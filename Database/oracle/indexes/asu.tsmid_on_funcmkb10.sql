@@ -1,0 +1,28 @@
+DROP INDEX ASU.TSMID_ON_FUNCMKB10
+/
+
+--
+-- TSMID_ON_FUNCMKB10  (Index) 
+--
+--  Dependencies: 
+--   GET_FULLMKB10 (Function)
+--
+CREATE INDEX ASU.TSMID_ON_FUNCMKB10 ON ASU.TSMID
+(SUBSTR("ASU"."GET_FULLMKB10"("FK_MKB10"),1,20))
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          12M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

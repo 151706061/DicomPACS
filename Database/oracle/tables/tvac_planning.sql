@@ -1,0 +1,156 @@
+ALTER TABLE ASU.TVAC_PLANNING
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TVAC_PLANNING CASCADE CONSTRAINTS
+/
+
+--
+-- TVAC_PLANNING  (Table) 
+--
+--  Dependencies: 
+--   TINFECTION (Table)
+--
+CREATE TABLE ASU.TVAC_PLANNING
+(
+  FK_ID           INTEGER                       NOT NULL,
+  FK_INFECTION    INTEGER                       NOT NULL,
+  FC_NAME         VARCHAR2(64 BYTE)             NOT NULL,
+  FC_DESCRIPTION  VARCHAR2(128 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVAC_PLANNING IS 'Схема планируемой вакцинации. Author: rca'
+/
+
+COMMENT ON COLUMN ASU.TVAC_PLANNING.FK_ID IS 'SEQUENCE=[SEQ_VAC_PLANNING]'
+/
+
+COMMENT ON COLUMN ASU.TVAC_PLANNING.FK_INFECTION IS 'Инфекция'
+/
+
+COMMENT ON COLUMN ASU.TVAC_PLANNING.FC_NAME IS 'Наименование плана'
+/
+
+COMMENT ON COLUMN ASU.TVAC_PLANNING.FC_DESCRIPTION IS 'Описание'
+/
+
+
+--
+-- PK_TVAC_PLANNING  (Index) 
+--
+--  Dependencies: 
+--   TVAC_PLANNING (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TVAC_PLANNING ON ASU.TVAC_PLANNING
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVAC_PLANNING_BY_FK_INFECT  (Index) 
+--
+--  Dependencies: 
+--   TVAC_PLANNING (Table)
+--
+CREATE INDEX ASU.TVAC_PLANNING_BY_FK_INFECT ON ASU.TVAC_PLANNING
+(FK_INFECTION)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVAC_PLANNING$BI  (Trigger) 
+--
+--  Dependencies: 
+--   TVAC_PLANNING (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVAC_PLANNING$BI" 
+ BEFORE
+  INSERT
+ ON asu.tvac_planning
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+    --  Column "FK_ID" uses sequence SEQ_VAC_PLANNING
+    SELECT SEQ_VAC_PLANNING.NEXTVAL INTO :new.FK_ID FROM dual;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TVAC_PLANNING 
+-- 
+ALTER TABLE ASU.TVAC_PLANNING ADD (
+  CONSTRAINT PK_TVAC_PLANNING
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TVAC_PLANNING 
+-- 
+ALTER TABLE ASU.TVAC_PLANNING ADD (
+  CONSTRAINT FK_TVAC_PLANNING$TINFECTION 
+ FOREIGN KEY (FK_INFECTION) 
+ REFERENCES ASU.TINFECTION (FK_ID))
+/
+

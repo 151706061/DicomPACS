@@ -1,0 +1,27 @@
+DROP FUNCTION ASU.GET_AMBVRACH
+/
+
+--
+-- GET_AMBVRACH  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TAMBVRACH (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_AMBVRACH" 
+  ( pFK_ID IN NUMBER)
+  RETURN  NUMBER IS
+  strTemp NUMBER;
+  CURSOR cTemp IS SELECT /*+ rule*/ FK_VRACHID FROM TAMBVRACH WHERE FK_PACID=pFK_ID AND FL_VID='M';
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO strTemp;
+  CLOSE cTemp;
+  RETURN strTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,114 @@
+CREATE TABLE MED.TPRICE_MONITOR_OST
+  (
+  PackNx NUMBER,
+  Year NUMBER (4),
+  Month NUMBER (2),
+  IRECID VARCHAR2 (20),
+  Series VARCHAR2 (100),
+  Quantity NUMBER,
+  Funds NUMBER,
+  Vendor VARCHAR2 (100),
+  PrcPrice NUMBER,
+  RtlPrice NUMBER,
+  RtlPremium NUMBER,
+  Remark VARCHAR2 (150),
+  SrcOrg VARCHAR2 (100),
+  IPV NUMBER,
+  FK_MEDICID NUMBER,
+  FK_KARTID NUMBER,
+  FD_DATE DATE,
+  FK_MOGROUP NUMBER
+ )
+/
+
+ALTER TABLE MED.TPRICE_MONITOR_OST 
+MODIFY (IPV      DEFAULT 2,
+        FUNDS    DEFAULT 0,
+        PRCPRICE DEFAULT 0,
+        RTLPRICE DEFAULT 0,
+        SERIES   VARCHAR2 (350)        
+       )
+/
+ALTER TABLE MED.TPRICE_MONITOR_OST ADD (Proizvoditel VARCHAR2 (300))
+/
+COMMENT ON TABLE MED.TPRICE_MONITOR_OST IS 
+'Остатки на определенную дату с привязкой к позициям росгоснадзора'
+/
+ALTER TABLE MED.TPRICE_MONITOR_OST 
+ ADD ( FK_ID NUMBER )
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.FK_ID IS 'ключ'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.PackNx IS 'Идентификатор ЛС. Из справочника номенклатуры по проекту Мониторинг цен'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.Year IS 'Год'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.Month IS 'Месяц'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.IRECID IS 'Идентификатор записи. Идентификатор цены будет отображен в отчете об ошибках, произошедших во время импорта.'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.Series IS 'Серии, разделенные запятой'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.Quantity IS 'Количество упаковок'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.Funds IS 'Средства на закупку, руб (0,00 для амбулаторного сегмента)'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.Vendor IS 'Поставщик (Пустая строка для амбулаторного сегмента)'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.PrcPrice IS 'Закупочная цена одной упаковки, руб (0.00 для госпитального сегмента)'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.RtlPrice IS 'Розничная цена одной упаковки, руб (0.00 для госпитального сегмента)'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.RtlPremium IS 'Надбавка к цене производителя, % (Пустая строка для госпитального сегмента или в том случае, если надбавка неизвестна)'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.Remark IS 'Комментарий'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.SrcOrg IS 'Организация, предоставившая сведения о цене'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.IPV IS 'Идентификатор протокола импорта (2)'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.FK_MEDICID IS 'MED.TMEDIC.MEDICID'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.FK_KARTID IS 'MED.TKART.KARTID'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.FD_DATE IS 'дата сбора остатков'
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.FK_MOGROUP IS 'группа МО'
+/
+
+CREATE Unique INDEX MED.TPRICE_MONITOR_OST_ID ON MED.TPRICE_MONITOR_OST
+   (  FK_ID ASC  ) 
+ COMPUTE STATISTICS 
+/
+CREATE INDEX MED.TPRICE_MON_OST_EXT ON MED.TPRICE_MONITOR_OST
+   (  FD_DATE ASC ,  FK_MEDICID ASC  ) 
+ COMPUTE STATISTICS 
+/
+CREATE SEQUENCE MED.SEQ_TPRICE_MONITOR_OST
+ START WITH  1
+ INCREMENT BY  1
+ MINVALUE  1
+/
+
+CREATE OR REPLACE TRIGGER MED.TPRICE_MONITOR_OST_INS
+ BEFORE 
+ INSERT
+ ON MED.TPRICE_MONITOR_OST
+ FOR EACH ROW 
+begin
+  if :NEW.FK_ID is null then
+    select MED.SEQ_TPRICE_MONITOR_OST.NEXTVAL into :NEW.FK_ID from DUAL;
+  end if;
+end;
+/
+
+ALTER TABLE MED.TPRICE_MONITOR_OST  ADD (VENDORID VARCHAR2 (15))
+/
+COMMENT ON COLUMN MED.TPRICE_MONITOR_OST.VENDORID IS 'ID поставщика по проекту "Мониторинг цен"'
+/
+
+
+CREATE INDEX MED.TPRICE_MONITOR_OST_PACKNX ON MED.TPRICE_MONITOR_OST
+   (  PACKNX ASC  ) 
+ COMPUTE STATISTICS 
+/

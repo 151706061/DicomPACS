@@ -1,0 +1,22 @@
+DROP TRIGGER ASU.TIBSHABLONNAMES_DELETE
+/
+
+--
+-- TIBSHABLONNAMES_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TIBSHABLONNAMES (Table)
+--   TIBSHABLONS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TIBSHABLONNAMES_DELETE" 
+  AFTER DELETE
+  ON ASU.TIBSHABLONNAMES   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  delete from tibshablons where fk_shablonnamesid=:old.fk_id;
+End;
+/
+SHOW ERRORS;
+
+

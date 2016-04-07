@@ -1,0 +1,90 @@
+DROP TABLE ASU.TNAZAPPARATS CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZAPPARATS  (Table) 
+--
+CREATE TABLE ASU.TNAZAPPARATS
+(
+  FK_ID         INTEGER                         DEFAULT -1                    NOT NULL,
+  FK_NAZID      INTEGER,
+  FK_APPARATID  INTEGER,
+  FK_KABINETID  INTEGER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNAZAPPARATS IS '—оответствие назначени€ и аппарата'
+/
+
+COMMENT ON COLUMN ASU.TNAZAPPARATS.FK_NAZID IS '—сылка на назначение'
+/
+
+COMMENT ON COLUMN ASU.TNAZAPPARATS.FK_APPARATID IS '—сылка на аппарат'
+/
+
+COMMENT ON COLUMN ASU.TNAZAPPARATS.FK_KABINETID IS '—сылка на кабинет'
+/
+
+
+--
+-- TNAZAPPARATS_BY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TNAZAPPARATS (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZAPPARATS_BY_FK_ID ON ASU.TNAZAPPARATS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZAPPARATS_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZAPPARATS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZAPPARATS_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.tnazapparats
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT SEQ_tnazapparats.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,70 @@
+DROP TABLE ASU.TDIAGNAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TDIAGNAZ  (Table) 
+--
+CREATE TABLE ASU.TDIAGNAZ
+(
+  FK_ID        NUMBER(15)                       NOT NULL,
+  FK_DIAGSMID  NUMBER(15)                       NOT NULL,
+  FK_NAZSMID   NUMBER(15)                       NOT NULL,
+  FP_TYPE      NUMBER(1)                        NOT NULL,
+  FL_PROTIV    NUMBER(1)                        DEFAULT 0                     NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TDIAGNAZ IS 'ѕротивопоказанные назначени€ в соответсвии поставленному диагнозу'
+/
+
+COMMENT ON COLUMN ASU.TDIAGNAZ.FK_ID IS 'SEQUENCE=[SEQ_TDIAGNAZ]'
+/
+
+COMMENT ON COLUMN ASU.TDIAGNAZ.FK_DIAGSMID IS ' од диагноза'
+/
+
+COMMENT ON COLUMN ASU.TDIAGNAZ.FK_NAZSMID IS ' од назначени€'
+/
+
+COMMENT ON COLUMN ASU.TDIAGNAZ.FP_TYPE IS '“ип предупреждени€'
+/
+
+COMMENT ON COLUMN ASU.TDIAGNAZ.FL_PROTIV IS '1 - противопоказано, 0 - непротивопоказано'
+/
+
+
+--
+-- TDIAGNAZ_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDIAGNAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDIAGNAZ_BEFORE_INSERT" 
+  BEFORE INSERT
+  ON ASU.TDIAGNAZ   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TDIAGNAZ.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,118 @@
+DROP TABLE ASU.THEAL_COST CASCADE CONSTRAINTS
+/
+
+--
+-- THEAL_COST  (Table) 
+--
+CREATE TABLE ASU.THEAL_COST
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FK_HEALID     NUMBER,
+  FD_DATE1      DATE,
+  FD_DATE2      DATE,
+  FN_COST       NUMBER,
+  FK_COMPANYID  NUMBER,
+  FK_DOGOVORID  NUMBER,
+  FL_KIOSK      NUMBER                          DEFAULT 0,
+  FC_NAME       VARCHAR2(500 BYTE),
+  FN_MAX_VALUE  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.THEAL_COST.FK_ID IS 'SEQUENCE=[SEQ_THEAL_COST]'
+/
+
+COMMENT ON COLUMN ASU.THEAL_COST.FK_HEALID IS 'Код услуги'
+/
+
+COMMENT ON COLUMN ASU.THEAL_COST.FD_DATE1 IS 'Дата начала действия'
+/
+
+COMMENT ON COLUMN ASU.THEAL_COST.FD_DATE2 IS 'Датат окончания действия'
+/
+
+COMMENT ON COLUMN ASU.THEAL_COST.FN_COST IS 'Стоимость'
+/
+
+COMMENT ON COLUMN ASU.THEAL_COST.FK_COMPANYID IS 'Страховая компания'
+/
+
+COMMENT ON COLUMN ASU.THEAL_COST.FK_DOGOVORID IS 'Код договора(TINSUR_DOGOVOR.FK_ID) added By Spasskiy for INSUR_PROGRAM'
+/
+
+COMMENT ON COLUMN ASU.THEAL_COST.FL_KIOSK IS 'отображать в теминале или нет?  0 - нет, 1 -да'
+/
+
+COMMENT ON COLUMN ASU.THEAL_COST.FC_NAME IS 'Название. Efimov V.A. 20120419 Историчность названий добавлена в соответствии с задачей http://192.168.1.9/redmine/issues/18040'
+/
+
+COMMENT ON COLUMN ASU.THEAL_COST.FN_MAX_VALUE IS 'максимальное значение услуги'
+/
+
+
+--
+-- IX_THEAL_COST$FK_HEALID  (Index) 
+--
+--  Dependencies: 
+--   THEAL_COST (Table)
+--
+CREATE INDEX ASU.IX_THEAL_COST$FK_HEALID ON ASU.THEAL_COST
+(FK_HEALID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- THEAL_COST_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   THEAL_COST (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."THEAL_COST_BEFORE_INSERT" 
+  BEFORE INSERT
+  ON ASU.THEAL_COST   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  IF :new.fk_id IS NULL THEN
+    SELECT SEQ_THEAL_COST.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  end if;
+
+  IF :new.FK_COMPANYID IS NULL THEN
+    :new.FK_COMPANYID := ASU.GET_DEF_STRAH_COMP;
+  end if;
+End;
+/
+SHOW ERRORS;
+
+

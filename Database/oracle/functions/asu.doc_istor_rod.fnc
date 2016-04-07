@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.DOC_ISTOR_ROD
+/
+
+--
+-- DOC_ISTOR_ROD  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."DOC_ISTOR_ROD" 
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =-
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 401;
+END;
+/
+
+SHOW ERRORS;
+
+

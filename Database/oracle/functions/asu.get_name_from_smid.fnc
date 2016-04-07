@@ -1,0 +1,33 @@
+DROP FUNCTION ASU.GET_NAME_FROM_SMID
+/
+
+--
+-- GET_NAME_FROM_SMID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSMID (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_NAME_FROM_SMID" 
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+--
+-- Purpose: Возвращает FC_NAME из SMID
+--
+CURSOR c IS SELECT /*+ first_row*/FC_NAME FROM TSMID WHERE FK_ID=pFK_ID;
+str TSMID.FC_NAME%TYPE;
+BEGIN
+  IF c%ISOPEN THEN
+    CLOSE c;
+  END IF;
+  OPEN c;
+  FETCH c INTO str;
+  CLOSE c;
+  RETURN str;
+END;
+/
+
+SHOW ERRORS;
+
+

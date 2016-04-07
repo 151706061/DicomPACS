@@ -1,0 +1,75 @@
+@head_first
+
+<title>Список пользователей</title>
+	
+	@incl_main_cmn
+
+	<link href="css/studylist/studylistn.css" rel="stylesheet" type="text/css">
+	<script src="js/studylist/studylistn.js"></script>
+    
+    <link href="css/mainDCMn.css" rel="stylesheet" type="text/css">
+    
+    <link href="css/form_rubber.css" rel="stylesheet" type="text/css">
+	<script src="js/form_rubber.js"></script>
+	
+	<script src="js/users/users.js"></script>
+
+	<script type="text/javascript">
+		var v_pr_sort = 0;
+		var v_height_tmp=0;
+		var v_width_tmp=0;
+		var v_cur_grid_id=0;
+		var v_arr_list = [];
+		var v_sel_nmb = 0;
+		// BEGIN_DEBUG
+		var v_url = '';
+		var v_ui = 0;
+		var v_up = '';
+		var v_un = '';
+		var v_username = 'sysdba';
+		var v_fam = '';
+		var v_nam = '';
+		var v_surn = '';
+		// END_DEBUG
+	</script>
+
+@endheadstartbody
+	
+	@main_header
+	
+    @main_menu
+    
+    <div id="myContainerLst" class="container" style="height:600px;width: 940px !important;">
+    
+    
+        <div id="myrowfff" class="row">
+        	
+            <!-- SEARCH	 -->
+            <div id="myleftcolfff" class="span4" style="width:300px !important;">
+                @users_left_col
+            </div>
+           
+            <div id="mygridfff" class="span4" >
+            	<div id="myLocLstMenu" style="background-color: #D0E7F2;height:28px;padding:0px;width:740px" >
+	            	<p>
+	                    <button id="myaddconcl" style="background-color:#65B1D5;border:none;width:180px;color:white !important" 
+	                                     title="Добавить новое заключение">ДОБАВИТЬ</button>
+	                    <button id="myedtconcl" style="background-color:#65B1D5;border:none;width:180px;color:white !important" title="Редактировать заключение">РЕДАКТИРОВАТЬ</button>
+	                    <button id="mydltconcl" style="background-color:#65B1D5;border:none;width:180px;color:white !important" title="Удалить заключение">УДАЛИТЬ</button>
+	                </p>
+	            </div>	
+                <!-- HEAD	 -->
+                <div id="mytabrefr" style="overflow: auto;width:740px;border:1px solid">
+                	<!-- LIST	 -->
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+    
+    
+	@main_footer
+    
+</body>
+</html>

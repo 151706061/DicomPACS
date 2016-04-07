@@ -1,0 +1,26 @@
+DROP FUNCTION ASU.GET_RAZ_DOC_ID
+/
+
+--
+-- GET_RAZ_DOC_ID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSMID (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_RAZ_DOC_ID" return number
+is
+  CURSOR cTemp IS SELECT FK_ID FROM TSMID WHERE FC_SYNONIM='RAZ_DOC';
+  ResTmp NUMBER;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO ResTmp;
+  CLOSE cTemp;
+  RETURN ResTmp;
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,86 @@
+DROP TABLE ASU.TTYPEPUT_PATIENT CASCADE CONSTRAINTS
+/
+
+--
+-- TTYPEPUT_PATIENT  (Table) 
+--
+CREATE TABLE ASU.TTYPEPUT_PATIENT
+(
+  FK_ID       NUMBER(15),
+  FC_VID      VARCHAR2(30 CHAR),
+  FL_DEFAULT  NUMBER(1)                         DEFAULT 0,
+  OLDID       NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          16K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TTYPEPUT_PATIENT IS 'Тип путевки. Добавил Косов, т.к. для хант таблица ttiproom используется для других целей'
+/
+
+
+--
+-- TTYPEPUT_PATIENT_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TTYPEPUT_PATIENT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TTYPEPUT_PATIENT_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TTYPEPUT_PATIENT  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  nTemp NUMBER;
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TTIPROOM', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TTIPROOM', 'FC_VID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fc_vid), :new.fk_id);
+  elsif DELETING then
+    PKG_LOG.Do_log('TTIPROOM', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_id), null, :old.fk_id);
+    PKG_LOG.Do_log('TTIPROOM', 'FC_VID', 'DELETE', PKG_LOG.GET_VALUE(:old.FC_VID), null, :old.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TTIPROOM', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FC_VID') AND PKG_LOG.GET_VALUE(:old.FC_VID) <> PKG_LOG.GET_VALUE(:new.FC_VID) then
+      PKG_LOG.Do_log('TTIPROOM', 'FC_VID', 'UPDATE', PKG_LOG.GET_VALUE(:old.FC_VID), PKG_LOG.GET_VALUE(:new.FC_VID), :old.fk_id);
+    end if;
+  end if;
+  null;
+END TTYPEPUT_PATIENT_LOG;
+/
+SHOW ERRORS;
+
+
+--
+-- SEQ_TTYPEPUT_PAT_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TTYPEPUT_PATIENT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."SEQ_TTYPEPUT_PAT_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TTYPEPUT_PATIENT REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  SELECT SEQ_TTYPEPUT_PATIENT.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

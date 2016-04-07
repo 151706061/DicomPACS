@@ -1,0 +1,110 @@
+ALTER TABLE ASU.TMKB308
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TMKB308 CASCADE CONSTRAINTS
+/
+
+--
+-- TMKB308  (Table) 
+--
+CREATE TABLE ASU.TMKB308
+(
+  FK_ID      NUMBER,
+  REC_CODE   VARCHAR2(255 BYTE),
+  MKB_NAME   VARCHAR2(255 BYTE),
+  ID_PARENT  VARCHAR2(255 BYTE),
+  ID         VARCHAR2(255 BYTE),
+  ADDL_CODE  VARCHAR2(255 BYTE),
+  MKB_CODE   VARCHAR2(255 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TMKB308 IS 'Таблица создана автоматически в результате загрузки DBF'
+/
+
+COMMENT ON COLUMN ASU.TMKB308.FK_ID IS 'ASU.SEQ_tMKB308'
+/
+
+
+--
+-- K_TMKB308_ID  (Index) 
+--
+--  Dependencies: 
+--   TMKB308 (Table)
+--
+CREATE UNIQUE INDEX ASU.K_TMKB308_ID ON ASU.TMKB308
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TMKB308_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TMKB308 (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.tMKB308_BEFORE_INSERT
+  BEFORE INSERT
+  ON ASU.TMKB308   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+BEGIN
+  SELECT ASU.SEQ_tMKB308.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TMKB308 
+-- 
+ALTER TABLE ASU.TMKB308 ADD (
+  CONSTRAINT K_TMKB308_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

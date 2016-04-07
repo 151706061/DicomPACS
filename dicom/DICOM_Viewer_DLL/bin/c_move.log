@@ -1,0 +1,76 @@
+23.12.2013 14:28:10 C_MOVE: Host = 192.168.56.101Port = 104CalledTitle = ServerCallingTitle = TEST1
+23.12.2013 14:28:10 AddMOVEPresentationContext
+23.12.2013 14:28:10 SendDicomRequest C_MOVE_REQUEST 
+23.12.2013 14:28:10 before PrepareRequestCommand
+23.12.2013 14:28:10 PrepareRequestCommand
+23.12.2013 14:28:10 SendCommandBySop ASOPClass=4133
+23.12.2013 14:28:10 Try to connect ...
+23.12.2013 14:28:10 connected=1
+23.12.2013 14:28:10 FAssociation.Init ...
+23.12.2013 14:28:10 connected=1 before SendRequest
+23.12.2013 14:28:10 FAssociation.Init
+23.12.2013 14:28:10 FAssociation.sendAssociateRequest(FRequest)
+23.12.2013 14:28:10 FAssociation.ReadPduType
+23.12.2013 14:28:10 FAssociation.ReadPduType = 2
+23.12.2013 14:28:10 FAssociation.receiveAssociateResponse(k) k=2
+23.12.2013 14:28:10 receiveAssociateResponse case of 2
+23.12.2013 14:28:10 try to TAssociateAcknowledgePdu.Create
+23.12.2013 14:28:10 TAssociateAcknowledgePdu.Created
+23.12.2013 14:28:10 q.Read 2
+23.12.2013 14:28:10 getAcknowledge success ...
+23.12.2013 14:28:10 FResponse=*** acknowledge ***
+max pdu size: 1048576
+max operation invoked: 1
+max operation performed: 1
+implementation class UID: 1.2.276.0.54.20050101.5.0.0.0
+implementation version name: HIPAX_DICOM_6_00
+ApplicationContextUid: 1.2.840.10008.3.1.1.1
+CalledTitle: Server
+CallingTitle: TEST1
+                 abstract syntax scu scp
+       1.2.840.10008.5.1.4.1.1.1   1   1
+   nr  pcid                          result     transfer syntax
+    0     1                        accepted 1.2.840.10008.1.2.1
+*******************
+23.12.2013 14:28:10 FAssociation.receiveAssociateResponse(k) *** acknowledge ***
+max pdu size: 1048576
+max operation invoked: 1
+max operation performed: 1
+implementation class UID: 1.2.276.0.54.20050101.5.0.0.0
+implementation version name: HIPAX_DICOM_6_00
+ApplicationContextUid: 1.2.840.10008.3.1.1.1
+CalledTitle: Server
+CallingTitle: TEST1
+                 abstract syntax scu scp
+       1.2.840.10008.5.1.4.1.1.1   1   1
+   nr  pcid                          result     transfer syntax
+    0     1                        accepted 1.2.840.10008.1.2.1
+******************* 0
+23.12.2013 14:28:10 connected=1 before sendDataPduBySOP
+23.12.2013 14:28:10 before getPresentationContext
+23.12.2013 14:28:10 getPresentationContext
+23.12.2013 14:28:10 SendDataPdu - start
+23.12.2013 14:28:10 SendDataPdu - GetDatalen
+23.12.2013 14:28:10 dicomobject.AddVariant GetDatalen(ImplicitVRLittleEndian)=90
+23.12.2013 14:28:10 begin - SendAttriutes
+23.12.2013 14:28:10 before TAssociateDataPdu.Create
+23.12.2013 14:28:10 DataPdu1.Stream.Seek
+23.12.2013 14:28:10 dicomobject.AddAllGrouplength
+23.12.2013 14:28:10 Write ATransferSyntax v_quality
+23.12.2013 14:28:10 DataPdu1.Free
+23.12.2013 14:28:10 SendDataPdu - SendAttriutes
+23.12.2013 14:28:10 SendDataPdu - before SendAttriutes
+23.12.2013 14:28:10 begin - SendAttriutes
+23.12.2013 14:28:10 before TAssociateDataPdu.Create
+23.12.2013 14:28:10 DataPdu1.Stream.Seek
+23.12.2013 14:28:10 dicomobject.AddAllGrouplength
+23.12.2013 14:28:10 Write ATransferSyntax v_quality
+23.12.2013 14:28:10 DataPdu1.Free
+23.12.2013 14:28:10 SendDataPdu - SendAttriutes
+23.12.2013 14:28:10 SendDataPdu
+23.12.2013 14:28:10 FAssociation.ReadPduType
+23.12.2013 14:28:10 FAssociation.ReadPduType=4
+23.12.2013 14:28:10 FAssociation.ReceiveDataPdu
+23.12.2013 14:28:10 FAssociation.ReceiveDataPdu=4
+23.12.2013 14:28:10 SendCommandBySop ASOPClass=4133 RESULT=1
+23.12.2013 14:28:10 C_MOVE_REQUEST Result=1

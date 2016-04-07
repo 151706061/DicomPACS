@@ -1,0 +1,36 @@
+DROP TABLE ASU.TSYNC_LOG CASCADE CONSTRAINTS
+/
+
+--
+-- TSYNC_LOG  (Table) 
+--
+CREATE TABLE ASU.TSYNC_LOG
+(
+  FK_ID    NUMBER,
+  FD_TIME  TIMESTAMP(3)                         DEFAULT systimestamp(3),
+  FC_MES   VARCHAR2(2000 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+GRANT INSERT ON ASU.TSYNC_LOG TO LOGIN
+/
+

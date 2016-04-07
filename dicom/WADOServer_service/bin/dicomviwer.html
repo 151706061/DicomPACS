@@ -1,0 +1,435 @@
+@head_first
+
+<title>Снимки</title>
+
+	@incl_main_cmn
+    
+    <link href="css/mainDCM.css" rel="stylesheet" type="text/css">
+    <link href="css/mainDCMn.css" rel="stylesheet" type="text/css">
+    
+    <link href="css/studylist/studylistn.css" rel="stylesheet" type="text/css">
+
+	<script type="text/javascript">
+	
+	var d = new Date();
+	var v_dt_touch = d.getTime();
+	var v_dt_time_check = 500;
+	
+	var d;
+	var v_cur_pos = 1;
+	var v_cur_img = 1; // текущий снимок из списка
+	// запрет выполнения обработки кода
+	var v_is_execute = false;
+	// объекты рисования
+	var v_obj_list = [[],[],[],[],[],[],[],[],[],[],[],[],[]];
+	var v_obj_manip_list = [[],[],[],[],[]];
+	var v_cur_nnn = 0;
+	var v_cur_obj = 0;
+	// для отрезка
+	var x0 = 0;
+	var y0 = 0;
+	var x1 = 0;
+	var y1 = 0;
+	var x2 = 0;
+	var y2 = 0;
+	var v_click_canvas = false;
+	var v_koeff_img = 1;
+	
+	var v_is_edt_concl = true;	//	true - режим редактирование заключения 
+	
+	var v_cur_grid_id = 0; 
+	
+	var v_cur_img_form = 1; 
+	
+	var v_cur_rotate_gr = 0;	// значение градусов поворота - текущее 
+	var v_scale_set = [];		// масштаб отображения 	v_scale_set[v_cur_img-1]
+	var v_pos_x = [];			// позиция x для перемещения 
+	var v_pos_y = [];			// позиция y для перемещения 
+	// переменные для измерений	
+	var v_vert_mirror = [];		// зеркало
+	var v_horiz_mirror = [];	// зеркало
+	var v_povorot = [];			// v_povorot_forw[v_cur_img-1]
+	var v_inversion = [];		// ИНВЕРСИЯ
+	var v_corr_light = [];		// яркость 
+	var v_corr_contrast = [];	// контраст 
+	
+	//
+	var v_canvas_w=0;
+	var v_canvas_h=0;
+	var v_scrs_k = 1;
+	//
+	var v_amm_windows = 1;		// количество окон 
+	var v_curr_window = 1;		// текущее окно 
+	var v_arr_windows = [[], [], [], [], []];	// массив с параметрами окон 
+	v_arr_windows[1][1] = 1;	// номер окна - ссылка на v_curr_window 
+	
+	var v_css_border_uncheck_button = "solid white";
+	var v_css_border_check_button = "solid red";
+	
+	var v_ismousedown = 0; 
+	var v_pos_x_move = 0; 
+	var v_pos_y_move = 0; 
+	
+	var v_loaded_frames = [[],[]];
+	var v_start_play_video = false;
+	var v_play_forward = true;
+	var v_cur_frame_nn = 1;
+	var v_id_fnext_tmp = 0;
+	var v_max_tmp = 0;
+	
+	
+	var v_fdraw_rejim = 0; // not paint
+	var v_font = "Tahoma";	
+	var v_text_font_on_image = "15pt "+v_font;
+	var v_h_text = 20;			// высота текста
+	var v_text_font = "15px "+v_font;
+	var v_text_fillStyle = '#FFF';
+	var v_show_label = false;
+	var v_strokeStyle = "red";//"#E8B557";  // set the line color to blue
+	var v_lineWidth=2;
+	var v_fillStyle = v_strokeStyle;	//	"red";//"#E8B557";  // вывод текста
+	var v_bgfill = "black";				// background-color for text
+	var v_padding = 4;					// padding вокруг текста
+	var v_color_otm = 'yellow';			// цвет отмеченного измерения мышкой
+	var v_cur_act_izmer = 0;			// номер текущего отмеченного измерения в массиве
+	var v_otm_len_to_obj = 0.5;			// расстояние до линии измерения от позиции мышки для отметки
+	var v_left_pos = 0;
+	var v_top_1_y = 0;
+	// лупа
+	var iZoomRadius = 100*1.5;
+	var iZoomPower = 2;
+	var v_is_focus = false;
+	var v_focus_x = 0;
+	var v_focus_y = 0;
+	
+	var StudyInstanceUID = [];
+	var v_img_vis = [];
+	var imgarr = [];
+	var FrameCount = [];				//	кол-во фреймов - если больше 1 то видео
+	var p_ename = [];
+	var p_databrn = [];
+	var patientid = [];
+	var studyUID = [];
+	var PixelSpacingX = [];
+	var PixelSpacingY = [];
+	var ImgWidth = [];
+	var ImgHeight = [];
+	var RescaleSlope = [];
+    // данные атрибутов для вывода на снимке -------------------------
+    var Modality = [];
+    // данные не картинок - ссылка на загрузку (сервис)  ------------------------- 
+    var v_etcstr = [];   
+    var v_etctitle = [];
+    var v_etctype = [];
+    var v_srtext = [];
+    
+    // массив с данными ЭКГ
+    var v_ECG_channelName = [[],[]]; // =название канала
+    var v_ECG_amm_channels = []; // кол-во каналов
+
+    var v_ECG_amm = [[],[]];         // =кол-во измерений в канале
+    var v_freq = [[],[]];            // =частота измерений в канале 
+	var v_NumberofWaveformGroups = []; // кол-во групп каналов
+	var v_NumberofWaveformChannels = [[],[]]; // общее кол-во каналов
+	var v_NumberofWaveformSamples = [[],[]]; // кол-во измерений в каналах
+    var v_ECG = [[],[],[],[]];        // [группа,канал,=показания]
+    
+    var Manufacturer = [];
+    var PatientAge = [];
+    var PatientSize = [];
+    var PatientWeight = [];
+    var StudyID = [];
+    var ContentDate = [];
+    var StudyDate = [];
+    var StudyTime = [];
+    var InstitutionName = [];
+    var GraphicsSign = [];
+    var BodyPartExamined = [];
+    var SeriesDescription = [];
+    var SeriesUID = [];
+    // для CT дополнительно тянем
+    var AcquisitionDate = [];
+    var ContentDate = [];
+    var AcquisitionTime = [];
+    var ContentTime = [];
+    var SliceLocation = [];
+    var SeriesNumber = [];
+    var InstanceNumber = [];
+    var AcquisitionNumber = [];
+    var ManufacturerModelName = [];
+    var SoftwareVersion = [];
+    var KVP = [];
+    var XRayTubeCurrent = [];
+    var SliceThickness = [];
+    var GantryDetectorTilt = [];
+    var SiemensData = [];
+    var SiemensData1 = [];
+    var ConvolutionKernel = [];
+    // для MR
+    var ReceivingCoil = [];
+    var SequenceName = [];
+    var ScanningSequence = [];
+    var RepetitionTime = [];
+    var EchoTime = [];
+    var FlipAngle = [];
+    var PhaseEncodingDirection = [];
+    var GantryDetectorTilt = [];
+    var ImageComments = [];
+    // размеры изображения  
+    var ADicomImage_height = [];
+    var ADicomImage_Width = [];
+    var ADicomImage_WindowWidth = [];
+    var ADicomImage_WindowCenter = [];
+    // GE
+    var AcquisitionMatrix = [];
+    var PixelBandwidth = [];
+    var SliceThickness = [];
+    var ReceivingCoil = [];
+    var EchoNumber = [];
+    var GE_Sequence_Name = [];
+    var SequenceVariant = [];
+    var SeriesDate = [];
+    var SeriesTime = [];
+    var PatientSex = [];
+    var EchoTrainLength = [];
+    // end ----------------------------------------	
+	var v_arr_concl_FK_ID = [];
+	var v_arr_concl_FD_DATE = [];
+	var v_arr_concl_FK_USERID = [];
+	var v_arr_concl_FC_FAM = [];
+	var v_arr_concl_FC_IM = [];
+	var v_arr_concl_FC_OTCH = [];
+	
+	var	v_is_from_rmis = false;
+	var v_act_str = '';
+	
+    // BEGIN_DEBUG
+	// заполним массив хоть чем-нибудь для тестирования 
+	// начало_замены
+	var v_ui = 0;
+	var v_up = '';
+	var v_un = '';
+	var v_username = 'sysdba';
+	var v_fam = '';
+	var v_nam = '';
+	var v_surn = '';
+	var v_max_pos = 27;
+    var v_url = 'http://afomin:11115';
+    var v_actuality = '';
+	for (var i = 1; i <= v_max_pos; i++) {
+		imgarr[i-1] = v_url+'/WADO?requestType=WADO&studyUID=2.16.840.1.113669.632.20.1211.10000315526'+
+					'&seriesUID=1.3.12.2.1107.5.1.4.54693.30000006100507010800000005268'+
+					'&objectUID=1.3.12.2.1107.5.1.4.54693.30000006100507010800000005269';
+		p_ename[i-1]  = i+'Иванов И.И.';
+		patientid[i-1] = 'q'+i;
+		p_databrn[i-1] = '01.01.2000';
+		studyUID[i-1] = 'study 001';
+		PixelSpacingX[i-1] = 0.040234375 ;
+		PixelSpacingY[i-1] = 0.040234375 ;
+		ImgWidth[i-1] = 512;
+		ImgHeight[i-1] = 512;
+		RescaleSlope[i-1]=0.04;
+	}
+	// окончание_замены
+    // END_DEBUG
+
+</script>
+
+<script type="text/javascript" src="js/dicomjsn.js"></script>
+
+</head>
+
+<body style="background-color: white;padding-top:0px;height:100%">
+	
+	@main_header
+    @main_menu
+        <p>    
+			<div class="myhdtext1" style="margin-left:40%;margin-top:-20px;">
+					<h3 style="color:black;">Снимки</h3>
+			</div>	
+		</p>
+    <div class="myfloatleft" style="width:100%">
+        <div id="mylfthordiv_1" class="myfloatleft mhbdcm" 
+          style="background-color:black;width:20%;border-right:1px solid;">
+       <!--        <div class="myfrght mypnldev mylftbtns" >  -->
+            	<button id="mybtnclr" class="win-command myfbtn mbtn" title="Очистить измерения">
+                    <span class="win-commandimage win-commandring myfbtn1">&#x0035;</span>
+                    <span class="win-label">Очистить</span>
+                </button>
+                
+                <button id="mybtninv" class="win-command myfbtn mbtn" title="Инверсия">
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe200;</span>
+                    <span class="win-label">Инверсия</span>
+                </button>
+                
+            	<button id="mybtnrotatep" class="win-command myfbtn mbtn" title="Поворот 90 градусов по часовой стрелке">
+                    <span class="win-commandimage win-commandring myfbtn1">&#x0056;</span>
+                    <span class="win-label">Поворот</span>
+                </button>
+                
+            	<button id="mybtnrotatem" class="win-command myfbtn mbtn" title="Поворот 90 градусов против часовой стрелке">
+                    <span class="win-commandimage win-commandring myfbtn1">&#x0055;</span>
+                    <span class="win-label">Поворот</span>
+                </button>
+                
+            	<button id="mybtnupDn" class="win-command myfbtn mbtn" title="Вертикальное зеркало">
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe1d3;</span>
+                    <span class="win-label">Зеркало</span>
+                </button>
+                
+            	<button id="mybtnLfRg" class="win-command myfbtn mbtn" title="Горизонтальное зеркало">
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe1d0;</span>
+                    <span class="win-label">Зеркало</span>
+                </button>
+                
+            	<button id="mybtnlarge" class="win-command myfbtn mbtn" title="Увеличение">
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe1b2;</span>
+                    <span class="win-label">Масштаб</span>
+                </button>
+                
+            	<button id="mybtnsmall" class="win-command myfbtn mbtn" title="Уменьшение">
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe1b4;</span>
+                    <span class="win-label">Масштаб</span>
+                </button>
+                
+            	<button id="mybtnlupa" class="win-command myfbtn mbtn" title="Лупа">
+                    <span id="mybtnlupa1" class="win-commandimage win-commandring myfbtn1 mylftbtnclr">&#x0068;</span>
+                    <span class="win-label">&nbsp;&nbsp;&nbsp;Лупа&nbsp;&nbsp;&nbsp;</span>
+                </button>
+        <!--       </div>    -->
+		<!--   	<div class="myfrght mypnldev mylftbtns"> -->
+            	<button id="mybtnMove" class="win-command myfbtn mbtn" title="Перемещение">
+                    <span id="mybtnMove1" class="win-commandimage win-commandring myfbtn1 mylftbtnclr" >&#xe1d4;</span>
+                    <span class="win-label">Сместить</span>
+                </button>
+                
+            	<button id="mybtnline" class="win-command myfbtn mbtn" title="Отрезок">
+                    <span id="mybtnline1" class="win-commandimage win-commandring myfbtn1 mylftbtnclr">&#xe16e;</span>
+                    <span class="win-label">Отрезок</span>
+                </button>
+                
+            	<button id="mybtnstrela" class="win-command myfbtn mbtn" title="Стрелка с текстом">
+                    <span id="mybtnstrela1" class="win-commandimage win-commandring myfbtn1 mylftbtnclr">&#xe0ed;</span>
+                    <span class="win-label">Стрелка</span>
+                </button>
+                
+            	<button id="mybtnugol" class="win-command myfbtn mbtn" title="Угол">
+                    <span id="mybtnugol1" class="win-commandimage win-commandring myfbtn1 mylftbtnclr">&#xe089;</span>
+                    <span class="win-label">Угол&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                </button>
+                
+            	<button id="mybtnmnogoug" class="win-command myfbtn mbtn" title="Зона интереса - многоугольник">
+                    <span id="mybtnmnogoug1" class="win-commandimage win-commandring myfbtn1 mylftbtnclr">&#xe212;</span>
+                    <span class="win-label">&nbsp;&nbsp;&nbsp;Зона&nbsp;&nbsp;&nbsp;</span>
+                </button>
+                
+            	<button id="mybtnText" class="win-command myfbtn mbtn" title="Текст">
+                    <span id="mybtnText1" class="win-commandimage win-commandring myfbtn1 mylftbtnclr">&#xe1a5;</span>
+                    <span class="win-label">&nbsp;&nbsp;&nbsp;Текст&nbsp;&nbsp;&nbsp;</span>
+                </button>
+                
+            	<button id="mybtnOkrujnost" class="win-command myfbtn mbtn" title="Круг">
+                    <span id="mybtnOkrujnost1" class="win-commandimage win-commandring myfbtn1 mylftbtnclr">&#xe074;</span>
+                    <span class="win-label">&nbsp;&nbsp;&nbsp;Круг&nbsp;&nbsp;&nbsp;</span>
+                </button>
+                
+            	<button id="mybtnDivide" class="win-command myfbtn mbtn" title="Добавить новое окно" style="display:none">	<!-- style="display:none" -->
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe197;</span>
+                    <span class="win-label">&nbsp;&nbsp;&nbsp;Окно&nbsp;&nbsp;&nbsp;</span>
+                </button>
+                
+            	<button id="mybtnBrightPlus" class="win-command myfbtn mbtn" title="Увеличить яркость">
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe0e0;</span>
+                    <span class="win-label">+ яркость</span>
+                </button>
+                
+            	<button id="mybtnBrightMinus" class="win-command myfbtn mbtn" title="Уменьшить яркость">
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe0df;</span>
+                    <span class="win-label">- яркость</span>
+                </button>
+                
+            	<button id="mybtnContrastPlus" class="win-command myfbtn mbtn" title="Увеличить контраст">
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe23b;</span>
+                    <span class="win-label">+ контраст</span>
+                </button>
+                
+            	<button id="mybtnContrastMinus" class="win-command myfbtn mbtn" title="Уменьшить контраст">
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe244;</span>
+                    <span class="win-label">- контраст</span>
+                </button>
+				
+            	<button id="mybtnDelInfo" class="win-command myfbtn mbtn" title="Инфо">
+                    <span class="win-commandimage win-commandring myfbtn1">&#xe19b;</span>
+                    <span class="win-label">&nbsp;&nbsp;&nbsp;Инфо&nbsp;&nbsp;&nbsp;</span>
+                </button>
+				<br>
+       <!--   &#xe00d;     </div> -->
+        </div>
+
+        <div id="mycmnfld" class="myfloatleft mhbdcm" style="width:60%;background-color:black;">
+        	 <div class="fscroll div_scroll" id="fidscroll" style="height:120px">
+              <div id="myframes" class="fscroll_child">
+              	  <div id="proczagr" style="top:150;left:150;width:20px;height:20px;position:fixed;display:none">
+              	  	<img id="myimgld" src="/css/img/loading1.gif" alt="" width="10" height="10" class="picture" title='Идет загрузка фреймов...' style="display:none"/>
+              	  	<div id="z1" style="color:grey;font-size:8px;display:none">&nbsp;</div>
+              	  </div>
+              	  <div id="mybtnT1" class="mydcmtags" style="display:none">&nbsp;</div>
+              	  <div id="mybtnT2" class="mydcmtags" style="display:none">&nbsp;</div>
+              	  <div id="frames" style="display:none">
+					<img src="#" alt="" class="picture" id="frame1" onload="myclcldr();" />
+              	  </div>	
+                  <!-- BEGIN-SHABLON-PICTS -->
+                  <div class="imgup"> 
+                      <img src="##SRC##" alt="" width="100" height="100" class="picture" id="p##ID##"  style="ST##DEF##"/> <!-- onload="f_to_canvas();return false;" --> 
+                  </div>   
+                  <!-- END-SHABLON-PICTS -->
+              </div>   
+            </div>
+            <img id="bigpicture" src="" style="display:none;" onload="myonloadrepaint();" />	<!-- onload="f_to_canvas();repaint_all();" -->
+            <!-- C A N V A S -->
+            <canvas id='draw' style="padding-left:0;border:none" >&nbsp;</canvas>
+            <!-- E N D   C A N V A S --> 
+            <div id="etcdiv" style="display:none">&nbsp;</div>
+            <div id="lupabrd" style="display:none;top:1px;left:1px;height:1px;width:1px;position:fixed;opacity:1;border:1px solid yellow">&nbsp;</div>  
+        </div>
+        <div id="mylfthordiv_3" class="myfloatleft  mhbdcm" style="background-color:black;width:19.77%;border-left:1px solid">
+				<!--меню навигации -->
+				<div id="navigationMenu" ><!--style="margin:70% 0% 0%;" -->
+	                <button id="mybtnPreviousSeries" class="win-command myfbtn mbtn" title="Предыдущая серия">
+	                    <span class="win-commandimage win-commandring myfbtn1">&#xe108;</span>
+	                    <span class="win-label">Пред. серия</span>
+	                </button>
+					<button id="mybtnPreviousPicture" class="win-command myfbtn mbtn" title="Предыдущий снимок">
+	                    <span class="win-commandimage win-commandring myfbtn1">&#xe0fc;</span>
+	                    <span class="win-label">Пред.снимок</span>
+	                </button>
+					<button id="mybtnNextPicture" class="win-command myfbtn mbtn" title="Следующий снимок">
+	                    <span class="win-commandimage win-commandring myfbtn1">&#xe0fd;</span>
+	                    <span class="win-label">Сл.  снимок</span>
+	                </button>
+					<button id="mybtnNextSeries" class="win-command myfbtn mbtn" title="Следующая серия">
+	                    <span class="win-commandimage win-commandring myfbtn1">&#xe109;</span>
+	                    <span class="win-label">Сл. серия</span>
+	                </button>
+					<button id="mybtnPreviousPeople" class="win-command myfbtn mbtn" title="Предыдущий пациент">
+	                    <span class="win-commandimage win-commandring myfbtn1">&#xe0fc;&#xe00d;</span>
+	                    <span class="win-label">Пред. пациент</span>
+	                </button>
+					<button id="mybtnNextPeople" class="win-command myfbtn mbtn" title="Следующий пациент">
+	                    <span class="win-commandimage win-commandring myfbtn1">&#xe00d;&#xe0fd;</span>
+	                    <span class="win-label">Сл. пациент</span>
+	                </button>
+				</div>
+                <!--конец меню навигации -->
+        </div>
+    </div>
+        
+        
+        
+	@main_footer
+	
+	@mylibCmn
+	<script src="js/MyLibCmn.js"></script>
+    
+</body>
+</html>

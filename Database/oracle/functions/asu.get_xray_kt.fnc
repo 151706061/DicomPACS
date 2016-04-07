@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_XRAY_KT
+/
+
+--
+-- GET_XRAY_KT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_XRAY_KT" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 260550;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_XRAY_KT TO PUBLIC
+/
+

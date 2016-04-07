@@ -1,0 +1,64 @@
+DROP TABLE ASU.TAGGRAVATIONS_TEMPL CASCADE CONSTRAINTS
+/
+
+--
+-- TAGGRAVATIONS_TEMPL  (Table) 
+--
+CREATE TABLE ASU.TAGGRAVATIONS_TEMPL
+(
+  FK_ID             NUMBER(15),
+  FK_AGGRAVATIONID  NUMBER(15),
+  FC_COMMENT        VARCHAR2(500 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TAGGRAVATIONS_TEMPL IS 'Тадлица шаблонов осложнений для Химиотерапии   Author: Slusarenko M.D.  17.01.2013'
+/
+
+COMMENT ON COLUMN ASU.TAGGRAVATIONS_TEMPL.FK_ID IS '[SEQ_TAGGRAVATIONS_TEMPL]'
+/
+
+COMMENT ON COLUMN ASU.TAGGRAVATIONS_TEMPL.FK_AGGRAVATIONID IS 'ид осложнений (TSMID.FK_ID из ветки с синонимом CHEMOTHERAPY_AGGRAVATION)'
+/
+
+COMMENT ON COLUMN ASU.TAGGRAVATIONS_TEMPL.FC_COMMENT IS 'Комментарий'
+/
+
+
+--
+-- TAGGRAVATIONS_TEMPL_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TAGGRAVATIONS_TEMPL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TAGGRAVATIONS_TEMPL_BI" 
+  before insert on asu.taggravations_templ
+  REFERENCING NEW AS NEW OLD AS OLD
+  for each row
+declare
+  -- local variables here
+begin
+  select asu.SEQ_TAGGRAVATIONS_TEMPL.nextval into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_ZAVSPEC_CODE
+/
+
+--
+-- GET_ZAVSPEC_CODE  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_ZAVSPEC_CODE" 
+return number
+is
+begin
+  return 901;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_ZAVSPEC_CODE TO PUBLIC
+/
+

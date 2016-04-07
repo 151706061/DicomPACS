@@ -1,0 +1,25 @@
+DROP INDEX ASU.TRECIPE_FK_PACID
+/
+
+--
+-- TRECIPE_FK_PACID  (Index) 
+--
+CREATE INDEX ASU.TRECIPE_FK_PACID ON ASU.TRECIPE
+(FK_PAC_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

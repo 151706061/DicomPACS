@@ -1,0 +1,25 @@
+DROP INDEX ASU.K_THST0003_ID
+/
+
+--
+-- K_THST0003_ID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.K_THST0003_ID ON ASU.THST0003
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

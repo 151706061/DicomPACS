@@ -1,0 +1,23 @@
+DROP TRIGGER ASU.TSMIDORDREP_INSERT
+/
+
+--
+-- TSMIDORDREP_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TSMIDORDREP (Sequence)
+--   TSMIDORDREP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSMIDORDREP_INSERT" 
+  BEFORE INSERT ON tsmidordrep
+  FOR EACH ROW
+DECLARE
+BEGIN
+  SELECT seq_tsmidordrep.NEXTVAL INTO :NEW.fk_id FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+

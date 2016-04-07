@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_OMSHEAL
+/
+
+--
+-- GET_OMSHEAL  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_OMSHEAL"
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =-
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 13960;
+END;
+/
+
+SHOW ERRORS;
+
+

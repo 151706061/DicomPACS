@@ -1,0 +1,25 @@
+DROP INDEX ASU.TRESAN_BY_ID
+/
+
+--
+-- TRESAN_BY_ID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TRESAN_BY_ID ON ASU.TRESAN
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          9472K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

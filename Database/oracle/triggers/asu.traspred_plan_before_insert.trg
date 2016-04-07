@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TRASPRED_PLAN_BEFORE_INSERT
+/
+
+--
+-- TRASPRED_PLAN_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TRASPRED_PLAN (Sequence)
+--   TRASPRED_PLAN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRASPRED_PLAN_BEFORE_INSERT" 
+BEFORE INSERT 
+ON traspred_plan
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+begin
+  select SEQ_TRASPRED_PLAN.nextval into :NEW.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

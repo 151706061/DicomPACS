@@ -1,0 +1,37 @@
+DROP FUNCTION ASU.DOC_PROF_DP
+/
+
+--
+-- DOC_PROF_DP  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU.DOC_PROF_DP
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =- 
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return -1;
+END;
+/
+
+SHOW ERRORS;
+
+
+DROP PUBLIC SYNONYM DOC_PROF_DP
+/
+
+--
+-- DOC_PROF_DP  (Synonym) 
+--
+--  Dependencies: 
+--   DOC_PROF_DP (Function)
+--
+CREATE PUBLIC SYNONYM DOC_PROF_DP FOR ASU.DOC_PROF_DP
+/
+
+
+GRANT EXECUTE ON ASU.DOC_PROF_DP TO PUBLIC
+/
+

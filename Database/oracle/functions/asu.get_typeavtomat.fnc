@@ -1,0 +1,26 @@
+DROP FUNCTION ASU.GET_TYPEAVTOMAT
+/
+
+--
+-- GET_TYPEAVTOMAT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   GET_POLUAVTOMAT (Function)
+--   TYPE_AVTOMAT (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_TYPEAVTOMAT" ( pFK_SMID IN NUMBER) RETURN  NUMBER IS
+BEGIN
+    if pFK_SMID = TYPE_AVTOMAT then
+        RETURN 1;
+      ELSIF pFK_SMID = GET_POLUAVTOMAT then
+        RETURN 2;
+       else
+        RETURN 0;
+    END IF;
+END;
+/
+
+SHOW ERRORS;
+
+

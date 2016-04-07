@@ -1,0 +1,25 @@
+DROP INDEX ASU.TINSUR_SRV_TMP_IX1
+/
+
+--
+-- TINSUR_SRV_TMP_IX1  (Index) 
+--
+CREATE INDEX ASU.TINSUR_SRV_TMP_IX1 ON ASU.TINSUR_SRV_TMP
+(FK_PEPLID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,25 @@
+DROP INDEX ASU.TUSL_KART_VANALIT
+/
+
+--
+-- TUSL_KART_VANALIT  (Index) 
+--
+CREATE INDEX ASU.TUSL_KART_VANALIT ON ASU.TUSL_KART
+(FK_ANALIT)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

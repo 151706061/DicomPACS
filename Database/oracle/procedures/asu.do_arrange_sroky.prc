@@ -1,0 +1,103 @@
+DROP PROCEDURE ASU.DO_ARRANGE_SROKY
+/
+
+--
+-- DO_ARRANGE_SROKY  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSROKY (Table)
+--   TPERESEL (Table)
+--   GET_MAXPERESELID (Function)
+--   GET_MAXSROKID (Function)
+--   GET_PAC_OSTATOK_ARRANGE (Function)
+--
+CREATE OR REPLACE PROCEDURE ASU."DO_ARRANGE_SROKY" ( pFK_PACID IN NUMBER)
+ IS
+  CURSOR cTemp1(nSrokID NUMBER) IS SELECT FD_DATA2 FROM TPERESEL WHERE FK_ID=(SELECT MIN(FK_ID) FROM TPERESEL WHERE FK_SROKID=nSrokID);
+  CURSOR cSroky IS SELECT FD_DATA1,FD_DATA2,FK_PRYB,FK_ID FROM TSROKY WHERE FK_PACID=pFK_PACID ORDER BY FK_ID DESC;
+  CURSOR cSroky1 IS SELECT FD_DATA1,FD_DATA2,FK_PRYB,FK_ID FROM TSROKY WHERE FK_PACID=pFK_PACID ORDER BY FK_ID;
+  nTemp1 NUMBER;
+  nTemp NUMBER;
+  dTemp DATE;
+  Data1 DATE;
+  Data2 DATE;
+  Pryb NUMBER;
+  ID   NUMBER;
+  Data11 DATE;
+  Data21 DATE;
+  Pryb1 NUMBER;
+  ID1   NUMBER;
+BEGIN
+  ID:=NULL;
+  OPEN cSroky;
+  LOOP
+    FETCH cSroky INTO Data1,Data2,Pryb,ID;
+    EXIT WHEN cSroky%NOTFOUND;
+    if ID IS NOT NULL THEN
+/*      if Pryb IN (3,7) then
+        UPDATE TSROKY SET FD_DATA3=Data1 WHERE FK_ID<ID AND FK_PACID=pFK_PACID AND FD_DATA3>=Data1 AND FK_PRYB>1;*/
+      if Pryb IN (5,6) then
+        UPDATE TSROKY SET FD_DATA3=Data1 WHERE FK_ID<ID AND FK_PACID=pFK_PACID and FK_PRYB NOT IN (1,3,7);
+--      NULL;
+      end if;
+    END IF;
+    Data11:=Data1;
+    Data21:=Data2;
+    Pryb1:=Pryb;
+    ID:=ID1;
+  END LOOP;
+  CLOSE cSroky;
+  OPEN cSroky1;
+  LOOP
+    FETCH cSroky1 INTO Data1,Data2,Pryb,ID;
+    EXIT WHEN cSroky1%NOTFOUND;
+    if ID IS NOT NULL THEN
+      if Pryb IN (3,7) then
+        UPDATE TSROKY SET FD_DATA3=Data1 WHERE FK_ID<ID AND FK_PACID=pFK_PACID AND FD_DATA3>=Data1 AND FK_PRYB>1;
+        nTemp:=GET_PAC_OSTATOK_ARRANGE(pFK_PACID,Data1,ID);
+        -- Efimov 20100520 Добавил проверку на превышение размера поля
+        if nTemp > 999 then
+          nTemp := 999;
+        end if;
+        UPDATE TSROKY SET FN_KOL=nTemp WHERE FK_ID=ID;
+/*      if Pryb IN (5,6) then
+        UPDATE TSROKY SET FD_DATA3=Data1 WHERE FK_ID<ID AND FK_PACID=pFK_PACID AND FD_DATA3<Data1 AND FK_PRYB>1;*/
+--      NULL;
+      end if;
+    END IF;
+    Data11:=Data1;
+    Data21:=Data2;
+    Pryb1:=Pryb;
+    ID:=ID1;
+  END LOOP;
+  CLOSE cSroky1;
+  nTemp:=GET_MAXSROKID(pFK_PACID);
+  nTemp1:=nTemp;
+  SELECT FK_PRYB,FD_DATA1,FD_DATA2 INTO Pryb,Data1,Data2 FROM TSROKY WHERE FK_ID=nTemp;
+  nTemp:=GET_MAXPERESELID(pFK_PACID);
+  if Pryb IN (3,7) then
+    UPDATE TPERESEL SET FD_DATA2=DATA1 WHERE FK_ID=nTemp;
+  elsif Pryb IN (2,4,5,6) then
+    UPDATE TPERESEL SET FD_DATA2=DATA2 WHERE FK_ID=nTemp;
+  end if;
+  if Pryb IN (2,4) then
+    OPEN cTemp1(nTemp1);
+    FETCH cTemp1 INTO dTemp;
+    CLOSE cTemp1;
+--    if dTemp<Data1 then
+--      DELETE FROM TPERESEL WHERE FK_ID=(SELECT MIN(FK_ID) FROM TPERESEL WHERE FK_SROKID=nTemp1);
+--    end if; Закомментировано Нефедовым 20.10.2006
+    UPDATE TPERESEL SET FD_DATA1=Data1 WHERE FK_ID=(SELECT MIN(FK_ID) FROM TPERESEL WHERE FK_SROKID=nTemp1);
+  end if;
+  --NEW...
+/*  nTemp:=GET_MINPERESELID(pFK_PACID);
+  Data1:=GET_PACINCOME(pFK_PACID)
+  UPDATE TPERESEL SET FD_DA*/
+END; -- Procedure
+/
+
+SHOW ERRORS;
+
+

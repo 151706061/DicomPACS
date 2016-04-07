@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_OSPK
+/
+
+--
+-- GET_OSPK  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_OSPK" 
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =-
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 21741;
+END;
+/
+
+SHOW ERRORS;
+
+

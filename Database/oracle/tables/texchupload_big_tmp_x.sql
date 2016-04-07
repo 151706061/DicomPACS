@@ -1,0 +1,145 @@
+DROP TABLE ASU.TEXCHUPLOAD_BIG_TMP_X CASCADE CONSTRAINTS
+/
+
+--
+-- TEXCHUPLOAD_BIG_TMP_X  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.TEXCHUPLOAD_BIG_TMP_X
+(
+  FK_ID             NUMBER,
+  FK_OMS_ID         NUMBER,
+  FK_AMBID          NUMBER,
+  FC_DOCVIDAN       VARCHAR2(100 BYTE),
+  FK_VIDDOC_EIS     NUMBER,
+  FC_PAC_SNILS      VARCHAR2(50 BYTE),
+  FK_EIS_TRAVM      NUMBER,
+  OTKAZ_GOSP        VARCHAR2(10 BYTE),
+  FN_DNST           NUMBER,
+  FC_DNU            VARCHAR2(10 BYTE),
+  LPU_NAPR          VARCHAR2(100 BYTE),
+  FK_TYPEDOC_EIS    NUMBER,
+  FK_OTDELID        NUMBER,
+  FP_OUT            NUMBER,
+  FD_OUT            DATE,
+  FN_TYPE_PODR      NUMBER,
+  FC_DOCSER         VARCHAR2(10 BYTE),
+  FC_DOCNUM         VARCHAR2(10 BYTE),
+  FD_DOCDATE        DATE,
+  FP_CHECKED        NUMBER(1),
+  FP_LOADED         NUMBER(1),
+  FP_IN_FOMS        NUMBER(1),
+  FC_SMK_NAME       VARCHAR2(250 BYTE),
+  FC_STRAH_ADDR     VARCHAR2(250 BYTE),
+  FC_LIFE_ADDR      VARCHAR2(250 BYTE),
+  FN_KDN            NUMBER,
+  IS_POLICY_GOOD    NUMBER(1),
+  POLICYBEG         DATE,
+  POLICYEND         DATE,
+  POLICYSER         VARCHAR2(30 BYTE),
+  POLICYNUM         VARCHAR2(30 BYTE),
+  POLICYTYPE        VARCHAR2(20 BYTE),
+  SNAME             VARCHAR2(30 BYTE),
+  FNAME             VARCHAR2(30 BYTE),
+  MNAME             VARCHAR2(30 BYTE),
+  DDMMYYYY          DATE,
+  POL               CHAR(1 BYTE),
+  NACIONAL          VARCHAR2(30 BYTE),
+  COUNTRY           VARCHAR2(30 BYTE),
+  STATE             VARCHAR2(50 BYTE),
+  RON               VARCHAR2(30 BYTE),
+  CITYPAS           VARCHAR2(30 BYTE),
+  VILLAGE           VARCHAR2(30 BYTE),
+  STREETPAS         VARCHAR2(40 BYTE),
+  DOMPAS            VARCHAR2(10 BYTE),
+  KORPAS            VARCHAR2(10 BYTE),
+  FLATPAS           VARCHAR2(10 BYTE),
+  FC_ADR            VARCHAR2(230 BYTE),
+  MR                VARCHAR2(100 BYTE),
+  DIA_SD            VARCHAR2(10 BYTE),
+  DIA_O             VARCHAR2(10 BYTE),
+  DIA_C             VARCHAR2(10 BYTE),
+  DIA_E             VARCHAR2(10 BYTE),
+  DATE_S            DATE,
+  DATE_E            DATE,
+  EXITUS            VARCHAR2(30 BYTE),
+  DOC_FIO           VARCHAR2(50 BYTE),
+  DOCSPEC           VARCHAR2(70 BYTE),
+  FK_DOCSPEC        NUMBER,
+  DESTROY           VARCHAR2(50 BYTE),
+  KOL_POS           NUMBER,
+  TYPE_PODR         NUMBER(1),
+  KEM_NAPR          VARCHAR2(50 BYTE),
+  ID_ILL            NUMBER,
+  SMK_ID_P          NUMBER,
+  SMK_ID            NUMBER,
+  TYPEDOG           NUMBER(1),
+  PROTOCOL          NUMBER,
+  N_MAP             NUMBER,
+  PID               NUMBER,
+  SSD               VARCHAR2(50 BYTE),
+  SUM_OPL           NUMBER,
+  FK_PEPLID         NUMBER,
+  POLICYID          NUMBER,
+  FC_TOMP           VARCHAR2(10 BYTE),
+  FC_SOP_TOMP       VARCHAR2(10 BYTE),
+  FC_SERVPLACE      VARCHAR2(30 BYTE),
+  TYPEPLACE         NUMBER(1),
+  ILLKIND           NUMBER,
+  FC_OTDEL          VARCHAR2(100 BYTE),
+  PL                NUMBER(1),
+  EXITUS_DOP        NUMBER(2),
+  ILLKIND_NAME      VARCHAR2(255 BYTE),
+  AGENT_STATUS      NUMBER,
+  AGENT_SUR_NAME    VARCHAR2(30 BYTE),
+  AGENT_FIRST_NAME  VARCHAR2(30 BYTE),
+  AGENT_PATR_NAME   VARCHAR2(30 BYTE),
+  AGENT_VDK         NUMBER,
+  AGENT_DOCSER      VARCHAR2(10 BYTE),
+  AGENT_DOCNUM      VARCHAR2(10 BYTE),
+  AGENT_DATE_V      VARCHAR2(10 BYTE),
+  AGENT_KEM         VARCHAR2(100 BYTE)
+)
+ON COMMIT PRESERVE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.TEXCHUPLOAD_BIG_TMP_X IS 'Временная таблица №2 для выгрузки страховых данных -- Created 20080401 by Linnikov'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.PL IS 'Экстреннно\планово [Added 20090216 by Linnikov]'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.EXITUS_DOP IS 'Дополнительный исход заболевания [Added 20090505 by Linnikov]'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.ILLKIND_NAME IS 'Характер заболевания [TSMID.FC_NAME]'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.AGENT_STATUS IS 'Статус представителя пациента'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.AGENT_SUR_NAME IS 'Фамилия родителя (представителя) пациента'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.AGENT_FIRST_NAME IS 'Имя родителя (представителя) пациента'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.AGENT_PATR_NAME IS 'Отчество родителя (представителя) пациента'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.AGENT_VDK IS 'Тип документа, удостоверяющего личность представителя'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.AGENT_DOCSER IS 'Серия документа, удостоверяющего личность представителя'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.AGENT_DOCNUM IS 'Номер документа, удостоверяющего личность представителя'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.AGENT_DATE_V IS 'Дата выдачи документа, удостоверяющего личность представителя'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_BIG_TMP_X.AGENT_KEM IS 'Кем выдан документ, удостоверяющий личность представителя'
+/
+
+

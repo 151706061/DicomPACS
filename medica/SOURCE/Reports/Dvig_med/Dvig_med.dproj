@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{7fee6daf-92dd-41a1-b8bb-7ca6e7113c8a}</ProjectGuid>
+    <MainSource>Dvig_med.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>d:\ASU\ASU_E\Dvig_med.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_Optimize>False</DCC_Optimize>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_UnitSearchPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ObjPath>
+    <DCC_IncludePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_IncludePath>
+    <DCC_Define>RELEASE</DCC_Define>
+    <DCC_ExeOutput>d:\ASU_SO\</DCC_ExeOutput>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_Optimize>False</DCC_Optimize>
+    <DCC_UnitSearchPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ObjPath>
+    <DCC_IncludePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_IncludePath>
+    <DCC_Define>RELEASE;USE_NEW_AUTH</DCC_Define>
+    <DCC_ExeOutput>d:\ASU\ASU_E\</DCC_ExeOutput>
+    <DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>..\dcu</DCC_HppOutput>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="RunParams">102404</Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">2</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">82</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">2.0.0.82</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">Dvig_med.dpr</Source></Source><Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="$(BDS)\bin\bcboffice2k100.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\bcbofficexp100.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Program Files (x86)\Developer Express Inc\Library\Delphi11\dxPSTeeChartD11.bpl">ExpressPrinting System ReportLink for TeeChart by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Program Files (x86)\Developer Express Inc\Library\Delphi11\dxPSDBTeeChartD11.bpl">ExpressPrinting System ReportLink for DBTeeChart by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\5.0\Bpl\DicomVCLD2006.bpl">DicomVCL for delphi</Excluded_Packages>
+    </Excluded_Packages></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="Dvig_med.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <RcCompile Include="shablon.rc">
+      <Form>shablon.res</Form>
+    </RcCompile>
+    <DCCReference Include="..\..\..\..\..\uCommon\uGlobalConst.pas" />
+    <DCCReference Include="..\..\src\fdmPrintSelect.pas">
+      <Form>dmPrintSelect</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\..\src\forms\fReportInputActSpis.pas">
+      <Form>fmReportInputActSpis</Form>
+    </DCCReference>
+    <DCCReference Include="..\CommonUnits\fCheckedListEdit.pas">
+      <Form>fmCheckedListEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\CommonUnits\fSelectCheckedList.pas">
+      <Form>fmSelectCheckedList</Form>
+    </DCCReference>
+    <DCCReference Include="..\CommonUnits\uReportParams.pas" />
+    <DCCReference Include="fFIOTreb.pas">
+      <Form>frmFIOTreb</Form>
+    </DCCReference>
+    <DCCReference Include="fgetperiod.pas">
+      <Form>frmGetPeriod</Form>
+    </DCCReference>
+    <DCCReference Include="fm_Select_MO.pas">
+      <Form>fmSelect_MO</Form>
+    </DCCReference>
+    <DCCReference Include="HtmlHlp.pas" />
+  </ItemGroup>
+</Project>

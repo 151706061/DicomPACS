@@ -1,0 +1,33 @@
+DROP TRIGGER ASU.TPUTPLANLIST_BEFORE_INSERT
+/
+
+--
+-- TPUTPLANLIST_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TPUTPLANLIST (Sequence)
+--   TPUTPLANDAYS (Table)
+--   TPUTPLANLIST (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPUTPLANLIST_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TPUTPLANLIST REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Declare
+ dDate DATE;
+Begin
+  SELECT SEQ_TPutplanlist.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  dDate := TO_DATE('01.01.' || :NEW.FC_YEAR,'dd.mm.yyyy');
+  LOOP
+    INSERT INTO TPUTPLANDAYS (FK_LISTID,FD_DATE)
+                      VALUES (:NEW.FK_ID,dDate);
+    EXIT WHEN dDate = TO_DATE('31.12.' || :NEW.FC_YEAR,'dd.mm.yyyy');
+    dDate := dDate + 1;
+  END LOOP;
+End;
+/
+SHOW ERRORS;
+
+

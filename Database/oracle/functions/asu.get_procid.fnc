@@ -1,0 +1,63 @@
+DROP FUNCTION ASU.GET_PROCID
+/
+
+--
+-- GET_PROCID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU.GET_PROCID
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =- 
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 1360;
+END;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM BUH.GET_PROCID
+/
+
+--
+-- GET_PROCID  (Synonym) 
+--
+--  Dependencies: 
+--   GET_PROCID (Function)
+--
+CREATE SYNONYM BUH.GET_PROCID FOR ASU.GET_PROCID
+/
+
+
+DROP PUBLIC SYNONYM GET_PROCID
+/
+
+--
+-- GET_PROCID  (Synonym) 
+--
+--  Dependencies: 
+--   GET_PROCID (Function)
+--
+CREATE PUBLIC SYNONYM GET_PROCID FOR ASU.GET_PROCID
+/
+
+
+DROP SYNONYM STAT.GET_PROCID
+/
+
+--
+-- GET_PROCID  (Synonym) 
+--
+--  Dependencies: 
+--   GET_PROCID (Function)
+--
+CREATE SYNONYM STAT.GET_PROCID FOR ASU.GET_PROCID
+/
+
+
+GRANT EXECUTE ON ASU.GET_PROCID TO PUBLIC
+/
+

@@ -1,0 +1,24 @@
+DROP FUNCTION ASU.DOC_IB_DS
+/
+
+--
+-- DOC_IB_DS  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."DOC_IB_DS" 
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =- 
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 621;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.DOC_IB_DS TO PUBLIC
+/
+

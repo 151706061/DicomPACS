@@ -1,0 +1,1530 @@
+﻿unit fMain;
+
+interface
+
+{
+FormCreate line line 754  -- начальная инициализация каталога
+sys_read        line 298  -- чтение параметров
+Myparams_save   line 776  -- сохранение параметров
+}
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, dxSkinsCore, dxSkinsdxBarPainter, ImgList, dxBar,
+  cxClasses, ActnList, ComCtrls, cxControls, cxContainer, cxTreeView,
+  dxSkinscxPCPainter, cxPC, cxSplitter, ExtCtrls, StdCtrls, IBDatabase, DB,
+  FIBDatabase, pFIBDatabase, Menus, cxLookAndFeelPainters, cxButtons, cxEdit,
+  cxTextEdit, JvBaseDlg, JvBrowseFolder, IB_Services, cxGraphics, cxLabel,
+  cxCheckBox, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxDBData,
+  cxMemo, cxGridLevel, cxGridCustomTableView, cxGridTableView,
+  cxGridDBTableView, cxGridCustomView, cxGrid, cxMaskEdit, cxDropDownEdit,
+  cxCalendar, JvExExtCtrls, JvExtComponent, JvPanel, FIBDataSet, pFIBDataSet,
+  cxGroupBox, cxRadioGroup, dxSkinOffice2007Green, jvDBUtils,
+  Grids, DBGrids, DCM32, DCM_Attributes, JvExDBGrids, Registry,
+  cxGridExportLink, frxClass, frxDBSet, DateUtils,
+  IBServices, StrUtils, FIBQuery, pFIBQuery, dxBarExtItems, JvAppInst,
+  dxSkinBlack;
+
+type
+  TfrmMain = class(TForm)
+    ilMain: TImageList;
+    DB: TpFIBDatabase;
+    trWrite: TpFIBTransaction;
+    trRead: TpFIBTransaction;
+    dlgrezcopy: TJvBrowseForFolderDialog;
+    actlstal: TActionList;
+    actOpenCatalog: TAction;
+    actCreateBackUpCopy: TAction;
+    actClose: TAction;
+    ParamsSave: TAction;
+    dlglocimg: TJvBrowseForFolderDialog;
+    actOpenCatLocalDBImages: TAction;
+    dsEvents: TDataSource;
+    pFIBEvents: TpFIBDataSet;
+    pFIBDevices: TpFIBDataSet;
+    dsDevices: TDataSource;
+    actEdtDevice: TAction;
+    actInsDevice: TAction;
+    actDltDevice: TAction;
+    actRefreshLog: TAction;
+    actStartProcess: TAction;
+    actStopProcess: TAction;
+    actReboot: TAction;
+    actRefrDevices: TAction;
+    dxbrmngr1: TdxBarManager;
+    dxbrmngr1Bar1: TdxBar;
+    dxBarButton1: TdxBarButton;
+    dxBarButton2: TdxBarButton;
+    dxBarButton3: TdxBarButton;
+    dxBarButton4: TdxBarButton;
+    dxBarButton5: TdxBarButton;
+    Panel1: TPanel;
+    pnl2: TPanel;
+    btnSave: TcxButton;
+    btnClose: TcxButton;
+    cxpgcntrl1: TcxPageControl;
+    TSDatabase: TcxTabSheet;
+    TSLocal: TcxTabSheet;
+    TSEvents: TcxTabSheet;
+    GrTVList: TcxGrid;
+    TVList: TcxGridDBTableView;
+    FD_DATE: TcxGridDBColumn;
+    FN_TYPE: TcxGridDBColumn;
+    FC_NAME: TcxGridDBColumn;
+    FC_REMARK: TcxGridDBColumn;
+    GrTVListdlvlGrLevel1: TcxGridLevel;
+    cxmLog: TcxMemo;
+    cxspltr2: TcxSplitter;
+    TSDevices: TcxTabSheet;
+    cxgrdDevices: TcxGrid;
+    cxDV: TcxGridDBTableView;
+    FC_COMMENT: TcxGridDBColumn;
+    FC_TITLE: TcxGridDBColumn;
+    FC_IP: TcxGridDBColumn;
+    FN_PORT: TcxGridDBColumn;
+    cxgrdlvl1: TcxGridLevel;
+    dxbrdckcntrl1: TdxBarDockControl;
+    pnl3: TPanel;
+    cxCheckBox2: TcxCheckBox;
+    pFIBDevicesFC_IP: TFIBStringField;
+    pFIBDevicesFK_ID: TFIBIntegerField;
+    pFIBDevicesFN_PORT: TFIBIntegerField;
+    pFIBDevicesFC_TITLE: TFIBStringField;
+    pFIBDevicesFC_COMMENT: TFIBStringField;
+    Panel2: TPanel;
+    cxtrvwTree: TcxTreeView;
+    Panel3: TPanel;
+    btnConnect: TcxButton;
+    btnDisconnect: TcxButton;
+    cxButton3: TcxButton;
+    cxlblWarBD: TcxLabel;
+    pmTV: TPopupMenu;
+    N1: TMenuItem;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    MenuItem3: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
+    N2: TMenuItem;
+    aText: TAction;
+    aWeb: TAction;
+    aXML: TAction;
+    aExcel: TAction;
+    aPrintDev: TAction;
+    aListClr: TAction;
+    sdPopUp: TSaveDialog;
+    pmDV: TPopupMenu;
+    MenuItem6: TMenuItem;
+    MenuItem7: TMenuItem;
+    MenuItem8: TMenuItem;
+    MenuItem9: TMenuItem;
+    MenuItem10: TMenuItem;
+    MenuItem11: TMenuItem;
+    MenuItem12: TMenuItem;
+    aText1: TAction;
+    aPrintLog: TAction;
+    aWeb1: TAction;
+    aXML1: TAction;
+    aExcel1: TAction;
+    aListClr1: TAction;
+    frxRpt: TfrxReport;
+    frxDS: TfrxDBDataset;
+    tsRules: TcxTabSheet;
+    dxBarDockControl1: TdxBarDockControl;
+    dxbrmngr1Bar2: TdxBar;
+    bbAddRul: TdxBarButton;
+    bbDelRul: TdxBarButton;
+    bbRefRul: TdxBarButton;
+    tvRules: TcxGridDBTableView;
+    grRulesLevel1: TcxGridLevel;
+    grRules: TcxGrid;
+    aAddRul: TAction;
+    aDelRul: TAction;
+    aRefRul: TAction;
+    dsRules: TDataSource;
+    pFIBRules: TpFIBDataSet;
+    tvRulesName: TcxGridDBColumn;
+    pFIBRulesFC_TITLE: TFIBStringField;
+    pFIBRulesFK_ID: TFIBIntegerField;
+    pmRules: TPopupMenu;
+    MenuItem13: TMenuItem;
+    MenuItem14: TMenuItem;
+    MenuItem15: TMenuItem;
+    MenuItem16: TMenuItem;
+    MenuItem17: TMenuItem;
+    MenuItem18: TMenuItem;
+    MenuItem19: TMenuItem;
+    aPrintRul: TAction;
+    aTextRul: TAction;
+    aWebRul: TAction;
+    aXMLRul: TAction;
+    aExcelRul: TAction;
+    LbRbtSrv: TcxLabel;
+    JvAppInstances: TJvAppInstances;
+    gbLocalBase: TcxGroupBox;
+    cxlbl10: TcxLabel;
+    cxtxtdt1: TcxTextEdit;
+    btn1: TcxButton;
+    gbStat: TcxGroupBox;
+    cxlbl4: TcxLabel;
+    lbl11: TcxLabel;
+    cxlbl5: TcxLabel;
+    lbl10: TcxLabel;
+    cxlbl6: TcxLabel;
+    lbl9: TcxLabel;
+    cxlbl7: TcxLabel;
+    lbl8: TcxLabel;
+    gbReservBD: TcxGroupBox;
+    cxlbl8: TcxLabel;
+    cxlbl9: TcxLabel;
+    cxtxtdtBD: TcxTextEdit;
+    btnBackUp: TcxButton;
+    btnOpen: TcxButton;
+    gbPathBD: TcxGroupBox;
+    cxlbl1: TcxLabel;
+    tePathBD: TcxTextEdit;
+    cxGroupBox5: TcxGroupBox;
+    cxLabel2: TcxLabel;
+    cxlbl11: TcxLabel;
+    cxlbl12: TcxLabel;
+    TEIPServer: TcxTextEdit;
+    cxtAE_TITLE: TcxTextEdit;
+    cxtSERVER_PORT: TcxTextEdit;
+    cxchckbxchkAE: TcxCheckBox;
+    cbIsWrtLog: TcxCheckBox;
+    CB_is_stor_comm_ex: TcxCheckBox;
+    gbJur: TcxGroupBox;
+    cxlbl2: TcxLabel;
+    cxdtdtDate1: TcxDateEdit;
+    cxLabel1: TcxLabel;
+    cxdtdtDate2: TcxDateEdit;
+    bRefJur: TcxButton;
+    gbFilters: TcxGroupBox;
+    cxCBall: TcxCheckBox;
+    cxCBstart: TcxCheckBox;
+    cxCBstop: TcxCheckBox;
+    cxchckbxerror: TcxCheckBox;
+    cxchckbxevents: TcxCheckBox;
+    cxchckbxParamEdit: TcxCheckBox;
+    pFIBDevicesFN_TYPE: TFIBIntegerField;
+    colFN_TPE: TcxGridDBColumn;
+    pFIBDevicesDEV_TYPE: TFIBStringField;
+    tvRulesSource: TcxGridDBColumn;
+    pFIBRulesFC_AET_SOURCE: TFIBStringField;
+    tvRulesMod: TcxGridDBColumn;
+    pFIBRulesFC_MOD: TFIBStringField;
+    dxbarseparator: TdxBarSeparator;
+    dxbarseparator2: TdxBarSeparator;
+    cb_use_3d: TcxCheckBox;
+    procedure cxtrvwTreeChange(Sender: TObject; Node: TTreeNode);
+    procedure FormCreate(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure TSDatabaseShow(Sender: TObject);
+    procedure actOpenCatalogExecute(Sender: TObject);
+    procedure actCloseExecute(Sender: TObject);
+    procedure actCreateBackUpCopyExecute(Sender: TObject);
+    procedure ParamsSaveExecute(Sender: TObject);
+    procedure actConnectExecute(Sender: TObject);
+    procedure actOpenCatLocalDBImagesExecute(Sender: TObject);
+    procedure TSLocalShow(Sender: TObject);
+    procedure TSDevicesShow(Sender: TObject);
+    procedure actEdtDeviceExecute(Sender: TObject);
+    procedure actInsDeviceExecute(Sender: TObject);
+    procedure actDltDeviceExecute(Sender: TObject);
+    procedure actRefreshLogExecute(Sender: TObject);
+    procedure pFIBEventsAfterScroll(DataSet: TDataSet);
+    procedure actStartProcessExecute(Sender: TObject);
+    procedure actStopProcessExecute(Sender: TObject);
+    procedure actRebootExecute(Sender: TObject);
+    procedure actRefrDevicesExecute(Sender: TObject);
+    procedure TSEventsShow(Sender: TObject);
+    procedure aTextExecute(Sender: TObject);
+    procedure aWebExecute(Sender: TObject);
+    procedure aXMLExecute(Sender: TObject);
+    procedure aExcelExecute(Sender: TObject);
+    procedure aListClrExecute(Sender: TObject);
+    procedure aText1Execute(Sender: TObject);
+    procedure aWeb1Execute(Sender: TObject);
+    procedure aXML1Execute(Sender: TObject);
+    procedure aExcel1Execute(Sender: TObject);
+    procedure aListClr1Execute(Sender: TObject);
+    procedure cxtxtdtBDEditing(Sender: TObject; var CanEdit: Boolean);
+    procedure cxtxtdt1Editing(Sender: TObject; var CanEdit: Boolean);
+    procedure cxtAE_TITLEEditing(Sender: TObject; var CanEdit: Boolean);
+    procedure cxtSERVER_PORTEditing(Sender: TObject; var CanEdit: Boolean);
+    procedure cxchckbxchkAEEditing(Sender: TObject; var CanEdit: Boolean);
+    procedure cbIsWrtLogEditing(Sender: TObject; var CanEdit: Boolean);
+    procedure cxCheckBox2Editing(Sender: TObject; var CanEdit: Boolean);
+    procedure aPrintLogExecute(Sender: TObject);
+    procedure aPrintDevExecute(Sender: TObject);
+    procedure frxRptNewGetValue(Sender: TObject; const VarName: string;
+      var Value: Variant);
+    procedure FormShow(Sender: TObject);
+    procedure aAddRulExecute(Sender: TObject);
+    procedure aDelRulExecute(Sender: TObject);
+    procedure aRefRulExecute(Sender: TObject);
+    procedure tsRulesShow(Sender: TObject);
+    procedure pFIBRulesAfterOpen(DataSet: TDataSet);
+    procedure MenuItem19Click(Sender: TObject);
+    procedure aTextRulExecute(Sender: TObject);
+    procedure aWebRulExecute(Sender: TObject);
+    procedure aXMLRulExecute(Sender: TObject);
+    procedure aExcelRulExecute(Sender: TObject);
+    procedure aPrintRulExecute(Sender: TObject);
+    procedure JvAppInstancesRejected(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+const // установка цвета
+      c_server_start_color = clTeal; // цвет для надписи сервер запущен
+      c_server_stop_color  = clMaroon; // цвет для надписи сервер остановлен
+      c_reg_lst_mn = '\SoftWare\SoftMaster\Configurator\';
+      c_devices_rg = 'cxDV';
+      c_events_rg  = 'TVList';
+      c_devices_def_rg = 'cxDVDefault';
+      c_events_def_rg  = 'TVListDefault';
+
+      c_ini_file = 'Settings.ini';    //   Configurator.ini
+
+var   frmMain: TfrmMain;
+      //
+      v_exe_path : AnsiString;
+      //
+      v_ip_fb,
+      v_1_2_BCP_CATALOG         ,
+      v_1_3_STORAGE_FOLDER      ,
+      v_1_4_SERVER_PORT         ,
+      v_1_5_AE_TITLE,
+      v_1_9_SERVER_IP            : String;
+      v_1_6_IS_DEVICES_CHECK    ,
+      v_1_7_IS_LOG_WRITE        ,
+      v_1_8_IS_CHK_AETITLE      ,
+      v_1_9_is_stor_comm_ex     : Boolean;
+      //
+      v_is_cxlbl8               : Boolean;
+
+procedure Myparams_save;
+function read_db_ip:string;
+
+implementation
+
+uses CmnUnit, IniFiles, pFIBProps, fBackUp, fEdtDevice, fAddRule,
+     DICOM_CMN, DB_CMN;
+
+{$R *.dfm}
+
+procedure SetSavBtnCol( p_is_Act:Boolean );
+begin
+  frmMain.ParamsSave.Enabled:=p_is_Act;
+end;
+
+// завершение всех транзакций
+procedure MyEndTransaction;
+begin
+  if frmMain.DB.Connected then begin
+    MyEndTrans(frmMain.trRead);
+    MyEndTrans(frmMain.trWrite);
+  end;
+end;
+
+// старт всех транзакций
+procedure MyStartTransaction;
+begin
+  if frmMain.DB.Connected then begin
+    MyStartTrans(frmMain.trWrite);
+    MyStartTrans(frmMain.trRead);
+  end;
+end;
+
+function read_db_ip:string;
+var v_ini : TIniFile;
+    v_res : string;
+begin
+  // чтение ini-файла
+  v_ini:=TIniFile.Create(v_exe_path+c_ini_file);
+  try
+    v_res := v_ini.ReadString( c_1_razdel, c_1_1_IP_FB, '' );
+    v_ini.WriteString( c_1_razdel, c_1_1_IP_FB, v_res);
+  finally
+    FreeAndNil(v_ini);
+  end;
+  Result := v_res;
+end;
+
+// чтение из параметров каталога для архивации
+procedure sys_read(const p_is_save:Boolean=True);
+var v_ini : TIniFile;
+begin
+  // чтение ini-файла
+  v_ini:=TIniFile.Create(v_exe_path+c_ini_file);
+  try
+    v_1_2_BCP_CATALOG         := v_ini.ReadString( c_1_razdel, с_1_2_BCP_CATALOG,      '' );
+    v_1_3_STORAGE_FOLDER      := v_ini.ReadString( c_1_razdel, c_1_3_STORAGE_FOLDER,   '' );
+    v_1_4_SERVER_PORT         := v_ini.ReadString( c_1_razdel, c_1_4_SERVER_PORT,      '' );
+
+    
+    v_1_9_SERVER_IP := DBparams_get ( 'SERVER',
+                                      'IP',
+                                      frmMain.trRead,
+                                      frmMain.DB
+                                    );
+
+    v_1_5_AE_TITLE    := v_ini.ReadString( c_1_razdel, c_1_5_AE_TITLE,         '' );
+    v_1_6_IS_DEVICES_CHECK    := ( v_ini.ReadString( c_1_razdel, c_1_6_IS_DEVICES_CHECK, '0' ) = '1' ) ;
+    v_1_7_IS_LOG_WRITE        := ( v_ini.ReadString( c_1_razdel, c_1_7_IS_LOG_WRITE, '0' ) = '1' ) ;
+    v_1_8_IS_CHK_AETITLE      := ( v_ini.ReadString( c_1_razdel, c_1_8_IS_CHK_AETITLE, '0' ) = '1' ) ;
+    v_1_9_is_stor_comm_ex     := MyStrToBool(
+                       DBparams_get (
+                                     'DICOM', // c_DICOM,        // SECTION
+                                     'ST_COMM_CONF_AFT_ST', // KEY
+                                     frmMain.trRead, // FIBTransaction
+                                     frmMain.DB      // TpFIBDatabase
+                                    )
+                                 );
+    //
+    frmMain.cxtxtdtBD.Text      :=  v_1_2_BCP_CATALOG;
+    frmMain.cxtxtdt1.Text       :=  v_1_3_STORAGE_FOLDER;
+    frmMain.cxtSERVER_PORT.Text :=  v_1_4_SERVER_PORT;
+    frmMain.cxtAE_TITLE.Text    :=  v_1_5_AE_TITLE;
+    frmMain.cxCheckBox2.Checked :=  v_1_6_IS_DEVICES_CHECK;
+    frmMain.cbIsWrtLog.Checked  :=  v_1_7_IS_LOG_WRITE;
+    frmMain.cxchckbxchkAE.Checked := v_1_8_IS_CHK_AETITLE;
+    frmMain.CB_is_stor_comm_ex.Checked := v_1_9_is_stor_comm_ex;
+    frmMain.TEIPServer.Text     :=  v_1_9_SERVER_IP;
+    //
+    frmMain.cb_use_3d.Checked := MyStrToBool(
+                       DBparams_get ('STATION', // c_DICOM,        // SECTION
+                                     'USE_3D_LIBRARY', // KEY
+                                     frmMain.trRead, // FIBTransaction
+                                     frmMain.DB,      // TpFIBDatabase
+                                     '1'
+                                    )
+                                 );
+  finally
+    FreeAndNil(v_ini);
+  end;
+  if p_is_save then Myparams_save;
+end;
+
+function frm_prm_str ( p_prm_name : string;
+                       p_old_value : string;
+                       p_new_value : string
+                     ) : ansistring;
+const c_r1 = '[';
+      c_r2 = ']';
+begin
+  if (p_old_value<>p_new_value) then
+  begin
+    Result := c_r1+p_prm_name+c_r2+
+              '   было: '+c_r1+p_old_value+c_r2+
+              '   стало: '+c_r1+p_new_value+c_r2;
+  end else
+  begin
+    Result:='';
+  end;
+end;
+
+procedure Myparams_save;
+var v_ini : TIniFile; v_str_wrt : ansistring;
+begin
+  // сформируем строку протокола
+  v_str_wrt:=
+    frm_prm_str('Каталог резервного копирования',
+                v_1_2_BCP_CATALOG,frmMain.cxtxtdtBD.Text);
+  v_str_wrt:=v_str_wrt+#13+
+    frm_prm_str('Каталог базы изображений',
+                v_1_3_STORAGE_FOLDER,
+                frmMain.cxtxtdt1.Text);
+  v_str_wrt:=v_str_wrt+#13+
+    frm_prm_str('IP-адрес',
+                v_1_9_SERVER_IP,
+                frmMain.TEIPServer.Text);
+  v_str_wrt:=v_str_wrt+#13+
+    frm_prm_str('AE Title',
+                v_1_5_AE_TITLE,
+                frmMain.cxtAE_TITLE.Text);
+  v_str_wrt:=v_str_wrt+#13+
+    frm_prm_str('Порт',
+                v_1_4_SERVER_PORT,
+                frmMain.cxtSERVER_PORT.Text);
+  v_str_wrt:=v_str_wrt+#13+
+    frm_prm_str('Проверять AE Title',
+                MyBoolToStr(v_1_8_IS_CHK_AETITLE),
+                MyBoolToStr(frmMain.cxchckbxchkAE.Checked));
+  v_str_wrt:=v_str_wrt+#13+
+    frm_prm_str('Вести расширенный протокол',
+                MyBoolToStr(v_1_7_IS_LOG_WRITE),
+                MyBoolToStr(frmMain.cbIsWrtLog.Checked));
+  v_str_wrt:=v_str_wrt+#13+
+    frm_prm_str('Выполнять STORAGE COMMITMENT после отправки снимков',
+                MyBoolToStr(v_1_9_is_stor_comm_ex),
+                MyBoolToStr(frmMain.CB_is_stor_comm_ex.Checked));
+  v_str_wrt:=v_str_wrt+#13+
+    frm_prm_str('Проверять наличие устройства DICOM в списке устройств',
+                MyBoolToStr(v_1_6_IS_DEVICES_CHECK),
+                MyBoolToStr(frmMain.cxCheckBox2.Checked));
+  // запись ini-файла
+  MyDoQueryInsert( 'Изменение параметров сервера',2,
+                   'Параметры сервера были изменены:'+#13+
+                   v_str_wrt+#13+
+                   'Необходима перезагрузка сервера.',
+                   frmMain.trWrite,
+                   frmMain.DB );
+  v_ini:=TIniFile.Create(v_exe_path+c_ini_file);
+  try
+    v_ini.WriteString( c_1_razdel, с_1_2_BCP_CATALOG,      Trim(frmMain.cxtxtdtBD.Text) );
+    DBparams_wrt (  'SERVER', // c_DICOM,        // SECTION
+                    'STORAGESCP', // KEY
+                    Trim(frmMain.cxtxtdtBD.Text),      // VALUE
+                    frmMain.trRead, // FIBTransaction
+                    frmMain.trWrite, // FIBTransaction
+                    frmMain.DB      // TpFIBDatabase
+                    );
+    v_ini.WriteString( c_1_razdel, c_1_3_STORAGE_FOLDER,   Trim(frmMain.cxtxtdt1.Text) );
+    DBparams_wrt (  'SERVER', // c_DICOM,        // SECTION
+                    'REMOTESTORAGESCP', // KEY
+                    Trim(frmMain.cxtxtdt1.Text),      // VALUE
+                    frmMain.trRead, // FIBTransaction
+                    frmMain.trWrite, // FIBTransaction
+                    frmMain.DB      // TpFIBDatabase
+                    );
+    v_ini.WriteString( c_1_razdel, c_1_4_SERVER_PORT,      Trim(frmMain.cxtSERVER_PORT.Text) );
+    DBparams_wrt (  'SERVER',
+                    'PORT',
+                    Trim(frmMain.cxtSERVER_PORT.Text),
+                    frmMain.trRead,
+                    frmMain.trWrite,
+                    frmMain.DB
+                    );                     
+
+    DBparams_wrt (  'SERVER',
+                    'IP',
+                    Trim(frmMain.TEIPServer.Text),
+                    frmMain.trRead,
+                    frmMain.trWrite,
+                    frmMain.DB
+                    );
+
+    v_ini.WriteString( c_1_razdel, c_1_5_AE_TITLE,         Trim(frmMain.cxtAE_TITLE.Text) );
+    DBparams_wrt (  'SERVER', // c_DICOM,        // SECTION
+                    'AETITLE', // KEY
+                    Trim(frmMain.cxtAE_TITLE.Text),      // VALUE
+                    frmMain.trRead, // FIBTransaction
+                    frmMain.trWrite, // FIBTransaction
+                    frmMain.DB      // TpFIBDatabase
+                    );
+    v_ini.WriteString( c_1_razdel, c_1_6_IS_DEVICES_CHECK, MyBoolToStr(frmMain.cxCheckBox2.Checked) );
+    v_ini.WriteString( c_1_razdel, c_1_7_IS_LOG_WRITE,     MyBoolToStr(frmMain.cbIsWrtLog.Checked) );
+    v_ini.WriteString( c_1_razdel, c_1_8_IS_CHK_AETITLE,   MyBoolToStr(frmMain.cxchckbxchkAE.Checked) );
+    //
+    DBparams_wrt (  'DICOM', // c_DICOM,        // SECTION
+                    'ST_COMM_CONF_AFT_ST', // KEY
+                    MyBoolToStr(frmMain.CB_is_stor_comm_ex.Checked),      // VALUE
+                    frmMain.trRead, // FIBTransaction
+                    frmMain.trWrite, // FIBTransaction
+                    frmMain.DB      // TpFIBDatabase
+                    );
+    //
+    DBparams_wrt (  'STATION', // c_DICOM,        // SECTION
+                    'USE_3D_LIBRARY', // KEY
+                    MyBoolToStr(frmMain.cb_use_3d.Checked),      // VALUE
+                    frmMain.trRead, // FIBTransaction
+                    frmMain.trWrite, // FIBTransaction
+                    frmMain.DB      // TpFIBDatabase
+                    );
+  //  v_ini.WriteString( c_1_razdel, c_1_9_is_stor_comm_ex,  MyBoolToStr(frmMain.CB_is_stor_comm_ex.Checked) );
+  finally
+    FreeAndNil(v_ini);
+  end;
+  sys_read(False);
+  SetSavBtnCol(False);
+end;
+
+// процедура коннекта/дисконнекта с базой
+// согласно значению параметра
+procedure act_conn( const p_is_connected : Boolean = True );
+begin
+  if ((p_is_connected) and (not frmMain.DB.Connected))
+  then
+  begin
+    if Trim(v_ip_fb)='' then
+    begin
+      MessageDlg('Не задан IP адрес SQL сервера Firebird', mtError, [mbOK], 0);
+      Application.Terminate;
+    end;
+    with frmMain.DB do
+    begin
+      frmMain.DB.DatabaseName := v_ip_fb+':PACSBASE'; 
+      ConnectParams.UserName := 'sysdba';
+      ConnectParams.Password := 'masterkey';
+      MyDbConnect(frmMain.DB);
+    end;
+    MyStartTransaction;
+  end
+  else if ((not p_is_connected) and (frmMain.DB.Connected)) then
+  begin
+    MyEndTransaction;
+    MyDBDisconnect(frmMain.DB);
+  end;
+end;
+
+// процедура общая для завершения программы - выход
+procedure Appl_Exit;
+begin
+  frmMain.cxDV.StoreToRegistry(c_reg_lst_mn+c_devices_rg, TRUE, [], 'cxDV');
+  frmMain.TVList.StoreToRegistry(c_reg_lst_mn+c_events_rg, TRUE, [], 'TVList');
+  //
+  frmMain.pFIBDevices.Close;
+  frmMain.pFIBEvents.Close;
+  Application.Terminate;
+end;
+
+procedure TfrmMain.aAddRulExecute(Sender: TObject);
+var FIBQuery : TpFIBQuery;
+begin
+  Application.CreateForm(TfrmAddRule, frmAddRule);
+  try
+    frmAddRule.ShowModal;
+    if frmAddRule.ModalResult = mrOk then
+      begin
+        if DB.Connected then
+          begin
+            Cmn_Commit(trWrite);
+            FIBQuery := TpFIBQuery.Create(nil);
+            FIBQuery.Database := DB;
+            FIBQuery.Transaction := trWrite;
+            FIBQuery.Options := FIBQuery.Options + [qoAutoCommit];
+            FIBQuery.SQL.Text := ' insert into RULES(fk_deviceid, fk_deviceid2, fc_mod) values(:pfk_deviceid, :pfk_deviceid2, :pfc_mod) ';
+            FIBQuery.ParamByName('pfk_deviceid').AsInteger := frmAddRule.beTo.Tag;
+            FIBQuery.ParamByName('pfk_deviceid2').AsInteger := frmAddRule.beFrom.Tag;
+            FIBQuery.ParamByName('pfc_mod').AsString := frmAddRule.cbType.Text;
+            try
+              MyExecQuery(FIBQuery);
+            finally
+              FIBQuery.Close;
+              FreeAndNil(FIBQuery);
+            end;
+            Cmn_Commit(trWrite);
+            aRefRulExecute(nil);
+            pFIBRules.Locate('fc_title', frmAddRule.beTo.Text, []);
+          end;
+      end;
+  finally
+    frmAddRule.Free;
+  end;
+end;
+
+procedure TfrmMain.actCloseExecute(Sender: TObject);
+VAR v_str : string;
+begin
+  if ((frmMain.cxtxtdtBD.Text      <>  v_1_2_BCP_CATALOG) or
+      (frmMain.cxtxtdt1.Text       <>  v_1_3_STORAGE_FOLDER) or
+      (frmMain.cxtSERVER_PORT.Text <>  v_1_4_SERVER_PORT) or
+      (frmMain.cxtAE_TITLE.Text    <>  v_1_5_AE_TITLE) or
+      (frmMain.cxCheckBox2.Checked <>  v_1_6_IS_DEVICES_CHECK) or
+      (frmMain.cbIsWrtLog.Checked  <>  v_1_7_IS_LOG_WRITE) or
+      (frmMain.cxchckbxchkAE.Checked <> v_1_8_IS_CHK_AETITLE) or
+      (frmMain.TEIPServer.Text <> v_1_9_SERVER_IP) or
+      (frmMain.CB_is_stor_comm_ex.Checked <> v_1_9_is_stor_comm_ex) )
+  then begin
+    v_str := 'Остались несохраненные данные'+#13+
+             'Вы хотите выйти из приложения '+#13+
+             'без сохранения данных ?';
+  end else begin
+    v_str:='Вы хотите выйти из приложения ?';
+  end;
+  if Application.MessageBox(PChar(v_str),
+                            'Вопрос',
+                            MB_YESNO + MB_ICONQUESTION) = MrYes
+  then begin
+    Appl_Exit; // завершение работы
+  end;
+end;
+
+procedure TfrmMain.actConnectExecute(Sender: TObject);
+begin
+end;
+
+// функция получения даты последнего архивирования
+function dt_last_backup:string;
+begin
+  dt_last_backup := DBparams_get (
+                    'SERVER',
+                    'LASTDATE',
+                    frmMain.trRead,
+                    frmMain.DB
+                    );
+end;
+
+// функция вывода числа integer по формату '999 999 999'
+function MyIntToStr (const p_nmb : integer): string;
+var i,j:Integer; v_res, v_str : string;
+begin
+  v_str:=IntToStr(p_nmb);
+  j:=Length(v_str);
+  v_res:='';
+  for i := 0 to j-1 do begin
+    if (i mod 3)=0  then v_res:=' '+v_res;
+    v_res:=Copy(v_str,j-i,1)+v_res;
+  end;
+  MyIntToStr:=v_res;
+end;
+
+// функция получения количества записей в таблицах
+// по параметру p_pr
+// p_pr=1 - Количество исследований
+// p_pr=2 - Количество серий
+// p_pr=3 - Количество изображений
+function gt_rec_amm ( const p_pr:Integer ):Integer;
+var FIBQuery : TpFIBQuery;
+    v_res : Integer;
+begin
+  v_res:=0;
+  if frmMain.DB.Connected and (p_pr in [1,2,3])
+  then begin
+  //  Cmn_Commit(frmMain.trRead);
+    FIBQuery := TpFIBQuery.Create(nil);
+    FIBQuery.Database := frmMain.DB;
+    FIBQuery.Transaction := frmMain.trRead;
+    if p_pr=1 then begin // Количество исследований
+      FIBQuery.SQL.Text := 'select count(1) as nnn from STUDIES';
+    end else if p_pr=2 then begin // Количество серий
+      FIBQuery.SQL.Text := 'select count(1) as nnn from SERIES';
+    end else if p_pr=3 then begin // Количество изображений
+      FIBQuery.SQL.Text := 'select count(1) as nnn from IMAGES';
+    end;
+    try
+      MyExecQuery(FIBQuery);
+      if not FIBQuery.Eof then begin
+        v_res:=FIBQuery.FieldByName('nnn').AsInteger;
+      end else begin
+        v_res:=0;
+      end;
+    finally
+      FIBQuery.Close;
+      FreeAndNil(FIBQuery);
+    end;
+  end;
+  gt_rec_amm:=v_res;
+end;
+
+procedure sh_service_status;
+begin
+  if ServiceRunning(nil,c_proc_name) then begin
+    frmMain.cxlblWarBD.Caption := 'Сервер запущен';
+    frmMain.cxlblWarBD.Style.Font.Color:=c_server_start_color;
+  end else begin
+    frmMain.cxlblWarBD.Caption := 'Сервер остановлен';
+    frmMain.cxlblWarBD.Style.Font.Color:=c_server_stop_color;
+    frmMain.LbRbtSrv.Visible:=False;
+  end;
+end;
+
+// отображение/перерисовка первой панели
+procedure PanelDB_Show(const p_n_panel : integer );
+var v_dt_str : AnsiString;
+begin
+  if p_n_panel=1 then
+  begin
+    if not frmMain.DB.Connected
+    then begin
+      v_is_cxlbl8:=False;
+      frmMain.cxlbl8.Caption:='';
+      //
+      frmMain.lbl11.Caption := ''; // Количество исследований :
+      frmMain.lbl10.Caption := ''; // Количество серий :
+      frmMain.lbl9.Caption  := ''; // Количество изображений :
+      frmMain.lbl8.Caption  := ''; // Размер базы данных, байт :
+    end else begin
+      if not v_is_cxlbl8 then begin
+        v_is_cxlbl8:=True;
+        act_conn(True);
+        v_dt_str:=dt_last_backup;
+        // определим дату последнего резервирования
+        if (v_dt_str='') then begin
+          frmMain.cxlbl8.Caption:='Резервирование не производилось!';
+        end else begin
+          frmMain.cxlbl8.Caption:='Дата последнего резервирования: '+v_dt_str;
+        end;
+        // Параметры локальной базы
+        frmMain.lbl11.Caption := MyIntToStr( gt_rec_amm(1) ); // Количество исследований :
+        frmMain.lbl10.Caption := MyIntToStr( gt_rec_amm(2) ); // Количество серий :
+        frmMain.lbl9.Caption  := MyIntToStr( gt_rec_amm(3) ); // Количество изображений :
+      //  v_dbname:=frmMain.DB.DatabaseName;
+        // Размер базы данных, байт :
+        frmMain.lbl8.Caption := MyIntToStr(FileSizeByName(frmMain.DB.DBFileName)) ;
+//        frmMain.lbl8.Caption := MyIntToStr(FileSizeByName(copy(frmMain.v_DB, pos(':',frmMain.v_DB)+1, length(frmMain.v_DB)))) ;
+      end;
+    end;
+  end else if p_n_panel=2 then
+  begin
+    sh_service_status;
+  end;
+end;
+
+// запись даты, имени файла архивации
+procedure WriteBackupRes( p_Date:TDateTime );
+begin
+  DBparams_wrt ( 'SERVER', // c_DICOM,        // SECTION
+                 'LASTDATE', // KEY
+                 DateTimeToStr(p_Date),      // VALUE
+                 frmMain.trRead, // FIBTransaction
+                 frmMain.trWrite, // FIBTransaction
+                 frmMain.DB      // TpFIBDatabase
+               );
+end;
+
+// открытие формы архивации
+procedure TfrmMain.actCreateBackUpCopyExecute(Sender: TObject);
+begin // create backup copy
+  if (Trim(cxtxtdtBD.Text)='') then begin
+    MessageDlg('Внимание!'+#13+#10+'Не задан каталог для резервного копирования!', mtInformation, [mbOK], 0);
+  end else if frmMain.DB.Connected then
+  begin
+    Application.CreateForm(TFrmBackUp, FrmBackUp);
+    FrmBackUp.SetParams( Trim(cxtxtdtBD.Text),
+                   //  frmMain.DB.DatabaseName,
+                     frmMain.DB.ConnectParams.UserName,
+                     frmMain.DB.ConnectParams.Password
+                   );
+    try
+      FrmBackUp.ShowModal;
+    finally
+      // если копирование было произведено
+      // то запишем в журнал резервных копий
+      if FrmBackUp.v_ok then begin
+        WriteBackupRes(Now);
+        cxlbl8.Caption:='Дата последнего резервирования: '+DateTimeToStr(Now);
+      end;
+      FreeAndNil(FrmBackUp);
+    end;
+  end
+  else
+  begin
+    Application.MessageBox('Внимание!'+#13+
+                           'Невозможно сделать резервную копию базы данных! База данных не подключена!',
+                           'Предупреждение',
+                           MB_ICONWARNING + MB_OK);
+  end;
+end;
+
+function f_GEN_DEVICES_ID :Integer;
+var FIBQuery : TpFIBQuery; v_res : integer;
+begin
+  v_res:=1;
+  if frmMain.DB.Connected
+  then begin
+    FIBQuery := TpFIBQuery.Create(nil);
+    FIBQuery.Database := frmMain.DB;
+    FIBQuery.Transaction := frmMain.trWrite;
+    FIBQuery.SQL.Text :=
+            'select gen_id(GEN_DEVICES_ID, 1) as gen_id from rdb$database';
+    try
+      MyExecQuery(FIBQuery);
+      v_res := FIBQuery.FieldByName('gen_id').AsInteger;
+    finally
+      FIBQuery.Close;
+      FreeAndNil(FIBQuery);
+    end;
+    Cmn_Commit(frmMain.trWrite);
+  end;
+  f_GEN_DEVICES_ID := v_res;
+end; 
+
+procedure p_devices_refr;
+var id : Integer;
+begin
+  // обновить список устройств
+  id := frmMain.pFIBDevices.FieldByName('fk_id').AsInteger;
+  frmMain.pFIBDevices.Close;
+  MyExecDSQuery(frmMain.pFIBDevices);
+  frmMain.pFIBDevices.Locate('fk_id', id, []);
+end;
+
+// вызов формы параметров устройства DICOM
+// 1 - добавить
+// 2 - изменить
+procedure CallFrm_Devices(const p_par:Byte);
+var v_res : Integer;
+    FIBQuery : TpFIBQuery;
+    v_FC_TITLE : string;
+begin
+  Application.CreateForm(TFrmEdtDevice, FrmEdtDevice);
+  if p_par = 1 then
+    begin // добавить устройство в список
+      FrmEdtDevice.v_FK_ID       := -1; //f_GEN_DEVICES_ID;
+      FrmEdtDevice.v_FC_IP       := '';
+      FrmEdtDevice.v_FN_PORT     := 0;
+      FrmEdtDevice.v_FC_TITLE    := '';
+      FrmEdtDevice.v_FC_COMMENT  := '';
+      FrmEdtDevice.v_FN_TYPE     := 0;
+    end else
+    begin  // редактировать запись об устройстве
+      FrmEdtDevice.v_FK_ID       := frmMain.pFIBDevices.FieldByName('FK_ID').AsInteger;
+      FrmEdtDevice.v_FC_IP       := frmMain.pFIBDevices.FieldByName('FC_IP').AsString;
+      FrmEdtDevice.v_FN_PORT     := frmMain.pFIBDevices.FieldByName('FN_PORT').AsInteger;
+      FrmEdtDevice.v_FC_TITLE    := frmMain.pFIBDevices.FieldByName('FC_TITLE').AsString;
+      FrmEdtDevice.v_FC_COMMENT  := frmMain.pFIBDevices.FieldByName('FC_COMMENT').AsString;
+      FrmEdtDevice.v_FN_TYPE     := frmMain.pFIBDevices.FieldByName('FN_TYPE').AsInteger;
+    end;
+  FrmEdtDevice.p_set_fld_val;
+  try
+    v_res:=FrmEdtDevice.ShowModal;
+    if v_res=mrOk then
+      begin
+        Cmn_Commit(frmMain.trWrite);
+        FIBQuery := TpFIBQuery.Create(nil);
+        FIBQuery.Database := frmMain.DB;
+        FIBQuery.Transaction := frmMain.trWrite;
+        FibQuery.Options := FibQuery.Options + [qoAutoCommit];
+        if p_par=1 then
+          begin // добавить устройство в список
+            FIBQuery.SQL.Text := ' insert into DEVICES (FC_IP, FN_PORT, FC_TITLE, FC_COMMENT, FN_TYPE) '+#13+
+                                 ' values(:p_FC_IP, :p_FN_PORT, :p_FC_TITLE, :p_FC_COMMENT, :p_FN_TYPE) ';
+          end else
+          begin // редактировать запись об устройстве
+            FIBQuery.SQL.Text := ' update DEVICES '+#13+
+                                 '    set FC_IP=:p_FC_IP, FN_PORT=:p_FN_PORT, '+#13+
+                                 '        FC_TITLE=:p_FC_TITLE, FC_COMMENT=:p_FC_COMMENT, FN_TYPE = :p_FN_TYPE '+#13+
+                                 '  where FK_ID=:p_FK_ID ';
+            FIBQuery.ParamByName('p_FK_ID').AsInteger := FrmEdtDevice.v_FK_ID ;
+          end;
+      FIBQuery.ParamByName('p_FC_IP').AsString  := FrmEdtDevice.v_FC_IP;
+      FIBQuery.ParamByName('p_FN_PORT').AsInteger := FrmEdtDevice.v_FN_PORT;
+      FIBQuery.ParamByName('p_FC_TITLE').AsString := FrmEdtDevice.v_FC_TITLE;
+      FIBQuery.ParamByName('p_FC_COMMENT').AsString := FrmEdtDevice.v_FC_COMMENT;
+      FIBQuery.ParamByName('p_FN_TYPE').AsInteger := FrmEdtDevice.v_FN_TYPE;
+      v_FC_TITLE:=FrmEdtDevice.v_FC_TITLE;
+      try
+        MyExecQuery(FIBQuery);
+      finally
+        FIBQuery.Close;
+        FreeAndNil(FIBQuery);
+      end;
+      Cmn_Commit(frmMain.trWrite);
+      // обновить список устройств на форме
+      p_devices_refr;
+      frmMain.pFIBDevices.Locate('FC_TITLE', FrmEdtDevice.v_FC_TITLE, []);
+    end;
+  finally
+    FreeAndNil(FrmEdtDevice);
+  end;
+end;
+
+procedure TfrmMain.actDltDeviceExecute(Sender: TObject);
+var FIBQuery : TpFIBQuery;
+begin // delete device
+  if (cxDV.DataController.Controller.SelectedRecordCount=1)
+  then begin
+    if Application.MessageBox(
+      'Вы действительно хотите удалить выбранное устройство из списка?',
+      'Вопрос', MB_YESNO + MB_ICONQUESTION) = IDYES
+    then
+    begin
+      Cmn_Commit(frmMain.trWrite);
+      FIBQuery := TpFIBQuery.Create(nil);
+      FIBQuery.Database := frmMain.DB;
+      FIBQuery.Transaction := frmMain.trWrite;
+      FibQuery.Options := FibQuery.Options + [qoAutoCommit];
+      FIBQuery.SQL.Text := 'delete from DEVICES where FK_ID=:p_FK_ID';
+      FIBQuery.ParamByName('p_FK_ID').AsInteger := pFIBDevices.FieldByName('FK_ID').AsInteger ;
+      try
+        MyExecQuery(FIBQuery);
+      finally
+        FIBQuery.Close;
+        FreeAndNil(FIBQuery);
+      end;
+      Cmn_Commit(frmMain.trWrite);
+      // обновить список устройств на форме
+      p_devices_refr;
+    end;
+  end;
+end;
+
+procedure TfrmMain.actEdtDeviceExecute(Sender: TObject);
+begin // edit device
+  if (cxDV.DataController.Controller.SelectedRecordCount=1)
+  then begin
+    CallFrm_Devices(2);
+  end;
+end;
+
+procedure TfrmMain.actInsDeviceExecute(Sender: TObject);
+begin  // insert device
+  CallFrm_Devices(1);
+end;
+
+procedure TfrmMain.actOpenCatalogExecute(Sender: TObject);
+begin
+  dlgrezcopy.Directory:=cxtxtdtBD.Text;
+  if dlgrezcopy.Execute then
+  begin
+    if (cxtxtdtBD.Text <> dlgrezcopy.Directory) then begin
+      SetSavBtnCol(True);
+      cxtxtdtBD.Text := dlgrezcopy.Directory;
+    end;
+  end;
+end;
+
+procedure TfrmMain.actOpenCatLocalDBImagesExecute(Sender: TObject);
+begin
+  dlglocimg.Directory:=cxtxtdt1.Text;
+  if dlglocimg.Execute then
+  begin
+    if (cxtxtdt1.Text <> dlglocimg.Directory) then
+    begin
+      SetSavBtnCol(True);
+      cxtxtdt1.Text := dlglocimg.Directory;
+    end;
+  end;
+end;
+
+procedure events_refresh;
+var v_sql : AnsiString;
+begin
+  // обновить список событий на дату
+  frmMain.pFIBEvents.Close;
+  frmMain.pFIBEvents.SQLs.SelectSQL.Clear;
+  v_sql := 'select e.*, CASE e.fn_type '+
+   ' WHEN 1 THEN ''Запуск сервера'' '+
+   ' WHEN 2 THEN ''Остановка сервера'' '+
+   ' WHEN 3 THEN ''Ошибка'' '+
+   ' WHEN 4 THEN ''Обработанные события'' '+
+   ' WHEN 5 THEN ''Изменения параметров сервера'' '+
+   ' ELSE ''Не определено'' '+
+  'END as TYP_NAME from EVENTS e where 1=1 ';
+  if YearOf(frmMain.cxdtdtDate1.Date)>1900 then begin
+    v_sql := v_sql + ' and FD_DATE >= :PDATE1 ';
+  end;
+  if YearOf(frmMain.cxdtdtDate2.Date)>1900 then begin
+    v_sql := v_sql + ' and FD_DATE < :PDATE2 + 1 ';
+  end;
+  if frmMain.cxCBall.Checked then begin // Все события
+    v_sql := v_sql + '';
+  end else begin
+    if frmMain.cxCBstart.Checked or
+       frmMain.cxCBstop.Checked or
+       frmMain.cxchckbxerror.Checked or
+       frmMain.cxchckbxevents.Checked or
+       frmMain.cxchckbxParamEdit.Checked
+    then begin
+      v_sql := v_sql + ' and ( (1=0) ';
+      if frmMain.cxCBstart.Checked then begin // Запуск сервера
+        v_sql := v_sql + ' or (FN_TYPE=1) ';
+      end;
+      if frmMain.cxCBstop.Checked then begin // Остановка сервера
+        v_sql := v_sql + ' or (FN_TYPE=2) ';
+      end;
+      if frmMain.cxchckbxerror.Checked then begin // Ошибки
+        v_sql := v_sql + ' or (FN_TYPE=3) ';
+      end;
+      if frmMain.cxchckbxevents.Checked then begin // Обработанные события
+        v_sql := v_sql + ' or (FN_TYPE=4) ';
+      end;
+      if frmMain.cxchckbxParamEdit.Checked then begin // Изменения параметров сервера
+        v_sql := v_sql + ' or (FN_TYPE=5) ';
+      end;
+      v_sql := v_sql + ' ) ';
+    end else begin
+      frmMain.cxCBall.Checked:=True;
+      v_sql := v_sql + '';
+    end;
+  end;
+  v_sql := v_sql + 'order by FD_DATE desc';
+  frmMain.pFIBEvents.SQLs.SelectSQL.Text:=v_sql;
+  if YearOf(frmMain.cxdtdtDate1.Date)>1900 then begin
+    frmMain.pFIBEvents.ParamByName('PDATE1').AsDateTime := frmMain.cxdtdtDate1.Date;
+  end;
+  if YearOf(frmMain.cxdtdtDate2.Date)>1900 then begin
+    frmMain.pFIBEvents.ParamByName('PDATE2').AsDateTime := frmMain.cxdtdtDate2.Date;
+  end;
+  MyExecDSQuery(frmMain.pFIBEvents);
+end;
+
+procedure TfrmMain.actRebootExecute(Sender: TObject);
+begin  // reboot server
+  try
+    ShowBusy(True);
+    ServiceStop(nil,c_proc_name);
+    sh_service_status;
+    Application.ProcessMessages;
+    ServiceStart(nil,c_proc_name);
+    sh_service_status;
+    frmMain.LbRbtSrv.Visible:=False;
+  finally
+    ShowBusy(False);
+  end;
+end;
+
+procedure TfrmMain.actRefrDevicesExecute(Sender: TObject);
+begin
+  p_devices_refr;
+end;
+
+procedure TfrmMain.actRefreshLogExecute(Sender: TObject);
+begin // refresh log
+  events_refresh;
+end;
+
+procedure TfrmMain.actStartProcessExecute(Sender: TObject);
+begin  // запустить сервис c_proc_name
+  try
+    ShowBusy(True);
+    ServiceStart(nil,c_proc_name);
+    sh_service_status;
+    frmMain.LbRbtSrv.Visible:=False;
+  finally
+    ShowBusy(False);
+  end;
+end;
+
+procedure TfrmMain.actStopProcessExecute(Sender: TObject);
+begin  // остановить сервис c_proc_name
+  try
+    ShowBusy(True);
+    ServiceStop(nil,c_proc_name);
+    sh_service_status;
+    frmMain.LbRbtSrv.Visible:=False;
+  finally
+    ShowBusy(False);
+  end;
+end;
+
+procedure TfrmMain.aDelRulExecute(Sender: TObject);
+var FIBQuery : TpFIBQuery;
+begin
+  if tvRules.DataController.Controller.SelectedRecordCount = 1 then
+    begin
+      if Application.MessageBox('Вы действительно хотите удалить выбранное правило пересылки?',
+                                'Вопрос', MB_YESNO + MB_ICONQUESTION) = IdYes then
+        begin
+          Cmn_Commit(frmMain.trWrite);
+          FIBQuery := TpFIBQuery.Create(nil);
+          FIBQuery.Database := frmMain.DB;
+          FIBQuery.Transaction := frmMain.trWrite;
+          FibQuery.Options := FibQuery.Options + [qoAutoCommit];
+          FIBQuery.SQL.Text := 'delete from RULES where FK_ID=:pFK_ID';
+          FIBQuery.ParamByName('pFK_ID').AsInteger := pFIBRules.FieldByName('fk_id').AsInteger;
+          try
+            MyExecQuery(FIBQuery);
+          finally
+            FIBQuery.Close;
+            FreeAndNil(FIBQuery);
+          end;
+          Cmn_Commit(frmMain.trWrite); // обновить список устройств на форме
+          aRefRulExecute(nil);
+        end;
+    end;
+end;
+
+procedure TfrmMain.aExcel1Execute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'xls';
+  sdPopUp.Filter := 'Таблицы Excel (*.xls)|*.xls';
+  if sdPopUp.Execute then
+    ExportGridToExcel(sdPopUp.FileName, cxgrdDevices, TRUE, (cxDV.DataController.Controller.SelectedRecordCount <= 1) );
+
+end;
+
+procedure TfrmMain.aExcelExecute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'xls';
+  sdPopUp.Filter := 'Таблицы Excel (*.xls)|*.xls';
+  if sdPopUp.Execute then
+    ExportGridToExcel(sdPopUp.FileName, GrTVList, TRUE, (TVList.DataController.Controller.SelectedRecordCount <= 1) );
+end;
+
+procedure TfrmMain.aExcelRulExecute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'xls';
+  sdPopUp.Filter := 'Таблицы Excel (*.xls)|*.xls';
+  if sdPopUp.Execute then
+    ExportGridToExcel(sdPopUp.FileName, grRules, True, (tvRules.DataController.Controller.SelectedRecordCount <= 1) );
+end;
+
+procedure TfrmMain.aListClr1Execute(Sender: TObject);
+begin
+  cxDV.RestoreFromRegistry(c_reg_lst_mn+c_devices_def_rg, FALSE, FALSE, [], 'cxDV');
+end;
+
+procedure TfrmMain.aListClrExecute(Sender: TObject);
+begin
+  TVList.RestoreFromRegistry(c_reg_lst_mn+c_events_def_rg, FALSE, FALSE, [], 'TVList');
+end;
+
+procedure TfrmMain.aPrintLogExecute(Sender: TObject);
+const c_filename = 'fEvent_list.fr3';
+var id : Integer;
+begin // печать списка событий
+  id := pFIBEvents.FieldByName('fk_id').AsInteger;
+  if FileExists(c_filename) then
+    begin
+      frxDS.DataSet:=pFIBEvents;
+      frxDS.UserName:='Evnt';
+      frxDS.FieldAliases.Clear;
+      frxRpt.LoadFromFile(c_filename);
+      frxRpt.ShowReport;
+      pFIBEvents.Locate('fk_id', id, []);
+    end else
+    begin
+      MessageDlg('Не найден файл '+c_filename, mtError, [mbOK], 0);
+    end;
+end;
+
+procedure TfrmMain.aPrintDevExecute(Sender: TObject);
+const c_filename = 'fDevice_list.fr3';
+var id : Integer;
+begin // печать списка устройств
+  id := pFIBDevices.FieldByName('fk_id').AsInteger;
+  if FileExists(c_filename) then
+    begin
+      frxDS.DataSet:=pFIBDevices;
+      frxDS.UserName:='Dev';
+      frxDS.FieldAliases.Clear;
+      frxRpt.LoadFromFile(c_filename);
+      frxRpt.ShowReport;
+      pFIBDevices.Locate('fk_id', id, []);
+    end else
+    begin
+      MessageDlg('Не найден файл '+c_filename, mtError, [mbOK], 0);
+    end;
+end;
+
+procedure TfrmMain.aPrintRulExecute(Sender: TObject);
+const c_filename = 'fRules_list.fr3';
+var id : Integer;
+begin // печать списка событий
+  id := pFIBRules.FieldByName('fk_id').AsInteger;
+  if FileExists(c_filename) then
+    begin
+      frxDS.DataSet:=pFIBRules;
+      frxDS.UserName:='Rules';
+      frxDS.FieldAliases.Clear;
+      frxRpt.LoadFromFile(c_filename);
+      frxRpt.ShowReport;
+      pFIBRules.Locate('fk_id', id, []);
+    end else
+    begin
+      MessageDlg('Не найден файл '+c_filename, mtError, [mbOK], 0);
+    end;
+end;
+
+procedure TfrmMain.aRefRulExecute(Sender: TObject);
+var id : Integer;
+begin
+  id := pFIBRules.FieldByName('fk_id').AsInteger;
+  pFIBRules.Close;
+  MyExecDSQuery(pFIBRules);
+  pFIBRules.Locate('fk_id', id, []);
+end;
+
+procedure TfrmMain.aText1Execute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'txt';
+  sdPopUp.Filter := 'Текстовые файлы (*.txt)|*.txt';
+  if sdPopUp.Execute then
+    ExportGridToText(sdPopUp.FileName, cxgrdDevices, TRUE, (cxDV.DataController.Controller.SelectedRecordCount<= 1));
+end;
+
+procedure TfrmMain.aTextExecute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'txt';
+  sdPopUp.Filter := 'Текстовые файлы (*.txt)|*.txt';
+  if sdPopUp.Execute then
+    ExportGridToText(sdPopUp.FileName, GrTVList, TRUE, (TVList.DataController.Controller.SelectedRecordCount<= 1) );
+end;
+
+procedure TfrmMain.aTextRulExecute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'txt';
+  sdPopUp.Filter := 'Текстовые файлы (*.txt)|*.txt';
+  if sdPopUp.Execute then
+    ExportGridToText(sdPopUp.FileName, grRules, TRUE, (tvRules.DataController.Controller.SelectedRecordCount<= 1) );
+end;
+
+procedure TfrmMain.aWeb1Execute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'html';
+  sdPopUp.Filter := 'Web-страницы (*.html)|*.html';
+  if sdPopUp.Execute then
+    ExportGridToHTML(sdPopUp.FileName, cxgrdDevices, TRUE, (cxDV.DataController.Controller.SelectedRecordCount <= 1) );
+end;
+
+procedure TfrmMain.aWebExecute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'html';
+  sdPopUp.Filter := 'Web-страницы (*.html)|*.html';
+  if sdPopUp.Execute then
+    ExportGridToHTML(sdPopUp.FileName, GrTVList, TRUE, (TVList.DataController.Controller.SelectedRecordCount <= 1));
+end;
+
+procedure TfrmMain.aWebRulExecute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'html';
+  sdPopUp.Filter := 'Web-страницы (*.html)|*.html';
+  if sdPopUp.Execute then
+    ExportGridToHTML(sdPopUp.FileName, grRules, TRUE, (tvRules.DataController.Controller.SelectedRecordCount <= 1));
+end;
+
+procedure TfrmMain.aXML1Execute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'xml';
+  sdPopUp.Filter := 'XML-страницы (*.xml)|*.xml';
+  if sdPopUp.Execute then
+    ExportGridToXML(sdPopUp.FileName, cxgrdDevices, TRUE, (cxDV.DataController.Controller.SelectedRecordCount <= 1));
+
+end;
+
+procedure TfrmMain.aXMLExecute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'xml';
+  sdPopUp.Filter := 'XML-страницы (*.xml)|*.xml';
+  if sdPopUp.Execute then
+    ExportGridToXML(sdPopUp.FileName, GrTVList, TRUE, (TVList.DataController.Controller.SelectedRecordCount <= 1));
+end;
+
+procedure TfrmMain.aXMLRulExecute(Sender: TObject);
+begin
+  sdPopUp.DefaultExt := 'xml';
+  sdPopUp.Filter := 'XML-страницы (*.xml)|*.xml';
+  if sdPopUp.Execute then
+    ExportGridToXML(sdPopUp.FileName, grRules, TRUE, (tvRules.DataController.Controller.SelectedRecordCount <= 1));
+end;
+
+procedure TfrmMain.TSDatabaseShow(Sender: TObject);
+begin
+  PanelDB_Show(1);
+end;
+
+procedure TfrmMain.TSLocalShow(Sender: TObject);
+begin  // отображение 2 закладки - локальная конфигурация DICOM
+  PanelDB_Show(2);
+end;
+
+procedure TfrmMain.TSDevicesShow(Sender: TObject);
+begin
+  if not frmMain.pFIBDevices.Active then  
+    p_devices_refr;
+  PanelDB_Show(3);
+end;
+
+procedure TfrmMain.TSEventsShow(Sender: TObject);
+begin
+  if not frmMain.pFIBEvents.Active then
+    events_refresh;
+  PanelDB_Show(4);
+end;
+
+procedure TreeChange(const p_SelIndex: integer);
+begin
+  if p_SelIndex = 1 then
+    begin // База данных
+      frmMain.cxpgcntrl1.ActivePageIndex := 0;
+    end else
+    if (p_SelIndex = 2) then
+      begin // Локальная конфигурация DICOM
+        frmMain.cxpgcntrl1.ActivePageIndex := 1;
+      end else
+      if p_SelIndex = 3 then
+        begin  // Удаленные устройства DICOM
+          frmMain.cxpgcntrl1.ActivePageIndex := 3;
+        end else
+        if p_SelIndex = 4 then
+          begin  // Журнал событий
+            frmMain.cxpgcntrl1.ActivePageIndex := 2;
+          end else
+          if p_SelIndex = 5 then
+            begin
+              frmMain.cxpgcntrl1.ActivePageIndex := 4;
+            end;
+end;
+
+// отображение панели, соответствующей выботу в дереве
+procedure TfrmMain.cbIsWrtLogEditing(Sender: TObject; var CanEdit: Boolean);
+begin
+  SetSavBtnCol(True);
+end;
+
+procedure TfrmMain.cxchckbxchkAEEditing(Sender: TObject; var CanEdit: Boolean);
+begin
+  SetSavBtnCol(True);
+end;
+
+procedure TfrmMain.cxCheckBox2Editing(Sender: TObject; var CanEdit: Boolean);
+begin
+  SetSavBtnCol(True);
+end;
+
+procedure TfrmMain.tsRulesShow(Sender: TObject);
+begin
+  if pFIBRules.Active = False then
+    pFIBRules.Active := True;
+end;
+
+procedure TfrmMain.cxtAE_TITLEEditing(Sender: TObject; var CanEdit: Boolean);
+begin
+  SetSavBtnCol(True);
+end;
+
+procedure TfrmMain.cxtrvwTreeChange(Sender: TObject; Node: TTreeNode);
+begin
+  TreeChange(Node.StateIndex);
+end;
+
+procedure TfrmMain.cxtSERVER_PORTEditing(Sender: TObject; var CanEdit: Boolean);
+begin
+  SetSavBtnCol(True);
+end;
+
+procedure TfrmMain.cxtxtdt1Editing(Sender: TObject; var CanEdit: Boolean);
+begin
+  SetSavBtnCol(True);
+end;
+
+procedure TfrmMain.cxtxtdtBDEditing(Sender: TObject; var CanEdit: Boolean);
+begin
+  SetSavBtnCol(True);
+end;
+
+// вывод типа события в строке на основании целочисленного представления в БД
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+var v_str : AnsiString;
+begin
+  cxDV.StoreToRegistry(c_reg_lst_mn+c_devices_rg, TRUE, [], 'cxDV');
+  TVList.StoreToRegistry(c_reg_lst_mn+c_events_rg, TRUE, [], 'TVList');
+  tvRules.StoreToRegistry('\SoftWare\SoftMaster\Configurator\grRules', True, [], 'tvRules');
+
+  if ((frmMain.cxtxtdtBD.Text      <>  v_1_2_BCP_CATALOG) or
+      (frmMain.cxtxtdt1.Text       <>  v_1_3_STORAGE_FOLDER) or
+      (frmMain.cxtSERVER_PORT.Text <>  v_1_4_SERVER_PORT) or
+      (frmMain.cxtAE_TITLE.Text    <>  v_1_5_AE_TITLE) or
+      (frmMain.cxCheckBox2.Checked <>  v_1_6_IS_DEVICES_CHECK) or
+      (frmMain.cbIsWrtLog.Checked  <>  v_1_7_IS_LOG_WRITE) or
+      (frmMain.cxchckbxchkAE.Checked <> v_1_8_IS_CHK_AETITLE) or
+      (frmMain.TEIPServer.Text     <> v_1_9_SERVER_IP) or
+      (frmMain.CB_is_stor_comm_ex.Checked <> v_1_9_is_stor_comm_ex) )
+  then begin
+    v_str := 'Остались несохраненные данные!'+#13+
+             'Вы хотите выйти из приложения '+#13+
+             'без сохранения данных ?';
+  end else begin
+    v_str:='Вы хотите выйти из приложения ?';
+  end;
+  if Application.MessageBox(PChar(v_str),
+                            'Вопрос',
+                            MB_YESNO + MB_ICONQUESTION) = MrYes
+  then begin
+    frmMain.pFIBDevices.Close;
+    frmMain.pFIBEvents.Close;
+    MyEndTransaction;
+    MyDBDisconnect(frmMain.DB);
+    action := caFree;
+  end else
+    action := caNone;
+end;
+
+// создание формы - начальная инициализация
+procedure TfrmMain.FormCreate(Sender: TObject);
+var Reg : TRegIniFile;
+begin
+  frmMain.LbRbtSrv.Visible:=False;
+  v_is_cxlbl8:=False;
+  Reg := TRegIniFile.Create;
+  try
+    Reg.RootKey:=HKEY_CURRENT_USER;
+    if not Reg.OpenKey(c_reg_lst_mn, False) then
+    begin
+      Reg.CreateKey(c_reg_lst_mn);
+    end;
+  finally
+    Reg.Free;
+  end;
+  // текущая дата в поиске по логу
+  cxdtdtDate1.Date:=Date;
+  // фильтр по всем событиям
+  frmMain.cxCBall.Checked:=True;
+  frmMain.cxCBstart.Checked:=False;
+  frmMain.cxCBstop.Checked:=False;
+  frmMain.cxchckbxerror.Checked:=False;
+  frmMain.cxchckbxevents.Checked:=False;
+  frmMain.cxchckbxParamEdit.Checked:=False;
+  // текущий каталог
+  v_exe_path:=ExtractFilePath(Application.ExeName);
+  cxpgcntrl1.HideTabs := True;
+  cxpgcntrl1.ActivePageIndex := 0;
+  // чтение адреса сервера Firebird
+  v_ip_fb:=read_db_ip;
+  act_conn(True);
+  sh_service_status;
+  sys_read(False);
+  frmMain.Caption := 'Конфигуратор ('+GetModuleVersion+')';
+end;
+
+procedure TfrmMain.FormShow(Sender: TObject);
+begin
+  cxDV.StoreToRegistry(c_reg_lst_mn+c_devices_def_rg, True, [], 'cxDV');
+  cxDV.RestoreFromRegistry(c_reg_lst_mn+c_devices_rg, False, False, [], 'cxDV');
+  TVList.StoreToRegistry(c_reg_lst_mn+c_events_def_rg, True, [], 'TVList');
+  TVList.RestoreFromRegistry(c_reg_lst_mn+c_events_rg, False, False, [], 'TVList');
+  tvRules.StoreToRegistry('\SoftWare\SoftMaster\Configurator\grRulesDefault', True, [], 'tvRules');
+  tvRules.RestoreFromRegistry('\SoftWare\SoftMaster\Configurator\grRules', False, False, [], 'tvRules');
+end;
+
+procedure TfrmMain.frxRptNewGetValue(Sender: TObject; const VarName: string; var Value: Variant);
+begin
+  if VarName='EventsTitle' then
+    begin
+      if ((YearOf(cxdtdtDate1.Date)>1900) and (YearOf(cxdtdtDate2.Date)>1900)) then
+        begin
+          Value:='Журнал событий за период с '+DateToStr(cxdtdtDate1.Date)+' по '+DateToStr(cxdtdtDate2.Date);
+        end else
+        if ((YearOf(cxdtdtDate1.Date)<=1900) and (YearOf(cxdtdtDate2.Date)>1900)) then
+          begin
+            Value:='Журнал событий за период до '+DateToStr(cxdtdtDate2.Date);
+          end else
+          if ((YearOf(cxdtdtDate1.Date)>1900) and (YearOf(cxdtdtDate2.Date)<=1900)) then
+            begin
+              Value:='Журнал событий за период c '+DateToStr(cxdtdtDate1.Date);
+            end else
+            begin
+              Value:='Журнал событий';
+            end;
+    end;
+end;
+
+procedure TfrmMain.JvAppInstancesRejected(Sender: TObject);
+begin
+  MessageDlg('Программа уже запущена !', mtWarning, [mbOK], 0);
+  Application.Terminate;
+end;
+
+procedure TfrmMain.MenuItem19Click(Sender: TObject);
+begin
+  tvRules.RestoreFromRegistry('\SoftWare\SoftMaster\Configurator\grRulesDefault', False, False, [], 'tvRules');
+end;
+
+// сохранение параметров в таблице SYSPARMS
+procedure TfrmMain.ParamsSaveExecute(Sender: TObject);
+begin
+  frmMain.LbRbtSrv.Visible:=True;
+  Myparams_save;
+  SetSavBtnCol(False);
+end;
+
+procedure TfrmMain.pFIBEventsAfterScroll(DataSet: TDataSet);
+begin
+  cxmLog.Lines.Text := pFIBEvents.FieldByName('FC_REMARK').AsString;
+end;
+
+procedure TfrmMain.pFIBRulesAfterOpen(DataSet: TDataSet);
+begin
+  aDelRul.Enabled := pFIBRules.RecordCount > 0;
+end;
+
+// проверка утечек памяти
+//initialization
+//  ReportMemoryLeaksOnShutdown := True;
+end.

@@ -1,0 +1,126 @@
+ALTER TABLE ASU.TSTANDART_PHARMGR
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TSTANDART_PHARMGR CASCADE CONSTRAINTS
+/
+
+--
+-- TSTANDART_PHARMGR  (Table) 
+--
+--  Dependencies: 
+--   TSTANDART (Table)
+--
+CREATE TABLE ASU.TSTANDART_PHARMGR
+(
+  FK_ID          NUMBER(6)                      NOT NULL,
+  FK_STANDART    INTEGER,
+  FK_PHARMGROUP  INTEGER                        NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          320K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSTANDART_PHARMGR IS 'Связь стандарты лечения фарм группы
+Author: Ura'
+/
+
+COMMENT ON COLUMN ASU.TSTANDART_PHARMGR.FK_ID IS 'SEQUENCE=[SEQ_STANDART_PHARMGR]'
+/
+
+COMMENT ON COLUMN ASU.TSTANDART_PHARMGR.FK_STANDART IS 'ссылка на TStandart'
+/
+
+COMMENT ON COLUMN ASU.TSTANDART_PHARMGR.FK_PHARMGROUP IS 'FK на RLS.TPHARMGROUP. Для простоты только декларативно'
+/
+
+
+--
+-- PK_TSTANDART_PHARMGR  (Index) 
+--
+--  Dependencies: 
+--   TSTANDART_PHARMGR (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TSTANDART_PHARMGR ON ASU.TSTANDART_PHARMGR
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          320K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSTANDART_PHARMGR$BI  (Trigger) 
+--
+--  Dependencies: 
+--   TSTANDART_PHARMGR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSTANDART_PHARMGR$BI" before insert
+on ASU.TSTANDART_PHARMGR for each row
+begin
+    --  Column "FK_ID" uses sequence SEQ_STANDART_PHARMGR
+    if :new.FK_ID is null then
+      select SEQ_STANDART_PHARMGR.NEXTVAL INTO :new.FK_ID  from dual;
+    end if;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TSTANDART_PHARMGR 
+-- 
+ALTER TABLE ASU.TSTANDART_PHARMGR ADD (
+  CONSTRAINT PK_TSTANDART_PHARMGR
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          320K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TSTANDART_PHARMGR 
+-- 
+ALTER TABLE ASU.TSTANDART_PHARMGR ADD (
+  CONSTRAINT FK_TSTANDART_PHAR$TSTANDART 
+ FOREIGN KEY (FK_STANDART) 
+ REFERENCES ASU.TSTANDART (FK_ID))
+/
+

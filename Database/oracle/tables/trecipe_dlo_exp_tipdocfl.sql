@@ -1,0 +1,95 @@
+ALTER TABLE ASU.TRECIPE_DLO_EXP_TIPDOCFL
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_EXP_TIPDOCFL CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_EXP_TIPDOCFL  (Table) 
+--
+CREATE TABLE ASU.TRECIPE_DLO_EXP_TIPDOCFL
+(
+  TIPDOC      NUMBER,
+  NAME_SHORT  VARCHAR2(100 BYTE),
+  NAME_FULL   VARCHAR2(100 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_EXP_TIPDOCFL IS 'ДЛО. Справочник документов, удостоверяющих личность'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TIPDOCFL.TIPDOC IS 'Код документа личности'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TIPDOCFL.NAME_SHORT IS 'Краткое наименование документа личности'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TIPDOCFL.NAME_FULL IS 'Наименование документа личности'
+/
+
+
+--
+-- TRECIPE_DLO_EXP_TIPDOCFL_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_TIPDOCFL (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_EXP_TIPDOCFL_PK ON ASU.TRECIPE_DLO_EXP_TIPDOCFL
+(TIPDOC)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_EXP_TIPDOCFL 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_EXP_TIPDOCFL ADD (
+  CONSTRAINT TRECIPE_DLO_EXP_TIPDOCFL_PK
+ PRIMARY KEY
+ (TIPDOC)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

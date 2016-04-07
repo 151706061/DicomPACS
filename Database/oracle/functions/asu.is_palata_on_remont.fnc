@@ -1,0 +1,31 @@
+DROP FUNCTION ASU.IS_PALATA_ON_REMONT
+/
+
+--
+-- IS_PALATA_ON_REMONT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSRTIPROOM (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."IS_PALATA_ON_REMONT" -- Created by TimurLan
+(pFK_ID IN NUMBER,pFD_DATA IN DATE) RETURN NUMBER IS-- used in rDirector;
+  CURSOR cTemp IS
+     SELECT FL_REMONT
+       FROM TSRTIPROOM
+      WHERE FK_PALATAID=pFK_ID
+        AND TRUNC(pFD_DATA) >= FD_DATA1
+        AND (TRUNC(pFD_DATA)<= FD_DATA2 OR FD_DATA2 IS NULL);
+  nTemp NUMBER;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO nTemp;
+  CLOSE cTemp;
+  RETURN nTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

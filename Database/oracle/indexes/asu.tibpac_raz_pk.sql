@@ -1,0 +1,25 @@
+DROP INDEX ASU.TIBPAC_RAZ_PK
+/
+
+--
+-- TIBPAC_RAZ_PK  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TIBPAC_RAZ_PK ON ASU.TIBPAC_RAZ
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

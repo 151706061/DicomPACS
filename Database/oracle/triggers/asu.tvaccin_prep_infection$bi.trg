@@ -1,0 +1,30 @@
+DROP TRIGGER ASU.TVACCIN_PREP_INFECTION$BI
+/
+
+--
+-- TVACCIN_PREP_INFECTION$BI  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_VACCIN_PREP_INF (Sequence)
+--   TVACCIN_PREP_INFECTION (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVACCIN_PREP_INFECTION$BI" 
+ BEFORE
+  INSERT
+ ON tvaccin_prep_infection
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT seq_vaccin_prep_inf.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,19 @@
+DROP FUNCTION ASU.GET_LEVELNAZ
+/
+
+--
+-- GET_LEVELNAZ  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_LEVELNAZ" 
+  RETURN  number IS
+BEGIN
+ return 1281;
+END;
+/
+
+SHOW ERRORS;
+
+

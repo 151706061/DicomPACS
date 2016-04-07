@@ -1,0 +1,47 @@
+DROP FUNCTION ASU.SHOE_TEXT_EXCHANGE_VAL
+/
+
+--
+-- SHOE_TEXT_EXCHANGE_VAL  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TEXCHANGE_OWN (Table)
+--   TTABLES (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."SHOE_TEXT_EXCHANGE_VAL" (p_FK_ID IN INTEGER)
+  RETURN VARCHAR2
+IS
+  vFK_TABLE   INTEGER;
+  vFN_CODE    VARCHAR2 (4000);
+  vFC_TABLE   VARCHAR2 (4000);
+  vRES        VARCHAR2 (4000);
+BEGIN
+  SELECT   FK_TABLE, fn_code
+    INTO   vFK_TABLE, vFN_CODE
+    FROM   exch43.texCHANGE_OWN
+   WHERE   fk_ID = p_FK_ID;
+
+  SELECT   FC_NAME
+    INTO   vFC_TABLE
+    FROM   exch43.TTABLES
+   WHERE   fk_ID = vFK_TABLE;
+
+  if vFC_TABLE <> 'TSMINI' and vFC_TABLE <> 'TTIPROOM' then
+    EXECUTE IMMEDIATE 'SELECT FC_NAME FROM ' || vFC_TABLE || ' WHERE FK_ID = ' || vFN_CODE
+      INTO   vRES;
+  elsif vFC_TABLE = 'TTIPROOM' then
+    EXECUTE IMMEDIATE 'SELECT fc_vid FROM ' || vFC_TABLE || ' WHERE FK_ID = ' || vFN_CODE
+      INTO   vRES;
+  elsif vFC_TABLE = 'TSMINI' then
+    EXECUTE IMMEDIATE 'SELECT fc_value FROM ' || vFC_TABLE || ' WHERE FK_ID = ' || vFN_CODE
+      INTO   vRES;
+  end if;
+  RETURN vRES;
+END;
+/
+
+SHOW ERRORS;
+
+

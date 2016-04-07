@@ -1,0 +1,130 @@
+.DynarchCalendar, .DynarchCalendar-focused {
+	background: #deefff; /* Old browsers */
+	background: -moz-linear-gradient(left, #deefff 0%, #98bede 28%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#deefff), color-stop(28%,#98bede)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #deefff 0%,#98bede 28%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #deefff 0%,#98bede 28%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #deefff 0%,#98bede 28%); /* IE10+ */
+	background: linear-gradient(to right, #deefff 0%,#98bede 28%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#98bede',GradientType=1 ); /* IE6-9 */
+
+  /*background-color:  	#d4d0c8;	*/	/*	фон центра	*/
+}
+
+.DynarchCalendar-topBar,
+.DynarchCalendar-bottomBar,
+.DynarchCalendar-focused .DynarchCalendar-topBar,
+.DynarchCalendar-focused .DynarchCalendar-bottomBar {
+  background: url("images/ui-bg_gloss-wave_75_2191c0_500x100.png") repeat-x scroll 50% 50% #2191C0;
+/*  background-color: #848078;	*//*	шапка, футер	*/
+  color: #fff;	/*	надпись внизу	*/
+}
+
+.DynarchCalendar-title div { color: #fff; }
+
+.DynarchCalendar-dayNames 	/*	2-я полоска с номерами недель	*/
+{ /*background-color: green;*//*#f4f0e8;*/ 
+	background: #deefff; /* Old browsers */
+	background: -moz-linear-gradient(left, #deefff 0%, #98bede 28%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#deefff), color-stop(28%,#98bede)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #deefff 0%,#98bede 28%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #deefff 0%,#98bede 28%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #deefff 0%,#98bede 28%); /* IE10+ */
+	background: linear-gradient(to right, #deefff 0%,#98bede 28%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#98bede',GradientType=1 ); /* IE6-9 */
+}
+
+.DynarchCalendar-hover-navBtn div,
+.DynarchCalendar-hover-title div,
+.DynarchCalendar-hover-bottomBar-today {
+  border-color: #f4f0e8 #444038 #444038 #f4f0e8;
+  
+  /*	фон центра на кнопках на шапке/футере при наведении	*/
+/*
+background: #deefff; * Old browsers *
+background: -moz-linear-gradient(left, #deefff 0%, #98bede 28%); * FF3.6+ *
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#deefff), color-stop(28%,#98bede)); * Chrome,Safari4+ *
+background: -webkit-linear-gradient(left, #deefff 0%,#98bede 28%); * Chrome10+,Safari5.1+ *
+background: -o-linear-gradient(left, #deefff 0%,#98bede 28%); * Opera 11.10+ *
+background: -ms-linear-gradient(left, #deefff 0%,#98bede 28%); * IE10+ *
+background: linear-gradient(to right, #deefff 0%,#98bede 28%); * W3C *
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#98bede',GradientType=1 ); * IE6-9 *
+*/
+  background-color: #356AA0;	/*#d4d0c8;*/	/*	фон центра на кнопках на шапке/футере при наведении	*/
+  color: #000;
+}
+.DynarchCalendar-menu table td div.DynarchCalendar-hover-navBtn {
+  border-color: #f4f0e8 #444038 #444038 #f4f0e8;
+  background-color: #356AA0;	/*	#e4e0d8;	*/
+  color: #000;
+}
+
+.DynarchCalendar-pressed-navBtn div,
+.DynarchCalendar-pressed-title div,
+.DynarchCalendar-pressed-bottomBar-today,
+.DynarchCalendar-menu table td div.DynarchCalendar-pressed-navBtn {
+  border-color: #444038 #f4f0e8 #f4f0e8 #444038;
+/*  background-color: #646058;	/*	выбор года в выпадающей форме	*/
+	background: #356aa0; /* Old browsers */
+	background: -moz-linear-gradient(left, #356aa0 0%, #356aa0 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%,#356aa0), color-stop(100%,#356aa0)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(left, #356aa0 0%,#356aa0 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(left, #356aa0 0%,#356aa0 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(left, #356aa0 0%,#356aa0 100%); /* IE10+ */
+	background: linear-gradient(to right, #356aa0 0%,#356aa0 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#356aa0', endColorstr='#356aa0',GradientType=1 ); /* IE6-9 */
+
+
+  color: #fff;
+}
+
+.DynarchCalendar-hover-date {
+  border-color: #f4f0e8 #444038 #444038 #f4f0e8;
+  /*background-color: #356AA0 ;	/*#e4e0d8;	/*	выбранная дата при наведении мыши	*/
+  background: url("images/ui-bg_gloss-wave_75_2191c0_500x100.png") repeat-x scroll 50% 50% #2191C0;
+}
+.DynarchCalendar-day {
+  -moz-border-radius: 0;
+  -webkit-border-radius: 0;
+  border-radius: 0;
+}
+
+.DynarchCalendar-day-disabled {
+  background: #c4c0b8;
+}
+
+.DynarchCalendar-hover-week 
+{ 
+/*	background-color: #e4e0d8 !important; */	/*	полоска - неделя	*/
+background: #deefff !important; /* Old browsers */
+background: -moz-linear-gradient(left, #deefff 0%, #98bede 28%) !important; /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#deefff), color-stop(28%,#98bede)) !important; /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left, #deefff 0%,#98bede 28%) !important; /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left, #deefff 0%,#98bede 28%) !important; /* Opera 11.10+ */
+background: -ms-linear-gradient(left, #deefff 0%,#98bede 28%) !important; /* IE10+ */
+background: linear-gradient(to right, #deefff 0%,#98bede 28%) !important; /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#98bede',GradientType=1 ) !important; /* IE6-9 */
+
+}
+
+.DynarchCalendar-day-selected {
+  background-color: #e4e0d8;
+  border: 1px solid;
+  border-color: #444038 #f4f0e8 #f4f0e8 #444038;
+  margin: 0;
+}
+
+.DynarchCalendar-day-today.DynarchCalendar-day-selected { background-color: #e4e0d8; }
+
+.DynarchCalendar-menu {
+/*  background-color: grey;	/*#d4d0c8;	/*	фон центра	в выборе года - отдельная форма	*/
+background: #deefff; /* Old browsers */
+background: -moz-linear-gradient(left, #deefff 0%, #98bede 28%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right top, color-stop(0%,#deefff), color-stop(28%,#98bede)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(left, #deefff 0%,#98bede 28%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(left, #deefff 0%,#98bede 28%); /* Opera 11.10+ */
+background: -ms-linear-gradient(left, #deefff 0%,#98bede 28%); /* IE10+ */
+background: linear-gradient(to right, #deefff 0%,#98bede 28%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#deefff', endColorstr='#98bede',GradientType=1 ); /* IE6-9 */
+
+}

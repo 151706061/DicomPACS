@@ -1,0 +1,52 @@
+.mybottomcolor {
+    background-color: #0D2937;
+}
+
+.mhh {
+	height:50px;
+}
+
+.mhbtnlogin {
+}
+
+.clear-float {
+    clear: both;
+}
+
+.myflft {
+	float:left;
+	left:auto;
+}
+
+.myfrght {
+	float:right;
+	right:auto;
+}
+
+.mhbdcm {
+	height: 750px ;
+	max-height: 755px ;
+}
+
+.mylftbtns {
+	width:80px;
+	height:0px;
+}
+
+.myconclchk {
+	border:2px solid #D0E7F2;
+}
+
+.mbtn {
+	padding: 4px 0 !important;
+}
+
+.div_scroll {
+	scrollbar-face-color: #ff8c00;
+	scrollbar-track-color: #fff8dc;
+	scrollbar-arrow-color: #ffffff;
+	scrollbar-highlight-color: #fff8dc;
+	scrollbar-shadow-color: #d2691e;
+	scrollbar-3dlight-color: #ffebcd;
+	scrollbar-darkshadow-color: #8b0000; 
+}

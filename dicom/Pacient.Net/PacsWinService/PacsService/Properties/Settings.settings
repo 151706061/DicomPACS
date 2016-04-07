@@ -1,0 +1,51 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PacsService.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SoapUrl" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://medtera.yarcloud.ru/module-rer/Rer?wsdl</Value>
+    </Setting>
+    <Setting Name="ConnectionStringDatabase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Provider=PostgreSQL;Unicode=true;host=192.168.1.11;Database=webtalonXtula;user=asu;password=asu</Value>
+    </Setting>
+    <Setting Name="TimerIntervalUpdatePeople" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">420</Value>
+    </Setting>
+    <Setting Name="TimerIntervalUpdateSchedule" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="ThreadCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+    <Setting Name="TimerIntervalRestoreConnect" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">10</Value>
+    </Setting>
+    <Setting Name="TimerIntervalUpdateLpuSettings" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">86400</Value>
+    </Setting>
+    <Setting Name="TimerIntervalUpdateAreas" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">86400</Value>
+    </Setting>
+    <Setting Name="TimerIntervalUpdateArrival" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">3600</Value>
+    </Setting>
+    <Setting Name="TimerIntervalUpdateReferral" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2400</Value>
+    </Setting>
+    <Setting Name="TimerIntervalUpdateCall" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1200</Value>
+    </Setting>
+    <Setting Name="TimerIntervalCleanBuffers" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7200</Value>
+    </Setting>
+    <Setting Name="TimerIntervalUpdateLpuNames" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">86400</Value>
+    </Setting>
+    <Setting Name="TimerIntervalUpdatePrescs" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="HL7ServerPort" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">8004</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

@@ -1,0 +1,108 @@
+DROP TABLE ASU.TNAZPRICE CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZPRICE  (Table) 
+--
+CREATE TABLE ASU.TNAZPRICE
+(
+  FK_ID     NUMBER(10),
+  FK_NAZID  NUMBER(10),
+  FN_PRICE  NUMBER(8,2),
+  FK_SMID   NUMBER(10),
+  FK_PACID  NUMBER(10)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNAZPRICE IS 'Цены на назначения'
+/
+
+COMMENT ON COLUMN ASU.TNAZPRICE.FK_ID IS 'SEQUENCE=[SEQ_TNAZPRICE]'
+/
+
+
+--
+-- TNAZPRICE_ALL  (Index) 
+--
+--  Dependencies: 
+--   TNAZPRICE (Table)
+--
+CREATE INDEX ASU.TNAZPRICE_ALL ON ASU.TNAZPRICE
+(FK_PACID, FK_SMID, FN_PRICE, FK_NAZID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZPRICE_ID  (Index) 
+--
+--  Dependencies: 
+--   TNAZPRICE (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZPRICE_ID ON ASU.TNAZPRICE
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZPRICE_BEFOR_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZPRICE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZPRICE_BEFOR_INSERT" 
+  BEFORE INSERT
+  ON ASU.TNAZPRICE   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  select SEQ_TNAZPRICE.NEXTVAL into :NEW.FK_ID from DUAL;
+End;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,185 @@
+ALTER TABLE ASU.TSTANDART_ICD10
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TSTANDART_ICD10 CASCADE CONSTRAINTS
+/
+
+--
+-- TSTANDART_ICD10  (Table) 
+--
+--  Dependencies: 
+--   TSTANDART (Table)
+--   TICD10 (Table)
+--
+CREATE TABLE ASU.TSTANDART_ICD10
+(
+  FK_ID        NUMBER(15)                       NOT NULL,
+  FK_STANDART  INTEGER,
+  FK_ICD10     INTEGER                          NOT NULL,
+  FL_OPER      NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSTANDART_ICD10 IS 'Стандарты диагнозы МКБ10
+Связь между таблицами TSTANDART и TCD10
+Author: Ura'
+/
+
+COMMENT ON COLUMN ASU.TSTANDART_ICD10.FK_ID IS 'SEQUENCE=[SEQ_STANDART_ICD10]'
+/
+
+COMMENT ON COLUMN ASU.TSTANDART_ICD10.FL_OPER IS ' относится ли услуга к оперативной (оперативному вмешательству). могут быть значения:  1 = ''ДА'', 0 = ''НЕТ'' или ''НЕ ЗАДАНО'''
+/
+
+
+--
+-- IQ_TSTANDART_ICD10$ALL  (Index) 
+--
+--  Dependencies: 
+--   TSTANDART_ICD10 (Table)
+--
+CREATE INDEX ASU.IQ_TSTANDART_ICD10$ALL ON ASU.TSTANDART_ICD10
+(FK_STANDART, FK_ICD10)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          320K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- PK_TSTANDART_ICD10  (Index) 
+--
+--  Dependencies: 
+--   TSTANDART_ICD10 (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TSTANDART_ICD10 ON ASU.TSTANDART_ICD10
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSTANDART_ICD10_ICD10  (Index) 
+--
+--  Dependencies: 
+--   TSTANDART_ICD10 (Table)
+--
+CREATE INDEX ASU.TSTANDART_ICD10_ICD10 ON ASU.TSTANDART_ICD10
+(FK_ICD10)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSTANDART_ICD10$BI  (Trigger) 
+--
+--  Dependencies: 
+--   TSTANDART_ICD10 (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSTANDART_ICD10$BI" before insert
+on ASU.TSTANDART_ICD10 for each row
+begin
+    --  Column "FK_ID" uses sequence SEQ_STANDART_ICD10
+    if :new.FK_ID is null then
+      select SEQ_STANDART_ICD10.NEXTVAL INTO :new.FK_ID  from dual;
+    end if;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TSTANDART_ICD10 
+-- 
+ALTER TABLE ASU.TSTANDART_ICD10 ADD (
+  CONSTRAINT PK_TSTANDART_ICD10
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          160K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TSTANDART_ICD10 
+-- 
+ALTER TABLE ASU.TSTANDART_ICD10 ADD (
+  CONSTRAINT FK_TSTANDART_ICD1$TICD10 
+ FOREIGN KEY (FK_ICD10) 
+ REFERENCES ASU.TICD10 (FK_ID),
+  CONSTRAINT FK_TSTANDAR_ICD$TSTANDART 
+ FOREIGN KEY (FK_STANDART) 
+ REFERENCES ASU.TSTANDART (FK_ID))
+/
+
+GRANT DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TSTANDART_ICD10 TO EXCHANGE
+/
+
+GRANT DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TSTANDART_ICD10 TO EXCH43
+/
+

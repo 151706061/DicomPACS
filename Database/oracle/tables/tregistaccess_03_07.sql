@@ -1,0 +1,33 @@
+DROP TABLE ASU.TREGISTACCESS_03_07 CASCADE CONSTRAINTS
+/
+
+--
+-- TREGISTACCESS_03_07  (Table) 
+--
+CREATE TABLE ASU.TREGISTACCESS_03_07
+(
+  FK_SOTRID   NUMBER                            NOT NULL,
+  FK_VRACHID  NUMBER                            NOT NULL,
+  FK_KABNTID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+

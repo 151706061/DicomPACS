@@ -1,0 +1,37 @@
+DROP FUNCTION ASU.GET_SOTR_SPEC
+/
+
+--
+-- GET_SOTR_SPEC  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSOTR (Synonym)
+--   PKG_REGIST_PACFUNC (Package)
+--   TS_SPRAV (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_SOTR_SPEC" (pfk_pacid IN NUMBER) RETURN VARCHAR2 IS
+
+   -- created by Serg
+
+ CURSOR c
+ IS
+ SELECT SP.FC_NAME
+        FROM TS_SPRAV SP,
+             TSOTR SO
+        WHERE SO.FK_SPRAVID = SP.FK_ID
+        AND SO.FK_ID = PKG_REGIST_PACFUNC.GET_PAC_VRACHID(pfk_pacid);
+ D VARCHAR2(32767);
+
+ BEGIN
+  OPEN C;
+  FETCH C INTO D;
+  CLOSE C;
+  RETURN D;
+ END;
+/
+
+SHOW ERRORS;
+
+

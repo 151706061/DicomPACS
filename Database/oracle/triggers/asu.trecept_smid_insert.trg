@@ -1,0 +1,23 @@
+DROP TRIGGER ASU.TRECEPT_SMID_INSERT
+/
+
+--
+-- TRECEPT_SMID_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TRECEPT_SMID (Sequence)
+--   TRECEPT_SMID (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECEPT_SMID_INSERT" 
+BEFORE INSERT
+ON ASU.TRECEPT_SMID REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+    select SEQ_TRECEPT_SMID.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

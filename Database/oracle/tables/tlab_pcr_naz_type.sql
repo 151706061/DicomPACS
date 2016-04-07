@@ -1,0 +1,70 @@
+DROP TABLE ASU.TLAB_PCR_NAZ_TYPE CASCADE CONSTRAINTS
+/
+
+--
+-- TLAB_PCR_NAZ_TYPE  (Table) 
+--
+CREATE TABLE ASU.TLAB_PCR_NAZ_TYPE
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FK_SMID_NAZ   NUMBER,
+  FK_SMID_TYPE  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TLAB_PCR_NAZ_TYPE IS 'ПЦР Лаборатория. Соотвествия назначений и типов тестов (ДНК/РНК)'
+/
+
+COMMENT ON COLUMN ASU.TLAB_PCR_NAZ_TYPE.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TLAB_PCR_NAZ_TYPE.FK_SMID_NAZ IS 'TSMID.FK_ID - ссылка на назначение'
+/
+
+COMMENT ON COLUMN ASU.TLAB_PCR_NAZ_TYPE.FK_SMID_TYPE IS 'TSMID.FK_ID - ссылка на тип теста (РНК/ДНК)'
+/
+
+
+--
+-- TLAB_NAZ_TYPE_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TLAB_PCR_NAZ_TYPE (Table)
+--
+CREATE UNIQUE INDEX ASU.TLAB_NAZ_TYPE_BY_ID ON ASU.TLAB_PCR_NAZ_TYPE
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,104 @@
+DROP TABLE ASU.TPATNAME CASCADE CONSTRAINTS
+/
+
+--
+-- TPATNAME  (Table) 
+--
+CREATE TABLE ASU.TPATNAME
+(
+  FK_ID     NUMBER(16)                          DEFAULT -1                    NOT NULL,
+  FC_NAME   VARCHAR2(20 BYTE),
+  FP_PRIOR  NUMBER(16)                          DEFAULT 0                     NOT NULL,
+  FN_HIGHM  NUMBER(7,2),
+  FN_LOWM   NUMBER(7,2),
+  FN_HIGHW  NUMBER(7,2),
+  FN_LOWW   NUMBER(7,2),
+  FK_GUID   VARCHAR2(32 BYTE)                   DEFAULT sys_guid()
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPATNAME IS 'Spravochnik kategoriy patalogiy by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TPATNAME.FK_ID IS 'SEQUENCE=[SEQ_TPATNAME]'
+/
+
+COMMENT ON COLUMN ASU.TPATNAME.FC_NAME IS 'Name'
+/
+
+COMMENT ON COLUMN ASU.TPATNAME.FP_PRIOR IS 'Priority - 0 - lowest'
+/
+
+COMMENT ON COLUMN ASU.TPATNAME.FN_HIGHM IS 'Максимум для мужчин'
+/
+
+COMMENT ON COLUMN ASU.TPATNAME.FN_LOWM IS 'минимум для мужчин'
+/
+
+COMMENT ON COLUMN ASU.TPATNAME.FN_HIGHW IS 'максимум для женщин'
+/
+
+COMMENT ON COLUMN ASU.TPATNAME.FN_LOWW IS 'минимум для женщин'
+/
+
+
+--
+-- TPATNAME_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TPATNAME (Table)
+--
+CREATE UNIQUE INDEX ASU.TPATNAME_BY_ID ON ASU.TPATNAME
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          3M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPATNAME_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPATNAME (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPATNAME_BEFORE_INSERT" 
+  BEFORE INSERT
+  ON ASU.TPATNAME   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TPATNAME.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

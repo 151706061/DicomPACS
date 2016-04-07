@@ -1,0 +1,25 @@
+DROP INDEX ASU.TPERESEL_FD_DATA1
+/
+
+--
+-- TPERESEL_FD_DATA1  (Index) 
+--
+CREATE INDEX ASU.TPERESEL_FD_DATA1 ON ASU.TPERESEL
+(FD_DATA1)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

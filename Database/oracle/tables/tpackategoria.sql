@@ -1,0 +1,33 @@
+DROP TABLE ASU.TPACKATEGORIA CASCADE CONSTRAINTS
+/
+
+--
+-- TPACKATEGORIA  (Table) 
+--
+CREATE TABLE ASU.TPACKATEGORIA
+(
+  FK_ID           NUMBER(15)                    NOT NULL,
+  FK_KATEGORIAID  NUMBER(15)                    DEFAULT -1,
+  FK_PACID        NUMBER(15)                    NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+

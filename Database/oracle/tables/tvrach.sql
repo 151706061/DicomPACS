@@ -1,0 +1,195 @@
+DROP TABLE ASU.TVRACH CASCADE CONSTRAINTS
+/
+
+--
+-- TVRACH  (Table) 
+--
+CREATE TABLE ASU.TVRACH
+(
+  FK_ID        NUMBER(15),
+  FK_PACID     NUMBER(15),
+  FK_VRACHID   NUMBER(15)                       DEFAULT -1,
+  FK_DALID     NUMBER(15),
+  FK_OTMENAID  NUMBER(15),
+  FL_VID       VARCHAR2(1 BYTE),
+  FK_SPECID    NUMBER(9)                        DEFAULT -1,
+  FD_INS       DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          760K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVRACH IS 'Лечащие врачи пациента by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TVRACH.FK_ID IS 'SEQUENCE=[SEQ_TVRACH]'
+/
+
+COMMENT ON COLUMN ASU.TVRACH.FK_PACID IS 'код пациента'
+/
+
+COMMENT ON COLUMN ASU.TVRACH.FK_VRACHID IS 'код врача'
+/
+
+COMMENT ON COLUMN ASU.TVRACH.FK_DALID IS 'код сотрудника'
+/
+
+COMMENT ON COLUMN ASU.TVRACH.FK_OTMENAID IS 'код сотрудника'
+/
+
+COMMENT ON COLUMN ASU.TVRACH.FL_VID IS 'M - лечащий W-запись, R - чтение'
+/
+
+COMMENT ON COLUMN ASU.TVRACH.FK_SPECID IS 'Код специальности, под которой врач давал доступ'
+/
+
+COMMENT ON COLUMN ASU.TVRACH.FD_INS IS 'дата записи'
+/
+
+
+--
+-- TVARCH_PAC_VID  (Index) 
+--
+--  Dependencies: 
+--   TVRACH (Table)
+--
+CREATE INDEX ASU.TVARCH_PAC_VID ON ASU.TVRACH
+(FK_PACID, FL_VID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          512K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVRACH_BY_ID_PACID  (Index) 
+--
+--  Dependencies: 
+--   TVRACH (Table)
+--
+CREATE UNIQUE INDEX ASU.TVRACH_BY_ID_PACID ON ASU.TVRACH
+(FK_ID, FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          640K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVRACH_BY_ID_VID  (Index) 
+--
+--  Dependencies: 
+--   TVRACH (Table)
+--
+CREATE UNIQUE INDEX ASU.TVRACH_BY_ID_VID ON ASU.TVRACH
+(FK_ID, FL_VID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          512K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVRACH_BY_VRID_VID_ID  (Index) 
+--
+--  Dependencies: 
+--   TVRACH (Table)
+--
+CREATE UNIQUE INDEX ASU.TVRACH_BY_VRID_VID_ID ON ASU.TVRACH
+(FK_VRACHID, FL_VID, FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          768K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVRACH_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TVRACH (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVRACH_INSERT" 
+  BEFORE INSERT ON ASU.TVRACH   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TVRACH.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  :NEW.FD_INS := TRUNC(SYSDATE);
+End;
+/
+SHOW ERRORS;
+
+
+DROP SYNONYM STAT.TVRACH
+/
+
+--
+-- TVRACH  (Synonym) 
+--
+--  Dependencies: 
+--   TVRACH (Table)
+--
+CREATE SYNONYM STAT.TVRACH FOR ASU.TVRACH
+/
+
+

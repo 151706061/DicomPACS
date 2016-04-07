@@ -1,0 +1,26 @@
+DROP INDEX ASU.TKLADR_ID_OWNER
+/
+
+--
+-- TKLADR_ID_OWNER  (Index) 
+--
+CREATE INDEX ASU.TKLADR_ID_OWNER ON ASU.TKLADR
+(FK_OWNER)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          17M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+REVERSE
+/
+
+

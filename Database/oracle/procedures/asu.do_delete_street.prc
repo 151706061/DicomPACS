@@ -1,0 +1,22 @@
+DROP PROCEDURE ASU.DO_DELETE_STREET
+/
+
+--
+-- DO_DELETE_STREET  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSTREET (Table)
+--
+CREATE OR REPLACE PROCEDURE ASU."DO_DELETE_STREET" 
+   ( pFK_ID IN NUMBER)
+   IS
+BEGIN
+  DELETE FROM TSTREET WHERE FK_ID=pFK_ID;
+END; -- Procedure
+/
+
+SHOW ERRORS;
+
+

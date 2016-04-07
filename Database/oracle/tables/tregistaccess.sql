@@ -1,0 +1,67 @@
+DROP TABLE ASU.TREGISTACCESS CASCADE CONSTRAINTS
+/
+
+--
+-- TREGISTACCESS  (Table) 
+--
+CREATE TABLE ASU.TREGISTACCESS
+(
+  FK_SOTRID   NUMBER                            NOT NULL,
+  FK_VRACHID  NUMBER                            NOT NULL,
+  FK_KABNTID  NUMBER                            DEFAULT -1
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TREGISTACCESS.FK_SOTRID IS 'Кому дается доступ'
+/
+
+COMMENT ON COLUMN ASU.TREGISTACCESS.FK_VRACHID IS 'На кого дается доступ'
+/
+
+COMMENT ON COLUMN ASU.TREGISTACCESS.FK_KABNTID IS 'Для какого кабинета'
+/
+
+
+--
+-- PK_REGISTACCESS  (Index) 
+--
+--  Dependencies: 
+--   TREGISTACCESS (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_REGISTACCESS ON ASU.TREGISTACCESS
+(FK_SOTRID, FK_VRACHID, FK_KABNTID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

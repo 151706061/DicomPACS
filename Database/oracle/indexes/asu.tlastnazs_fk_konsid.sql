@@ -1,0 +1,25 @@
+DROP INDEX ASU.TLASTNAZS_FK_KONSID
+/
+
+--
+-- TLASTNAZS_FK_KONSID  (Index) 
+--
+CREATE INDEX ASU.TLASTNAZS_FK_KONSID ON ASU.TLASTNAZS
+(FK_KONSID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,27 @@
+DROP FUNCTION ASU.GET_GROUP
+/
+
+--
+-- GET_GROUP  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TGROUP (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_GROUP" 
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+  strTemp VARCHAR2(100);
+  CURSOR cTemp IS SELECT /*+ rule*/ FC_NAME FROM TGROUP WHERE FK_ID=pFK_ID;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO strTemp;
+  CLOSE cTemp;
+  RETURN strTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

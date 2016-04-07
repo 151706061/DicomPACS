@@ -1,0 +1,52 @@
+DROP TABLE ASU.TPROFP_WORK_PAC CASCADE CONSTRAINTS
+/
+
+--
+-- TPROFP_WORK_PAC  (Table) 
+--
+CREATE TABLE ASU.TPROFP_WORK_PAC
+(
+  FK_ID            NUMBER,
+  FK_PROFP_LIST    NUMBER,
+  FK_WORK_HISTORY  NUMBER,
+  FN_PROFPAGE_ALL  NUMBER,
+  FN_PROFPAGE      NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- "tprofp_work_pac_BEFORE_INSERT"  (Trigger) 
+--
+--  Dependencies: 
+--   TPROFP_WORK_PAC (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."tprofp_work_pac_BEFORE_INSERT"
+ BEFORE
+  INSERT
+ ON tprofp_work_pac
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+if :new.fk_id is null then
+  select seq_tprofp_ispol.NEXTVAL into :new.fk_id from dual;
+  end if;
+end;
+/
+SHOW ERRORS;
+
+

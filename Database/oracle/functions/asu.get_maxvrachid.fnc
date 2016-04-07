@@ -1,0 +1,30 @@
+DROP FUNCTION ASU.GET_MAXVRACHID
+/
+
+--
+-- GET_MAXVRACHID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TVRACH (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_MAXVRACHID" 
+  ( pFK_PACID IN NUMBER,pFK_VRACHID IN NUMBER)
+  RETURN  NUMBER IS
+CURSOR cTemp IS SELECT /*+first_row*/MAX(FK_ID) FROM TVRACH WHERE FK_PACID=pFK_PACID AND FK_VRACHID=pFK_VRACHID;
+nTemp NUMBER;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO nTemp;
+  CLOSE cTemp;
+  if nTemp IS NULL then
+    nTemp:=0;
+  end if;
+  return nTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

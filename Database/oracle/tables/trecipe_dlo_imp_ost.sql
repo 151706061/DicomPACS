@@ -1,0 +1,188 @@
+ALTER TABLE ASU.TRECIPE_DLO_IMP_OST
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_IMP_OST CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_IMP_OST  (Table) 
+--
+CREATE TABLE ASU.TRECIPE_DLO_IMP_OST
+(
+  FK_ID       NUMBER,
+  DRUGSCODE   NUMBER,
+  PARTIA      NUMBER,
+  KOL         NUMBER(18,8),
+  CENAROZ     NUMBER(18,4),
+  TYPE_FIN    NUMBER,
+  SUBDIVCODE  NUMBER,
+  DATE_OST    DATE,
+  PROG_ONLS   NUMBER,
+  CODEORG     NUMBER,
+  ID_GK       NUMBER,
+  ID_SPEC     NUMBER,
+  SERIA       VARCHAR2(30 BYTE),
+  SRGODN      DATE,
+  PARTIA_IN   NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_IMP_OST IS 'ДЛО. Входящие остатки на дату выгрузки'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.FK_ID IS 'ключ'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.DRUGSCODE IS 'Код ЛС Поставщика'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.PARTIA IS 'Номер партии'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.KOL IS 'Количество'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.CENAROZ IS 'Цена розничная'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.TYPE_FIN IS 'Источник финансирования: 1 - Федеральный, 2 - Региональный'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.SUBDIVCODE IS 'Код подразделения, владелец остатков'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.DATE_OST IS 'Дата остатка'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.PROG_ONLS IS 'Программа ЛЛО'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.CODEORG IS 'Код Юр.лица - исполнителя ГК'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.ID_GK IS 'Код ГК'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.ID_SPEC IS 'Код спецификации'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.SERIA IS 'Серия ЛС'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.SRGODN IS 'Срок годности ЛС'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_OST.PARTIA_IN IS 'Родительская партия (CODEORG)'
+/
+
+
+--
+-- TRECIPE_DLO_IMP_OST_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_IMP_OST (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_IMP_OST_PK ON ASU.TRECIPE_DLO_IMP_OST
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_IMP_OST_SUBDIV  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_IMP_OST (Table)
+--
+CREATE INDEX ASU.TRECIPE_DLO_IMP_OST_SUBDIV ON ASU.TRECIPE_DLO_IMP_OST
+(SUBDIVCODE)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_IMP_OST_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_IMP_OST (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECIPE_DLO_IMP_OST_INS"
+ BEFORE
+  INSERT
+ ON ASU.TRECIPE_DLO_IMP_OST REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  if (:new.fk_id is null) then
+    select ASU.SEQ_TRECIPE_DLO_IMP_OST.nextval into :new.fk_id from dual;
+  end if;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_IMP_OST 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_IMP_OST ADD (
+  CONSTRAINT TRECIPE_DLO_IMP_OST_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TKARTA_AS_DEL_CALL_STACK
+/
+
+--
+-- TKARTA_AS_DEL_CALL_STACK  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TKARTA (Table)
+--   TKARTACALLSTACK (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TKARTA_AS_DEL_CALL_STACK" 
+ AFTER
+  DELETE
+ ON asu.tkarta
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  delete from asu.tkartacallstack where FK_ID = :NEW.FK_ID;
+END;
+/
+SHOW ERRORS;
+
+

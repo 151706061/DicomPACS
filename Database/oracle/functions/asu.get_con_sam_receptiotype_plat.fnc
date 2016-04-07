@@ -1,0 +1,15 @@
+DROP FUNCTION ASU.GET_CON_SAM_RECEPTIOTYPE_PLAT
+/
+
+--
+-- GET_CON_SAM_RECEPTIOTYPE_PLAT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU.GET_CON_SAM_RECEPTIOTYPE_PLAT return varchar2 is begin return '656f55ae-1dc7-4265-891e-06a78911b7fd'; end;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,202 @@
+DROP TABLE ASU.TPICS CASCADE CONSTRAINTS
+/
+
+--
+-- TPICS  (Table) 
+--
+CREATE TABLE ASU.TPICS
+(
+  FK_ID      NUMBER(15)                         NOT NULL,
+  FK_BLOBID  NUMBER(15),
+  FL_SHOWIB  NUMBER(1)                          DEFAULT 1,
+  FK_NAZID   NUMBER(15),
+  FC_EXT     VARCHAR2(4 BYTE),
+  FN_HEIGHT  NUMBER(5),
+  FN_WIDTH   NUMBER(5)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          280K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPICS IS ' артинки к результатам назначений by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TPICS.FK_ID IS 'SEQUENCE=[SEQ_TPICS]'
+/
+
+COMMENT ON COLUMN ASU.TPICS.FK_BLOBID IS 'TBLOBS.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TPICS.FL_SHOWIB IS '1 - показывать при формировании истории болезни, 0 - не показывать'
+/
+
+COMMENT ON COLUMN ASU.TPICS.FK_NAZID IS 'код назначени€'
+/
+
+COMMENT ON COLUMN ASU.TPICS.FC_EXT IS 'расширение'
+/
+
+COMMENT ON COLUMN ASU.TPICS.FN_HEIGHT IS 'ширина'
+/
+
+COMMENT ON COLUMN ASU.TPICS.FN_WIDTH IS 'высота'
+/
+
+
+--
+-- TPICS_BLOBID  (Index) 
+--
+--  Dependencies: 
+--   TPICS (Table)
+--
+CREATE INDEX ASU.TPICS_BLOBID ON ASU.TPICS
+(FK_BLOBID, FK_NAZID, FL_SHOWIB)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPICS_ID  (Index) 
+--
+--  Dependencies: 
+--   TPICS (Table)
+--
+CREATE UNIQUE INDEX ASU.TPICS_ID ON ASU.TPICS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPICS_NAZID  (Index) 
+--
+--  Dependencies: 
+--   TPICS (Table)
+--
+CREATE INDEX ASU.TPICS_NAZID ON ASU.TPICS
+(FK_NAZID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPICS_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TPICS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPICS_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TPICS  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TPICS', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TPICS', 'FK_BLOBID', 'INSERT', PKG_LOG.GET_VALUE(:old.FK_BLOBID), PKG_LOG.GET_VALUE(:new.FK_BLOBID), :new.fk_id);
+    PKG_LOG.Do_log('TPICS', 'FL_SHOWIB', 'INSERT', PKG_LOG.GET_VALUE(:old.FL_SHOWIB), PKG_LOG.GET_VALUE(:new.FL_SHOWIB), :new.fk_id);
+    PKG_LOG.Do_log('TPICS', 'FK_NAZID', 'INSERT', PKG_LOG.GET_VALUE(:old.FK_NAZID), PKG_LOG.GET_VALUE(:new.FK_NAZID), :new.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TPICS', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FK_BLOBID') AND PKG_LOG.GET_VALUE(:old.FK_BLOBID) <> PKG_LOG.GET_VALUE(:new.FK_BLOBID) then
+      PKG_LOG.Do_log('TPIC', 'FK_BLOBID', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_BLOBID), PKG_LOG.GET_VALUE(:new.FK_BLOBID), :old.fk_id);
+    end if;
+    if UPDATING ('FL_SHOWIB') AND PKG_LOG.GET_VALUE(:old.FL_SHOWIB) <> PKG_LOG.GET_VALUE(:new.FL_SHOWIB) then
+      PKG_LOG.Do_log('TPIC', 'FL_SHOWIB', 'UPDATE', PKG_LOG.GET_VALUE(:old.FL_SHOWIB), PKG_LOG.GET_VALUE(:new.FL_SHOWIB), :old.fk_id);
+    end if;
+    if UPDATING ('FK_NAZID') AND PKG_LOG.GET_VALUE(:old.FK_NAZID) <> PKG_LOG.GET_VALUE(:new.FK_NAZID) then
+      PKG_LOG.Do_log('TPIC', 'FK_NAZID', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_NAZID), PKG_LOG.GET_VALUE(:new.FK_NAZID), :old.fk_id);
+    end if;
+  end if;
+END;
+/
+SHOW ERRORS;
+
+
+--
+-- TPICS_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPICS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPICS_BEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TPICS   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TPICS.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TPICS_AFTER_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TPICS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPICS_AFTER_DELETE" 
+  AFTER DELETE ON ASU.TPICS   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+BEGIN
+  DELETE FROM TBLOBS WHERE FK_ID = :old.FK_BLOBID;
+END;
+/
+SHOW ERRORS;
+
+

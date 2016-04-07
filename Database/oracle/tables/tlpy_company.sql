@@ -1,0 +1,174 @@
+ALTER TABLE ASU.TLPY_COMPANY
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TLPY_COMPANY CASCADE CONSTRAINTS
+/
+
+--
+-- TLPY_COMPANY  (Table) 
+--
+--  Dependencies: 
+--   TCOMPANY (Table)
+--
+CREATE TABLE ASU.TLPY_COMPANY
+(
+  FK_ID           INTEGER                       NOT NULL,
+  FK_COMPANY_LPY  INTEGER                       NOT NULL,
+  FK_COMPANY      INTEGER                       NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          40K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TLPY_COMPANY IS 'Список организаций подконтрольных ЛПУ
+Author: Ura'
+/
+
+COMMENT ON COLUMN ASU.TLPY_COMPANY.FK_ID IS 'SEQUENCE=[SEQ_TLPY_COMPANY]'
+/
+
+
+--
+-- PK_TLPY_COMPANY  (Index) 
+--
+--  Dependencies: 
+--   TLPY_COMPANY (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TLPY_COMPANY ON ASU.TLPY_COMPANY
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLPY_COMPANY_BY_FK_COMPANY  (Index) 
+--
+--  Dependencies: 
+--   TLPY_COMPANY (Table)
+--
+CREATE INDEX ASU.TLPY_COMPANY_BY_FK_COMPANY ON ASU.TLPY_COMPANY
+(FK_COMPANY)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLPY_COMPANY_BY_FK_COMPANY_LPY  (Index) 
+--
+--  Dependencies: 
+--   TLPY_COMPANY (Table)
+--
+CREATE INDEX ASU.TLPY_COMPANY_BY_FK_COMPANY_LPY ON ASU.TLPY_COMPANY
+(FK_COMPANY_LPY)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLPY_COMPANY_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TLPY_COMPANY (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLPY_COMPANY_BEFORE_INSERT" BEFORE INSERT
+ON ASU.TLPY_COMPANY FOR EACH ROW
+begin
+    --  Column "FK_ID" uses sequence SEQ_TLPY_COMPANY
+      IF :NEW.FK_ID IS NULL
+      THEN
+         SELECT SEQ_TLPY_COMPANY.NEXTVAL INTO :NEW.FK_ID from dual;
+      END IF;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TLPY_COMPANY 
+-- 
+ALTER TABLE ASU.TLPY_COMPANY ADD (
+  CONSTRAINT PK_TLPY_COMPANY
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TLPY_COMPANY 
+-- 
+ALTER TABLE ASU.TLPY_COMPANY ADD (
+  CONSTRAINT FK_TLPY_COMPANY$TCOMPANY 
+ FOREIGN KEY (FK_COMPANY) 
+ REFERENCES ASU.TCOMPANY (FK_ID),
+  CONSTRAINT FK_TLPY_COMPANY$TCOMPANYLPY 
+ FOREIGN KEY (FK_COMPANY_LPY) 
+ REFERENCES ASU.TCOMPANY (FK_ID))
+/
+

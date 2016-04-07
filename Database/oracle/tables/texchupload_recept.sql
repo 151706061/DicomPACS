@@ -1,0 +1,77 @@
+DROP TABLE ASU.TEXCHUPLOAD_RECEPT CASCADE CONSTRAINTS
+/
+
+--
+-- TEXCHUPLOAD_RECEPT  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.TEXCHUPLOAD_RECEPT
+(
+  ID_RECEPT   NUMBER,
+  ID_ILL      NUMBER(20),
+  PID         NUMBER,
+  N_MAP       NUMBER(10),
+  IST_FIN     NUMBER(1),
+  LEKAR       NUMBER(3),
+  DIA         VARCHAR2(12 BYTE),
+  ID_MEDIC    NUMBER(13),
+  COUNT       NUMBER,
+  KOL_DAY_IS  NUMBER(3),
+  VID_RECEPT  NUMBER(1),
+  SER         VARCHAR2(8 BYTE),
+  NUM         VARCHAR2(10 BYTE),
+  DOCTOR      NUMBER(5),
+  DATE_V      VARCHAR2(10 BYTE)
+)
+ON COMMIT PRESERVE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.TEXCHUPLOAD_RECEPT IS 'Временная таблица для выгрузки данных рецептов [Author: Linnikov]'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.ID_RECEPT IS 'Код рецепта'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.ID_ILL IS 'Идентификатор случая'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.PID IS 'Идентификатор пациента'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.N_MAP IS 'Номер карты в стационаре'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.IST_FIN IS 'Источник финансирования (1-федеральный, 2-субъект РФ, 3-муниципальный)'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.LEKAR IS 'Процент льготы рецепта'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.DIA IS 'Диагноз заболевания, по которому выписан рецепт'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.ID_MEDIC IS 'Код медикамента (справочник RECEPT_MEDICAM поле ID_MEDIC)'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.COUNT IS 'Выписанное кол-во единиц лекарственной формы лекарственного средства'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.KOL_DAY_IS IS 'Срок действия рецепта'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.VID_RECEPT IS 'Вид рецепта (1-федеральный, 2-региональный, 3-простой)'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.SER IS 'Серия рецепта'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.NUM IS 'Номер рецепта'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.DOCTOR IS 'Код врача, выписавшего рецепт'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_RECEPT.DATE_V IS 'Дата выдачи рецепта '
+/
+
+

@@ -1,0 +1,29 @@
+DROP FUNCTION ASU.GET_COUNT_VYB
+/
+
+--
+-- GET_COUNT_VYB  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   GET_COUNT_OUT (Function)
+--   GET_COUNT_TEMPOUT (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_COUNT_VYB" (pFD_DATAC IN DATE)
+  RETURN VARCHAR2
+  IS
+  i NUMBER;
+  BEGIN
+    i:=GET_COUNT_TEMPOUT(pFD_DATAC);
+    if i>0 then
+      RETURN TO_CHAR(GET_COUNT_OUT(pFD_DATAC))||'+'||TO_CHAR(i);
+    else
+      RETURN TO_CHAR(GET_COUNT_OUT(pFD_DATAC));
+    end if;
+  END;
+/
+
+SHOW ERRORS;
+
+

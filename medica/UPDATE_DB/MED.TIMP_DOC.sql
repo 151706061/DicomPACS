@@ -1,0 +1,112 @@
+set define off
+CREATE TABLE MED.TIMP_DOC
+  (
+  FK_ID NUMBER,
+  FC_SRC_DOC_NUM VARCHAR2 (20),
+  FC_SRC_DOC_DATE VARCHAR2 (30),
+  FC_SRC_POSTAV VARCHAR2 (100),
+  FC_SRC_VID_OPLATI VARCHAR2 (50),
+  FC_SRC_SCHET_FAKTURA VARCHAR2 (20),
+  FC_SRC_SUMMA_S_NDS VARCHAR2 (20),
+  FC_SRC_KOLVO_POS VARCHAR2 (5),
+  FC_SRC_COMMENT VARCHAR2 (500),
+  FC_IMP_FILENAME VARCHAR2 (500),
+  FD_INS_DATE DATE,
+  FD_EDIT_DATE DATE,
+  FK_INS_MO NUMBER,
+  FK_EDIT_MO NUMBER,
+  FD_DOC_DATE DATE,
+  FK_POST_ID NUMBER,
+  FN_SUMMA_S_NDS NUMBER,
+  FN_KOLVO_POS NUMBER
+ )
+/
+COMMENT ON TABLE MED.TIMP_DOC IS 
+'Таблица для хранения импортированных документов Воронов О.А. (04.05.2009)'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FK_ID IS 'ключ'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FC_SRC_DOC_NUM IS 'номер документа (исходный)'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FC_SRC_DOC_DATE IS 'дата документа (исходная)'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FC_SRC_POSTAV IS 'поставщик (исходный)'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FC_SRC_VID_OPLATI IS 'вид оплаты (исходный)'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FC_SRC_SCHET_FAKTURA IS 'счет-фактура (исходная)'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FC_SRC_SUMMA_S_NDS IS 'сумма по документу с ндс (для проверки)'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FC_SRC_KOLVO_POS IS 'кол-во позиций (для проверки)'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FC_SRC_COMMENT IS 'комментарий к документу'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FD_INS_DATE IS 'дата вставки записи'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FD_EDIT_DATE IS 'дата редактирования записи'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FK_INS_MO IS 'кто вставил'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FK_EDIT_MO IS 'кто изменил'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FD_DOC_DATE IS 'дата документа - (для импорта)'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FK_POST_ID IS 'ID поставщика - (для импорта)'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FN_SUMMA_S_NDS IS 'сумма с НДС'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FN_KOLVO_POS IS 'кол-во позиций'
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FC_IMP_FILENAME IS 'файл, который был импортирован'
+/
+
+ALTER TABLE MED.TIMP_DOC ADD (FD_IMPORT DATE)
+/
+COMMENT ON COLUMN MED.TIMP_DOC.FD_IMPORT IS 'дата импорта'
+/
+
+CREATE SEQUENCE MED.SEQ_TIMP_DOC
+ START WITH  1
+ INCREMENT BY  1
+ MINVALUE  1
+/
+
+CREATE OR REPLACE TRIGGER med.timp_doc_ins
+ BEFORE
+  INSERT
+ ON med.timp_doc
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  if NVL(:new.fk_id,0) < 1 then
+    select MED.SEQ_TIMP_DOC.nextval into :new.fk_id from dual;
+  end if;
+  :new.FD_INS_DATE := sysdate;
+  :new.FK_INS_MO   := med.pkg_medses.get_curmo;
+end;
+/
+
+
+CREATE OR REPLACE TRIGGER MED.TIMP_DOC_DEL
+ BEFORE 
+ DELETE
+ ON MED.TIMP_DOC
+ REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+begin
+  delete from MED.TIMP_DOC_ITEMS idi where idi.FK_IMP_DOC_ID = :OLD.FK_ID;
+end;
+/
+
+CREATE OR REPLACE TRIGGER med.timp_doc_upd
+ BEFORE
+  UPDATE
+ ON med.timp_doc
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  :NEW.FD_EDIT_DATE := sysdate;
+  :new.FK_EDIT_MO   := med.pkg_medses.get_curmo;
+end;
+/

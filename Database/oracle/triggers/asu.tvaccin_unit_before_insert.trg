@@ -1,0 +1,32 @@
+DROP TRIGGER ASU.TVACCIN_UNIT_BEFORE_INSERT
+/
+
+--
+-- TVACCIN_UNIT_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TVACCIN_UNIT (Sequence)
+--   TVACCIN_UNIT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVACCIN_UNIT_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.tvaccin_unit
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+    --  Column "FK_ID" uses sequence SEQ_TVACCIN_UNIT
+
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT SEQ_TVACCIN_UNIT.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+

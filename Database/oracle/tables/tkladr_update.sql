@@ -1,0 +1,105 @@
+ALTER TABLE ASU.TKLADR_UPDATE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TKLADR_UPDATE CASCADE CONSTRAINTS
+/
+
+--
+-- TKLADR_UPDATE  (Table) 
+--
+CREATE TABLE ASU.TKLADR_UPDATE
+(
+  FK_ID      INTEGER                            NOT NULL,
+  FC_NAME    VARCHAR2(40 BYTE),
+  FC_CODE    VARCHAR2(17 BYTE),
+  FC_PREFIX  VARCHAR2(10 BYTE),
+  FL_EVEN    INTEGER,
+  FC_OKATO   VARCHAR2(11 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TKLADR_UPDATE IS 'Для обновления данных КЛАДРа'
+/
+
+
+--
+-- TKLADR_UPDATE_PK  (Index) 
+--
+--  Dependencies: 
+--   TKLADR_UPDATE (Table)
+--
+CREATE UNIQUE INDEX ASU.TKLADR_UPDATE_PK ON ASU.TKLADR_UPDATE
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TKLADR_UPDATE_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TKLADR_UPDATE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TKLADR_UPDATE_BEFORE_INSERT" 
+ BEFORE INSERT ON ASU.TKLADR_UPDATE  REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+ SELECT SEQ_TKLADR_UPDATE.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TKLADR_UPDATE 
+-- 
+ALTER TABLE ASU.TKLADR_UPDATE ADD (
+  CONSTRAINT TKLADR_UPDATE_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

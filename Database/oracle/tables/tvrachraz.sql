@@ -1,0 +1,132 @@
+DROP TABLE ASU.TVRACHRAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TVRACHRAZ  (Table) 
+--
+CREATE TABLE ASU.TVRACHRAZ
+(
+  FK_ID      NUMBER(16),
+  FK_SPECID  NUMBER(16),
+  FK_RAZDID  NUMBER(16),
+  FP_TYPE    NUMBER(1)                          DEFAULT 1
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVRACHRAZ IS 'Редактор доступа к разделам ИБ. /TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TVRACHRAZ.FK_ID IS 'SEQUENCE=[SEQ_TVRACHRAZ]'
+/
+
+
+--
+-- TVRACHRAZ  (Index) 
+--
+--  Dependencies: 
+--   TVRACHRAZ (Table)
+--
+CREATE INDEX ASU.TVRACHRAZ ON ASU.TVRACHRAZ
+(FK_SPECID, FK_RAZDID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVRACHRAZ$ID  (Index) 
+--
+--  Dependencies: 
+--   TVRACHRAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.TVRACHRAZ$ID ON ASU.TVRACHRAZ
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVRACHRAZ$ID$RAZDID  (Index) 
+--
+--  Dependencies: 
+--   TVRACHRAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.TVRACHRAZ$ID$RAZDID ON ASU.TVRACHRAZ
+(FK_ID, FK_RAZDID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVRACHRAZ_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TVRACHRAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVRACHRAZ_INSERT" 
+  BEFORE INSERT
+  ON ASU.TVRACHRAZ   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TVRACHRAZ.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,45 @@
+DROP FUNCTION ASU.HOUSES_INTERSECT_RANGE
+/
+
+--
+-- HOUSES_INTERSECT_RANGE  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."HOUSES_INTERSECT_RANGE" (SRC_STR VARCHAR2, CMP_STR VARCHAR) return NUMBER is
+  RESULT NUMBER;
+  INP_STR VARCHAR2(1000);
+  TST_STR VARCHAR2(1000);
+  HOUSE VARCHAR2(10);
+  I integer;
+  N integer;
+  K integer;
+  L integer;
+BEGIN
+  RESULT:=0;
+  IF SRC_STR='' OR CMP_STR='' THEN
+    I:=1;
+    N:=1;
+    K:=0;
+    INP_STR:=','||SRC_STR||',';
+    TST_STR:=CMP_STR||',';
+    L:=LENGTH(TST_STR);
+    LOOP
+      I:=INSTR(TST_STR,',',I+1); 
+      HOUSE:=','||SUBSTR(TST_STR,N,I-N)||',';
+      K:=INSTR(INP_STR,HOUSE);
+      N:=I+1;
+    EXIT WHEN K>0 OR I=L;
+    END LOOP;
+    IF K>0 THEN
+      RESULT:=1; -- Есть пересечение
+    END IF;  
+  END IF;  
+  RETURN(RESULT);
+END HOUSES_INTERSECT_RANGE;
+/
+
+SHOW ERRORS;
+
+

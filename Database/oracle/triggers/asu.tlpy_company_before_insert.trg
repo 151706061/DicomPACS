@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TLPY_COMPANY_BEFORE_INSERT
+/
+
+--
+-- TLPY_COMPANY_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TLPY_COMPANY (Sequence)
+--   TLPY_COMPANY (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLPY_COMPANY_BEFORE_INSERT" BEFORE INSERT
+ON ASU.TLPY_COMPANY FOR EACH ROW
+begin
+    --  Column "FK_ID" uses sequence SEQ_TLPY_COMPANY
+      IF :NEW.FK_ID IS NULL
+      THEN
+         SELECT SEQ_TLPY_COMPANY.NEXTVAL INTO :NEW.FK_ID from dual;
+      END IF;
+end;
+/
+SHOW ERRORS;
+
+

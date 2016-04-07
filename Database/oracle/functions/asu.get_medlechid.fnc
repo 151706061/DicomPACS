@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_MEDLECHID
+/
+
+--
+-- GET_MEDLECHID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_MEDLECHID" 
+return number
+is 
+begin
+  return 257116;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_MEDLECHID TO PUBLIC
+/
+

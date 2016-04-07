@@ -1,0 +1,25 @@
+DROP INDEX ASU.IDX_TTOWN_GUID
+/
+
+--
+-- IDX_TTOWN_GUID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.IDX_TTOWN_GUID ON ASU.TTOWN
+(FK_GUID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

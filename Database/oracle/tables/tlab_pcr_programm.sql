@@ -1,0 +1,45 @@
+DROP TABLE ASU.TLAB_PCR_PROGRAMM CASCADE CONSTRAINTS
+/
+
+--
+-- TLAB_PCR_PROGRAMM  (Table) 
+--
+CREATE TABLE ASU.TLAB_PCR_PROGRAMM
+(
+  FK_ID    NUMBER,
+  FC_NAME  VARCHAR2(100 BYTE),
+  FL_DEL   NUMBER(1)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TLAB_PCR_PROGRAMM IS 'ПРЦ Лаборатория. Справочник программ'
+/
+
+COMMENT ON COLUMN ASU.TLAB_PCR_PROGRAMM.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TLAB_PCR_PROGRAMM.FC_NAME IS 'Наименование программы'
+/
+
+COMMENT ON COLUMN ASU.TLAB_PCR_PROGRAMM.FL_DEL IS 'Признак удаления (0 - нормальная запись/1 - удалена)'
+/
+
+

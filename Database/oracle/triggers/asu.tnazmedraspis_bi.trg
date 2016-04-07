@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TNAZMEDRASPIS_BI
+/
+
+--
+-- TNAZMEDRASPIS_BI  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TNAZMEDRASPIS (Sequence)
+--   TNAZMEDRASPIS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZMEDRASPIS_BI" 
+BEFORE INSERT
+ON ASU.TNAZMEDRASPIS REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+BEGIN
+  SELECT seq_tnazmedraspis.nextval
+    INTO :new.fk_id
+    FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

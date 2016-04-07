@@ -1,0 +1,56 @@
+DROP TABLE ASU.TNAZID_DOOBSL CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZID_DOOBSL  (Table) 
+--
+CREATE TABLE ASU.TNAZID_DOOBSL
+(
+  FK_NAZID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- TNAZID_DOOBSL_NAZID  (Index) 
+--
+--  Dependencies: 
+--   TNAZID_DOOBSL (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZID_DOOBSL_NAZID ON ASU.TNAZID_DOOBSL
+(FK_NAZID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

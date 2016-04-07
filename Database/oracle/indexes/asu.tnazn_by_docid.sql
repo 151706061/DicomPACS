@@ -1,0 +1,25 @@
+DROP INDEX ASU.TNAZN_BY_DOCID
+/
+
+--
+-- TNAZN_BY_DOCID  (Index) 
+--
+CREATE INDEX ASU.TNAZN_BY_DOCID ON ASU.TNAZN
+(FK_DOC_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

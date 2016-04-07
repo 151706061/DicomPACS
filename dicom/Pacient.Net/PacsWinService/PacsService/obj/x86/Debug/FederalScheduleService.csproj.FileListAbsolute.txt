@@ -1,0 +1,5 @@
+d:\www\ExchangeWebService\FSWinService_2\FederalScheduleService\bin\Debug\FederalScheduleService.exe.config
+d:\www\ExchangeWebService\FSWinService_2\FederalScheduleService\obj\x86\Debug\ResolveAssemblyReference.cache
+d:\www\ExchangeWebService\FSWinService_2\FederalScheduleService\obj\x86\Debug\FederalScheduleService.ProjectInstaller.resources
+d:\www\ExchangeWebService\FSWinService_2\FederalScheduleService\obj\x86\Debug\GenerateResource.read.1.tlog
+d:\www\ExchangeWebService\FSWinService_2\FederalScheduleService\obj\x86\Debug\GenerateResource.write.1.tlog

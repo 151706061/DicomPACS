@@ -1,0 +1,18 @@
+DROP PACKAGE ASU.QUEST_SL_SCHEDULED_COLLECTOR
+/
+
+--
+-- QUEST_SL_SCHEDULED_COLLECTOR  (Package) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE PACKAGE ASU."QUEST_SL_SCHEDULED_COLLECTOR" IS
+	PROCEDURE Load_Sqlarea(collector_name   VARCHAR2, s_name VARCHAR2, u_name VARCHAR2);
+ 	PROCEDURE Reset_Sqlarea (collector_name VARCHAR2, s_name VARCHAR2, u_name VARCHAR2 ) ;
+END;
+/
+
+SHOW ERRORS;
+
+

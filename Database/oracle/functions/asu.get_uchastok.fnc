@@ -1,0 +1,27 @@
+DROP FUNCTION ASU.GET_UCHASTOK
+/
+
+--
+-- GET_UCHASTOK  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TUCHASTOK (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_UCHASTOK" 
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+CURSOR cTemp IS SELECT /*+first_row*/FC_NAME FROM TUCHASTOK WHERE FK_ID=pFK_ID;
+strTemp VARCHAR2(100);
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO strTemp;
+  CLOSE cTemp;
+  RETURN strTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

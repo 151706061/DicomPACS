@@ -1,0 +1,35 @@
+DROP FUNCTION ASU.GET_TOMP_SUM
+/
+
+--
+-- GET_TOMP_SUM  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSTANDART (Table)
+--   TSTANDART_COST (Table)
+--   TSTANDART_RAZDEL (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_TOMP_SUM" (pfc_tomp IN VARCHAR2) RETURN NUMBER IS
+ -- Created 20070909 by Linnikov
+ -- Функция возвращает цену ТОМПа
+
+ nRes NUMBER;
+BEGIN
+ SELECT MAX(C.FN_COST)
+   INTO nRes
+   FROM ASU.TSTANDART S, ASU.TSTANDART_COST C, ASU.TSTANDART_RAZDEL R
+  WHERE S.FK_ID = C.FK_STANDARTID
+    AND R.FK_ID = S.FK_RAZDEL
+    AND R.CODE = SUBSTR(pfc_tomp, 1, 2)
+    AND S.FC_CODE = SUBSTR(pfc_tomp, 3, LENGTH(pfc_tomp) - 2)
+    AND C.FD_DATE1 <= SYSDATE
+    AND NVL(C.FD_DATE2, SYSDATE) >= SYSDATE;
+ RETURN NVL(ROUND(nRes, 2), 0);
+END;
+/
+
+SHOW ERRORS;
+
+

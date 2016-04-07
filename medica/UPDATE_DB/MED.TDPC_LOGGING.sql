@@ -1,0 +1,46 @@
+set define off
+ALTER TABLE MED.TDPC 
+ ADD (
+  FK_CREATE_MO_ID NUMBER,
+  FD_CREATE DATE,
+  FK_EDIT_MO_ID NUMBER,
+  FD_EDIT DATE
+ )
+/
+COMMENT ON COLUMN MED.TDPC.FK_CREATE_MO_ID IS 'кто создал строку (ссылка на MED.TMO)'
+/
+COMMENT ON COLUMN MED.TDPC.FD_CREATE IS 'дата создания'
+/
+COMMENT ON COLUMN MED.TDPC.FK_EDIT_MO_ID IS 'кто изменил строку (ссылка на MED.TMO)'
+/
+COMMENT ON COLUMN MED.TDPC.FD_EDIT IS 'дата редактирования'
+/
+
+CREATE OR REPLACE TRIGGER MED.TDPC_INS
+ BEFORE 
+ INSERT
+ ON MED.TDPC
+ REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW 
+Begin
+  select SEQ_TDPC.nextval into :new.DPCID from dual;
+ :NEW.FK_CREATE_MO_ID := med.pkg_medses.get_curmo;
+ :NEW.FD_CREATE := sysdate;
+End;
+/
+
+CREATE OR REPLACE TRIGGER MED.TDPC_UPD
+ BEFORE 
+ UPDATE
+ ON MED.TDPC
+ REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW 
+begin
+  :NEW.FK_EDIT_MO_ID := med.pkg_medses.get_curmo;
+  :NEW.FD_EDIT       := sysdate;
+end;
+/
+
+
+quit
+/

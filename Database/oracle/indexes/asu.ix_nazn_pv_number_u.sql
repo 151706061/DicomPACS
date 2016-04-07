@@ -1,0 +1,25 @@
+DROP INDEX ASU.IX_NAZN_PV_NUMBER_U
+/
+
+--
+-- IX_NAZN_PV_NUMBER_U  (Index) 
+--
+CREATE INDEX ASU.IX_NAZN_PV_NUMBER_U ON ASU.TNAZN_PV_NUMBER
+(FK_NAZN)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

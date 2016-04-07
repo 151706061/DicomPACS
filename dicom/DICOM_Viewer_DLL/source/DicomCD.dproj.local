@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015.04.27 14:37:36.276.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\Project1.dproj=C:\Delphi\Trunk_AUTH\ASU2\Dicom\DICOM_Viewer_DLL\source\DicomCD.dproj</Transaction>
+    <Transaction>2015.04.28 13:51:30.983.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\DICOM_Viewer_DLL\source\Unit2.pas=C:\Delphi\Trunk_AUTH\ASU2\uCommon_Dicom\UnfrmProgressBurn.pas</Transaction>
+    <Transaction>2015.04.28 13:51:30.983.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\DICOM_Viewer_DLL\source\Unit2.dfm=C:\Delphi\Trunk_AUTH\ASU2\uCommon_Dicom\UnfrmProgressBurn.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

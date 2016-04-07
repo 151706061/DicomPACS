@@ -1,0 +1,25 @@
+DROP INDEX ASU.VNAZ_BY_NAZOWNER
+/
+
+--
+-- VNAZ_BY_NAZOWNER  (Index) 
+--
+CREATE INDEX ASU.VNAZ_BY_NAZOWNER ON ASU.VNAZ
+(FK_NAZOWNER)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          9840K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

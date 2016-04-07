@@ -1,0 +1,148 @@
+DROP TABLE ASU.TLABLOT CASCADE CONSTRAINTS
+/
+
+--
+-- TLABLOT  (Table) 
+--
+CREATE TABLE ASU.TLABLOT
+(
+  FK_ID       NUMBER,
+  FK_SOST     NUMBER,
+  FK_COUNT    NUMBER,
+  FK_VMEST    NUMBER,
+  FD_DATE     DATE,
+  FN_NUMBER   NUMBER,
+  FK_LABSMID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TLABLOT.FK_SOST IS 'Состояние лотка 0-открыт, 1-закрыт'
+/
+
+COMMENT ON COLUMN ASU.TLABLOT.FK_COUNT IS 'Колличество заполненых ячеек'
+/
+
+COMMENT ON COLUMN ASU.TLABLOT.FK_VMEST IS 'Вместительность лотка'
+/
+
+COMMENT ON COLUMN ASU.TLABLOT.FD_DATE IS 'Дата работы с лотком'
+/
+
+COMMENT ON COLUMN ASU.TLABLOT.FN_NUMBER IS 'Номер лотка'
+/
+
+COMMENT ON COLUMN ASU.TLABLOT.FK_LABSMID IS 'Принадлежность лаборатории'
+/
+
+
+--
+-- TLABLOT_BY_DATE_NUM  (Index) 
+--
+--  Dependencies: 
+--   TLABLOT (Table)
+--
+CREATE UNIQUE INDEX ASU.TLABLOT_BY_DATE_NUM ON ASU.TLABLOT
+(FD_DATE, FN_NUMBER)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLABLOT_BY_DATE_SOST  (Index) 
+--
+--  Dependencies: 
+--   TLABLOT (Table)
+--
+CREATE UNIQUE INDEX ASU.TLABLOT_BY_DATE_SOST ON ASU.TLABLOT
+(FD_DATE, FK_SOST)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLABLOT_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TLABLOT (Table)
+--
+CREATE UNIQUE INDEX ASU.TLABLOT_BY_ID ON ASU.TLABLOT
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLABLOT_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TLABLOT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLABLOT_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TLABLOT  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+    SELECT SEQ_TLABLOT.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,28 @@
+14:53:20: pacs/pacs123@sk131008
+   14:57:14: еще вопрос - как сохранить базу если будет обновляться с филиала ?
+ 
+   14:58:06: экспортить схему, а потом заливать в новый поднятый инстанс, предварительно создав там юзера. Скрипт выше
+   14:58:29: ок
+ 
+   14:58:37: exp system/sys123123@sk131008 owner=pacs file=...
+   14:58:52: ок
+   14:59:15: скрипт создания не дошел почему-то
+
+CREATE USER PACS
+  IDENTIFIED BY <password>
+  DEFAULT TABLESPACE USR
+  TEMPORARY TABLESPACE TEMP
+  PROFILE DEFAULT
+  ACCOUNT UNLOCK;
+  -- 1 Role for PACS 
+  GRANT MEDOTRADE_DATA_ROLE TO PACS;
+  ALTER USER PACS DEFAULT ROLE ALL;
+  -- 7 System Privileges for PACS 
+  GRANT CREATE SESSION TO PACS;
+  GRANT EXECUTE ANY OPERATOR TO PACS;
+  GRANT EXECUTE ANY PROCEDURE TO PACS;
+  GRANT EXECUTE ANY PROGRAM TO PACS;
+  GRANT SELECT ANY DICTIONARY TO PACS;
+  GRANT SELECT ANY TABLE TO PACS;
+  GRANT UNLIMITED TABLESPACE TO PACS;
+   14:59:33: ок

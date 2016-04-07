@@ -1,0 +1,20 @@
+DROP FUNCTION ASU.GET_FIZIOTERAPEVT_KONS
+/
+
+--
+-- GET_FIZIOTERAPEVT_KONS  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_FIZIOTERAPEVT_KONS" 
+return number
+is
+begin
+  return 427596;
+end;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,154 @@
+DROP TABLE ASU.TLIN_MEDIC CASCADE CONSTRAINTS
+/
+
+--
+-- TLIN_MEDIC  (Table) 
+--
+CREATE TABLE ASU.TLIN_MEDIC
+(
+  FK_ID        NUMBER,
+  FK_DPCID     NUMBER,
+  FK_PACID     NUMBER,
+  FD_DATE      DATE,
+  FL_ALLDAY    NUMBER(1)                        DEFAULT 0                     NOT NULL,
+  FK_VVODPATH  NUMBER,
+  FL_INFUSE    NUMBER(1)                        DEFAULT 0                     NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TLIN_MEDIC IS 'Лист интенсивного наблюдения (препараты) Author: Neronov A.S.'
+/
+
+COMMENT ON COLUMN ASU.TLIN_MEDIC.FK_ID IS '[SEQ_TLIN_MEDIC]'
+/
+
+COMMENT ON COLUMN ASU.TLIN_MEDIC.FK_DPCID IS 'Ссылка на проводку медикамента'
+/
+
+COMMENT ON COLUMN ASU.TLIN_MEDIC.FK_PACID IS 'TKARTA.FK_ID - ID пациента'
+/
+
+COMMENT ON COLUMN ASU.TLIN_MEDIC.FD_DATE IS 'Дата применения препарата'
+/
+
+COMMENT ON COLUMN ASU.TLIN_MEDIC.FL_ALLDAY IS '1 - препарат на весь день'
+/
+
+COMMENT ON COLUMN ASU.TLIN_MEDIC.FK_VVODPATH IS 'TVVODPATH.FK_ID - Путь ввода препарата'
+/
+
+COMMENT ON COLUMN ASU.TLIN_MEDIC.FL_INFUSE IS '1 - это инфузия'
+/
+
+
+--
+-- TLIN_MEDIC_BY_DATE  (Index) 
+--
+--  Dependencies: 
+--   TLIN_MEDIC (Table)
+--
+CREATE INDEX ASU.TLIN_MEDIC_BY_DATE ON ASU.TLIN_MEDIC
+(FD_DATE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLIN_MEDIC_BY_DPCID  (Index) 
+--
+--  Dependencies: 
+--   TLIN_MEDIC (Table)
+--
+CREATE INDEX ASU.TLIN_MEDIC_BY_DPCID ON ASU.TLIN_MEDIC
+(FK_DPCID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLIN_MEDIC_BY_PACID  (Index) 
+--
+--  Dependencies: 
+--   TLIN_MEDIC (Table)
+--
+CREATE INDEX ASU.TLIN_MEDIC_BY_PACID ON ASU.TLIN_MEDIC
+(FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLIN_MEDIC_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TLIN_MEDIC (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLIN_MEDIC_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TLIN_MEDIC  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+    SELECT SEQ_TLIN_MEDIC.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+

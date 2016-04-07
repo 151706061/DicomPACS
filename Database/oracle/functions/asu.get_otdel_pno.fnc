@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_OTDEL_PNO
+/
+
+--
+-- GET_OTDEL_PNO  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU.GET_OTDEL_PNO
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =-
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 130411;
+END;
+/
+
+SHOW ERRORS;
+
+

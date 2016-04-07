@@ -1,0 +1,49 @@
+DROP TABLE ASU.TENL_NAZAN CASCADE CONSTRAINTS
+/
+
+--
+-- TENL_NAZAN  (Table) 
+--
+CREATE TABLE ASU.TENL_NAZAN
+(
+  FK_ID      NUMBER,
+  FK_SMID    NUMBER,
+  FK_ENLLPU  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- TENL_NAZAN_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TENL_NAZAN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TENL_NAZAN_BI
+  before insert ON ASU.TENL_NAZAN   REFERENCING OLD AS OLD NEW AS NEW
+  for each ROW
+begin
+  SELECT asu.seq_tenl_nazan.nextval INTO :new.fk_id FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

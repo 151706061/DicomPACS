@@ -1,0 +1,13 @@
+ALTER TABLE ASU.VNAZ
+  DROP CONSTRAINT VNAZ_BY_ID
+/
+
+-- 
+-- Non Foreign Key Constraints for Table VNAZ 
+-- 
+ALTER TABLE ASU.VNAZ ADD (
+  CONSTRAINT VNAZ_BY_ID
+ PRIMARY KEY
+ (FK_ID))
+/
+

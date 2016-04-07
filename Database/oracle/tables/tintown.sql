@@ -1,0 +1,119 @@
+DROP TABLE ASU.TINTOWN CASCADE CONSTRAINTS
+/
+
+--
+-- TINTOWN  (Table) 
+--
+CREATE TABLE ASU.TINTOWN
+(
+  FK_ID       NUMBER(15)                        NOT NULL,
+  FC_NAME     VARCHAR2(30 BYTE),
+  FL_DEFAULT  NUMBER                            DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TINTOWN IS 'Справочник "Пригороды" by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TINTOWN.FK_ID IS 'SEQUENCE=[SEQ_TINTOWN]'
+/
+
+COMMENT ON COLUMN ASU.TINTOWN.FC_NAME IS 'Название'
+/
+
+COMMENT ON COLUMN ASU.TINTOWN.FL_DEFAULT IS 'значение по-умолчанию'
+/
+
+
+--
+-- TINTOWN_BY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TINTOWN (Table)
+--
+CREATE UNIQUE INDEX ASU.TINTOWN_BY_FK_ID ON ASU.TINTOWN
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TINTOWN_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TINTOWN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TINTOWN_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TINTOWN  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  nTemp NUMBER;
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TINTOWN', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TINTOWN', 'FC_NAME', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fc_name), :new.fk_id);
+  elsif DELETING then
+    PKG_LOG.Do_log('TINTOWN', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_id), null, :old.fk_id);
+    PKG_LOG.Do_log('TINTOWN', 'FC_NAME', 'DELETE', PKG_LOG.GET_VALUE(:old.FC_NAME), null, :old.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TINTOWN', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FC_NAME') AND PKG_LOG.GET_VALUE(:old.FC_NAME) <> PKG_LOG.GET_VALUE(:new.FC_NAME) then
+      PKG_LOG.Do_log('TINTOWN', 'FC_NAME', 'UPDATE', PKG_LOG.GET_VALUE(:old.FC_NAME), PKG_LOG.GET_VALUE(:new.FC_NAME), :old.fk_id);
+    end if;
+  end if;
+  null;
+END TINTOWN_LOG;
+/
+SHOW ERRORS;
+
+
+--
+-- TINTOWN_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TINTOWN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TINTOWN_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TINTOWN REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  SELECT SEQ_TINTOWN.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

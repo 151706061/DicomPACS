@@ -1,0 +1,19 @@
+2014-08-07 14:38:17,641 [INFO] [10] - DownloadPosts - Begin.
+2014-08-07 14:38:26,880 [INFO] [10] - GetPosts
+2014-08-07 14:39:25,394 [INFO] [10] - DownloadPosts - Begin.
+2014-08-07 14:39:29,337 [INFO] [10] - GetPosts
+2014-08-07 14:40:12,237 [ERROR] [10] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-08-07 14:53:50,715 [INFO] [10] - DownloadPosts - Begin.
+2014-08-07 14:54:37,310 [INFO] [10] - GetPosts
+2014-08-07 14:59:00,088 [INFO] [1] - DownloadPosts - Begin.
+2014-08-07 14:59:00,569 [INFO] [1] - GetPosts
+2014-08-07 14:59:02,233 [ERROR] [1] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-08-07 14:59:02,271 [INFO] [1] - DownloadPosts - ok. Duration: 0.03626874 minutes
+2014-08-07 14:59:02,272 [INFO] [1] - DownloadPayments - Begin.
+2014-08-07 14:59:02,273 [INFO] [1] - GetPayments
+2014-08-07 14:59:02,680 [ERROR] [1] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-08-07 14:59:02,693 [INFO] [1] - DownloadPayments - ok. Duration: 0.00701706833333333 minutes
+2014-08-07 14:59:02,694 [INFO] [1] - DownloadSpecsAndServices - Begin.
+2014-08-07 14:59:02,697 [INFO] [1] - GetSpecs
+2014-08-07 14:59:03,102 [ERROR] [1] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-08-07 14:59:03,124 [INFO] [1] - DownloadSpecsAndServices - ok. Duration: 0.00715041 minutes

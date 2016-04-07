@@ -1,0 +1,1085 @@
+﻿@using PacientNet.Core.Infrastructure.Utils
+@using PacientNet.WebUI.Controllers
+
+@using PacientNet.Domain.Models.AccessWorkList
+
+@{
+    Layout = null;
+}
+@using PacientNet.Core.App_Code
+@DataFormatterHelper.DataFormatter()
+<script type="text/javascript">
+
+    var currentRowStatus = "";
+    var currentNeyavkaBtnState = "setNeyavka";
+    var nothingSelectedAlert = 'Выберите, пожалуйста, прием';
+    var failedAjaxRequestMsg = "При обращении к серверу произошла ошибка. Попробуйте перезагрузить страницу.";
+    var paidOnlyLocalStorageName = "PriemListPaidOnlyChbxState";
+
+    var vPACS = "";
+
+    $(document).ready(function () {
+    //  using PacientNet.WebUI.Models.Priem.PriemListViewModel
+
+        vPACS = @AccessWorkList.pGetPACS()   
+
+        $('.link_button_menu li').hover(function () {
+            $(this).addClass("active");
+            $(this).find('ul').stop(true, true);
+            $(this).find('ul').fadeIn('fast');
+        },
+            function () {
+                $(this).removeClass("active");
+                $(this).find('ul').fadeOut('fast');
+            }
+        );
+
+        $("#neyavkaBtn").on("click", function () {
+            PriemListGrid_SetNeyavka();
+            return false;
+        });
+
+        var $checkbox = $("#isAllPrescs");
+        var key = 'isAllPrescs_consultant';
+        $checkbox.prop('checked', (getLocalStorageItem(key)));
+        $checkbox.on("change", function () {
+            setLocalStorageItem(key, $checkbox.prop('checked'));
+            PriemListGrid_Refresh();
+            return false;
+        });
+        
+        if ($("#paidOnly").length > 0 && typeof window.localStorage !== 'undefined') {
+            $("#paidOnly").prop("checked", window.localStorage.getItem(paidOnlyLocalStorageName) == "true");
+        }
+    });
+
+    function PriemListGrid_Refresh() {
+        $('#lbInfoPriemList').text('');
+        $("#SetNotDoneBtn").addClass("linkBtnDisabled");
+        $('#PriemGridList').jqGrid().trigger("reloadGrid");
+        return false;
+    }
+
+
+    function OnPriemClose() {
+        $('#lbInfoPriemList').text('');
+        $("#PriemPanelData").empty();
+        $("#PriemPanel_container").hide();
+        $("#PriemList_container").show();
+        PriemList_Refresh();
+    }
+
+
+    function ShowPriem_ajax(prescId, scheduleId, isProfex, multiSign) {
+        $('#lbInfoPriemList').text('');
+        $.ajax({
+            url: '@Url.Action("FillPriem", "Priem")',
+            type: 'GET',
+            async: false,
+            data: {
+                prescId: prescId,
+                isProfex: isProfex,
+                multiSign: multiSign,
+                listDateFrom: $("#DateFrom").val(),
+                listDateTo: $("#DateTo").val(),
+                listCabinet: $("#Cabinet").val(),
+                CallBackCancel: 'OnPriemClose'
+            },
+            dataType: "html",
+            success: function (data) {
+                $('.close-reveal-modal', '#VipModal').click();
+                $("#PriemList_container").hide();
+                $("#DebtTalonList_container").hide();
+                $("#ArchivePriemList_container").hide();
+                $("#PriemPanel_container").show();
+                $("#PriemPanelData").html(data);
+            },
+            statusCode: {403: function(response) {
+              alert( response.responseText);
+            }}
+        });
+    }
+
+    function PriemListGrid_EditRecord() {
+        $('#lbInfoPriemList').text('');
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        if (id == null) {
+            PriemList_Vip_CallbackMessage(nothingSelectedAlert);
+        }
+        else {
+            var obj = grid.getRowData(id);
+            var state = obj['PrescStateId'].trim();
+            if ((!(obj['is_read_only'] == '0')) && ((state == 'sign'))) {
+                PriemList_Vip_CallbackMessage("Заполнение невозможно. Истек период редактирования данных осмотра.");
+                return;
+            } else if ((state == 'absence')) {
+                PriemList_Vip_CallbackMessage("Нельзя заполнить прием со статусом 'Неявка'");
+                return;
+            } else if (state == 'cancel') {
+                PriemList_Vip_CallbackMessage("Нельзя заполнить прием со статусом 'Не выполнено'");
+                return;
+            } else if (obj['is_ambtick_close'] == 'True') {
+                PriemList_Vip_CallbackMessage("Нельзя заполнить прием со статусом талона 'Закрыт'");
+                return;
+            }
+
+            var prescId = grid.jqGrid('getCell', id, 'PrescId');
+            var isProfex = grid.jqGrid('getCell', id, 'is_profex');
+            var multiSign = grid.jqGrid('getCell', id, 'MultiSigne');
+
+            ShowPriem_ajax(prescId, id, isProfex, multiSign);
+        }
+    }
+
+
+    function PriemListGrid_OpenMK() {
+        $('#lbInfoPriemList').text('');
+
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        if (id == null) {
+            PriemList_Vip_CallbackMessage(nothingSelectedAlert);
+        }
+        else {
+            var prescId = grid.jqGrid('getCell', id, 'PrescId');
+            var mdocId = grid.jqGrid('getCell', id, 'MdocId');
+
+            var datefrom = $('#DateFrom').val();
+            var dateto = $('#DateTo').val();
+            var cabinet = $('#Cabinet').val();
+
+            location.href = '@Url.Action("Index", "MedicalCard")' + "/?id=" + mdocId +
+                "&callbackUrl=" + "@Url.Action("Index", "Doctor")/?datefrom=" + datefrom + "%26dateto=" + dateto + "%26cabinet=" + cabinet;
+        }
+    }
+
+    function PriemListGrid_Search() {
+        var grid = $("#PriemGridList");
+        grid.trigger("reloadGrid", [{ page: 1}]);
+        return false;
+    }
+
+    function PriemListGrid_SetNeyavka() {
+
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        if (id == null) {
+            PriemList_Vip_CallbackMessage(nothingSelectedAlert);
+        } else {
+            var obj = grid.getRowData(id);
+            var prescState = obj['PrescStateId'].trim();
+            if (!(obj['is_read_only'] == '0')) {
+                PriemList_Vip_CallbackMessage("Установить неявку невозможно. Истек период редактирования данных осмотра.");
+                return;
+            } else if ((prescState == 'sign')) {
+                PriemList_Vip_CallbackMessage("Нельзя установить неявку на прием со статусом 'Подписано'");
+                return;
+            } else if (prescState == 'cancel') {
+                PriemList_Vip_CallbackMessage("Нельзя установить неявку на прием со статусом 'Отменено'");
+                return;
+            } else if ((prescState == 'absence')) {
+                PriemList_Vip_CallbackMessage("Приему уже установлен статус 'Неявка'");
+                return;
+            } else if (obj['is_future'] == '1') {
+                PriemList_Vip_CallbackMessage("Нельзя установить неявку на будущий прием");
+                return;
+            } else if (obj['is_ambtick_close'] == 'True') {
+                PriemList_Vip_CallbackMessage("Нельзя установить неявку на прием со статусом талона 'Закрыт'");
+                return;
+            }
+            // проверяем, есть ли содержимое приема (назначения, рецепты, протокол и др.)
+            $.ajax({
+                type: "post",
+                url: '@Url.Action("IsExistsPrescContent", "PriemList")',
+                cache: false,
+                async: false,
+                data: { prescid: id },
+                success: function (json) {
+                    if ((json != null) && (json != "")) {
+                        PriemList_Vip_CallbackMessage("Невозможно установить приему статус 'Неявка',\nв рамках данного приема созданы: \n" + json);
+                        return;
+                    } else {
+                        if (confirm('Установить неявку на прием?')) {
+                            $.ajax({
+                                type: "post",
+                                url: '@Url.Action("Absence", "Priem")',
+                                cache: false,
+                                async: false,
+                                data: { prescId: id, callback: 'CloseNeyavka' },
+                                success: function (data) {
+                                    if (data.success == false) {
+                                        PriemList_Vip_CallbackMessage(data.errorText);
+                                    } else if (data != null && data != "") {
+                                        $('#AbsenceInfo').html(data);
+                                        $('#AbsenceModal').reveal({
+                                            animation: 'fade',
+                                            animationspeed: 100,
+                                            closeonbackgroundclick: false,
+                                            dismissmodalclass: 'close-reveal-modal',
+                                            isfixed: false
+                                        });
+                                    }
+                                },
+                                error: function () {
+                                    PriemList_Vip_CallbackMessage(failedAjaxRequestMsg);
+                                }
+                            });
+                        }
+                    }
+                },
+                error: function () {
+                    PriemList_Vip_CallbackMessage(failedAjaxRequestMsg);
+                    return;
+                }
+            });
+
+
+        }
+    }
+
+    function PriemListGrid_SetNotDone() {
+        $('#lbInfoPriemList').text('');
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        if (id != null) {
+            var obj = grid.getRowData(id);
+            if (obj['PrescStateId'].trim() == 'absence') {
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("PriemSetNotDone", "Priem")',
+                    cache: false,
+                    async: false,
+                    data: { prescId: id },
+                    success: function (data) {
+                        if (data.success == false) {
+                            PriemList_Vip_CallbackMessage("При отмене неявки произошла ошибка.");
+                        } else {
+                            PriemListGrid_Refresh();
+                        }
+                    },
+                    error: function () {
+                        PriemList_Vip_CallbackMessage(failedAjaxRequestMsg);
+                    }
+                });
+            }
+        }
+    }
+
+    function CloseNeyavka() {
+        PriemList_Refresh();
+        $('.close-reveal-modal', '#AbsenceModal').click();
+    }
+
+    function PriemListGrid_SetYavka() {
+        $('#lbInfoPriemList').text('');
+
+        var grid = $("#PriemGridList");
+
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        if (id == null) {
+            PriemList_Vip_CallbackMessage(nothingSelectedAlert);
+        }
+        else {
+            var obj = grid.getRowData(id);
+            var prescState = obj['PrescStateId'].trim();
+            if (!(obj['is_read_only'] == '0')) {
+                PriemList_Vip_CallbackMessage("Установить явку невозможно. Истек период редактирования данных осмотра.");
+                return;
+            } else if ((prescState == 'sign')) {
+                PriemList_Vip_CallbackMessage("Нельзя установить явку на прием со статусом 'Подписано'");
+                return;
+            } else if (prescState == 'cancel') {
+                PriemList_Vip_CallbackMessage("Нельзя установить явку на прием со статусом 'Отменено'");
+                return;
+            } else if (prescState == 'presence') {
+                PriemList_Vip_CallbackMessage("Приему уже установлен статус 'Явка'");
+                return;
+            } else if (obj['is_future'] == '1') {
+                PriemList_Vip_CallbackMessage("Нельзя установить явку на будущий прием");
+                return;
+            } else if (obj['is_ambtick_close'] == 'True') {
+                PriemList_Vip_CallbackMessage("Нельзя установить явку на прием со статусом талона 'Закрыт'");
+                return;
+            }
+
+            if (confirm('Установить явку на прием?')) {
+                $.ajax({
+                    type: "post",
+                    url: '@Url.Action("PriemSetYavka", "PriemList")' + "?oid=" + id,
+                    cache: false,
+                    data: {},
+                    success: function () {
+                        PriemListGrid_Refresh();
+                    },
+                    error: function () {
+                        PriemList_Vip_CallbackMessage(failedAjaxRequestMsg);
+                    }
+                });
+            }
+
+        }
+    }
+
+    function PriemList_Refresh() {
+        $('#lbInfoPriemList').text('');
+        $('#PriemGridList').jqGrid().trigger("reloadGrid");
+    }
+
+    function DateOnChange() {
+        PriemListGrid_Search();
+    }
+
+    function ListDblClick() {
+        PriemListGrid_EditRecord();
+    }
+
+    function AfterInsertRow(rowId, rowData) {
+        var grid = $("#PriemGridList");
+
+        if (($.trim(rowData.PrescStateId) == 'sign')) {
+            $("#" + rowId).addClass("sign-row");
+        }
+
+        if (($.trim(rowData.PrescStateId) == 'absence')) {
+            $("#" + rowId).addClass("absence-row");
+        }
+
+        if (($.trim(rowData.PrescStateId) == 'presence')) {
+            $("#" + rowId).addClass("presence-row");
+        }
+        
+        if (($.trim(rowData.Cito) == "1")) {
+            $("tr#" + rowId + " td").addClass("presc-cito-row");
+        } else {
+            $("tr#" + rowId + " td").removeClass("presc-cito-row");
+        }
+        
+        @if (Model.ShowPaidOnlyChbx)
+        {
+            <text>
+            if (($.trim(rowData.PrescStateId) == "not_done" && $.trim(rowData.IsPayedString) == "Оплачено")) {
+                $("tr#" + rowId + " td").addClass("paid-not-done-row");
+            } else {
+                $("tr#" + rowId + " td").removeClass("paid-not-done-row");
+            }
+            </text>
+        }
+    }
+
+    function OnSelectRow(rowId) {
+        var grid = $("#PriemGridList");
+        var lastRow = $("#last_row_id").val();
+        currentRowStatus = grid.getRowData(rowId)['PrescStateId'].trim();
+        
+
+        $("#" + lastRow).removeClass("priem-list-selected-row");
+        $("#" + rowId).addClass("priem-list-selected-row");
+
+        $("#last_row_id").val(rowId);
+
+        if (currentRowStatus == "absence" && currentNeyavkaBtnState == "setNeyavka") {
+            $("#neyavkaBtn").off().on("click", function () {
+                PriemListGrid_SetNotDone();
+                return false;
+            });
+            $("#neyavkaBtnNeyavkaIcon").hide();
+            $("#neyavkaBtnOtmNeyavkaIcon").show();
+            $("#neyavkaBtn .lb").text("Отмена неявки");
+            currentNeyavkaBtnState = "setNotDone";
+        }
+        if (currentRowStatus != "absence" && currentNeyavkaBtnState == "setNotDone") {
+            $("#neyavkaBtn").off().on("click", function () {
+                PriemListGrid_SetNeyavka();
+                return false;
+            });
+            $("#neyavkaBtnNeyavkaIcon").show();
+            $("#neyavkaBtnOtmNeyavkaIcon").hide();
+            $("#neyavkaBtn .lb").text("Неявка");
+            currentNeyavkaBtnState = "setNeyavka";
+        }
+
+        ShowProfexButton(grid, grid.jqGrid('getGridParam', 'selrow'));
+
+        if ('@Model.ShowPregnancyFunction' == 'True') {
+            PregnancyButton(grid, grid.jqGrid('getGridParam', 'selrow'));
+        }
+    }
+    
+    function PriemList_Direction() {
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        var obj = grid.getRowData(id);
+        var visitId = obj['VisitId'].trim();
+        if (id) {
+            if (visitId) {
+                $.ajax({
+                    url: '@Url.Action("DirectionCreateCheck", "Direction")',
+                    async: false,
+                    cache: false,
+                    data: { visit: visitId },
+                    traditional: true,
+                    type: 'POST',
+                    beforeSend: null,
+                    success: function(data_check) {
+                        if (data_check.Result) {
+                            var doCreateDirection = true;
+
+                            if (data_check.error_text != '') {
+                                data_check.error_text = data_check.error_text + '. ';
+
+                                if (!confirm(data_check.error_text + "Продолжить?")) {
+                                    doCreateDirection = false;
+                                }
+                            }
+
+                            if (doCreateDirection == true) {
+                                $.ajax({
+                                    url: '@Url.Action("DirectionInfo", "Direction")',
+                                    async: false,
+                                    cache: false,
+                                    data: { visit: visitId,
+                                        prescId: id,
+                                        callback: 'PriemList_DirectionCallback',
+                                        parentdiv: 'PriemList_PopupModalInfo_container'
+                                    },
+                                    dataType: "html",
+                                    success: function(data) {
+                                        $('#PriemList_PopupModalInfo_container').html(data);
+                                        $('#PriemList_PopupModalInfo').reveal({
+                                            animation: 'fade',
+                                            animationspeed: 100,
+                                            closeonbackgroundclick: false,
+                                            dismissmodalclass: 'close-reveal-modal'
+                                        });
+                                    }
+                                });
+                            }
+                        } else {
+                            alert(data_check.error_text);
+                        }
+                    }
+                });
+            } else {
+                alert('Не найден талон пациента');
+            }
+        } else {
+            alert('Выберите пациента.');
+        }
+    }
+    
+    function PriemList_DirectionCallback() {
+        $('.close-reveal-modal', '#PriemList_PopupModalInfo').click();
+    }
+
+    function PriemList_PriemPeopleFind() {
+        datefrom = $('#DateFrom').val();
+        dateto = $('#DateTo').val();
+        cabinet = $('#Cabinet').val();
+
+        $(location).attr('href', '@Url.Action("Index", "PriemPeopleFind", new { type = 1 })'
+            + "&dateFrom=" + datefrom
+            + "&dateTo=" + dateto
+            + "&cabinet=" + cabinet
+            + '&callbackurl=' + '@Url.Action("Index", "Doctor")');
+    }
+
+    function PriemList_Archive() {
+        $('#lbInfoPriemList').text('');
+        $.ajax({
+            url: '@Url.Action("ArchivePriemList", "PriemList")',
+            async: false,
+            data: { sotr: '@Model.SotrId' },
+            dataType: "html",
+            success: function (data) {
+                $("#PriemListViewModel").hide();
+                $("#DebtTalonList_container").hide();
+                $("#ArchivePriemList_container").show();
+                $("#ArchivePriemListInfo").html(data);
+            }
+        });
+    }
+
+    function OnArchiveClose() {
+        $("#ArchivePriemListInfo").empty();
+        $("#ArchivePriemList_container").hide();
+        $("#PriemListViewModel").show();
+        PriemList_Refresh();
+    }
+
+    function PriemList_DebtTalon() {
+        $.ajax({
+            url: '@Url.Action("DebtAmbTicketList", "PriemList")',
+            async: false,
+            data: { sotr: '@Model.SotrId' },
+            dataType: "html",
+            success: function (data) {
+                $("#PriemListViewModel").hide();
+                $("#ArchivePriemList_container").hide();
+                $("#DebtTalonList_container").show();
+                $("#DebtTalonListInfo").html(data);
+            }
+        });
+    }
+
+    function OnDebtTalonClose() {
+        $("#DebtTalonListInfo").empty();
+        $("#DebtTalonList_container").hide();
+        $("#PriemListViewModel").show();
+        PriemList_Refresh();
+    }
+
+    function ProtocolPrintWithProtText_call()
+    {
+        ProtocolPrint_call(true);
+    }
+    
+    function ProtocolPrintWithoutProtText_call()
+    {
+        ProtocolPrint_call(false);
+    }
+
+    function ProtocolPrint_call(showProtocol) {
+        $('#lbInfoPriemList').text('');
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        var prescId = jQuery("#PriemGridList").getCell(id, 'PrescId');
+        var sign = jQuery("#PriemGridList").getCell(id, 'PrescStateName');
+
+        if (prescId == "") {
+            PriemList_Vip_CallbackMessage("Для печати протокола необходимо выбрать прием!");
+            return false;
+        }
+        if (sign != "Подписано") {
+            PriemList_Vip_CallbackMessage("Невозможно распечатать протокол! Приём не подписан!");
+            return false;
+        }
+        var str = '@Url.Action("GetPrintPrescContent", "MedicalCard")?oid=' + prescId + '';
+        if (typeof showProtocol != "undefined") {
+            str += '&showProtocol=' + showProtocol;
+        }
+        window.open(str, 'mywindow', 'width=800,height=1000,left=0,top=0,screenX=0,screenY=0,scrollbars=yes');
+        return false;
+    }
+
+    function AllProtocolPrint_call() {
+        $('#lbInfoPriemList').text('');
+        var ids = jQuery("#PriemGridList").getDataIDs();
+        if (typeof ids != "undefined" && ids != '' && ids != null) {
+            var idsArrayWithSignPriem = new Array();
+            for (var i = 0; i < ids.length; i++) {
+                var ret = jQuery("#PriemGridList").getRowData(ids[i]);
+                if (ret.PrescStateId.trim() == 'sign') {
+                    idsArrayWithSignPriem.push(ids[i]);
+                }
+            }
+            var str = '@Url.Action("GetPrintPrescContentAll", "MedicalCard")?oids=' + idsArrayWithSignPriem;
+            window.open(str, 'AllProtocolPrint', 'width=800,height=1000,left=0,top=0,screenX=0,screenY=0,scrollbars=yes');
+        } else {
+            $('#lbInfoPriemList').text('Выберите корректный период, в котором есть приемы');
+        }
+        return false;
+    }
+
+    function PatientListPrint_call() {
+        var date_from = $("#DateFrom").val();
+        var date_to = $("#DateTo").val();
+        var cabinet_oid = $("#Cabinet").val();
+        var isAllPrescs = $("#isAllPrescs").prop("checked");
+
+        var fields = ['PersonFullName', 'Birthday', 'Age', 'Sex', 'PresctypeStr', 'sign_date', 'SysuserFIO', 'PrescStateName', 'PayType', 'IsPayedString', 'Balance', 'cabinet', 'mkb10_code', 'mkb10_name', 'ambtick_status_name'];
+        
+        var str = '@Url.Content("~/ReportFolder/Reports/DoctorReportOfPatientList/DoctorPatientList.aspx")?date_from=' + date_from + "&date_to=" + date_to + "&cabinet_oid=" + cabinet_oid + "&is_all_prescs=" + isAllPrescs;
+
+        fields.forEach(function(element, index, array) {
+            var fldVal = $("#gs_" + element).val();
+            if (typeof fldVal != "undefined" && fldVal != '') {
+                str += '&' + element + "=" + fldVal;
+            }
+        });
+        
+        window.open(str, 'mywindow', 'width=800,height=1000,left=0,top=0,screenX=0,screenY=0,scrollbars=yes');
+
+        return false;
+    }
+
+    function preEditRecord() {
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        var mdocStatus = grid.jqGrid('getCell', id, 'MdocStatus');
+
+        if (mdocStatus == '1') {
+            PriemList_Vip_CallbackMessage("Карта сдана в архив! \nНевозможно заполнить прием!");
+            return false;
+        }
+        CheckVipPeople_Action('PriemList_EditRecord');
+
+
+        return false;
+    }
+
+   
+    function PriemList_EditRecord() {
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        var isProfex = grid.jqGrid('getCell', id, 'is_profex');
+
+        if (isProfex == 'True') {
+            ShowProphExamPreview();
+        } else {
+            PriemListGrid_EditRecord();
+        }
+        return false;
+    }
+
+
+
+    function ShowProphExamPreview() {
+        var nothingSelectedAlert = 'Выберите, пожалуйста, исследование';
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        if (id == null) {
+            PriemList_Vip_CallbackMessage(nothingSelectedAlert);
+        }
+        else {
+            var prescId = grid.jqGrid('getCell', id, 'Oid');
+            if (prescId != '') {
+                loadAjaxProphExamPreview(prescId);
+            }
+        }
+    }
+
+    function loadAjaxProphExamPreview(prescId) {
+        $.ajax({
+            url: '@Url.Action("ProphExamsReview", "ProphExamDoctor")',
+            async: false,
+            type: 'GET',
+            cache: false,
+            data: { prescId: prescId, callbackFunction: "PriemListGrid_EditRecord" },
+            success: function (data) {
+                $('.ProphExamPreviewlInfo').html(data);
+                $('#ProphExamPreviewModal').reveal({
+                    animation: 'fade',                   //fade, fadeAndPop, none
+                    animationspeed: 100,                       //how fast animtions are
+                    closeonbackgroundclick: false,              //if you click background will modal close?
+                    dismissmodalclass: 'close-reveal-modal'    //the class of a button or element that will close an open modal
+                });
+                $('#ProphExamPreviewModal').css('top', 0);
+            }
+        });
+    }
+    
+    function PerformerOfSysuser_close() {
+        $('.formPerformerOfSysuser').hide();
+        $('#PriemListViewModel').show();
+        PriemListGrid_Refresh();
+    }
+
+    function GetProfexListId() {
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        if (id == null || id == '') {
+            PriemList_Vip_CallbackMessage('@ConstMsgUtils.SESelect');
+            return null;
+        } else {
+            var profexListId = grid.jqGrid('getCell', id, 'ProfexlistOid');
+            return (profexListId != null && profexListId != '') ? profexListId : null;
+        }
+    }
+
+    function ProfexPrintPasportHealth() {
+        var profexListId = GetProfexListId();
+        if (profexListId != null) {
+            var str = '@Url.Content("~/ReportFolder/Reports/ProphExam/ProphExamPasport.aspx")?idWorkers=' + profexListId;
+            window.open(str, 'mywindow', 'width=800,height=1000,left=0,top=0,screenX=0,screenY=0,scrollbars=yes');
+        }
+        return false;
+    }
+
+    function ProfexPrintProphConclusion() {
+        var profexListId = GetProfexListId();
+        if (profexListId != null) {
+            var str = '@Url.Content("~/ReportFolder/Reports/ProphExam/ProphConclusion.aspx")?idWorkers=' + profexListId + "&type=conclusion";
+            window.open(str, 'mywindow', 'width=800,height=1000,left=0,top=0,screenX=0,screenY=0,scrollbars=yes');
+        }
+        return false;
+    }
+
+    function ShowProfexButton(grid, id) {
+        $('.profex_button').hide();
+        var prescstateid = grid.jqGrid('getCell', id, 'PrescStateId');
+        //var schedulestateid = grid.jqGrid('getCell', id, 'ScheduleStateId');
+        var isProfexPresctipe = grid.jqGrid('getCell', id, 'IsProfexPresctipe');
+        if ((($.trim(prescstateid) == 'sign')) && isProfexPresctipe == 'True') {
+            $('.profex_button').show();
+        }
+    }
+
+    function PregnancyButton(grid, id) {
+
+        var sex = grid.jqGrid('getCell', id, 'SexCode');
+        var pregnancy = grid.jqGrid('getCell', id, 'Pregnancy');
+        //  женский пол 
+        if (sex == 1) {//не стоит на учете
+            if (pregnancy == 0) {
+                $("#PregnancyButton", '#PriemListGrid').removeClass('linkBtnDisabled');
+                $('#PregnancyButton').attr("mode", "add");
+                $('#PregnancyButton').find('.lb').html("На учет");
+            }
+            else {
+                $("#PregnancyButton", '#PriemListGrid').removeClass('linkBtnDisabled');
+                $('#PregnancyButton').attr("mode", "del");
+                $('#PregnancyButton').find('.lb').html("Снять с учета");
+            }
+        }
+        else {//мужчины
+            $('#PregnancyButton').find('.lb').html("На учет");
+            $('#PregnancyButton').addClass('linkBtnDisabled');
+        }
+    }
+
+    function PriemGridLoadComplete() {
+        $("#PriemGridList").jqGrid('filterToolbar', { searchOnEnter: true, stringResult: true, defaultSearch: "cn", groupOp: "AND" });
+    }
+
+    function PriemGridBeforeRequest() {
+        var grid = $("#PriemGridList");
+
+        var datefromm = $("#DateFrom").val();
+        var datetoo = $("#DateTo").val();
+        var cabinet = $("#Cabinet").val();
+        var isAllPrescs = $("#isAllPrescs").prop('checked');
+        var paidOnly = $("#paidOnly").prop("checked");
+        if (typeof paidOnly == "undefined") {
+            paidOnly = false;
+        }
+        
+        var postdata = grid.jqGrid('getGridParam', 'postData');
+        $.extend(true, postdata, { 'datefrom': datefromm });
+        $.extend(true, postdata, { 'dateto': datetoo });
+        $.extend(true, postdata, { 'cabinet': cabinet });
+        $.extend(true, postdata, { 'isAllPrescs': isAllPrescs });
+        $.extend(true, postdata, { 'paidOnly': paidOnly });
+        grid.jqGrid('setGridParam', { postData: postdata });
+    }
+
+    function PriemList_Pregnancy() {
+
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+
+        if (id == null) {
+            PriemList_Vip_CallbackMessage('Выберите, пожалуйста, пациента');
+        }
+        else {
+            var mdocId = grid.jqGrid('getCell', id, 'MdocId');
+
+            if ($('#PregnancyButton').attr("mode") == "add") {
+                AddPregnancyControl(id, mdocId);
+            }
+            else {
+                DelPregnancyControl(mdocId);
+            }
+        }
+    }
+
+
+    function DelPregnancyControl(mdocId) {
+        $.ajax({
+            url: '@Url.Action("DelPregnancyControl", "Priem")',
+            type: 'post',
+            async: false,
+            data: {
+                mdocId: mdocId
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.status == "1") {
+                    PriemListGrid_Refresh();
+                }
+                else {
+                    PriemList_Vip_CallbackMessage("Ошибка снятия с учета! \n" + data.ret);
+                };
+            }
+        });
+    }
+
+    function AddPregnancyControl(id, mdocId) {
+        var prescId = Pregnancy_AddPresc(mdocId);
+        ShowPriem_ajax(prescId, id, false, false);
+    }
+
+    function Pregnancy_AddPresc(mdocId) {
+        var prescId = '';
+        $.ajax({
+            url: '@Url.Action("AddPrescPregnancy", "Priem")',
+            type: 'post',
+            async: false,
+            data: {
+                mdocId: mdocId
+            },
+            dataType: "json",
+            success: function (data) {
+                if (data.status == "1") {
+                    prescId = data.ret;
+                }
+                else {
+                    PriemList_Vip_CallbackMessage("Ошибка постановки на учёт! \n" + data.ret);
+                }
+            }
+        });
+        return prescId;
+    }
+ 
+ 
+    // проверка на ВИП с указанием ф-и возврата для продолжения
+    function CheckVipPeople_Action(callbackCheck) {
+        $('#lbInfoPriemList').text('');
+        var grid = $("#PriemGridList");
+        var id = grid.jqGrid('getGridParam', 'selrow');
+        var row = grid.jqGrid('getRowData', id);
+
+        if (row != null) {
+            var mdocId = row.MdocId;
+            var peopleId = row.PeopleId;
+            
+            if (typeof window['VipPeopleCheck_PriemList'] == 'function') {
+                window['VipPeopleCheck_PriemList'](peopleId, mdocId, callbackCheck);
+                return false;
+            }
+        }
+        if (typeof window[callbackCheck] == 'function') {
+            window[callbackCheck]();
+        }
+        return false;
+    }
+    
+    // Callback для сообщений из ВИП-модуля
+    function PriemList_Vip_CallbackMessage(mess) {
+        $('#lbInfoPriemList').attr('class', 'MessageError').text(mess);
+    }
+   
+    function PriemList_ClearFilterGrid() {
+        var colnames = $("#PriemGridList").jqGrid('getGridParam', 'colModel');
+        $.each(colnames, function () {
+            if (this.hidden != true) {
+                $('#gs_' + this.name, $("#PriemGridList_container")).val("");
+            }
+        });
+        $("#PriemGridList").jqGrid('setGridParam', { search: false, postData: { "filters": ""} }).trigger("reloadGrid");
+    }
+
+    function PaidOnlyToLocalStorage() {
+        if (typeof window.localStorage !== 'undefined') {
+            window.localStorage.setItem(paidOnlyLocalStorageName, $("#paidOnly").prop("checked"));
+        }
+        PriemListGrid_Search();
+    }
+
+    function ANListGrid_EditRecord(p_an) {
+       if (p_an == null) {
+            alert(nothingSelectedAlert);
+       }
+       else {
+         window.open(vPACS+p_an, '_blank');
+         return p_an;
+       }
+    }
+
+    function Record_ANFormater(cellval, opts, row) {
+        if (row.accessionnumber != undefined && row.accessionnumber != "") {
+            return '<a><span></span></a>';
+        } else {
+          return '<a href="#" onclick="ANListGrid_EditRecord(\'' + '' + '\');return false"><span>' + row.accessionnumber + '</span></a>';
+        }
+    }
+
+</script>
+<div id="AbsenceModal" class="reveal-modal small-modal">
+    <div id="AbsenceInfo">
+    </div>
+    <a class="close-reveal-modal close-reveal-modal-X" data-for="AbsenceModal">&#215;</a>
+</div>
+<input type='hidden' class="close-reveal-modal" data-for='ProphExamPreviewModal' id='closeProphExamPreviewModal' />
+<div id="ProphExamPreviewModal" style='position: absolute;' class="reveal-modal">
+    <div class="ProphExamPreviewlInfo">
+    </div>
+    <a class="close-reveal-modal close-reveal-modal-X" data-for="ProphExamPreviewModal"></a>
+</div>
+<div id="ArchivePriemList_container">
+    <div id="ArchivePriemListInfo">
+    </div>
+</div>
+<div id="DebtTalonList_container">
+    <div id="DebtTalonListInfo">
+    </div>
+</div>
+<div id="PriemList_PopupModalInfo" class="reveal-modal middle-modal">
+    <div id="PriemList_PopupModalInfo_container">
+    </div>
+    <a class="close-reveal-modal close-reveal-modal-X" data-for="PriemList_PopupModalInfo">&#215;</a>
+</div>
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "PriemListViewModel" }))
+{
+    <div id="PriemListGrid">
+        <div>
+            <div id="HeaderPriemList">
+                <h3 class="titleStyle">
+                    Список записанных на прием</h3>
+            </div>
+            <div class='editor-button'>
+                <a href="#" class="link_button" onclick="preEditRecord(); return false;"><span class="buttons-icons/doc_red_16x16.png"></span><span class="lb">Заполнить</span></a>
+                <a href="#" class="link_button" onclick="CheckVipPeople_Action('PriemListGrid_OpenMK'); return false;"><span class="buttons-icons/card_16x16.png"></span><span class="lb">Открыть МК</span></a>
+                <a href="#" id="neyavkaBtn" class="link_button" style="width: 120px;"><span id="neyavkaBtnNeyavkaIcon" class="buttons-icons/ne_yavka_polz_16x16.png"></span><span id="neyavkaBtnOtmNeyavkaIcon" class="buttons-icons/ne_yavka_otmena_16x16.png" style="display: none;">
+                </span><span class="lb">Неявка</span> </a>
+                <a href="#" class="link_button" onclick="PriemList_Archive(); return false;"><span class="buttons-icons/archive2_16x16.png"></span><span class="lb">Архив консультаций</span></a>
+                @if (Model.ShowPregnancyFunction)
+                {
+                    <a id='PregnancyButton' mode='add' href="#" class="link_button linkBtnDisabled" style="width: 115px;" onclick="if (!$('#PregnancyButton').hasClass('linkBtnDisabled')) CheckVipPeople_Action('PriemList_Pregnancy'); return false;"><span class="buttons-icons/pregnancy_16.png">
+                    </span><span class="lb">На учет</span> </a>
+                }
+                @if (Model.ShowDirectionButton)
+                {
+                    <a href="#" class="link_button" onclick=" PriemList_Direction(); return false; "><span class="buttons-icons/napravl_dob_16x16.png"></span><span class="lb">Направление</span></a>
+                    
+                }
+                @if (!Model.IsPay)
+                {
+                    <a href="#" class="link_button" onclick=" PriemList_DebtTalon(); return false; "><span class="buttons-icons/dolgi_po_tal_16.png"></span><span class="lb">Долги по талонам</span></a>
+                }
+                <ul class="link_button_menu">
+                    <li class="">
+                        <p title="Печать" class="link_button">
+                            <span class="buttons-icons/print1_16x16.png"></span><span class="lb">Печать</span></p>
+                        <ul class="sf-menu sf-vertical" style="display: none;">
+                            <li>
+                                <a href="#" onclick="CheckVipPeople_Action('ProtocolPrintWithProtText_call'); return false;"><span class="buttons-icons/print1_16x16.png"></span><span class="lb">Печать протокола</span></a></li>
+                            <li>
+                                <a href="#" onclick="CheckVipPeople_Action('ProtocolPrintWithoutProtText_call'); return false;"><span class="buttons-icons/print1_16x16.png"></span><span class="lb">Печать врачебного заключения</span></a></li>
+                            <li>
+                                <a href="#" onclick="AllProtocolPrint_call(); return false;"><span class="buttons-icons/print1_16x16.png"></span><span class="lb">Печать всех протоколов</span></a></li>
+                            <li>
+                                <a href="#" onclick="PatientListPrint_call(); return false;"><span class="buttons-icons/print1_16x16.png"></span><span class="lb">Список записанных на прием</span></a></li>
+                            <li>
+                                <a href="#" class="profex_button" style="display: none" onclick="ProfexPrintProphConclusion(); return false;"><span class="buttons-icons/print1_16x16.png"></span><span class="lb">Заключение</span> </a>
+                            </li>
+                            <li>
+                                <a href="#" class="profex_button" style="display: none" onclick="ProfexPrintPasportHealth(); return false;"><span class="buttons-icons/print1_16x16.png"></span><span class="lb">Паспорт здоровья</span> </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <a href="#" class="link_button" onclick="PriemList_PriemPeopleFind(); return false;"><span class="buttons-icons/search_16x16.png"></span><span class="lb">Поиск</span></a>
+                <a href="#" class="link_button" onclick='return PriemList_ClearFilterGrid();'><span class="buttons-icons/update_16.png"></span><span class="lb">Очистить фильтр</span></a>
+                <a href="#" class="link_button" onclick="PriemListGrid_Refresh(); return false;"><span class="buttons-icons/update_16.png"></span><span class="lb">Обновить</span></a>
+            </div>
+            <div class='editor-button' style="margin-bottom: 5px;">
+                <div class='edit-field' style="display: inline;">
+                    @Html.LabelFor(x => x.DateFrom, "Период c:")
+                    @Html.TextBoxFor(x => x.DateFrom, new { @class = "checking-update calendar-input", onChange = "DateOnChange();  return false;" }).AsDatePicker(new DatePicker(dateFormat: "dd.mm.yy", addtionalParameters: Model.CalendarProperties))
+                </div>
+                <div class='edit-field' style="display: inline;">
+                    @Html.LabelFor(x => x.DateTo, "по:")
+                    @Html.TextBoxFor(x => x.DateTo, new { @class = "checking-update calendar-input", onChange = "DateOnChange();  return false;" }).AsDatePicker(new DatePicker(dateFormat: "dd.mm.yy", addtionalParameters: Model.CalendarProperties))
+                </div>
+                <div class="edit-field">
+                    @Html.LabelFor(x => x.Cabinet, "Кабинет:")
+                    @Html.DropDownListFor(x => x.Cabinet, Model.CabinetList, "Не выбран", new { @class = "checking-update", onChange = "PriemListGrid_Search();  return false;", @style = "width:150px;" })
+                </div>
+                <div class="edit-field">
+                    <input type="checkbox" id="isAllPrescs" style="vertical-align: middle;" />
+                    <label for="isAllPrescs">Все консультации</label>
+                </div>
+                @if (Model.ShowPaidOnlyChbx)
+                {
+                    <div class="edit-field">
+                        <input type="checkbox" id="paidOnly" style="vertical-align: middle; margin-left: 15px;" onchange="PaidOnlyToLocalStorage(); return false;" />
+                        <label for="paidOnly">Только оплаченные</label>
+                    </div>
+                }
+                <div class="pac-list-legend">
+                    <div class="absence-row">
+                        Неявка</div>
+                    <div class="presc-cito-row">
+                        Cito</div>
+                    <div class="sign-row">
+                        Подписано</div>
+                    @if (Model.ShowAdditionalFunction)
+                    {
+                        <div class="presence-row">
+                            Явка</div>
+                    }
+                    @if (Model.ShowPaidOnlyChbx)
+                    {
+                        <div class="paid-not-done-row">
+                            Оплачено и не выполнено</div>
+                    }
+                </div>
+            </div>
+            <span id='lbInfoPriemList'></span>
+            <div id="PriemGridList_container">
+                @PacientNet.Core.App_Code.jqGridResizeHelper.AddResize(Html, "#PriemGridList", "#PriemGridList_container")
+                @Html.Grid(new GridControl()
+                    .SetName("PriemGridList")
+                    .SetPageSize(@Model.MaximumGridPageSize)
+                    .SetIsAutoSize(false)
+                    .SetListUrl(Url.Action("PriemListGrid", "PriemList", new { sotrid = Model.SotrId }))
+                    .SetHeight("350")
+                    .SetWidth("$(\"#PriemGridList_container\").width()")
+                    .UpdateDefaultPager(pager => pager.ShowSearch(false, false).ShowRefresh(false))
+
+                    .AddColumn(new GridColumnModel("Oid").SetAsPrimaryKey().SetHidden(true))
+                    .AddColumn(new GridColumnModel("IsProfexPresctipe").SetHidden(true))
+                    .AddColumn(new GridColumnModel("ProfexlistOid").SetHidden(true))
+                    .AddColumn(new GridColumnModel("PeopleId").SetHidden(true))
+                    .AddColumn(new GridColumnModel("MdocNum").SetCaption("№ карты").SetAlign(""))
+                    .AddColumn(new GridColumnModel("PersonFullName").SetCaption("ФИО пациента").SetAlign("").SetFormatter("PerformerFlag"))
+                    .AddColumn(new GridColumnModel("Birthday").SetCaption("Дата рождения").SetAlign("").SetFormatter("DateJsonFormatter"))
+                    .AddColumn(new GridColumnModel("Age").SetCaption("Возраст").SetAlign(""))
+                    .AddColumn(new GridColumnModel("Sex").SetCaption("Пол").SetAlign(""))
+                    .AddColumn(new GridColumnModel("SexCode").SetHidden(true))
+                    .AddColumn(new GridColumnModel("Pregnancy").SetHidden(true))
+                    .AddColumn(new GridColumnModel("PresctypeStr").SetCaption("Консультация").SetAlign(""))
+                    .AddColumn(new GridColumnModel("sign_date").SetCaption("Дата выполнения").SetAlign("").SetFormatter("DateTimeJsonFormatter"))
+                    .AddColumn(new GridColumnModel("SysuserFIO").SetCaption("Врач").SetAlign(""))
+                    .AddColumn(new GridColumnModel("PrescStateName").SetCaption("Статус назначения").SetAlign(""))
+                    .AddColumn(new GridColumnModel("PayType").SetCaption("Вид оплаты").SetAlign(""))
+                    .AddColumn(new GridColumnModel("IsPayedString").SetCaption("Оплата").SetAlign(""))
+                    .AddColumn(new GridColumnModel("Balance").SetCaption("Баланс").SetAlign("").SetHidden(Model.IsBalanceUsed))
+                    .AddColumn(new GridColumnModel("PrescId").SetHidden(true))
+                    .AddColumn(new GridColumnModel("PrescStateId").SetHidden(true))
+                    .AddColumn(new GridColumnModel("MdocTypeStr").SetCaption("Тип карты").SetAlign("").SetHidden(true))
+                    .AddColumn(new GridColumnModel("MdocId").SetHidden(true))
+                    .AddColumn(new GridColumnModel("MdocStatus").SetHidden(true))
+                    .AddColumn(new GridColumnModel("is_future").SetHidden(true))
+                    .AddColumn(new GridColumnModel("is_read_only").SetHidden(true))
+                    .AddColumn(new GridColumnModel("is_profex").SetHidden(true))
+                    .AddColumn(new GridColumnModel("is_performer").SetHidden(true))
+                    .AddColumn(new GridColumnModel("ambtick_status_id").SetHidden(true))
+                    .AddColumn(new GridColumnModel("is_ambtick_close").SetHidden(true))
+                    .AddColumn(new GridColumnModel("cabinet").SetCaption("Кабинет").SetAlign(""))
+        //.AddColumn(new GridColumnModel("mkb10_code").SetCaption("Код МКБ-10").SetAlign(""))
+                    .AddColumn(new GridColumnModel("mkb10_name").SetCaption("Диагноз").SetAlign(""))
+                    .AddColumn(new GridColumnModel("ambtick_status_name").SetCaption("Статус талона").SetAlign(""))
+                    .AddColumn(new GridColumnModel("Sotr").SetHidden(true))
+                    .AddColumn(new GridColumnModel("MultiSigne").SetHidden(true))
+                    .AddColumn(new GridColumnModel("VisitId").SetHidden(true))
+                    .AddColumn(new GridColumnModel("Comment").SetCaption("Комментарий").SetAlign(""))
+                    .AddColumn(new GridColumnModel("Cito").SetHidden(true))
+
+                    .AddColumn(new GridColumnModel("accessionnumber").SetCaption("Номер протокола").SetAlign("").SetFormatter("Record_ANFormater"))
+                    
+                    .SetAdditionalAttributes(",ondblClickRow: preEditRecord, scrollrows: true" +
+                    ", afterInsertRow: AfterInsertRow, onSelectRow: OnSelectRow " +
+                    ", loadComplete: PriemGridLoadComplete" +
+                    ", beforeRequest: PriemGridBeforeRequest, ColumnGridWidthOnce : true")
+                      )
+            </div>
+            <div id="last_row_id" style="display: none">
+            </div>
+        </div>
+    </div>
+}
+<div class="formPerformerOfSysuser" style="display: none;">
+</div>
+@VipPeopleCheckHelper.VipPeopleCheck("PriemList", "PriemList_Vip_CallbackMessage")

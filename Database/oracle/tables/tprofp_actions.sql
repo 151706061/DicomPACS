@@ -1,0 +1,234 @@
+DROP TABLE ASU.TPROFP_ACTIONS CASCADE CONSTRAINTS
+/
+
+--
+-- TPROFP_ACTIONS  (Table) 
+--
+CREATE TABLE ASU.TPROFP_ACTIONS
+(
+  FK_ID      NUMBER(15)                         NOT NULL,
+  FK_SMIDID  NUMBER                             NOT NULL,
+  FL_ISLIST  NUMBER(1)                          NOT NULL,
+  FC_NAME    VARCHAR2(50 BYTE),
+  FK_SOTRID  NUMBER(15),
+  FD_DATE    DATE,
+  FK_SOSID   NUMBER(1),
+  FK_DOGID   NUMBER(15),
+  FD_OPENED  DATE,
+  FD_CLOSED  DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TPROFP_ACTIONS.FK_ID IS 'SEQUENCE=[SEQ_TPROFP_ACTIONS]'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_ACTIONS.FK_SMIDID IS 'вид мероприятия'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_ACTIONS.FL_ISLIST IS 'работам со списком (1-да/0-нет)'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_ACTIONS.FC_NAME IS 'редактируемое название мероприятия'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_ACTIONS.FK_SOTRID IS 'сотрудник создавший'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_ACTIONS.FD_DATE IS 'дата создания записи'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_ACTIONS.FK_SOSID IS 'статус мероприятия'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_ACTIONS.FK_DOGID IS 'договор из tprofp_dog'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_ACTIONS.FD_OPENED IS 'дата начала'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_ACTIONS.FD_CLOSED IS 'дата окончания'
+/
+
+
+--
+-- TPROFP_ACTIONS_BY_DATE  (Index) 
+--
+--  Dependencies: 
+--   TPROFP_ACTIONS (Table)
+--
+CREATE INDEX ASU.TPROFP_ACTIONS_BY_DATE ON ASU.TPROFP_ACTIONS
+(FD_DATE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFP_ACTIONS_BY_DOGID  (Index) 
+--
+--  Dependencies: 
+--   TPROFP_ACTIONS (Table)
+--
+CREATE INDEX ASU.TPROFP_ACTIONS_BY_DOGID ON ASU.TPROFP_ACTIONS
+(FK_DOGID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFP_ACTIONS_BY_FD_OPENED  (Index) 
+--
+--  Dependencies: 
+--   TPROFP_ACTIONS (Table)
+--
+CREATE INDEX ASU.TPROFP_ACTIONS_BY_FD_OPENED ON ASU.TPROFP_ACTIONS
+(FD_OPENED)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFP_ACTIONS_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TPROFP_ACTIONS (Table)
+--
+CREATE UNIQUE INDEX ASU.TPROFP_ACTIONS_BY_ID ON ASU.TPROFP_ACTIONS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFP_ACTIONS_BY_LIST  (Index) 
+--
+--  Dependencies: 
+--   TPROFP_ACTIONS (Table)
+--
+CREATE INDEX ASU.TPROFP_ACTIONS_BY_LIST ON ASU.TPROFP_ACTIONS
+(FL_ISLIST)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFP_ACTIONS_BEFOR_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TPROFP_ACTIONS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFP_ACTIONS_BEFOR_DELETE" 
+ BEFORE
+  DELETE
+ ON tprofp_actions
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  delete from tprofp_list where fk_actionid=:old.fk_id;
+  delete from tprofp_list_naz where fk_actionid=:old.fk_id;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TPROFP_ACTIONS_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPROFP_ACTIONS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFP_ACTIONS_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tprofp_actions
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  select seq_tprofp_actions.NEXTVAL into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

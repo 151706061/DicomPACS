@@ -1,0 +1,23 @@
+DROP TRIGGER ASU.TINSURDOCS_BEFORE_INSERT
+/
+
+--
+-- TINSURDOCS_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TINSURDOCS (Sequence)
+--   TINSURDOCS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TINSURDOCS_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TINSURDOCS REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  select seq_TINSURDOCS.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,56 @@
+DROP FUNCTION ASU.GET_SVOD_VED_OTDEL
+/
+
+--
+-- GET_SVOD_VED_OTDEL  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TOTDEL (Table)
+--   GET_POLIKOTDEL (Function)
+--
+CREATE OR REPLACE FUNCTION ASU.GET_SVOD_VED_OTDEL RETURN SYS_REFCURSOR IS
+ Res SYS_REFCURSOR;
+BEGIN
+ OPEN res FOR
+ -- Переделано Ищуковым С.С. 14,05,2015 
+ -- https://tg.samozapis.ru:15001/redmine/issues/33589 
+   SELECT 'Все' FC_NAME, -1 POL, 0 TYP, -1 TYPE_DOC
+     FROM DUAL
+   UNION ALL  
+   SELECT FC_NAME, FK_ID POL, ROW_NUMBER() OVER (ORDER BY FC_NAME) TYP, -1 TYPE_DOC
+     FROM LOGIN.TOTDEL
+    WHERE LEVEL = 2
+      AND FL_DEL = 0
+      AND FK_ID <> 206733
+      AND FK_ID <> 186937
+   CONNECT BY PRIOR FK_ID = FK_OWNERID
+   START WITH FK_ID = ASU.GET_POLIKOTDEL;
+/*    
+  SELECT 'Все' FC_NAME, 0 TYP, -1 TYPE_DOC, -1 POL
+    FROM DUAL
+  UNION ALL
+  SELECT 'КДП' FC_NAME, 1 TYP, ASU.DOC_AMBUL TYPE_DOC, ASU.GET_KONSDIAGPOL POL
+    FROM DUAL
+  UNION ALL
+  SELECT 'Детская поликлиника' FC_NAME,
+         2 TYP,
+         ASU.DOC_AMBDP TYPE_DOC,
+         ASU.GET_AMBULDP_OTDEL POL
+    FROM DUAL
+  UNION ALL
+  SELECT 'Женская консультация' FC_NAME,
+         3 TYP,
+         ASU.DOC_AMBUL_GK TYPE_DOC,
+         ASU.GET_ZHENKONSOTDELID POL
+    FROM DUAL;
+*/
+ RETURN(Res);
+END;
+/
+
+SHOW ERRORS;
+
+

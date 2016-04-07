@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015.04.21 15:30:40.061.pas,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLClient\UnMain.pas</Transaction>
+    <Transaction>2015.04.21 15:30:40.061.dfm,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLClient\UnMain.dfm</Transaction>
+    <Transaction>2015.04.21 15:30:53.007.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\Project1.dproj=C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLClient\Source\WLClient.dproj</Transaction>
+    <Transaction>2015.04.21 15:34:28.406.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLClient\UnMain.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLClient\Source\UnMain.pas</Transaction>
+    <Transaction>2015.04.21 15:34:28.406.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLClient\UnMain.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLClient\Source\UnMain.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

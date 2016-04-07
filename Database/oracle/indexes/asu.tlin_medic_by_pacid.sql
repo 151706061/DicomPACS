@@ -1,0 +1,25 @@
+DROP INDEX ASU.TLIN_MEDIC_BY_PACID
+/
+
+--
+-- TLIN_MEDIC_BY_PACID  (Index) 
+--
+CREATE INDEX ASU.TLIN_MEDIC_BY_PACID ON ASU.TLIN_MEDIC
+(FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

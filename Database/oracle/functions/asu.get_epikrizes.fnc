@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_EPIKRIZES
+/
+
+--
+-- GET_EPIKRIZES  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_EPIKRIZES" 
+return number
+is 
+begin
+  return 260591;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_EPIKRIZES TO PUBLIC
+/
+

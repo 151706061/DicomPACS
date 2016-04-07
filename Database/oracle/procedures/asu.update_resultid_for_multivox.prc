@@ -1,0 +1,24 @@
+DROP PROCEDURE ASU.UPDATE_RESULTID_FOR_MULTIVOX
+/
+
+--
+-- UPDATE_RESULTID_FOR_MULTIVOX  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TNAZIS (Table)
+--
+CREATE OR REPLACE PROCEDURE ASU."UPDATE_RESULTID_FOR_MULTIVOX" (nID NUMBER)
+IS
+pragma autonomous_transaction;
+BEGIN
+  UPDATE ASU.TNAZIS
+     SET FK_RESULTID = 1
+   WHERE FK_ID = nID;
+  COMMIT;   
+END; -- Procedure
+/
+
+SHOW ERRORS;
+
+

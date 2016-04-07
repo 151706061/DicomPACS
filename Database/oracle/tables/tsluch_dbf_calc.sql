@@ -1,0 +1,164 @@
+DROP TABLE ASU.TSLUCH_DBF_CALC CASCADE CONSTRAINTS
+/
+
+--
+-- TSLUCH_DBF_CALC  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.TSLUCH_DBF_CALC
+(
+  ID_ILL           NUMBER(19),
+  ID_ILL_U         NUMBER(19),
+  P_ID_ILL         NUMBER(2),
+  FL_FROMSTOR      NUMBER(1)                    DEFAULT 0,
+  FD_DATE1         DATE,
+  FD_DATE2         DATE,
+  FC_ICD           VARCHAR2(10 BYTE),
+  FK_PACID         NUMBER(15),
+  FL_POLY          NUMBER(1),
+  PR_OWN           NUMBER,
+  FC_CODE          VARCHAR2(20 BYTE),
+  FN_COST          NUMBER,
+  FK_KOYKAVIDID    NUMBER,
+  FK_PALATAID      NUMBER,
+  FK_REGIONID      NUMBER,
+  FC_TYPEDOC_SYN   VARCHAR2(50 BYTE),
+  FK_USLVIDID      NUMBER,
+  FK_PEPLID        NUMBER(15),
+  FK_INSURDOCID    NUMBER(15),
+  FK_TYPEOMS       NUMBER(15),
+  FC_SER           VARCHAR2(100 BYTE),
+  FC_NUM           VARCHAR2(100 BYTE),
+  FC_ENP           VARCHAR2(100 BYTE),
+  FC_OGRN          VARCHAR2(13 BYTE),
+  FK_COMPANYID     NUMBER(15),
+  FN_STEP          NUMBER(1)                    DEFAULT 0,
+  FL_UNDER18       NUMBER(1),
+  FL_ISDS          NUMBER(1),
+  FL_FIRST         VARCHAR2(15 BYTE),
+  FK_OTDELID       NUMBER(15),
+  FK_SMID          NUMBER(15),
+  FC_CODE_BY_KV    VARCHAR2(20 BYTE),
+  FN_COUNT         NUMBER,
+  FN_COST_BY_KV    NUMBER,
+  FN_SUM_BY_KV     NUMBER,
+  FD_CALC          DATE,
+  FC_OPERCODE      VARCHAR2(100 BYTE),
+  FK_OPERNAZ       NUMBER,
+  TYPE_V_MU        NUMBER,
+  FN_TARIF         NUMBER,
+  FC_OPERCODE_ALL  VARCHAR2(4000 BYTE)
+)
+ON COMMIT PRESERVE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.TSLUCH_DBF_CALC IS 'ID_ILL случаев которые должны попасть в результирующую выборку, среди них могут быть случаи, которые должны быть рассчитаны заново и те, которые должны браться из хранилица Author:Efimov'
+/
+
+COMMENT ON COLUMN ASU.TSLUCH_DBF_CALC.FC_OPERCODE_ALL IS 'Список всех операций через запятую'
+/
+
+COMMENT ON COLUMN ASU.TSLUCH_DBF_CALC.ID_ILL IS 'Идентификационный номер случая'
+/
+
+COMMENT ON COLUMN ASU.TSLUCH_DBF_CALC.FL_FROMSTOR IS '0 - рассчитать, 1 - взять из хранилица'
+/
+
+COMMENT ON COLUMN ASU.TSLUCH_DBF_CALC.FD_CALC IS 'Дата на которую будет рассчитываться случай, добавлена в связи с тем, сто переводы за 2013й, относящиеся к карте за 2014, должны рассчитываться по тарифам 2014го'
+/
+
+
+--
+-- I_SLUCH_DBF_CALC_FROMSTOR  (Index) 
+--
+--  Dependencies: 
+--   TSLUCH_DBF_CALC (Table)
+--
+CREATE INDEX ASU.I_SLUCH_DBF_CALC_FROMSTOR ON ASU.TSLUCH_DBF_CALC
+(FL_FROMSTOR)
+/
+
+
+--
+-- I_SLUCH_DBF_CALC_ID_ILL  (Index) 
+--
+--  Dependencies: 
+--   TSLUCH_DBF_CALC (Table)
+--
+CREATE INDEX ASU.I_SLUCH_DBF_CALC_ID_ILL ON ASU.TSLUCH_DBF_CALC
+(ID_ILL)
+/
+
+
+--
+-- I_SLUCH_DBF_CALC_POLY  (Index) 
+--
+--  Dependencies: 
+--   TSLUCH_DBF_CALC (Table)
+--
+CREATE INDEX ASU.I_SLUCH_DBF_CALC_POLY ON ASU.TSLUCH_DBF_CALC
+(FL_POLY)
+/
+
+
+--
+-- I_SLUCH_DBF_CALC_PS  (Index) 
+--
+--  Dependencies: 
+--   TSLUCH_DBF_CALC (Table)
+--
+CREATE INDEX ASU.I_SLUCH_DBF_CALC_PS ON ASU.TSLUCH_DBF_CALC
+(FL_POLY, FN_STEP)
+/
+
+
+--
+-- I_SLUCH_DBF_COSTSTEP  (Index) 
+--
+--  Dependencies: 
+--   TSLUCH_DBF_CALC (Table)
+--
+CREATE INDEX ASU.I_SLUCH_DBF_COSTSTEP ON ASU.TSLUCH_DBF_CALC
+(FN_COST, FN_STEP)
+/
+
+
+--
+-- I_SLUCH_DBF_OPERCODE  (Index) 
+--
+--  Dependencies: 
+--   TSLUCH_DBF_CALC (Table)
+--
+CREATE INDEX ASU.I_SLUCH_DBF_OPERCODE ON ASU.TSLUCH_DBF_CALC
+(FC_OPERCODE)
+/
+
+
+--
+-- I_SLUCH_DBF_STEP  (Index) 
+--
+--  Dependencies: 
+--   TSLUCH_DBF_CALC (Table)
+--
+CREATE INDEX ASU.I_SLUCH_DBF_STEP ON ASU.TSLUCH_DBF_CALC
+(FN_STEP)
+/
+
+
+--
+-- I_SLUCH_DBF_TYPE_V_MU  (Index) 
+--
+--  Dependencies: 
+--   TSLUCH_DBF_CALC (Table)
+--
+CREATE INDEX ASU.I_SLUCH_DBF_TYPE_V_MU ON ASU.TSLUCH_DBF_CALC
+(TYPE_V_MU)
+/
+
+
+GRANT ALTER, DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TSLUCH_DBF_CALC TO EXCH79
+/
+
+GRANT ALTER, DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TSLUCH_DBF_CALC TO PILE
+/
+

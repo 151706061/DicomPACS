@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TMDA_DBF_ARCHIVE_INSERT
+/
+
+--
+-- TMDA_DBF_ARCHIVE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TMDA_DBF_ARCHIVE (Sequence)
+--   TMDA_DBF_ARCHIVE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TMDA_DBF_ARCHIVE_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.tmda_dbf_archive
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT asu.SEQ_tmda_dbf_archive.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

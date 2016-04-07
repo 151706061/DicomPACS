@@ -1,0 +1,1 @@
+wadoservice.exe /install

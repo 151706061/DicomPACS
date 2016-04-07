@@ -1,0 +1,13 @@
+ALTER TABLE ASU.TDIAG
+  DROP CONSTRAINT TDIAG_ID_PK
+/
+
+-- 
+-- Non Foreign Key Constraints for Table TDIAG 
+-- 
+ALTER TABLE ASU.TDIAG ADD (
+  CONSTRAINT TDIAG_ID_PK
+ PRIMARY KEY
+ (FK_ID))
+/
+

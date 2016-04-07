@@ -1,0 +1,46 @@
+DROP TABLE ASU.TLAB_PCR_ACT_PROG CASCADE CONSTRAINTS
+/
+
+--
+-- TLAB_PCR_ACT_PROG  (Table) 
+--
+CREATE TABLE ASU.TLAB_PCR_ACT_PROG
+(
+  FK_ID      NUMBER,
+  FK_PROGID  NUMBER,
+  FL_SOS     NUMBER,
+  FD_BEGIN   DATE                               DEFAULT SYSDATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TLAB_PCR_ACT_PROG IS 'ПЦР Лаборатория. Справочник активных программ.'
+/
+
+COMMENT ON COLUMN ASU.TLAB_PCR_ACT_PROG.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TLAB_PCR_ACT_PROG.FK_PROGID IS 'TLAB_PCR_PROGRAMM.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TLAB_PCR_ACT_PROG.FL_SOS IS 'Состояние программы (0 - активна/ 1 - завершена)'
+/
+
+

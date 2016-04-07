@@ -1,0 +1,25 @@
+DROP INDEX ASU.TIBPRINT_BY_SMID
+/
+
+--
+-- TIBPRINT_BY_SMID  (Index) 
+--
+CREATE INDEX ASU.TIBPRINT_BY_SMID ON ASU.TIBPRINT
+(FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

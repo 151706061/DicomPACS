@@ -1,0 +1,166 @@
+ALTER TABLE ASU.TINSUR_PROGRAM
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TINSUR_PROGRAM CASCADE CONSTRAINTS
+/
+
+--
+-- TINSUR_PROGRAM  (Table) 
+--
+CREATE TABLE ASU.TINSUR_PROGRAM
+(
+  FK_ID       NUMBER                            NOT NULL,
+  FK_DOGOVOR  NUMBER                            NOT NULL,
+  FK_HEAL     NUMBER,
+  FN_PAYPCNT  NUMBER                            DEFAULT 100
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    5
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TINSUR_PROGRAM IS 'Таблица программ страхования (Author : Spasskiy S.N.)'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_PROGRAM.FK_ID IS 'SEQUENCE=[SEQ_TINSUR_PROGRAMM]'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_PROGRAM.FK_DOGOVOR IS 'Ид договора(TINSUR_DOGOVOR.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_PROGRAM.FK_HEAL IS 'Код услуги (THEAK.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_PROGRAM.FN_PAYPCNT IS 'Процент оплаты услуги'
+/
+
+
+--
+-- TINSUR_DOGOVOR  (Index) 
+--
+--  Dependencies: 
+--   TINSUR_PROGRAM (Table)
+--
+CREATE INDEX ASU.TINSUR_DOGOVOR ON ASU.TINSUR_PROGRAM
+(FK_DOGOVOR)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TINSUR_HEAL  (Index) 
+--
+--  Dependencies: 
+--   TINSUR_PROGRAM (Table)
+--
+CREATE INDEX ASU.TINSUR_HEAL ON ASU.TINSUR_PROGRAM
+(FK_HEAL)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TINSUR_PROG_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TINSUR_PROGRAM (Table)
+--
+CREATE UNIQUE INDEX ASU.TINSUR_PROG_BY_ID ON ASU.TINSUR_PROGRAM
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TINSUR_PROGRAM_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TINSUR_PROGRAM (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TINSUR_PROGRAM_INSERT" 
+  BEFORE INSERT ON ASU.TINSUR_PROGRAM   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+BEGIN
+  SELECT SEQ_TINSUR_PROGRAMM.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+
+END TINSUR_DOGOVOR_INSERT;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TINSUR_PROGRAM 
+-- 
+ALTER TABLE ASU.TINSUR_PROGRAM ADD (
+  CONSTRAINT TINSUR_PROG_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

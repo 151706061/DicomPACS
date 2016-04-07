@@ -1,0 +1,25 @@
+DROP INDEX ASU.TVRACHKAB_BY_SOTRID_
+/
+
+--
+-- TVRACHKAB_BY_SOTRID_  (Index) 
+--
+CREATE INDEX ASU.TVRACHKAB_BY_SOTRID_ ON ASU.TVRACHKAB
+(FK_SOTRID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

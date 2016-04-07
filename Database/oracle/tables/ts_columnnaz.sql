@@ -1,0 +1,180 @@
+DROP TABLE ASU.TS_COLUMNNAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TS_COLUMNNAZ  (Table) 
+--
+CREATE TABLE ASU.TS_COLUMNNAZ
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FC_NAME       VARCHAR2(300 BYTE),
+  FK_OWNER      NUMBER(15),
+  FK_SMID       NUMBER(15)                      DEFAULT -1,
+  FL_DEL        NUMBER(1)                       DEFAULT 0,
+  FC_SYNONIM    VARCHAR2(300 BYTE),
+  FC_TABLENAME  VARCHAR2(300 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          384K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TS_COLUMNNAZ IS 'Таблица соответствий назначений и групп отчетов'
+/
+
+COMMENT ON COLUMN ASU.TS_COLUMNNAZ.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TS_COLUMNNAZ.FC_NAME IS 'Наименование'
+/
+
+COMMENT ON COLUMN ASU.TS_COLUMNNAZ.FK_OWNER IS 'Родитель'
+/
+
+COMMENT ON COLUMN ASU.TS_COLUMNNAZ.FK_SMID IS 'TSMID.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TS_COLUMNNAZ.FL_DEL IS 'Признак удаления'
+/
+
+COMMENT ON COLUMN ASU.TS_COLUMNNAZ.FC_SYNONIM IS 'Синоним'
+/
+
+COMMENT ON COLUMN ASU.TS_COLUMNNAZ.FC_TABLENAME IS 'Имя таблицы'
+/
+
+
+--
+-- TS_COLUMNNAZ_DEL  (Index) 
+--
+--  Dependencies: 
+--   TS_COLUMNNAZ (Table)
+--
+CREATE INDEX ASU.TS_COLUMNNAZ_DEL ON ASU.TS_COLUMNNAZ
+(FL_DEL)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TS_COLUMNNAZ_ID  (Index) 
+--
+--  Dependencies: 
+--   TS_COLUMNNAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.TS_COLUMNNAZ_ID ON ASU.TS_COLUMNNAZ
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TS_COLUMNNAZ_OWNER  (Index) 
+--
+--  Dependencies: 
+--   TS_COLUMNNAZ (Table)
+--
+CREATE INDEX ASU.TS_COLUMNNAZ_OWNER ON ASU.TS_COLUMNNAZ
+(FK_OWNER)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          192K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TS_COLUMNNAZ_SYNONIM  (Index) 
+--
+--  Dependencies: 
+--   TS_COLUMNNAZ (Table)
+--
+CREATE INDEX ASU.TS_COLUMNNAZ_SYNONIM ON ASU.TS_COLUMNNAZ
+(FC_SYNONIM)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TS_COLUMNNAZ_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TS_COLUMNNAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TS_COLUMNNAZ_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.ts_columnnaz
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TS_COLUMNNAZ.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+

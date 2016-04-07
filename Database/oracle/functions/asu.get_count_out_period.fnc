@@ -1,0 +1,34 @@
+DROP FUNCTION ASU.GET_COUNT_OUT_PERIOD
+/
+
+--
+-- GET_COUNT_OUT_PERIOD  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSROKY (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_COUNT_OUT_PERIOD" (pFD_DATA1 IN DATE,pFD_DATA2 IN DATE)
+RETURN NUMBER
+ IS
+  CURSOR c IS
+         SELECT /*+ first_row*/COUNT(*)
+           FROM TSROKY
+          WHERE FK_PRYB=3
+            AND FD_DATA1 BETWEEN pFD_DATA1 AND pFD_DATA2+1-1/(24*60*60);
+  i NUMBER;
+BEGIN
+  IF c%ISOPEN THEN
+    CLOSE c;
+  END IF;
+  OPEN c;
+  FETCH c INTO i;
+  CLOSE c;
+  RETURN i;
+END;
+/
+
+SHOW ERRORS;
+
+

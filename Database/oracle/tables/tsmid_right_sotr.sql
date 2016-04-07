@@ -1,0 +1,139 @@
+DROP TABLE ASU.TSMID_RIGHT_SOTR CASCADE CONSTRAINTS
+/
+
+--
+-- TSMID_RIGHT_SOTR  (Table) 
+--
+CREATE TABLE ASU.TSMID_RIGHT_SOTR
+(
+  FK_SOTRID  NUMBER,
+  FK_SMID    NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSMID_RIGHT_SOTR IS 'ѕрава пользователей на доступ к назначени€м Autor:Kulbatsky D.'
+/
+
+
+--
+-- TSMID_RIGHR_SOTR$SMID  (Index) 
+--
+--  Dependencies: 
+--   TSMID_RIGHT_SOTR (Table)
+--
+CREATE UNIQUE INDEX ASU.TSMID_RIGHR_SOTR$SMID ON ASU.TSMID_RIGHT_SOTR
+(FK_SMID, FK_SOTRID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSMID_RIGHT_SOTR$SOTR  (Index) 
+--
+--  Dependencies: 
+--   TSMID_RIGHT_SOTR (Table)
+--
+CREATE UNIQUE INDEX ASU.TSMID_RIGHT_SOTR$SOTR ON ASU.TSMID_RIGHT_SOTR
+(FK_SOTRID, FK_SMID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSMID_RIGHT_SOTR_SYNC  (Trigger) 
+--
+--  Dependencies: 
+--   TSMID_RIGHT_SOTR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSMID_RIGHT_SOTR_SYNC" 
+ BEFORE 
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TSMID_RIGHT_SOTR  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+declare
+    nGROUPID NUMBER;
+begin
+  if INSERTING then
+    /*SELECT count(asu.TSMID_RIGHTS_GROUP.FK_GROUPID) INTO nGROUPID
+    FROM ASU.TSOTRGROUP, ASU.TSMID_RIGHTS_GROUP
+    WHERE FK_SOTRID = :NEW.FK_SOTRID
+          AND ASU.TSOTRGROUP.FK_GROUPID = ASU.TSMID_RIGHTS_GROUP.FK_GROUPID
+          AND ASU.TSMID_RIGHTS_GROUP.FK_SMID = :NEW.FK_SMID;
+    if nGROUPID = 0 then*/
+    SELECT count(asu.TSMID_RIGHTS.fk_id) INTO nGROUPID
+    FROM ASU.TSMID_RIGHTS
+    WHERE FK_SOTRID = :NEW.FK_SOTRID
+      and fk_smid = :NEW.FK_SMID;
+    if nGROUPID = 0 then
+    begin
+        INSERT INTO ASU.TSMID_RIGHTS (FK_SOTRID, FK_SMID) VALUES(:NEW.FK_SOTRID, :NEW.FK_SMID);
+    exception
+      when others then
+        if sqlcode = -6512 then
+          null;
+        end if;
+    end;
+    end if;
+  elsif DELETING then
+       SELECT count(ASU.TSOTRGROUP.FK_GROUPID) INTO nGROUPID
+       FROM ASU.TSOTRGROUP, ASU.TSMID_RIGHTS_GROUP
+       WHERE FK_SOTRID = :OLD.FK_SOTRID
+             AND ASU.TSOTRGROUP.FK_GROUPID = ASU.TSMID_RIGHTs_GROUP.FK_GROUPID
+             AND ASU.TSMID_RIGHTS_GROUP.FK_SMID = :OLD.FK_SMID;
+
+       if nGROUPID = 0 then
+           DELETE FROM ASU.TSMID_RIGHTS WHERE FK_SOTRID = :OLD.FK_SOTRID AND FK_SMID = :OLD.FK_SMID;
+       end if;
+  elsif UPDATING then
+  null;
+  end if;
+
+END;
+/
+SHOW ERRORS;
+
+

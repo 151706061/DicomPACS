@@ -1,0 +1,139 @@
+DROP TABLE ASU.TPROFFACTOR_PEOPLES CASCADE CONSTRAINTS
+/
+
+--
+-- TPROFFACTOR_PEOPLES  (Table) 
+--
+CREATE TABLE ASU.TPROFFACTOR_PEOPLES
+(
+  FK_ID         NUMBER(15)                      NOT NULL,
+  FK_PACID      NUMBER(15)                      NOT NULL,
+  FK_PROFACTOR  NUMBER(15)                      NOT NULL,
+  FD_BEGIN      DATE                            DEFAULT sysdate               NOT NULL,
+  FD_END        DATE,
+  FK_SOTRID     NUMBER(15)                      NOT NULL,
+  FN_TYPE       NUMBER(15)                      DEFAULT 1                     NOT NULL,
+  FK_USLWORK    NUMBER,
+  FC_FAK_FAK    VARCHAR2(1000 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TPROFFACTOR_PEOPLES.FK_ID IS 'SEQUENCE=[SEQ_TPROFFACTOR_PEOPLES]'
+/
+
+COMMENT ON COLUMN ASU.TPROFFACTOR_PEOPLES.FK_PACID IS 'Код пациента TPEOPLES.FK_ID или TPROFP_LIST.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TPROFFACTOR_PEOPLES.FK_PROFACTOR IS 'Код проффактора TPROFFACTOR.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TPROFFACTOR_PEOPLES.FD_BEGIN IS 'Дата начала действия проффаторов'
+/
+
+COMMENT ON COLUMN ASU.TPROFFACTOR_PEOPLES.FD_END IS 'Дата окончания действия проффаторов'
+/
+
+COMMENT ON COLUMN ASU.TPROFFACTOR_PEOPLES.FK_SOTRID IS 'Код сотрудника, установившего проффактор login.tsotr.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TPROFFACTOR_PEOPLES.FN_TYPE IS 'Тип записи: 1-tpeoples, 2-tprofp_list'
+/
+
+COMMENT ON COLUMN ASU.TPROFFACTOR_PEOPLES.FK_USLWORK IS 'Условия труда TSMID (PROF_USL_TRUD)'
+/
+
+COMMENT ON COLUMN ASU.TPROFFACTOR_PEOPLES.FC_FAK_FAK IS 'Фактический фактор'
+/
+
+
+--
+-- PEPL_TPROFACTOR_PEOPLES  (Index) 
+--
+--  Dependencies: 
+--   TPROFFACTOR_PEOPLES (Table)
+--
+CREATE INDEX ASU.PEPL_TPROFACTOR_PEOPLES ON ASU.TPROFFACTOR_PEOPLES
+(FK_PACID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- PK_TPROFACTOR_PEOPLES  (Index) 
+--
+--  Dependencies: 
+--   TPROFFACTOR_PEOPLES (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TPROFACTOR_PEOPLES ON ASU.TPROFFACTOR_PEOPLES
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFFACTOR_PEOPLES_BEF_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TPROFFACTOR_PEOPLES (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFFACTOR_PEOPLES_BEF_INS"
+     BEFORE
+     INSERT
+     ON ASU.TPROFFACTOR_PEOPLES      REFERENCING OLD AS OLD NEW AS NEW
+     FOR EACH ROW
+BEGIN
+      IF :NEW.fk_id IS NULL
+      THEN
+        SELECT asu.seq_proffactor_peoples.NEXTVAL
+          INTO :NEW.fk_id
+          FROM DUAL;
+      END IF;
+    END;
+/
+SHOW ERRORS;
+
+

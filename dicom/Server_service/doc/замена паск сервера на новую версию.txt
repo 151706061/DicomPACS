@@ -1,0 +1,28 @@
+верно - базу можете так скопировать 
+база находится : найти в папке firebird (в program files) файл aliases.conf
+
+найдите в службах FirebirdServerDefaultInstance - там путь к firebird
+
+там ссылка на файл базы :
+PACSBASE = c:\pacs\PACSDB.GDB - что-то вроде этого
+теперь останавливаем пакс, потом firebird , копируем файл в папку архива , запускаем в обратной последовательности firebird,
+заменяем файлы :
+с виртуалки берем c:\PACS\pacs\Server.exe и Configurator.exe
+на боевом сервере находим службу DicomServer, перейти к процессу - открыть место хранения файла - Server.exe - сохранить(скопировать) из этой папки файлы server.exe и Configurator.exe 
+в папку архива 
+потом заменяем эти файлы новыми с виртуалки и запускаем пакс через конфигуратор
+
+еще - надо добавить два новых файла с виртуалки :
+LOGDB.GDB
+WORKLISTDB.GDB
+поместить их в папку где база пакса PACSDB.GDB (ее не трогать)
+и в файле aliases.conf добавить 2 записи :
+WORKLISTBASE = c:\pacs\WORKLISTDB.GDB
+LOGBASE = c:\pacs\LOGDB.GDB
+заменив пути на реальное расположение этих файлов
+Итого в файле aliases должно быть 3 ссылки :
+PACSBASE = c:\pacs\PACSDB.GDB
+WORKLISTBASE = c:\pacs\WORKLISTDB.GDB
+LOGBASE = c:\pacs\LOGDB.GDB
+с ДРУГИМИ (реальными) путями к файлам баз
+

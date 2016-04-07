@@ -1,0 +1,136 @@
+ALTER TABLE ASU.TS_PRINTIB_RIGHTS
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TS_PRINTIB_RIGHTS CASCADE CONSTRAINTS
+/
+
+--
+-- TS_PRINTIB_RIGHTS  (Table) 
+--
+CREATE TABLE ASU.TS_PRINTIB_RIGHTS
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FK_PRINTIBID  NUMBER,
+  FK_SOTRID     NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TS_PRINTIB_RIGHTS IS 'Настройки прав доступа печати разделов ИБ by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TS_PRINTIB_RIGHTS.FK_ID IS 'SEQUENCE=[SEQ_TS_PRINTIB]'
+/
+
+COMMENT ON COLUMN ASU.TS_PRINTIB_RIGHTS.FK_PRINTIBID IS 'TS_PRINTIB.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TS_PRINTIB_RIGHTS.FK_SOTRID IS 'TSOTR.FK_ID'
+/
+
+
+--
+-- TS_PRINTIB_RIGHTS_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TS_PRINTIB_RIGHTS (Table)
+--
+CREATE UNIQUE INDEX ASU.TS_PRINTIB_RIGHTS_BY_ID ON ASU.TS_PRINTIB_RIGHTS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TS_PRINTIB_RIGHTS_ID1  (Index) 
+--
+--  Dependencies: 
+--   TS_PRINTIB_RIGHTS (Table)
+--
+CREATE INDEX ASU.TS_PRINTIB_RIGHTS_ID1 ON ASU.TS_PRINTIB_RIGHTS
+(FK_SOTRID, FK_PRINTIBID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TS_PRINTIB_RIGHTSBEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TS_PRINTIB_RIGHTS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TS_PRINTIB_RIGHTSBEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TS_PRINTIB_RIGHTS   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+BEGIN
+  select seq_ts_printib.nextval into :new.fk_id from dual;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TS_PRINTIB_RIGHTS 
+-- 
+ALTER TABLE ASU.TS_PRINTIB_RIGHTS ADD (
+  CONSTRAINT TS_PRINTIB_RIGHTS_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

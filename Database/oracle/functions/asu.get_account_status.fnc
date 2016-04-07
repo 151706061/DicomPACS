@@ -1,0 +1,27 @@
+DROP FUNCTION ASU.GET_ACCOUNT_STATUS
+/
+
+--
+-- GET_ACCOUNT_STATUS  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TUSLUG (Synonym)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_ACCOUNT_STATUS" 
+  (pNAZID IN NUMBER)
+  RETURN  NUMBER IS
+  CURSOR c1  IS select fl_opl from tuslug where fk_medDocID = pNazID;
+  nTmp NUMBER;
+BEGIN
+OPEN c1;
+FETCH c1 INTO nTmp;
+CLOSE c1;
+RETURN nTmp;
+END;
+/
+
+SHOW ERRORS;
+
+

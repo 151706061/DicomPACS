@@ -1,0 +1,211 @@
+DROP PROCEDURE ASU.DO_SAVEPACINFO
+/
+
+--
+-- DO_SAVEPACINFO  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   SET_PACHRAP (Procedure)
+--   SET_PACKUR (Procedure)
+--   TSROKY (Table)
+--   TVRACH (Table)
+--   TPEOPLES (Table)
+--   PKG_PACIENT (Package)
+--   TKARTA (Table)
+--   TEPID (Table)
+--
+CREATE OR REPLACE PROCEDURE ASU."DO_SAVEPACINFO" -- Modified by TimurLan 
+-- Modified 16.08.2006 by Nefedov S.M.
+-- Modified 10.05.2007 by Nefedov S.M.
+  ( pFK_ID IN NUMBER,
+   pFK_PEPLID IN NUMBER,
+   pFK_VRACHID IN  NUMBER,
+   pFK_DALID IN NUMBER,
+   pFK_PALATAID IN  NUMBER,
+   pFC_FAM IN  VARCHAR2,
+   pFC_OTCH IN  VARCHAR2,
+   pFC_IM IN  VARCHAR2,
+   pFK_IBID IN  NUMBER,
+   pFK_IBY IN  NUMBER,
+   pFD_ROJD IN  DATE,
+   pFP_SEX IN  NUMBER,
+   pFC_RABOTA IN  VARCHAR2,
+   pFC_PHONE IN  VARCHAR2,
+   pFC_EMAIL IN  VARCHAR2,
+   pFC_HTTP IN  VARCHAR2,
+   pFC_FAX IN  VARCHAR2,
+   pFL_VOV IN  NUMBER,
+   pFL_IVOV IN  NUMBER,
+   pFL_ULA IN NUMBER,
+   pFL_PMC IN  NUMBER,
+   pFK_KOD IN  NUMBER,
+   pFK_KOD2 IN  NUMBER,
+   pFC_PUT IN  VARCHAR2,
+   pFN_SUM IN  NUMBER,
+   pFK_COC_POLID IN  NUMBER,
+   pFK_GROUPID IN  NUMBER,
+   pFK_PUTTYPE IN  NUMBER,
+   pFC_PISMO IN VARCHAR2,
+   pFK_PRIZN IN NUMBER,
+   pFD_PRIB IN DATE,
+   pFP_TRAN IN NUMBER,
+   pFK_REIS IN VARCHAR2,
+   pFC_FROM IN VARCHAR2,
+   pFL_ALERG IN NUMBER,
+   pFL_MET_ROP IN NUMBER,
+   pFL_KUR IN NUMBER,
+   pFL_HRAP IN NUMBER,
+   pFK_FINVIDID IN NUMBER,
+   pFK_SANID IN NUMBER,
+   pFK_USLVIDID IN NUMBER,
+   pFL_SKK IN NUMBER,
+   pFL_SEO IN NUMBER,
+   pFL_ILL IN NUMBER,
+   pFK_DOCVID IN NUMBER,
+   pFC_DOCSER IN VARCHAR2,
+   pFC_DOCNUM IN VARCHAR2,
+   pFC_DOCVIDAN IN VARCHAR2,
+   pFD_DOCDATE IN DATE,
+   pFK_COMPANY IN NUMBER,
+   pFK_OTDEL IN NUMBER,
+   pFK_DOLGNOST IN NUMBER,
+   pFC_ROJDPLACE IN VARCHAR2,
+   pFL_PRIVIT IN NUMBER,
+   pFK_PACVID IN NUMBER,
+   pFL_PAYPLACE IN NUMBER,
+   pFK_STOLID IN NUMBER
+   )
+ IS
+  CURSOR cSrok IS SELECT FK_PRYB FROM TSROKY,(SELECT MAX(FK_ID) FK_MAXID FROM TSROKY WHERE FK_PACID=pFK_ID and FK_PRYB>0) WHERE FK_ID=FK_MAXID;
+  CURSOR cChange IS SELECT FL_CHANGE from TKARTA where FK_ID=pFK_ID;
+  CURSOR cTekCoc IS SELECT FP_TEK_COC from TKARTA where FK_ID=pFK_ID;
+  pFP_TEK_COC NUMBER;
+  pFL_CHANGE NUMBER(1);
+  pID NUMBER;
+  pTekCOC NUMBER;
+ BEGIN
+  SET_PACKUR(pFK_ID,pFL_KUR);
+  SET_PACHRAP(pFK_ID,pFL_HRAP);
+  OPEN cSrok;
+  FETCH cSrok INTO pFP_TEK_COC;
+  CLOSE cSrok;
+  OPEN cTekCoc;
+  FETCH cTekCoc INTO pTekCOC;
+  CLOSE cTekCoc;
+
+  if pFP_TEK_COC IN (2,4,5,6) then
+    if pTekCOC = -2 then
+        pFP_TEK_COC:=-2;
+    else
+        pFP_TEK_COC:=2;
+    end if;
+  elsif pFP_TEK_COC IN (3,7) then
+    pFP_TEK_COC:=3;
+  elsif pFP_TEK_COC=1 then
+    pFP_TEK_COC:=1;
+  end if;
+  Update TVRACH
+       SET FK_VRACHID=pFK_VRACHID,
+           FK_DALID=pFK_DALID
+       WHERE FK_PACID=pFK_ID AND FL_VID='M';
+  UPDATE TEPID
+       SET FD_PRIB=pFD_PRIB,
+           FP_TRAN=pFP_TRAN,
+           FK_REIS=pFK_REIS,
+           FC_FROM=pFC_FROM,
+           FL_ALERG=pFL_ALERG,
+           FL_MET_ROP=pFL_MET_ROP,FL_AMB=0
+       WHERE FK_PACID=pFK_ID;
+  Open cChange;
+  FETCH cChange into pFL_CHANGE;
+  if pFL_CHANGE<>2 then
+    pFL_CHANGE:=0;
+  end if;
+  Close cChange;
+UPDATE TKARTA
+       SET FK_IBID=pFK_IBID,
+           FK_IBY=pFK_IBY,
+           FK_COC_POLID=pFK_COC_POLID,
+           FK_GROUPID=pFK_GROUPID,
+           FL_VOV=pFL_VOV,
+           FL_IVOV=pFL_IVOV,
+           FL_ULA=pFL_ULA,
+           FL_PMC=pFL_PMC,
+           FP_TEK_COC=pFP_TEK_COC,
+           FK_PRIZN=pFK_PRIZN,
+           FK_KOD=pFK_KOD,
+           FK_KOD2=pFK_KOD2,
+           FC_PUT=pFC_PUT,
+           FN_SUM=pFN_SUM,
+           FK_PUTTYPE=pFK_PUTTYPE,
+           FK_FINVIDID=pFK_FINVIDID,
+           FL_DOR=0,
+           FL_CHANGE=pFL_CHANGE,
+           FK_SANID=pFK_SANID,
+           FK_USLVIDID=pFK_USLVIDID,
+           FL_SKK=pFL_SKK,
+           FL_SEO=pFL_SEO,
+           FL_ILL=pFL_ILL,
+           FK_PEPLID=pFK_PEPLID,
+           FC_FAM=pFC_FAM, -- Peoples data's begin
+           FC_IM=pFC_IM,
+           FC_OTCH=pFC_OTCH,
+           FP_SEX=pFP_SEX,
+           FD_ROJD=pFD_ROJD,
+           FC_RABOTA=pFC_RABOTA,
+           FC_PHONE=pFC_PHONE,
+           FC_FAX=pFC_FAX,
+           FC_E_MAIL=pFC_EMAIL,
+           FC_HTTP=pFC_HTTP,
+           FK_DOCVID=pFK_DOCVID,
+           FC_DOCSER=pFC_DOCSER,
+           FC_DOCNUM=pFC_DOCNUM,
+           FC_DOCVIDAN=pFC_DOCVIDAN,
+           FD_DOCDATE=pFD_DOCDATE,
+           FC_ROJDPLACE=pFC_ROJDPLACE,
+           FL_PRIVIT=pFL_PRIVIT,
+           FK_PACVID=pFK_PACVID,
+           FL_PAYPLACE=pFL_PAYPLACE,
+           FK_STOLID=pFK_STOLID
+       WHERE FK_ID=pFK_ID;
+    BEGIN
+      PKG_PACIENT.DO_SPLIT_PUT(pFK_ID,pFC_PUT);
+      EXCEPTION WHEN OTHERS THEN NULL;
+    END;
+UPDATE TPeoples
+       SET FC_FAM=pFC_FAM,
+           FC_IM=pFC_IM,
+           FC_OTCH=pFC_OTCH,
+           FP_SEX=pFP_SEX,
+           FD_ROJD=pFD_ROJD,
+           FC_RABOTA=pFC_RABOTA,
+           FC_PHONE=pFC_PHONE,
+           FC_FAX=pFC_FAX,
+           FC_E_MAIL=pFC_EMAIL,
+           FC_HTTP=pFC_HTTP,
+           FK_DOCVID=pFK_DOCVID,
+           FC_DOCSER=pFC_DOCSER,
+           FC_DOCNUM=pFC_DOCNUM,
+           FC_DOCVIDAN=pFC_DOCVIDAN,
+           FD_DOCDATE=pFD_DOCDATE,
+           FK_COMPANYID=pFK_COMPANY,
+           FK_OTDEL=pFK_OTDEL,
+           FK_DOLGNOST=pFK_DOLGNOST,
+           FC_ROJDPLACE=pFC_ROJDPLACE,
+           FK_GROUPID=pFK_GROUPID
+       WHERE FK_ID=pFK_PEPLID;
+/*UPDATE TAdress
+       SET FK_COUNTRYID=pFK_COUNTRYID,
+           FK_REGIONID=pFK_REGIONID,
+           FK_TOWNID=pFK_TOWNID,
+           FC_ADR=pFC_ADR
+       WHERE FK_PacID=pID;*/
+
+END;
+/
+
+SHOW ERRORS;
+
+

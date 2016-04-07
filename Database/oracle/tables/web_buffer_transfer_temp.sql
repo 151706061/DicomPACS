@@ -1,0 +1,86 @@
+ALTER TABLE ASU.WEB_BUFFER_TRANSFER_TEMP
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.WEB_BUFFER_TRANSFER_TEMP CASCADE CONSTRAINTS
+/
+
+--
+-- WEB_BUFFER_TRANSFER_TEMP  (Table) 
+--
+CREATE TABLE ASU.WEB_BUFFER_TRANSFER_TEMP
+(
+  ID               NUMBER                       NOT NULL,
+  UPLOAD_DATE      DATE,
+  REGIST_DATE      DATE,
+  TABLE_NAME       VARCHAR2(255 CHAR),
+  KEY_FIELD_VALUE  NUMBER,
+  ACTION           VARCHAR2(255 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- PK_WEB_BUF_  (Index) 
+--
+--  Dependencies: 
+--   WEB_BUFFER_TRANSFER_TEMP (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_WEB_BUF_ ON ASU.WEB_BUFFER_TRANSFER_TEMP
+(ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table WEB_BUFFER_TRANSFER_TEMP 
+-- 
+ALTER TABLE ASU.WEB_BUFFER_TRANSFER_TEMP ADD (
+  CONSTRAINT PK_WEB_BUF_
+ PRIMARY KEY
+ (ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

@@ -1,0 +1,41 @@
+DROP TRIGGER ASU.TPROFACTOR_STD_BEFORE_INSERT
+/
+
+--
+-- TPROFACTOR_STD_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   TPROFACTOR_STD (Table)
+--   SEQ_PROFACTOR_STD (Sequence)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFACTOR_STD_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TPROFACTOR_STD  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+
+-- Код триггера модифицирован системой автоматической генерации триггеров репликации aTrigger.exe от:22.09.2005 10:13:13
+BEGIN
+  IF (USERENV('CLIENT_INFO') is null) or (USERENV('CLIENT_INFO') <> '%MAIL%') THEN
+    BEGIN
+    -- ORIGINAL TRIGGER BODY BEGIN FROM HERE:
+
+BEGIN
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT seq_profactor_std.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+
+    -- ORIGINAL TRIGGER BODY ENDS HERE
+    END;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+

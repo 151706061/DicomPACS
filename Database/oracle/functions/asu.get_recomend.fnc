@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_RECOMEND
+/
+
+--
+-- GET_RECOMEND  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_RECOMEND"
+return number DETERMINISTIC
+is 
+begin
+  return 89;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_RECOMEND TO PUBLIC
+/
+

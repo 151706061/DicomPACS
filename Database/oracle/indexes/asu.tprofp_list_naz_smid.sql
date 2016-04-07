@@ -1,0 +1,25 @@
+DROP INDEX ASU.TPROFP_LIST_NAZ_SMID
+/
+
+--
+-- TPROFP_LIST_NAZ_SMID  (Index) 
+--
+CREATE INDEX ASU.TPROFP_LIST_NAZ_SMID ON ASU.TPROFP_LIST_NAZ
+(FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          3904K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

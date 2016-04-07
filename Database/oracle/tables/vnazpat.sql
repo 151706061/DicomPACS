@@ -1,0 +1,33 @@
+DROP TABLE ASU.VNAZPAT CASCADE CONSTRAINTS
+/
+
+--
+-- VNAZPAT  (Table) 
+--
+CREATE TABLE ASU.VNAZPAT
+(
+  FK_NAZID  NUMBER(15),
+  FD_INS    DATE,
+  FD_OUT    DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+

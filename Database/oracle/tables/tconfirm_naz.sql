@@ -1,0 +1,163 @@
+DROP TABLE ASU.TCONFIRM_NAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TCONFIRM_NAZ  (Table) 
+--
+CREATE TABLE ASU.TCONFIRM_NAZ
+(
+  FK_ID             NUMBER(15)                  NOT NULL,
+  FK_SOTRIDNAZ      NUMBER(15),
+  FD_DATENAZ        DATE,
+  FK_SOTRIDCONFIRM  NUMBER(15),
+  FD_DATECONFIRM    DATE,
+  FN_STATUS         NUMBER(15),
+  FN_STATUSCONFIRM  NUMBER(15),
+  FK_NAZID          NUMBER(15),
+  FK_OWNERID        NUMBER(15)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TCONFIRM_NAZ IS 'Oaaeeoa-naycea aey iiaoaa??aaiey iacia?aiee'
+/
+
+COMMENT ON COLUMN ASU.TCONFIRM_NAZ.FK_ID IS 'Oieeaeuiue eaaioeoeeaoi?'
+/
+
+COMMENT ON COLUMN ASU.TCONFIRM_NAZ.FK_SOTRIDNAZ IS 'Iacia?eaoee nio?oaiee'
+/
+
+COMMENT ON COLUMN ASU.TCONFIRM_NAZ.FD_DATENAZ IS 'Aaoa iacia?aiey'
+/
+
+COMMENT ON COLUMN ASU.TCONFIRM_NAZ.FK_SOTRIDCONFIRM IS 'Iiaoaa?aeaoee nio?oaiee'
+/
+
+COMMENT ON COLUMN ASU.TCONFIRM_NAZ.FD_DATECONFIRM IS 'Aaoa iiaoaa??aaiey'
+/
+
+COMMENT ON COLUMN ASU.TCONFIRM_NAZ.FN_STATUS IS 'Noaoon iacia?aiey'
+/
+
+COMMENT ON COLUMN ASU.TCONFIRM_NAZ.FN_STATUSCONFIRM IS 'Noaoon iacia?aiey iinea iiaoaa??aaiey'
+/
+
+COMMENT ON COLUMN ASU.TCONFIRM_NAZ.FK_NAZID IS 'VNAZ.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TCONFIRM_NAZ.FK_OWNERID IS 'OWNERID'
+/
+
+
+--
+-- TCONFIRM_NAZ_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TCONFIRM_NAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.TCONFIRM_NAZ_FK_ID ON ASU.TCONFIRM_NAZ
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TCONFIRM_NAZ_NAZID  (Index) 
+--
+--  Dependencies: 
+--   TCONFIRM_NAZ (Table)
+--
+CREATE INDEX ASU.TCONFIRM_NAZ_NAZID ON ASU.TCONFIRM_NAZ
+(FK_NAZID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TCONFIRM_NAZ_OWNERID  (Index) 
+--
+--  Dependencies: 
+--   TCONFIRM_NAZ (Table)
+--
+CREATE INDEX ASU.TCONFIRM_NAZ_OWNERID ON ASU.TCONFIRM_NAZ
+(FK_OWNERID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TCONFIRM_NAZ_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TCONFIRM_NAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TCONFIRM_NAZ_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.tconfirm_naz
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  select seq_tconfirm_naz.NEXTVAL into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

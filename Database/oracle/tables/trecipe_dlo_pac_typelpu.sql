@@ -1,0 +1,168 @@
+ALTER TABLE ASU.TRECIPE_DLO_PAC_TYPELPU
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_PAC_TYPELPU CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_PAC_TYPELPU  (Table) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_REG_PAC (Table)
+--
+CREATE TABLE ASU.TRECIPE_DLO_PAC_TYPELPU
+(
+  FK_ID        NUMBER,
+  FK_REGPACID  NUMBER,
+  FK_LPU       NUMBER,
+  FD_DATA      DATE,
+  TYPEPRLPU    NUMBER,
+  PRSOST       NUMBER,
+  CPRSOST      VARCHAR2(40 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_PAC_TYPELPU IS 'ДЛО.Региональный регистр льготников.Блок данных о прикреплениях пациента к ЛПУ'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_PAC_TYPELPU.FK_ID IS 'ключ'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_PAC_TYPELPU.FK_REGPACID IS 'ссылка на льготника'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_PAC_TYPELPU.FK_LPU IS 'Код ЛПУ'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_PAC_TYPELPU.FD_DATA IS 'Дата изменения состояния'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_PAC_TYPELPU.TYPEPRLPU IS 'Прикреплен/снят с учёта в ЛПУ'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_PAC_TYPELPU.PRSOST IS 'Код причины прикрепления/снятия'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_PAC_TYPELPU.CPRSOST IS 'Наименование причины'
+/
+
+
+--
+-- TRECIPE_DLO_PAC_TYPELPU_IDX  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_PAC_TYPELPU (Table)
+--
+CREATE INDEX ASU.TRECIPE_DLO_PAC_TYPELPU_IDX ON ASU.TRECIPE_DLO_PAC_TYPELPU
+(FK_REGPACID, FK_LPU)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_PAC_TYPELPU_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_PAC_TYPELPU (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_PAC_TYPELPU_PK ON ASU.TRECIPE_DLO_PAC_TYPELPU
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_PAC_TYPELPU_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_PAC_TYPELPU (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECIPE_DLO_PAC_TYPELPU_INS"
+ BEFORE
+  INSERT
+ ON ASU.TRECIPE_DLO_PAC_TYPELPU REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  if (:new.fk_id is null) then
+    select ASU.SEQ_TRECIPE_DLO_PAC_TYPELPU.nextval into :new.fk_id from dual;
+  end if;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_PAC_TYPELPU 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_PAC_TYPELPU ADD (
+  CONSTRAINT TRECIPE_DLO_PAC_TYPELPU_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TRECIPE_DLO_PAC_TYPELPU 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_PAC_TYPELPU ADD (
+  CONSTRAINT TRECIPE_DLO_PAC_TYPELPU_FK 
+ FOREIGN KEY (FK_REGPACID) 
+ REFERENCES ASU.TRECIPE_DLO_REG_PAC (FK_ID))
+/
+

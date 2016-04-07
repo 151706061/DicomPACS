@@ -1,0 +1,121 @@
+ALTER TABLE ASU.TBUNKINFO
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TBUNKINFO CASCADE CONSTRAINTS
+/
+
+--
+-- TBUNKINFO  (Table) 
+--
+CREATE TABLE ASU.TBUNKINFO
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FD_BEGIN      DATE,
+  FD_END        DATE,
+  FK_TIPROOMID  NUMBER,
+  FK_CATEGORY   NUMBER,
+  FK_BUNKSID    NUMBER,
+  FL_REPAIR     NUMBER                          DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TBUNKINFO.FD_BEGIN IS 'Начало действия типа'
+/
+
+COMMENT ON COLUMN ASU.TBUNKINFO.FD_END IS 'Окончание действия типа'
+/
+
+COMMENT ON COLUMN ASU.TBUNKINFO.FK_TIPROOMID IS 'TTIPROOM.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TBUNKINFO.FK_CATEGORY IS 'TSMID.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TBUNKINFO.FK_BUNKSID IS 'TBUNKS.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TBUNKINFO.FL_REPAIR IS 'На ремонте ? 1 - да, 0 - нет'
+/
+
+
+--
+-- PK_TBUNKINFO  (Index) 
+--
+--  Dependencies: 
+--   TBUNKINFO (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TBUNKINFO ON ASU.TBUNKINFO
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TBUNKINFO_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TBUNKINFO (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TBUNKINFO_BI" 
+  before insert on ASU.TBUNKINFO
+ for each row
+begin
+  Select ASU.SEQ_TBUNKINFO.nextval into :new.FK_ID from DUAL;
+ end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TBUNKINFO 
+-- 
+ALTER TABLE ASU.TBUNKINFO ADD (
+  CONSTRAINT PK_TBUNKINFO
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

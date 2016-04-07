@@ -1,0 +1,1 @@
+Скрипт для внедрения: ....\Trunk_AUTH\ASU2\medica\UPDATE_DB\ADD_SYN_MED_TUCHGR.sql

@@ -1,0 +1,40 @@
+DROP FUNCTION ASU.GET_AMBFIO
+/
+
+--
+-- GET_AMBFIO  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TAMBULANCE (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_AMBFIO" 
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+  strTemp VARCHAR2(200);
+  CURSOR cTemp IS SELECT FC_FAM||' '||SUBSTR(FC_IM,0,1)||'. '||SUBSTR(FC_OTCH,0,1)||'. ' FROM TAMBULANCE WHERE FK_ID=pFK_ID;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO strTemp;
+  CLOSE cTemp;
+  RETURN strTemp;
+END;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM MED.GET_AMBFIO
+/
+
+--
+-- GET_AMBFIO  (Synonym) 
+--
+--  Dependencies: 
+--   GET_AMBFIO (Function)
+--
+CREATE SYNONYM MED.GET_AMBFIO FOR ASU.GET_AMBFIO
+/
+
+

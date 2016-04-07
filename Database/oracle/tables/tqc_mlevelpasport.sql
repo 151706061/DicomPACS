@@ -1,0 +1,55 @@
+DROP TABLE ASU.TQC_MLEVELPASPORT CASCADE CONSTRAINTS
+/
+
+--
+-- TQC_MLEVELPASPORT  (Table) 
+--
+CREATE TABLE ASU.TQC_MLEVELPASPORT
+(
+  FK_ID        INTEGER                          NOT NULL,
+  FK_MLEVELID  INTEGER                          NOT NULL,
+  FK_METODID   INTEGER                          NOT NULL,
+  FN_LMIN      NUMBER(18,6),
+  FN_LMAX      NUMBER(18,6),
+  FN_XA        NUMBER(18,6),
+  FN_SA        NUMBER(18,6),
+  FN_DX        NUMBER(18,6),
+  FN_CV        NUMBER(18,6)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- TQC_MLEVELPASPORT$BI  (Trigger) 
+--
+--  Dependencies: 
+--   TQC_MLEVELPASPORT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TQC_MLEVELPASPORT$BI" 
+ BEFORE
+  INSERT
+ ON asu.tqc_mlevelpasport
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+    --  Column "FK_ID" uses sequence SEQ_TQC_MLEVELPASPORT
+    select SEQ_TQC_MLEVELPASPORT.NEXTVAL INTO :NEW.FK_ID from DUAL;
+end
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,25 @@
+DROP INDEX ASU.TRESLECH#FD_INS
+/
+
+--
+-- TRESLECH#FD_INS  (Index) 
+--
+CREATE INDEX ASU.TRESLECH#FD_INS ON ASU.TRESLECH
+(FD_INS, FL_PATFIRST)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          13568K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

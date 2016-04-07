@@ -1,0 +1,44 @@
+DROP TABLE ASU.TEMP_XML_TFOMS_LOADER CASCADE CONSTRAINTS
+/
+
+--
+-- TEMP_XML_TFOMS_LOADER  (Table) 
+--
+CREATE TABLE ASU.TEMP_XML_TFOMS_LOADER
+(
+  FD_BEG        VARCHAR2(10 BYTE),
+  FD_STOP       VARCHAR2(10 BYTE),
+  FD_PRIK       VARCHAR2(10 BYTE),
+  FD_PRIK_STOP  VARCHAR2(10 BYTE),
+  FC_POL        VARCHAR2(20 BYTE),
+  FC_ENP        VARCHAR2(20 BYTE),
+  FC_FAM        VARCHAR2(100 BYTE),
+  FC_IM         VARCHAR2(100 BYTE),
+  FC_OT         VARCHAR2(100 BYTE),
+  FD_ROJD       VARCHAR2(10 BYTE),
+  FC_DOCTOR     VARCHAR2(12 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TEMP_XML_TFOMS_LOADER IS 'Временная таблица для BULK-insert данных из XML-файла с прикрепленными пациентами. Created by Ищуков С.С. - 22.10.2015'
+/
+
+

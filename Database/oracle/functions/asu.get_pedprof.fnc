@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_PEDPROF
+/
+
+--
+-- GET_PEDPROF  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PEDPROF" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 29690;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_PEDPROF TO PUBLIC
+/
+

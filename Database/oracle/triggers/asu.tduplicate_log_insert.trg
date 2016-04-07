@@ -1,0 +1,22 @@
+DROP TRIGGER ASU.TDUPLICATE_LOG_INSERT
+/
+
+--
+-- TDUPLICATE_LOG_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TDUPLICATE_LOG (Sequence)
+--   TDUPLICATE_LOG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDUPLICATE_LOG_INSERT" 
+  before insert on tduplicate_log
+  for each row
+begin
+  SELECT SEQ_TDUPLICATE_LOG.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+end TDUPLICATE_LOG_INSERT;
+/
+SHOW ERRORS;
+
+

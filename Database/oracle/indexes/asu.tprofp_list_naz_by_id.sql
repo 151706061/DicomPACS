@@ -1,0 +1,25 @@
+DROP INDEX ASU.TPROFP_LIST_NAZ_BY_ID
+/
+
+--
+-- TPROFP_LIST_NAZ_BY_ID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TPROFP_LIST_NAZ_BY_ID ON ASU.TPROFP_LIST_NAZ
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          3104K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,23 @@
+DROP TRIGGER ASU.TANAL_COMPAR_BEFORE_INSERT
+/
+
+--
+-- TANAL_COMPAR_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   TANALIZATOR_COMPARISONS (Table)
+--   SEQ_TANAL_COMPAR (Sequence)
+--
+CREATE OR REPLACE TRIGGER ASU."TANAL_COMPAR_BEFORE_INSERT" 
+ BEFORE 
+ INSERT
+ ON ASU.TANALIZATOR_COMPARISONS  FOR EACH ROW
+begin
+  select seq_tanal_compar.NEXTVAL into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

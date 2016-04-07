@@ -1,0 +1,27 @@
+DROP TABLE ASU.TMP_TIB CASCADE CONSTRAINTS
+/
+
+--
+-- TMP_TIB  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.TMP_TIB
+(
+  FK_ID        NUMBER,
+  FC_CHAR      VARCHAR2(4000 BYTE),
+  FN_NUM       NUMBER,
+  FK_BID       NUMBER,
+  FK_PACID     NUMBER,
+  FK_SMID      NUMBER,
+  FK_SMEDITID  NUMBER,
+  FK_VRACHID   NUMBER,
+  FD_DATE      DATE
+)
+ON COMMIT PRESERVE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.TMP_TIB IS 'Временная таблица TIB для ускорения работы динамических форм.
+By Nefedov S.M. 06.02.2008'
+/
+
+

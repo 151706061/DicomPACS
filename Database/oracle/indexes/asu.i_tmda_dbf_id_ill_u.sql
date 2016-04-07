@@ -1,0 +1,24 @@
+DROP INDEX ASU.I_TMDA_DBF_ID_ILL_U
+/
+
+--
+-- I_TMDA_DBF_ID_ILL_U  (Index) 
+--
+CREATE INDEX ASU.I_TMDA_DBF_ID_ILL_U ON ASU.TMDA_DBF
+(ID_ILL_U)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

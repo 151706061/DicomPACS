@@ -1,0 +1,5 @@
+ALTER TABLE STUDIES
+ADD FC_AEAPPARAT VARCHAR(15);
+
+DESCRIBE FIELD FC_AEAPPARAT TABLE STUDIES
+'AEtitle аппарата с которого пришло исследование';

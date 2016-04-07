@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.PLGHASH
+/
+
+--
+-- PLGHASH  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DBMS_UTILITY (Synonym)
+--
+CREATE OR REPLACE FUNCTION ASU."PLGHASH" (VALUE IN VARCHAR2)
+  RETURN NUMBER
+IS
+  retval   NUMBER := 0;
+BEGIN
+  retval := DBMS_UTILITY.GET_HASH_VALUE (VALUE, 2, 2147483647);
+  RETURN retval;
+END PLGhash;
+/
+
+SHOW ERRORS;
+
+

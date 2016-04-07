@@ -1,0 +1,58 @@
+DROP TABLE ASU.TKURS CASCADE CONSTRAINTS
+/
+
+--
+-- TKURS  (Table) 
+--
+CREATE TABLE ASU.TKURS
+(
+  KURSID      NUMBER(9)                         NOT NULL,
+  FN_DAY      NUMBER,
+  FN_PERDAY   NUMBER,
+  FN_KOL      NUMBER,
+  MEDICID     NUMBER,
+  KURLISTID   NUMBER,
+  MOID        NUMBER,
+  FC_COMMENT  VARCHAR2(255 BYTE),
+  FK_TYPE     NUMBER,
+  FN_UCHKOL   NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+PARALLEL ( DEGREE DEFAULT INSTANCES DEFAULT )
+MONITORING
+/
+
+
+--
+-- TKURS_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TKURS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TKURS_INS" 
+ BEFORE 
+ INSERT
+ ON ASU.TKURS  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+Begin 
+  select SEQ_TKURS.nextval into :new.KURSID from dual;
+End;
+/
+SHOW ERRORS;
+
+

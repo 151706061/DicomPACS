@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_XRAY_FLU
+/
+
+--
+-- GET_XRAY_FLU  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_XRAY_FLU" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 303093;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_XRAY_FLU TO PUBLIC
+/
+

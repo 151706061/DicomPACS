@@ -1,0 +1,25 @@
+DROP INDEX ASU.I_PARPORT_MIC_BU_FL_ADD
+/
+
+--
+-- I_PARPORT_MIC_BU_FL_ADD  (Index) 
+--
+CREATE INDEX ASU.I_PARPORT_MIC_BU_FL_ADD ON ASU.PASPORT_MIC_BU
+(FL_ADD)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

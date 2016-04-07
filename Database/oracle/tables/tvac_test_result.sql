@@ -1,0 +1,154 @@
+ALTER TABLE ASU.TVAC_TEST_RESULT
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TVAC_TEST_RESULT CASCADE CONSTRAINTS
+/
+
+--
+-- TVAC_TEST_RESULT  (Table) 
+--
+--  Dependencies: 
+--   TVAC_TEST (Table)
+--
+CREATE TABLE ASU.TVAC_TEST_RESULT
+(
+  FK_ID        INTEGER                          NOT NULL,
+  FC_NAME      VARCHAR2(60 BYTE)                NOT NULL,
+  FK_VAC_TEST  INTEGER                          NOT NULL,
+  FC_REM       VARCHAR2(4000 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          40K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVAC_TEST_RESULT IS 'Возможные результаты по тестам
+Например по манту и реакции Шика
+Author: ura'
+/
+
+COMMENT ON COLUMN ASU.TVAC_TEST_RESULT.FK_ID IS 'SEQUENCE=[SEQ_VAC_TEST_RESULT]'
+/
+
+COMMENT ON COLUMN ASU.TVAC_TEST_RESULT.FC_NAME IS 'Название обозначение'
+/
+
+COMMENT ON COLUMN ASU.TVAC_TEST_RESULT.FC_REM IS 'описани - больше для методической части'
+/
+
+
+--
+-- PK_TVAC_TEST_RESULT  (Index) 
+--
+--  Dependencies: 
+--   TVAC_TEST_RESULT (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TVAC_TEST_RESULT ON ASU.TVAC_TEST_RESULT
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVAC_TEST_RESULT$FK_VAC_TEST  (Index) 
+--
+--  Dependencies: 
+--   TVAC_TEST_RESULT (Table)
+--
+CREATE INDEX ASU.TVAC_TEST_RESULT$FK_VAC_TEST ON ASU.TVAC_TEST_RESULT
+(FK_VAC_TEST)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVAC_TEST_RESULT_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TVAC_TEST_RESULT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVAC_TEST_RESULT_BEFORE_INSERT" BEFORE INSERT
+ON ASU.TVAC_TEST_RESULT FOR EACH ROW
+begin
+    --  Column "FK_ID" uses sequence SEQ_VAC_TEST_RESULT
+      IF :NEW.FK_ID IS NULL
+      THEN
+         SELECT SEQ_VAC_TEST_RESULT.NEXTVAL INTO :NEW.FK_ID from dual;
+      END IF;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TVAC_TEST_RESULT 
+-- 
+ALTER TABLE ASU.TVAC_TEST_RESULT ADD (
+  CONSTRAINT PK_TVAC_TEST_RESULT
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TVAC_TEST_RESULT 
+-- 
+ALTER TABLE ASU.TVAC_TEST_RESULT ADD (
+  CONSTRAINT FK_TVAC_TEST_RE$TVAC_TEST 
+ FOREIGN KEY (FK_VAC_TEST) 
+ REFERENCES ASU.TVAC_TEST (FK_ID))
+/
+

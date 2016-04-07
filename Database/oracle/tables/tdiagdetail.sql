@@ -1,0 +1,131 @@
+ALTER TABLE ASU.TDIAGDETAIL
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TDIAGDETAIL CASCADE CONSTRAINTS
+/
+
+--
+-- TDIAGDETAIL  (Table) 
+--
+CREATE TABLE ASU.TDIAGDETAIL
+(
+  FK_ID        NUMBER                           NOT NULL,
+  FK_DIAGID    NUMBER,
+  FK_ETAPID    NUMBER,
+  FK_STADIAID  NUMBER,
+  FK_GRUPID    NUMBER,
+  FD_EXPOSE    DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TDIAGDETAIL.FD_EXPOSE IS 'Дата, когда выявлен впервые'
+/
+
+
+--
+-- TDIAGDETAIL$FK_DIAG  (Index) 
+--
+--  Dependencies: 
+--   TDIAGDETAIL (Table)
+--
+CREATE INDEX ASU.TDIAGDETAIL$FK_DIAG ON ASU.TDIAGDETAIL
+(FK_DIAGID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDIAGDETAIL_ID  (Index) 
+--
+--  Dependencies: 
+--   TDIAGDETAIL (Table)
+--
+CREATE UNIQUE INDEX ASU.TDIAGDETAIL_ID ON ASU.TDIAGDETAIL
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDIAGDETAIL_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDIAGDETAIL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDIAGDETAIL_INSERT" 
+  BEFORE INSERT
+  ON ASU.TDIAGDETAIL   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  select SEQ_TDIAGDETAIL.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TDIAGDETAIL 
+-- 
+ALTER TABLE ASU.TDIAGDETAIL ADD (
+  CONSTRAINT TDIAGDETAIL_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

@@ -1,0 +1,26 @@
+Configurator by Fomin A.
+
+Для работы программы необходимо выполнить скрипты на БД :
+
+1. создадим таблицу точек архивации :
+CREATE TABLE BACKUPPOINTS (
+    FDATE      TIMESTAMP,
+    FFILENAME  VARCHAR(250)
+);
+CREATE INDEX BACKUPPOINTS_IDX1 ON BACKUPPOINTS (FDATE);
+
+2. Таблица DICOM устройств
+ALTER TABLE DEVICES ADD (
+    FC_COMMENT  VARCHAR(250)
+);
+ALTER TABLE DEVICES ADD CONSTRAINT PK_DEVICES PRIMARY KEY (FK_ID);
+CREATE OR ALTER TRIGGER DEVICES_BI0 FOR DEVICES
+ACTIVE BEFORE INSERT POSITION 0
+AS
+begin
+  if (new.fk_id is null) then
+  begin
+    new.fk_id = gen_id(GEN_DEVICES_ID, 1);
+  end
+end;
+

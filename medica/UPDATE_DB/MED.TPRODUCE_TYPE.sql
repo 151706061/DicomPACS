@@ -1,0 +1,76 @@
+CREATE TABLE MED.TPRODUCE_TYPE
+  (
+  FK_ID NUMBER,
+  FC_NAME VARCHAR2 (30),
+  FN_ORDER NUMBER
+ )
+/
+COMMENT ON TABLE MED.TPRODUCE_TYPE IS 
+'Таблица типов производства. Author:Voronov'
+/
+COMMENT ON COLUMN MED.TPRODUCE_TYPE.FK_ID IS 'ключ'
+/
+COMMENT ON COLUMN MED.TPRODUCE_TYPE.FC_NAME IS 'название'
+/
+COMMENT ON COLUMN MED.TPRODUCE_TYPE.FN_ORDER IS 'порядок'
+/
+ALTER TABLE MED.TPRODUCE_TYPE ADD (FC_SYNONIM VARCHAR2 (20) )
+/
+COMMENT ON COLUMN MED.TPRODUCE_TYPE.FC_SYNONIM IS 'синоним'
+/
+
+CREATE Unique INDEX MED.TRODUCE_TYPE_UK ON MED.TPRODUCE_TYPE
+   (  FK_ID ASC  ) 
+ COMPUTE STATISTICS 
+/
+
+CREATE SEQUENCE MED.SEQ_TPRODUCE_TYPE
+/
+
+CREATE OR REPLACE TRIGGER med.tproduce_type_ins
+ BEFORE
+  INSERT
+ ON med.tproduce_type
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  if :new.fk_id is null then
+    select MED.SEQ_TPRODUCE_TYPE.NEXTVAL into :new.fk_id from dual;
+  end if;
+end;
+/
+
+CREATE OR REPLACE TRIGGER med.tproduce_type_del
+ BEFORE
+  DELETE
+ ON med.tproduce_type
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  update med.tkartcompos ks set ks.FK_PRODUCE_TYPE = null
+  where ks.FK_PRODUCE_TYPE = :old.fk_id;
+end;
+/
+
+ALTER TABLE MED.TPRODUCE_TYPE ADD CONSTRAINT CTPRODUCE_TYPE_UK
+  UNIQUE (
+  FK_ID)
+/
+
+INSERT INTO med.tproduce_type
+("FC_NAME","FN_ORDER","FC_SYNONIM")
+VALUES
+('Лабораторно-фасовочные',1,'LFP')
+/
+INSERT INTO med.tproduce_type
+("FC_NAME","FN_ORDER","FC_SYNONIM")
+VALUES
+('Лабораторные',2,'LP')
+/
+INSERT INTO med.tproduce_type
+("FC_NAME","FN_ORDER","FC_SYNONIM")
+VALUES
+('Несерийные',3,'NSP')
+/
+
+

@@ -1,0 +1,22 @@
+DROP PROCEDURE ASU.DO_DELETE_REGION
+/
+
+--
+-- DO_DELETE_REGION  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TREGION (Table)
+--
+CREATE OR REPLACE PROCEDURE ASU."DO_DELETE_REGION" 
+   ( pFK_ID IN NUMBER)
+   IS
+BEGIN
+  DELETE FROM TREGION WHERE FK_ID=pFK_ID;
+END; -- Procedure
+/
+
+SHOW ERRORS;
+
+

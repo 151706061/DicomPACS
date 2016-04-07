@@ -1,0 +1,61 @@
+DROP TABLE ASU.TPROFP_DIAG_NAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TPROFP_DIAG_NAZ  (Table) 
+--
+CREATE TABLE ASU.TPROFP_DIAG_NAZ
+(
+  FK_ID          NUMBER,
+  FK_LISTID      NUMBER,
+  FK_PROFP_DIAG  NUMBER,
+  FC_NOMDOC      VARCHAR2(20 BYTE),
+  FD_DATADOC     DATE,
+  FC_TEXTDOG     VARCHAR2(300 BYTE),
+  FD_DATA_MKB    DATE,
+  FN_VID         NUMBER                         DEFAULT 1,
+  FK_DIAGID      NUMBER,
+  FC_TEXT7       VARCHAR2(300 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TPROFP_DIAG_NAZ.FK_DIAGID IS '—в€занный диагноз пациента из asu.tdiag (выбираетс€ на форме »«¬≈ў≈Ќ»я)'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_DIAG_NAZ.FC_TEXT7 IS 'ѕараграф 7 в отчете'
+/
+
+
+--
+-- TPROFP_DIAG_NAZ_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPROFP_DIAG_NAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFP_DIAG_NAZ_BEFORE_INSERT"
+ BEFORE
+  INSERT
+ ON tprofp_DIAG_naz
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  select seq_profp_dog.NEXTVAL into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

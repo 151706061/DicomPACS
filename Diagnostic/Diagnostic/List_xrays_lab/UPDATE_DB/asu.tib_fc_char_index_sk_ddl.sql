@@ -1,0 +1,1 @@
+create index asu.TIB_FC_CHAR on ASU.TIB (fc_char);

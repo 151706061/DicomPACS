@@ -1,0 +1,113 @@
+ALTER TABLE ASU.TPAYMENT
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TPAYMENT CASCADE CONSTRAINTS
+/
+
+--
+-- TPAYMENT  (Table) 
+--
+CREATE TABLE ASU.TPAYMENT
+(
+  FK_ID             NUMBER                      NOT NULL,
+  FK_INSURANCEID    NUMBER,
+  FK_GARANTLETTERS  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPAYMENT IS '≈сли плательщик юр.лицо, то пациент св€зан с плательщиком договорами - полисом или гарантийным письмом. TPAYMENT.FK_ID указываетсч€ в TAPPENDEX.FK_PAYMENTID A.Nakorjakov 070508'
+/
+
+COMMENT ON COLUMN ASU.TPAYMENT.FK_ID IS 'SEQUENCE=[SEQ_TPAYMENT]'
+/
+
+COMMENT ON COLUMN ASU.TPAYMENT.FK_INSURANCEID IS 'TINSURDOCS.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TPAYMENT.FK_GARANTLETTERS IS 'TGARANTLETTERS.FK_ID (ƒл€ ёгорска - buh.tdogovor.fk_id - договор по которому происходит оплата)'
+/
+
+
+--
+-- PK_PAYMENT  (Index) 
+--
+--  Dependencies: 
+--   TPAYMENT (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_PAYMENT ON ASU.TPAYMENT
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPAYMENT_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPAYMENT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPAYMENT_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TPAYMENT  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TPAYMENT.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TPAYMENT 
+-- 
+ALTER TABLE ASU.TPAYMENT ADD (
+  CONSTRAINT PK_PAYMENT
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

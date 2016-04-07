@@ -1,0 +1,25 @@
+DROP INDEX ASU.PK_TEXP_TADRESS
+/
+
+--
+-- PK_TEXP_TADRESS  (Index) 
+--
+CREATE UNIQUE INDEX ASU.PK_TEXP_TADRESS ON ASU.TEXP_TADRESS
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

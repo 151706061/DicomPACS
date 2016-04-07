@@ -1,0 +1,58 @@
+DROP FUNCTION ASU.GET_NAPRAVLEN
+/
+
+--
+-- GET_NAPRAVLEN  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TNAZIS (Table)
+--   TIB (Table)
+--   TCOMPANY (Table)
+--   TSMID (Table)
+--   GET_SMIDNAME (Function)
+--   GET_VRACHFCOTDEL (Function)
+--   DO_VRACHFIO (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_NAPRAVLEN" (PFK_PACID IN NUMBER, PFK_NAZID IN NUMBER)
+  RETURN VARCHAR2 IS
+  CURSOR C1 IS SELECT GET_VRACHFCOTDEL(FK_VRACHID)||' '||'-'||' '||DO_VRACHFIO(FK_VRACHID) FROM TNAZIS WHERE FK_ID = PFK_NAZID; 
+  CURSOR C2 IS SELECT DECODE(FC_CHAR, NULL, ASU.GET_SMIDNAME(TIB.FK_SMID), FC_CHAR)
+                 FROM TIB
+                WHERE FK_PACID = PFK_NAZID
+                  AND FK_SMID IN (SELECT FK_ID
+                                    FROM TSMID
+                                  START WITH FC_SYNONIM = 'KEM_NAPRAVLEN'
+                                  CONNECT BY PRIOR FK_ID = FK_OWNER
+                                  UNION ALL
+                                  SELECT FK_ID FROM ASU.TCOMPANY
+                                  START WITH FC_SYNONIM = 'ROOT_LPU'
+                                  CONNECT BY PRIOR FK_ID = FK_OWNER);
+  CURSOR C3 IS SELECT MAX(FC_CHAR) FROM ASU.TIB 
+                WHERE FK_PACID = PFK_NAZID 
+                  AND FK_SMID IN (SELECT FK_ID FROM TSMID WHERE FC_SYNONIM = 'VRACH_NAPRAVIL');
+  cNAME1 VARCHAR(3000);
+  cNAME2 VARCHAR(3000);
+  cNAME3 VARCHAR2(3000);
+BEGIN
+  OPEN C3;
+  FETCH C3 INTO cNAME3;
+  CLOSE C3;
+  OPEN C2;
+  FETCH C2 INTO cNAME2;
+  CLOSE C2;
+  IF cNAME2 IS NULL THEN
+      OPEN C1; 
+      FETCH C1 INTO cNAME1;
+      CLOSE C1;
+      RETURN cNAME1;
+  ELSE
+    RETURN cNAME2||' '||'-'||' '||cNAME3;
+  END IF;
+END;
+/
+
+SHOW ERRORS;
+
+

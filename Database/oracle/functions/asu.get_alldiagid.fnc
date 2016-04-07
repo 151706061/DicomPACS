@@ -1,0 +1,36 @@
+DROP FUNCTION ASU.GET_ALLDIAGID
+/
+
+--
+-- GET_ALLDIAGID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_ALLDIAGID" 
+return number
+is
+begin
+  return 2999;
+end;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM STAT.GET_ALLDIAGID
+/
+
+--
+-- GET_ALLDIAGID  (Synonym) 
+--
+--  Dependencies: 
+--   GET_ALLDIAGID (Function)
+--
+CREATE SYNONYM STAT.GET_ALLDIAGID FOR ASU.GET_ALLDIAGID
+/
+
+
+GRANT EXECUTE ON ASU.GET_ALLDIAGID TO PUBLIC
+/
+

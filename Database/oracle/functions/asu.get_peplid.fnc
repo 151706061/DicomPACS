@@ -1,0 +1,44 @@
+DROP FUNCTION ASU.GET_PEPLID
+/
+
+--
+-- GET_PEPLID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TAMBULANCE (Table)
+--   TPEOPLES (Table)
+--   TKARTA (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PEPLID" (pFK_PACID IN NUMBER) RETURN NUMBER
+-- Created by TimurLan
+/* Modified by Spasskiy S.N. 07102008
+   Привел к нормальному виду
+*/
+ IS
+  CURSOR c IS
+    SELECT FK_PEPLID
+      FROM TKARTA
+     WHERE FK_ID = pFK_PACID
+    UNION ALL
+    SELECT FK_PEPLID
+      FROM TAMBULANCE
+     WHERE FK_ID = pFK_PACID
+    UNION ALL
+    SELECT FK_ID FROM TPEOPLES WHERE FK_ID = pFK_PACID;
+
+  RESULT NUMBER;
+BEGIN
+  --  SELECT FK_PEPLID into Result FROM TKARTA WHERE FK_ID = pFK_PACID;
+  OPEN c;
+  FETCH c
+    INTO RESULT;
+  CLOSE c;
+  RETURN(NVL(RESULT, -1));
+END GET_PEPLID;
+/
+
+SHOW ERRORS;
+
+

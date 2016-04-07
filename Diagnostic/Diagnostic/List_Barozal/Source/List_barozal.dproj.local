@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2011.07.15 14:44:31.966.pas,C:\Users\Prihodko_NN\Documents\RAD Studio\Projects\Unit1.pas=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fMain.pas</Transaction>
+    <Transaction>2011.07.15 14:44:31.966.dfm,C:\Users\Prihodko_NN\Documents\RAD Studio\Projects\Unit1.dfm=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fMain.dfm</Transaction>
+    <Transaction>2011.07.15 14:44:40.205.dproj,C:\Users\Prihodko_NN\Documents\RAD Studio\Projects\Project1.dproj=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\List_barozal.dproj</Transaction>
+    <Transaction>2011.07.18 10:47:53.908.pas,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.pas=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fAdd.pas</Transaction>
+    <Transaction>2011.07.18 10:47:53.908.dfm,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.dfm=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fAdd.dfm</Transaction>
+    <Transaction>2011.07.20 08:36:41.935.pas,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.pas=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fSetRemark.pas</Transaction>
+    <Transaction>2011.07.20 08:36:41.935.dfm,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.dfm=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fSetRemark.dfm</Transaction>
+    <Transaction>2011.07.20 10:08:28.592.pas,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.pas=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fSetDs.pas</Transaction>
+    <Transaction>2011.07.20 10:08:28.592.dfm,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.dfm=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fSetDs.dfm</Transaction>
+    <Transaction>2011.07.20 16:42:09.821.pas,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.pas=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fEdit.pas</Transaction>
+    <Transaction>2011.07.20 16:42:09.821.dfm,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.dfm=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fEdit.dfm</Transaction>
+    <Transaction>2011.07.21 10:32:37.653.pas,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.pas=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fParams.pas</Transaction>
+    <Transaction>2011.07.21 10:32:37.653.dfm,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.dfm=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fParams.dfm</Transaction>
+    <Transaction>2011.07.21 14:20:27.608.pas,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.pas=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fAddEdit.pas</Transaction>
+    <Transaction>2011.07.21 14:20:27.608.dfm,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.dfm=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fAddEdit.dfm</Transaction>
+    <Transaction>2011.08.08 10:36:35.706.pas,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.pas=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fSetOtdel.pas</Transaction>
+    <Transaction>2011.08.08 10:36:35.706.dfm,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.dfm=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fSetOtdel.dfm</Transaction>
+    <Transaction>2012.10.25 08:33:11.538.pas,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.pas=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fEditDate.pas</Transaction>
+    <Transaction>2012.10.25 08:33:11.538.dfm,C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\Unit1.dfm=C:\Work\Trunk_AUTH\ASU2\Diagnostic\List_Barozal\Source\fEditDate.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

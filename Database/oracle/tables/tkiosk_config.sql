@@ -1,0 +1,137 @@
+ALTER TABLE ASU.TKIOSK_CONFIG
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TKIOSK_CONFIG CASCADE CONSTRAINTS
+/
+
+--
+-- TKIOSK_CONFIG  (Table) 
+--
+CREATE TABLE ASU.TKIOSK_CONFIG
+(
+  FK_ID           NUMBER(15)                    NOT NULL,
+  FK_OTDEL        NUMBER(15),
+  FL_SKEEP_OTDEL  NUMBER(1),
+  FC_IP           VARCHAR2(250 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TKIOSK_CONFIG IS 'Настройки киоска. Author:Oleinikov'
+/
+
+COMMENT ON COLUMN ASU.TKIOSK_CONFIG.FK_OTDEL IS 'Ссылка на отдел (TOTDEL)'
+/
+
+COMMENT ON COLUMN ASU.TKIOSK_CONFIG.FL_SKEEP_OTDEL IS 'Флаг. Ппропускать выбор отдела'
+/
+
+
+--
+-- TKIOSK_CONFIG_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TKIOSK_CONFIG (Table)
+--
+CREATE UNIQUE INDEX ASU.TKIOSK_CONFIG_BY_ID ON ASU.TKIOSK_CONFIG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TKIOSK_CONFIG_FK_OTDEL  (Index) 
+--
+--  Dependencies: 
+--   TKIOSK_CONFIG (Table)
+--
+CREATE INDEX ASU.TKIOSK_CONFIG_FK_OTDEL ON ASU.TKIOSK_CONFIG
+(FK_OTDEL)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TKIOSK_CONFIG_BEF_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TKIOSK_CONFIG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TKIOSK_CONFIG_BEF_INS"
+BEFORE INSERT
+ON ASU.TKIOSK_CONFIG REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  IF :NEW.FK_ID IS NULL THEN
+     SELECT ASU.SEQ_TKIOSK_CONFIG.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  END IF;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TKIOSK_CONFIG 
+-- 
+ALTER TABLE ASU.TKIOSK_CONFIG ADD (
+  CONSTRAINT TKIOSK_CONFIG_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

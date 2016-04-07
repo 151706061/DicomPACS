@@ -1,0 +1,25 @@
+DROP INDEX ASU.TNAZAN_BY_PACID
+/
+
+--
+-- TNAZAN_BY_PACID  (Index) 
+--
+CREATE INDEX ASU.TNAZAN_BY_PACID ON ASU.TNAZAN
+(FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          3584K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

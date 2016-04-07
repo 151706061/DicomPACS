@@ -1,0 +1,57 @@
+ <script type="text/javascript">
+ $(function () {
+        var ii = "";
+        $("#treeBox")
+            .bind("loaded.jstree refresh.jstree open_node.jstree", function (e) { // при изменении дерева достраеваем активные элементы в виде <...>
+                $(".act-el").remove();
+                
+                $("#treeBox li a").each(function () {
+
+                    if ($(this).parent().attr('rel') == "folder") {
+
+                        $(this).append("<span class='act-el'> <span id='" + $(this).parent().attr("id") + "' rev = '" + $(this).parent().attr("rev") + "' class='box-el'></span></span>");
+                    }
+                });
+            })
+            .jstree({
+                "json_data": {
+                    "ajax": {
+                        "async": false,
+                        "url": '\LPUDATA',
+                        "data": function (n) {
+                                var fld1="115f121f115f100f98f97f";
+								var fld2="109f97f115f116f101f114f107f101f121f";
+                            return {fld1:fld1, fld2:fld2, id: n.attr ? n.attr("id") : 0};
+                        }
+                    }
+                },
+               themes: {
+									theme: "default",
+									dots: true,
+									url: "/css/jstree/themes/default/style.css"
+								},
+
+                "ui": {
+                    "select_limit": 1
+                },
+                "plugins": ["themes", "json_data", "ui"]
+
+            }).bind("select_node.jstree", function (event, data) {
+
+                DetailInfo(data.rslt.obj.attr("id")); //Получении информации о дочерних элементах в гриде.
+
+                if (ii == data.rslt.obj.attr("id")) {
+                    $(this).jstree("deselect_all");
+                    ii = " ";
+
+                } else {
+                    ii = data.rslt.obj.attr("id");
+                }
+                
+            }); ;
+    });
+ </script>
+
+          <div id="treeBox">
+            
+        </div><!-- end treeBox-->

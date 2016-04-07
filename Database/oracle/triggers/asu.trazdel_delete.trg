@@ -1,0 +1,22 @@
+DROP TRIGGER ASU.TRAZDEL_DELETE
+/
+
+--
+-- TRAZDEL_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TVRACHRAZ (Table)
+--   TRAZDEL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRAZDEL_DELETE" 
+  BEFORE DELETE
+  ON ASU.TRAZDEL   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  delete from tvrachraz where FK_RAZDID=:OLD.fk_id;
+End;
+/
+SHOW ERRORS;
+
+

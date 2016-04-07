@@ -1,0 +1,25 @@
+DROP INDEX ASU.TEQUEUE_FK_WINDOW
+/
+
+--
+-- TEQUEUE_FK_WINDOW  (Index) 
+--
+CREATE INDEX ASU.TEQUEUE_FK_WINDOW ON ASU.TEQUEUE
+(FK_WINDOW)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

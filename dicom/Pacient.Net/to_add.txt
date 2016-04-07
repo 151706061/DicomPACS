@@ -1,0 +1,276 @@
+1. В типы назначений добавить параметр - aetitle аппарата 
+(аппарат куда будут назначены и переданы списки назначений).
+2. В типы назначений добавить параметр - accessionnumber исследования
+
+3. Обновить на 1.20 C:\WorkingFolders\PacientNet_TulaForEntity
+сделать update
+
+4. в студии открыть  PacientNet.Domain    PgDataModel.edml
+с помощью entity developer (default) 
+- update model from database
+- подождать и скопировать сгенерированные файлы
+
+
+5. в Model : PresctypeNaz.cs - line 33 add
+
+	public bool dicom_pr { get; set; }
+        public string modality { get; set; }
+
+6. View  ...\Views\Presctype\AddPresctype.cshtml  -  line 720  add    
+
+    <div id="dicom_pr" class="wide-block">
+        <div class="field-112 empty-lbl">
+            @Html.CheckBoxFor(x => x.dicom_pr)
+            @Html.LabelFor(model => model.dicom_pr, "признак DICOM")
+        </div>
+    </div>
+    <div class="wide-block">
+        <div class="lbl-112">
+            @Html.LabelFor(model => model.modality, "Модальность: ")
+        </div>
+        <div class="field-112 full">
+            @Html.TextBoxFor(model => model.modality)
+        </div>
+    </div>
+
+
+line 363  add
+
+  jQuery("#dicom_pr").show();
+  jQuery("#modality").show();
+
+
+7. в контроллере      ...\PacientNet_Tula\PacientNet.WebUI\Controllers\PresctypeController.cs
+
+
+add line 1248, 1275
+
+  if (PresctypeNaz.dicom_pr)
+  {
+    Presctype.DicomPr = "1";
+  } else {
+    Presctype.DicomPr = "0";
+  }
+  Presctype.Modality = PresctypeNaz.modality;
+
+а также строка  1002  :
+
+  if (Presctype.DicomPr == "1")
+  {
+    PresctypeNaz.dicom_pr = true;
+  }
+  else
+  {
+    PresctypeNaz.dicom_pr = false;
+  }
+  PresctypeNaz.modality = Presctype.Modality;
+
+
+8. C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.WebUI\Web.config
+line 70
+
+    <!--Настройки для WorkList сервера -->
+    <add key="worklist_chk" value="1" />
+    <add key="worklist_database" value="test" />
+    <add key="worklist_port" value="5432" />
+    <add key="worklist_server" value="localhost" />
+    <add key="worklist_user" value="postgres" />
+    <add key="worklist_password" value="postgres" />
+    <add key="worklist_schema" value="mypacs" />
+
+
+9. Добавление назначения   
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Domain\Concrete\DictionaryN\PrescRepository.cs
+
+line 15
+using PacientNet.Domain.Models.AccessWorkList;
+
+
+line 436
+
+// call worklist
+AccessWorkList awl = new AccessWorkList();
+awl.pNazChange( presc_id, 0 );                  - УБРАЛИ (ПЕРЕНЕСЛИ)
+
+
+10. Вывод ссылки на исследование в списке назначений
+
+
+...\PacientNet.WebUI\Views\PriemList\PriemList.cshtml   line 995 - список полей
+
+
+...\PacientNet.Domain\Concrete\DictionaryN\PrescRepository.cs  line 718
+
+добавим поле line 771
+
+pr.accessionnumber 
+
+
+...\PacientNet.WebUI\Views\PriemList\PriemList.cshtml  
+
+line 8
+@using PacientNet.Domain.Models.AccessWorkList
+
+line 870
+add
+
+    function ANListGrid_EditRecord(href) {
+        window.open( href, "_blank" );
+       return false;
+    }
+
+    function Record_ANFormater(cellval, opts, row) {
+        if (row.accessionnumber != undefined && row.accessionnumber != "") {
+            return '<a href="#" onclick="ANListGrid_EditRecord(\'' + vPACS+row.accessionnumber + '\');return false"><span>' + vPACS+row.accessionnumber + '</span></a>';
+        } else {
+            return '<a><span>' + cellval + '</span></a>';
+        }
+    }
+
+
+line 1057 add
+
+                    
+.AddColumn(new GridColumnModel("accessionnumber").SetCaption("Номер протокола").SetAlign("").SetFormatter("Record_ANFormater"))
+             
+
+
+11. в PacientNet.Domain\Models\AccessWorkList\AccessWorkList.cs добавить функцию
+
+// функция возвращает ссылку на PACS
+        public string pGetPACS()
+        {
+            // 
+            // определим параметры назначения
+            string Sql = "select t.url from mir.xray_pacs t where t.enable=1 ";
+            Hashtable ht = new Hashtable();
+            DataRow dr = DataAccess.GetFirstRow(Sql, ht);
+
+            string url = dr != null ? dr["url"].ToStringSafe() : null;
+
+            return url;
+        }
+
+12.    ...\PacientNet.WebUI\Controllers\PriemListController.cs
+
+line 327
+
+add
+
+accessionnumber = p.accessionnumber
+
+
+line 724 add
+
+public String accessionnumber { get; set; }
+
+
+13 file  ...\PacientNet.Domain\Models\Presc\PrescForList.cs
+
+
+add
+
+public String accessionnumber { get; set; }
+
+
+
+-----------------------------------------------------------------
+
+ПРАВКА КОДА
+
+1. Добавим C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Domain\Infrastructure\SQL\SQLWorkList.cs
+и в него скинем все sql запросы
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Domain\Infrastructure\SQL\WorkListConnection.cs
+и в него connection
+
+2. в файл C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Domain\Infrastructure\SQL\SQLRegist.cs
+перенести работу с mir.presc - назначениями
+
+ /// <summary>
+        /// чтение параметров назначения
+        /// </summary>
+        /// <param name="pIdNaz"></param>
+        public static DataRow FpNazChange(string pIdNaz)
+        {
+            // определим параметры назначения
+            string Sql = "select p2.dicom_pr, p2.modality, p2.name as studydescription,  " +
+                                " pl.firstname, pl.middlename, pl.lastname, " +
+                                " pl.birthday, pl.sex, p1.runbeg_dt, " +
+                                " mir.mdoc_get_num(md.id) as patientid   " +
+                                " from mir.presc p1, mir.presctype p2, mir.mdoc md, mir.people pl  " +
+                                " where p1.id=@id and p2.oid=p1.presctype_id " +
+                                " and md.id=p1.mdoc_id and md.people_id=pl.oid ";
+            Hashtable ht = new Hashtable();
+            DataAccess.AddParameter(ht, "id", pIdNaz, DataAccessType.VarChar);
+            return DataAccess.GetFirstRow(Sql, ht); 
+        }
+
+        /// <summary>
+        /// чтение параметров назначения
+        /// </summary>
+        /// <param name="pIdNaz"></param>
+        /// <param name="pvAccessionNumber"></param>
+        public static void UpdateAccessionNumber(string pIdNaz, string pvAccessionNumber)
+        {
+            const string Sql1 = " update mir.presc set accessionnumber=:accessionnumber where id=:id ";
+            Hashtable ht1 = new Hashtable();
+            DataAccess.AddParameter(ht1, "id", pIdNaz, DataAccessType.VarChar);
+            DataAccess.AddParameter(ht1, "accessionnumber", pvAccessionNumber, DataAccessType.VarChar);
+            DataAccess.ExecuteProc(Sql1, ht1);
+        }
+
+
+3. изменить C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Domain\Models\AccessWorkList\AccessWorkList.cs
+повыносить из него sql куски
+
+4. перенести остаток
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Domain\Models\AccessWorkList\AccessWorkList.cs  -  УДАЛИТЬ
+
+в
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Core\Infrastructure\Concrete\MainWorkList.cs
+
+
+добавим интерфейс
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Core\Infrastructure\Abstract\IMainWorkList.cs
+
+добавим в файл
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.WebUI\App_Start\NinjectMVC3.cs
+
+в конец :
+
+
+------------------------------------
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.WebUI\Controllers\PriemController.cs
+
+line 
+
+------------------------------------
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Domain\Concrete\DictionaryN\PrescRepository.cs
+
+line 436,  15  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

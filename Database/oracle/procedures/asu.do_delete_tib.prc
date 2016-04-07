@@ -1,0 +1,27 @@
+DROP PROCEDURE ASU.DO_DELETE_TIB
+/
+
+--
+-- DO_DELETE_TIB  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TIB (Table)
+--   TSMID (Table)
+--   PKG_REGIST_PEPLFUNC (Package)
+--
+CREATE OR REPLACE PROCEDURE ASU."DO_DELETE_TIB"
+   (pFK_PACID         IN NUMBER,
+    pFC_SYNONIM       IN VARCHAR2)
+   IS
+BEGIN
+     DELETE FROM ASU.TIB T
+     WHERE T.FK_PACID = ASU.PKG_REGIST_PEPLFUNC.GET_PEPL_ID(pFK_PACID)
+        AND FK_SMEDITID IN (SELECT FK_ID FROM ASU.TSMID WHERE (fl_del <> 1 or fl_del is null) and FC_SYNONIM = pFC_SYNONIM);
+END "DO_DELETE_TIB"; -- Procedure
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,26 @@
+DROP INDEX ASU.I_RSD_DBF_BY_KEY
+/
+
+--
+-- I_RSD_DBF_BY_KEY  (Index) 
+--
+CREATE UNIQUE INDEX ASU.I_RSD_DBF_BY_KEY ON ASU.TRSD_DBF
+(YEAR, MONTH, LPU_ID, ID_ILL, P_ID_ILL, 
+SANK_KOD)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,18 @@
+.concl_edtbtn {
+	background-color:#65B1D5;
+	border:none;
+	width:180px;
+	color:white !important;
+}
+
+.t_hgh_gr {
+/*	min-height: 30px !important;
+	max-height: 300px !important;*/
+	height:900px /*!important*/;
+}
+
+.t_hgh_gr1 {
+/*	min-height: 30px !important;
+	max-height: 300px !important;*/
+	height:900px /*!important*/;
+}

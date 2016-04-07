@@ -1,0 +1,33 @@
+DROP FUNCTION ASU.GET_PAC_ROJD
+/
+
+--
+-- GET_PAC_ROJD  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TPEOPLES (Table)
+--   PKG_REGIST_PACFUNC (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PAC_ROJD" ( PFK_ID IN NUMBER )
+ RETURN DATE
+ IS
+   CURSOR C( PID IN NUMBER ) IS
+      SELECT
+         FD_ROJD
+         FROM TPEOPLES
+         WHERE FK_ID = PKG_REGIST_PACFUNC.GET_PEPL_ID(PID);
+   D DATE;
+ BEGIN
+   OPEN C( PFK_ID );
+   FETCH C
+      INTO D;
+   CLOSE C;
+   RETURN D;
+END;
+/
+
+SHOW ERRORS;
+
+

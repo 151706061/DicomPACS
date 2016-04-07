@@ -1,0 +1,124 @@
+DROP TABLE ASU.TSTREET CASCADE CONSTRAINTS
+/
+
+--
+-- TSTREET  (Table) 
+--
+CREATE TABLE ASU.TSTREET
+(
+  FK_ID       NUMBER(16)                        NOT NULL,
+  FC_NAME     VARCHAR2(30 BYTE),
+  FL_DEFAULT  NUMBER(1)                         DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSTREET IS 'Справочник "Улицы" by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TSTREET.FK_ID IS 'SEQUENCE=[SEQ_TSTREET]'
+/
+
+COMMENT ON COLUMN ASU.TSTREET.FC_NAME IS 'название'
+/
+
+COMMENT ON COLUMN ASU.TSTREET.FL_DEFAULT IS 'по-умолчанию'
+/
+
+
+--
+-- TSTREET_BY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TSTREET (Table)
+--
+CREATE UNIQUE INDEX ASU.TSTREET_BY_FK_ID ON ASU.TSTREET
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSTREET_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TSTREET (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSTREET_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TSTREET  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  nTemp NUMBER;
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TSTREET', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TSTREET', 'FC_NAME', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fc_name), :new.fk_id);
+  elsif DELETING then
+    PKG_LOG.Do_log('TSTREET', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_id), null, :old.fk_id);
+    PKG_LOG.Do_log('TSTREET', 'FC_NAME', 'DELETE', PKG_LOG.GET_VALUE(:old.FC_NAME), null, :old.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TSTREET', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FC_NAME') AND PKG_LOG.GET_VALUE(:old.FC_NAME) <> PKG_LOG.GET_VALUE(:new.FC_NAME) then
+      PKG_LOG.Do_log('TSTREET', 'FC_NAME', 'UPDATE', PKG_LOG.GET_VALUE(:old.FC_NAME), PKG_LOG.GET_VALUE(:new.FC_NAME), :old.fk_id);
+    end if;
+  end if;
+  null;
+END TSTREET_LOG;
+/
+SHOW ERRORS;
+
+
+--
+-- TSTREET_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TSTREET (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSTREET_BEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TSTREET   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TSTREET.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+GRANT DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TSTREET TO EXCHANGE
+/
+
+GRANT DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TSTREET TO EXCH43
+/
+

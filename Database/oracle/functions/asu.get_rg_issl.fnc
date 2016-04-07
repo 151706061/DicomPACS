@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_RG_ISSL
+/
+
+--
+-- GET_RG_ISSL  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_RG_ISSL" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 41940;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_RG_ISSL TO PUBLIC
+/
+

@@ -1,0 +1,36 @@
+DROP TRIGGER ASU.TAUDITREP_LOG
+/
+
+--
+-- TAUDITREP_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DBMS_STANDARD (Package)
+--   PKG_LOG (Package)
+--   TAUDITREP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TAUDITREP_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TAUDITREP  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  nTemp NUMBER;
+BEGIN
+/*
+  created by Spasskiy S.N.
+  для логирования действий просмотра ИБ Врачами
+*/
+  if INSERTING  and :new.FK_RAZDELID = 5 then
+    PKG_LOG.Do_log('TAUDITREP', 'FC_COMMENT', 'INSERT', null, PKG_LOG.GET_VALUE(:new.FC_COMMENT), :new.FK_PACID);
+    PKG_LOG.Do_log('TAUDITREP', 'FK_VRACHID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.FK_VRACHID), :new.FK_PACID);
+    PKG_LOG.Do_log('TAUDITREP', 'FK_PACID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.FK_PACID), :new.FK_PACID);
+    PKG_LOG.Do_log('TAUDITREP', 'FK_OBJID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.FK_OBJID), :new.FK_PACID);
+  end if;
+
+END TAUDITREP_LOG;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,41 @@
+DROP TABLE ASU.TQUEUEWTYPE CASCADE CONSTRAINTS
+/
+
+--
+-- TQUEUEWTYPE  (Table) 
+--
+CREATE TABLE ASU.TQUEUEWTYPE
+(
+  FK_QUEUETYPE  NUMBER                          NOT NULL,
+  FK_WINDOW     NUMBER                          NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TQUEUEWTYPE IS 'связка типов очереди с окнами регистратуры для электронной очереди'
+/
+
+COMMENT ON COLUMN ASU.TQUEUEWTYPE.FK_QUEUETYPE IS 'тип очереди'
+/
+
+COMMENT ON COLUMN ASU.TQUEUEWTYPE.FK_WINDOW IS 'номер окна'
+/
+
+

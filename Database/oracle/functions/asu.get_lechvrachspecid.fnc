@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_LECHVRACHSPECID
+/
+
+--
+-- GET_LECHVRACHSPECID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_LECHVRACHSPECID" 
+return number
+is
+begin
+  return 893;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_LECHVRACHSPECID TO PUBLIC
+/
+

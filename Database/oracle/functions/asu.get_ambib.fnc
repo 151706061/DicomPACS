@@ -1,0 +1,27 @@
+DROP FUNCTION ASU.GET_AMBIB
+/
+
+--
+-- GET_AMBIB  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TAMBULANCE (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_AMBIB" 
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+  strTemp VARCHAR2(20);
+  CURSOR cTemp IS SELECT FK_IBID||'/'||FK_IBY FROM TAMBULANCE WHERE FK_ID=pFK_ID;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO strTemp;
+  CLOSE cTemp;
+  RETURN strTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

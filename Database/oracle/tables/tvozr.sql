@@ -1,0 +1,74 @@
+DROP TABLE ASU.TVOZR CASCADE CONSTRAINTS
+/
+
+--
+-- TVOZR  (Table) 
+--
+CREATE TABLE ASU.TVOZR
+(
+  FK_ID    NUMBER(15),
+  FN_1     NUMBER(3),
+  FN_2     NUMBER(3),
+  FC_NAME  VARCHAR2(10 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVOZR IS 'Возрастные категории для отчета по возрастам by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TVOZR.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TVOZR.FN_1 IS 'от'
+/
+
+COMMENT ON COLUMN ASU.TVOZR.FN_2 IS 'до'
+/
+
+COMMENT ON COLUMN ASU.TVOZR.FC_NAME IS 'название'
+/
+
+
+--
+-- TVOZR_N1_N2  (Index) 
+--
+--  Dependencies: 
+--   TVOZR (Table)
+--
+CREATE INDEX ASU.TVOZR_N1_N2 ON ASU.TVOZR
+(FN_1, FN_2)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

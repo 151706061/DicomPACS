@@ -1,0 +1,43 @@
+DROP TABLE ASU.TVRACHKAB_NAZ_DISMISSED CASCADE CONSTRAINTS
+/
+
+--
+-- TVRACHKAB_NAZ_DISMISSED  (Table) 
+--
+CREATE TABLE ASU.TVRACHKAB_NAZ_DISMISSED
+(
+  FK_ID           NUMBER(10),
+  FK_SOTRKABID    NUMBER(10),
+  FK_SMID         NUMBER(15),
+  FN_DOSTUP       NUMBER(1)                     DEFAULT 3,
+  FN_PODPIS       NUMBER(1)                     DEFAULT 0,
+  FN_ACCESS       NUMBER(1)                     DEFAULT 0,
+  FK_ID_          NUMBER(15),
+  FK_MEDSPEC      NUMBER,
+  FK_PMSP         NUMBER,
+  FK_VSO_VSD_SSO  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          560K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVRACHKAB_NAZ_DISMISSED IS '(сбнкеммше) Autor:Kosov E.'
+/
+
+

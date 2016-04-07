@@ -1,0 +1,18 @@
+DROP FUNCTION ASU.GET_YEARID
+/
+
+--
+-- GET_YEARID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_YEARID" RETURN NUMBER is
+  Begin
+   RETURN  837823;
+  End;
+/
+
+SHOW ERRORS;
+
+

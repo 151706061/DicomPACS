@@ -1,0 +1,22 @@
+DROP TRIGGER ASU.TKABSOOTVETKAB_BEFOREINSERT
+/
+
+--
+-- TKABSOOTVETKAB_BEFOREINSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TKABSOOTVETKAB (Sequence)
+--   TKABSOOTVETKAB (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TKABSOOTVETKAB_BEFOREINSERT" 
+  before insert on TKABSOOTVETKAB
+  for each row
+begin
+  SELECT seq_TKABSOOTVETKAB.NEXTVAL INTO :new.fk_id FROM dual;
+end;
+/
+SHOW ERRORS;
+
+

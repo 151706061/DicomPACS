@@ -1,0 +1,118 @@
+ALTER TABLE ASU.TMULTIMSG
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TMULTIMSG CASCADE CONSTRAINTS
+/
+
+--
+-- TMULTIMSG  (Table) 
+--
+CREATE TABLE ASU.TMULTIMSG
+(
+  FK_ID        NUMBER                           NOT NULL,
+  FK_RESENDER  NUMBER,
+  FK_RECIEVER  NUMBER,
+  FD_DATE      DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TMULTIMSG IS 'Направления перенаправления сообщений'
+/
+
+COMMENT ON COLUMN ASU.TMULTIMSG.FK_ID IS 'SEQUENCE=[SEQ_TMULTIMSG]'
+/
+
+COMMENT ON COLUMN ASU.TMULTIMSG.FK_RESENDER IS 'Пользователь пересылающий сообщение'
+/
+
+COMMENT ON COLUMN ASU.TMULTIMSG.FK_RECIEVER IS 'Пользоваель, получающий сообщение'
+/
+
+COMMENT ON COLUMN ASU.TMULTIMSG.FD_DATE IS 'Дата ввода'
+/
+
+
+--
+-- TMULTIVMSG_PK  (Index) 
+--
+--  Dependencies: 
+--   TMULTIMSG (Table)
+--
+CREATE UNIQUE INDEX ASU.TMULTIVMSG_PK ON ASU.TMULTIMSG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TMULTIMSG_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TMULTIMSG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TMULTIMSG_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tmultimsg
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT SEQ_tmultimsg.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TMULTIMSG 
+-- 
+ALTER TABLE ASU.TMULTIMSG ADD (
+  CONSTRAINT TMULTIVMSG_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

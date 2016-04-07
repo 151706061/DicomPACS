@@ -1,0 +1,155 @@
+ALTER TABLE ASU.THEAL_SMID_DT
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.THEAL_SMID_DT CASCADE CONSTRAINTS
+/
+
+--
+-- THEAL_SMID_DT  (Table) 
+--
+--  Dependencies: 
+--   THEAL_SMID (Table)
+--
+CREATE TABLE ASU.THEAL_SMID_DT
+(
+  FK_ID         INTEGER                         NOT NULL,
+  FK_HEAL_SMID  INTEGER                         NOT NULL,
+  FD_DATE1      DATE,
+  FD_DATE2      DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          16K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.THEAL_SMID_DT IS 'Таблица задаёт сроки дейсвтия для соответствия назначения и услуги (см. THEAL_SMID) Author:Efimov'
+/
+
+COMMENT ON COLUMN ASU.THEAL_SMID_DT.FK_ID IS 'SEQUENCE=[SEQ_HEAL_SMID_DT]'
+/
+
+COMMENT ON COLUMN ASU.THEAL_SMID_DT.FK_HEAL_SMID IS 'THEAL_SMID.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.THEAL_SMID_DT.FD_DATE1 IS 'Дата начала действия'
+/
+
+COMMENT ON COLUMN ASU.THEAL_SMID_DT.FD_DATE2 IS 'Дата окончания действия'
+/
+
+
+--
+-- PK_THEAL_SMID_DT  (Index) 
+--
+--  Dependencies: 
+--   THEAL_SMID_DT (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_THEAL_SMID_DT ON ASU.THEAL_SMID_DT
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- THEAL_SMID_DT_HEAL  (Index) 
+--
+--  Dependencies: 
+--   THEAL_SMID_DT (Table)
+--
+CREATE INDEX ASU.THEAL_SMID_DT_HEAL ON ASU.THEAL_SMID_DT
+(FK_HEAL_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- THEAL_SMID_DT_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   THEAL_SMID_DT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."THEAL_SMID_DT_INSERT" 
+ BEFORE
+  INSERT
+ ON ASU.THEAL_SMID_DT REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT asu.SEQ_THEAL_SMID_DT.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table THEAL_SMID_DT 
+-- 
+ALTER TABLE ASU.THEAL_SMID_DT ADD (
+  CONSTRAINT PK_THEAL_SMID_DT
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          256K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table THEAL_SMID_DT 
+-- 
+ALTER TABLE ASU.THEAL_SMID_DT ADD (
+  CONSTRAINT FK_THEAL_SMID_DT_HEAL_SMID 
+ FOREIGN KEY (FK_HEAL_SMID) 
+ REFERENCES ASU.THEAL_SMID (FK_ID)
+    ON DELETE CASCADE)
+/
+

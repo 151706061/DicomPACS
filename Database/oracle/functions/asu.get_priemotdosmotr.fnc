@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_PRIEMOTDOSMOTR
+/
+
+--
+-- GET_PRIEMOTDOSMOTR  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PRIEMOTDOSMOTR" 
+return number
+is 
+begin
+  return 324518;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_PRIEMOTDOSMOTR TO PUBLIC
+/
+

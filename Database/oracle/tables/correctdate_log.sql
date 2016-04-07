@@ -1,0 +1,57 @@
+DROP TABLE ASU.CORRECTDATE_LOG CASCADE CONSTRAINTS
+/
+
+--
+-- CORRECTDATE_LOG  (Table) 
+--
+CREATE TABLE ASU.CORRECTDATE_LOG
+(
+  TAB           VARCHAR2(32 BYTE),
+  ID            NUMBER,
+  DATE_INS      DATE,
+  COL           VARCHAR2(32 BYTE),
+  USR_MODULE    VARCHAR2(100 BYTE),
+  USR_TERMINAL  VARCHAR2(100 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.CORRECTDATE_LOG IS 'Сохраняет даты < 01.01.1880 Author:Гуленок'
+/
+
+COMMENT ON COLUMN ASU.CORRECTDATE_LOG.TAB IS 'Таблица где произошла вставка'
+/
+
+COMMENT ON COLUMN ASU.CORRECTDATE_LOG.ID IS 'id в этой таблице'
+/
+
+COMMENT ON COLUMN ASU.CORRECTDATE_LOG.DATE_INS IS 'Время вставки'
+/
+
+COMMENT ON COLUMN ASU.CORRECTDATE_LOG.COL IS 'Поле где произошла вставка'
+/
+
+COMMENT ON COLUMN ASU.CORRECTDATE_LOG.USR_MODULE IS 'Модуль из которого инициирована вставка'
+/
+
+COMMENT ON COLUMN ASU.CORRECTDATE_LOG.USR_TERMINAL IS 'Терминал с которого инициирована вставка'
+/
+
+

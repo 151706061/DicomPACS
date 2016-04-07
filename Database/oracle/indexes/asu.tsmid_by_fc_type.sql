@@ -1,0 +1,25 @@
+DROP INDEX ASU.TSMID_BY_FC_TYPE
+/
+
+--
+-- TSMID_BY_FC_TYPE  (Index) 
+--
+CREATE INDEX ASU.TSMID_BY_FC_TYPE ON ASU.TSMID
+(FC_TYPE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

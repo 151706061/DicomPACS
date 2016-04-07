@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport Version="4.12" DotMatrixReport="False" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="4095" PreviewOptions.Zoom="1" PrintOptions.Printer="�� ���������" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="39782,6229401389" ReportOptions.Description.Text="" ReportOptions.LastChange="41212,3587487847" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end." PropData="044C656674022803546F7003300108446174617365747301010C2A00000020446174615365743D2266727844424B61622220446174615365744E616D653D2266727844424B6162220000095661726961626C65730100055374796C650100">
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" PaperWidth="210" PaperHeight="297" PaperSize="9" LeftMargin="5" RightMargin="5" TopMargin="5" BottomMargin="5" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
+    <TfrxReportTitle Name="ReportTitle1" Height="109,60637" Left="0" Top="18,89765" Width="755,906">
+      <TfrxMemoView Name="Memo1" Align="baWidth" Left="0" Top="0" Width="755,906" Height="15,11812" ShowHint="False" Color="15790320" Font.Charset="1" Font.Color="0" Font.Height="-9" Font.Name="Arial" Font.Style="1" Frame.Width="2" HAlign="haCenter" ParentFont="False" Text="[COMPANYNAME]"/>
+      <TfrxMemoView Name="Memo2" Align="baWidth" Left="0" Top="34,01577" Width="755,906" Height="18,89765" ShowHint="False" Color="8421376" Font.Charset="1" Font.Color="16777215" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Width="2" ParentFont="False" Text="Список кабинетов"/>
+      <TfrxMemoView Name="Memo5" Left="3,77953" Top="90,70872" Width="52,91342" Height="18,89765" ShowHint="False" Color="15790320" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Frame.Width="2" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="№ п/п"/>
+      <TfrxMemoView Name="Memo6" Left="56,69295" Top="90,70872" Width="434,64595" Height="18,89765" ShowHint="False" Color="15790320" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Frame.Width="2" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="Наименование"/>
+      <TfrxMemoView Name="Memo7" Left="3,77953" Top="61,69295" Width="94,48825" Height="18,89765" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Width="2" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="Количество:"/>
+      <TfrxMemoView Name="Memo8" Left="102,04731" Top="61,69295" Width="64,25201" Height="18,89765" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="15" Frame.Width="2" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="[KOLVO]"/>
+      <TfrxMemoView Name="Memo3" Align="baWidth" Left="0" Top="16,11812" Width="755,906" Height="15,11812" ShowHint="False" Color="15790320" Font.Charset="1" Font.Color="0" Font.Height="-9" Font.Name="Arial" Font.Style="1" Frame.Width="2" HAlign="haCenter" ParentFont="False" Text="[OTDELNAME]"/>
+    </TfrxReportTitle>
+    <TfrxMasterData Name="MasterData1" Height="18,89765" Left="0" Top="188,9765" Width="755,906" ColumnWidth="0" ColumnGap="0" DataSet="frxDBKab" DataSetName="frxDBKab" RowCount="0">
+      <TfrxMemoView Name="Memo9" Left="3,77953" Top="0" Width="52,91342" Height="18,89765" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="15" HAlign="haCenter" ParentFont="False" VAlign="vaCenter" Text="[Line]"/>
+      <TfrxMemoView Name="Memo10" Left="56,69295" Top="0" Width="434,64595" Height="18,89765" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="0" Frame.Typ="15" ParentFont="False" VAlign="vaCenter" Text="[frxDBKab.&#34;FC_NAME&#34;]"/>
+    </TfrxMasterData>
+    <TfrxPageFooter Name="PageFooter1" Height="15,11812" Left="0" Top="268,34663" Width="755,906">
+      <TfrxMemoView Name="Memo11" Left="604,7248" Top="0" Width="147,40167" Height="15,11812" ShowHint="False" Color="15790320" Font.Charset="1" Font.Color="0" Font.Height="-9" Font.Name="Arial" Font.Style="0" Frame.Width="2" HAlign="haRight" ParentFont="False" Text="Стр. [Page] из [TotalPages#]"/>
+      <TfrxMemoView Name="Memo15" Left="3,77953" Top="0" Width="600,94527" Height="15,11812" ShowHint="False" Color="15790320" Font.Charset="1" Font.Color="0" Font.Height="-9" Font.Name="Arial" Font.Style="0" ParentFont="False" Text="[MEDOTRADESIGN], [DATESYS] [SOTRNAME]"/>
+    </TfrxPageFooter>
+  </TfrxReportPage>
+</TfrxReport>

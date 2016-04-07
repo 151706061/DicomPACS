@@ -1,0 +1,17 @@
+ALTER TABLE MED.TKART add (FN_PARTY_NUM2 VARCHAR2 (10))
+/
+
+update med.tkart set FN_PARTY_NUM2 = FN_PARTY_NUM
+/
+
+update med.tkart set FN_PARTY_NUM = null
+/
+
+ALTER TABLE MED.TKART MODIFY (FN_PARTY_NUM VARCHAR2 (10))
+/
+
+update med.tkart set FN_PARTY_NUM = FN_PARTY_NUM2
+/
+
+ALTER TABLE MED.TKART DROP column FN_PARTY_NUM2
+/

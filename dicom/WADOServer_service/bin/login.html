@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Авторизация</title>
+	
+	@incl_main_cmn
+	
+    <link rel="stylesheet" type="text/css" href="css/login.css" />
+    <script type="text/javascript" src="js/login.js"></script>
+
+	<script type="text/javascript">
+        // BEGIN_DEBUG
+        var v_url = '';
+        // END_DEBUG
+    </script>
+
+
+</head>
+
+<body id="mymains" class="index" style="padding-top:0px">
+
+	<!--	BACKGROUND IMAGE 	-->
+	<div class="container-fluid mybgimg" style="height:370px">
+    	<div class="container">
+            <div class="row-fluid">
+                <div class="metro span12">
+                    <div class="span8 align-left">
+                    	<div class="image-wrapper" style="width:100px;padding-top:100px">
+	                        <img src="css/img/medlogo.png">
+                        </div>
+                    	<div id="myhdnadp" class="myhdtext1" style="margin-left:25%;margin-top:-100px">
+                        	<h1 id="myheadh" style="color: white;"><p>ЦЕНТР <br>МЕДИЦИНСКИХ <br>ИЗОБРАЖЕНИЙ</p></h1>
+                        </div>
+		            </div>
+	                <div id="myauthfrm" class="span3 align-left" style="padding-top:8px;padding-left:50px;width:290px;">
+                        <div class="row" style="width:270px">
+	                        <div class="span12" style="color: white;">
+                                <div class="span12" style="height:41px;padding-top:2px;padding-left:135px;">
+                                	<button  style="background-color:#D0E6F1;border:none;color:#65B1D5 !important;width:135px">РЕГИСТРАЦИЯ</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="width:270px">
+	                        <div class="span12 mybgwhite" style="height:60px;padding-top:9px;padding-left:15px">
+                            	<!--	face 	-->
+                                <div class="" style="width:50px;height:10px">
+                                    <img src="css/img/face.png">
+                                </div>
+                                <div class="" style="width:180px;padding-left:60px">
+                                    <h5 style="color:#599DC0">ВХОД В СИСТЕМУ</h5>
+                                </div> 	
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="width:270px">
+	                        <div class="span12 mybgwhite " style="height:50px;padding-left:15px;padding-top:13px">
+                            	<input id="fusername" type="text" placeholder="ЛОГИН" style="width:240px;background-color:#D0E6F1;border:none">
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="width:270px">
+	                        <div class="span12 mybgwhite " style="height:50px;">
+                                <div class="span12 " style="height:50px;padding-left:15px;padding-top:13px">
+                                    <input id="fpassword" type="password" placeholder="ПАРОЛЬ" style="width:240px;background-color:#D0E6F1;border:none" >
+                                </div>
+                            </div>
+                        </div>
+                        
+						<div class="row" style="width:270px">
+	                        <div class="span12 mybgwhite " style="height:60px;padding-left:15px;">
+                            	<!--	face 	-->
+                                <div class="" style="width:50px;height:10px">
+                                    <label class="checkbox" style="width:160px">
+                                        <input type="checkbox" style="width:160px" style="color:#599DC0"><span class="metro-checkbox" style="color:#599DC0">запомнить меня</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>                       
+                        
+                        <div class="row" style="width:270px">
+	                        <div class="span12 mybgwhite " style="height: 70px; padding-left: 15px; margin-top: -20px;">
+                            	<button style="font-size: 23px;background-color:#65B1D5;border:none;color:white !important;width:240px;height:50px;" onclick="Autorize();">ВХОД</button>
+                            	<button id="myBtnLogIn" class="win-command" style="color:#D0E6F1;margin-left: 8px;margin-left: 186px;margin-top: -72px;" onclick="Autorize();">
+                                    <span class="win-commandimage win-commandring"></span>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="errpassw" class="alert fade in" style="display:none;margin-left:-30px">
+                        <!--	    <button class="close" data-dismiss="alert" type="button"></button> 	-->
+                            <strong>Неверный логин/пароль!</strong>
+                        </div>
+                        
+                        
+                        
+		            </div>
+	            </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" >
+    	&nbsp;
+    </div>
+    
+    <!--	1 РЕКЛАМА 	-->
+    <div class="container">
+        <div class="row-fluid">
+            <div class="metro span12">
+                <div id="mylftsp1" class="span6 align-left " style="padding-left:70px">
+                    <a href="#" class="tile wide imagetext mycolorbox1 mywidthbox1" style="padding-left:4px;padding-top:20px;height:140px">
+                        <div class="image-wrapper">
+	                        <img src="css/img/zapis_priem.png">
+                        </div>
+                        <div class="column-text" style="height:150px">
+                            <div class="text-header mywidthbox1txt mywidthbox1txthd">ЗАПИСЬ НА ПРИЕМ</div>
+                            <div class="text4 mywidthbox1txt" style="max-height: 192px;">
+                            	<H4>Вы можете записаться на прием к любому требующемуся врачу, в соответствии с его графиком <br>
+                                После прохождения процедуры записи, вы получите электронный талон</H4>
+                            </div>
+                        </div>
+                        <div class="align-right" >
+                            <button class="win-command mybox1btn" style="color:#6099B6;width:50px">
+                                <span class="win-commandimage win-commandring"></span>
+                            </button>
+                        </div> 
+                    </a>
+                </div>
+                <div id="my1lev3pos" class="span6 align-right " style="padding-left:20px">
+                    <a href="#" class="tile wide imagetext mycolorbox2 mywidthbox1" style="padding-left:4px;padding-top:20px;height:140px">
+                        <div class="image-wrapper">
+	                        <img src="css/img/house.png">
+                        </div>
+                        <div class="column-text" style="height:150px">
+                            <div class="text-header mywidthbox1txt mywidthbox1txthd">ВЫЗОВ ВРАЧА НА ДОМ</div>
+                            <div class="text4 mywidthbox1txt" style="max-height: 192px;">
+                            	<H4>Вы можете вызвать врача в три клика* <br> <br> </H4>
+                                <H4>*при условии, что вами были внесены в личную карту
+                                точный адрес и телефон</H4>
+                            </div>
+                        </div>
+                        <div class="align-right" >
+                            <button class="win-command mybox1btn" style="color:#5EB483;width:50px">
+                                <span class="win-commandimage win-commandring"></span>
+                            </button>
+                        </div> 
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" >
+    	&nbsp;
+    </div>
+    
+    <!--	2 РЕКЛАМА 	-->
+    <div id="mycont2" class="container">
+        <div class="row-fluid">
+            <div class="metro span12" style="padding-left:75px" >
+                <div class="span3 align-left myborder my2reklrow mycolorbox3">
+                    <div class="text-header mywidthbox1txt mywidthbox1txthd" style="padding-left:15px;color:white">НОВОСТИ МЕДИЦИНЫ</div>
+                    <div class="text4 mywidthbox1txt" style="max-height: 192px; padding-left:15px;color:white;padding-top:10px;max-width:290px">
+                            	<H4>Минздрав выделяет 39 млн.руб. на строительство детского дома в г.Дубна </H4>
+                                <H4 style="padding-top:10px">В Челябинске ввели в эксплуатацию новое здание родильного дома.
+                                </H4>
+                    </div>
+                </div>
+                <div class="span3 align-right my2reklrow">
+                		<a href="#" class="tile" style="height: 70px; background-color: rgb(70, 108, 127); width: 320px; margin-left: -5px; margin-top: -18px;">
+                            <div class="text-header mywidthbox1txt mywidthbox1txthd" style="color: white; width: 110px ! important; padding-left: 10px; padding-top: 1px;">
+                                АПТЕКИ
+                            </div>
+                            <div class="text4 mywidthbox1txt" style="max-height: 192px; padding-left:0px;color:white;padding-top:5px;max-width:300px;width:300px !important">
+                                <h4 style="font-size: 13px; font-weight: 400; line-height: 20px; letter-spacing: 0px; text-align: left; padding-left: 10px; margin-top: -2px;">
+                                    Вы можете найти ближайшие аптеки на карте
+                                </h4>
+                            </div>
+                          <div class="align-right">
+                                <button class="win-command" style="opacity: 0.5;background-color:#476C7F;color:#6C8999;width:50px;padding-top:0px !important; margin-top:-65px !important;">
+                                    <span class="win-commandimage win-commandring"></span>
+                                </button>
+                            </div>  	
+	                    </a>
+                        <div style="height: 70px; background-color: rgb(142, 159, 167); margin-left: -5px; margin-top: 70px;" class="">
+                            <div style="padding-left:0px;color:white;width:110px !important; padding-top:20px" class="text-header mywidthbox1txt mywidthbox1txthd">
+                                ПОГОДА
+                            </div>
+                            <div style="padding-left:100px;margin-top:-40px;color:white;width:110px !important; padding-top:20px" class="text-header mywidthbox1txt mywidthbox1txthd">
+                                +15 C
+                            </div>
+                            <div style="max-height: 192px; padding-left:0px;color:white;padding-top:5px;max-width:300px;width:300px !important" class="text4 mywidthbox1txt">
+                                <h4 style="font-size:13px;font-weight:400;line-height:20px;letter-spacing:0px;text-align: left;padding-left:10px">
+                                    Красноярск
+                                </h4>
+                            </div>
+                            <div style="margin-top: -60px;" class="image-wrapper">
+                                <img src="css/img/cloud.png">
+                            </div>
+                        </div>
+                </div>
+                
+                <div id="myprofilv" class="span3 align-right " style="width:320px">
+                    <a href="#" class="tile wide imagetext mycolorbox5 mywidthbox5" style="padding-left: 4px; padding-top: 20px; margin-top: 2px; margin-left: -4px; width: 298px ! important; height: 118px;">
+                        <div class="image-wrapper align-left" style="margin-top:-20px">
+	                        <img src="css/img/profil.png">
+                        </div>
+                        <div class="column-text" style="height: 130px; margin-top: -70px; margin-left: 68px;">
+                            <div class="text-header mywidthbox1txt mywidthbox1txthd" style="width:210px !important;color:white">ПРОФИЛАКТИКА</div>
+                            <div class="text4 mywidthbox1txt" style="max-height: 192px; margin-left: -21px; width: 239px ! important;">
+                            	<h4 style="font-size: 13px; font-weight: 400; letter-spacing: 0px; text-align: left; padding-left: 0px; color: white;">
+                                	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    Используйте нашу систему тестов, чтобы предостеречь ваш организм
+                                    от возможных заболеваний и своевременно запишитесь на прием к врачу</h4>
+                            </div>
+                        </div>
+                        <div class="align-right">
+                            <button class="win-command mybox1btn" style="color: rgb(181, 96, 129); width: 50px; padding-left: 0px; position: fixed; margin-top: -24px; opacity: 0.5; margin-left: -41px;">
+                                <span class="win-commandimage win-commandring"></span>
+                            </button>
+                        </div> 
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" >
+    	&nbsp;
+    </div>
+
+	@main_footer
+	
+	@mylibCmn
+	<script src="js/MyLibCmn.js"></script>
+
+</body>
+</html>

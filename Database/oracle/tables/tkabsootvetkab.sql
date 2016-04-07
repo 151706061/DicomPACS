@@ -1,0 +1,99 @@
+ALTER TABLE ASU.TKABSOOTVETKAB
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TKABSOOTVETKAB CASCADE CONSTRAINTS
+/
+
+--
+-- TKABSOOTVETKAB  (Table) 
+--
+CREATE TABLE ASU.TKABSOOTVETKAB
+(
+  FK_ID            NUMBER                       NOT NULL,
+  FK_KABINETID     NUMBER,
+  FK_KABSOOTVETID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- TKABSOOTVETKAB  (Index) 
+--
+--  Dependencies: 
+--   TKABSOOTVETKAB (Table)
+--
+CREATE UNIQUE INDEX ASU.TKABSOOTVETKAB ON ASU.TKABSOOTVETKAB
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TKABSOOTVETKAB_BEFOREINSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TKABSOOTVETKAB (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TKABSOOTVETKAB_BEFOREINSERT" 
+  before insert on TKABSOOTVETKAB
+  for each row
+begin
+  SELECT seq_TKABSOOTVETKAB.NEXTVAL INTO :new.fk_id FROM dual;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TKABSOOTVETKAB 
+-- 
+ALTER TABLE ASU.TKABSOOTVETKAB ADD (
+  CONSTRAINT TKABSOOTVETKAB
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

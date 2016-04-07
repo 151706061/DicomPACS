@@ -1,0 +1,142 @@
+DROP TABLE ASU.TXRAY_LOG CASCADE CONSTRAINTS
+/
+
+--
+-- TXRAY_LOG  (Table) 
+--
+CREATE TABLE ASU.TXRAY_LOG
+(
+  FK_ID       NUMBER                            NOT NULL,
+  FC_FIELD    VARCHAR2(50 BYTE),
+  FC_VALUE    VARCHAR2(1000 BYTE),
+  FD_DATE     DATE,
+  FK_NAZID    NUMBER,
+  FK_SOTRID   NUMBER,
+  FC_OSUSER   VARCHAR2(100 BYTE),
+  FC_MACHINE  VARCHAR2(100 BYTE),
+  FC_MODULE   VARCHAR2(100 BYTE),
+  FC_FORM     VARCHAR2(100 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TXRAY_LOG IS 'Таблица логов для рентгена Created by Prihodko N. 17.05.2012'
+/
+
+COMMENT ON COLUMN ASU.TXRAY_LOG.FK_ID IS 'UID'
+/
+
+COMMENT ON COLUMN ASU.TXRAY_LOG.FC_FIELD IS 'Поле'
+/
+
+COMMENT ON COLUMN ASU.TXRAY_LOG.FC_VALUE IS 'Значение'
+/
+
+COMMENT ON COLUMN ASU.TXRAY_LOG.FD_DATE IS 'Дата'
+/
+
+COMMENT ON COLUMN ASU.TXRAY_LOG.FK_NAZID IS 'VNAZ.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TXRAY_LOG.FK_SOTRID IS 'TSOTR.FK_ID (пользователь МИС "Пациент")'
+/
+
+COMMENT ON COLUMN ASU.TXRAY_LOG.FC_OSUSER IS 'Пользователь ОС'
+/
+
+COMMENT ON COLUMN ASU.TXRAY_LOG.FC_MACHINE IS 'Терминал'
+/
+
+COMMENT ON COLUMN ASU.TXRAY_LOG.FC_MODULE IS 'Модуль'
+/
+
+COMMENT ON COLUMN ASU.TXRAY_LOG.FC_FORM IS 'Форма модуля'
+/
+
+
+--
+-- TXRAY_LOG_NAZID  (Index) 
+--
+--  Dependencies: 
+--   TXRAY_LOG (Table)
+--
+CREATE INDEX ASU.TXRAY_LOG_NAZID ON ASU.TXRAY_LOG
+(FK_NAZID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TXRAY_LOG_UID  (Index) 
+--
+--  Dependencies: 
+--   TXRAY_LOG (Table)
+--
+CREATE UNIQUE INDEX ASU.TXRAY_LOG_UID ON ASU.TXRAY_LOG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TXRAY_LOG_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TXRAY_LOG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TXRAY_LOG_BI" 
+ BEFORE
+  INSERT
+ ON asu.txray_log
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  select seq_txray_log.nextval into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

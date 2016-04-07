@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<!--
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF
+// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A
+// PARTICULAR PURPOSE.
+//
+// Copyright (c) Microsoft Corporation. All rights reserved
+-->
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<meta http-equiv="X-UA-Compatible" content="IE=9" >
+
+<head>
+<script type="text/javascript" src="default.js"></script>
+<style>
+	div {left: 850px; top: 50px; position: absolute; opacity:.75}
+	.red {color: red} 
+	.green {color: green} 
+	.blue {color: blue} 
+	button {width: 150px}
+	td {border: solid 1px; width: 35px;text-align: center; border-color: black}
+	table {border-spacing: 0px; border: solid 1px}
+	span {font-weight: bold}
+	canvas { left: 10px; top: 10px; position: absolute}
+	img {display: none}
+}
+</style>	
+
+</head>
+<body oncontextmenu="return false">
+
+<canvas id="myCanvas" height="600" width="800" >
+	Canvas is not supported
+</canvas>
+<img src="Background.jpg" id="myImage">
+
+<div>
+<form name="myform">
+<input  name="filter" type="checkbox" value="r">Remove <span class="red"> Red </span> Channel </input><br>
+<input  name="filter" type="checkbox" value="g">Remove <span class="green"> Green </span> Channel </input><br> 
+<input  name="filter" type="checkbox" value="b">Remove <span class="blue"> Blue </span> Channel </input><br> 
+</form>
+<br>
+<button type="button" onclick="applyFilter (2)"> Apply Filter </button><br><br>
+<button type="button" onclick="applyFilter (1)"> Convert to B&W </button><br><br>
+
+Note: once channel is removed, you have to<br> reload image to get it back.
+<br>
+<br>
+<table id="colorValues"> 
+<tr>
+<td colspan="6">
+Current Pointer Information
+</td>
+</tr>
+<tr> 
+	<td> X </td>
+	<td> Y </td>
+	<td class="red"> R </td>
+	<td class="green"> G </td>
+	<td class="blue"> B </span></td>
+	<td> A </td>
+</tr>
+<tr> 
+	<td id="x">&nbsp;</td>
+	<td id="y">&nbsp;</td>
+	<td id="rVal" class="red"> &nbsp;</td>
+	<td id="gVal" class="green">&nbsp;</td>
+	<td id="bVal"class="blue">&nbsp;</td>
+	<td id="aVal">&nbsp; </td>
+</tr>
+</table>
+<br>
+<span> Left Mouse Click </span> - remove color<br>
+<span> Right Mouse Click </span>- color to alpha
+<br><br>
+<button type="button" onclick="loadImage()"> Reload Image </button><br>
+</div>
+<form>
+</body>
+</html>

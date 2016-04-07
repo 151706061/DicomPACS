@@ -1,0 +1,192 @@
+DROP TABLE ASU.TSMINI CASCADE CONSTRAINTS
+/
+
+--
+-- TSMINI  (Table) 
+--
+CREATE TABLE ASU.TSMINI
+(
+  FK_ID       NUMBER(9)                         DEFAULT -1                    NOT NULL,
+  FC_SECTION  VARCHAR2(255 BYTE),
+  FC_KEY      VARCHAR2(255 BYTE),
+  FC_VALUE    VARCHAR2(255 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSMINI IS 'Хранение параметров'
+/
+
+COMMENT ON COLUMN ASU.TSMINI.FK_ID IS 'SEQUENCE=[SEQ_TSMINI]'
+/
+
+COMMENT ON COLUMN ASU.TSMINI.FC_SECTION IS 'Наименование секции'
+/
+
+COMMENT ON COLUMN ASU.TSMINI.FC_KEY IS 'Наименование ключа'
+/
+
+COMMENT ON COLUMN ASU.TSMINI.FC_VALUE IS 'Значение'
+/
+
+
+--
+-- TSMINI_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TSMINI (Table)
+--
+CREATE UNIQUE INDEX ASU.TSMINI_BY_ID ON ASU.TSMINI
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSMINI_BY_SECTION  (Index) 
+--
+--  Dependencies: 
+--   TSMINI (Table)
+--
+CREATE INDEX ASU.TSMINI_BY_SECTION ON ASU.TSMINI
+(FC_SECTION)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSMINI_BY_SECTION_KEY  (Index) 
+--
+--  Dependencies: 
+--   TSMINI (Table)
+--
+CREATE UNIQUE INDEX ASU.TSMINI_BY_SECTION_KEY ON ASU.TSMINI
+(FC_SECTION, FC_KEY)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSMINI$UPPER_SEC_KEY  (Index) 
+--
+--  Dependencies: 
+--   TSMINI (Table)
+--
+CREATE INDEX ASU.TSMINI$UPPER_SEC_KEY ON ASU.TSMINI
+(UPPER("FC_SECTION"), UPPER("FC_KEY"))
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSMIN$UPPER_FCSEC  (Index) 
+--
+--  Dependencies: 
+--   TSMINI (Table)
+--
+CREATE INDEX ASU.TSMIN$UPPER_FCSEC ON ASU.TSMINI
+(UPPER("FC_SECTION"))
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSMINI_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TSMINI (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSMINI_BEFORE_INSERT" 
+BEFORE  INSERT  ON ASU.TSMINI FOR EACH ROW
+Begin
+  SELECT SEQ_TSMINI.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+GRANT SELECT ON ASU.TSMINI TO EXCH43
+/
+

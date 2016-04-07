@@ -1,0 +1,49 @@
+DROP FUNCTION ASU.IS_PAC_PATALOGY
+/
+
+--
+-- IS_PAC_PATALOGY  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TDIAG (Table)
+--   TSMID (Table)
+--   TSUBDIAG (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."IS_PAC_PATALOGY" 
+  ( pFK_ID IN NUMBER)
+  RETURN  NUMBER IS
+--
+-- Purpose: У пациента имеется ли паталогия?
+--
+-- MODIFICATION HISTORY
+-- Person      Date    Comments
+-- ---------   ------  -------------------------------------------
+--Philip A. Milovanov 24.03.2000
+  CURSOR C(ppFK_ID NUMBER) IS
+  select /*+ rule*/TDIAG.FK_ID FROM TSMID,TDIAG WHERE TDIAG.FK_SMDIAGID=TSMID.FK_ID AND TDIAG.FK_PACID=ppFK_ID AND
+TSMID.fp_pat=1
+UNION ALL
+select TDIAG.FK_ID FROM TSMID,TDIAG,TSUBDIAG WHERE TSUBDIAG.FK_SMDIAGID=TSMID.FK_ID AND TDIAG.FK_PACID=ppFK_ID AND
+TSMID.fp_pat=1 AND TSUBDIAG.fk_diagid=TDIAG.FK_ID;
+
+-- SELECT COUNT(*) FROM TDIAG WHERE FK_PACID=pFK_ID AND IS_PATALOGY(FK_ID)=1;
+  i NUMBER;
+BEGIN
+  OPEN C(pFK_ID);
+  FETCH C INTO I;
+  IF c% NOTFOUND THEN
+    CLOSE c;
+    RETURN 0;
+  ELSE
+    CLOSE c;
+    RETURN 1;
+  END IF;
+  CLOSE C;
+END;
+/
+
+SHOW ERRORS;
+
+

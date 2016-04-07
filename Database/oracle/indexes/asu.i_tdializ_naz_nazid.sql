@@ -1,0 +1,25 @@
+DROP INDEX ASU.I_TDIALIZ_NAZ_NAZID
+/
+
+--
+-- I_TDIALIZ_NAZ_NAZID  (Index) 
+--
+CREATE INDEX ASU.I_TDIALIZ_NAZ_NAZID ON ASU.TDIALIZ_NAZ
+(FK_NAZID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,4 @@
+ALTER TABLE MED.TKARTCO_ITEM ADD (FN_PARTY_ORDER NUMBER)
+/
+COMMENT ON COLUMN MED.TKARTCO_ITEM.FN_PARTY_ORDER IS 'очередность выбора партии для автоматического заполнения'
+/

@@ -1,0 +1,60 @@
+DROP TABLE ASU.TDOPDISP_ORG CASCADE CONSTRAINTS
+/
+
+--
+-- TDOPDISP_ORG  (Table) 
+--
+CREATE TABLE ASU.TDOPDISP_ORG
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FK_COMPANYID  NUMBER,
+  FK_SOTRID     NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TDOPDISP_ORG IS 'Таблица предприятия, сотрудники которых подлежат доп. диспансеризации(by Spasskiy 27112008)'
+/
+
+COMMENT ON COLUMN ASU.TDOPDISP_ORG.FK_COMPANYID IS 'TCOMPANY.FK_ID, Код организации'
+/
+
+COMMENT ON COLUMN ASU.TDOPDISP_ORG.FK_SOTRID IS 'TSOTR.FK_ID, Сотрудник ответственный за доп. дисп. организации'
+/
+
+
+--
+-- "ASU.TDOPDISP_ORG"  (Trigger) 
+--
+--  Dependencies: 
+--   TDOPDISP_ORG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."ASU.TDOPDISP_ORG" 
+ BEFORE
+  INSERT
+ ON ASU.TDOPDISP_ORG REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT SEQ_DOPDISP_ORG.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

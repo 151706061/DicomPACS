@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015.03.06 11:50:47.691.groupproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\ProjectGroup1.groupproj=C:\Delphi\Trunk_AUTH\ASU2\Dicom\DICOM_Viewer_DLL\source\ProjectGroup1.groupproj</Transaction>
+  </Transactions>
+	<Default.Personality>
+		<Projects ActiveProject="DicomCD.dll"/>
+	</Default.Personality>
+</BorlandProject>

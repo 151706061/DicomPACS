@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TSMID_TEMPLATES_BEFORE_UPDATE
+/
+
+--
+-- TSMID_TEMPLATES_BEFORE_UPDATE  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   TSMID_TEMPLATES (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSMID_TEMPLATES_BEFORE_UPDATE" 
+ BEFORE
+ UPDATE OF FC_NAME, FK_ID, REMARK
+ ON asu.tsmid_templates
+ REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+begin
+  select sysDate() into :new.FD from dual;
+end;
+/
+SHOW ERRORS;
+
+

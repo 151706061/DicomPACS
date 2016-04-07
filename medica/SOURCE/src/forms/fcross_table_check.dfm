@@ -1,0 +1,531 @@
+object frmCROSS_TABLE_CHECK: TfrmCROSS_TABLE_CHECK
+  Left = 351
+  Top = 199
+  HelpContext = 45
+  Caption = #1050#1086#1085#1092#1080#1075#1091#1088#1072#1090#1086#1088' '#1087#1088#1072#1074
+  ClientHeight = 453
+  ClientWidth = 632
+  Color = clBtnFace
+  Constraints.MinHeight = 480
+  Constraints.MinWidth = 640
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  KeyPreview = True
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  ShowHint = True
+  OnClose = FormClose
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object CoolBar1: TCoolBar
+    Left = 0
+    Top = 0
+    Width = 632
+    Height = 42
+    AutoSize = True
+    Bands = <
+      item
+        Control = ToolBar1
+        ImageIndex = -1
+        MinHeight = 36
+        Width = 628
+      end>
+    BorderWidth = 1
+    EdgeBorders = [ebTop]
+    object ToolBar1: TToolBar
+      Left = 9
+      Top = 0
+      Width = 619
+      Height = 36
+      AutoSize = True
+      ButtonHeight = 36
+      ButtonWidth = 62
+      Caption = 'ToolBar1'
+      Images = dmMain.ilMain
+      ParentShowHint = False
+      ShowCaptions = True
+      ShowHint = True
+      TabOrder = 0
+      object ToolButton5: TToolButton
+        Left = 0
+        Top = 0
+        Action = acRefresh
+      end
+      object ToolButton6: TToolButton
+        Left = 62
+        Top = 0
+        Width = 8
+        Caption = 'ToolButton6'
+        ImageIndex = 16
+        Style = tbsSeparator
+      end
+      object Panel1: TPanel
+        Left = 70
+        Top = 0
+        Width = 221
+        Height = 36
+        BevelOuter = bvNone
+        TabOrder = 0
+        object lcbCROSS_TABLE_SELECT: TcxLookupComboBox
+          Left = 6
+          Top = 15
+          Properties.ClearKey = 46
+          Properties.DropDownAutoSize = True
+          Properties.DropDownSizeable = True
+          Properties.ImmediatePost = True
+          Properties.KeyFieldNames = 'FK_ID'
+          Properties.ListColumns = <
+            item
+              FieldName = 'FC_CROSS_NAME'
+            end>
+          Properties.ListOptions.ShowHeader = False
+          Properties.ListSource = dsTCROSS_TABLE_PARAMS
+          Properties.OnChange = lcbCROSS_TABLE_SELECTPropertiesChange
+          TabOrder = 0
+          Width = 209
+        end
+        object cxLabel1: TcxLabel
+          Left = 6
+          Top = 0
+          Caption = #1055#1088#1072#1074#1072
+        end
+      end
+      object ToolButton3: TToolButton
+        Left = 291
+        Top = 0
+        Width = 8
+        Caption = 'ToolButton3'
+        ImageIndex = 3
+        Style = tbsSeparator
+      end
+      object tbuCROSS_TABLE_PARAMS: TToolButton
+        Left = 299
+        Top = 0
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
+        ImageIndex = 3
+        OnClick = tbuCROSS_TABLE_PARAMSClick
+      end
+      object ToolButton7: TToolButton
+        Left = 361
+        Top = 0
+        Width = 8
+        Caption = 'ToolButton7'
+        ImageIndex = 4
+        Style = tbsSeparator
+      end
+      object ToolButton1: TToolButton
+        Left = 369
+        Top = 0
+        Action = acClose
+      end
+      object ToolButton2: TToolButton
+        Left = 431
+        Top = 0
+        Width = 8
+        Caption = 'ToolButton2'
+        ImageIndex = 2
+        Style = tbsSeparator
+      end
+    end
+  end
+  object grbTable2: TcxGroupBox
+    Left = 0
+    Top = 88
+    Align = alClient
+    TabOrder = 1
+    Height = 365
+    Width = 632
+    object cxGrid1: TcxGrid
+      Left = 2
+      Top = 18
+      Width = 532
+      Height = 345
+      Align = alClient
+      TabOrder = 0
+      object cxGrid1DBTableView1: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        OnCellClick = cxGrid1DBTableView1CellClick
+        DataController.DataSource = dsParam2_Value
+        DataController.KeyFieldNames = 'FK_ID'
+        DataController.Options = [dcoAssignGroupingValues, dcoAssignMasterDetailKeys, dcoSaveExpanding, dcoImmediatePost]
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <
+          item
+            Format = #1050#1086#1083'-'#1074#1086': 0'
+            Kind = skCount
+            Column = cxGrid1DBTableView1_FC_NAME
+          end>
+        DataController.Summary.SummaryGroups = <>
+        OptionsBehavior.CellHints = True
+        OptionsBehavior.IncSearch = True
+        OptionsCustomize.ColumnsQuickCustomization = True
+        OptionsView.ColumnAutoWidth = True
+        OptionsView.Footer = True
+        OptionsView.GroupByBox = False
+        OptionsView.Indicator = True
+        object cxGrid1DBTableView1_FC_NAME: TcxGridDBColumn
+          Caption = #1053#1072#1079#1074#1072#1085#1080#1077
+          DataBinding.FieldName = 'FC_NAME'
+          Options.Editing = False
+          Width = 403
+        end
+        object cxGrid1DBTableView1_FN_VALUE: TcxGridDBColumn
+          Caption = #1047#1085#1072#1095#1077#1085#1080#1077
+          DataBinding.FieldName = 'FN_VALUE'
+          PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.ImmediatePost = True
+          Properties.ValueChecked = 1
+          Properties.ValueUnchecked = 0
+          Properties.OnChange = cxGrid1DBTableView1_FN_VALUEPropertiesChange
+          Width = 119
+        end
+        object cxGrid1DBTableView1_FK_ID: TcxGridDBColumn
+          Caption = 'ID'
+          DataBinding.FieldName = 'FK_ID'
+          PropertiesClassName = 'TcxSpinEditProperties'
+          Properties.ValueType = vtFloat
+          Visible = False
+        end
+      end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = cxGrid1DBTableView1
+      end
+    end
+    object cxDBPivotGrid1: TcxDBPivotGrid
+      Left = 534
+      Top = 18
+      Width = 96
+      Height = 345
+      Align = alRight
+      Groups = <>
+      OptionsBehavior.CellHints = True
+      OptionsView.ColumnGrandTotals = False
+      OptionsView.ColumnTotals = False
+      OptionsView.FilterFields = False
+      OptionsView.FilterSeparator = False
+      OptionsView.RowGrandTotals = False
+      OptionsView.RowTotals = False
+      TabOrder = 1
+      Visible = False
+      OnCustomDrawCell = cxDBPivotGrid1CustomDrawCell
+      ExplicitLeft = 540
+    end
+  end
+  object grbTable1: TcxGroupBox
+    Left = 0
+    Top = 42
+    Align = alTop
+    TabOrder = 2
+    DesignSize = (
+      632
+      46)
+    Height = 46
+    Width = 632
+    object lcbParam1: TcxLookupComboBox
+      Left = 5
+      Top = 18
+      Anchors = [akLeft, akTop, akRight]
+      Properties.ClearKey = 46
+      Properties.ImmediatePost = True
+      Properties.KeyFieldNames = 'FK_ID'
+      Properties.ListColumns = <
+        item
+          Caption = #1053#1072#1079#1074#1072#1085#1080#1077
+          FieldName = 'FC_NAME'
+        end>
+      Properties.ListSource = dsParam1
+      Properties.OnChange = lcbParam1PropertiesChange
+      TabOrder = 0
+      Width = 525
+    end
+    object buExchange: TcxButton
+      Left = 536
+      Top = 10
+      Width = 90
+      Height = 31
+      Anchors = [akTop, akRight]
+      Caption = #1055#1086#1084#1077#1085#1103#1090#1100
+      Enabled = False
+      TabOrder = 1
+      OnClick = buExchangeClick
+      Glyph.Data = {
+        36050000424D3605000000000000360400002800000010000000100000000100
+        08000000000000010000120B0000120B0000000100000000000000000000FFFF
+        FF00FF00FF0001570300079110000D9A1B0013A1230017A92C0017A72A0020B4
+        3B0025BB430024B841002AC04B002FC5530031C7560031C7570037CE60003AD1
+        660084FEFB0087FFFE00D7FCFB0056DCDD00A5FFFF00C0FFFF007DFAFE0062F8
+        FF0077F7FF007BF0F60080F8FE0057F4FF005BF4FF0062DCE7008EF6FF0063DE
+        EA00ABF0F70095D0D70045CAE0004BD9F00072EAFF002AB7D50053CCE3005BDC
+        F70062E5FF0016B7DD0023D7FF002CD5FF0051D3F2005CE1FF0057D0ED0068D7
+        F3009EE0F00011BBEA0015CEFE0016CEFE0014B8E50018CBFE0018C9FB0018C7
+        F7001ACFFF001ACBFC001DA4CB003C95AF004FB4D10054ABC2004991A4006EDA
+        F70078DDF700B4E1EE00A1C4CE0018BFF00043A7C50051BDDE00ADDEEE008AAC
+        B600189ED00089CEE500097DAC000976A3000C86B8001284B200159ACE00179E
+        D1001A92C0001D7292002180A50040A1C7000274A9000273A700026898000265
+        920009729F00096D9800B7DAE900FFFFFF000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000020202020202
+        02025656565656560202020202020202024C3C36452E474E5602020202020202
+        0259152B3A2A4151560202025656560303030334372F31505602024C3C360304
+        0356192C2D26424A5602025615030503405923324844434B5602020303070B0E
+        03033E52035B545556020256030F1111035627030603464D5602025622031103
+        49560308090C034F590202563E52035A5303030A0D1003035602025627333928
+        3D56170311031C25560202561E3438303F59031103131221560202561D353B29
+        03030303565656560202025617201A181B24580202020202020202565C141613
+        121F570202020202020202025756565656560202020202020202}
+      SpeedButtonOptions.GroupIndex = 1
+      SpeedButtonOptions.AllowAllUp = True
+    end
+  end
+  object al: TActionList
+    Images = dmMain.ilMain
+    Left = 130
+    Top = 192
+    object acClose: TAction
+      Caption = #1047#1072#1082#1088#1099#1090#1100
+      Hint = #1047#1072#1082#1088#1099#1090#1100' '#1086#1082#1085#1086
+      ImageIndex = 1
+      ShortCut = 16499
+      OnExecute = acCloseExecute
+    end
+    object acRefresh: TAction
+      Caption = #1054#1073#1085#1086#1074#1080#1090#1100
+      Hint = #1054#1073#1085#1086#1074#1080#1090#1100' '#1089#1087#1080#1089#1086#1082
+      ImageIndex = 15
+      ShortCut = 116
+      OnExecute = acRefreshExecute
+    end
+  end
+  object FormStorage: TJvFormStorage
+    AppStorage = dmMain.JvAppIniFileStorage
+    AppStoragePath = 'frmCrossRigths\'
+    StoredValues = <
+      item
+        Name = 'WState'
+        Value = 1
+      end>
+    Left = 540
+    Top = 174
+  end
+  object ImageList1: TImageList
+    Height = 11
+    Width = 11
+    Left = 454
+    Top = 262
+    Bitmap = {
+      494C01010200080008000B000B00FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      00000000000036000000280000002C0000000B00000001002000000000009007
+      0000000000000000000000000000000000006A240A006A240A006A240A006A24
+      0A006A240A006A240A006A240A006A240A006A240A006A240A006A240A006A24
+      0A006A240A006A240A006A240A006A240A006A240A006A240A006A240A006A24
+      0A006A240A006A240A0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00006A240A000000000000000000000000000000000000000000000000000000
+      000000000000000000006A240A006A240A000000000000000000000000000000
+      000000000000000000000000000000000000000000006A240A00000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000006A240A0000000000000000000000
+      00000000000000000000000000000000000000000000000000006A240A006A24
+      0A00000000000000000000000000000000000000000000000000000000000000
+      0000000000006A240A0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00006A240A000000000000000000000000000000000000000000000000000000
+      000000000000000000006A240A006A240A000000000000000000000000000000
+      000000000000000000000000000000000000000000006A240A00000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000006A240A0000000000000000000000
+      00000000000000000000000000000000000000000000000000006A240A006A24
+      0A00000000000000000000000000000000000000000000000000000000000000
+      0000000000006A240A0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00006A240A000000000000000000000000000000000000000000000000000000
+      000000000000000000006A240A006A240A000000000000000000000000000000
+      000000000000000000000000000000000000000000006A240A00000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000006A240A0000000000000000000000
+      00000000000000000000000000000000000000000000000000006A240A006A24
+      0A00000000000000000000000000000000000000000000000000000000000000
+      0000000000006A240A0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00006A240A000000000000000000000000000000000000000000000000000000
+      000000000000000000006A240A006A240A000000000000000000000000000000
+      000000000000000000000000000000000000000000006A240A00000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000006A240A0000000000000000000000
+      00000000000000000000000000000000000000000000000000006A240A006A24
+      0A00000000000000000000000000000000000000000000000000000000000000
+      0000000000006A240A0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00006A240A000000000000000000000000000000000000000000000000000000
+      000000000000000000006A240A006A240A000000000000000000000000000000
+      000000000000000000000000000000000000000000006A240A00000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000006A240A006A240A006A240A006A24
+      0A006A240A006A240A006A240A006A240A006A240A006A240A006A240A006A24
+      0A006A240A006A240A006A240A006A240A006A240A006A240A006A240A006A24
+      0A006A240A006A240A0000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000424D3E000000000000003E000000280000002C0000000B00000001000100
+      00000000580000000000000000000000000000000000000000000000FFFFFF00
+      00000000000000007FCFF800000000007FCEF800000000007FCC780000000000
+      7FC83800000000007FC91800000000007FCB8800000000007FCFC80000000000
+      7FCFE800000000007FCFF8000000000000000000000000000000000000000000
+      0000000000000000000000000000}
+  end
+  object odsTCROSS_TABLE_PARAMS: TOracleDataSet
+    SQL.Strings = (
+      'SELECT a.ROWID, a.*'
+      'FROM med.tcross_table_params a')
+    ReadBuffer = 50
+    Optimize = False
+    QBEDefinition.QBEFieldDefs = {
+      04000000050000000B000000464B5F55434847525F49440100000000000D0000
+      00464B5F4D4F47524F55505F494401000000000009000000464C5F4143434550
+      540100000000000800000046435F47524F55500100000000000800000046435F
+      5543484752010000000000}
+    Cursor = crSQLWait
+    UniqueFields = 'FK_ID'
+    Session = dmMain.os
+    Left = 240
+    Top = 28
+  end
+  object dsTCROSS_TABLE_PARAMS: TDataSource
+    DataSet = odsTCROSS_TABLE_PARAMS
+    Left = 242
+    Top = 74
+  end
+  object odsParam2_Value: TOracleDataSet
+    ReadBuffer = 50
+    Optimize = False
+    Variables.Data = {
+      0300000002000000130000003A464B5F43524F53535F504152414D535F494403
+      0000000000000000000000070000003A464B5F4B455904000000000000000000
+      0000}
+    QBEDefinition.QBEFieldDefs = {
+      04000000050000000B000000464B5F55434847525F49440100000000000D0000
+      00464B5F4D4F47524F55505F494401000000000009000000464C5F4143434550
+      540100000000000800000046435F47524F55500100000000000800000046435F
+      5543484752010000000000}
+    Cursor = crSQLWait
+    RefreshOptions = [roAfterInsert, roAfterUpdate, roAllFields]
+    OnApplyRecord = odsParam2_ValueApplyRecord
+    Session = dmMain.os
+    Left = 32
+    Top = 196
+  end
+  object odsParam1: TOracleDataSet
+    ReadBuffer = 50
+    Optimize = False
+    QBEDefinition.QBEFieldDefs = {
+      04000000050000000B000000464B5F55434847525F49440100000000000D0000
+      00464B5F4D4F47524F55505F494401000000000009000000464C5F4143434550
+      540100000000000800000046435F47524F55500100000000000800000046435F
+      5543484752010000000000}
+    Cursor = crSQLWait
+    UniqueFields = 'FK_ID'
+    Session = dmMain.os
+    Left = 424
+    Top = 68
+  end
+  object oqSetValue: TOracleQuery
+    SQL.Strings = (
+      'declare'
+      '  N NUMBER;'
+      'begin'
+      '  select count(1) into N'
+      '  from med.tcross_table_check c '
+      '  where c.fk_cross_params_id = :fk_cross_params_id '
+      '    and c.fk_key1 = :fk_key1'
+      '    and c.fk_key2 = :fk_key2;'
+      ''
+      '  if N = 0 then'
+      
+        '    insert into med.tcross_table_check (fk_cross_params_id, fk_k' +
+        'ey1, fk_key2, fn_value) values (:fk_cross_params_id, :fk_key1, :' +
+        'fk_key2, :fn_value);'
+      '  else'
+      '    update med.tcross_table_check c set c.fn_value = :fn_value'
+      '    where c.fk_cross_params_id = :fk_cross_params_id '
+      '      and c.fk_key1 = :fk_key1'
+      '      and c.fk_key2 = :fk_key2;'
+      '  end if;'
+      ''
+      '  commit;'
+      'end;')
+    Session = dmMain.os
+    Optimize = False
+    Variables.Data = {
+      0300000004000000130000003A464B5F43524F53535F504152414D535F494403
+      0000000000000000000000080000003A464B5F4B455931040000000000000000
+      000000080000003A464B5F4B455932040000000000000000000000090000003A
+      464E5F56414C5545030000000000000000000000}
+    Cursor = crSQLWait
+    Left = 480
+    Top = 184
+  end
+  object dsParam1: TDataSource
+    DataSet = odsParam1
+    Left = 426
+    Top = 126
+  end
+  object dsParam2_Value: TDataSource
+    DataSet = odsParam2_Value
+    Left = 34
+    Top = 254
+  end
+  object pmSetValues: TPopupMenu
+    Left = 304
+    Top = 224
+    object N1: TMenuItem
+      Tag = 1
+      Caption = #1055#1086#1089#1090#1072#1074#1080#1090#1100' '#1074#1089#1077
+      OnClick = N1Click
+    end
+    object N2: TMenuItem
+      Tag = 2
+      Caption = #1057#1085#1103#1090#1100' '#1074#1089#1077
+      OnClick = N1Click
+    end
+    object N3: TMenuItem
+      Caption = '-'
+    end
+    object N4: TMenuItem
+      Tag = 3
+      Caption = #1048#1085#1074#1077#1088#1090#1080#1088#1086#1074#1072#1090#1100' '#1074#1089#1077
+      OnClick = N1Click
+    end
+  end
+end

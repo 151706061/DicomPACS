@@ -1,0 +1,63 @@
+DROP TABLE ASU.TEPIK_VK_AUTONAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TEPIK_VK_AUTONAZ  (Table) 
+--
+CREATE TABLE ASU.TEPIK_VK_AUTONAZ
+(
+  FK_EPIKID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TEPIK_VK_AUTONAZ IS 'Таблица-ссылка на то, что на эпикриз на ВК было создано автоматическое назначение
+Created by Prihodko N. 28.03.2013 '
+/
+
+COMMENT ON COLUMN ASU.TEPIK_VK_AUTONAZ.FK_EPIKID IS 'TEPIKRIZ.FK_ID'
+/
+
+
+--
+-- TEPIK_VK_AUTONAZ_ID  (Index) 
+--
+--  Dependencies: 
+--   TEPIK_VK_AUTONAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.TEPIK_VK_AUTONAZ_ID ON ASU.TEPIK_VK_AUTONAZ
+(FK_EPIKID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

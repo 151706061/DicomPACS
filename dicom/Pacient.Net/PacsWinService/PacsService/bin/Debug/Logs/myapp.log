@@ -1,0 +1,285 @@
+2014-08-13 17:21:34,049 [INFO] [1] - ScheduleRer2Service
+2014-08-13 17:21:34,075 [INFO] [7] - SERVICE START
+2014-08-13 17:21:34,086 [INFO] [5] - Initialize
+2014-08-13 17:21:34,089 [INFO] [5] - DBConnectionString: Provider=PostgreSQL;Unicode=true;host=192.168.1.11;Database=webtalonXtula;user=asu;password=asu
+2014-08-13 17:21:34,089 [INFO] [5] - EndpointAddress: http://medtera.yarcloud.ru/module-rer/Rer?wsdl
+2014-08-13 17:21:34,089 [INFO] [5] - WCFLibClient.ConnectionString: <Provider=PostgreSQL;Unicode=true;host=192.168.1.11;Database=webtalonXtula;user=asu;password=asu>
+2014-08-13 17:21:34,090 [INFO] [5] - TimerIntervalUpdateLpuSettings interval = 86400 sec = 1440 min = 24 hours
+2014-08-13 17:21:34,090 [INFO] [5] - TimerIntervalUpdateAreas interval = 86400 sec = 1440 min = 24 hours
+2014-08-13 17:21:34,090 [INFO] [5] - TimerIntervalUpdateSchedule interval = 20 sec = 0,333333333333333 min = 0,00555555555555556 hours
+2014-08-13 17:21:34,090 [INFO] [5] - TimerIntervalUpdatePeople interval = 420 sec = 7 min = 0,116666666666667 hours
+2014-08-13 17:21:34,090 [INFO] [5] - TimerIntervalUpdateArrival interval = 3600 sec = 60 min = 1 hours
+2014-08-13 17:21:34,091 [INFO] [5] - TimerIntervalUpdateReferral interval = 2400 sec = 40 min = 0,666666666666667 hours
+2014-08-13 17:21:34,091 [INFO] [5] - TimerIntervalUpdateCall interval = 1200 sec = 20 min = 0,333333333333333 hours
+2014-08-13 17:21:34,091 [INFO] [5] - TimerIntervalCleanBuffers interval = 7200 sec = 120 min = 2 hours
+2014-08-13 17:21:34,091 [INFO] [5] - TimerRestoreConnect interval = 10 sec = 0,166666666666667 min = 0,00277777777777778 hours
+2014-08-13 17:21:34,091 [INFO] [5] - TimerUpdateLpuNames interval = 86400 sec = 1440 min = 24 hours
+2014-08-13 17:21:34,092 [INFO] [5] - Проверка коннекта.
+2014-08-13 17:21:34,378 [INFO] [5] - CheckConnectDataBase - ok
+2014-08-13 17:21:39,204 [INFO] [5] - CheckConnectSOAPSocket - ok
+2014-08-13 17:21:39,206 [INFO] [5] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:21:39,207 [INFO] [5] - Thread count = 1 ++ (code: UpdateSchedule)
+2014-08-13 17:21:39,246 [INFO] [5] - Service: UpdateSchedule; datetime_on: 13.08.2014 17:08:08
+2014-08-13 17:21:39,247 [INFO] [5] - UpdateDoctors - Begin. ThreadCount=16
+2014-08-13 17:21:39,247 [INFO] [5] - GetLpuListFS
+2014-08-13 17:21:39,257 [INFO] [5] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:21:39,258 [INFO] [5] - UpdateDoctorsForLpu - Begin.
+2014-08-13 17:21:39,259 [INFO] [5] - GetDoctorListToUpdate: lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:08:08]
+2014-08-13 17:21:39,308 [INFO] [5] - UpdateDoctorsForLpu - ok. Duration: 0.000833381666666667 minutes
+2014-08-13 17:21:39,308 [INFO] [5] - UpdateDoctors - ok. Duration: 0.001016725 minutes
+2014-08-13 17:21:39,310 [INFO] [5] - UploadSchedule - Begin. ThreadCount=16 CurrentTimestamp=13.08.2014 17:08:08
+2014-08-13 17:21:39,310 [INFO] [5] - GetLpuListFS
+2014-08-13 17:21:39,314 [INFO] [5] - UpdateSchedulesForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")', CurrentTimestamp=13.08.2014 17:08:08
+2014-08-13 17:21:39,315 [INFO] [5] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:08:08]
+2014-08-13 17:21:39,876 [INFO] [5] - UpdateSchedulesForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00938333333333333 minutes
+2014-08-13 17:21:39,876 [INFO] [5] - UploadSchedule - ok. Duration: 13.523853675 minutes
+2014-08-13 17:21:39,877 [INFO] [5] - UploadPeople - Begin. ThreadCount=16
+2014-08-13 17:21:39,878 [INFO] [5] - GetLpuListFS
+2014-08-13 17:21:39,885 [INFO] [5] - UpdatePeopleForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:21:39,885 [INFO] [5] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:08:08]
+2014-08-13 17:21:40,071 [INFO] [5] - UpdatePeopleForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00313333333333333 minutes
+2014-08-13 17:21:40,072 [INFO] [5] - UploadPeople - ok. Duration: 0.00338333333333333 minutes
+2014-08-13 17:21:40,073 [INFO] [5] - UploadArrival - Begin. ThreadCount=16
+2014-08-13 17:21:40,073 [INFO] [5] - GetLpuListFS
+2014-08-13 17:21:40,076 [INFO] [5] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:21:40,079 [INFO] [5] - UploadArrivalForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:21:40,080 [INFO] [5] - GetArrivalSlots. Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]]
+2014-08-13 17:21:40,084 [INFO] [5] - UploadArrivalForLpu - ok. ЛПУ [1 из 1]. Duration: 8.33383333333333E-05 minutes
+2014-08-13 17:21:40,084 [INFO] [5] - UploadArrival - ok. Duration: 0.000183345 minutes
+2014-08-13 17:21:40,084 [INFO] [5] - Service: UpdateSchedule - True.   Thread count = 0 --
+2014-08-13 17:21:40,087 [INFO] [5] - == service 'CleanBuffers' next start : 13.08.2014 19:21:40
+2014-08-13 17:21:40,087 [INFO] [5] - == service 'RestoreConnection' next start : 13.08.2014 17:21:50
+2014-08-13 17:21:40,087 [INFO] [5] - == service 'UpdateLpuSettings' next start : 14.08.2014 17:21:40
+2014-08-13 17:21:40,087 [INFO] [5] - == service 'UpdateAreas' next start : 14.08.2014 17:21:40
+2014-08-13 17:21:40,087 [INFO] [5] - == service 'UpdateArrival' next start : 13.08.2014 18:21:40
+2014-08-13 17:21:40,087 [INFO] [5] - == service 'UpdateCall' next start : 13.08.2014 17:41:40
+2014-08-13 17:21:40,087 [INFO] [5] - == service 'UpdatePeople' next start : 13.08.2014 17:28:40
+2014-08-13 17:21:40,088 [INFO] [5] - == service 'UpdateReferral' next start : 13.08.2014 18:01:40
+2014-08-13 17:21:40,088 [INFO] [5] - == service 'UpdateSchedule' next start : 13.08.2014 17:22:00
+2014-08-13 17:21:40,088 [INFO] [5] - == service 'UpdateLpuNames' next start : 14.08.2014 17:21:40
+2014-08-13 17:21:50,084 [INFO] [7] - Проверка коннекта.
+2014-08-13 17:21:50,086 [INFO] [7] - CheckConnectDataBase - ok
+2014-08-13 17:21:50,817 [INFO] [7] - CheckConnectSOAPSocket - ok
+2014-08-13 17:21:50,817 [INFO] [7] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:22:00,085 [INFO] [7] - Thread count = 1 ++ (code: UpdateSchedule)
+2014-08-13 17:22:00,087 [INFO] [7] - Service: UpdateSchedule; datetime_on: 13.08.2014 17:08:29
+2014-08-13 17:22:00,087 [INFO] [7] - UpdateDoctors - Begin. ThreadCount=16
+2014-08-13 17:22:00,087 [INFO] [7] - GetLpuListFS
+2014-08-13 17:22:00,090 [INFO] [7] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:22:00,090 [INFO] [7] - UpdateDoctorsForLpu - Begin.
+2014-08-13 17:22:00,090 [INFO] [7] - GetDoctorListToUpdate: lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:08:29]
+2014-08-13 17:22:00,104 [INFO] [7] - UpdateDoctorsForLpu - ok. Duration: 0.000233346666666667 minutes
+2014-08-13 17:22:00,105 [INFO] [7] - UpdateDoctors - ok. Duration: 0.000300016666666667 minutes
+2014-08-13 17:22:00,106 [INFO] [7] - UploadSchedule - Begin. ThreadCount=16 CurrentTimestamp=13.08.2014 17:08:29
+2014-08-13 17:22:00,106 [INFO] [7] - GetLpuListFS
+2014-08-13 17:22:00,110 [INFO] [7] - UpdateSchedulesForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")', CurrentTimestamp=13.08.2014 17:08:29
+2014-08-13 17:22:00,110 [INFO] [7] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:08:29]
+2014-08-13 17:22:00,665 [INFO] [7] - UpdateSchedulesForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00936666666666667 minutes
+2014-08-13 17:22:00,665 [INFO] [7] - UploadSchedule - ok. Duration: 13.5237234916667 minutes
+2014-08-13 17:22:00,665 [INFO] [7] - UploadPeople - Begin. ThreadCount=16
+2014-08-13 17:22:00,666 [INFO] [7] - GetLpuListFS
+2014-08-13 17:22:00,670 [INFO] [7] - UpdatePeopleForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:22:00,670 [INFO] [7] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:08:29]
+2014-08-13 17:22:00,818 [INFO] [8] - Проверка коннекта.
+2014-08-13 17:22:00,862 [INFO] [8] - CheckConnectDataBase - ok
+2014-08-13 17:22:00,863 [INFO] [7] - UpdatePeopleForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00313333333333333 minutes
+2014-08-13 17:22:00,863 [INFO] [7] - UploadPeople - ok. Duration: 0.00313333333333333 minutes
+2014-08-13 17:22:00,863 [INFO] [7] - UploadArrival - Begin. ThreadCount=16
+2014-08-13 17:22:00,863 [INFO] [7] - GetLpuListFS
+2014-08-13 17:22:00,866 [INFO] [7] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:22:00,866 [INFO] [7] - UploadArrivalForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:22:00,866 [INFO] [7] - GetArrivalSlots. Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]]
+2014-08-13 17:22:00,868 [INFO] [7] - UploadArrivalForLpu - ok. ЛПУ [1 из 1]. Duration: 3.3335E-05 minutes
+2014-08-13 17:22:00,868 [INFO] [7] - UploadArrival - ok. Duration: 8.33366666666667E-05 minutes
+2014-08-13 17:22:00,868 [INFO] [7] - Service: UpdateSchedule - True.   Thread count = 0 --
+2014-08-13 17:22:00,868 [INFO] [7] - == service 'UpdateSchedule' next start : 13.08.2014 17:22:20
+2014-08-13 17:22:01,522 [INFO] [8] - CheckConnectSOAPSocket - ok
+2014-08-13 17:22:01,522 [INFO] [8] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:22:11,523 [INFO] [6] - Проверка коннекта.
+2014-08-13 17:22:11,524 [INFO] [6] - CheckConnectDataBase - ok
+2014-08-13 17:22:12,228 [INFO] [6] - CheckConnectSOAPSocket - ok
+2014-08-13 17:22:12,228 [INFO] [6] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:22:20,871 [INFO] [7] - Thread count = 1 ++ (code: UpdateSchedule)
+2014-08-13 17:22:20,872 [INFO] [7] - Service: UpdateSchedule; datetime_on: 13.08.2014 17:08:50
+2014-08-13 17:22:20,872 [INFO] [7] - UpdateDoctors - Begin. ThreadCount=16
+2014-08-13 17:22:20,872 [INFO] [7] - GetLpuListFS
+2014-08-13 17:22:20,875 [INFO] [7] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:22:20,875 [INFO] [7] - UpdateDoctorsForLpu - Begin.
+2014-08-13 17:22:20,875 [INFO] [7] - GetDoctorListToUpdate: lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:08:50]
+2014-08-13 17:22:20,889 [INFO] [7] - UpdateDoctorsForLpu - ok. Duration: 0.000233346666666667 minutes
+2014-08-13 17:22:20,889 [INFO] [7] - UpdateDoctors - ok. Duration: 0.00028335 minutes
+2014-08-13 17:22:20,894 [INFO] [7] - UploadSchedule - Begin. ThreadCount=16 CurrentTimestamp=13.08.2014 17:08:50
+2014-08-13 17:22:20,894 [INFO] [7] - GetLpuListFS
+2014-08-13 17:22:20,898 [INFO] [7] - UpdateSchedulesForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")', CurrentTimestamp=13.08.2014 17:08:50
+2014-08-13 17:22:20,898 [INFO] [7] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:08:50]
+2014-08-13 17:22:21,445 [INFO] [7] - UpdateSchedulesForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00911666666666667 minutes
+2014-08-13 17:22:21,446 [INFO] [7] - UploadSchedule - ok. Duration: 13.5237266366667 minutes
+2014-08-13 17:22:21,446 [INFO] [7] - UploadPeople - Begin. ThreadCount=16
+2014-08-13 17:22:21,446 [INFO] [7] - GetLpuListFS
+2014-08-13 17:22:21,450 [INFO] [7] - UpdatePeopleForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:22:21,450 [INFO] [7] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:08:50]
+2014-08-13 17:22:21,633 [INFO] [7] - UpdatePeopleForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00311666666666667 minutes
+2014-08-13 17:22:21,635 [INFO] [7] - UploadPeople - ok. Duration: 0.00311666666666667 minutes
+2014-08-13 17:22:21,635 [INFO] [7] - UploadArrival - Begin. ThreadCount=16
+2014-08-13 17:22:21,635 [INFO] [7] - GetLpuListFS
+2014-08-13 17:22:21,637 [INFO] [7] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:22:21,637 [INFO] [7] - UploadArrivalForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:22:21,637 [INFO] [7] - GetArrivalSlots. Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]]
+2014-08-13 17:22:21,640 [INFO] [7] - UploadArrivalForLpu - ok. ЛПУ [1 из 1]. Duration: 5.00016666666667E-05 minutes
+2014-08-13 17:22:21,640 [INFO] [7] - UploadArrival - ok. Duration: 8.33366666666667E-05 minutes
+2014-08-13 17:22:21,640 [INFO] [7] - Service: UpdateSchedule - True.   Thread count = 0 --
+2014-08-13 17:22:21,640 [INFO] [7] - == service 'UpdateSchedule' next start : 13.08.2014 17:22:41
+2014-08-13 17:22:22,233 [INFO] [6] - Проверка коннекта.
+2014-08-13 17:22:22,234 [INFO] [6] - CheckConnectDataBase - ok
+2014-08-13 17:22:22,930 [INFO] [6] - CheckConnectSOAPSocket - ok
+2014-08-13 17:22:22,931 [INFO] [6] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:22:32,932 [INFO] [8] - Проверка коннекта.
+2014-08-13 17:22:32,934 [INFO] [8] - CheckConnectDataBase - ok
+2014-08-13 17:22:33,571 [INFO] [8] - CheckConnectSOAPSocket - ok
+2014-08-13 17:22:33,571 [INFO] [8] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:22:41,647 [INFO] [6] - Thread count = 1 ++ (code: UpdateSchedule)
+2014-08-13 17:22:41,651 [INFO] [6] - Service: UpdateSchedule; datetime_on: 13.08.2014 17:09:10
+2014-08-13 17:22:41,651 [INFO] [6] - UpdateDoctors - Begin. ThreadCount=16
+2014-08-13 17:22:41,651 [INFO] [6] - GetLpuListFS
+2014-08-13 17:22:41,653 [INFO] [6] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:22:41,653 [INFO] [6] - UpdateDoctorsForLpu - Begin.
+2014-08-13 17:22:41,653 [INFO] [6] - GetDoctorListToUpdate: lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:09:10]
+2014-08-13 17:22:41,668 [INFO] [6] - UpdateDoctorsForLpu - ok. Duration: 0.000250015 minutes
+2014-08-13 17:22:41,668 [INFO] [6] - UpdateDoctors - ok. Duration: 0.00028335 minutes
+2014-08-13 17:22:41,669 [INFO] [6] - UploadSchedule - Begin. ThreadCount=16 CurrentTimestamp=13.08.2014 17:09:10
+2014-08-13 17:22:41,669 [INFO] [6] - GetLpuListFS
+2014-08-13 17:22:41,672 [INFO] [6] - UpdateSchedulesForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")', CurrentTimestamp=13.08.2014 17:09:10
+2014-08-13 17:22:41,672 [INFO] [6] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:09:10]
+2014-08-13 17:22:42,208 [INFO] [6] - UpdateSchedulesForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00911666666666667 minutes
+2014-08-13 17:22:42,208 [INFO] [6] - UploadSchedule - ok. Duration: 13.523413095 minutes
+2014-08-13 17:22:42,208 [INFO] [6] - UploadPeople - Begin. ThreadCount=16
+2014-08-13 17:22:42,209 [INFO] [6] - GetLpuListFS
+2014-08-13 17:22:42,213 [INFO] [6] - UpdatePeopleForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:22:42,213 [INFO] [6] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:09:10]
+2014-08-13 17:22:42,409 [INFO] [6] - UpdatePeopleForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00313333333333333 minutes
+2014-08-13 17:22:42,410 [INFO] [6] - UploadPeople - ok. Duration: 0.00313333333333333 minutes
+2014-08-13 17:22:42,410 [INFO] [6] - UploadArrival - Begin. ThreadCount=16
+2014-08-13 17:22:42,410 [INFO] [6] - GetLpuListFS
+2014-08-13 17:22:42,412 [INFO] [6] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:22:42,412 [INFO] [6] - UploadArrivalForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:22:42,412 [INFO] [6] - GetArrivalSlots. Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]]
+2014-08-13 17:22:42,415 [INFO] [6] - UploadArrivalForLpu - ok. ЛПУ [1 из 1]. Duration: 5.00016666666667E-05 minutes
+2014-08-13 17:22:42,415 [INFO] [6] - UploadArrival - ok. Duration: 8.33383333333333E-05 minutes
+2014-08-13 17:22:42,415 [INFO] [6] - Service: UpdateSchedule - True.   Thread count = 0 --
+2014-08-13 17:22:42,415 [INFO] [6] - == service 'UpdateSchedule' next start : 13.08.2014 17:23:02
+2014-08-13 17:22:43,570 [INFO] [8] - Проверка коннекта.
+2014-08-13 17:22:43,571 [INFO] [8] - CheckConnectDataBase - ok
+2014-08-13 17:22:44,200 [INFO] [8] - CheckConnectSOAPSocket - ok
+2014-08-13 17:22:44,200 [INFO] [8] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:22:54,205 [INFO] [7] - Проверка коннекта.
+2014-08-13 17:22:54,206 [INFO] [7] - CheckConnectDataBase - ok
+2014-08-13 17:22:54,827 [INFO] [7] - CheckConnectSOAPSocket - ok
+2014-08-13 17:22:54,827 [INFO] [7] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:23:02,426 [INFO] [6] - Thread count = 1 ++ (code: UpdateSchedule)
+2014-08-13 17:23:02,428 [INFO] [6] - Service: UpdateSchedule; datetime_on: 13.08.2014 17:09:31
+2014-08-13 17:23:02,428 [INFO] [6] - UpdateDoctors - Begin. ThreadCount=16
+2014-08-13 17:23:02,428 [INFO] [6] - GetLpuListFS
+2014-08-13 17:23:02,431 [INFO] [6] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:23:02,431 [INFO] [6] - UpdateDoctorsForLpu - Begin.
+2014-08-13 17:23:02,431 [INFO] [6] - GetDoctorListToUpdate: lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:09:31]
+2014-08-13 17:23:02,446 [INFO] [6] - UpdateDoctorsForLpu - ok. Duration: 0.000250013333333333 minutes
+2014-08-13 17:23:02,446 [INFO] [6] - UpdateDoctors - ok. Duration: 0.000300016666666667 minutes
+2014-08-13 17:23:02,447 [INFO] [6] - UploadSchedule - Begin. ThreadCount=16 CurrentTimestamp=13.08.2014 17:09:31
+2014-08-13 17:23:02,447 [INFO] [6] - GetLpuListFS
+2014-08-13 17:23:02,451 [INFO] [6] - UpdateSchedulesForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")', CurrentTimestamp=13.08.2014 17:09:31
+2014-08-13 17:23:02,451 [INFO] [6] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:09:31]
+2014-08-13 17:23:02,982 [INFO] [6] - UpdateSchedulesForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00885 minutes
+2014-08-13 17:23:02,982 [INFO] [6] - UploadSchedule - ok. Duration: 13.5232828983333 minutes
+2014-08-13 17:23:02,982 [INFO] [6] - UploadPeople - Begin. ThreadCount=16
+2014-08-13 17:23:02,983 [INFO] [6] - GetLpuListFS
+2014-08-13 17:23:02,987 [INFO] [6] - UpdatePeopleForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:23:02,987 [INFO] [6] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:09:31]
+2014-08-13 17:23:03,168 [INFO] [6] - UpdatePeopleForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00311666666666667 minutes
+2014-08-13 17:23:03,169 [INFO] [6] - UploadPeople - ok. Duration: 0.00311666666666667 minutes
+2014-08-13 17:23:03,169 [INFO] [6] - UploadArrival - Begin. ThreadCount=16
+2014-08-13 17:23:03,169 [INFO] [6] - GetLpuListFS
+2014-08-13 17:23:03,172 [INFO] [6] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:23:03,172 [INFO] [6] - UploadArrivalForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:23:03,172 [INFO] [6] - GetArrivalSlots. Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]]
+2014-08-13 17:23:03,174 [INFO] [6] - UploadArrivalForLpu - ok. ЛПУ [1 из 1]. Duration: 3.3335E-05 minutes
+2014-08-13 17:23:03,174 [INFO] [6] - UploadArrival - ok. Duration: 8.33383333333333E-05 minutes
+2014-08-13 17:23:03,174 [INFO] [6] - Service: UpdateSchedule - True.   Thread count = 0 --
+2014-08-13 17:23:03,174 [INFO] [6] - == service 'UpdateSchedule' next start : 13.08.2014 17:23:23
+2014-08-13 17:23:04,814 [INFO] [8] - Проверка коннекта.
+2014-08-13 17:23:04,815 [INFO] [8] - CheckConnectDataBase - ok
+2014-08-13 17:23:05,490 [INFO] [8] - CheckConnectSOAPSocket - ok
+2014-08-13 17:23:05,490 [INFO] [8] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:23:15,490 [INFO] [6] - Проверка коннекта.
+2014-08-13 17:23:15,491 [INFO] [6] - CheckConnectDataBase - ok
+2014-08-13 17:23:16,175 [INFO] [6] - CheckConnectSOAPSocket - ok
+2014-08-13 17:23:16,175 [INFO] [6] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:23:23,175 [INFO] [7] - Thread count = 1 ++ (code: UpdateSchedule)
+2014-08-13 17:23:23,176 [INFO] [7] - Service: UpdateSchedule; datetime_on: 13.08.2014 17:09:52
+2014-08-13 17:23:23,176 [INFO] [7] - UpdateDoctors - Begin. ThreadCount=16
+2014-08-13 17:23:23,176 [INFO] [7] - GetLpuListFS
+2014-08-13 17:23:23,179 [INFO] [7] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:23:23,179 [INFO] [7] - UpdateDoctorsForLpu - Begin.
+2014-08-13 17:23:23,179 [INFO] [7] - GetDoctorListToUpdate: lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:09:52]
+2014-08-13 17:23:23,193 [INFO] [7] - UpdateDoctorsForLpu - ok. Duration: 0.000233346666666667 minutes
+2014-08-13 17:23:23,193 [INFO] [7] - UpdateDoctors - ok. Duration: 0.00028335 minutes
+2014-08-13 17:23:23,195 [INFO] [7] - UploadSchedule - Begin. ThreadCount=16 CurrentTimestamp=13.08.2014 17:09:52
+2014-08-13 17:23:23,195 [INFO] [7] - GetLpuListFS
+2014-08-13 17:23:23,198 [INFO] [7] - UpdateSchedulesForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")', CurrentTimestamp=13.08.2014 17:09:52
+2014-08-13 17:23:23,199 [INFO] [7] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:09:52]
+2014-08-13 17:23:23,732 [INFO] [7] - UpdateSchedulesForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00885 minutes
+2014-08-13 17:23:23,732 [INFO] [7] - UploadSchedule - ok. Duration: 13.523269345 minutes
+2014-08-13 17:23:23,732 [INFO] [7] - UploadPeople - Begin. ThreadCount=16
+2014-08-13 17:23:23,733 [INFO] [7] - GetLpuListFS
+2014-08-13 17:23:23,739 [INFO] [7] - UpdatePeopleForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:23:23,739 [INFO] [7] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:09:52]
+2014-08-13 17:23:23,922 [INFO] [7] - UpdatePeopleForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00285 minutes
+2014-08-13 17:23:23,923 [INFO] [7] - UploadPeople - ok. Duration: 0.00311666666666667 minutes
+2014-08-13 17:23:23,923 [INFO] [7] - UploadArrival - Begin. ThreadCount=16
+2014-08-13 17:23:23,923 [INFO] [7] - GetLpuListFS
+2014-08-13 17:23:23,925 [INFO] [7] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:23:23,926 [INFO] [7] - UploadArrivalForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:23:23,926 [INFO] [7] - GetArrivalSlots. Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]]
+2014-08-13 17:23:23,928 [INFO] [7] - UploadArrivalForLpu - ok. ЛПУ [1 из 1]. Duration: 3.3335E-05 minutes
+2014-08-13 17:23:23,928 [INFO] [7] - UploadArrival - ok. Duration: 8.33383333333333E-05 minutes
+2014-08-13 17:23:23,928 [INFO] [7] - Service: UpdateSchedule - True.   Thread count = 0 --
+2014-08-13 17:23:23,928 [INFO] [7] - == service 'UpdateSchedule' next start : 13.08.2014 17:23:43
+2014-08-13 17:23:26,175 [INFO] [8] - Проверка коннекта.
+2014-08-13 17:23:26,176 [INFO] [8] - CheckConnectDataBase - ok
+2014-08-13 17:23:26,798 [INFO] [8] - CheckConnectSOAPSocket - ok
+2014-08-13 17:23:26,798 [INFO] [8] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:23:36,809 [INFO] [7] - Проверка коннекта.
+2014-08-13 17:23:36,810 [INFO] [7] - CheckConnectDataBase - ok
+2014-08-13 17:23:37,442 [INFO] [7] - CheckConnectSOAPSocket - ok
+2014-08-13 17:23:37,442 [INFO] [7] - КОННЕКТ ПОЯВИЛСЯ! :) Работаем в штатном режиме.
+2014-08-13 17:23:43,933 [INFO] [6] - Thread count = 1 ++ (code: UpdateSchedule)
+2014-08-13 17:23:43,937 [INFO] [6] - Service: UpdateSchedule; datetime_on: 13.08.2014 17:10:13
+2014-08-13 17:23:43,937 [INFO] [6] - UpdateDoctors - Begin. ThreadCount=16
+2014-08-13 17:23:43,937 [INFO] [6] - GetLpuListFS
+2014-08-13 17:23:43,939 [INFO] [6] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:23:43,939 [INFO] [6] - UpdateDoctorsForLpu - Begin.
+2014-08-13 17:23:43,939 [INFO] [6] - GetDoctorListToUpdate: lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:10:13]
+2014-08-13 17:23:43,954 [INFO] [6] - UpdateDoctorsForLpu - ok. Duration: 0.000250013333333333 minutes
+2014-08-13 17:23:43,954 [INFO] [6] - UpdateDoctors - ok. Duration: 0.000283348333333333 minutes
+2014-08-13 17:23:43,955 [INFO] [6] - UploadSchedule - Begin. ThreadCount=16 CurrentTimestamp=13.08.2014 17:10:13
+2014-08-13 17:23:43,955 [INFO] [6] - GetLpuListFS
+2014-08-13 17:23:43,958 [INFO] [6] - UpdateSchedulesForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")', CurrentTimestamp=13.08.2014 17:10:13
+2014-08-13 17:23:43,958 [INFO] [6] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:10:13]
+2014-08-13 17:23:44,530 [INFO] [6] - UpdateSchedulesForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00938333333333333 minutes
+2014-08-13 17:23:44,530 [INFO] [6] - UploadSchedule - ok. Duration: 13.524072505 minutes
+2014-08-13 17:23:44,530 [INFO] [6] - UploadPeople - Begin. ThreadCount=16
+2014-08-13 17:23:44,533 [INFO] [6] - GetLpuListFS
+2014-08-13 17:23:44,537 [INFO] [6] - UpdatePeopleForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:23:44,537 [INFO] [6] - GetResourcePeriodList.  table_name_list=System.Collections.Generic.List`1[System.String], buffer_action=System.Collections.Generic.List`1[System.String], Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[13.08.2014 17:10:13]
+2014-08-13 17:23:44,725 [INFO] [6] - UpdatePeopleForLpu - ok. ЛПУ [1 из 1]. Duration: 0.00313333333333333 minutes
+2014-08-13 17:23:44,726 [INFO] [6] - UploadPeople - ok. Duration: 0.00338333333333333 minutes
+2014-08-13 17:23:44,726 [INFO] [6] - UploadArrival - Begin. ThreadCount=16
+2014-08-13 17:23:44,726 [INFO] [6] - GetLpuListFS
+2014-08-13 17:23:44,729 [INFO] [6] - SetMaxThreads=16, Succeeded=True
+2014-08-13 17:23:44,729 [INFO] [6] - UploadArrivalForLpu. ЛПУ [1 из 1]. OnlyEdited=True, Lpu='Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")'
+2014-08-13 17:23:44,729 [INFO] [6] - GetArrivalSlots. Lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]]
+2014-08-13 17:23:44,731 [INFO] [6] - UploadArrivalForLpu - ok. ЛПУ [1 из 1]. Duration: 3.3335E-05 minutes
+2014-08-13 17:23:44,731 [INFO] [6] - UploadArrival - ok. Duration: 8.33383333333333E-05 minutes
+2014-08-13 17:23:44,731 [INFO] [6] - Service: UpdateSchedule - True.   Thread count = 0 --
+2014-08-13 17:23:44,731 [INFO] [6] - == service 'UpdateSchedule' next start : 13.08.2014 17:24:04
+2014-08-13 17:23:45,119 [INFO] [8] - SERVICE STOP
+2014-08-13 17:23:45,119 [INFO] [8] - workedThread aborted

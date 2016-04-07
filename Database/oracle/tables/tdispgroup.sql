@@ -1,0 +1,127 @@
+DROP TABLE ASU.TDISPGROUP CASCADE CONSTRAINTS
+/
+
+--
+-- TDISPGROUP  (Table) 
+--
+CREATE TABLE ASU.TDISPGROUP
+(
+  FK_ID        NUMBER                           NOT NULL,
+  FC_NAME      VARCHAR2(4000 BYTE),
+  FN_AGEFROM   NUMBER,
+  FN_AGETO     NUMBER,
+  FK_OWNER     NUMBER,
+  FN_TYPE      NUMBER,
+  FL_USEDIAG   NUMBER                           DEFAULT 1,
+  FL_USEAGE    NUMBER                           DEFAULT 1,
+  FK_USLVIDID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TDISPGROUP.FC_NAME IS 'Наименование'
+/
+
+COMMENT ON COLUMN ASU.TDISPGROUP.FN_AGEFROM IS 'Минимальный возраст'
+/
+
+COMMENT ON COLUMN ASU.TDISPGROUP.FN_AGETO IS 'Максимальный возраст'
+/
+
+COMMENT ON COLUMN ASU.TDISPGROUP.FN_TYPE IS '0 - группа, 1 - папка'
+/
+
+COMMENT ON COLUMN ASU.TDISPGROUP.FL_USEDIAG IS 'Использовать для признака диагнозы ?'
+/
+
+COMMENT ON COLUMN ASU.TDISPGROUP.FL_USEAGE IS 'Использовать для признака возраст ?'
+/
+
+COMMENT ON COLUMN ASU.TDISPGROUP.FK_USLVIDID IS 'Тип документа'
+/
+
+
+--
+-- TDISPG_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TDISPGROUP (Table)
+--
+CREATE UNIQUE INDEX ASU.TDISPG_FK_ID ON ASU.TDISPGROUP
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDISPG_FK_OWNER  (Index) 
+--
+--  Dependencies: 
+--   TDISPGROUP (Table)
+--
+CREATE INDEX ASU.TDISPG_FK_OWNER ON ASU.TDISPGROUP
+(FK_OWNER)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDISPGROUP_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDISPGROUP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDISPGROUP_INSERT" 
+  BEFORE INSERT
+  ON ASU.TDISPGROUP   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  select SEQ_TDISPGROUP.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

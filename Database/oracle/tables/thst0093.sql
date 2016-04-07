@@ -1,0 +1,107 @@
+ALTER TABLE ASU.THST0093
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.THST0093 CASCADE CONSTRAINTS
+/
+
+--
+-- THST0093  (Table) 
+--
+CREATE TABLE ASU.THST0093
+(
+  FK_ID  NUMBER,
+  CODE   VARCHAR2(255 BYTE),
+  STAGE  VARCHAR2(255 BYTE),
+  NAME   VARCHAR2(255 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.THST0093 IS 'Таблица создана автоматически в результате загрузки DBF'
+/
+
+COMMENT ON COLUMN ASU.THST0093.FK_ID IS 'ASU.SEQ_THST0093'
+/
+
+
+--
+-- K_THST0093_ID  (Index) 
+--
+--  Dependencies: 
+--   THST0093 (Table)
+--
+CREATE UNIQUE INDEX ASU.K_THST0093_ID ON ASU.THST0093
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- THST0093_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   THST0093 (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.THST0093_BEFORE_INSERT
+  BEFORE INSERT
+  ON ASU.THST0093   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+BEGIN
+  SELECT ASU.SEQ_THST0093.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table THST0093 
+-- 
+ALTER TABLE ASU.THST0093 ADD (
+  CONSTRAINT K_THST0093_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

@@ -1,0 +1,13 @@
+ALTER TABLE ASU.TSTOL
+  DROP CONSTRAINT TSTOL_BY_ID
+/
+
+-- 
+-- Non Foreign Key Constraints for Table TSTOL 
+-- 
+ALTER TABLE ASU.TSTOL ADD (
+  CONSTRAINT TSTOL_BY_ID
+ PRIMARY KEY
+ (FK_ID))
+/
+

@@ -1,0 +1,46 @@
+DROP TABLE ASU.TUSL_DBF_ARCH_TMP CASCADE CONSTRAINTS
+/
+
+--
+-- TUSL_DBF_ARCH_TMP  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.TUSL_DBF_ARCH_TMP
+(
+  FK_ID       NUMBER(15)                        NOT NULL,
+  ID_ILL_U    NUMBER(19),
+  DOC_CD_U    VARCHAR2(20 BYTE),
+  DATE_E_U    DATE,
+  FK_SLUCHID  NUMBER(15),
+  TYPE_USL    NUMBER(1),
+  ID_ILL      NUMBER(19)
+)
+ON COMMIT PRESERVE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.TUSL_DBF_ARCH_TMP IS 'Экспертиза. Временная таблица, которая используется для ускорения работы Author:Efimov'
+/
+
+
+--
+-- IDX_TUSL_DBF_ARCH_TMP_TYPE_USL  (Index) 
+--
+--  Dependencies: 
+--   TUSL_DBF_ARCH_TMP (Table)
+--
+CREATE INDEX ASU.IDX_TUSL_DBF_ARCH_TMP_TYPE_USL ON ASU.TUSL_DBF_ARCH_TMP
+(TYPE_USL)
+/
+
+
+--
+-- IDX_USL_DBF_ARCH_TMP_ID_ILL_U  (Index) 
+--
+--  Dependencies: 
+--   TUSL_DBF_ARCH_TMP (Table)
+--
+CREATE INDEX ASU.IDX_USL_DBF_ARCH_TMP_ID_ILL_U ON ASU.TUSL_DBF_ARCH_TMP
+(ID_ILL_U)
+/
+
+

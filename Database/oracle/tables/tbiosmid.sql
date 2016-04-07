@@ -1,0 +1,116 @@
+DROP TABLE ASU.TBIOSMID CASCADE CONSTRAINTS
+/
+
+--
+-- TBIOSMID  (Table) 
+--
+CREATE TABLE ASU.TBIOSMID
+(
+  FK_ID    NUMBER(9)                            DEFAULT -1                    NOT NULL,
+  FC_BIO   VARCHAR2(2 BYTE),
+  FK_SMID  NUMBER(9)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TBIOSMID IS 'Таблица соответствий кодов биохимии и кодов SMID'
+/
+
+COMMENT ON COLUMN ASU.TBIOSMID.FK_ID IS 'SEQUENCE=[SEQ_TBIOSMID]'
+/
+
+COMMENT ON COLUMN ASU.TBIOSMID.FC_BIO IS 'Код по биохимии'
+/
+
+COMMENT ON COLUMN ASU.TBIOSMID.FK_SMID IS 'Код по SMID'
+/
+
+
+--
+-- TBIOSMID_ID  (Index) 
+--
+--  Dependencies: 
+--   TBIOSMID (Table)
+--
+CREATE UNIQUE INDEX ASU.TBIOSMID_ID ON ASU.TBIOSMID
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TBIOSMID_SMID  (Index) 
+--
+--  Dependencies: 
+--   TBIOSMID (Table)
+--
+CREATE INDEX ASU.TBIOSMID_SMID ON ASU.TBIOSMID
+(FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TBIOSMID  (Trigger) 
+--
+--  Dependencies: 
+--   TBIOSMID (Table)
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TBIOSMID (Sequence)
+--
+CREATE OR REPLACE TRIGGER ASU."TBIOSMID" 
+BEFORE  INSERT  ON ASU.TBIOSMID REFERENCING
+ NEW AS NEW
+ OLD AS OLD
+FOR EACH ROW
+Begin
+  SELECT SEQ_TBIOSMID.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

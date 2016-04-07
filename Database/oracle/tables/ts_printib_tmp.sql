@@ -1,0 +1,37 @@
+DROP TABLE ASU.TS_PRINTIB_TMP CASCADE CONSTRAINTS
+/
+
+--
+-- TS_PRINTIB_TMP  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.TS_PRINTIB_TMP
+(
+  FC_NAME   VARCHAR2(100 BYTE),
+  FC_FUNC   VARCHAR2(100 BYTE),
+  FL_PRINT  NUMBER(1)                           DEFAULT 1,
+  FN_ORDER  NUMBER(9)                           DEFAULT -1,
+  FK_ID     NUMBER
+)
+ON COMMIT DELETE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.TS_PRINTIB_TMP IS 'временная системная таблица Настройки печати разделов ИБ by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TS_PRINTIB_TMP.FC_NAME IS 'Название раздела'
+/
+
+COMMENT ON COLUMN ASU.TS_PRINTIB_TMP.FC_FUNC IS 'Название ф-ции пакета TEXTIB возвращающего клоб раздела'
+/
+
+COMMENT ON COLUMN ASU.TS_PRINTIB_TMP.FL_PRINT IS 'Печатать(1) или нет(0)?'
+/
+
+COMMENT ON COLUMN ASU.TS_PRINTIB_TMP.FN_ORDER IS 'Порядок'
+/
+
+COMMENT ON COLUMN ASU.TS_PRINTIB_TMP.FK_ID IS 'ID'
+/
+
+

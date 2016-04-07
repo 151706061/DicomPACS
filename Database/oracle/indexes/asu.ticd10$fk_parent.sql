@@ -1,0 +1,25 @@
+DROP INDEX ASU.TICD10$FK_PARENT
+/
+
+--
+-- TICD10$FK_PARENT  (Index) 
+--
+CREATE INDEX ASU.TICD10$FK_PARENT ON ASU.TICD10
+(FK_PARENT)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          384K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

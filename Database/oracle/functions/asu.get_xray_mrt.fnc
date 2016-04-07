@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_XRAY_MRT
+/
+
+--
+-- GET_XRAY_MRT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_XRAY_MRT" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 260551;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_XRAY_MRT TO PUBLIC
+/
+

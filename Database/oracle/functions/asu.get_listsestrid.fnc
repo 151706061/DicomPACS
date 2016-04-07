@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_LISTSESTRID
+/
+
+--
+-- GET_LISTSESTRID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_LISTSESTRID" 
+return number
+is 
+begin
+  return 324451;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_LISTSESTRID TO PUBLIC
+/
+

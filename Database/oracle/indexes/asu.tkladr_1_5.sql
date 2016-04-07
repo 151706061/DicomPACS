@@ -1,0 +1,25 @@
+DROP INDEX ASU.TKLADR_1_5
+/
+
+--
+-- TKLADR_1_5  (Index) 
+--
+CREATE INDEX ASU.TKLADR_1_5 ON ASU.TKLADR
+(SUBSTR("FC_CODE",1,5))
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          18M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

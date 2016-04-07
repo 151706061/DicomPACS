@@ -1,0 +1,87 @@
+DROP TABLE ASU.TAUDIT CASCADE CONSTRAINTS
+/
+
+--
+-- TAUDIT  (Table) 
+--
+CREATE TABLE ASU.TAUDIT
+(
+  FK_ID        NUMBER(9)                        DEFAULT -1,
+  FD_DATE      DATE                             DEFAULT sysdate,
+  FC_TERMINAL  VARCHAR2(80 BYTE),
+  FC_OSUSER    VARCHAR2(80 BYTE),
+  FC_BULO      VARCHAR2(4000 BYTE),
+  FC_STALO     VARCHAR2(4000 BYTE),
+  FC_OBJECT    VARCHAR2(4000 BYTE),
+  FK_VRACHID   NUMBER(9)                        DEFAULT -1,
+  FC_OPER      VARCHAR2(6 BYTE)
+)
+TABLESPACE LOG
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          6720K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TAUDIT IS 'Таблица действий производимых юзерами'
+/
+
+COMMENT ON COLUMN ASU.TAUDIT.FK_ID IS 'SEQUENCE=[SEQ_TAUDIT]'
+/
+
+COMMENT ON COLUMN ASU.TAUDIT.FD_DATE IS 'Дата операции'
+/
+
+COMMENT ON COLUMN ASU.TAUDIT.FC_TERMINAL IS 'Машина с которой запустили ту или инную операцию'
+/
+
+COMMENT ON COLUMN ASU.TAUDIT.FC_OSUSER IS 'пользователь машины'
+/
+
+COMMENT ON COLUMN ASU.TAUDIT.FC_BULO IS 'что было'
+/
+
+COMMENT ON COLUMN ASU.TAUDIT.FC_STALO IS 'что стало'
+/
+
+COMMENT ON COLUMN ASU.TAUDIT.FC_OBJECT IS 'объект работы'
+/
+
+COMMENT ON COLUMN ASU.TAUDIT.FK_VRACHID IS 'Код врача, выполнившего действия'
+/
+
+COMMENT ON COLUMN ASU.TAUDIT.FC_OPER IS 'операция'
+/
+
+
+--
+-- TAUDIT_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TAUDIT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TAUDIT_INSERT" 
+BEFORE  INSERT  ON ASU.TAUDIT REFERENCING
+ NEW AS NEW
+ OLD AS OLD
+FOR EACH ROW
+Begin
+  select seq_taudit.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

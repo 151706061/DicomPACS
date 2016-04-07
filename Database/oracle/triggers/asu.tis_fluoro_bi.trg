@@ -1,0 +1,28 @@
+DROP TRIGGER ASU.TIS_FLUORO_BI
+/
+
+--
+-- TIS_FLUORO_BI  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TIS_FLUORO (Sequence)
+--   TIS_FLUORO (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TIS_FLUORO_BI
+  BEFORE INSERT
+  ON ASU.TIS_FLUORO   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+BEGIN
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT asu.seq_TIS_FLUORO.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+

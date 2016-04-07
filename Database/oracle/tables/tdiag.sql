@@ -1,0 +1,393 @@
+ALTER TABLE ASU.TDIAG
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TDIAG CASCADE CONSTRAINTS
+/
+
+--
+-- TDIAG  (Table) 
+--
+CREATE TABLE ASU.TDIAG
+(
+  FK_ID          INTEGER                        NOT NULL,
+  FK_PACID       NUMBER(15),
+  FK_SMDIAGID    NUMBER(15),
+  FP_TYPE        NUMBER(15),
+  FL_FIRST       NUMBER(15)                     DEFAULT 0,
+  FC_WRITE       VARCHAR2(3000 BYTE),
+  FD_DATE        DATE,
+  FK_VRACHID     NUMBER(15),
+  FL_MAIN        NUMBER(15)                     DEFAULT 0,
+  FL_SHOWIB      NUMBER(1)                      DEFAULT 1,
+  FK_NAZID       NUMBER(15)                     DEFAULT -1,
+  FK_MKB_10      NUMBER(15),
+  FN_PODT        NUMBER(15)                     DEFAULT 0,
+  FK_PMR         NUMBER(15)                     DEFAULT -1,
+  FN_ORDER_EDIT  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          6560K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TDIAG IS 'Диагнозы пациентов by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FN_ORDER_EDIT IS 'Для идентификации к какому Editу привязан диагноз'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FK_ID IS 'SEQUENCE=[SEQ_TDIAG]'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FK_PACID IS 'ID пациента из TKARTA'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FK_SMDIAGID IS 'ID диагноза из TSMID'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FP_TYPE IS 'Тип диагноза (1 - направившего учреждения, 2 - клинический, 3 - клинико-паталогоанатомический, 4 - специалиста, 5 - заключительный, 6 - при поступлении, 7 - предварительный)'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FL_FIRST IS 'Диагноз поставлен впервые (1 - впервые, 0 - нет)'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FC_WRITE IS 'Наименование диагноза'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FD_DATE IS 'Дата постановки диагноза'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FK_VRACHID IS 'ID врача, поставившего диагноз, из TSOTR'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FL_MAIN IS 'Вид диагноза  (0 - сопутствующий, 1 - основной, 2 - осложнение основного, 3 - конкурирующий, 4 - дифференциальный)'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FL_SHOWIB IS 'Признак показа в истории болезни (1 - показывать, 0 - не показывать)'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FK_NAZID IS 'ID назначения из VNAZ, которому принадлежит этот диагноз'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FK_MKB_10 IS 'Код МКБ-10'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FN_PODT IS 'Подтвержден ли диагноз'
+/
+
+COMMENT ON COLUMN ASU.TDIAG.FK_PMR IS 'Признак "Первично-множественная опухоль" (ссылка на TSMID)'
+/
+
+
+--
+-- TDIAG_BY_VRACHID  (Index) 
+--
+--  Dependencies: 
+--   TDIAG (Table)
+--
+CREATE INDEX ASU.TDIAG_BY_VRACHID ON ASU.TDIAG
+(FK_VRACHID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          512K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDIAG_DATE  (Index) 
+--
+--  Dependencies: 
+--   TDIAG (Table)
+--
+CREATE INDEX ASU.TDIAG_DATE ON ASU.TDIAG
+(FD_DATE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDIAG$FK_NAZID  (Index) 
+--
+--  Dependencies: 
+--   TDIAG (Table)
+--
+CREATE INDEX ASU.TDIAG$FK_NAZID ON ASU.TDIAG
+(FK_NAZID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDIAG_ID  (Index) 
+--
+--  Dependencies: 
+--   TDIAG (Table)
+--
+CREATE INDEX ASU.TDIAG_ID ON ASU.TDIAG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDIAG_ID_SMID_PACID  (Index) 
+--
+--  Dependencies: 
+--   TDIAG (Table)
+--
+CREATE INDEX ASU.TDIAG_ID_SMID_PACID ON ASU.TDIAG
+(FK_PACID, FK_SMDIAGID, FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          768K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDIAG_SMDID_VRID_DATE  (Index) 
+--
+--  Dependencies: 
+--   TDIAG (Table)
+--
+CREATE INDEX ASU.TDIAG_SMDID_VRID_DATE ON ASU.TDIAG
+(FK_SMDIAGID, FK_VRACHID, FD_DATE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDIAG_BEFORE_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TDIAG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDIAG_BEFORE_DELETE" 
+ BEFORE
+  INSERT OR DELETE
+ ON asu.tdiag
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+
+  DELETE FROM TSUBDIAG      WHERE TSUBDIAG.FK_DIAGID=:OLD.FK_ID;
+  DELETE FROM TDIAGID       WHERE FK_DIAGID=:OLD.FK_ID AND FK_NAZID=:OLD.FK_NAZID;
+  DELETE FROM TSTANDARTDIAG WHERE FK_PACID = :OLD.FK_PACID AND FK_DIAGID = :OLD.FK_SMDIAGID;
+  DELETE FROM TNAZOPER_DIAG WHERE FK_DIAGID =:OLD.FK_ID;
+
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TDIAG_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDIAG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDIAG_BEFORE_INSERT" 
+  BEFORE INSERT
+  ON ASU.TDIAG   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  select seq_tdiag.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TDIAG_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TDIAG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDIAG_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TDIAG  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  IF INSERTING THEN
+    PKG_LOG.DO_LOG('TDIAG', 'FK_ID', 'INSERT', NULL, PKG_LOG.GET_VALUE(:NEW.FK_ID), :new.fk_id);
+  ELSIF DELETING THEN
+    PKG_LOG.Do_log('TDIAG', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.FK_ID), null, :old.fk_id);
+    PKG_LOG.Do_log('TDIAG', 'FK_SMDIAGID', 'DELETE', PKG_LOG.GET_VALUE(:old.FK_SMDIAGID), null, :old.fk_id);
+    PKG_LOG.Do_log('TDIAG', 'FP_TYPE', 'DELETE', PKG_LOG.GET_VALUE(:old.FP_TYPE), null, :old.fk_id);
+    PKG_LOG.Do_log('TDIAG', 'FL_FIRST', 'DELETE', PKG_LOG.GET_VALUE(:old.FL_FIRST), null, :old.fk_id);
+    PKG_LOG.Do_log('TDIAG', 'FC_WRITE', 'DELETE', PKG_LOG.GET_VALUE(:old.FC_WRITE), null, :old.fk_id);
+    PKG_LOG.Do_log('TDIAG', 'FD_DATE', 'DELETE', PKG_LOG.GET_VALUE(:old.FD_DATE), null, :old.fk_id);
+    PKG_LOG.Do_log('TDIAG', 'FK_VRACHID', 'DELETE', PKG_LOG.GET_VALUE(:old.FK_VRACHID), null, :old.fk_id);
+    PKG_LOG.Do_log('TDIAG', 'FL_MAIN', 'DELETE', PKG_LOG.GET_VALUE(:old.FL_MAIN), null, :old.fk_id);
+    PKG_LOG.Do_log('TDIAG', 'FK_PACID', 'DELETE', PKG_LOG.GET_VALUE(:old.FK_PACID), null, :old.fk_id);
+    PKG_LOG.Do_log('TDIAG', 'FK_NAZID', 'DELETE', PKG_LOG.GET_VALUE(:old.FK_NAZID), null, :old.fk_id);
+    PKG_LOG.Do_log('TDIAG', 'FN_PODT', 'DELETE', PKG_LOG.GET_VALUE(:old.FN_PODT), null, :old.fk_id);
+
+  ELSIF UPDATING THEN
+    PKG_LOG.DO_LOG('TDIAG', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FK_ID), PKG_LOG.GET_VALUE(:NEW.FK_ID), :old.fk_id);
+
+    IF UPDATING ('FK_SMDIAGID') AND PKG_LOG.GET_VALUE(:OLD.FK_SMDIAGID) <> PKG_LOG.GET_VALUE(:NEW.FK_SMDIAGID) THEN
+      PKG_LOG.DO_LOG('TDIAG', 'FK_SMDIAGID', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FK_SMDIAGID), PKG_LOG.GET_VALUE(:NEW.FK_SMDIAGID), :old.fk_id);
+    END IF;
+
+    IF UPDATING ('FP_TYPE') AND PKG_LOG.GET_VALUE(:OLD.FP_TYPE) <> PKG_LOG.GET_VALUE(:NEW.FP_TYPE) THEN
+      PKG_LOG.DO_LOG('TDIAG', 'FP_TYPE', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FP_TYPE), PKG_LOG.GET_VALUE(:NEW.FP_TYPE), :old.fk_id);
+    END IF;
+
+    IF UPDATING ('FL_FIRST') AND PKG_LOG.GET_VALUE(:OLD.FL_FIRST) <> PKG_LOG.GET_VALUE(:NEW.FL_FIRST) THEN
+      PKG_LOG.DO_LOG('TDIAG', 'FL_FIRST', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FL_FIRST), PKG_LOG.GET_VALUE(:NEW.FL_FIRST), :old.fk_id);
+    END IF;
+
+    IF UPDATING ('FC_WRITE') AND PKG_LOG.GET_VALUE(:OLD.FC_WRITE) <> PKG_LOG.GET_VALUE(:NEW.FC_WRITE) THEN
+      PKG_LOG.DO_LOG('TDIAG', 'FC_WRITE', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FC_WRITE), PKG_LOG.GET_VALUE(:NEW.FC_WRITE), :old.fk_id);
+    END IF;
+
+    IF UPDATING ('FD_DATE') AND PKG_LOG.GET_VALUE(:OLD.FD_DATE) <> PKG_LOG.GET_VALUE(:NEW.FD_DATE) THEN
+      PKG_LOG.DO_LOG('TDIAG', 'FD_DATE', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FD_DATE), PKG_LOG.GET_VALUE(:NEW.FD_DATE), :old.fk_id);
+    END IF;
+
+    IF UPDATING ('FK_VRACHID') AND PKG_LOG.GET_VALUE(:OLD.FK_VRACHID) <> PKG_LOG.GET_VALUE(:NEW.FK_VRACHID) THEN
+      PKG_LOG.DO_LOG('TDIAG', 'FK_VRACHID', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FK_VRACHID), PKG_LOG.GET_VALUE(:NEW.FK_VRACHID), :old.fk_id);
+    END IF;
+
+    IF UPDATING ('FL_MAIN') AND PKG_LOG.GET_VALUE(:OLD.FL_MAIN) <> PKG_LOG.GET_VALUE(:NEW.FL_MAIN) THEN
+      PKG_LOG.DO_LOG('TDIAG', 'FL_MAIN', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FL_MAIN), PKG_LOG.GET_VALUE(:NEW.FL_MAIN), :old.fk_id);
+    END IF;
+
+    IF UPDATING ('FK_PACID') AND PKG_LOG.GET_VALUE(:OLD.FK_PACID) <> PKG_LOG.GET_VALUE(:NEW.FK_PACID) THEN
+      PKG_LOG.DO_LOG('TDIAG', 'FK_PACID', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FK_PACID), PKG_LOG.GET_VALUE(:NEW.FK_PACID), :old.fk_id);
+    END IF;
+
+    IF UPDATING ('FK_NAZID') AND PKG_LOG.GET_VALUE(:OLD.FK_NAZID) <> PKG_LOG.GET_VALUE(:NEW.FK_NAZID) THEN
+      PKG_LOG.DO_LOG('TDIAG', 'FK_NAZID', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FK_NAZID), PKG_LOG.GET_VALUE(:NEW.FK_NAZID), :old.fk_id);
+    END IF;
+
+    IF UPDATING ('FN_PODT') AND PKG_LOG.GET_VALUE(:OLD.FN_PODT) <> PKG_LOG.GET_VALUE(:NEW.FN_PODT) THEN
+      PKG_LOG.DO_LOG('TDIAG', 'FN_PODT', 'UPDATE', PKG_LOG.GET_VALUE(:OLD.FN_PODT), PKG_LOG.GET_VALUE(:NEW.FN_PODT), :old.fk_id);
+    END IF;
+
+  END IF;
+  NULL;
+END VNAZ_LOG;
+/
+SHOW ERRORS;
+
+
+DROP SYNONYM STAT.TDIAG
+/
+
+--
+-- TDIAG  (Synonym) 
+--
+--  Dependencies: 
+--   TDIAG (Table)
+--
+CREATE SYNONYM STAT.TDIAG FOR ASU.TDIAG
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TDIAG 
+-- 
+ALTER TABLE ASU.TDIAG ADD (
+  CONSTRAINT TDIAG_ID_PK
+ PRIMARY KEY
+ (FK_ID))
+/
+
+GRANT REFERENCES, SELECT ON ASU.TDIAG TO EXCHANGE
+/
+
+GRANT REFERENCES, SELECT ON ASU.TDIAG TO EXCH43
+/
+

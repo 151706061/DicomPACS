@@ -1,0 +1,106 @@
+ALTER TABLE ASU.TIS_GENSTAT_FINANCE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TIS_GENSTAT_FINANCE CASCADE CONSTRAINTS
+/
+
+--
+-- TIS_GENSTAT_FINANCE  (Table) 
+--
+CREATE TABLE ASU.TIS_GENSTAT_FINANCE
+(
+  FK_ID             NUMBER                      NOT NULL,
+  FK_FINSOURCEID    VARCHAR2(64 BYTE),
+  FN_SUM            NUMBER(15,2),
+  FK_IS_GENSTAT_ID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- PK_TIS_GENSTAT_FINANCE  (Index) 
+--
+--  Dependencies: 
+--   TIS_GENSTAT_FINANCE (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TIS_GENSTAT_FINANCE ON ASU.TIS_GENSTAT_FINANCE
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TIS_GEN_STAT_FINANCE_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TIS_GENSTAT_FINANCE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TIS_GEN_STAT_FINANCE_BI
+  BEFORE INSERT
+  ON ASU.TIS_GENSTAT_FINANCE   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+BEGIN
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT asu.seq_genstat_finance.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TIS_GENSTAT_FINANCE 
+-- 
+ALTER TABLE ASU.TIS_GENSTAT_FINANCE ADD (
+  CONSTRAINT PK_TIS_GENSTAT_FINANCE
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

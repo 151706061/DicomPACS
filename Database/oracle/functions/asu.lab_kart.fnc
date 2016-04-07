@@ -1,0 +1,24 @@
+DROP FUNCTION ASU.LAB_KART
+/
+
+--
+-- LAB_KART  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."LAB_KART" 
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =- 
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 502;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.LAB_KART TO PUBLIC
+/
+

@@ -1,0 +1,42 @@
+DROP FUNCTION ASU.GET_VRACHLIST_BY_AREALID
+/
+
+--
+-- GET_VRACHLIST_BY_AREALID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TDISTRICT_VRACH (Table)
+--   DO_VRACHFIO (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_VRACHLIST_BY_AREALID" (arealID IN NUMBER) return varchar2 is
+  RESULT VARCHAR2(256);
+  fio VARCHAR2(50);
+  FLAG BOOLEAN;
+  CURSOR cVrach (a_id NUMBER) IS
+    SELECT ASU.DO_VRACHFIO(DV.FK_SOTR) VRACH
+    FROM ASU.TDISTRICT_VRACH DV
+    WHERE DV.FK_DIST_NAME_ID=a_id;
+begin
+  RESULT:='';
+  FLAG:=FALSE;
+  OPEN cVrach(arealID);
+  LOOP
+    FETCH cVrach INTO fio;
+    EXIT WHEN cVrach%NOTFOUND;
+    IF FLAG THEN RESULT:=RESULT || ', ' || fio;
+    ELSE 
+      RESULT:=fio;
+      FLAG:=TRUE;
+    END IF;
+  END LOOP;
+  CLOSE cVrach;  
+  
+  RETURN(RESULT);
+end GET_VRACHLIST_BY_AREALID;
+/
+
+SHOW ERRORS;
+
+

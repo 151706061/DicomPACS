@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{a44e7ff8-23ed-4aaf-9717-845eeb65d2b2}</ProjectGuid>
+    <MainSource>Dvig_OneMedic.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>..\..\..\..\..\..\..\ASU\ASU_SO\Dvig_OneMedic.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_UnitSearchPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ObjPath>
+    <DCC_IncludePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_IncludePath>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_UnitSearchPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ObjPath>
+    <DCC_IncludePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_IncludePath>
+    <DCC_Define>RELEASE;USE_NEW_AUTH</DCC_Define>
+    <DCC_ExeOutput>c:\Work\ASU\ASU_SO\</DCC_ExeOutput>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="RunParams">102404</Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">2</VersionInfo><VersionInfo Name="MinorVer">1</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">82</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">2.1.0.82</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">Dvig_OneMedic.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="Dvig_OneMedic.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <RcCompile Include="Shablon.rc">
+      <Form>Shablon.res</Form>
+    </RcCompile>
+    <DCCReference Include="..\..\..\..\..\uCommon\uGlobalConst.pas" />
+    <DCCReference Include="..\..\src\fdmPrintSelect.pas">
+      <Form>dmPrintSelect</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\CommonUnits\fCheckedListEdit.pas">
+      <Form>fmCheckedListEdit</Form>
+    </DCCReference>
+    <DCCReference Include="fgetperiod.pas">
+      <Form>frmGetPeriod</Form>
+    </DCCReference>
+    <DCCReference Include="HtmlHlp.pas" />
+  </ItemGroup>
+</Project>

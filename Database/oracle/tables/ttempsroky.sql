@@ -1,0 +1,42 @@
+DROP TABLE ASU.TTEMPSROKY CASCADE CONSTRAINTS
+/
+
+--
+-- TTEMPSROKY  (Table) 
+--
+CREATE TABLE ASU.TTEMPSROKY
+(
+  FK_ID        NUMBER(15),
+  FK_PACID     NUMBER(15),
+  FK_PRYB      NUMBER(1),
+  FK_VYB       NUMBER(1),
+  FN_KOL       NUMBER(3),
+  FD_DATA1     DATE,
+  FD_DATA2     DATE,
+  FD_DATA3     DATE,
+  FN_SUM       NUMBER,
+  FK_OPLID     NUMBER(16)                       DEFAULT -1,
+  FL_BUH       NUMBER(1)                        DEFAULT 0,
+  FC_DOCUMENT  VARCHAR2(30 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+

@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.DOC_OBRASH
+/
+
+--
+-- DOC_OBRASH  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."DOC_OBRASH" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 302;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.DOC_OBRASH TO PUBLIC
+/
+

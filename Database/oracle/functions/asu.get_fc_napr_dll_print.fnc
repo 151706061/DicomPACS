@@ -1,0 +1,44 @@
+DROP FUNCTION ASU.GET_FC_NAPR_DLL_PRINT
+/
+
+--
+-- GET_FC_NAPR_DLL_PRINT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TIB (Table)
+--   TAMBTALON (Table)
+--   TAMBTALON_NAZ (Table)
+--   TSMID (Table)
+--   VNAZ (Table)
+--
+CREATE OR REPLACE FUNCTION ASU.GET_FC_NAPR_DLL_PRINT(pFK_NAZID in number)
+  RETURN varchar2 IS
+
+  cursor c is
+   select max(TUCH.FC_NAME)
+  from ASU.TSMID, ASU.TIB, ASU.TSMID TUCH, ASU.TAMBTALON, ASU.TAMBTALON_NAZ,ASU.VNAZ,
+  (select DECODE(FK_NAZOWNER,-1,FK_ID,-2,FK_ID,FK_NAZOWNER) as FK_ID from ASU.VNAZ where FK_ID = pFK_NAZID ) V
+ where TIB.FK_PACID = TAMBTALON.FK_ID
+   and ASU.TAmbtalon_naz.FK_TALONID = TAMBTALON.FK_ID
+   and TAMBTALON_NAZ.FK_NAZID = VNAZ.FK_ID
+   and TIB.FK_SMEDITID = TSMID.FK_ID
+   and TSMID.FC_SYNONIM = 'PD_NAPRAVIV_YCH'
+   and TIB.FK_SMID = TUCH.FK_ID
+   and VNAZ.FK_ID = V.FK_ID;
+
+
+
+  pRes varchar2(512);
+BEGIN
+  OPEN C;
+  FETCH C INTO pRES;
+  CLOSE C;
+  return pRes;
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,25 @@
+DROP INDEX ASU.I_SMID_PD_TRAVM_ID
+/
+
+--
+-- I_SMID_PD_TRAVM_ID  (Index) 
+--
+CREATE INDEX ASU.I_SMID_PD_TRAVM_ID ON ASU.TSMID_PD_TRAVM
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

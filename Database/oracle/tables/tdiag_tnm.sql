@@ -1,0 +1,111 @@
+DROP TABLE ASU.TDIAG_TNM CASCADE CONSTRAINTS
+/
+
+--
+-- TDIAG_TNM  (Table) 
+--
+CREATE TABLE ASU.TDIAG_TNM
+(
+  FK_DIAGID  NUMBER,
+  FC_T       VARCHAR2(10 BYTE),
+  FC_N       VARCHAR2(10 BYTE),
+  FC_M       VARCHAR2(10 BYTE),
+  FK_PHASE   NUMBER,
+  FC_BASE    VARCHAR2(3000 BYTE),
+  FC_ADD     VARCHAR2(3000 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TDIAG_TNM IS 'Таблица доп информации для диагнозов (для онкозаболеваний) Prihodko N. 10.02.2012'
+/
+
+COMMENT ON COLUMN ASU.TDIAG_TNM.FK_DIAGID IS 'TDIAG.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TDIAG_TNM.FC_T IS 'T'
+/
+
+COMMENT ON COLUMN ASU.TDIAG_TNM.FC_N IS 'N'
+/
+
+COMMENT ON COLUMN ASU.TDIAG_TNM.FC_M IS 'M'
+/
+
+COMMENT ON COLUMN ASU.TDIAG_TNM.FK_PHASE IS 'TSMID.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TDIAG_TNM.FC_BASE IS 'формулировка диагноза'
+/
+
+COMMENT ON COLUMN ASU.TDIAG_TNM.FC_ADD IS 'дополнительно'
+/
+
+
+--
+-- TDIAG_TNM_DIAGID  (Index) 
+--
+--  Dependencies: 
+--   TDIAG_TNM (Table)
+--
+CREATE UNIQUE INDEX ASU.TDIAG_TNM_DIAGID ON ASU.TDIAG_TNM
+(FK_DIAGID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDIAG_TNM_PHASE  (Index) 
+--
+--  Dependencies: 
+--   TDIAG_TNM (Table)
+--
+CREATE INDEX ASU.TDIAG_TNM_PHASE ON ASU.TDIAG_TNM
+(FK_PHASE)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

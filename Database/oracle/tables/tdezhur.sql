@@ -1,0 +1,68 @@
+DROP TABLE ASU.TDEZHUR CASCADE CONSTRAINTS
+/
+
+--
+-- TDEZHUR  (Table) 
+--
+CREATE TABLE ASU.TDEZHUR
+(
+  FK_DEZHURSPECID  NUMBER                       NOT NULL,
+  FD_DATE          DATE,
+  FK_VRACHID       NUMBER,
+  FN_COLOR         NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TDEZHUR.FK_DEZHURSPECID IS 'TDezhurspec.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TDEZHUR.FK_VRACHID IS 'TSotr.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TDEZHUR.FN_COLOR IS 'Цвет'
+/
+
+
+--
+-- TDEZHUR_DATE_SPEC  (Index) 
+--
+--  Dependencies: 
+--   TDEZHUR (Table)
+--
+CREATE INDEX ASU.TDEZHUR_DATE_SPEC ON ASU.TDEZHUR
+(FK_DEZHURSPECID, FD_DATE)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

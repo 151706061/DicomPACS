@@ -1,0 +1,4 @@
+ALTER TABLE MED.TTREB ADD (FL_CITO NUMBER (1) DEFAULT 0)
+/
+COMMENT ON COLUMN MED.TTREB.FL_CITO IS 'Пометка "срочно" - 0 - не срочно, 1 - срочно'
+/

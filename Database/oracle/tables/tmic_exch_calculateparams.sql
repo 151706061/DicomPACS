@@ -1,0 +1,35 @@
+DROP TABLE ASU.TMIC_EXCH_CALCULATEPARAMS CASCADE CONSTRAINTS
+/
+
+--
+-- TMIC_EXCH_CALCULATEPARAMS  (Table) 
+--
+CREATE TABLE ASU.TMIC_EXCH_CALCULATEPARAMS
+(
+  FD_BEG  DATE,
+  FD_END  DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             8K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TMIC_EXCH_CALCULATEPARAMS IS 'Выгрузка в МИЦ. Настройки для автоматического расчёта Author: Efimov'
+/
+
+

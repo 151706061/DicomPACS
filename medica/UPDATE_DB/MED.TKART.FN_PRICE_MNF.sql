@@ -1,0 +1,4 @@
+ALTER TABLE MED.TKART ADD (FN_PRICE_MNF NUMBER)
+/
+COMMENT ON COLUMN MED.TKART.FN_PRICE_MNF IS 'цена, установленная производителем'
+/

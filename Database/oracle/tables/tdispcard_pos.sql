@@ -1,0 +1,143 @@
+ALTER TABLE ASU.TDISPCARD_POS
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TDISPCARD_POS CASCADE CONSTRAINTS
+/
+
+--
+-- TDISPCARD_POS  (Table) 
+--
+CREATE TABLE ASU.TDISPCARD_POS
+(
+  FK_ID          NUMBER(15)                     NOT NULL,
+  FD_NAZN        DATE,
+  FK_DISPCARDID  NUMBER(15),
+  FK_VNAZ        NUMBER(15)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TDISPCARD_POS IS 'Данные посещений диспансерного учёта'
+/
+
+COMMENT ON COLUMN ASU.TDISPCARD_POS.FK_ID IS 'SEQUENCE=[SEQ_TDISPCARD_POS]'
+/
+
+COMMENT ON COLUMN ASU.TDISPCARD_POS.FD_NAZN IS 'Назначено явиться'
+/
+
+COMMENT ON COLUMN ASU.TDISPCARD_POS.FK_DISPCARDID IS 'TDISPCARD.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TDISPCARD_POS.FK_VNAZ IS 'VNAZ.FK_ID - код назначенной консультации'
+/
+
+
+--
+-- PK_DISPCARD_POS  (Index) 
+--
+--  Dependencies: 
+--   TDISPCARD_POS (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_DISPCARD_POS ON ASU.TDISPCARD_POS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDISPCARD_POS_BY_DISPCARDID  (Index) 
+--
+--  Dependencies: 
+--   TDISPCARD_POS (Table)
+--
+CREATE INDEX ASU.TDISPCARD_POS_BY_DISPCARDID ON ASU.TDISPCARD_POS
+(FK_DISPCARDID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDISPCARD_POS_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDISPCARD_POS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDISPCARD_POS_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tdispcard_pos
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT SEQ_TDispCard_Pos.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TDISPCARD_POS 
+-- 
+ALTER TABLE ASU.TDISPCARD_POS ADD (
+  CONSTRAINT PK_DISPCARD_POS
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

@@ -1,0 +1,28 @@
+DROP INDEX ASU.TPEOPLES_BY_SNILS
+/
+
+--
+-- TPEOPLES_BY_SNILS  (Index) 
+--
+--  Dependencies: 
+--   GET_SNILS_3332 (Function)
+--
+CREATE INDEX ASU.TPEOPLES_BY_SNILS ON ASU.TPEOPLES
+(SUBSTR("ASU"."GET_SNILS_3332"("FC_SNILS"),1,11))
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

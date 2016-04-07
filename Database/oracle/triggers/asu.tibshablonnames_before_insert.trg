@@ -1,0 +1,23 @@
+DROP TRIGGER ASU.TIBSHABLONNAMES_BEFORE_INSERT
+/
+
+--
+-- TIBSHABLONNAMES_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TIBSHABLONNAMES (Sequence)
+--   TIBSHABLONNAMES (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TIBSHABLONNAMES_BEFORE_INSERT" 
+  BEFORE INSERT
+  ON ASU.TIBSHABLONNAMES   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  select seq_tibshablonnames.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

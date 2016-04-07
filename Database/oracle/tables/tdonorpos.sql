@@ -1,0 +1,142 @@
+DROP TABLE ASU.TDONORPOS CASCADE CONSTRAINTS
+/
+
+--
+-- TDONORPOS  (Table) 
+--
+CREATE TABLE ASU.TDONORPOS
+(
+  FK_ID      NUMBER                             NOT NULL,
+  FK_AMBID   NUMBER,
+  FD_BEGIN   DATE,
+  FK_VID     NUMBER,
+  FK_RESULT  NUMBER,
+  FK_DOCID   NUMBER,
+  FK_SOTRID  NUMBER,
+  FN_YEAR    NUMBER(4)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TDONORPOS IS '“‡·ÎËˆ‡ ÒÎÛ˜‡Â‚ ‰ÓÌÓÒÚ‚‡'
+/
+
+COMMENT ON COLUMN ASU.TDONORPOS.FK_ID IS 'SEQUENCE=[SEQ_TKARTA]'
+/
+
+COMMENT ON COLUMN ASU.TDONORPOS.FK_AMBID IS ' Œƒ ƒŒÕŒ–¿ »« TAMBULANCE'
+/
+
+COMMENT ON COLUMN ASU.TDONORPOS.FK_VID IS '¬»ƒ  –Œ¬Œƒ¿◊»'
+/
+
+COMMENT ON COLUMN ASU.TDONORPOS.FK_RESULT IS '–≈«”À‹“¿“ —À”◊¿ﬂ'
+/
+
+COMMENT ON COLUMN ASU.TDONORPOS.FK_DOCID IS 'ÕŒÃ≈– —À”◊¿ﬂ(œ¿ ≈“¿)'
+/
+
+
+--
+-- FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TDONORPOS (Table)
+--
+CREATE UNIQUE INDEX ASU.FK_ID ON ASU.TDONORPOS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDONOR_AMBID  (Index) 
+--
+--  Dependencies: 
+--   TDONORPOS (Table)
+--
+CREATE INDEX ASU.TDONOR_AMBID ON ASU.TDONORPOS
+(FK_ID, FK_AMBID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDONORPOS_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDONORPOS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDONORPOS_BEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TDONORPOS   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+BEGIN
+ SELECT SEQ_TKARTA.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END TDONORPOS_BEFORE_INSERT;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TDONORPOS 
+-- 
+ALTER TABLE ASU.TDONORPOS ADD (
+  CONSTRAINT FK_ID
+ UNIQUE (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

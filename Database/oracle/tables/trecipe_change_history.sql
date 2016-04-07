@@ -1,0 +1,160 @@
+ALTER TABLE ASU.TRECIPE_CHANGE_HISTORY
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_CHANGE_HISTORY CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_CHANGE_HISTORY  (Table) 
+--
+--  Dependencies: 
+--   TRECIPE (Table)
+--
+CREATE TABLE ASU.TRECIPE_CHANGE_HISTORY
+(
+  FK_ID           NUMBER,
+  FK_RECIPE_ID    NUMBER,
+  FD_DATE         DATE                          DEFAULT sysdate,
+  FK_SOTR         NUMBER,
+  FN_CHANGE_TYPE  NUMBER,
+  FC_DESCRIPTION  VARCHAR2(50 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_CHANGE_HISTORY IS 'Таблица для хранения изменений, вносимых в рецепты Autor:Voronov'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_CHANGE_HISTORY.FK_RECIPE_ID IS 'ссылка на рецепт ASU.TRECIPE.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_CHANGE_HISTORY.FD_DATE IS 'когда было сделано изменение'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_CHANGE_HISTORY.FK_SOTR IS 'сотрудник, изменивший рецепт (LOGIN.TSOTR.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_CHANGE_HISTORY.FN_CHANGE_TYPE IS 'вид изменения (расшифровки в ASU.PKG_DLO.GET_CHANGE_TYPE_NAME)'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_CHANGE_HISTORY.FC_DESCRIPTION IS 'суть изменения'
+/
+
+
+--
+-- TRECIPE_CH_FK_RECIPE  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_CHANGE_HISTORY (Table)
+--
+CREATE INDEX ASU.TRECIPE_CH_FK_RECIPE ON ASU.TRECIPE_CHANGE_HISTORY
+(FK_RECIPE_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_CH_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_CHANGE_HISTORY (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_CH_PK ON ASU.TRECIPE_CHANGE_HISTORY
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_CH_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TRECIPE_CHANGE_HISTORY (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECIPE_CH_INS" 
+ BEFORE
+ INSERT
+ ON ASU.TRECIPE_CHANGE_HISTORY  FOR EACH ROW
+begin
+  if :new.fk_id is null then
+    SELECT asu.seq_trecipe_ch.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  end if;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_CHANGE_HISTORY 
+-- 
+ALTER TABLE ASU.TRECIPE_CHANGE_HISTORY ADD (
+  CONSTRAINT TRECIPE_CH_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TRECIPE_CHANGE_HISTORY 
+-- 
+ALTER TABLE ASU.TRECIPE_CHANGE_HISTORY ADD (
+  CONSTRAINT TRECIPE_CH_RECIPEID 
+ FOREIGN KEY (FK_RECIPE_ID) 
+ REFERENCES ASU.TRECIPE (FK_ID))
+/
+

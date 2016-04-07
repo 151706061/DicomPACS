@@ -1,0 +1,1034 @@
+object fmMedEditorTemplates: TfmMedEditorTemplates
+  Left = 373
+  Top = 210
+  Caption = #1064#1072#1073#1083#1086#1085#1099
+  ClientHeight = 391
+  ClientWidth = 604
+  Color = clBtnFace
+  Font.Charset = RUSSIAN_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'MS Sans Serif'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnClose = FormClose
+  OnCreate = FormCreate
+  OnKeyDown = FormKeyDown
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Bevel1: TBevel
+    Left = 0
+    Top = 341
+    Width = 604
+    Height = 3
+    Align = alBottom
+    Shape = bsBottomLine
+    ExplicitTop = 356
+    ExplicitWidth = 603
+  end
+  object Splitter1: TSplitter
+    Left = 277
+    Top = 0
+    Height = 341
+    Beveled = True
+    ExplicitHeight = 356
+  end
+  object Panel1: TPanel
+    AlignWithMargins = True
+    Left = 3
+    Top = 347
+    Width = 598
+    Height = 41
+    Align = alBottom
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    TabOrder = 0
+    DesignSize = (
+      598
+      41)
+    object cxButton1: TcxButton
+      Left = 433
+      Top = 6
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = #1054#1090#1084#1077#1085#1072
+      ModalResult = 2
+      TabOrder = 1
+      LookAndFeel.SkinName = 'Office2007Green'
+    end
+    object cxButton2: TcxButton
+      Left = 349
+      Top = 6
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = #1054#1050
+      Default = True
+      ModalResult = 1
+      TabOrder = 0
+      OnClick = cxButton2Click
+      LookAndFeel.SkinName = 'Office2007Green'
+    end
+    object bbApply: TcxButton
+      Left = 517
+      Top = 6
+      Width = 75
+      Height = 25
+      Anchors = [akTop, akRight]
+      Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
+      TabOrder = 2
+      OnClick = bbApplyClick
+      LookAndFeel.SkinName = 'Office2007Green'
+    end
+    object ckNotShow: TcxCheckBox
+      Left = 12
+      Top = 8
+      Caption = #1053#1077' '#1074#1099#1074#1086#1076#1080#1090#1100' '#1073#1086#1083#1100#1096#1077' '#1101#1090#1086' '#1086#1082#1085#1086
+      Style.LookAndFeel.SkinName = 'Office2007Green'
+      StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+      StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+      StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+      TabOrder = 3
+      Width = 211
+    end
+  end
+  object PC: TcxPageControl
+    Left = 280
+    Top = 0
+    Width = 324
+    Height = 341
+    ActivePage = tsRV
+    Align = alClient
+    TabOrder = 1
+    ExplicitWidth = 323
+    ExplicitHeight = 356
+    ClientRectBottom = 337
+    ClientRectLeft = 4
+    ClientRectRight = 320
+    ClientRectTop = 4
+    object tsRV: TcxTabSheet
+      Caption = 'tsRV'
+      ImageIndex = 0
+      TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 324
+      ExplicitHeight = 341
+      object RV: TRichViewEdit
+        Left = 0
+        Top = 17
+        Width = 316
+        Height = 316
+        ReadOnly = True
+        Align = alClient
+        TabOrder = 0
+        BackgroundStyle = bsTiledAndScrolled
+        DoInPaletteMode = rvpaCreateCopies
+        Options = [rvoAllowSelection, rvoScrollToEnd, rvoShowPageBreaks, rvoTagsArePChars, rvoAutoCopyText, rvoAutoCopyRVF, rvoAutoCopyImage, rvoFormatInvalidate, rvoDblClickSelectsWord, rvoRClickDeselects, rvoFastFormatting]
+        RTFReadProperties.TextStyleMode = rvrsAddIfNeeded
+        RTFReadProperties.ParaStyleMode = rvrsAddIfNeeded
+        RVFOptions = [rvfoSavePicturesBody, rvfoSaveControlsBody, rvfoIgnoreUnknownCtrls, rvfoConvUnknownStylesToZero, rvfoConvLargeImageIdxToZero, rvfoSaveBinary, rvfoSaveTextStyles, rvfoSaveParaStyles, rvfoSaveLayout, rvfoLoadLayout, rvfoSaveDocProperties, rvfoLoadDocProperties]
+        ExplicitTop = 21
+        ExplicitWidth = 324
+        ExplicitHeight = 320
+      end
+      object cxLabel2: TcxLabel
+        Left = 0
+        Top = 0
+        Align = alTop
+        Caption = ' '#1055#1088#1077#1076#1074#1072#1088#1080#1090#1077#1083#1100#1085#1099#1081' '#1087#1088#1086#1089#1084#1086#1090#1088
+        ParentColor = False
+        ParentFont = False
+        Style.Color = clInactiveCaption
+        Style.Font.Charset = RUSSIAN_CHARSET
+        Style.Font.Color = clWindow
+        Style.Font.Height = -11
+        Style.Font.Name = 'MS Sans Serif'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        ExplicitWidth = 324
+      end
+    end
+    object tsSys: TcxTabSheet
+      Caption = 'tsSys'
+      ImageIndex = 1
+      TabVisible = False
+      ExplicitLeft = 0
+      ExplicitTop = 0
+      ExplicitWidth = 324
+      ExplicitHeight = 341
+      object cxGrid2: TcxGrid
+        Left = 0
+        Top = 17
+        Width = 316
+        Height = 316
+        Align = alClient
+        TabOrder = 0
+        ExplicitWidth = 324
+        ExplicitHeight = 324
+        object TVSys: TcxGridDBTableView
+          NavigatorButtons.ConfirmDelete = False
+          NavigatorButtons.First.Visible = True
+          NavigatorButtons.PriorPage.Visible = True
+          NavigatorButtons.Prior.Visible = True
+          NavigatorButtons.Next.Visible = True
+          NavigatorButtons.NextPage.Visible = True
+          NavigatorButtons.Last.Visible = True
+          NavigatorButtons.Insert.Visible = True
+          NavigatorButtons.Delete.Visible = True
+          NavigatorButtons.Edit.Visible = True
+          NavigatorButtons.Post.Visible = True
+          NavigatorButtons.Cancel.Visible = True
+          NavigatorButtons.Refresh.Visible = True
+          NavigatorButtons.SaveBookmark.Visible = True
+          NavigatorButtons.GotoBookmark.Visible = True
+          NavigatorButtons.Filter.Visible = True
+          DataController.DataModeController.SmartRefresh = True
+          DataController.DataSource = dsSysTempl
+          DataController.KeyFieldNames = 'FK_ID'
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsCustomize.ColumnFiltering = False
+          OptionsData.CancelOnExit = False
+          OptionsData.Deleting = False
+          OptionsData.DeletingConfirmation = False
+          OptionsData.Inserting = False
+          OptionsView.ColumnAutoWidth = True
+          OptionsView.GroupByBox = False
+          OptionsView.Indicator = True
+          object TVSysFK_ID: TcxGridDBColumn
+            DataBinding.FieldName = 'FK_ID'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object TVSysFK_SMID: TcxGridDBColumn
+            DataBinding.FieldName = 'FK_SMID'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object TVSysFN_COMPRESS: TcxGridDBColumn
+            DataBinding.FieldName = 'FN_COMPRESS'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object TVSysFD: TcxGridDBColumn
+            DataBinding.FieldName = 'FD'
+            Visible = False
+          end
+          object TVSysFK_SOTR: TcxGridDBColumn
+            DataBinding.FieldName = 'FK_SOTR'
+            Visible = False
+          end
+          object TVSysFC_NAME: TcxGridDBColumn
+            Caption = #1053#1072#1079#1074#1072#1085#1080#1077
+            DataBinding.FieldName = 'FC_NAME'
+            Options.Editing = False
+            Width = 290
+          end
+          object TVSysRC_REMARK: TcxGridDBColumn
+            DataBinding.FieldName = 'RC_REMARK'
+            Visible = False
+          end
+          object TVSysFN_TYPE: TcxGridDBColumn
+            DataBinding.FieldName = 'FN_TYPE'
+            Visible = False
+            VisibleForCustomization = False
+          end
+          object TVSysDefault: TcxGridDBColumn
+            Caption = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+            DataBinding.ValueType = 'Smallint'
+            PropertiesClassName = 'TcxCheckBoxProperties'
+            Properties.ValueChecked = 1
+            Properties.ValueUnchecked = 0
+            Width = 51
+          end
+        end
+        object cxGrid2Level1: TcxGridLevel
+          GridView = TVSys
+        end
+      end
+      object cxLabel1: TcxLabel
+        Left = 0
+        Top = 0
+        Align = alTop
+        Caption = ' '#1057#1087#1080#1089#1086#1082' '#1089#1080#1089#1090#1077#1084#1085#1099#1093' '#1096#1072#1073#1083#1086#1085#1086#1074
+        ParentColor = False
+        ParentFont = False
+        Style.Color = clInactiveCaption
+        Style.Font.Charset = RUSSIAN_CHARSET
+        Style.Font.Color = clWindow
+        Style.Font.Height = -11
+        Style.Font.Name = 'MS Sans Serif'
+        Style.Font.Style = []
+        Style.IsFontAssigned = True
+        ExplicitWidth = 324
+      end
+    end
+  end
+  object paLeft: TPanel
+    Left = 0
+    Top = 0
+    Width = 277
+    Height = 341
+    Align = alLeft
+    BevelOuter = bvNone
+    TabOrder = 6
+    object dxBarDockControl1: TdxBarDockControl
+      Left = 0
+      Top = 0
+      Width = 277
+      Height = 24
+      Align = dalTop
+      BarManager = BM
+    end
+    object cxGrid1: TcxGrid
+      AlignWithMargins = True
+      Left = 3
+      Top = 27
+      Width = 271
+      Height = 311
+      Align = alClient
+      TabOrder = 1
+      LookAndFeel.Kind = lfFlat
+      ExplicitTop = 25
+      ExplicitHeight = 313
+      object tv: TcxGridDBTableView
+        NavigatorButtons.ConfirmDelete = False
+        NavigatorButtons.First.Visible = True
+        NavigatorButtons.PriorPage.Visible = True
+        NavigatorButtons.Prior.Visible = True
+        NavigatorButtons.Next.Visible = True
+        NavigatorButtons.NextPage.Visible = True
+        NavigatorButtons.Last.Visible = True
+        NavigatorButtons.Insert.Visible = True
+        NavigatorButtons.Delete.Visible = True
+        NavigatorButtons.Edit.Visible = True
+        NavigatorButtons.Post.Visible = True
+        NavigatorButtons.Cancel.Visible = True
+        NavigatorButtons.Refresh.Visible = True
+        NavigatorButtons.SaveBookmark.Visible = True
+        NavigatorButtons.GotoBookmark.Visible = True
+        NavigatorButtons.Filter.Visible = True
+        OnCustomDrawCell = tvCustomDrawCell
+        OnFocusedRecordChanged = tvFocusedRecordChanged
+        DataController.DataSource = dsTempl
+        DataController.KeyFieldNames = 'FK_ID'
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsSelection.HideFocusRectOnExit = False
+        OptionsView.CellAutoHeight = True
+        OptionsView.ColumnAutoWidth = True
+        OptionsView.GroupByBox = False
+        OptionsView.Indicator = True
+        object tvFK_ID: TcxGridDBColumn
+          DataBinding.FieldName = 'FK_ID'
+          Visible = False
+        end
+        object tvFK_SMID: TcxGridDBColumn
+          DataBinding.FieldName = 'FK_SMID'
+          Visible = False
+          VisibleForCustomization = False
+        end
+        object tvFN_COMPRESS: TcxGridDBColumn
+          DataBinding.FieldName = 'FN_COMPRESS'
+          Visible = False
+        end
+        object tvFD: TcxGridDBColumn
+          DataBinding.FieldName = 'FD'
+          Visible = False
+        end
+        object tvFK_SOTR: TcxGridDBColumn
+          DataBinding.FieldName = 'FK_SOTR'
+          Visible = False
+        end
+        object tvName: TcxGridDBColumn
+          Caption = #1053#1072#1079#1074#1072#1085#1080#1077
+          DataBinding.FieldName = 'FC_NAME'
+          SortIndex = 0
+          SortOrder = soAscending
+          Width = 203
+        end
+        object tvFN_Type: TcxGridDBColumn
+          Caption = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+          Visible = False
+          Width = 46
+        end
+        object tvDefault: TcxGridDBColumn
+          Caption = #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+          DataBinding.ValueType = 'Smallint'
+          PropertiesClassName = 'TcxCheckBoxProperties'
+          Properties.ReadOnly = True
+          Properties.ValueChecked = 1
+          Properties.ValueUnchecked = 0
+          Options.Editing = False
+        end
+      end
+      object cxGrid1Level1: TcxGridLevel
+        GridView = tv
+      end
+    end
+  end
+  object BM: TdxBarManager
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -12
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Categories.Strings = (
+      'Default')
+    Categories.ItemsVisibles = (
+      2)
+    Categories.Visibles = (
+      True)
+    ImageOptions.Images = il16
+    LookAndFeel.Kind = lfFlat
+    PopupMenuLinks = <>
+    Style = bmsUseLookAndFeel
+    UseSystemFont = False
+    Left = 368
+    Top = 230
+    DockControlHeights = (
+      0
+      0
+      0
+      0)
+    object BMBar1: TdxBar
+      AllowClose = False
+      AllowCustomizing = False
+      AllowQuickCustomizing = False
+      AllowReset = False
+      BorderStyle = bbsNone
+      Caption = 'Custom 1'
+      CaptionButtons = <>
+      DockControl = dxBarDockControl1
+      DockedDockControl = dxBarDockControl1
+      DockedLeft = 0
+      DockedTop = 0
+      FloatLeft = 404
+      FloatTop = 344
+      FloatClientWidth = 23
+      FloatClientHeight = 22
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'bbSetDefault'
+        end
+        item
+          Visible = True
+          ItemName = 'bbCancelDef'
+        end
+        item
+          Visible = True
+          ItemName = 'bbDel'
+        end
+        item
+          Visible = True
+          ItemName = 'bbSaveToFile'
+        end>
+      OldName = 'Custom 1'
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = True
+    end
+    object bbDel: TdxBarButton
+      Caption = #1059#1076#1072#1083#1080#1090#1100' '#1096#1072#1073#1083#1086#1085
+      Category = 0
+      Hint = #1059#1076#1072#1083#1080#1090#1100' '#1096#1072#1073#1083#1086#1085
+      Visible = ivAlways
+      ImageIndex = 0
+      OnClick = bbDelClick
+    end
+    object bbSetDefault: TdxBarButton
+      Caption = #1057#1076#1077#1083#1072#1090#1100' '#1096#1072#1073#1083#1086#1085#1086#1084' '#1087#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+      Category = 0
+      Hint = #1057#1076#1077#1083#1072#1090#1100' '#1096#1072#1073#1083#1086#1085#1086#1084' '#1087#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+      Visible = ivAlways
+      ImageIndex = 1
+      OnClick = bbSetDefaultClick
+    end
+    object bbCancelDef: TdxBarButton
+      Caption = #1053#1077' '#1080#1089#1087#1086#1083#1100#1079#1086#1074#1072#1090#1100' '#1082#1072#1082' '#1096#1072#1073#1083#1086#1085' '#1087#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+      Category = 0
+      Hint = #1053#1077' '#1080#1089#1087#1086#1083#1100#1079#1086#1074#1072#1090#1100' '#1082#1072#1082' '#1096#1072#1073#1083#1086#1085' '#1087#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+      Visible = ivAlways
+      ImageIndex = 2
+      OnClick = bbCancelDefClick
+    end
+    object bbSaveToFile: TdxBarButton
+      Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' '#1092#1072#1081#1083
+      Category = 0
+      Hint = #1057#1086#1093#1088#1072#1085#1080#1090#1100' '#1074' '#1092#1072#1081#1083
+      Visible = ivAlways
+      ImageIndex = 3
+      OnClick = bbSaveToFileClick
+    end
+  end
+  object odsTempl: TOracleDataSet
+    SQL.Strings = (
+      
+        'SELECT a.ROWID, a.fk_id, a.fk_smid, a.fn_compress, a.fd, a.fk_so' +
+        'tr, a.fc_name, a.rc_remark,'
+      '       a.fn_type'
+      '  FROM trichview_templ a'
+      
+        ' WHERE (a.fk_smid = :fk_smid AND a.fn_type = 2 AND a.fk_sotr = :' +
+        'fk_sotr)'
+      '')
+    Optimize = False
+    Variables.Data = {
+      0300000002000000080000003A464B5F534D4944030000000000000000000000
+      080000003A464B5F534F5452030000000000000000000000}
+    SequenceField.Field = 'FK_ID'
+    SequenceField.ApplyMoment = amOnServer
+    QBEDefinition.QBEFieldDefs = {
+      040000000800000005000000464B5F494401000000000007000000464B5F534D
+      49440100000000000B000000464E5F434F4D5052455353010000000000020000
+      00464401000000000007000000464B5F534F5452010000000000070000004643
+      5F4E414D450100000000000900000052435F52454D41524B0100000000000700
+      0000464E5F54595045010000000000}
+    Cursor = crSQLWait
+    Session = frmMain.os
+    CompressBLOBs = True
+    BeforePost = odsTemplBeforePost
+    AfterPost = odsTemplAfterPost
+    OnNewRecord = odsTemplNewRecord
+    Left = 64
+    Top = 84
+    object odsTemplFK_ID: TFloatField
+      FieldName = 'FK_ID'
+      Visible = False
+    end
+    object odsTemplFK_SMID: TFloatField
+      FieldName = 'FK_SMID'
+      Required = True
+    end
+    object odsTemplFN_COMPRESS: TFloatField
+      FieldName = 'FN_COMPRESS'
+      Required = True
+      Visible = False
+    end
+    object odsTemplFD: TDateTimeField
+      FieldName = 'FD'
+    end
+    object odsTemplFK_SOTR: TFloatField
+      FieldName = 'FK_SOTR'
+      Required = True
+      Visible = False
+    end
+    object odsTemplFC_NAME: TStringField
+      DisplayLabel = #1053#1072#1079#1074#1072#1085#1080#1077' '#1096#1072#1073#1083#1086#1085#1072
+      FieldName = 'FC_NAME'
+      Required = True
+      Size = 200
+    end
+    object odsTemplRC_REMARK: TStringField
+      FieldName = 'RC_REMARK'
+      Size = 4000
+    end
+    object odsTemplFN_TYPE: TFloatField
+      FieldName = 'FN_TYPE'
+      Required = True
+    end
+  end
+  object dsTempl: TDataSource
+    DataSet = odsTempl
+    Left = 166
+    Top = 162
+  end
+  object odsBlob: TOracleDataSet
+    SQL.Strings = (
+      'SELECT a.rowid,a.fk_id,a.fb_Blob,a.fn_type'
+      'FROM trichview_templ a'
+      ' WHERE a.fk_id = :fk_id'
+      '')
+    Optimize = False
+    Variables.Data = {0300000001000000060000003A464B5F4944030000000000000000000000}
+    SequenceField.Field = 'FK_ID'
+    SequenceField.ApplyMoment = amOnServer
+    QBEDefinition.QBEFieldDefs = {
+      040000000300000005000000464B5F49440100000000000700000046425F424C
+      4F4200000000000007000000464E5F54595045010000000000}
+    Cursor = crSQLWait
+    Master = odsTempl
+    MasterFields = 'FK_ID'
+    DetailFields = 'FK_ID'
+    Session = frmMain.os
+    CompressBLOBs = True
+    AfterScroll = odsBlobAfterScroll
+    Left = 332
+    Top = 124
+    object BlobField1: TBlobField
+      FieldName = 'FB_BLOB'
+      BlobType = ftOraBlob
+    end
+    object odsBlobFK_ID: TFloatField
+      FieldName = 'FK_ID'
+    end
+    object odsBlobFN_TYPE: TFloatField
+      FieldName = 'FN_TYPE'
+      Required = True
+    end
+  end
+  object quDelTemplate: TOracleQuery
+    SQL.Strings = (
+      'begin'
+      ''
+      'end;')
+    Session = frmMain.os
+    Optimize = False
+    Cursor = crSQLWait
+    Left = 438
+    Top = 72
+  end
+  object shTempl: TJvStrHolder
+    Capacity = 4
+    Macros = <>
+    Left = 486
+    Top = 152
+    InternalVer = 1
+    StrData = (
+      ''
+      
+        '53454c45435420612e524f5749442c20612e666b5f69642c20612e666b5f736d' +
+        '69642c20612e666e5f636f6d70726573732c20612e66642c20612e666b5f736f' +
+        '74722c20612e66635f6e616d652c20612e72635f72656d61726b2c'
+      '20202020202020612e666e5f74797065'
+      '202046524f4d207472696368766965775f74656d706c2061'
+      
+        '2057484552452028612e666b5f736d6964203d203a666b5f736d696420414e44' +
+        '20612e666e5f74797065203d203220414e4420612e666b5f736f7472203d203a' +
+        '666b5f736f747229')
+  end
+  object odsSysTempl: TOracleDataSet
+    SQL.Strings = (
+      
+        'SELECT   a.ROWID, a.fk_id, a.fk_smid, a.fn_compress, a.fd, a.fk_' +
+        'sotr, a.fc_name, a.rc_remark,'
+      '         a.fn_type'
+      '    FROM trichview_templ a'
+      '   WHERE (a.fk_smid = :fk_smid AND a.fn_type = 1)'
+      'ORDER BY a.fn_order'
+      '')
+    Optimize = False
+    Variables.Data = {
+      0300000001000000080000003A464B5F534D4944030000000000000000000000}
+    QBEDefinition.QBEFieldDefs = {
+      040000000800000005000000464B5F494401000000000007000000464B5F534D
+      49440100000000000B000000464E5F434F4D5052455353010000000000020000
+      00464401000000000007000000464B5F534F5452010000000000070000004643
+      5F4E414D450100000000000900000052435F52454D41524B0100000000000700
+      0000464E5F54595045010000000000}
+    Cursor = crSQLWait
+    Session = frmMain.os
+    Left = 60
+    Top = 224
+    object odsSysTemplFK_ID: TFloatField
+      FieldName = 'FK_ID'
+      Required = True
+    end
+    object odsSysTemplFK_SMID: TFloatField
+      FieldName = 'FK_SMID'
+      Required = True
+    end
+    object odsSysTemplFN_COMPRESS: TFloatField
+      FieldName = 'FN_COMPRESS'
+      Required = True
+    end
+    object odsSysTemplFD: TDateTimeField
+      FieldName = 'FD'
+      Required = True
+    end
+    object odsSysTemplFK_SOTR: TFloatField
+      FieldName = 'FK_SOTR'
+      Required = True
+    end
+    object odsSysTemplFC_NAME: TStringField
+      FieldName = 'FC_NAME'
+      Required = True
+      Size = 200
+    end
+    object odsSysTemplRC_REMARK: TStringField
+      FieldName = 'RC_REMARK'
+      Size = 4000
+    end
+    object odsSysTemplFN_TYPE: TFloatField
+      FieldName = 'FN_TYPE'
+      Required = True
+    end
+  end
+  object dsSysTempl: TDataSource
+    DataSet = odsSysTempl
+    Left = 294
+    Top = 256
+  end
+  object odsDefTempl: TOracleDataSet
+    SQL.Strings = (
+      'SELECT a.ROWID, a.fk_id, a.fk_sotr, a.fk_richview_teml,a.fk_smid'
+      '  FROM trichview_templ_def a, trichview_templ'
+      ' WHERE a.fk_sotr = :fk_sotr'
+      '   AND a.fk_smid = :fk_smid'
+      '   AND a.fk_richview_teml = trichview_templ.fk_id'
+      '   AND trichview_templ.fk_smid = :fk_smid'
+      '   AND trichview_templ.fn_type = 2'
+      ''
+      '')
+    Optimize = False
+    Variables.Data = {
+      0300000002000000080000003A464B5F534D4944030000000000000000000000
+      080000003A464B5F534F5452030000000000000000000000}
+    SequenceField.Field = 'fk_id'
+    SequenceField.ApplyMoment = amOnServer
+    QBEDefinition.QBEFieldDefs = {
+      040000000400000005000000464B5F494401000000000007000000464B5F534F
+      545201000000000010000000464B5F52494348564945575F54454D4C01000000
+      000007000000464B5F534D4944010000000000}
+    Cursor = crSQLWait
+    UpdatingTable = 'trichview_templ_def'
+    Session = frmMain.os
+    Left = 62
+    Top = 134
+    object odsDefTemplFK_ID: TFloatField
+      FieldName = 'FK_ID'
+    end
+    object odsDefTemplFK_SOTR: TFloatField
+      FieldName = 'FK_SOTR'
+      Required = True
+    end
+    object odsDefTemplFK_RICHVIEW_TEML: TFloatField
+      FieldName = 'FK_RICHVIEW_TEML'
+      Required = True
+    end
+    object odsDefTemplFK_SMID: TFloatField
+      FieldName = 'FK_SMID'
+    end
+  end
+  object odsDefTemplSys: TOracleDataSet
+    SQL.Strings = (
+      
+        'SELECT a.ROWID, a.fk_id, a.fk_sotr, a.fk_richview_teml, a.fk_smi' +
+        'd'
+      '  FROM trichview_templ_def a, trichview_templ'
+      ' WHERE a.fk_richview_teml = trichview_templ.fk_id'
+      '   AND trichview_templ.fk_smid = :fk_smid'
+      '   AND trichview_templ.fn_type = 1'
+      '   AND a.fk_smid = :fk_smid'
+      '   AND a.fk_sotr = :fk_sotr')
+    Optimize = False
+    Variables.Data = {
+      0300000002000000080000003A464B5F534D4944030000000000000000000000
+      080000003A464B5F534F5452030000000000000000000000}
+    SequenceField.Field = 'fk_id'
+    SequenceField.ApplyMoment = amOnServer
+    QBEDefinition.QBEFieldDefs = {
+      040000000400000005000000464B5F494401000000000007000000464B5F534F
+      545201000000000010000000464B5F52494348564945575F54454D4C01000000
+      000007000000464B5F534D4944010000000000}
+    Cursor = crSQLWait
+    UpdatingTable = 'trichview_templ_def'
+    Session = frmMain.os
+    OnNewRecord = odsDefTemplSysNewRecord
+    Left = 64
+    Top = 176
+    object FloatField1: TFloatField
+      FieldName = 'FK_ID'
+    end
+    object FloatField2: TFloatField
+      FieldName = 'FK_SOTR'
+      Required = True
+    end
+    object FloatField3: TFloatField
+      FieldName = 'FK_RICHVIEW_TEML'
+      Required = True
+    end
+    object odsDefTemplSysFK_SMID: TFloatField
+      FieldName = 'FK_SMID'
+    end
+  end
+  object il16: TImageList
+    Left = 374
+    Top = 296
+    Bitmap = {
+      494C010104000800140010001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      0000000000003600000028000000400000002000000001002000000000000020
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000005B7000005B7000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000006D422FFF6D422FFF6D422FFF6D422FFF6D42
+      2FFF6D422FFF6D422FFF6D422FFF6D422FFF000000000005B7000005B7000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000005B7000005B700000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000C8B3A4FF604830FF694731FF6947
+      31FF694731FF694731FFCE726FFFD1928CFFCA8882FF715A48FF5F5046FFD0C0
+      B0FFE1CABDFF8C7667FFA04840FF6D422FFF000000000005B7000005B7000005
+      B700000000000000000000000000000000000000000000000000000000000000
+      00000005B7000005B70000000000000000000000000000000000000000000000
+      000000000000004B0000004B0000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000006565650065656500000000000000000000000000000000000000
+      000000000000000000000000000000000000C8B3A4FFEEE5E0FFD6C2B6FFD6C2
+      B6FFD6C2B6FFD6C2B6FFCE726FFFD89D97FFD1928CFF715A48FF0A0A0AFF5F50
+      46FFE1CABDFF8C7667FFA04840FF6D422FFF000000000005B7000005B6000005
+      B7000005B7000000000000000000000000000000000000000000000000000005
+      B7000005B7000000000000000000000000000000000000000000000000000000
+      0000004B00000E9D1D000E9D1D00004B00000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000656565009999990099999900656565000000000000000000000000000000
+      000000000000000000000000000000000000C8B3A4FFEFE8E4FFEEE5E0FFEBE1
+      DCFFE8DDD7FFE5D9D1FFCE726FFFDFA8A2FFD89D97FF715A48FF715A48FF715A
+      48FF715A48FF715A48FFA9554DFF6D422FFF00000000000000000006D7000005
+      BA000005B7000005B700000000000000000000000000000000000005B7000005
+      B70000000000000000000000000000000000000000000000000000000000004B
+      00001CB1350011A422000E9D1D0011A42200004B000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000006565
+      6500ABABAB009999990099999900999999006565650000000000000000000000
+      000000000000000000000000000000000000C8B3A4FFF2EBE8FFEFE8E4FFEEE5
+      E0FFEBE1DCFFE8DDD7FFCE726FFFE6B3ADFFDFA8A2FFD89D97FFD1928CFFCA88
+      82FFC27C75FFBA6F68FFB1625BFF6D422FFF0000000000000000000000000000
+      00000005B7000005B7000005B600000000000005B6000005B7000005B7000000
+      0000000000000000000000000000000000000000000000000000004B00002EC6
+      520024BC430013922400004B00000D931A000E9D1D00004B0000000000000000
+      000000000000000000000000000000000000000000000000000065656500BFBF
+      BF00B5B5B5009999990065656500959595009999990065656500000000000000
+      000000000000000000000000000000000000C8B3A4FFF4EFECFFF2EBE8FFEFE8
+      E4FFEEE5E0FFEBE1DCFFCE726FFFEEBDB8FFC8635CFFC8635CFFC8635CFFC863
+      5CFFC8635CFFC8635CFFBA6F68FF6D422FFF0000000000000000000000000000
+      0000000000000005B6000006C7000006C7000006CE000005B400000000000000
+      00000000000000000000000000000000000000000000004B000035CA5E0039D4
+      65001CA13400004B000000000000004B00000A8615000E9D1D00004B00000000
+      0000000000000000000000000000000000000000000065656500C4C4C400CACA
+      CA00A5A5A5006565650000000000656565008C8C8C0099999900656565000000
+      000000000000000000000000000000000000C8B3A4FFF7F3F1FFF4EFECFFF2EB
+      E8FF0A0A0AFFEEE5E0FFCE726FFFF0C1BCFFC8635CFFF6F1EFFFECE3DEFFE1D2
+      C9FFDBC9BFFFC8635CFFC27C75FF6D422FFF0000000000000000000000000000
+      000000000000000000000006C1000005C1000006DA0000000000000000000000
+      0000000000000000000000000000000000000000000000000000004B000029B5
+      4800004B000000000000000000000000000000000000004B00000D931A00004B
+      000000000000000000000000000000000000000000000000000065656500B5B5
+      B500656565000000000000000000000000000000000065656500959595006565
+      650000000000000000000000000000000000C8B3A4FFF9F6F5FFC0A890FF0A0A
+      0AFF0A0A0AFF0A0A0AFFCE726FFFF0C1BCFFC8635CFFFFFFFFFFF6F1EFFFECE3
+      DEFFE1D2C9FFC8635CFF6D422FFF6D422FFF0000000000000000000000000000
+      0000000000000005B6000006D7000006CE000006DA000006E900000000000000
+      000000000000000000000000000000000000000000000000000000000000004B
+      0000000000000000000000000000000000000000000000000000004B00000A86
+      1500004B00000000000000000000000000000000000000000000000000006565
+      6500000000000000000000000000000000000000000000000000656565008C8C
+      8C0065656500000000000000000000000000C8B3A4FFFCFAF9FF0A0A0AFFF7F3
+      F1FF0A0A0AFFF2EBE8FFCE726FFFF0C1BCFFC8635CFFFFFFFFFFFFFFFFFFF6F1
+      EFFFECE3DEFFC8635CFFD1928CFF6D422FFF0000000000000000000000000000
+      00000006E5000006DA000006D30000000000000000000006E5000006EF000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000004B0000004B000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000065656500656565000000000000000000C8B3A4FFFEFEFDFF0A0A0AFFF9F6
+      F5FFF7F3F1FFF4EFECFFCE726FFFCE726FFFCE726FFFCE726FFFCE726FFFCE72
+      6FFFCE726FFFCE726FFFCE726FFFCE726FFF0000000000000000000000000006
+      F8000006DA000006EF00000000000000000000000000000000000006F8000006
+      F600000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000004B0000004B0000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000656565006565650000000000C8B3A4FFFFFFFFFF0A0A0AFFFCFA
+      F9FFF9F6F5FFF7F3F1FFF4EFECFFF2EBE8FFD6C2B6FFD6C2B6FF604830FF0000
+      00000000000000000000000000000000000000000000000000000006F6000006
+      F6000006F8000000000000000000000000000000000000000000000000000006
+      F6000006F6000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000C8B3A4FFFFFFFFFFB0A090FFFEFE
+      FDFFFCFAF9FFF9F6F5FFF7F3F1FFC8B3A4FF604830FF604830FF604830FF0000
+      000000000000000000000000000000000000000000000006F6000006F6000006
+      F600000000000000000000000000000000000000000000000000000000000000
+      0000000000000006F60000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000FF000000FF000000
+      FF000000FF000000FF000000FF000000FF000000FF0000000000000000000000
+      000000000000000000000000000000000000C8B3A4FFFFFFFFFFFFFFFFFFFFFF
+      FFFFFEFEFDFFFCFAF9FFF9F6F5FFC8B3A4FFF3EBE6FF604830FF000000000000
+      0000000000000000000000000000000000000006F6000006F6000006F6000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000000000000000FF000000FF000000
+      FF000000FF000000FF000000FF000000FF000000FF0000000000000000000000
+      000000000000000000000000000000000000C8B3A4FFFFFFFFFFFFFFFFFFFFFF
+      FFFFFFFFFFFFFEFEFDFFFCFAF9FFC8B3A4FF604830FF00000000000000000000
+      0000000000000000000000000000000000000006F6000006F600000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000C8B3A4FFC8B3A4FFC8B3A4FFC8B3
+      A4FFC8B3A4FFC8B3A4FFC8B3A4FFC8B3A4FF0000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      000000000000000000000000000000000000FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00FFFF
+      FF00FFFFFF00FFFFFF00FFFFFF00FFFFFF00424D3E000000000000003E000000
+      2800000040000000200000000100010000000000000100000000000000000000
+      000000000000000000000000FFFFFF0000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      0000000000000000000000000000000000000000000000000000000000000000
+      00000000000000000000000000000000FFFCFFFFFFFFFE009FF9FFFFFFFF0000
+      8FF3F9FFF9FF000087E7F0FFF0FF0000C3CFE07FE07F0000F11FC03FC03F0000
+      F83F821F821F0000FC7FC78FC78F0000F83FEFC7EFC70000F19FFFF3FFF30000
+      E3CFFFF9FFF9001FC7E7FFFFFFFF001F8FFBFFFF807F003F1FFFFFFF807F007F
+      3FFFFFFFFFFF00FFFFFFFFFFFFFF000000000000000000000000000000000000
+      000000000000}
+  end
+  object sd: TSaveDialog
+    DefaultExt = '*.rme'
+    Filter = #1060#1072#1081#1083#1099' '#1052#1077#1076' '#1088#1077#1076#1072#1082#1090#1086#1088#1072' (*.rme)|*.rme|'#1042#1089#1077' '#1092#1072#1081#1083#1099' (*.*)|*.*'
+    Left = 202
+    Top = 194
+  end
+end

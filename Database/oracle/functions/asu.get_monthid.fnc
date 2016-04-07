@@ -1,0 +1,18 @@
+DROP FUNCTION ASU.GET_MONTHID
+/
+
+--
+-- GET_MONTHID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_MONTHID" RETURN NUMBER is
+  Begin
+   RETURN  837822;
+  End;
+/
+
+SHOW ERRORS;
+
+

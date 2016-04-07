@@ -1,0 +1,20 @@
+DROP PACKAGE ASU.PKG_MISEXCH
+/
+
+--
+-- PKG_MISEXCH  (Package) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE PACKAGE ASU."PKG_MISEXCH" 
+  IS
+
+   FUNCTION GetSotrList(pFK_TASKID IN NUMBER) RETURN VARCHAR2;
+
+END; -- Package spec
+/
+
+SHOW ERRORS;
+
+

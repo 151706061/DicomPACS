@@ -1,0 +1,110 @@
+DROP TABLE ASU.TSYNTEXT CASCADE CONSTRAINTS
+/
+
+--
+-- TSYNTEXT  (Table) 
+--
+CREATE TABLE ASU.TSYNTEXT
+(
+  FK_ID       NUMBER(9)                         DEFAULT -1                    NOT NULL,
+  FC_SYNONIM  VARCHAR2(254 BYTE),
+  FC_TEXT     VARCHAR2(254 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSYNTEXT IS 'Таблица соответствия русских названий синонимов'
+/
+
+COMMENT ON COLUMN ASU.TSYNTEXT.FK_ID IS 'SEQUENCE=[SEQ_TSYNTEXT]'
+/
+
+COMMENT ON COLUMN ASU.TSYNTEXT.FC_SYNONIM IS 'Синоним'
+/
+
+COMMENT ON COLUMN ASU.TSYNTEXT.FC_TEXT IS 'Русский текст'
+/
+
+
+--
+-- TSYNTEXT_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TSYNTEXT (Table)
+--
+CREATE UNIQUE INDEX ASU.TSYNTEXT_BY_ID ON ASU.TSYNTEXT
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSYNTEXT_BY_SYNONIM  (Index) 
+--
+--  Dependencies: 
+--   TSYNTEXT (Table)
+--
+CREATE UNIQUE INDEX ASU.TSYNTEXT_BY_SYNONIM ON ASU.TSYNTEXT
+(FC_SYNONIM)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSYNTEXT_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TSYNTEXT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSYNTEXT_BEFORE_INSERT" 
+BEFORE  INSERT  ON ASU.TSYNTEXT FOR EACH ROW
+Begin
+  SELECT SEQ_TSYNTEXT.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,23 @@
+DROP TRIGGER ASU.TRECIPE_DLO_EXP_UPD
+/
+
+--
+-- TRECIPE_DLO_EXP_UPD  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TRECIPE_DLO_EXP_DOCTOR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECIPE_DLO_EXP_UPD" 
+ BEFORE
+  INSERT OR UPDATE
+ ON asu.trecipe_dlo_exp_doctor
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  :NEW.FD_UPDATE := sysdate;
+end;
+/
+SHOW ERRORS;
+
+

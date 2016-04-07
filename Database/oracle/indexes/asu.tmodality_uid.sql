@@ -1,0 +1,25 @@
+DROP INDEX ASU.TMODALITY_UID
+/
+
+--
+-- TMODALITY_UID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TMODALITY_UID ON ASU.TMODALITY
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

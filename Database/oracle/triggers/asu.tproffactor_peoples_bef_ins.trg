@@ -1,0 +1,29 @@
+DROP TRIGGER ASU.TPROFFACTOR_PEOPLES_BEF_INS
+/
+
+--
+-- TPROFFACTOR_PEOPLES_BEF_INS  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   TPROFFACTOR_PEOPLES (Table)
+--   SEQ_PROFFACTOR_PEOPLES (Sequence)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFFACTOR_PEOPLES_BEF_INS"
+     BEFORE
+     INSERT
+     ON ASU.TPROFFACTOR_PEOPLES      REFERENCING OLD AS OLD NEW AS NEW
+     FOR EACH ROW
+BEGIN
+      IF :NEW.fk_id IS NULL
+      THEN
+        SELECT asu.seq_proffactor_peoples.NEXTVAL
+          INTO :NEW.fk_id
+          FROM DUAL;
+      END IF;
+    END;
+/
+SHOW ERRORS;
+
+

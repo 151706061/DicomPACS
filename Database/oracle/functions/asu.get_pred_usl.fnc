@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_PRED_USL
+/
+
+--
+-- GET_PRED_USL  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PRED_USL" 
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =-
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 600;
+END;
+/
+
+SHOW ERRORS;
+
+

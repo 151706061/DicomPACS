@@ -1,0 +1,195 @@
+ALTER TABLE ASU.TDOC
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TDOC CASCADE CONSTRAINTS
+/
+
+--
+-- TDOC  (Table) 
+--
+CREATE TABLE ASU.TDOC
+(
+  FK_ID          NUMBER(15),
+  FK_PACID       NUMBER(15),
+  FD_DATE        DATE,
+  FD_ENDDATE     DATE,
+  FK_DOCID       NUMBER(15),
+  FK_DOGOVORID   NUMBER(15),
+  FK_VRACHID     NUMBER(15),
+  FD_DATECREATE  DATE,
+  FK_KARTAID     NUMBER(15)                     DEFAULT -1,
+  FN_KEYVALUE    VARCHAR2(64 BYTE),
+  FN_STATUS      NUMBER(1)                      DEFAULT 2,
+  FC_NAME        VARCHAR2(400 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TDOC.FK_ID IS 'SEQUENCE=[SEQ_TKARTA]'
+/
+
+COMMENT ON COLUMN ASU.TDOC.FK_PACID IS 'TPEOPLES.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TDOC.FK_KARTAID IS '-1 -путевка'
+/
+
+COMMENT ON COLUMN ASU.TDOC.FN_KEYVALUE IS 'ключ - 64 б'
+/
+
+COMMENT ON COLUMN ASU.TDOC.FN_STATUS IS 'логический статус документа'
+/
+
+
+--
+-- TDOC_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TDOC (Table)
+--
+CREATE UNIQUE INDEX ASU.TDOC_BY_ID ON ASU.TDOC
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDOC_BY_KARTAID  (Index) 
+--
+--  Dependencies: 
+--   TDOC (Table)
+--
+CREATE INDEX ASU.TDOC_BY_KARTAID ON ASU.TDOC
+(FK_KARTAID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDOC_BY_PACID  (Index) 
+--
+--  Dependencies: 
+--   TDOC (Table)
+--
+CREATE INDEX ASU.TDOC_BY_PACID ON ASU.TDOC
+(FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDOC_DELETE_ALL  (Trigger) 
+--
+--  Dependencies: 
+--   TDOC (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDOC_DELETE_ALL" 
+  AFTER DELETE ON ASU.TDOC   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+
+--Created by TimurLan 19/08/04
+Begin
+  FOR p in (SELECT FK_ID FROM TNAZN WHERE TNAZN.FK_DOC_ID = :OLD.FK_ID) LOOP
+    PKG_NAZN.DEL_NAZN(p.FK_ID);
+  END LOOP;
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TDOC_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDOC (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDOC_BEFORE_INSERT" 
+BEFORE INSERT 
+ON tdoc
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+Begin
+  SELECT SEQ_TKARTA.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TDOC 
+-- 
+ALTER TABLE ASU.TDOC ADD (
+  CONSTRAINT TDOC_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

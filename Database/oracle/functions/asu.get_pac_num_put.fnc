@@ -1,0 +1,41 @@
+DROP FUNCTION ASU.GET_PAC_NUM_PUT
+/
+
+--
+-- GET_PAC_NUM_PUT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TDOGOVOR (Table)
+--   TSUBVID (Table)
+--   TPISMA (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PAC_NUM_PUT" 
+  ( pFK_KOD2 IN NUMBER,pFK_KOD IN NUMBER)
+  RETURN  VARCHAR2 IS
+  CURSOR cOrg IS SELECT Fk_NAME_DOG FROM TDOGOVOR WHERE FK_ID=pFK_KOD ;
+  CURSOR cOrg1 IS SELECT Fk_NAME_PIS FROM TPISMA WHERE FK_ID=pFK_KOD ;
+  CURSOR cOrg2 IS SELECT FC_SHORT FROM TSUBVID WHERE FK_ID=pFK_KOD;
+  cFC_ORG varchar2(70);
+BEGIN
+    if pFK_KOD2=1 then
+     OPEN cOrg1;
+     FETCH cOrg1 INTO cFC_ORG;
+     CLOSE cOrg1;
+    elsif pFK_KOD2=2 then
+     OPEN cOrg;
+     FETCH cOrg INTO cFC_ORG;
+     CLOSE cOrg;
+    elsif pFK_KOD2>3 then
+     OPEN cOrg2;
+     FETCH cOrg2 INTO cFC_ORG;
+     CLOSE cOrg2;
+    end if;
+    RETURN cFC_ORG;
+END;
+/
+
+SHOW ERRORS;
+
+

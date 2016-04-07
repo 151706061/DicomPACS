@@ -1,0 +1,27 @@
+DROP TRIGGER ASU.TLOG_EXP_IMP_BEFOR_INSERT
+/
+
+--
+-- TLOG_EXP_IMP_BEFOR_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TLOG_EXP_IMP (Sequence)
+--   TLOG_EXP_IMP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLOG_EXP_IMP_BEFOR_INSERT" 
+  before insert on asu.tlog_exp_imp
+  REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+BEGIN
+
+ IF :NEW.FK_ID IS NULL THEN
+  SELECT SEQ_TLOG_EXP_IMP.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+ END IF;
+
+end TLog_exp_imp_befor_insert;
+/
+SHOW ERRORS;
+
+

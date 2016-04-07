@@ -1,0 +1,216 @@
+ALTER TABLE ASU.TANONYM_ADDRESS
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TANONYM_ADDRESS CASCADE CONSTRAINTS
+/
+
+--
+-- TANONYM_ADDRESS  (Table) 
+--
+--  Dependencies: 
+--   TANONYM_PEOPLE (Table)
+--
+CREATE TABLE ASU.TANONYM_ADDRESS
+(
+  FK_ID          NUMBER(15)                     NOT NULL,
+  FK_COUNTRYID   NUMBER(15)                     DEFAULT -1,
+  FK_REGIONID    NUMBER(15)                     DEFAULT -1,
+  FK_TOWNID      NUMBER(15)                     DEFAULT -1,
+  FK_STREETID    NUMBER(15)                     DEFAULT -1,
+  FK_PACID       NUMBER(15)                     DEFAULT -1                    NOT NULL,
+  FK_TYPE        NUMBER(15)                     DEFAULT -1                    NOT NULL,
+  FL_AS_ANOTHER  NUMBER                         DEFAULT 0,
+  FK_RAIONID     NUMBER(15)                     DEFAULT -1,
+  FC_ADR         VARCHAR2(230 BYTE),
+  FK_INTOWNID    NUMBER(15)                     DEFAULT -1,
+  FC_HOUSE       VARCHAR2(10 BYTE),
+  FC_KORPUS      VARCHAR2(4 BYTE),
+  FC_KVARTIRA    VARCHAR2(4 BYTE),
+  FK_KLADR       NUMBER,
+  FD_DATE        DATE,
+  FK_APPSOTRID   NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TANONYM_ADDRESS IS 'Таблица адресов для обезличенных личностей  Author: Spasskiy S.N.'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_ID IS 'SEQUENCE=[SEQ_ANONIM_ADDRESS]'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_COUNTRYID IS 'TCOUNTRY.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_REGIONID IS 'TREGION.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_TOWNID IS 'TTOWN.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_STREETID IS 'TSTREET.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_PACID IS 'TPEOPLES.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_TYPE IS 'TADRTYPRE.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FL_AS_ANOTHER IS 'нет данных'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_RAIONID IS 'TRAION.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FC_ADR IS 'почтовый адрес'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_INTOWNID IS 'TINTOWN.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FC_HOUSE IS 'номер дома'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FC_KORPUS IS 'номер корпуса'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FC_KVARTIRA IS 'номер квартиры'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_KLADR IS 'Код КЛАДР TKLADR.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FD_DATE IS 'Дата изменения адреса'
+/
+
+COMMENT ON COLUMN ASU.TANONYM_ADDRESS.FK_APPSOTRID IS 'Сотрудник, изменивший адрес LOGIN.TAPPSOTR.FK_ID'
+/
+
+
+--
+-- IX_TANONIM_ADRESS_BY_PACID3  (Index) 
+--
+--  Dependencies: 
+--   TANONYM_ADDRESS (Table)
+--
+CREATE INDEX ASU.IX_TANONIM_ADRESS_BY_PACID3 ON ASU.TANONYM_ADDRESS
+(FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          3872K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TANONIM_ADRESS_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TANONYM_ADDRESS (Table)
+--
+CREATE UNIQUE INDEX ASU.TANONIM_ADRESS_BY_ID ON ASU.TANONYM_ADDRESS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          3328K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TANONYM_ADDRESS$BI  (Trigger) 
+--
+--  Dependencies: 
+--   TANONYM_ADDRESS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TANONYM_ADDRESS$BI" before insert
+on ASU.TANONYM_ADDRESS for each row
+declare
+    integrity_error  exception;
+    errno            integer;
+    errmsg           char(200);
+    dummy            integer;
+    found            boolean;
+
+begin
+    --  Column "FK_ID" uses sequence ASU.SEQ_ANONIM_ADDRESS
+    select ASU.SEQ_ANONIM_ADDRESS.NEXTVAL INTO :new.FK_ID from dual;
+
+--  Errors handling
+exception
+    when integrity_error then
+       raise_application_error(errno, errmsg);
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TANONYM_ADDRESS 
+-- 
+ALTER TABLE ASU.TANONYM_ADDRESS ADD (
+  CONSTRAINT TANONIM_ADRESS_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          3328K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TANONYM_ADDRESS 
+-- 
+ALTER TABLE ASU.TANONYM_ADDRESS ADD (
+  CONSTRAINT FK_AN_ADDRES$AN_PEOPLE 
+ FOREIGN KEY (FK_PACID) 
+ REFERENCES ASU.TANONYM_PEOPLE (FK_ID))
+/
+

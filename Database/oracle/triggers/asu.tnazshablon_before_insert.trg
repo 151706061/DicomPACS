@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TNAZSHABLON_BEFORE_INSERT
+/
+
+--
+-- TNAZSHABLON_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TNAZSHABLON (Sequence)
+--   TNAZSHABLON (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZSHABLON_BEFORE_INSERT" 
+BEFORE INSERT
+ON tnazshablon
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+begin
+ select SEQ_TNAZSHABLON.nextval  into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

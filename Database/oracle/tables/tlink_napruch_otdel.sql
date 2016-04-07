@@ -1,0 +1,91 @@
+ALTER TABLE ASU.TLINK_NAPRUCH_OTDEL
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TLINK_NAPRUCH_OTDEL CASCADE CONSTRAINTS
+/
+
+--
+-- TLINK_NAPRUCH_OTDEL  (Table) 
+--
+CREATE TABLE ASU.TLINK_NAPRUCH_OTDEL
+(
+  FK_SMID     NUMBER                            NOT NULL,
+  FK_OTDELID  NUMBER                            NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TLINK_NAPRUCH_OTDEL IS 'Связь направившего учреждения с подразделениями ЛПУ'
+/
+
+COMMENT ON COLUMN ASU.TLINK_NAPRUCH_OTDEL.FK_SMID IS 'Ссылка на TSMID. Синоним = ''PD_NAPRAVIV_YCH'''
+/
+
+COMMENT ON COLUMN ASU.TLINK_NAPRUCH_OTDEL.FK_OTDELID IS 'Ссылка на LOGIN.TOTDEL.FK_ID'
+/
+
+
+--
+-- PK_TLINK_NAPRUCH_OTDEL  (Index) 
+--
+--  Dependencies: 
+--   TLINK_NAPRUCH_OTDEL (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TLINK_NAPRUCH_OTDEL ON ASU.TLINK_NAPRUCH_OTDEL
+(FK_SMID, FK_OTDELID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TLINK_NAPRUCH_OTDEL 
+-- 
+ALTER TABLE ASU.TLINK_NAPRUCH_OTDEL ADD (
+  CONSTRAINT PK_TLINK_NAPRUCH_OTDEL
+ PRIMARY KEY
+ (FK_SMID, FK_OTDELID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

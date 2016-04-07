@@ -1,0 +1,20 @@
+Метод принимает [Id Искомой Строки]
+запрашивает данные из БД (Если есть искомая строка, то ищем по её ID)
+формируем список(list) из полученных данных
+//1		   <;>4   <;>РОССИЯ <;> 1	  <;>      			   <;>0
+//amm_child<;>P_ID<;>FC_NAME<;>FN_TYPE<;>STUDIES_IMAGE_TYPE<;>FN_PARENTID
+список(list) должен содержать поля:
+data := "FC_NAME"] +" "+ ["STUDIES_IMAGE_TYPE"],
+attr
+	{	
+		id := ["P_ID"],
+		rel := ["amm_child"] == "1" ? "folder" : "default",
+		title := ["FC_NAME"]
+	}
+state := ["amm_child"] == "1" ? "closed" : " "
+преобразовать строку в JSON. 
+string json = jsonSerializer.Serialize( list );
+example
+[{	"data":"РОССИЯ (код оборудования - если есть)","attr":{"id": "4","rel": "folder","title":"РОССИЯ"},"state":"closed"}]
+ [{	"data":"Оборудование MG","attr":{"id": "7","rel": "default","title":"Оборудование"},"state":""}] 
+return json;

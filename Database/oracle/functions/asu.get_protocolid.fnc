@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_PROTOCOLID
+/
+
+--
+-- GET_PROTOCOLID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PROTOCOLID" 
+return number
+is
+begin
+  return 1324;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_PROTOCOLID TO PUBLIC
+/
+

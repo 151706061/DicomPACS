@@ -1,0 +1,25 @@
+DROP INDEX ASU.TWORKDAYS$FL
+/
+
+--
+-- TWORKDAYS$FL  (Index) 
+--
+CREATE INDEX ASU.TWORKDAYS$FL ON ASU.TWORKDAYS
+(FL)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

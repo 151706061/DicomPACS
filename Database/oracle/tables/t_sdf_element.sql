@@ -1,0 +1,254 @@
+ALTER TABLE ASU.T_SDF_ELEMENT
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.T_SDF_ELEMENT CASCADE CONSTRAINTS
+/
+
+--
+-- T_SDF_ELEMENT  (Table) 
+--
+CREATE TABLE ASU.T_SDF_ELEMENT
+(
+  FK_ID              NUMBER                     NOT NULL,
+  FK_SMID            NUMBER,
+  FC_QUERRYSQL       VARCHAR2(4000 BYTE),
+  FC_SAVESQL         VARCHAR2(4000 BYTE),
+  FC_LISTSQL         VARCHAR2(4000 BYTE),
+  FC_SYNONYM         VARCHAR2(250 BYTE),
+  FC_NAME            VARCHAR2(250 BYTE),
+  FC_TYPE            VARCHAR2(250 BYTE),
+  FC_PARMANAGER_SYN  VARCHAR2(250 BYTE),
+  FC_ENTITYTYPE      VARCHAR2(250 BYTE),
+  FL_ISAUTOSAVE      NUMBER                     DEFAULT 1,
+  FK_OWNER           NUMBER,
+  FL_DEL             NUMBER                     DEFAULT 0,
+  FL_REQUIRED        NUMBER                     DEFAULT 0,
+  FC_PARELEMENT_SYN  VARCHAR2(250 BYTE),
+  FL_READONLY        NUMBER                     DEFAULT 0,
+  FC_DETAILSQL       VARCHAR2(4000 BYTE),
+  FK_QUERRY_SMID     NUMBER,
+  FK_GLOBALID        NUMBER                     NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.T_SDF_ELEMENT IS 'Created by A.Nakorjakov 250308
+Таблица элементов динамической формы'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FK_ID IS 'SEQUENCE=[SEQ_T_SDF_ELEMENT]'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FK_SMID IS 'TSMID.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FC_QUERRYSQL IS 'SQL для данных'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FC_SAVESQL IS 'SQL для сохранения'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FC_LISTSQL IS 'SQL для списка комбобокса и VARCHARа'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FC_SYNONYM IS 'Синоним'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FC_NAME IS 'Название'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FC_TYPE IS 'Тип'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FC_PARMANAGER_SYN IS 'Синоним менеджера'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FC_ENTITYTYPE IS 'Тип сущности'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FL_ISAUTOSAVE IS 'Может компонент сам себя сохранять?'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FL_DEL IS 'Удален?'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FL_REQUIRED IS 'Обязателен для заполнения?'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FC_PARELEMENT_SYN IS 'Синоним родительского эдита'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FL_READONLY IS 'Только для чтения?'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FC_DETAILSQL IS 'SQL для детализации (для VARCHAR)'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FK_QUERRY_SMID IS 'TSMID.FK_ID - ссылка на смид, передаваемый в запросы как :SmidID (для приемственности старой динамической формы)'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_ELEMENT.FK_GLOBALID IS 'Уникальный идентификатор для всех объектов (timestamp в формате yyyymmddhh24missff)'
+/
+
+
+--
+-- PK_T_SDF_ELEMENT  (Index) 
+--
+--  Dependencies: 
+--   T_SDF_ELEMENT (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_T_SDF_ELEMENT ON ASU.T_SDF_ELEMENT
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- T_SDF_ELEMENT_GLOBAL_UNIQ  (Index) 
+--
+--  Dependencies: 
+--   T_SDF_ELEMENT (Table)
+--
+CREATE UNIQUE INDEX ASU.T_SDF_ELEMENT_GLOBAL_UNIQ ON ASU.T_SDF_ELEMENT
+(FK_GLOBALID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- T_SDF_ELEMENT_SYNONYM  (Index) 
+--
+--  Dependencies: 
+--   T_SDF_ELEMENT (Table)
+--
+CREATE UNIQUE INDEX ASU.T_SDF_ELEMENT_SYNONYM ON ASU.T_SDF_ELEMENT
+(FC_SYNONYM)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- T_SDF_ELEMENT_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   T_SDF_ELEMENT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."T_SDF_ELEMENT_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON t_sdf_element
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_T_SDF_ELEMENT.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table T_SDF_ELEMENT 
+-- 
+ALTER TABLE ASU.T_SDF_ELEMENT ADD (
+  CONSTRAINT PK_T_SDF_ELEMENT
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ),
+  CONSTRAINT T_SDF_ELEMENT_GLOBAL_UNIQ
+ UNIQUE (FK_GLOBALID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ),
+  CONSTRAINT T_SDF_ELEMENT_SYNONYM
+ UNIQUE (FC_SYNONYM)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

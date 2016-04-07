@@ -1,0 +1,131 @@
+DROP TABLE ASU.TVRACHKAB CASCADE CONSTRAINTS
+/
+
+--
+-- TVRACHKAB  (Table) 
+--
+CREATE TABLE ASU.TVRACHKAB
+(
+  FK_ID         NUMBER(10),
+  FK_SOTRID     NUMBER(15),
+  FK_KABINETID  NUMBER(15),
+  FL_DEFAULT    VARCHAR2(1 BYTE)                DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVRACHKAB IS 'таблица связки кабинета и врача (пронаследована от TNAZVRACH)'
+/
+
+COMMENT ON COLUMN ASU.TVRACHKAB.FK_ID IS 'SEQUENCE=[SEQ_TNAZVRACH]'
+/
+
+COMMENT ON COLUMN ASU.TVRACHKAB.FL_DEFAULT IS '1-выполняет по умолчанию'
+/
+
+
+--
+-- TVRACHKAB_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TVRACHKAB (Table)
+--
+CREATE UNIQUE INDEX ASU.TVRACHKAB_BY_ID ON ASU.TVRACHKAB
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          40K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVRACHKAB_BY_SOTRID_  (Index) 
+--
+--  Dependencies: 
+--   TVRACHKAB (Table)
+--
+CREATE INDEX ASU.TVRACHKAB_BY_SOTRID_ ON ASU.TVRACHKAB
+(FK_SOTRID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVRACHKAB_BEFORE_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TVRACHKAB (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVRACHKAB_BEFORE_DELETE" 
+ BEFORE 
+ DELETE
+ ON ASU.TVRACHKAB  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+begin
+  delete from tvrachkab_naz where fk_sotrkabid=:old.fk_id;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TVRACHKAB_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TVRACHKAB (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVRACHKAB_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TVRACHKAB  REFERENCING OLD AS old NEW AS new
+ FOR EACH ROW
+BEGIN
+  IF (:NEW.FK_ID IS NULL OR :NEW.FK_ID < 0) THEN
+    SELECT SEQ_tnazvrach.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  END IF;
+End;
+/
+SHOW ERRORS;
+
+

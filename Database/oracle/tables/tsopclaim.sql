@@ -1,0 +1,95 @@
+DROP TABLE ASU.TSOPCLAIM CASCADE CONSTRAINTS
+/
+
+--
+-- TSOPCLAIM  (Table) 
+--
+CREATE TABLE ASU.TSOPCLAIM
+(
+  FK_PACID   NUMBER,
+  FD_DATE    DATE,
+  FB_TEXT    BLOB,
+  FC_NUMBER  VARCHAR2(20 BYTE),
+  FK_DIAGID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSOPCLAIM IS 'Заявки на лечение по сопутствующему диагнозу'
+/
+
+COMMENT ON COLUMN ASU.TSOPCLAIM.FK_PACID IS 'ID из tkarta, tambulance'
+/
+
+COMMENT ON COLUMN ASU.TSOPCLAIM.FD_DATE IS 'Дата заявления'
+/
+
+COMMENT ON COLUMN ASU.TSOPCLAIM.FB_TEXT IS 'Текст заявления (RichView)'
+/
+
+COMMENT ON COLUMN ASU.TSOPCLAIM.FC_NUMBER IS 'Номер заявления'
+/
+
+COMMENT ON COLUMN ASU.TSOPCLAIM.FK_DIAGID IS 'ID из tdiag'
+/
+
+
+--
+-- KEY_SOPCLAIM_UNIQUE  (Index) 
+--
+--  Dependencies: 
+--   TSOPCLAIM (Table)
+--
+CREATE UNIQUE INDEX ASU.KEY_SOPCLAIM_UNIQUE ON ASU.TSOPCLAIM
+(FK_PACID, FK_DIAGID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TSOPCLAIM 
+-- 
+ALTER TABLE ASU.TSOPCLAIM ADD (
+  CONSTRAINT KEY_SOPCLAIM_UNIQUE
+ UNIQUE (FK_PACID, FK_DIAGID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

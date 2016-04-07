@@ -1,0 +1,24 @@
+DROP FUNCTION ASU.DOC_ROD_DS
+/
+
+--
+-- DOC_ROD_DS  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."DOC_ROD_DS" 
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =- 
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 1001;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.DOC_ROD_DS TO PUBLIC
+/
+

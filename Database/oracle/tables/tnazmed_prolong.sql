@@ -1,0 +1,152 @@
+ALTER TABLE ASU.TNAZMED_PROLONG
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TNAZMED_PROLONG CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZMED_PROLONG  (Table) 
+--
+CREATE TABLE ASU.TNAZMED_PROLONG
+(
+  FK_ID        NUMBER                           NOT NULL,
+  FK_NAZMEDID  NUMBER                           NOT NULL,
+  FD_BEGIN     DATE                             DEFAULT trunc(sysdate)        NOT NULL,
+  FN_DURATION  NUMBER                           DEFAULT 1                     NOT NULL,
+  FD_CREATE    DATE                             DEFAULT sysdate               NOT NULL,
+  FK_SOTR      NUMBER                           DEFAULT -1                    NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNAZMED_PROLONG IS 'Таблица продлений медикаментозных назначений. Author: Neronov A.S. 22.12.2012'
+/
+
+COMMENT ON COLUMN ASU.TNAZMED_PROLONG.FK_ID IS 'SEQUENCE=[SEQ_TKARTA]'
+/
+
+COMMENT ON COLUMN ASU.TNAZMED_PROLONG.FK_NAZMEDID IS 'ASU.TNAZMED.FK_ID - продлеваемое назначение'
+/
+
+COMMENT ON COLUMN ASU.TNAZMED_PROLONG.FD_BEGIN IS 'С какого числа продлеваем'
+/
+
+COMMENT ON COLUMN ASU.TNAZMED_PROLONG.FN_DURATION IS 'Продолжительность дней'
+/
+
+COMMENT ON COLUMN ASU.TNAZMED_PROLONG.FD_CREATE IS 'Дата создания'
+/
+
+COMMENT ON COLUMN ASU.TNAZMED_PROLONG.FK_SOTR IS 'Кто создал'
+/
+
+
+--
+-- PK_TNAZMED_PROLONG  (Index) 
+--
+--  Dependencies: 
+--   TNAZMED_PROLONG (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TNAZMED_PROLONG ON ASU.TNAZMED_PROLONG
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZMED_PROLONG_BY_NAZMED  (Index) 
+--
+--  Dependencies: 
+--   TNAZMED_PROLONG (Table)
+--
+CREATE INDEX ASU.TNAZMED_PROLONG_BY_NAZMED ON ASU.TNAZMED_PROLONG
+(FK_NAZMEDID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZMED_PROLONG_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZMED_PROLONG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZMED_PROLONG_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TNAZMED_PROLONG  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  IF :NEW.FK_ID IS NULL THEN
+    SELECT SEQ_TKARTA.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  END IF;
+END TNAZMED_PROLONG_BEFORE_INSERT;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TNAZMED_PROLONG 
+-- 
+ALTER TABLE ASU.TNAZMED_PROLONG ADD (
+  CONSTRAINT PK_TNAZMED_PROLONG
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

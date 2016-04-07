@@ -1,0 +1,40 @@
+2014-08-06 08:55:27,243 [INFO] [1] - ScheduleRer2Service
+2014-08-06 08:55:27,253 [INFO] [7] - SERVICE START
+2014-08-06 08:55:27,281 [INFO] [5] - Initialize
+2014-08-06 08:55:27,330 [INFO] [5] - DBConnectionString: Provider=PostgreSQL;Unicode=true;host=192.168.1.11;Database=webtalonXtula;user=asu;password=asu
+2014-08-06 08:55:27,330 [INFO] [5] - EndpointAddress: http://medtera.yarcloud.ru/module-rer/Rer?wsdl
+2014-08-06 08:55:27,330 [INFO] [5] - WCFLibClient.ConnectionString: <Provider=PostgreSQL;Unicode=true;host=192.168.1.11;Database=webtalonXtula;user=asu;password=asu>
+2014-08-06 08:55:27,331 [INFO] [5] - TimerIntervalUpdateLpuSettings interval = 86400 sec = 1440 min = 24 hours
+2014-08-06 08:55:27,331 [INFO] [5] - TimerIntervalUpdateAreas interval = 86400 sec = 1440 min = 24 hours
+2014-08-06 08:55:27,331 [INFO] [5] - TimerIntervalUpdateSchedule interval = 20 sec = 0,333333333333333 min = 0,00555555555555556 hours
+2014-08-06 08:55:27,331 [INFO] [5] - TimerIntervalUpdatePeople interval = 420 sec = 7 min = 0,116666666666667 hours
+2014-08-06 08:55:27,331 [INFO] [5] - TimerIntervalUpdateArrival interval = 3600 sec = 60 min = 1 hours
+2014-08-06 08:55:27,331 [INFO] [5] - TimerIntervalUpdateReferral interval = 2400 sec = 40 min = 0,666666666666667 hours
+2014-08-06 08:55:27,332 [INFO] [5] - TimerIntervalUpdateCall interval = 1200 sec = 20 min = 0,333333333333333 hours
+2014-08-06 08:55:27,332 [INFO] [5] - TimerIntervalCleanBuffers interval = 7200 sec = 120 min = 2 hours
+2014-08-06 08:55:27,332 [INFO] [5] - TimerRestoreConnect interval = 10 sec = 0,166666666666667 min = 0,00277777777777778 hours
+2014-08-06 08:55:27,332 [INFO] [5] - TimerUpdateLpuNames interval = 86400 sec = 1440 min = 24 hours
+2014-08-06 08:55:27,333 [INFO] [5] - Проверка коннекта.
+2014-08-06 08:55:27,785 [INFO] [5] - CheckConnectDataBase - ok
+2014-08-06 08:55:44,604 [ERROR] [5] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-08-06 08:55:44,786 [INFO] [5] - Коннекта пока нет. Попробуем позже через 10 сек...
+2014-08-06 08:55:54,786 [INFO] [8] - Проверка коннекта.
+2014-08-06 08:55:54,787 [INFO] [8] - CheckConnectDataBase - ok
+2014-08-06 08:55:55,228 [ERROR] [8] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-08-06 08:55:55,262 [INFO] [8] - Коннекта пока нет. Попробуем позже через 10 сек...
+2014-08-06 08:56:05,262 [INFO] [8] - Проверка коннекта.
+2014-08-06 08:56:05,267 [INFO] [8] - CheckConnectDataBase - ok
+2014-08-06 08:56:05,660 [ERROR] [8] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-08-06 08:56:05,693 [INFO] [8] - Коннекта пока нет. Попробуем позже через 10 сек...
+2014-08-06 08:56:15,699 [INFO] [8] - Проверка коннекта.
+2014-08-06 08:56:15,703 [INFO] [8] - CheckConnectDataBase - ok
+2014-08-06 08:56:16,097 [ERROR] [8] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-08-06 08:56:16,110 [INFO] [8] - Коннекта пока нет. Попробуем позже через 10 сек...
+2014-08-06 08:56:26,110 [INFO] [8] - Проверка коннекта.
+2014-08-06 08:56:26,117 [INFO] [8] - CheckConnectDataBase - ok
+2014-08-06 08:56:26,515 [ERROR] [8] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-08-06 08:56:26,539 [INFO] [8] - Коннекта пока нет. Попробуем позже через 10 сек...
+2014-08-06 08:56:36,541 [INFO] [9] - Проверка коннекта.
+2014-08-06 08:56:36,542 [INFO] [9] - CheckConnectDataBase - ok
+2014-08-06 08:56:37,628 [INFO] [8] - SERVICE STOP
+2014-08-06 08:56:37,628 [INFO] [8] - workedThread aborted

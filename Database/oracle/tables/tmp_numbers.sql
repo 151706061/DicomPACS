@@ -1,0 +1,42 @@
+ALTER TABLE ASU.TMP_NUMBERS
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TMP_NUMBERS CASCADE CONSTRAINTS
+/
+
+--
+-- TMP_NUMBERS  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.TMP_NUMBERS
+(
+  FN_VALUE  NUMBER                              NOT NULL
+)
+ON COMMIT DELETE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.TMP_NUMBERS IS 'by TimurLan для передачи массивов интегеров ораклу из дельфи. значения уникальны'
+/
+
+
+--
+-- TMP_NUMBERS_VAL  (Index) 
+--
+--  Dependencies: 
+--   TMP_NUMBERS (Table)
+--
+CREATE UNIQUE INDEX ASU.TMP_NUMBERS_VAL ON ASU.TMP_NUMBERS
+(FN_VALUE)
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TMP_NUMBERS 
+-- 
+ALTER TABLE ASU.TMP_NUMBERS ADD (
+  CONSTRAINT TMP_NUMBERS_VAL
+ PRIMARY KEY
+ (FN_VALUE))
+/
+

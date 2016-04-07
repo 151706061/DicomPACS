@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TPAC_GROUP_SET_BEFORE_INSERT
+/
+
+--
+-- TPAC_GROUP_SET_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TPAC_GROUP_SET (Sequence)
+--   TPAC_GROUP_SET (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPAC_GROUP_SET_BEFORE_INSERT" 
+BEFORE INSERT 
+ON tpac_group_set
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+begin
+  select SEQ_TPAC_GROUP_SET.NEXTVAL into :NEW.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_BEZ_PEREMEN
+/
+
+--
+-- GET_BEZ_PEREMEN  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_BEZ_PEREMEN" 
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =-
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 872796;
+END;
+/
+
+SHOW ERRORS;
+
+

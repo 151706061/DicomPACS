@@ -1,0 +1,174 @@
+ALTER TABLE ASU.TBILL
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TBILL CASCADE CONSTRAINTS
+/
+
+--
+-- TBILL  (Table) 
+--
+CREATE TABLE ASU.TBILL
+(
+  FK_ID          NUMBER                         NOT NULL,
+  FK_APPENDIX    NUMBER,
+  FK_SOTRCREATE  NUMBER,
+  FK_SOTRPAY     NUMBER,
+  FD_CREATE      DATE,
+  FD_PAY         DATE,
+  FP_PAY         NUMBER,
+  FC_NUM         VARCHAR2(10 BYTE),
+  FD_ASSUMEPAY   DATE,
+  FD_ANNUL       DATE,
+  FK_SOTRANNUL   NUMBER,
+  FC_PKO         VARCHAR2(5 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TBILL IS 'Таблица счетов в кассу. A.Nakorjakov 080508'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FK_ID IS 'SEQUENCE=[SEQ_TBILL]'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FK_APPENDIX IS 'TAPPENDIX.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FK_SOTRCREATE IS 'Сотрудник создавший счет'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FK_SOTRPAY IS 'Сотрудник, принявший оплату'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FD_CREATE IS 'Дата создания счета'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FD_PAY IS 'Дата оплаты по счету'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FP_PAY IS '0- не оплачен;1- оплачен'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FC_NUM IS 'Номер счета'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FD_ASSUMEPAY IS 'Предполагаемая дата по счету'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FD_ANNUL IS 'Дата аннулирования'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FK_SOTRANNUL IS 'TSOTR.FK_ID Кто анулировал'
+/
+
+COMMENT ON COLUMN ASU.TBILL.FC_PKO IS 'Код (номер) приходного ордера'
+/
+
+
+--
+-- PK_BILL  (Index) 
+--
+--  Dependencies: 
+--   TBILL (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_BILL ON ASU.TBILL
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TBILL_BY_FK_APPENDIX  (Index) 
+--
+--  Dependencies: 
+--   TBILL (Table)
+--
+CREATE INDEX ASU.TBILL_BY_FK_APPENDIX ON ASU.TBILL
+(FK_APPENDIX)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TBILL_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TBILL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TBILL_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TBILL  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TBILL.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TBILL 
+-- 
+ALTER TABLE ASU.TBILL ADD (
+  CONSTRAINT PK_BILL
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

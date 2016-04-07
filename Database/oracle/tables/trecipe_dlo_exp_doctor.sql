@@ -1,0 +1,229 @@
+ALTER TABLE ASU.TRECIPE_DLO_EXP_DOCTOR
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_EXP_DOCTOR CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_EXP_DOCTOR  (Table) 
+--
+CREATE TABLE ASU.TRECIPE_DLO_EXP_DOCTOR
+(
+  PCOD        VARCHAR2(22 BYTE),
+  FAM_V       VARCHAR2(30 BYTE),
+  IM_V        VARCHAR2(20 BYTE),
+  OT_V        VARCHAR2(20 BYTE),
+  D_JOB       VARCHAR2(50 BYTE),
+  DATE_B      DATE,
+  DATE_E      DATE,
+  FD_UPDATE   DATE,
+  C_OGRN      VARCHAR2(15 BYTE),
+  MSG_TEXT    VARCHAR2(100 BYTE),
+  FK_SOTR_ID  NUMBER,
+  TF_OKATO    VARCHAR2(11 BYTE),
+  PRVD        NUMBER,
+  D_PRIK      DATE,
+  D_SER       DATE,
+  PRVS        VARCHAR2(9 BYTE),
+  KV_KAT      NUMBER                            DEFAULT 0,
+  TAB_N       VARCHAR2(15 BYTE),
+  TEL         VARCHAR2(30 BYTE),
+  SS          VARCHAR2(15 BYTE),
+  MCOD        VARCHAR2(7 BYTE),
+  FK_ID       NUMBER                            NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_EXP_DOCTOR IS 'Таблица для хранения сведений о врачах, имеющих право выписывать рецепты. Используется в asu.trecipe_dlo_exp.pcod. Author:Voronov'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.PCOD IS 'Идентификационный код врача'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.FAM_V IS 'Фамилия'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.IM_V IS 'Имя'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.OT_V IS 'Отчество'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.D_JOB IS 'Должность'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.DATE_B IS 'Дата начала разрешения'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.DATE_E IS 'Дата конца разрешения'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.FD_UPDATE IS 'дата обновления записи'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.C_OGRN IS 'код ЛПУ, где числится врач'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.MSG_TEXT IS 'комментарий'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.FK_SOTR_ID IS 'связка с сотрудником МИС ПАЦИЕНТ (login.tsotr.fk_id)'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.TF_OKATO IS 'код по ОКАТО'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.PRVD IS 'код должности'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.D_PRIK IS 'дата приказа'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.KV_KAT IS 'категория врача: 0 - без категории, 1,2 - 1,2 категории, 3 - высшая категория'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.TAB_N IS 'дополнительная должность'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.TEL IS 'телефон'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.SS IS 'СНИЛС'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.MCOD IS 'код принадлежности к больнице'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_DOCTOR.FK_ID IS 'внутренний ИД'
+/
+
+
+--
+-- TRECIPE_DLO_EXP_DOCTOR_PCOD  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_DOCTOR (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_EXP_DOCTOR_PCOD ON ASU.TRECIPE_DLO_EXP_DOCTOR
+(PCOD)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_EXP_DOCTOR_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_DOCTOR (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_EXP_DOCTOR_PK ON ASU.TRECIPE_DLO_EXP_DOCTOR
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_EXP_DOCTOR_INS_TRG  (Trigger) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_DOCTOR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TRECIPE_DLO_EXP_DOCTOR_INS_TRG
+ BEFORE
+  INSERT
+ ON ASU.TRECIPE_DLO_EXP_DOCTOR REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  if (:new.fk_id is null) then
+    select ASU.SEQ_TRECIPE_DLO_EXP_DOCTOR.nextval into :new.fk_id from dual;
+  end if;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TRECIPE_DLO_EXP_UPD  (Trigger) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_DOCTOR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECIPE_DLO_EXP_UPD" 
+ BEFORE
+  INSERT OR UPDATE
+ ON asu.trecipe_dlo_exp_doctor
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  :NEW.FD_UPDATE := sysdate;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_EXP_DOCTOR 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_EXP_DOCTOR ADD (
+  CONSTRAINT TRECIPE_DLO_EXP_DOCTOR_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

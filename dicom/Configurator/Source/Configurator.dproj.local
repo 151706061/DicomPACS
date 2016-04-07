@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013.11.20 11:47:29.689.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\fTAGSEdt.pas</Transaction>
+    <Transaction>2013.11.20 11:47:29.689.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\fTAGSEdt.dfm</Transaction>
+    <Transaction>2014.03.18 13:55:17.823.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\UnfrmEdtPatient.pas</Transaction>
+    <Transaction>2014.03.18 13:55:17.823.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\UnfrmEdtPatient.dfm</Transaction>
+    <Transaction>2014.11.19 13:24:59.718.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\UnEdtWLForm.pas</Transaction>
+    <Transaction>2014.11.19 13:24:59.718.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\UnEdtWLForm.dfm</Transaction>
+    <Transaction>2014.12.01 08:47:48.987.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\uCommon_Dicom\UnAbout.pas</Transaction>
+    <Transaction>2014.12.01 08:47:48.987.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\uCommon_Dicom\UnAbout.dfm</Transaction>
+    <Transaction>2014.12.01 09:43:18.293.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Configurator\Source\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\uCommon_Dicom\rpVersionInfo.pas</Transaction>
+    <Transaction>2014.12.01 10:09:37.140.pas,C:\Delphi\Trunk_AUTH\ASU2\uCommon_Dicom\rpVersionInfo.pas=</Transaction>
+  </Transactions>
+</BorlandProject>

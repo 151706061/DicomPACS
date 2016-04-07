@@ -1,0 +1,20 @@
+DROP FUNCTION ASU.GET_PREDDIAG
+/
+
+--
+-- GET_PREDDIAG  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PREDDIAG"
+  RETURN NUMBER 
+  IS 
+BEGIN
+  Return 261304;
+END;
+/
+
+SHOW ERRORS;
+
+

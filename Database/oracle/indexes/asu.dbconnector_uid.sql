@@ -1,0 +1,25 @@
+DROP INDEX ASU.DBCONNECTOR_UID
+/
+
+--
+-- DBCONNECTOR_UID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.DBCONNECTOR_UID ON ASU."DbConnector"
+("UID")
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

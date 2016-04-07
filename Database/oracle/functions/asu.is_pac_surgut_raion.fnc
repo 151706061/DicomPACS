@@ -1,0 +1,22 @@
+DROP FUNCTION ASU.IS_PAC_SURGUT_RAION
+/
+
+--
+-- IS_PAC_SURGUT_RAION  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   PKG_REGIST_PACFUNC (Package)
+--   IS_PEPL_SURGUT_RAION (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."IS_PAC_SURGUT_RAION" (pPaclID NUMBER) RETURN NUMBER IS
+  -- Created by Ищуков С.С. 01,09,2015
+BEGIN
+  RETURN ASU.IS_PEPL_SURGUT_RAION(asu.pkg_regist_pacfunc.GET_PEPL_ID(pPaclID));
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,50 @@
+DROP PROCEDURE ASU.DO_INSERT_FORRPLANPLAN
+/
+
+--
+-- DO_INSERT_FORRPLANPLAN  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TPEOPLES (Table)
+--   DO_ADD_PLANS (Procedure)
+--   GET_PACSUBVID (Function)
+--   DO_WRITE_PERESEL (Procedure)
+--   TKARTA (Table)
+--
+CREATE OR REPLACE PROCEDURE ASU."DO_INSERT_FORRPLANPLAN" 
+  (pCOUNT IN NUMBER, pFK_KOD IN NUMBER, pFK_KOD2 IN NUMBER, pFD_DATE IN DATE, pFK_PUTTYPE IN NUMBER, pFN_KDN IN NUMBER)
+ IS
+  dDate1 DATE;
+  dDate2 DATE;
+  nFK_PACID NUMBER;
+  nFK_PEPLID NUMBER;
+  strFam VARCHAR(30);
+  nCount NUMBER;
+BEGIN
+  nCount:=pCount;
+  dDate1:=TRUNC(pFD_DATE,'MI');
+  dDate2:=dDate1+pFN_KDN-1/(24*60);
+  strFam:=UPPER(SUBSTR(GET_PACSUBVID(pFK_KOD2,pFK_KOD),1,30));
+  WHILE nCount > 0 LOOP
+    INSERT INTO TKARTA (FK_IBID,FC_FAM,FK_KOD2,FK_KOD,FP_TEK_COC,FK_PUTTYPE,FL_PLANNED)
+                values (0,strFam,pFK_KOD2,pFK_KOD,1,pFK_PUTTYPE,1)
+      RETURNING FK_ID INTO nFK_PACID;
+    INSERT INTO TPEOPLES (FC_FAM)
+                values (strFam)
+      RETURNING FK_ID INTO nFK_PEPLID;
+    UPDATE TKarta SET FK_PEPLID = nFK_PEPLID,
+                      FL_DOR = 0
+                WHERE FK_ID = nFK_PACID;
+    DO_ADD_PLANS(nFK_PACID,dDate1,dDate2,dDate2,pFN_KDN,0,0);
+    DO_WRITE_PERESEL(-1,nFK_PACID,dDate1,dDate2,-1,0);
+    COMMIT;
+    nCount:=nCount-1;
+  END LOOP;
+END DO_INSERT_FORrPlanPlan;
+/
+
+SHOW ERRORS;
+
+

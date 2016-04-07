@@ -1,0 +1,92 @@
+ALTER TABLE ASU.TNEXTYAVKA
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TNEXTYAVKA CASCADE CONSTRAINTS
+/
+
+--
+-- TNEXTYAVKA  (Table) 
+--
+CREATE TABLE ASU.TNEXTYAVKA
+(
+  FK_PACID  NUMBER                              NOT NULL,
+  FK_SMID   NUMBER                              NOT NULL,
+  FD_DATE   DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TNEXTYAVKA.FK_PACID IS 'Пацик'
+/
+
+COMMENT ON COLUMN ASU.TNEXTYAVKA.FK_SMID IS 'Вид назначения'
+/
+
+COMMENT ON COLUMN ASU.TNEXTYAVKA.FD_DATE IS 'дата'
+/
+
+
+--
+-- PK_FK_PACID_FK_SMID  (Index) 
+--
+--  Dependencies: 
+--   TNEXTYAVKA (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_FK_PACID_FK_SMID ON ASU.TNEXTYAVKA
+(FK_PACID, FK_SMID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TNEXTYAVKA 
+-- 
+ALTER TABLE ASU.TNEXTYAVKA ADD (
+  CONSTRAINT PK_FK_PACID_FK_SMID
+ PRIMARY KEY
+ (FK_PACID, FK_SMID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

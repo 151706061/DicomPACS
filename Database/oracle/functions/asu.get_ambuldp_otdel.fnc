@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_AMBULDP_OTDEL
+/
+
+--
+-- GET_AMBULDP_OTDEL  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_AMBULDP_OTDEL" 
+      RETURN NUMBER DETERMINISTIC
+      IS -- Created by -= aAdmin.exe =-
+         -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+   BEGIN
+     Return 954;
+   END;
+/
+
+SHOW ERRORS;
+
+

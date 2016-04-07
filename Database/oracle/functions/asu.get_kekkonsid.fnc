@@ -1,0 +1,36 @@
+DROP FUNCTION ASU.GET_KEKKONSID
+/
+
+--
+-- GET_KEKKONSID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_KEKKONSID" 
+return number
+is
+begin
+  return 33550;
+end;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM STAT.GET_KEKKONSID
+/
+
+--
+-- GET_KEKKONSID  (Synonym) 
+--
+--  Dependencies: 
+--   GET_KEKKONSID (Function)
+--
+CREATE SYNONYM STAT.GET_KEKKONSID FOR ASU.GET_KEKKONSID
+/
+
+
+GRANT EXECUTE ON ASU.GET_KEKKONSID TO PUBLIC
+/
+

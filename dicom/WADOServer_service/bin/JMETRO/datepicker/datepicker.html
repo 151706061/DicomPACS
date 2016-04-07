@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Документ без названия</title>
+
+<script type="text/javascript" src="js/jquery/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery/jquery-migrate-1.1.0.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="css/datepicker.css" /> 
+<script src="js/bootstrap-datepicker.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+		
+        <div class="well">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Check in: <input type="text" id="dpd1" value="" class="span2"></th>
+            <th>Check out: <input type="text" id="dpd2" value="" class="span2"></th>
+          </tr>
+        </thead>
+      </table>
+          </div>
+        
+<script type="text/javascript">     
+    var nowTemp = new Date();
+    var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+     
+    var checkin = $('#dpd1').datepicker({
+    onRender: function(date) {
+    return date.valueOf() < now.valueOf() ? 'disabled' : '';
+    }
+    }).on('changeDate', function(ev) {
+    if (ev.date.valueOf() > checkout.date.valueOf()) {
+    var newDate = new Date(ev.date)
+    newDate.setDate(newDate.getDate() + 1);
+    checkout.setValue(newDate);
+    }
+    checkin.hide();
+    $('#dpd2')[0].focus();
+    }).data('datepicker');
+    var checkout = $('#dpd2').datepicker({
+    onRender: function(date) {
+    return date.valueOf() <= checkin.date.valueOf() ? 'disabled' : '';
+    }
+    }).on('changeDate', function(ev) {
+    checkout.hide();
+    }).data('datepicker');
+</script>        
+
+</body>
+</html>

@@ -1,0 +1,25 @@
+DROP INDEX ASU.TNAZSOS_FC_NAME
+/
+
+--
+-- TNAZSOS_FC_NAME  (Index) 
+--
+CREATE INDEX ASU.TNAZSOS_FC_NAME ON ASU.TNAZSOS
+(FC_NAME)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

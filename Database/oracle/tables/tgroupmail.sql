@@ -1,0 +1,98 @@
+DROP TABLE ASU.TGROUPMAIL CASCADE CONSTRAINTS
+/
+
+--
+-- TGROUPMAIL  (Table) 
+--
+CREATE TABLE ASU.TGROUPMAIL
+(
+  FK_ID       NUMBER                            NOT NULL,
+  FC_MAIL     VARCHAR2(4000 BYTE),
+  FK_GROUPID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TGROUPMAIL IS 'Таблица соответствии адресов рассылок по ЗП и групп отбора пипла by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TGROUPMAIL.FK_ID IS 'SEQUENCE=[SEQ_TGROUP]'
+/
+
+COMMENT ON COLUMN ASU.TGROUPMAIL.FC_MAIL IS 'E-Mail'
+/
+
+COMMENT ON COLUMN ASU.TGROUPMAIL.FK_GROUPID IS 'TGROUP.FK_ID'
+/
+
+
+--
+-- TGROUPMAIL_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TGROUPMAIL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TGROUPMAIL_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TGROUPMAIL  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  nTemp NUMBER;
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TGROUPMAIL', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TGROUPMAIL', 'FC_MAIL', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fc_mail), :new.fk_id);
+    PKG_LOG.Do_log('TGROUPMAIL', 'FK_GROUPID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_groupid), :new.fk_id);
+  elsif DELETING then
+    PKG_LOG.Do_log('TGROUPMAIL', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_id), null, :old.fk_id);
+    PKG_LOG.Do_log('TGROUPMAIL', 'FC_MAIL', 'DELETE', PKG_LOG.GET_VALUE(:old.FC_MAIL), null, :old.fk_id);
+    PKG_LOG.Do_log('TGROUPMAIL', 'FK_GROUPID', 'DELETE', PKG_LOG.GET_VALUE(:old.FK_GROUPID), null, :old.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TGROUPMAIL', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FC_MAIL') AND PKG_LOG.GET_VALUE(:old.FC_MAIL) <> PKG_LOG.GET_VALUE(:new.FC_MAIL) then
+      PKG_LOG.Do_log('TGROUPMAIL', 'FC_MAIL', 'UPDATE', PKG_LOG.GET_VALUE(:old.FC_MAIL), PKG_LOG.GET_VALUE(:new.FC_MAIL), :old.fk_id);
+    end if;
+    if UPDATING ('FK_GROUPID') AND PKG_LOG.GET_VALUE(:old.FK_GROUPID) <> PKG_LOG.GET_VALUE(:new.FK_GROUPID) then
+      PKG_LOG.Do_log('TGROUPMAIL', 'FC_NAME', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_GROUPID), PKG_LOG.GET_VALUE(:new.FK_GROUPID), :old.fk_id);
+    end if;
+  end if;
+  null;
+END TGROUPMAIL_LOG;
+/
+SHOW ERRORS;
+
+
+--
+-- TGROUPMAIL_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TGROUPMAIL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TGROUPMAIL_BEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TGROUPMAIL   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TGROUP.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

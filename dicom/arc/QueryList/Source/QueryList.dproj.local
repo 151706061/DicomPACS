@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012.12.22 10:39:59.644.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\fHeader.pas=</Transaction>
+    <Transaction>2012.12.22 10:39:59.644.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\fHeader.dfm=</Transaction>
+    <Transaction>2014.11.27 11:52:37.392.pas,C:\Delphi\Trunk_AUTH\DicomVCL\dcm_utils.pas=</Transaction>
+    <Transaction>2014.12.03 11:33:49.646.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\UnOptions.pas</Transaction>
+    <Transaction>2014.12.03 11:33:49.646.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\UnOptions.dfm</Transaction>
+    <Transaction>2015.04.27 11:44:06.327.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Client\Source\fProgressCD.pas=C:\Delphi\Trunk_AUTH\ASU2\uCommon_Dicom\fProgressCD.pas</Transaction>
+    <Transaction>2015.04.27 11:44:06.327.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Client\Source\fProgressCD.dfm=C:\Delphi\Trunk_AUTH\ASU2\uCommon_Dicom\fProgressCD.dfm</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{9dfc7c04-f89f-4fc9-8dcb-3bf2c4605a0e}</ProjectGuid>
+    <MainSource>TrebEDS.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>d:\Temp\stAsu_NewCheck\TrebEDS.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_UnitSearchPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ObjPath>
+    <DCC_IncludePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_IncludePath>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_ExeOutput>d:\Temp\stAsu_NewCheck</DCC_ExeOutput>
+    <DCC_UnitSearchPath>..\..\..\uCommon_Tima;..\..\..\uCommon_Utils\;..\..\..\..\DigitalSignature\TestSignBlob\SOURCE\</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\..\uCommon_Tima;..\..\..\uCommon_Utils\;..\..\..\..\DigitalSignature\TestSignBlob\SOURCE\</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\..\uCommon_Tima;..\..\..\uCommon_Utils\;..\..\..\..\DigitalSignature\TestSignBlob\SOURCE\</DCC_ObjPath>
+    <DCC_IncludePath>..\..\..\uCommon_Tima;..\..\..\uCommon_Utils\;..\..\..\..\DigitalSignature\TestSignBlob\SOURCE\</DCC_IncludePath>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="RunParams">152327</Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">2</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">4</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">2.0.0.4</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">TrebEDS.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="TrebEDS.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\Collections\uKeysInfoList.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\DigKey\uDigitalSignature.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\DigKey\ufrmDigKey.pas">
+      <Form>frmDigKey</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\uCryptMng.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\XMLKeysInfo\uCertificateKey.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\XMLKeysInfo\uEmployeeInfo.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\XMLKeysInfo\uEmployeeKeysInfo.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\XMLKeysInfo\uKeyInfo.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\XMLKeysInfo\uKeysInfoConst.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\XMLKeysInfo\uPrivateKeyInfo.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\XMLKeysInfo\uPublicKeyInfo.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\XMLKeysInfo\uUserKeyInfo.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\Collections\uKeysInfoList.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\DigKey\uDigitalSignature.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\DigKey\ufrmDigKey.pas">
+      <Form>frmDigKey</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\DigitalSignature\parts\uCryptMng.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\XMLKeysInfo\uCertificateKey.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\XMLKeysInfo\uEmployeeInfo.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\XMLKeysInfo\uEmployeeKeysInfo.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\XMLKeysInfo\uKeyInfo.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\XMLKeysInfo\uKeysInfoConst.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\XMLKeysInfo\uPrivateKeyInfo.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\XMLKeysInfo\uPublicKeyInfo.pas" />
+    <DCCReference Include="..\..\..\DigitalSignature\parts\XMLKeysInfo\uUserKeyInfo.pas" />
+    <DCCReference Include="..\DigitalSignature\parts\Collections\uKeysInfoList.pas" />
+    <DCCReference Include="fMain.pas">
+      <Form>frmGetPeriod</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>

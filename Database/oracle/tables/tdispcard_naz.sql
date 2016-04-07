@@ -1,0 +1,36 @@
+DROP TABLE ASU.TDISPCARD_NAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TDISPCARD_NAZ  (Table) 
+--
+CREATE TABLE ASU.TDISPCARD_NAZ
+(
+  FK_NAZID       NUMBER,
+  FK_DISPKARDID  NUMBER,
+  FD_NAZ         DATE                           DEFAULT SYSDATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TDISPCARD_NAZ.FD_NAZ IS 'Дата назначения'
+/
+
+

@@ -1,0 +1,3 @@
+Сервис прослушки порта и сохранения SMDR 
+Created By Prihodko N.
+Date: 10.07.2012

@@ -1,0 +1,1 @@
+wlserver.exe /install

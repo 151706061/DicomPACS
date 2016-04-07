@@ -1,0 +1,124 @@
+ALTER TABLE ASU.TMSG_SHEDULE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TMSG_SHEDULE CASCADE CONSTRAINTS
+/
+
+--
+-- TMSG_SHEDULE  (Table) 
+--
+CREATE TABLE ASU.TMSG_SHEDULE
+(
+  FK_ID             NUMBER                      NOT NULL,
+  FK_UNDER_CONTROL  NUMBER,
+  FN_DONE_HOURS     NUMBER,
+  FN_READ_HOURS     NUMBER,
+  FD_START          DATE,
+  FK_CONTROLER      NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TMSG_SHEDULE IS 'Список контролируемых сотрудников сопровождения 20070522 by Linnikov'
+/
+
+COMMENT ON COLUMN ASU.TMSG_SHEDULE.FK_ID IS 'SEQUENCE=[SEQ_TMSG_SHEDULE]'
+/
+
+COMMENT ON COLUMN ASU.TMSG_SHEDULE.FK_UNDER_CONTROL IS 'Подконтрольный сотрудник (TSOTR.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TMSG_SHEDULE.FN_DONE_HOURS IS 'Количество часов до завершения'
+/
+
+COMMENT ON COLUMN ASU.TMSG_SHEDULE.FN_READ_HOURS IS 'Количество часов до ответа'
+/
+
+COMMENT ON COLUMN ASU.TMSG_SHEDULE.FD_START IS 'Дата (время) начала мониторинга'
+/
+
+COMMENT ON COLUMN ASU.TMSG_SHEDULE.FK_CONTROLER IS 'Контролирующий сотрудник (TSOTR.FK_ID)'
+/
+
+
+--
+-- TMSG_SHEDULE_PK  (Index) 
+--
+--  Dependencies: 
+--   TMSG_SHEDULE (Table)
+--
+CREATE UNIQUE INDEX ASU.TMSG_SHEDULE_PK ON ASU.TMSG_SHEDULE
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TMSG_SHEDULE_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TMSG_SHEDULE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TMSG_SHEDULE_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TMSG_SHEDULE REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+BEGIN
+  SELECT SEQ_TMSG_SHEDULE.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TMSG_SHEDULE 
+-- 
+ALTER TABLE ASU.TMSG_SHEDULE ADD (
+  CONSTRAINT TMSG_SHEDULE_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

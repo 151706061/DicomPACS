@@ -1,0 +1,27 @@
+1. уберем из webconfig
+
+<!--Настройки для WorkList сервера -->
+    <add key="worklist_chk" value="1" />
+    <add key="worklist_database" value="test" />
+    <add key="worklist_port" value="5432" />
+    <add key="worklist_server" value="localhost" />
+    <add key="worklist_user" value="postgres" />
+    <add key="worklist_password" value="postgres" />
+    <add key="worklist_schema" value="mypacs" />
+
+2. worklistconnection из domain infrastructure  sql
+
+3. убрать thread
+
+из C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Core\Infrastructure\Concrete\MainWorkList.cs
+
+
+4. убрать
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Domain\Infrastructure\SQL\SQLWorkList.cs
+
+5. добавим триггер на таблицу tnaz
+после добавления
+если не пустой accessionnumber то  
+
+

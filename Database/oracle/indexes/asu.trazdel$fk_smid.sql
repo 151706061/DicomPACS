@@ -1,0 +1,25 @@
+DROP INDEX ASU.TRAZDEL$FK_SMID
+/
+
+--
+-- TRAZDEL$FK_SMID  (Index) 
+--
+CREATE INDEX ASU.TRAZDEL$FK_SMID ON ASU.TRAZDEL
+(FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

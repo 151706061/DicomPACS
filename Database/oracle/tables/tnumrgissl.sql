@@ -1,0 +1,123 @@
+DROP TABLE ASU.TNUMRGISSL CASCADE CONSTRAINTS
+/
+
+--
+-- TNUMRGISSL  (Table) 
+--
+CREATE TABLE ASU.TNUMRGISSL
+(
+  FK_ID     NUMBER                              NOT NULL,
+  FN_NUM    NUMBER(15),
+  FD_DATE   DATE,
+  FK_NAZID  NUMBER(15),
+  FP_TYPE   NUMBER(1)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNUMRGISSL IS 'Таблица порядковых номеров исследований на дату 
+created by X-Side'
+/
+
+COMMENT ON COLUMN ASU.TNUMRGISSL.FK_ID IS 'Уникальный ID'
+/
+
+COMMENT ON COLUMN ASU.TNUMRGISSL.FN_NUM IS 'Номер rg-исследования'
+/
+
+COMMENT ON COLUMN ASU.TNUMRGISSL.FD_DATE IS 'Дата исследования'
+/
+
+COMMENT ON COLUMN ASU.TNUMRGISSL.FK_NAZID IS 'TNAZIS.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TNUMRGISSL.FP_TYPE IS '1-флюро, 2 - пока остальные исследования'
+/
+
+
+--
+-- TNUMRGISSL_DATE  (Index) 
+--
+--  Dependencies: 
+--   TNUMRGISSL (Table)
+--
+CREATE INDEX ASU.TNUMRGISSL_DATE ON ASU.TNUMRGISSL
+(FD_DATE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNUMRGISSL_ID  (Index) 
+--
+--  Dependencies: 
+--   TNUMRGISSL (Table)
+--
+CREATE UNIQUE INDEX ASU.TNUMRGISSL_ID ON ASU.TNUMRGISSL
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNUMRGISSL_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TNUMRGISSL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNUMRGISSL_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.tnumrgissl
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TNUMRGISSL.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+

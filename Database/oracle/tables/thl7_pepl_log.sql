@@ -1,0 +1,116 @@
+ALTER TABLE ASU.THL7_PEPL_LOG
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.THL7_PEPL_LOG CASCADE CONSTRAINTS
+/
+
+--
+-- THL7_PEPL_LOG  (Table) 
+--
+CREATE TABLE ASU.THL7_PEPL_LOG
+(
+  FK_ID        NUMBER                           NOT NULL,
+  FK_PEOPLEID  NUMBER,
+  FD_DATE      DATE,
+  FC_SYSTEMID  VARCHAR2(32 BYTE),
+  FP_INOUT     NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.THL7_PEPL_LOG IS 'Лог приема\передачи данных TPEOPLES в формате HL7'
+/
+
+COMMENT ON COLUMN ASU.THL7_PEPL_LOG.FK_PEOPLEID IS 'TPEOPLES.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.THL7_PEPL_LOG.FD_DATE IS 'Дата обмена'
+/
+
+COMMENT ON COLUMN ASU.THL7_PEPL_LOG.FC_SYSTEMID IS 'Система - участник обмена'
+/
+
+COMMENT ON COLUMN ASU.THL7_PEPL_LOG.FP_INOUT IS '0 - передача (от нас), 1 - прием (к нам)'
+/
+
+
+--
+-- THL7_PEPL_LOG_PK  (Index) 
+--
+--  Dependencies: 
+--   THL7_PEPL_LOG (Table)
+--
+CREATE UNIQUE INDEX ASU.THL7_PEPL_LOG_PK ON ASU.THL7_PEPL_LOG
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- THL7_PEPL_LOG_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   THL7_PEPL_LOG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."THL7_PEPL_LOG_BEFORE_INSERT" 
+ BEFORE INSERT ON ASU.THL7_PEPL_LOG  REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+ SELECT SEQ_THL7_PEPL_LOG.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table THL7_PEPL_LOG 
+-- 
+ALTER TABLE ASU.THL7_PEPL_LOG ADD (
+  CONSTRAINT THL7_PEPL_LOG_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

@@ -1,0 +1,131 @@
+ALTER TABLE ASU.TPAC_APPEARANCE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TPAC_APPEARANCE CASCADE CONSTRAINTS
+/
+
+--
+-- TPAC_APPEARANCE  (Table) 
+--
+CREATE TABLE ASU.TPAC_APPEARANCE
+(
+  FK_ID      NUMBER                             NOT NULL,
+  FK_NAZID   NUMBER,
+  FD_DATE    DATE,
+  FK_SOTRID  NUMBER,
+  FK_STATE   NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPAC_APPEARANCE IS 'Записи о явке пациентов на прием'
+/
+
+COMMENT ON COLUMN ASU.TPAC_APPEARANCE.FK_NAZID IS 'vnaz.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TPAC_APPEARANCE.FD_DATE IS 'дата записи'
+/
+
+COMMENT ON COLUMN ASU.TPAC_APPEARANCE.FK_SOTRID IS 'сотрудник записавший состояние'
+/
+
+COMMENT ON COLUMN ASU.TPAC_APPEARANCE.FK_STATE IS 'состояние назначения'
+/
+
+
+--
+-- TPAC_APPEARANCE_BY_ID_STATE  (Index) 
+--
+--  Dependencies: 
+--   TPAC_APPEARANCE (Table)
+--
+CREATE INDEX ASU.TPAC_APPEARANCE_BY_ID_STATE ON ASU.TPAC_APPEARANCE
+(FK_ID, FK_STATE)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPAC_APPEARANCE_BY_NAZID_STATE  (Index) 
+--
+--  Dependencies: 
+--   TPAC_APPEARANCE (Table)
+--
+CREATE INDEX ASU.TPAC_APPEARANCE_BY_NAZID_STATE ON ASU.TPAC_APPEARANCE
+(FK_NAZID, FK_STATE)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPAC_APPEARANCE_BEFORE_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TPAC_APPEARANCE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPAC_APPEARANCE_BEFORE_INS" 
+ BEFORE
+  INSERT
+ ON tpac_appearance
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  select seq_tpac_appearance.NEXTVAL into :new.fk_id  from dual;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TPAC_APPEARANCE 
+-- 
+ALTER TABLE ASU.TPAC_APPEARANCE ADD (
+  PRIMARY KEY
+ (FK_ID))
+/
+

@@ -1,0 +1,67 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{9b0ecef6-e7b6-473c-9562-09d8e73cf3be}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>ECGViewer.exe</DCC_DependencyCheckOutputName>
+    <MainSource>ECGViewer.dpr</MainSource>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfs11.bpl">FastScript 1.9 Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfrx11.bpl">FastReport 4.0 Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfrxcs11.bpl">FastReport 4.0 Client/Server Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfsDB11.bpl">FastScript 1.9 DB Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfrxDB11.bpl">FastReport 4.0 DB Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfsbde11.bpl">FastScript 1.9 BDE Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfrxbde11.bpl">FastReport 4.0 BDE Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfsado11.bpl">FastScript 1.9 ADO Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfrxado11.bpl">FastReport 4.0 ADO Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfsibx11.bpl">FastScript 1.9 IBX Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfrxibx11.bpl">FastReport 4.0 IBX Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfrxe11.bpl">FastReport 4.0 Exports</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfstee11.bpl">FastScript 1.9 Tee Components</Excluded_Packages>
+      <Excluded_Packages Name="c:\Program Files (x86)\CodeGear\Fastreport_4_12\LibD11\dclfrxtee11.bpl">FastReport 4.0 Tee Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\bcboffice2k100.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\bcbofficexp100.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+    </Excluded_Packages><Source><Source Name="MainSource">ECGViewer.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="ECGViewer.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\..\..\DicomVCL\DCM_Attributes.pas" />
+    <DCCReference Include="..\..\..\DicomVCL\DCM_Def.pas" />
+    <DCCReference Include="..\..\..\DicomVCL\DCM_Dict.pas" />
+    <DCCReference Include="..\..\..\DicomVCL\DCM_ImageData_Bitmap.pas" />
+    <DCCReference Include="..\..\..\DicomVCL\DCM_ImageData_Bitmap32.pas" />
+    <DCCReference Include="..\..\..\DicomVCL\DCM_UID.pas" />
+    <DCCReference Include="..\..\..\DicomVCL\Dcm_View.pas" />
+    <DCCReference Include="..\..\..\DicomVCL\DicomVFWView.pas" />
+    <DCCReference Include="..\..\..\DicomVCL\DICOM_charset.pas" />
+    <DCCReference Include="..\..\uCommon_Dicom\fHeader.pas">
+      <Form>frmHeader</Form>
+    </DCCReference>
+    <DCCReference Include="UnECGMain.pas">
+      <Form>frmECGMain</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>

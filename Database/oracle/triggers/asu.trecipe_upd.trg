@@ -1,0 +1,23 @@
+DROP TRIGGER ASU.TRECIPE_UPD
+/
+
+--
+-- TRECIPE_UPD  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TRECIPE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECIPE_UPD" 
+ BEFORE
+  UPDATE
+ ON asu.trecipe
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  :NEW.FD_DATE := trunc(:NEW.FD_DATE);
+end;
+/
+SHOW ERRORS;
+
+

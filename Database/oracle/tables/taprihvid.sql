@@ -1,0 +1,115 @@
+DROP TABLE ASU.TAPRIHVID CASCADE CONSTRAINTS
+/
+
+--
+-- TAPRIHVID  (Table) 
+--
+CREATE TABLE ASU.TAPRIHVID
+(
+  FK_ID     NUMBER(9),
+  FC_NAME   VARCHAR2(100 BYTE),
+  FP_VID    NUMBER(1),
+  FK_APPID  NUMBER(9)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TAPRIHVID IS 'вид прихода/расхода'
+/
+
+COMMENT ON COLUMN ASU.TAPRIHVID.FK_ID IS 'SEQUENCE=[SEQ_TAPRIHVID]'
+/
+
+COMMENT ON COLUMN ASU.TAPRIHVID.FC_NAME IS 'Ќаименование'
+/
+
+COMMENT ON COLUMN ASU.TAPRIHVID.FP_VID IS '1-прихода, 2-расхода'
+/
+
+COMMENT ON COLUMN ASU.TAPRIHVID.FK_APPID IS ' од документа сопоставленного с этим видом'
+/
+
+
+--
+-- TAPRIHVID  (Index) 
+--
+--  Dependencies: 
+--   TAPRIHVID (Table)
+--
+CREATE UNIQUE INDEX ASU.TAPRIHVID ON ASU.TAPRIHVID
+(FK_ID, FP_VID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAPRIHVID$INS$UPD_APPID  (Trigger) 
+--
+--  Dependencies: 
+--   TAPRIHVID (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TAPRIHVID$INS$UPD_APPID" 
+BEFORE  INSERT  OR UPDATE  OF
+   FK_APPID
+ ON ASU.TAPRIHVID REFERENCING
+ NEW AS NEW
+ OLD AS OLD
+FOR EACH ROW
+BEGIN
+  IF :new.fk_appid = -1 THEN
+    :new.fk_appid := NULL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+
+--
+-- TAPRIHVID$INS  (Trigger) 
+--
+--  Dependencies: 
+--   TAPRIHVID (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TAPRIHVID$INS" 
+BEFORE INSERT
+ON ASU.TAPRIHVID REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+BEGIN
+  SELECT seq_taprihvid.nextval
+    INTO :new.fk_id
+    FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

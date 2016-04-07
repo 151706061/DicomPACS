@@ -1,0 +1,26 @@
+DROP TRIGGER ASU.TVAC_PLAN_PATTERN$BI
+/
+
+--
+-- TVAC_PLAN_PATTERN$BI  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_VAC_PLAN_PATTERN (Sequence)
+--   TVAC_PLAN_PATTERN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVAC_PLAN_PATTERN$BI" 
+ BEFORE
+  INSERT
+ ON asu.tvac_plan_pattern
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+    --  Column "FK_ID" uses sequence SEQ_VAC_PLAN_PATTERN
+    SELECT SEQ_VAC_PLAN_PATTERN.NEXTVAL INTO :new.FK_ID FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

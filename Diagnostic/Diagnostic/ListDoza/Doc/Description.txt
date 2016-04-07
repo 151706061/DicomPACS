@@ -1,0 +1,2 @@
+Name: Лист лучевой нагрузки пациента (DLL)
+Author: Prihodko

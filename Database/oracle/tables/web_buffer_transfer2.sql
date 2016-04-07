@@ -1,0 +1,117 @@
+ALTER TABLE ASU.WEB_BUFFER_TRANSFER2
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.WEB_BUFFER_TRANSFER2 CASCADE CONSTRAINTS
+/
+
+--
+-- WEB_BUFFER_TRANSFER2  (Table) 
+--
+CREATE TABLE ASU.WEB_BUFFER_TRANSFER2
+(
+  ID               NUMBER                       NOT NULL,
+  UPLOAD_DATE      DATE,
+  REGIST_DATE      DATE,
+  TABLE_NAME       VARCHAR2(255 CHAR),
+  KEY_FIELD_VALUE  NUMBER,
+  ACTION           VARCHAR2(255 BYTE),
+  FC_INFO          VARCHAR2(255 BYTE),
+  FC_USERNAME      VARCHAR2(255 BYTE),
+  ACTUAL_DATE      DATE,
+  FK_SOTRPEPLID    NUMBER                       DEFAULT -1,
+  FK_OTDELID       NUMBER                       DEFAULT -1,
+  FN_SOTRSPEC      NUMBER                       DEFAULT -1,
+  FN_MEDPOST       NUMBER                       DEFAULT -1,
+  FC_KABINET       VARCHAR2(100 BYTE),
+  FK_PACID         NUMBER                       DEFAULT -1                    NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.WEB_BUFFER_TRANSFER2.ACTUAL_DATE IS 'Дата актуальности, дата из ячейки расписания'
+/
+
+
+--
+-- PK_WEB_BUF_TRANSF2  (Index) 
+--
+--  Dependencies: 
+--   WEB_BUFFER_TRANSFER2 (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_WEB_BUF_TRANSF2 ON ASU.WEB_BUFFER_TRANSFER2
+(ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- WEB_BUFFER_TRANSFER2$BI  (Trigger) 
+--
+--  Dependencies: 
+--   WEB_BUFFER_TRANSFER2 (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."WEB_BUFFER_TRANSFER2$BI"
+  BEFORE INSERT ON ASU.WEB_BUFFER_TRANSFER2   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+BEGIN
+  SELECT ASU.SEQ_WEB_BUFFER_TRANSFFER.NEXTVAL INTO :NEW.ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table WEB_BUFFER_TRANSFER2 
+-- 
+ALTER TABLE ASU.WEB_BUFFER_TRANSFER2 ADD (
+  CONSTRAINT PK_WEB_BUF_TRANSF2
+ PRIMARY KEY
+ (ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+GRANT INSERT, SELECT ON ASU.WEB_BUFFER_TRANSFER2 TO LOGIN
+/
+

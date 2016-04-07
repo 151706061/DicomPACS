@@ -1,0 +1,76 @@
+@head_first
+
+<title>Список исследований</title>
+<link href="css/users/users.css" rel="stylesheet" type="text/css">	 
+	@incl_main_cmn
+
+
+	<link href="css/studylist/studylistn.css" rel="stylesheet" type="text/css">
+	<script src="js/studylist/studylistn.js"></script>
+    
+    <link href="css/mainDCMn.css" rel="stylesheet" type="text/css">
+ 
+    
+	<script type="text/javascript">
+		var v_pr_sort = 0;
+		var v_height_tmp=0;
+		var v_width_tmp=0;
+		var v_cur_grid_id=0;
+		var v_arr_list = [];
+		var v_sel_nmb = 0;
+		// BEGIN_DEBUG
+		var v_url = '';
+		var v_ui = 0;
+		var v_up = '';
+		var v_un = '';
+		var v_username = 'sysdba';
+		var v_fam = '';
+		var v_nam = '';
+		var v_surn = '';
+		// END_DEBUG
+	</script>
+	
+	
+
+	@endheadstartbody
+	
+	@main_header
+	
+    @main_menu
+
+		<p>    
+			<div class="myhdtext1" style="margin-left:50%;margin-top:-20px;">
+					<h3 style="color:black;">Список исследований</h3>
+			</div>	
+		</p>
+    <div class="container " style="height:600px">
+    
+    
+        <div id="myrowfff" class="row">
+        	
+            <!-- Параметры поиска	 -->
+            <div id="myleftcolfff" class="span4 " style="width:280px !important;margin-top:-20px">
+                <!-- Сюда меню-->
+				@left_col
+            </div>
+           
+            <div id="mygridfff" class="span4 " style="margin-top:-20px">	
+			@urgency_research_menu
+			<!-- HEAD	 -->
+                @grid_head
+                <div id="mytabrefr" style="overflow: auto;width:670px">
+                    @grid_lst
+                </div>
+            </div>
+            
+            
+        </div>
+    </div>
+        
+	@main_footer
+
+	@mylibCmn
+	<script src="js/MyLibCmn.js"></script>
+	
+</body>
+</html>

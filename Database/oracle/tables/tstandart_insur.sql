@@ -1,0 +1,96 @@
+ALTER TABLE ASU.TSTANDART_INSUR
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TSTANDART_INSUR CASCADE CONSTRAINTS
+/
+
+--
+-- TSTANDART_INSUR  (Table) 
+--
+CREATE TABLE ASU.TSTANDART_INSUR
+(
+  FK_ID        NUMBER                           NOT NULL,
+  FK_STANDART  NUMBER,
+  FK_INSUR     NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSTANDART_INSUR IS '—в€зка стандарта с полисом и гарантийным письмом
+Author: A.Nakorjakov 140508'
+/
+
+COMMENT ON COLUMN ASU.TSTANDART_INSUR.FK_ID IS 'SEQUENCE=[SEQ_TSTANDART_INSUR]'
+/
+
+COMMENT ON COLUMN ASU.TSTANDART_INSUR.FK_STANDART IS 'TSTANDART.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TSTANDART_INSUR.FK_INSUR IS 'TINSURDOCS.FK_ID;TGARANTLETTERS.FK_ID'
+/
+
+
+--
+-- PK_STANDART_INSUR  (Index) 
+--
+--  Dependencies: 
+--   TSTANDART_INSUR (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_STANDART_INSUR ON ASU.TSTANDART_INSUR
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TSTANDART_INSUR 
+-- 
+ALTER TABLE ASU.TSTANDART_INSUR ADD (
+  CONSTRAINT PK_STANDART_INSUR
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

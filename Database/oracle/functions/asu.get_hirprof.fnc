@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_HIRPROF
+/
+
+--
+-- GET_HIRPROF  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_HIRPROF" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 29686;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_HIRPROF TO PUBLIC
+/
+

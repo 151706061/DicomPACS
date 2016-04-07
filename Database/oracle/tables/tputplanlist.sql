@@ -1,0 +1,101 @@
+DROP TABLE ASU.TPUTPLANLIST CASCADE CONSTRAINTS
+/
+
+--
+-- TPUTPLANLIST  (Table) 
+--
+CREATE TABLE ASU.TPUTPLANLIST
+(
+  FK_ID        NUMBER(15),
+  FK_SNTRID    NUMBER(15),
+  FC_YEAR      VARCHAR2(4 BYTE),
+  FC_COMMENTS  VARCHAR2(60 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPUTPLANLIST IS 'планирование путевок by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TPUTPLANLIST.FK_ID IS 'SEQUENCE=[SEQ_TPUTPLANLIST]'
+/
+
+COMMENT ON COLUMN ASU.TPUTPLANLIST.FK_SNTRID IS 'код санатория'
+/
+
+COMMENT ON COLUMN ASU.TPUTPLANLIST.FC_YEAR IS 'год'
+/
+
+COMMENT ON COLUMN ASU.TPUTPLANLIST.FC_COMMENTS IS 'комментарии'
+/
+
+
+--
+-- TPUTPLANLIST_DELETE_ALL  (Trigger) 
+--
+--  Dependencies: 
+--   TPUTPLANLIST (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPUTPLANLIST_DELETE_ALL" 
+AFTER DELETE
+ON ASU.TPUTPLANLIST REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+DECLARE
+  CURSOR cC is
+         Select tkarta.fk_id from tputsplans,tkarta
+          where tputsplans.fk_listid = :OLD.FK_ID
+            and tkarta.fk_id = fk_pacid;
+Begin
+  FOR p in cC LOOP
+    delete from tkarta where fk_id = p.fk_id;
+  END LOOP;
+  Delete from TPUTPLANDAYS where FK_LISTID=:OLD.FK_ID;
+  Delete from TPUTSPLANS where FK_LISTID=:OLD.FK_ID;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TPUTPLANLIST_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPUTPLANLIST (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPUTPLANLIST_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TPUTPLANLIST REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Declare
+ dDate DATE;
+Begin
+  SELECT SEQ_TPutplanlist.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  dDate := TO_DATE('01.01.' || :NEW.FC_YEAR,'dd.mm.yyyy');
+  LOOP
+    INSERT INTO TPUTPLANDAYS (FK_LISTID,FD_DATE)
+                      VALUES (:NEW.FK_ID,dDate);
+    EXIT WHEN dDate = TO_DATE('31.12.' || :NEW.FC_YEAR,'dd.mm.yyyy');
+    dDate := dDate + 1;
+  END LOOP;
+End;
+/
+SHOW ERRORS;
+
+

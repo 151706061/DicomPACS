@@ -1,0 +1,103 @@
+ALTER TABLE ASU.TRECIPE_DLO_EXP_ONLS
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_EXP_ONLS CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_EXP_ONLS  (Table) 
+--
+CREATE TABLE ASU.TRECIPE_DLO_EXP_ONLS
+(
+  C_FINL     NUMBER                             DEFAULT 0,
+  C_PROG     NUMBER,
+  NAME_PROG  VARCHAR2(50 BYTE),
+  DATE_BEG   DATE,
+  MSG_TEXT   VARCHAR2(100 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_EXP_ONLS IS 'ДЛО. Справочник программ ЛЛО'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_ONLS.C_FINL IS 'Код источника финансирования'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_ONLS.C_PROG IS 'Код программы ЛЛО'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_ONLS.NAME_PROG IS 'Наименование программы ЛЛО'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_ONLS.DATE_BEG IS 'Дата начала действия программы ЛЛО'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_ONLS.MSG_TEXT IS 'Комментарий'
+/
+
+
+--
+-- TRECIPE_DLO_EXP_ONLS_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_ONLS (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_EXP_ONLS_PK ON ASU.TRECIPE_DLO_EXP_ONLS
+(C_FINL, C_PROG)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_EXP_ONLS 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_EXP_ONLS ADD (
+  CONSTRAINT TRECIPE_DLO_EXP_ONLS_PK
+ PRIMARY KEY
+ (C_FINL, C_PROG)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

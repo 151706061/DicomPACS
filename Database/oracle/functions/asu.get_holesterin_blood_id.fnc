@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_HOLESTERIN_BLOOD_ID
+/
+
+--
+-- GET_HOLESTERIN_BLOOD_ID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_HOLESTERIN_BLOOD_ID" 
+return number
+is
+begin
+  return 40415;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_HOLESTERIN_BLOOD_ID TO PUBLIC
+/
+

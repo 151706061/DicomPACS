@@ -1,0 +1,116 @@
+DROP TABLE ASU.TSMID_TOOTH CASCADE CONSTRAINTS
+/
+
+--
+-- TSMID_TOOTH  (Table) 
+--
+CREATE TABLE ASU.TSMID_TOOTH
+(
+  FK_ID     NUMBER(15)                          NOT NULL,
+  FK_OWNER  NUMBER(15),
+  FC_NAME   VARCHAR2(500 BYTE),
+  FN_LEVEL  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- I_SMID_TOOTH_ID  (Index) 
+--
+--  Dependencies: 
+--   TSMID_TOOTH (Table)
+--
+CREATE INDEX ASU.I_SMID_TOOTH_ID ON ASU.TSMID_TOOTH
+(FK_ID)
+LOGGING
+TABLESPACE SYSTEM
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            FREELISTS        1
+            FREELIST GROUPS  1
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- I_SMID_TOOTH_LEVEL  (Index) 
+--
+--  Dependencies: 
+--   TSMID_TOOTH (Table)
+--
+CREATE INDEX ASU.I_SMID_TOOTH_LEVEL ON ASU.TSMID_TOOTH
+(FN_LEVEL)
+LOGGING
+TABLESPACE SYSTEM
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            FREELISTS        1
+            FREELIST GROUPS  1
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- I_SMID_TOOTH_OWNER  (Index) 
+--
+--  Dependencies: 
+--   TSMID_TOOTH (Table)
+--
+CREATE INDEX ASU.I_SMID_TOOTH_OWNER ON ASU.TSMID_TOOTH
+(FK_OWNER)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+GRANT ALTER, DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TSMID_TOOTH TO EXCH79
+/
+

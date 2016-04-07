@@ -1,0 +1,2 @@
+Name: Журнал для диспансеризации
+Author: Prihodko

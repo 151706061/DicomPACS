@@ -1,0 +1,33 @@
+DROP FUNCTION ASU.GET_VALTYPE
+/
+
+--
+-- GET_VALTYPE  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSMID (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_VALTYPE" 
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+--
+-- Purpose: Возвращает тип значения из SMID;
+--
+  CURSOR C IS SELECT FC_TYPE FROM TSMID WHERE FK_ID=pFK_ID;
+  str VARCHAR2(20);
+BEGIN
+  IF C%ISOPEN THEN
+    CLOSE C;
+  END IF;
+  OPEN C;
+  FETCH C INTO str;
+  CLOSE C;
+  RETURN str;
+END;
+/
+
+SHOW ERRORS;
+
+

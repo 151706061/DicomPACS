@@ -1,0 +1,29 @@
+23.12.2013 14:28:10 EXECUTE C-MOVEp_STUDYUID=dicom_ip=192.168.56.101dicom_port=104local_port=1131dicom_calledAET=ServerCallingAET=TEST1PATIENTID=20121213-01-0001ACCESSIONNUMBER=18182/2012-------------------------------------------------------------------
+23.04.2015 15:24:58 START ATRIS connection
+23.04.2015 15:24:58 dicom_ip=LocalHostdicom_called=PACSSERVdicom_port=1114CallingAET=TEST1local_port=115
+23.04.2015 15:24:58 using c-get
+23.04.2015 15:36:16 START ATRIS connection
+23.04.2015 15:36:16 dicom_ip=LocalHostdicom_called=PACSSERVdicom_port=1114CallingAET=TEST1local_port=115
+23.04.2015 15:36:16 using c-get
+24.04.2015 9:40:20 START ATRIS connection
+24.04.2015 9:40:20 dicom_ip=LocalHostdicom_called=PACSSERVdicom_port=1114CallingAET=TEST1local_port=115
+24.04.2015 9:40:20 using c-get
+24.04.2015 9:41:46 START ATRIS connection
+24.04.2015 9:41:46 dicom_ip=LocalHostdicom_called=PACSSERVdicom_port=1114CallingAET=TEST1local_port=115
+24.04.2015 9:41:46 using c-get
+29.09.2015 8:49:09 START ATRIS connection
+29.09.2015 8:53:50 START ATRIS connection
+29.09.2015 8:53:50 dicom_ip=192.168.1.47dicom_called=MULTIVOXdicom_port=11114CallingAET=TEST1local_port=p_patientID=p_AccessionNumber=AN-15.1.2015.33082398
+29.09.2015 8:53:50 using c-get
+29.09.2015 8:55:41 START ATRIS connection
+29.09.2015 8:55:41 dicom_ip=192.168.1.47dicom_called=MULTIVOXdicom_port=11114CallingAET=TEST1local_port=p_patientID=p_AccessionNumber=AN-15.1.2015.33082398
+29.09.2015 8:55:41 using c-get
+29.09.2015 9:00:47 START ATRIS connection
+29.09.2015 9:00:47 dicom_ip=192.168.1.47dicom_called=MULTIVOXdicom_port=11114CallingAET=TEST1local_port=p_patientID=p_AccessionNumber=AN-15.1.2015.33082398
+29.09.2015 9:00:47 using c-get
+29.09.2015 9:01:32 START ATRIS connection
+29.09.2015 9:01:32 dicom_ip=192.168.1.47dicom_called=MULTIVOXdicom_port=11114CallingAET=TEST1local_port=p_patientID=p_AccessionNumber=1234567890QWERTY1234567890Q
+29.09.2015 9:01:32 using c-get
+29.09.2015 9:04:30 START ATRIS connection
+29.09.2015 9:04:30 dicom_ip=192.168.1.47dicom_called=MULTIVOXdicom_port=11114CallingAET=TEST1local_port=p_patientID=p_AccessionNumber=1234567890QWERTY1234567890Q
+29.09.2015 9:04:30 using c-get

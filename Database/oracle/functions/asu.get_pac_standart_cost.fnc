@@ -1,0 +1,45 @@
+DROP FUNCTION ASU.GET_PAC_STANDART_COST
+/
+
+--
+-- GET_PAC_STANDART_COST  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSTANDART (Table)
+--   TSTANDARTDIAG (Table)
+--   TSTANDART_COST (Table)
+--   TSMID (Table)
+--   TKARTA (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PAC_STANDART_COST" (pfk_pacid IN NUMBER) RETURN FLOAT IS
+
+   -- created by Serg
+
+ CURSOR c
+ IS
+ SELECT SC.FN_COST
+        FROM TSTANDARTDIAG SD,
+        TKARTA K,
+        TSMID D,
+        TSTANDART S,
+        TSTANDART_COST SC
+        WHERE K.FK_ID = SD.FK_PACID
+        AND D.FK_ID = SD.FK_DIAGID
+        AND S.FK_ID = SD.FK_STANDARTID
+        AND S.FK_ID = SC.FK_STANDARTID(+)
+        AND K.FK_ID = pfk_pacid;
+ D FLOAT;
+
+ BEGIN
+  OPEN C;
+  FETCH C INTO D;
+  CLOSE C;
+  RETURN nvl(D, 0);
+ END;
+/
+
+SHOW ERRORS;
+
+

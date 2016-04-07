@@ -1,0 +1,25 @@
+DROP INDEX ASU.VNAZ_BY_SMID_PACID
+/
+
+--
+-- VNAZ_BY_SMID_PACID  (Index) 
+--
+CREATE INDEX ASU.VNAZ_BY_SMID_PACID ON ASU.VNAZ
+(FK_SMID, FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          12032K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

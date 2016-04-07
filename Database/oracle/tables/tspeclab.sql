@@ -1,0 +1,68 @@
+DROP TABLE ASU.TSPECLAB CASCADE CONSTRAINTS
+/
+
+--
+-- TSPECLAB  (Table) 
+--
+CREATE TABLE ASU.TSPECLAB
+(
+  FK_ID         NUMBER(9)                       DEFAULT 0,
+  FK_SPECID     NUMBER(9)                       DEFAULT -1,
+  FL_PODPIS     NUMBER(1)                       DEFAULT 0,
+  FL_EDITSPR    NUMBER(1)                       DEFAULT 0,
+  FL_PARAMMEST  NUMBER(1)                       DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSPECLAB IS 'Настройка специальностей для лаборатории'
+/
+
+COMMENT ON COLUMN ASU.TSPECLAB.FK_ID IS 'SEQUENCE=[SEQ_TSPECLAB]'
+/
+
+COMMENT ON COLUMN ASU.TSPECLAB.FK_SPECID IS 'Код специальности TSPEC.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TSPECLAB.FL_PODPIS IS 'Имеет право подписи'
+/
+
+COMMENT ON COLUMN ASU.TSPECLAB.FL_EDITSPR IS 'Имеет право редактирования справочника'
+/
+
+COMMENT ON COLUMN ASU.TSPECLAB.FL_PARAMMEST IS 'Имеет право изменения параметров мест'
+/
+
+
+--
+-- TSPECLAB_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TSPECLAB (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSPECLAB_BEFORE_INSERT" 
+BEFORE  INSERT  ON ASU.TSPECLAB FOR EACH ROW
+Begin
+  SELECT SEQ_TSPECLAB.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

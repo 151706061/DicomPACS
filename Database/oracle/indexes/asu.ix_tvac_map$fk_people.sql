@@ -1,0 +1,25 @@
+DROP INDEX ASU.IX_TVAC_MAP$FK_PEOPLE
+/
+
+--
+-- IX_TVAC_MAP$FK_PEOPLE  (Index) 
+--
+CREATE UNIQUE INDEX ASU.IX_TVAC_MAP$FK_PEOPLE ON ASU.TVAC_MAP
+(FK_PEOPLE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          768K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

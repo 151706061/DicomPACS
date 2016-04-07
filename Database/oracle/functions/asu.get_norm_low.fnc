@@ -1,0 +1,99 @@
+DROP FUNCTION ASU.GET_NORM_LOW
+/
+
+--
+-- GET_NORM_LOW  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSMID (Table)
+--   TSMIDNORMS (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_NORM_LOW" 
+  ( pFK_SMID IN NUMBER,pFK_SEX IN NUMBER,pFN_AGE IN NUMBER:=-1, bMonth IN NUMBER := 0)
+  RETURN   NUMBER IS
+  Res Varchar2(100);
+-- Purpose: Возращает норму в виде 4-3
+  CURSOR cW IS SELECT FN_LOW_W FROM TSMID WHERE FK_ID=pFK_SMID;
+  CURSOR cM IS SELECT FN_LOW_M FROM TSMID WHERE FK_ID=pFK_SMID;
+
+  CURSOR cIsSubNorm (pFK_SMID NUMBER) IS
+    SELECT FK_ID FROM TSMIDNORMS WHERE FK_SMID=pFK_SMID;
+
+  CURSOR cSubNormW (pFK_SMID NUMBER,pFN_AGE NUMBER) IS
+    SELECT FN_LOW_W
+      FROM TSMIDNORMS
+     WHERE FK_SMID = pFK_SMID AND pFN_AGE BETWEEN FN_YEAR1 AND FN_YEAR2;
+
+  CURSOR cSubNormM (pFK_SMID NUMBER,pFN_AGE NUMBER) IS
+    SELECT FN_LOW_M
+      FROM TSMIDNORMS
+     WHERE FK_SMID = pFK_SMID AND pFN_AGE BETWEEN FN_YEAR1 AND FN_YEAR2;
+
+  nL NUMBER;
+  i  NUMBER;
+BEGIN
+  IF bMonth = 0 THEN
+        IF pFK_SEX=1 THEN
+      OPEN cM;
+      FETCH cM INTO nL;
+      CLOSE cM;
+    ELSIF pFK_SEX=0 THEN
+      OPEN cW;
+      FETCH cW INTO nL;
+      CLOSE cW;
+    ELSE
+      RETURN '';
+    END IF;
+  ELSE
+  OPEN cIsSubNorm(pFK_SMID);
+  FETCH cIsSubNorm INTO i;
+  IF cIsSubNorm%NOTFOUND THEN
+    IF pFK_SEX=1 THEN
+      OPEN cM;
+      FETCH cM INTO nL;
+      CLOSE cM;
+    ELSIF pFK_SEX=0 THEN
+      OPEN cW;
+      FETCH cW INTO nL;
+      CLOSE cW;
+    ELSE
+      RETURN '';
+    END IF;
+  ELSE
+    IF pFK_SEX=1 THEN
+      OPEN cSubNormM (pFK_SMID,pFN_AGE);
+      FETCH cSubNormM INTO nL;
+      IF cSubNormM%NOTFOUND THEN
+        OPEN cM;
+        FETCH cM INTO nL;
+        CLOSE cM;
+      END IF;
+      CLOSE cSubNormM;
+    ELSIF pFK_SEX=0 THEN
+      OPEN cSubNormW (pFK_SMID,pFN_AGE);
+      FETCH cSubNormW INTO nL;
+      IF cSubNormW%NOTFOUND THEN
+        OPEN cW;
+        FETCH cW INTO nL;
+        CLOSE cW;
+      END IF;
+      CLOSE cSubNormW;
+    ELSE
+      RETURN -1;
+    END IF;
+  END IF;
+  CLOSE cIsSubNorm;
+  END IF;
+  IF nL IS NULL THEN
+    RETURN -1;
+   Else
+    RETURN nL;
+  END IF;
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TAPP_DELETE
+/
+
+--
+-- TAPP_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TAPP (Table)
+--   TAPPVIEW (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TAPP_DELETE" 
+ BEFORE 
+ DELETE
+ ON ASU.TAPP  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  DELETE
+    FROM tappview
+   WHERE fk_id = :old.fk_id;
+END;
+/
+SHOW ERRORS;
+
+

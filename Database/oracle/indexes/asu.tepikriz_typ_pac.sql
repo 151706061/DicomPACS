@@ -1,0 +1,25 @@
+DROP INDEX ASU.TEPIKRIZ_TYP_PAC
+/
+
+--
+-- TEPIKRIZ_TYP_PAC  (Index) 
+--
+CREATE INDEX ASU.TEPIKRIZ_TYP_PAC ON ASU.TEPIKRIZ
+(FK_PACID, FP_TYPE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          384K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

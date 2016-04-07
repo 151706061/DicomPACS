@@ -1,0 +1,107 @@
+DROP TABLE ASU.TRECEPT_SMID CASCADE CONSTRAINTS
+/
+
+--
+-- TRECEPT_SMID  (Table) 
+--
+CREATE TABLE ASU.TRECEPT_SMID
+(
+  FK_ID        NUMBER(9),
+  FK_SMID      NUMBER(9),
+  FK_RECEPTID  NUMBER(9)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECEPT_SMID IS 'Таблица соответствий рецептов со значениями в SMID'
+/
+
+COMMENT ON COLUMN ASU.TRECEPT_SMID.FK_ID IS 'SEQUENCE=[SEQ_TRECEPT_SMID]'
+/
+
+COMMENT ON COLUMN ASU.TRECEPT_SMID.FK_SMID IS 'Код SMID'
+/
+
+COMMENT ON COLUMN ASU.TRECEPT_SMID.FK_RECEPTID IS 'Код TRECEPT'
+/
+
+
+--
+-- TRECEPT_SMID$FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TRECEPT_SMID (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECEPT_SMID$FK_ID ON ASU.TRECEPT_SMID
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECEPT_SMID_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TRECEPT_SMID (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECEPT_SMID_INSERT" 
+BEFORE INSERT
+ON ASU.TRECEPT_SMID REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+    select SEQ_TRECEPT_SMID.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECEPT_SMID 
+-- 
+ALTER TABLE ASU.TRECEPT_SMID ADD (
+  CONSTRAINT TRECEPT_SMID$FK_ID
+ UNIQUE (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

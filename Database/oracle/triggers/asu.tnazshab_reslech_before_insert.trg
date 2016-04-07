@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TNAZSHAB_RESLECH_BEFORE_INSERT
+/
+
+--
+-- TNAZSHAB_RESLECH_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TNAZSHAB_RESLECH (Sequence)
+--   TNAZSHAB_RESLECH (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZSHAB_RESLECH_BEFORE_INSERT" 
+BEFORE INSERT
+ON tnazshab_reslech
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+begin
+ select SEQ_TNAZSHAB_RESLECH.nextval  into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,30 @@
+DROP FUNCTION ASU.GET_OWNER_FROM_SMID
+/
+
+--
+-- GET_OWNER_FROM_SMID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSMID (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_OWNER_FROM_SMID" 
+  (pFK_SMID IN NUMBER )
+  RETURN NUMBER IS
+--
+-- Purpose: Возращает овнера...
+-- By Philip A. Milovanov
+CURSOR c IS SELECT /*+ rule*/FK_OWNER FROM TSMID WHERE FK_ID=pFK_SMID;
+i NUMBER;
+BEGIN
+  OPEN c;
+  FETCH c INTO i;
+  CLOSE c;
+  RETURN i;
+END; -- Function GET_OWNER_FROM_SMID
+/
+
+SHOW ERRORS;
+
+

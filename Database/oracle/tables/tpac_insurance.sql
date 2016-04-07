@@ -1,0 +1,198 @@
+ALTER TABLE ASU.TPAC_INSURANCE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TPAC_INSURANCE CASCADE CONSTRAINTS
+/
+
+--
+-- TPAC_INSURANCE  (Table) 
+--
+CREATE TABLE ASU.TPAC_INSURANCE
+(
+  FK_ID          NUMBER                         NOT NULL,
+  FK_PACID       NUMBER,
+  FK_INSURDOCID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          400K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TPAC_INSURANCE.FK_ID IS 'SEQUENCE=[SEQ_TPAC_INSURANCE]'
+/
+
+COMMENT ON COLUMN ASU.TPAC_INSURANCE.FK_PACID IS 'Код ИБ'
+/
+
+COMMENT ON COLUMN ASU.TPAC_INSURANCE.FK_INSURDOCID IS 'Код документа страхования'
+/
+
+
+--
+-- TPAC_INSURANCE_BY_DOCID  (Index) 
+--
+--  Dependencies: 
+--   TPAC_INSURANCE (Table)
+--
+CREATE INDEX ASU.TPAC_INSURANCE_BY_DOCID ON ASU.TPAC_INSURANCE
+(FK_INSURDOCID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          336K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPAC_INSURANCE_BY_PACID  (Index) 
+--
+--  Dependencies: 
+--   TPAC_INSURANCE (Table)
+--
+CREATE INDEX ASU.TPAC_INSURANCE_BY_PACID ON ASU.TPAC_INSURANCE
+(FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          640K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPAC_INSURANCE_PK  (Index) 
+--
+--  Dependencies: 
+--   TPAC_INSURANCE (Table)
+--
+CREATE UNIQUE INDEX ASU.TPAC_INSURANCE_PK ON ASU.TPAC_INSURANCE
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          368K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPAC_INSURANCE_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TPAC_INSURANCE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPAC_INSURANCE_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TPAC_INSURANCE  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TPAC_INSURANCE', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TPAC_INSURANCE', 'FK_PACID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_PacID), :new.fk_id);
+    PKG_LOG.Do_log('TPAC_INSURANCE', 'FK_INSURDOCID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_insurdocid), :new.fk_id);
+  elsif DELETING then
+    PKG_LOG.Do_log('TPAC_INSURANCE', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_id), null, :old.fk_id);
+    PKG_LOG.Do_log('TPAC_INSURANCE', 'FK_PACID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_PacID), null, :old.fk_id);
+    PKG_LOG.Do_log('TPAC_INSURANCE', 'FK_INSURDOCID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_insurdocid), null, :old.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TPAC_INSURANCE', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    PKG_LOG.Do_log('TPAC_INSURANCE', 'FK_PACID', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_PACID), PKG_LOG.GET_VALUE(:new.FK_PACID), :old.fk_id);
+    if UPDATING ('fk_insurdocid') AND PKG_LOG.GET_VALUE(:old.fk_insurdocid) <> PKG_LOG.GET_VALUE(:new.fk_insurdocid) then
+      PKG_LOG.Do_log('TPAC_INSURANCE', 'FK_INSURDOCID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_insurdocid), PKG_LOG.GET_VALUE(:new.fk_insurdocid), :old.fk_id);
+    end if;
+  end if;
+  null;
+END TPAC_INSURANCE_LOG;
+/
+SHOW ERRORS;
+
+
+--
+-- TPAC_INSURANCE_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPAC_INSURANCE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPAC_INSURANCE_BEFORE_INSERT" 
+  BEFORE INSERT
+  ON ASU.TPAC_INSURANCE   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TPAC_INSURANCE.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TPAC_INSURANCE 
+-- 
+ALTER TABLE ASU.TPAC_INSURANCE ADD (
+  CONSTRAINT TPAC_INSURANCE_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          368K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+GRANT DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TPAC_INSURANCE TO EXCHANGE
+/
+
+GRANT DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TPAC_INSURANCE TO EXCH43
+/
+

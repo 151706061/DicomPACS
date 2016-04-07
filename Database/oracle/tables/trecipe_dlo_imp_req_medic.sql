@@ -1,0 +1,197 @@
+ALTER TABLE ASU.TRECIPE_DLO_IMP_REQ_MEDIC
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_IMP_REQ_MEDIC CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_IMP_REQ_MEDIC  (Table) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_IMP_REQ (Table)
+--
+CREATE TABLE ASU.TRECIPE_DLO_IMP_REQ_MEDIC
+(
+  FK_ID        NUMBER,
+  FK_UNIQCODE  NUMBER,
+  STRNPP       NUMBER,
+  C_MNN        NUMBER,
+  C_LSFO       NUMBER,
+  QUANTITY     NUMBER(18,8),
+  PRICE        NUMBER(18,4),
+  C_LF         NUMBER,
+  D_LS         VARCHAR2(25 BYTE),
+  C_DLS        NUMBER,
+  V_LF         NUMBER(18,8),
+  M_LF         NUMBER(18,8),
+  N_FV         NUMBER,
+  DESTROYED    NUMBER                           DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_IMP_REQ_MEDIC IS 'ДЛО. Состав заявки на получение ЛП'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.FK_ID IS 'ключ'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.FK_UNIQCODE IS 'TRECIPE_DLO_IMP_REQ.UNIQCODE'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.STRNPP IS 'Порядковый номер строки'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.C_MNN IS 'Код МНН'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.C_LSFO IS 'Код ЛС поставщика'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.QUANTITY IS 'Количество упаковок'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.PRICE IS 'Предельная цена за единицу товара'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.C_LF IS 'Код лекарственной формы'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.D_LS IS 'Дозировка действующего вещества'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.C_DLS IS 'Код единицы измерения дозировки'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.V_LF IS 'Объем лекарственной формы  (заполняется для растворов, сиропов, суспензий, аэрозолей, мазей)
+'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.M_LF IS 'Вес лекарственной формы'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.N_FV IS 'Фасовка лекарственного средства.'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ_MEDIC.DESTROYED IS 'Признак удаленной записи'
+/
+
+
+--
+-- TREC_DLO_IMP_REQ_MED_REQID_IDX  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_IMP_REQ_MEDIC (Table)
+--
+CREATE INDEX ASU.TREC_DLO_IMP_REQ_MED_REQID_IDX ON ASU.TRECIPE_DLO_IMP_REQ_MEDIC
+(FK_UNIQCODE)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_IMP_REQ_MEDIC_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_IMP_REQ_MEDIC (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_IMP_REQ_MEDIC_PK ON ASU.TRECIPE_DLO_IMP_REQ_MEDIC
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_IMP_REQ_MEDIC_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_IMP_REQ_MEDIC (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECIPE_DLO_IMP_REQ_MEDIC_INS"
+ BEFORE
+  INSERT
+ ON ASU.TRECIPE_DLO_IMP_REQ_MEDIC REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  if (:new.fk_id is null) then
+    select ASU.SEQ_TRECIPE_DLO_IMP_REQ_MEDIC.nextval into :new.fk_id from dual;
+  end if;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_IMP_REQ_MEDIC 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_IMP_REQ_MEDIC ADD (
+  CONSTRAINT TRECIPE_DLO_IMP_REQ_MEDIC_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TRECIPE_DLO_IMP_REQ_MEDIC 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_IMP_REQ_MEDIC ADD (
+  CONSTRAINT TREC_DLO_IMP_REQ_MED_REQID_FK 
+ FOREIGN KEY (FK_UNIQCODE) 
+ REFERENCES ASU.TRECIPE_DLO_IMP_REQ (UNIQCODE))
+/
+

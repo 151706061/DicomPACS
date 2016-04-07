@@ -1,0 +1,144 @@
+ALTER TABLE ASU.TKIOSK_LIMIT
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TKIOSK_LIMIT CASCADE CONSTRAINTS
+/
+
+--
+-- TKIOSK_LIMIT  (Table) 
+--
+CREATE TABLE ASU.TKIOSK_LIMIT
+(
+  FK_ID            NUMBER(15)                   NOT NULL,
+  FK_VRACHKAB_NAZ  NUMBER(15),
+  FN_MIN_AGE       NUMBER(3),
+  FN_MAX_AGE       NUMBER(3),
+  FN_COUNT_ZAPIS   NUMBER(2)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TKIOSK_LIMIT IS 'Настройки ограничений киоска. Author:Oleinikov'
+/
+
+COMMENT ON COLUMN ASU.TKIOSK_LIMIT.FK_VRACHKAB_NAZ IS 'Ссылка на консультацию (TVRACHKAB_NAZ)'
+/
+
+COMMENT ON COLUMN ASU.TKIOSK_LIMIT.FN_MIN_AGE IS 'Минимальный возраст для записи)'
+/
+
+COMMENT ON COLUMN ASU.TKIOSK_LIMIT.FN_MAX_AGE IS 'Максимальный возраст'
+/
+
+COMMENT ON COLUMN ASU.TKIOSK_LIMIT.FN_COUNT_ZAPIS IS 'Количество записей'
+/
+
+
+--
+-- TKIOSK_LIMIT_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TKIOSK_LIMIT (Table)
+--
+CREATE UNIQUE INDEX ASU.TKIOSK_LIMIT_BY_ID ON ASU.TKIOSK_LIMIT
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TKIOSK_LIMIT_FK_VRACHKAB_NAZ  (Index) 
+--
+--  Dependencies: 
+--   TKIOSK_LIMIT (Table)
+--
+CREATE INDEX ASU.TKIOSK_LIMIT_FK_VRACHKAB_NAZ ON ASU.TKIOSK_LIMIT
+(FK_VRACHKAB_NAZ)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TKIOSK_LIMIT_BEF_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TKIOSK_LIMIT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TKIOSK_LIMIT_BEF_INS"
+BEFORE INSERT
+ON ASU.TKIOSK_LIMIT REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  IF :NEW.FK_ID IS NULL THEN
+     SELECT ASU.SEQ_TKIOSK_LIMIT.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  END IF;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TKIOSK_LIMIT 
+-- 
+ALTER TABLE ASU.TKIOSK_LIMIT ADD (
+  CONSTRAINT TKIOSK_LIMIT_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

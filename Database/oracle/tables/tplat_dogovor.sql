@@ -1,0 +1,146 @@
+ALTER TABLE ASU.TPLAT_DOGOVOR
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TPLAT_DOGOVOR CASCADE CONSTRAINTS
+/
+
+--
+-- TPLAT_DOGOVOR  (Table) 
+--
+CREATE TABLE ASU.TPLAT_DOGOVOR
+(
+  FK_ID          NUMBER                         NOT NULL,
+  FK_PACID       NUMBER,
+  FD_BEGIN       DATE,
+  FD_END         DATE,
+  FD_PROLONG     DATE,
+  FP_SOS         NUMBER                         DEFAULT 0,
+  FK_SOTRCREATE  NUMBER,
+  FK_SOTRCLOSE   NUMBER,
+  FK_OPEKUN      NUMBER,
+  FC_NUM         VARCHAR2(250 BYTE),
+  FP_TYPEPAY     NUMBER                         DEFAULT 0,
+  FC_CHECK       VARCHAR2(20 BYTE),
+  FD_CANCEL      DATE,
+  FK_SMIDID      NUMBER,
+  FC_KKM         VARCHAR2(8 BYTE),
+  FC_KO          VARCHAR2(20 BYTE),
+  FD_PAY         DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPLAT_DOGOVOR IS 'Таблица договоров платных услуг - by A.Nakorjakov 070508'
+/
+
+COMMENT ON COLUMN ASU.TPLAT_DOGOVOR.FK_ID IS 'SEQUENCE=[SEQ_TKARTA]'
+/
+
+COMMENT ON COLUMN ASU.TPLAT_DOGOVOR.FD_BEGIN IS 'Начало срока действия документа'
+/
+
+COMMENT ON COLUMN ASU.TPLAT_DOGOVOR.FD_END IS 'Окончание срока действия документа'
+/
+
+COMMENT ON COLUMN ASU.TPLAT_DOGOVOR.FD_PROLONG IS 'Дата пролонгации'
+/
+
+COMMENT ON COLUMN ASU.TPLAT_DOGOVOR.FP_SOS IS '0 - действующий; 1- закрыт'
+/
+
+COMMENT ON COLUMN ASU.TPLAT_DOGOVOR.FK_SOTRCREATE IS 'Сотрудник, кто создал'
+/
+
+COMMENT ON COLUMN ASU.TPLAT_DOGOVOR.FK_SOTRCLOSE IS 'Сотрудник, кто закрыл'
+/
+
+COMMENT ON COLUMN ASU.TPLAT_DOGOVOR.FK_OPEKUN IS 'TPEOPLES.FK_ID - опекун'
+/
+
+COMMENT ON COLUMN ASU.TPLAT_DOGOVOR.FC_NUM IS 'Номер договора'
+/
+
+
+--
+-- PK_PLAT_DOGOVOR  (Index) 
+--
+--  Dependencies: 
+--   TPLAT_DOGOVOR (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_PLAT_DOGOVOR ON ASU.TPLAT_DOGOVOR
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPLAT_DOGOVOR_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPLAT_DOGOVOR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPLAT_DOGOVOR_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TPLAT_DOGOVOR  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TKARTA.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  SELECT PKG_PLATUSLUG.GET_NEWDOCNUM INTO :NEW.FC_NUM FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TPLAT_DOGOVOR 
+-- 
+ALTER TABLE ASU.TPLAT_DOGOVOR ADD (
+  CONSTRAINT PK_PLAT_DOGOVOR
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

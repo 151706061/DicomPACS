@@ -1,0 +1,25 @@
+DROP INDEX ASU.TPICS_BLOBID
+/
+
+--
+-- TPICS_BLOBID  (Index) 
+--
+CREATE INDEX ASU.TPICS_BLOBID ON ASU.TPICS
+(FK_BLOBID, FK_NAZID, FL_SHOWIB)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

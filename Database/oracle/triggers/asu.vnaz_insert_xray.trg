@@ -1,0 +1,38 @@
+DROP TRIGGER ASU.VNAZ_INSERT_XRAY
+/
+
+--
+-- VNAZ_INSERT_XRAY  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TNAZMARK_X (Table)
+--   TSMID (Table)
+--   GET_OWNER_FROM_SMID (Function)
+--   GET_RG_ISSL (Function)
+--   VNAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."VNAZ_INSERT_XRAY" 
+ AFTER 
+ INSERT
+ ON ASU.VNAZ  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DISABLE
+DECLARE
+  CURSOR c1 IS SELECT COUNT(*) as CNT
+                 FROM TSMID
+                WHERE GET_OWNER_FROM_SMID(:NEW.FK_SMID) IN (SELECT FK_ID FROM TSMID WHERE FK_OWNER = GET_RG_ISSL);
+  CNT NUMBER;
+BEGIN
+  OPEN c1;
+  FETCH c1 INTO CNT;
+  CLOSE c1;
+
+  IF CNT > 0 THEN
+    INSERT INTO TNAZMARK_X(FK_NAZID) VALUES(:NEW.FK_ID);
+  END IF;
+END; -- триггер отключен 13.05.2010 by Prihodko N. по истечению 2-ух мес€цев удалить его и удалить таблицу TNAZMARK_X
+/
+SHOW ERRORS;
+
+

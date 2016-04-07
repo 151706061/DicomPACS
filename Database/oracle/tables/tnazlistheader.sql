@@ -1,0 +1,103 @@
+ALTER TABLE ASU.TNAZLISTHEADER
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TNAZLISTHEADER CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZLISTHEADER  (Table) 
+--
+CREATE TABLE ASU.TNAZLISTHEADER
+(
+  FC_LPU           VARCHAR2(1024 BYTE),
+  FC_ADDR          VARCHAR2(1024 BYTE),
+  FC_WHERE         VARCHAR2(1024 BYTE),
+  FC_SMID_SYNONIM  VARCHAR2(254 BYTE)           NOT NULL,
+  FN_AS_ONE_STR    INTEGER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          16K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNAZLISTHEADER IS 'Шапка отчёта по назначениям (печатается из Priem_Dll.dll) Author:Efimov'
+/
+
+COMMENT ON COLUMN ASU.TNAZLISTHEADER.FC_LPU IS 'Название ЛПУ'
+/
+
+COMMENT ON COLUMN ASU.TNAZLISTHEADER.FC_ADDR IS 'Адрес ЛПУ'
+/
+
+COMMENT ON COLUMN ASU.TNAZLISTHEADER.FC_WHERE IS 'лаборатория куда назначили'
+/
+
+COMMENT ON COLUMN ASU.TNAZLISTHEADER.FC_SMID_SYNONIM IS 'синоним из TSMID'
+/
+
+COMMENT ON COLUMN ASU.TNAZLISTHEADER.FN_AS_ONE_STR IS 'Если поле не null то в отчёте назначения этой ветки печатаются в виде одного поля через запятую'
+/
+
+
+--
+-- FK_SMID_SYNONIM  (Index) 
+--
+--  Dependencies: 
+--   TNAZLISTHEADER (Table)
+--
+CREATE UNIQUE INDEX ASU.FK_SMID_SYNONIM ON ASU.TNAZLISTHEADER
+(FC_SMID_SYNONIM)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TNAZLISTHEADER 
+-- 
+ALTER TABLE ASU.TNAZLISTHEADER ADD (
+  CONSTRAINT FK_SMID_SYNONIM
+ PRIMARY KEY
+ (FC_SMID_SYNONIM)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

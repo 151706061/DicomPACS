@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_DIAGSSTAT
+/
+
+--
+-- GET_DIAGSSTAT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_DIAGSSTAT" 
+return number
+is 
+begin
+  return 292667;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_DIAGSSTAT TO PUBLIC
+/
+

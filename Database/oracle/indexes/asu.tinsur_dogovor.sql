@@ -1,0 +1,25 @@
+DROP INDEX ASU.TINSUR_DOGOVOR
+/
+
+--
+-- TINSUR_DOGOVOR  (Index) 
+--
+CREATE INDEX ASU.TINSUR_DOGOVOR ON ASU.TINSUR_PROGRAM
+(FK_DOGOVOR)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,26 @@
+DROP TRIGGER ASU.TSROKY_AFTER_INSERT_UPDATE
+/
+
+--
+-- TSROKY_AFTER_INSERT_UPDATE  (Trigger) 
+--
+--  Dependencies: 
+--   TSROKY (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSROKY_AFTER_INSERT_UPDATE" 
+  BEFORE INSERT OR UPDATE ON ASU.TSROKY   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+Begin
+  --Rem by TimurLan
+  --  if :NEW.FK_PRYB IN (1,2,4,5,6) then
+  --    :NEW.FD_DATA2:=:NEW.FD_DATA1+:NEW.FN_KOL-1;
+  --    if :NEW.FK_VYB=0 then
+  --      :NEW.FD_DATA3:=:NEW.FD_DATA2;
+  --    end if;
+  --  end if;
+  null;
+End;
+/
+SHOW ERRORS;
+
+

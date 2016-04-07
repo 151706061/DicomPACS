@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_OPERTIPROOM
+/
+
+--
+-- GET_OPERTIPROOM  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_OPERTIPROOM" 
+      RETURN NUMBER DETERMINISTIC
+      IS -- Created by -= aAdmin.exe =-
+         -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+   BEGIN
+     Return 366;
+   END;
+/
+
+SHOW ERRORS;
+
+

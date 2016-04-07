@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_NAZCANCEL
+/
+
+--
+-- GET_NAZCANCEL  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_NAZCANCEL"
+return number DETERMINISTIC
+is
+begin
+  return 23;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_NAZCANCEL TO PUBLIC
+/
+

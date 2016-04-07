@@ -1,0 +1,25 @@
+DROP INDEX ASU.CON_LAB_REAGENT_PK
+/
+
+--
+-- CON_LAB_REAGENT_PK  (Index) 
+--
+CREATE UNIQUE INDEX ASU.CON_LAB_REAGENT_PK ON ASU.TLAB_REAGENT
+(FK_SMID)
+LOGGING
+TABLESPACE USERS
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

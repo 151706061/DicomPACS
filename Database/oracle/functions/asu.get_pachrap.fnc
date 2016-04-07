@@ -1,0 +1,27 @@
+DROP FUNCTION ASU.GET_PACHRAP
+/
+
+--
+-- GET_PACHRAP  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TANAMNEZ (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PACHRAP" 
+  ( pFK_ID IN NUMBER)
+  RETURN  NUMBER IS
+  CURSOR cTemp IS SELECT/*+rule*/ FL_HRAP FROM TANAMNEZ WHERE FK_PACID=pFK_ID;
+  nTemp NUMBER;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO nTemp;
+  CLOSE cTemp;
+  RETURN nTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

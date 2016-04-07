@@ -1,0 +1,22 @@
+DROP TRIGGER ASU.TTECHBOLEZNI_BEFORE_INSERT
+/
+
+--
+-- TTECHBOLEZNI_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TKARTA (Sequence)
+--   TTECHBOLEZNI (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TTECHBOLEZNI_BEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TTECHBOLEZNI   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+Begin
+  select seq_tkarta.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

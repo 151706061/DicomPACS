@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TNAZSHAB_RESAN_BEFORE_INSERT
+/
+
+--
+-- TNAZSHAB_RESAN_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TNAZSHAB_RESAN (Sequence)
+--   TNAZSHAB_RESAN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZSHAB_RESAN_BEFORE_INSERT" 
+BEFORE INSERT
+ON tnazshab_resan
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+begin
+ select SEQ_TNAZSHAB_RESAN.nextval  into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

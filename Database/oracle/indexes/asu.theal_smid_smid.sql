@@ -1,0 +1,25 @@
+DROP INDEX ASU.THEAL_SMID_SMID
+/
+
+--
+-- THEAL_SMID_SMID  (Index) 
+--
+CREATE INDEX ASU.THEAL_SMID_SMID ON ASU.THEAL_SMID
+(FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

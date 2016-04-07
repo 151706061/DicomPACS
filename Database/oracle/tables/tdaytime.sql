@@ -1,0 +1,106 @@
+ALTER TABLE ASU.TDAYTIME
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TDAYTIME CASCADE CONSTRAINTS
+/
+
+--
+-- TDAYTIME  (Table) 
+--
+CREATE TABLE ASU.TDAYTIME
+(
+  FK_ID     NUMBER(10)                          NOT NULL,
+  FN_ORDER  NUMBER(10),
+  FC_TIME   VARCHAR2(10 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TDAYTIME IS 'Таблица - справочник времени суток'
+/
+
+COMMENT ON COLUMN ASU.TDAYTIME.FK_ID IS 'SEQUENCE=[SEQ_TDAYTIME]'
+/
+
+
+--
+-- TDAYTIME_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TDAYTIME (Table)
+--
+CREATE UNIQUE INDEX ASU.TDAYTIME_BY_ID ON ASU.TDAYTIME
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDAYTIME_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDAYTIME (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDAYTIME_BEFORE_INSERT" 
+    BEFORE INSERT ON ASU.TDAYTIME     FOR EACH ROW
+BEGIN
+    IF :NEW.FK_ID IS NULL THEN
+      SELECT SEQ_TDAYTIME.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+    END IF;  
+  END TDAYTIME_BEFORE_INSERT;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TDAYTIME 
+-- 
+ALTER TABLE ASU.TDAYTIME ADD (
+  CONSTRAINT TDAYTIME_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

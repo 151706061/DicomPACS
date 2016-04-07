@@ -1,0 +1,25 @@
+DROP INDEX ASU.TS_COLUMNNAZ_DEL
+/
+
+--
+-- TS_COLUMNNAZ_DEL  (Index) 
+--
+CREATE INDEX ASU.TS_COLUMNNAZ_DEL ON ASU.TS_COLUMNNAZ
+(FL_DEL)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

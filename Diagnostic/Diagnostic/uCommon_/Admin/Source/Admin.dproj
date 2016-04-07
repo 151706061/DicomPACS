@@ -1,0 +1,190 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{02cd2740-0c0b-4585-98b8-31677e5932fc}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>..\bin\Admin.exe</DCC_DependencyCheckOutputName>
+    <MainSource>Admin.dpr</MainSource>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_ExeOutput>..\bin</DCC_ExeOutput>
+    <DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>..\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\..\Common;..\..\RUS_D11</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\Common;..\..\RUS_D11</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\Common;..\..\RUS_D11</DCC_ObjPath>
+    <DCC_IncludePath>..\..\Common;..\..\RUS_D11</DCC_IncludePath>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">True</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">20</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.20</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="C:\Users\Public\Documents\RAD Studio\5.0\Bpl\DicomTools2007.bpl">(untitled)</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Program Files\Developer Express Inc\Library\Delphi11\dcldxBarExtItemsD11.bpl">ExpressBars extended items by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Program Files\Developer Express Inc\Library\Delphi11\dcldxRibbonD11.bpl">ExpressBars Ribbon controls by Developer Express Inc.</Excluded_Packages>
+    </Excluded_Packages><Source><Source Name="MainSource">Admin.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="Admin.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="fAddEditClient.pas">
+      <Form>frmAddEditClient</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditCross.pas">
+      <Form>frmAddEditCross</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditDrv.pas">
+      <Form>frmAddEditDrv</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditKeys.pas">
+      <Form>frmAddEditKeys</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditMG.pas">
+      <Form>frmAddEditMG</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditPlace.pas">
+      <Form>frmAddEditPlace</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditRaion.pas">
+      <Form>frmAddEditRaion</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditSotr.pas">
+      <Form>frmAddEditSotr</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditStop.pas">
+      <Form>frmAddEditStop</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditTarif.pas">
+      <Form>frmAddEditTarif</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditTaxi.pas">
+      <Form>frmAddEditTaxi</Form>
+    </DCCReference>
+    <DCCReference Include="fAddEditTSS.pas">
+      <Form>frmAddEditTSS</Form>
+    </DCCReference>
+    <DCCReference Include="fCalls.pas">
+      <Form>frmCalls</Form>
+    </DCCReference>
+    <DCCReference Include="fDetail.pas">
+      <Form>frmDetail</Form>
+    </DCCReference>
+    <DCCReference Include="fDisp.pas">
+      <Form>frmDisp</Form>
+    </DCCReference>
+    <DCCReference Include="fDistrictStreet.pas">
+      <Form>frmDistrictStreet</Form>
+    </DCCReference>
+    <DCCReference Include="fDistrictStreetEdit.pas">
+      <Form>frmDistrictStreetEdit</Form>
+    </DCCReference>
+    <DCCReference Include="fEdit.pas">
+      <Form>frmEdit</Form>
+    </DCCReference>
+    <DCCReference Include="fEditSpr.pas">
+      <Form>frmEditStr</Form>
+    </DCCReference>
+    <DCCReference Include="fFindDrv.pas">
+      <Form>frmFindDrv</Form>
+    </DCCReference>
+    <DCCReference Include="fMain.pas">
+      <Form>frmMain</Form>
+    </DCCReference>
+    <DCCReference Include="fModuleInfo.pas">
+      <Form>frmModuleInfo</Form>
+    </DCCReference>
+    <DCCReference Include="fSetAdr.pas">
+      <Form>frmSetAdr</Form>
+    </DCCReference>
+    <DCCReference Include="fSetAdrParam.pas">
+      <Form>frmSetAdrParam</Form>
+    </DCCReference>
+    <DCCReference Include="fSetIdentMG.pas">
+      <Form>frmSetIdentMG</Form>
+    </DCCReference>
+    <DCCReference Include="fSetNumDrv.pas">
+      <Form>frmSetNumDrv</Form>
+    </DCCReference>
+    <DCCReference Include="fSetPers.pas">
+      <Form>frmSetPers</Form>
+    </DCCReference>
+    <DCCReference Include="fSprClient.pas">
+      <Form>frmSprClient</Form>
+    </DCCReference>
+    <DCCReference Include="fSprCross.pas">
+      <Form>frmSprCross</Form>
+    </DCCReference>
+    <DCCReference Include="fSprDrivers.pas">
+      <Form>frmSprDrivers</Form>
+    </DCCReference>
+    <DCCReference Include="fSprKeys.pas">
+      <Form>frmSprKeys</Form>
+    </DCCReference>
+    <DCCReference Include="fSprMG.pas">
+      <Form>frmSprMG</Form>
+    </DCCReference>
+    <DCCReference Include="fSprPlaces.pas">
+      <Form>frmSprPlaces</Form>
+    </DCCReference>
+    <DCCReference Include="fSprRaion.pas">
+      <Form>frmSprRaion</Form>
+    </DCCReference>
+    <DCCReference Include="fSprSotr.pas">
+      <Form>frmSprSotr</Form>
+    </DCCReference>
+    <DCCReference Include="fSprStops.pas">
+      <Form>frmSprStops</Form>
+    </DCCReference>
+    <DCCReference Include="fSprStreet.pas">
+      <Form>frmSprStreet</Form>
+    </DCCReference>
+    <DCCReference Include="fSprTarif.pas">
+      <Form>frmSprTarif</Form>
+    </DCCReference>
+    <DCCReference Include="fSvodVed.pas">
+      <Form>frmSvodVed</Form>
+    </DCCReference>
+    <DCCReference Include="fSysParams.pas">
+      <Form>frmSysParams</Form>
+    </DCCReference>
+    <DCCReference Include="fSysSpr.pas">
+      <Form>frmSysSpr</Form>
+    </DCCReference>
+    <DCCReference Include="fTel.pas">
+      <Form>frmTel</Form>
+    </DCCReference>
+    <DCCReference Include="fVedSmena.pas">
+      <Form>frmVedSmena</Form>
+    </DCCReference>
+    <DCCReference Include="fVedSotr.pas">
+      <Form>frmVedSotr</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>

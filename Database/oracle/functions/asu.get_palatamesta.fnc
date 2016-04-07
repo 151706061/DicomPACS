@@ -1,0 +1,29 @@
+DROP FUNCTION ASU.GET_PALATAMESTA
+/
+
+--
+-- GET_PALATAMESTA  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSRTIPROOM (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PALATAMESTA" 
+  (pFK_ID IN NUMBER)
+  RETURN  NUMBER IS
+  nTemp NUMBER;
+  CURSOR cTemp IS SELECT /*+ rule*/FN_MESTA FROM TSRTIPROOM,
+                   (select max(TSRTIPROOM.FK_ID) FK_MAXID from TSRTIPROOM
+                           where FK_PALATAID=pFK_ID) WHERE FK_ID=FK_MAXID;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO nTemp;
+  CLOSE cTemp;
+  RETURN nTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,117 @@
+DROP TABLE ASU.TMISEXCH_TASKS CASCADE CONSTRAINTS
+/
+
+--
+-- TMISEXCH_TASKS  (Table) 
+--
+CREATE TABLE ASU.TMISEXCH_TASKS
+(
+  FK_ID              NUMBER(10),
+  FC_RECIPADDRESS    VARCHAR2(30 BYTE),
+  FC_TIMEINTERVAL    VARCHAR2(15 BYTE),
+  FL_TEXTVIEW        NUMBER(1),
+  FL_BOTHDIRECTIONS  NUMBER(1)                  DEFAULT 0,
+  FL_IMPORTANTONLY   NUMBER(1)                  DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TMISEXCH_TASKS IS 'перечень задач на оправку зарегистрированных в системе TMISMESSAGE_EXCHANGE'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_TASKS.FK_ID IS 'SEQUENCE=[SEQ_TMISEXCH]'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_TASKS.FC_RECIPADDRESS IS 'Адрес получателя'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_TASKS.FC_TIMEINTERVAL IS 'Интервал отправки в формате CRON'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_TASKS.FL_BOTHDIRECTIONS IS 'вся корреспонденция'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_TASKS.FL_IMPORTANTONLY IS 'только важные'
+/
+
+
+--
+-- TMISEXCH_TASKS_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TMISEXCH_TASKS (Table)
+--
+CREATE UNIQUE INDEX ASU.TMISEXCH_TASKS_BY_ID ON ASU.TMISEXCH_TASKS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TMISEXCH_TASKS_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TMISEXCH_TASKS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TMISEXCH_TASKS_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tmisexch_tasks
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  select seq_tmisexch.NEXTVAL into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TMISEXCH_TASKS_BEFORE_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TMISEXCH_TASKS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TMISEXCH_TASKS_BEFORE_DELETE" 
+ BEFORE
+  DELETE
+ ON tmisexch_tasks
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  delete from tmisexch_tasks_users where fk_taskid=:old.fk_id;
+end;
+/
+SHOW ERRORS;
+
+

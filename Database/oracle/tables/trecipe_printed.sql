@@ -1,0 +1,45 @@
+DROP TABLE ASU.TRECIPE_PRINTED CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_PRINTED  (Table) 
+--
+CREATE TABLE ASU.TRECIPE_PRINTED
+(
+  FK_TRECIPEID  NUMBER(10)                      NOT NULL,
+  FD_DATE       DATE,
+  FN_PRINT      NUMBER(1)                       DEFAULT 1                     NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_PRINTED IS 'Таблица, где указывается, что рецепт распечатан'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_PRINTED.FK_TRECIPEID IS 'Ссылка на таблицу TRECIPE'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_PRINTED.FD_DATE IS 'Дата печати'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_PRINTED.FN_PRINT IS 'Сколько раз распечатали'
+/
+
+

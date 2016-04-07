@@ -1,0 +1,41 @@
+DROP FUNCTION ASU.GET_BUNK_FC_CATEGORY
+/
+
+--
+-- GET_BUNK_FC_CATEGORY  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSMID (Table)
+--   TBUNKINFO (Table)
+--   TBUNKS (Table)
+--
+CREATE OR REPLACE FUNCTION ASU.GET_BUNK_FC_CATEGORY(pFD_BEGIN in date, pFD_END in date, pFK_BUNKSID in number) return varchar2 is
+
+  res varchar2(4000);
+
+   CURSOR C IS
+    select TSMID.FC_NAME from ASU.TBUNKINFO, ASU.Tbunks, asu.TSMID
+ where TBUNKINFO.FK_BUNKSID = TBUNKS.FK_ID
+  and
+  (TBUNKINFO.FD_BEGIN, TBUNKINFO.FD_END)
+    overlaps
+  (pFD_BEGIN, pFD_END)
+  and
+  TBUNKINFO.FK_BUNKSID = pFK_BUNKSID
+  and
+  TSMID.FK_ID = TBUNKINFO.FK_CATEGORY ORDER BY TBUNKINFO.FK_ID DESC;
+
+BEGIN
+  RES := '';
+  OPEN C;
+  FETCH C INTO  RES;
+  CLOSE C;
+  RETURN RES;
+END;
+/
+
+SHOW ERRORS;
+
+

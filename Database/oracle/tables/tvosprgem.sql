@@ -1,0 +1,122 @@
+DROP TABLE ASU.TVOSPRGEM CASCADE CONSTRAINTS
+/
+
+--
+-- TVOSPRGEM  (Table) 
+--
+CREATE TABLE ASU.TVOSPRGEM
+(
+  FK_ID     NUMBER(9)                           DEFAULT -1                    NOT NULL,
+  FK_SMID   NUMBER(9)                           DEFAULT -1                    NOT NULL,
+  FN_C1     NUMBER(5,2),
+  FN_C2     NUMBER(5,2),
+  FD_DATE   DATE,
+  FN_PROBA  NUMBER(2)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVOSPRGEM IS '??????? ???????? ?????????????????? ??? ???????????'
+/
+
+COMMENT ON COLUMN ASU.TVOSPRGEM.FK_ID IS 'SEQUENCE=[SEQ_TVOSPRGEM]'
+/
+
+COMMENT ON COLUMN ASU.TVOSPRGEM.FK_SMID IS '??? ?????? ?? ???? (???????? ? ??.)'
+/
+
+COMMENT ON COLUMN ASU.TVOSPRGEM.FN_C1 IS '1-? ????????'
+/
+
+COMMENT ON COLUMN ASU.TVOSPRGEM.FN_C2 IS '2-? ????????'
+/
+
+COMMENT ON COLUMN ASU.TVOSPRGEM.FD_DATE IS '???? ???????'
+/
+
+COMMENT ON COLUMN ASU.TVOSPRGEM.FN_PROBA IS '????? ??????'
+/
+
+
+--
+-- TVOSPRGEM_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TVOSPRGEM (Table)
+--
+CREATE UNIQUE INDEX ASU.TVOSPRGEM_BY_ID ON ASU.TVOSPRGEM
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVOSPRGEM_BY_SMID  (Index) 
+--
+--  Dependencies: 
+--   TVOSPRGEM (Table)
+--
+CREATE INDEX ASU.TVOSPRGEM_BY_SMID ON ASU.TVOSPRGEM
+(FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVOSPRGEM_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TVOSPRGEM (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVOSPRGEM_BEFORE_INSERT" 
+BEFORE  INSERT  ON ASU.TVOSPRGEM FOR EACH ROW
+Begin
+  SELECT SEQ_TVOSPRGEM.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

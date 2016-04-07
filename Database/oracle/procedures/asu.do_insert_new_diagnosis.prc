@@ -1,0 +1,37 @@
+DROP PROCEDURE ASU.DO_INSERT_NEW_DIAGNOSIS
+/
+
+--
+-- DO_INSERT_NEW_DIAGNOSIS  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSMID (Table)
+--   DO_INSERT_NEW_DIAG (Procedure)
+--   PKG_STATUTIL (Package)
+--
+CREATE OR REPLACE PROCEDURE ASU."DO_INSERT_NEW_DIAGNOSIS"
+      (pFK_PACID         IN OUT NUMBER,
+       pFK_SMDIAGID      IN NUMBER,
+       pFP_TYPE          IN VARCHAR2,
+       pFC_WRITE         IN VARCHAR2,
+       pFK_VRACHID       IN NUMBER,
+       pFC_SYNONIM       IN VARCHAR2) IS
+
+pMAX_FK_ID NUMBER;
+BEGIN
+        SELECT MAX(FK_ID)
+        INTO pMAX_FK_ID
+        FROM ASU.TSMID
+        WHERE (fl_del <> 1 or fl_del is null) and FC_SYNONIM = pFC_SYNONIM;
+
+        ASU.DO_INSERT_NEW_DIAG(pFK_PACID, pFK_SMDIAGID, stat.PKG_STATUTIL.GET_SMIDID(pFP_TYPE), 0, pFC_WRITE, SYSDATE,
+                              pFK_VRACHID, pMAX_FK_ID, pFK_SMDIAGID, -1);
+
+END "DO_INSERT_NEW_DIAGNOSIS";
+/
+
+SHOW ERRORS;
+
+

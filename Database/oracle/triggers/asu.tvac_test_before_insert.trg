@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TVAC_TEST_BEFORE_INSERT
+/
+
+--
+-- TVAC_TEST_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_VAC_TEST (Sequence)
+--   TVAC_TEST (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVAC_TEST_BEFORE_INSERT" BEFORE INSERT
+ON ASU.TVAC_TEST FOR EACH ROW
+begin
+    --  Column "FK_ID" uses sequence SEQ_VAC_TEST
+      IF :NEW.FK_ID IS NULL
+      THEN
+         SELECT SEQ_VAC_TEST.NEXTVAL INTO :NEW.FK_ID from dual;
+      END IF;
+end;
+/
+SHOW ERRORS;
+
+

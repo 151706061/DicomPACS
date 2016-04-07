@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_CURR_RAION_KLADR_ID
+/
+
+--
+-- GET_CURR_RAION_KLADR_ID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TKLADR (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_CURR_RAION_KLADR_ID" RETURN TKLADR.FK_ID%TYPE IS
+-- Возвращает ID текущего района
+-- Created 20081017 by Linnikov
+BEGIN
+  RETURN(1736);
+END GET_CURR_RAION_KLADR_ID;
+/
+
+SHOW ERRORS;
+
+

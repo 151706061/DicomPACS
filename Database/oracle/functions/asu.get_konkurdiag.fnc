@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_KONKURDIAG
+/
+
+--
+-- GET_KONKURDIAG  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_KONKURDIAG" 
+return number
+is 
+begin
+  return 319033;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_KONKURDIAG TO PUBLIC
+/
+

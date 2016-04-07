@@ -1,0 +1,33 @@
+DROP FUNCTION ASU.GET_ZAVTERAPEVT
+/
+
+--
+-- GET_ZAVTERAPEVT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_ZAVTERAPEVT" 
+return number
+is
+begin
+  return 1185;
+end;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM STAT.GET_ZAVTERAPEVT
+/
+
+--
+-- GET_ZAVTERAPEVT  (Synonym) 
+--
+--  Dependencies: 
+--   GET_ZAVTERAPEVT (Function)
+--
+CREATE SYNONYM STAT.GET_ZAVTERAPEVT FOR ASU.GET_ZAVTERAPEVT
+/
+
+

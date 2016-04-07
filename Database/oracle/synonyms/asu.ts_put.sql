@@ -1,0 +1,10 @@
+DROP SYNONYM ASU.TS_PUT
+/
+
+--
+-- TS_PUT  (Synonym) 
+--
+CREATE SYNONYM ASU.TS_PUT FOR BUH.TS_PUT
+/
+
+

@@ -1,0 +1,176 @@
+ALTER TABLE ASU.TDISTRICT_HISTORY
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TDISTRICT_HISTORY CASCADE CONSTRAINTS
+/
+
+--
+-- TDISTRICT_HISTORY  (Table) 
+--
+CREATE TABLE ASU.TDISTRICT_HISTORY
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FK_PEPLID     NUMBER                          NOT NULL,
+  FD_DATE_MOVE  DATE                            NOT NULL,
+  FK_AREAID     NUMBER                          NOT NULL,
+  FK_REASON     NUMBER,
+  FK_SOTRID     NUMBER                          NOT NULL,
+  FC_TYPE       CHAR(1 BYTE)                    NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          4M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TDISTRICT_HISTORY IS 'История перемещений пациента между участками'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT_HISTORY.FK_PEPLID IS 'ID пациента из TPEOPLES.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT_HISTORY.FD_DATE_MOVE IS 'Дата перемещения'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT_HISTORY.FK_AREAID IS 'ID участка КУДА или ОТКУДА перемещен пациент TDISTRICT_NAME.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT_HISTORY.FK_REASON IS 'Код причины снятия с учета - TSMID.FK_ID для TSMID.FK_OWNER=get_synid(''AREA_REASON_TYPE'')'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT_HISTORY.FK_SOTRID IS 'ID сотрудника cменившего участок из TSOTR.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT_HISTORY.FC_TYPE IS 'Тип операции: I - поступление на учет, O - снятие с учета'
+/
+
+
+--
+-- TDISTRICT_HISTORY_AREA  (Index) 
+--
+--  Dependencies: 
+--   TDISTRICT_HISTORY (Table)
+--
+CREATE INDEX ASU.TDISTRICT_HISTORY_AREA ON ASU.TDISTRICT_HISTORY
+(FK_AREAID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          3M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDISTRICT_HISTORY_PAC  (Index) 
+--
+--  Dependencies: 
+--   TDISTRICT_HISTORY (Table)
+--
+CREATE INDEX ASU.TDISTRICT_HISTORY_PAC ON ASU.TDISTRICT_HISTORY
+(FK_PEPLID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          3M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDISTRICT_HISTORY_PK  (Index) 
+--
+--  Dependencies: 
+--   TDISTRICT_HISTORY (Table)
+--
+CREATE UNIQUE INDEX ASU.TDISTRICT_HISTORY_PK ON ASU.TDISTRICT_HISTORY
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          2M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDISTRICT_HIST_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDISTRICT_HISTORY (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDISTRICT_HIST_BEFORE_INSERT" 
+ BEFORE INSERT ON ASU.TDISTRICT_HISTORY  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+ IF :NEW.FK_ID IS NULL THEN
+  SELECT SEQ_TDISTRICT_HISTORY.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+ END IF;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TDISTRICT_HISTORY 
+-- 
+ALTER TABLE ASU.TDISTRICT_HISTORY ADD (
+  CONSTRAINT TDISTRICT_HISTORY_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          2M
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

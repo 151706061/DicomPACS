@@ -1,0 +1,27 @@
+DROP FUNCTION ASU.GET_FIRST_DIGIT_FROM_CHAR
+/
+
+--
+-- GET_FIRST_DIGIT_FROM_CHAR  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_FIRST_DIGIT_FROM_CHAR" (S IN VARCHAR2) RETURN VARCHAR2 IS
+ -- Created 20080411 by Linnikov
+ n NUMBER;
+BEGIN
+ n := 1;
+ WHILE INSTR('0123456789', SUBSTR(s, n, 1)) > 0 LOOP
+  IF n = Length(S) THEN
+   RETURN(S);
+  END IF;
+  n := n + 1;
+ END LOOP;
+ RETURN(SUBSTR(s, 1, n - 1));
+END;
+/
+
+SHOW ERRORS;
+
+

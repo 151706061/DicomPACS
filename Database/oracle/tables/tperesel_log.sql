@@ -1,0 +1,246 @@
+DROP TABLE ASU.TPERESEL_LOG CASCADE CONSTRAINTS
+/
+
+--
+-- TPERESEL_LOG  (Table) 
+--
+CREATE TABLE ASU.TPERESEL_LOG
+(
+  FK_ID          NUMBER(15)                     DEFAULT -1,
+  FK_PALATAID    NUMBER(15)                     DEFAULT -1,
+  FK_PACID       NUMBER(15)                     DEFAULT -1,
+  FD_DATA1       DATE,
+  FD_DATA2       DATE,
+  FK_SROKID      NUMBER(15)                     DEFAULT -1,
+  FL_BUH         NUMBER                         DEFAULT 0,
+  FK_KOYKAVIDID  NUMBER,
+  FK_DOCOBSLID   NUMBER,
+  FD_INS         DATE                           DEFAULT SYSDATE,
+  FK_SOTRID      NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          16K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPERESEL_LOG IS 'таблица переселений пациента by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TPERESEL_LOG.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TPERESEL_LOG.FK_PALATAID IS 'TROOM.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TPERESEL_LOG.FK_PACID IS 'код пациента'
+/
+
+COMMENT ON COLUMN ASU.TPERESEL_LOG.FD_DATA1 IS 'начало периода'
+/
+
+COMMENT ON COLUMN ASU.TPERESEL_LOG.FD_DATA2 IS 'конец периода'
+/
+
+COMMENT ON COLUMN ASU.TPERESEL_LOG.FK_SROKID IS 'TSROKY.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TPERESEL_LOG.FL_BUH IS 'отметка бухгалтерии'
+/
+
+COMMENT ON COLUMN ASU.TPERESEL_LOG.FK_KOYKAVIDID IS 'Профиль койки'
+/
+
+COMMENT ON COLUMN ASU.TPERESEL_LOG.FK_DOCOBSLID IS 'Ссылка на вид док-та обслуживания TDocObsl'
+/
+
+
+--
+-- TPERESEL_LOG_BY_FD_DATA1_DATA2  (Index) 
+--
+--  Dependencies: 
+--   TPERESEL_LOG (Table)
+--
+CREATE INDEX ASU.TPERESEL_LOG_BY_FD_DATA1_DATA2 ON ASU.TPERESEL_LOG
+(FD_DATA1, FD_DATA2)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1664K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERESEL_LOG_BY_FD_DATA2  (Index) 
+--
+--  Dependencies: 
+--   TPERESEL_LOG (Table)
+--
+CREATE INDEX ASU.TPERESEL_LOG_BY_FD_DATA2 ON ASU.TPERESEL_LOG
+(FD_DATA2)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1536K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERESEL_LOG_BY_FK_PALATAID  (Index) 
+--
+--  Dependencies: 
+--   TPERESEL_LOG (Table)
+--
+CREATE INDEX ASU.TPERESEL_LOG_BY_FK_PALATAID ON ASU.TPERESEL_LOG
+(FK_PALATAID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          896K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERESEL_LOG_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TPERESEL_LOG (Table)
+--
+CREATE INDEX ASU.TPERESEL_LOG_BY_ID ON ASU.TPERESEL_LOG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          512K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERESEL_LOG_BY_PACID  (Index) 
+--
+--  Dependencies: 
+--   TPERESEL_LOG (Table)
+--
+CREATE INDEX ASU.TPERESEL_LOG_BY_PACID ON ASU.TPERESEL_LOG
+(FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERESEL_LOG_DATA2DATA1  (Index) 
+--
+--  Dependencies: 
+--   TPERESEL_LOG (Table)
+--
+CREATE INDEX ASU.TPERESEL_LOG_DATA2DATA1 ON ASU.TPERESEL_LOG
+(FD_DATA2, FD_DATA1)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1920K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERESEL_LOG$FK_DOCOBSLID  (Index) 
+--
+--  Dependencies: 
+--   TPERESEL_LOG (Table)
+--
+CREATE INDEX ASU.TPERESEL_LOG$FK_DOCOBSLID ON ASU.TPERESEL_LOG
+(FK_DOCOBSLID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

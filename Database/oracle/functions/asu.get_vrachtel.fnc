@@ -1,0 +1,27 @@
+DROP FUNCTION ASU.GET_VRACHTEL
+/
+
+--
+-- GET_VRACHTEL  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSOTR (Synonym)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_VRACHTEL" -- Created by TimurLan for PKG_REGIST_REPORTS
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+  dTemp VARCHAR2(20);
+  CURSOR cTemp IS SELECT TSOTR.FC_TEL FROM TSOTR WHERE TSOTR.FK_ID = pFK_ID;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO dTemp;
+  CLOSE cTemp;
+  RETURN dTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

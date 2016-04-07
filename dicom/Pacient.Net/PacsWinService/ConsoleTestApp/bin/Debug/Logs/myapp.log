@@ -1,0 +1,10 @@
+2014-10-03 10:30:09,137 [INFO] [11] - UpdatePrescs - Begin. ThreadCount=1
+2014-10-03 10:30:13,184 [INFO] [11] - GetLpuListFS
+2014-10-03 10:30:38,372 [INFO] [11] - SetMaxThreads=1, Succeeded=False
+2014-10-03 10:30:38,373 [INFO] [11] - SetMaxThreads=2, Succeeded=False
+2014-10-03 10:30:38,373 [INFO] [11] - SetMaxThreads=3, Succeeded=False
+2014-10-03 10:30:38,373 [INFO] [11] - SetMaxThreads=4, Succeeded=True
+2014-10-03 10:30:46,093 [INFO] [11] - UpdatePrescsForLpu - Begin.
+2014-10-03 10:30:51,863 [INFO] [11] - GetPrescListToUpdate: lpu=[Oid=[b31cb827-6c20-4f94-bb4a-b73abe8fb8f7] [rDVR6USd4ak7MQap1by-], Token=[rDVR6USd4ak7MQap1by-] CompName=[Тестовое ЛПУ г. Тулы (ГУЗ ЯО "Бурмакинская Районная Больница № 1")]], datetime_on=[03.10.2014 10:29:52]
+2014-10-03 10:31:07,422 [INFO] [11] - UpdatePrescsForLpu - ok. Duration: 0.371771263333333 minutes
+2014-10-03 10:31:12,905 [INFO] [11] - UpdatePrescs - ok. Duration: 1.05096011166667 minutes

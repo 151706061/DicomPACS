@@ -1,0 +1,172 @@
+DROP TABLE ASU.TASKREPLYGROUP CASCADE CONSTRAINTS
+/
+
+--
+-- TASKREPLYGROUP  (Table) 
+--
+CREATE TABLE ASU.TASKREPLYGROUP
+(
+  FK_ID          NUMBER(15)                     NOT NULL,
+  FC_ASK         VARCHAR2(50 BYTE)              NOT NULL,
+  FC_ASKFIELD    VARCHAR2(50 BYTE)              NOT NULL,
+  FC_REPLY       VARCHAR2(50 BYTE)              NOT NULL,
+  FC_REPLYFIELD  VARCHAR2(50 BYTE)              NOT NULL,
+  FC_COMMENT     VARCHAR2(1024 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          16K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TASKREPLYGROUP IS 'Группы соотвтетсвий типа вопрос-ответ Author:Efimov'
+/
+
+COMMENT ON COLUMN ASU.TASKREPLYGROUP.FK_ID IS 'ASU.SEQ_TASKREPLYGROUP'
+/
+
+COMMENT ON COLUMN ASU.TASKREPLYGROUP.FC_ASK IS 'таблица-вопрос (каждому вопросу соотвтетсвует только дин ответ, но один ответ может быть на несколько вопросов)'
+/
+
+COMMENT ON COLUMN ASU.TASKREPLYGROUP.FC_ASKFIELD IS 'название поля сопоставления в таблице-вопросе'
+/
+
+COMMENT ON COLUMN ASU.TASKREPLYGROUP.FC_REPLY IS 'таблица-ответ'
+/
+
+COMMENT ON COLUMN ASU.TASKREPLYGROUP.FC_REPLYFIELD IS 'название поля сопоставления в таблице-ответе'
+/
+
+
+--
+-- I_TASKREPLYGROUP_A_BY_R  (Index) 
+--
+--  Dependencies: 
+--   TASKREPLYGROUP (Table)
+--
+CREATE INDEX ASU.I_TASKREPLYGROUP_A_BY_R ON ASU.TASKREPLYGROUP
+(FC_ASK, FC_ASKFIELD, FC_REPLY, FC_REPLYFIELD)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- I_TASKREPLYGROUP_R_BY_A  (Index) 
+--
+--  Dependencies: 
+--   TASKREPLYGROUP (Table)
+--
+CREATE UNIQUE INDEX ASU.I_TASKREPLYGROUP_R_BY_A ON ASU.TASKREPLYGROUP
+(FC_REPLY, FC_REPLYFIELD, FC_ASK, FC_ASKFIELD)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- I_TASKREPLYGROUP_TABLES  (Index) 
+--
+--  Dependencies: 
+--   TASKREPLYGROUP (Table)
+--
+CREATE INDEX ASU.I_TASKREPLYGROUP_TABLES ON ASU.TASKREPLYGROUP
+(FC_ASK, FC_REPLY)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- K_TASKREPLYGROUP_ID  (Index) 
+--
+--  Dependencies: 
+--   TASKREPLYGROUP (Table)
+--
+CREATE INDEX ASU.K_TASKREPLYGROUP_ID ON ASU.TASKREPLYGROUP
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TASKREPLYGROUP_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TASKREPLYGROUP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TASKREPLYGROUP_INSERT" 
+ BEFORE
+  INSERT
+ ON ASU.TASKREPLYGROUP REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT asu.SEQ_TASKREPLYGROUP.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

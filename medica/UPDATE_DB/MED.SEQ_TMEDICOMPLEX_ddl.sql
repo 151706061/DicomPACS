@@ -1,0 +1,16 @@
+-- Start of DDL Script for Sequence MED.SEQ_TMEDICOMPLEX
+-- Generated 11.10.07 10:15:57 from MED@ASU
+
+CREATE SEQUENCE med.seq_tmedicomplex
+  INCREMENT BY 1
+  START WITH 1
+  MINVALUE 1
+  MAXVALUE 999999999999999999999999999
+  NOCYCLE
+  ORDER
+  CACHE 20
+/
+
+
+-- End of DDL Script for Sequence MED.SEQ_TMEDICOMPLEX
+

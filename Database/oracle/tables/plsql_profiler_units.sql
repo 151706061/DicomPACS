@@ -1,0 +1,77 @@
+ALTER TABLE ASU.PLSQL_PROFILER_UNITS
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.PLSQL_PROFILER_UNITS CASCADE CONSTRAINTS
+/
+
+--
+-- PLSQL_PROFILER_UNITS  (Table) 
+--
+--  Dependencies: 
+--   PLSQL_PROFILER_RUNS (Table)
+--
+CREATE TABLE ASU.PLSQL_PROFILER_UNITS
+(
+  RUNID           NUMBER,
+  UNIT_NUMBER     NUMBER,
+  UNIT_TYPE       VARCHAR2(32 BYTE),
+  UNIT_OWNER      VARCHAR2(32 BYTE),
+  UNIT_NAME       VARCHAR2(32 BYTE),
+  UNIT_TIMESTAMP  DATE,
+  TOTAL_TIME      NUMBER                        DEFAULT 0                     NOT NULL,
+  SPARE1          NUMBER,
+  SPARE2          NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.PLSQL_PROFILER_UNITS IS 'Information about each library unit in a run'
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table PLSQL_PROFILER_UNITS 
+-- 
+ALTER TABLE ASU.PLSQL_PROFILER_UNITS ADD (
+  PRIMARY KEY
+ (RUNID, UNIT_NUMBER)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table PLSQL_PROFILER_UNITS 
+-- 
+ALTER TABLE ASU.PLSQL_PROFILER_UNITS ADD (
+  FOREIGN KEY (RUNID) 
+ REFERENCES ASU.PLSQL_PROFILER_RUNS (RUNID))
+/
+

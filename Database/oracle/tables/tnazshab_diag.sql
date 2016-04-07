@@ -1,0 +1,88 @@
+DROP TABLE ASU.TNAZSHAB_DIAG CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZSHAB_DIAG  (Table) 
+--
+CREATE TABLE ASU.TNAZSHAB_DIAG
+(
+  FK_ID      NUMBER(15),
+  FK_SHABID  NUMBER(15),
+  FK_SMID    NUMBER(15)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNAZSHAB_DIAG IS 'Таблица зависимостей между шаблоном и диагнозами'
+/
+
+COMMENT ON COLUMN ASU.TNAZSHAB_DIAG.FK_ID IS 'SEQUENCE=[SEQ_TNAZSHAB_DIAG]'
+/
+
+COMMENT ON COLUMN ASU.TNAZSHAB_DIAG.FK_SHABID IS 'Код шаблона TNAZSHABLON.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TNAZSHAB_DIAG.FK_SMID IS 'Код диагноза TSMID.FK_ID'
+/
+
+
+--
+-- TNAZSHAB_DIAG_ID  (Index) 
+--
+--  Dependencies: 
+--   TNAZSHAB_DIAG (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZSHAB_DIAG_ID ON ASU.TNAZSHAB_DIAG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZSHAB_DIAG_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZSHAB_DIAG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZSHAB_DIAG_BEFORE_INSERT" 
+BEFORE INSERT
+ON tnazshab_diag
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+begin
+  select seq_tnazshab_diag.NEXTVAL into :NEW.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

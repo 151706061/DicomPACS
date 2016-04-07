@@ -1,0 +1,25 @@
+DROP INDEX ASU.TPROTIV#SMID2
+/
+
+--
+-- TPROTIV#SMID2  (Index) 
+--
+CREATE INDEX ASU.TPROTIV#SMID2 ON ASU.TPROTIV
+(FK_SMID2)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          12672K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

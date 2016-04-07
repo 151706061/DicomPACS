@@ -1,0 +1,7 @@
+ALTER TABLE MED.TPOSTAV 
+ ADD (
+  FC_REKVIZITI VARCHAR2 (250)
+ )
+/
+COMMENT ON COLUMN MED.TPOSTAV.FC_REKVIZITI IS 'реквизиты поставщиков для указания в накладных'
+/

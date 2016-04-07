@@ -1,0 +1,36 @@
+DROP FUNCTION ASU.GET_GROUPDIAGID
+/
+
+--
+-- GET_GROUPDIAGID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_GROUPDIAGID" 
+return number
+is
+begin
+  return 2872;
+end;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM STAT.GET_GROUPDIAGID
+/
+
+--
+-- GET_GROUPDIAGID  (Synonym) 
+--
+--  Dependencies: 
+--   GET_GROUPDIAGID (Function)
+--
+CREATE SYNONYM STAT.GET_GROUPDIAGID FOR ASU.GET_GROUPDIAGID
+/
+
+
+GRANT EXECUTE ON ASU.GET_GROUPDIAGID TO PUBLIC
+/
+

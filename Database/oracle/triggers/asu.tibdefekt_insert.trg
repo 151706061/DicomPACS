@@ -1,0 +1,23 @@
+DROP TRIGGER ASU.TIBDEFEKT_INSERT
+/
+
+--
+-- TIBDEFEKT_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TIBDEFEKT (Sequence)
+--   TIBDEFEKT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TIBDEFEKT_INSERT" 
+BEFORE INSERT
+ON ASU.TIBDEFEKT REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  select seq_TIBDEFEKT.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

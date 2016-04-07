@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TNAZRASPRED_BEFOR_INSERT
+/
+
+--
+-- TNAZRASPRED_BEFOR_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TNAZRASPRED (Sequence)
+--   TNAZRASPRED (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZRASPRED_BEFOR_INSERT" 
+BEFORE  INSERT  ON ASU.TNAZRASPRED REFERENCING
+ NEW AS NEW
+ OLD AS OLD
+FOR EACH ROW
+Begin
+    select seq_tnazraspred.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,188 @@
+DROP TABLE ASU.TPERIOD_COMPANY CASCADE CONSTRAINTS
+/
+
+--
+-- TPERIOD_COMPANY  (Table) 
+--
+CREATE TABLE ASU.TPERIOD_COMPANY
+(
+  FK_ID           NUMBER                        NOT NULL,
+  FC_NAME         VARCHAR2(200 BYTE),
+  FK_OWNER        NUMBER(15)                    DEFAULT -1,
+  FN_ORDER        NUMBER(15),
+  FK_COMPANYID    NUMBER(15)                    DEFAULT 0,
+  FD_DATE1        DATE,
+  FD_DATE2        DATE,
+  FL_DEL          NUMBER(1)                     DEFAULT 0,
+  FD_DATECONTROL  DATE,
+  FK_SOTRCONTROL  NUMBER(15),
+  FN_PRIZNAK      NUMBER(1)                     DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPERIOD_COMPANY IS 'Таблица связующая период выверки и компанию. Древовидная структура. Создана для Рентгена(флюорографии) by X-Side'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FK_ID IS 'SEQ_TPERIOD_COMPANY'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FC_NAME IS 'Наименование'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FK_OWNER IS 'Родитель'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FN_ORDER IS 'Порядок'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FK_COMPANYID IS 'TCOMPANY.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FD_DATE1 IS 'Дата начала периода'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FD_DATE2 IS 'Дата окончания периода'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FL_DEL IS 'Признак удаления'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FD_DATECONTROL IS 'Дата сверки'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FK_SOTRCONTROL IS 'Сотрудник сверявший'
+/
+
+COMMENT ON COLUMN ASU.TPERIOD_COMPANY.FN_PRIZNAK IS 'Признак того является ли предприятияе подчиненным или находится в корневой ветке(1-является, 0-не является)'
+/
+
+
+--
+-- TPERIOD_COMPANY_COMPANYID  (Index) 
+--
+--  Dependencies: 
+--   TPERIOD_COMPANY (Table)
+--
+CREATE INDEX ASU.TPERIOD_COMPANY_COMPANYID ON ASU.TPERIOD_COMPANY
+(FK_COMPANYID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERIOD_COMPANY_FL_DEL  (Index) 
+--
+--  Dependencies: 
+--   TPERIOD_COMPANY (Table)
+--
+CREATE INDEX ASU.TPERIOD_COMPANY_FL_DEL ON ASU.TPERIOD_COMPANY
+(FL_DEL)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERIOD_COMPANY_OWNER  (Index) 
+--
+--  Dependencies: 
+--   TPERIOD_COMPANY (Table)
+--
+CREATE INDEX ASU.TPERIOD_COMPANY_OWNER ON ASU.TPERIOD_COMPANY
+(FK_OWNER)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERIOD_COMPANY_DEL  (Trigger) 
+--
+--  Dependencies: 
+--   TPERIOD_COMPANY (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPERIOD_COMPANY_DEL" 
+ BEFORE
+  DELETE
+ ON asu.tperiod_company
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  delete from asu.tpeoples_company where fk_companyid = :old.fk_companyid and fk_periodid = :old.fk_owner;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TPERIOD_COMPANY_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPERIOD_COMPANY (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPERIOD_COMPANY_BEFORE_INSERT" 
+ BEFORE 
+ INSERT
+ ON ASU.TPERIOD_COMPANY  FOR EACH ROW
+BEGIN
+  SELECT SEQ_TPERIOD_COMPANY.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+

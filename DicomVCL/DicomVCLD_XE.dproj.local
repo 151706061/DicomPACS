@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899-12-30 00:00:00.000.dproj,F:\Program Files (x86)\Borland\Delphi7\dicomvcl\Source\DicomVCLD2010.dproj=F:\Program Files (x86)\Borland\Delphi7\dicomvcl\Source\DicomVCLD2009.dproj</Transaction>
+    <Transaction>1899-12-30 00:00:00.000.671,C:\Program Files\Borland\Delphi7\dicomvcl\Source\DicomVCLD_XE.dproj=C:\Program Files\Borland\Delphi7\dicomvcl\Source\DicomVCLD2010.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

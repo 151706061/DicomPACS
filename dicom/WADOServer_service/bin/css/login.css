@@ -1,0 +1,121 @@
+.mybgimg {
+/*	background-image: url('img/login_img_emp.png');*/
+	background-color: #65B1D5;
+	height: 410px;
+}
+
+.myheight1 {
+	height: 200px;
+}
+
+
+
+.myborder {
+	border:1px solid; 
+}
+
+.mybgwhite {
+	background-color: white;
+}
+
+.bs-docs-example:after {
+    background-color: #F5F5F5;
+    border: 1px solid #DDDDDD;
+    border-radius: 0 0 0 0;
+    color: #9DA0A4;
+    content: "Example";
+    font-size: 12px;
+    font-weight: bold;
+    left: -1px;
+    padding: 3px 7px;
+    position: absolute;
+    top: -1px;
+}
+.bs-docs-example {
+    background-color: #FFFFFF;
+    border: 1px solid #DDDDDD;
+    border-radius: 0 0 0 0;
+    margin: 15px 0;
+    padding: 39px 19px 14px;
+    position: relative;
+}
+
+.mybottomcolor {
+	background-color: #0D2937;
+/*	color: #000000;*/
+}
+
+.mycolorwhite {
+	color:white;
+}
+
+.mycolorgrey {
+	color:#899096;
+}
+
+.mycolorgrey:hover {
+	color:white;
+}
+
+.bottom_btn_pd {
+	padding-top:8px;
+}
+
+.mycolorbox1 {
+	background-color: #3780A1 !important;
+}
+
+.mycolorbox2 {
+	background-color: #38A264 !important;
+}
+
+.mycolorbox3 {
+	background-color: #1F5873 !important;
+}
+
+.mycolorbox5 {
+	background-color: #A1375F !important;
+}
+
+.mycolorboxtitle {
+	background-color: #65B1D5 !important;
+}
+
+.mywidthbox1 {
+	width:440px !important;
+}
+
+.mywidthbox1txt {
+	width:340px !important;
+/*	height:190px !important;
+	max-height:190px !important;	*/
+}
+
+.mywidthbox1txthd {
+	font-size: 25px !important;
+}
+
+.mybox1btn {
+	 padding-top:110px !important;
+/*	 padding-left:115px !important;*/
+}
+
+.my2reklrow {
+	width:320px !important;	
+	
+	 height: 160px !important;	
+    padding-left: 4px !important;	
+    padding-top: 20px !important;	
+}
+
+.my5reklrow {
+		
+	
+	 height: 160px !important;	
+    padding-left: 4px !important;	
+    padding-top: 20px !important;	
+}
+
+.mywidthbox5 {
+	width:275px !important;
+}

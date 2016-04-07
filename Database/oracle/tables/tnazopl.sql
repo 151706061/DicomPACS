@@ -1,0 +1,102 @@
+DROP TABLE ASU.TNAZOPL CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZOPL  (Table) 
+--
+CREATE TABLE ASU.TNAZOPL
+(
+  FK_ID                NUMBER                   NOT NULL,
+  FK_NAZID             NUMBER,
+  FK_SMID_TAL_OPL      NUMBER,
+  FK_SMID_COMPN_DOGVR  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- TNAZ_OPL_BY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TNAZOPL (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZ_OPL_BY_FK_ID ON ASU.TNAZOPL
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZOPL_BY_NAZID  (Index) 
+--
+--  Dependencies: 
+--   TNAZOPL (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZOPL_BY_NAZID ON ASU.TNAZOPL
+(FK_NAZID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZOPL_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZOPL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZOPL_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TNAZOPL  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+Begin
+  SELECT SEQ_TNAZOPL.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

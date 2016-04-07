@@ -1,0 +1,139 @@
+DROP TABLE ASU.TPROFP_LIST CASCADE CONSTRAINTS
+/
+
+--
+-- TPROFP_LIST  (Table) 
+--
+CREATE TABLE ASU.TPROFP_LIST
+(
+  FK_ID             NUMBER(15),
+  FK_ACTIONID       NUMBER(15),
+  FK_DOGID          NUMBER(10),
+  FK_AMBULANCEID    NUMBER(15),
+  FK_DOCID          NUMBER(15),
+  FN_PROFPAGE       NUMBER(2),
+  FK_SOSID          NUMBER(2),
+  FK_INSURANCEID    NUMBER(15),
+  FK_USLWORK        NUMBER,
+  FK_WORKPLACEHIST  NUMBER,
+  FN_PROFPAGE_ALL   NUMBER(2)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TPROFP_LIST.FK_ID IS 'SEQUENCE=[SEQ_TKARTA]'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_LIST.FK_DOCID IS 'связка с TDOC'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_LIST.FN_PROFPAGE_ALL IS 'Общийстаж'
+/
+
+
+--
+-- TPROFP_LIST_BY_ACTIONID_AMBID  (Index) 
+--
+--  Dependencies: 
+--   TPROFP_LIST (Table)
+--
+CREATE UNIQUE INDEX ASU.TPROFP_LIST_BY_ACTIONID_AMBID ON ASU.TPROFP_LIST
+(FK_ACTIONID, FK_AMBULANCEID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFP_LIST_BY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TPROFP_LIST (Table)
+--
+CREATE UNIQUE INDEX ASU.TPROFP_LIST_BY_FK_ID ON ASU.TPROFP_LIST
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFP_LIST_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPROFP_LIST (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFP_LIST_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tprofp_list
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  select seq_tkarta.NEXTVAL into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TPROFP_LIST_BEFORE_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TPROFP_LIST (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFP_LIST_BEFORE_DELETE" 
+ BEFORE
+  DELETE
+ ON tprofp_list
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  delete from tprofp_list_naz where fk_listid=:old.fk_id;
+  delete from tib where fk_pacid=:old.fk_id;
+end;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,103 @@
+DROP TABLE ASU.TQCSHUHARTFIX CASCADE CONSTRAINTS
+/
+
+--
+-- TQCSHUHARTFIX  (Table) 
+--
+CREATE TABLE ASU.TQCSHUHARTFIX
+(
+  FK_ID          NUMBER(9)                      DEFAULT -1                    NOT NULL,
+  FK_SMID        NUMBER(9)                      DEFAULT -1,
+  FN_XM          NUMBER(9,4)                    DEFAULT 0,
+  FN_S           NUMBER(9,4)                    DEFAULT 0,
+  FD_DATA1       DATE,
+  FD_DATA2       DATE,
+  FK_KONTRMATID  NUMBER(9)                      DEFAULT -1
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TQCSHUHARTFIX IS 'Таблица с фиксированными значениями Xср и S для исследования'
+/
+
+COMMENT ON COLUMN ASU.TQCSHUHARTFIX.FK_ID IS 'SEQUENCE=[SEQ_TQCSHUHARTFIX]'
+/
+
+COMMENT ON COLUMN ASU.TQCSHUHARTFIX.FK_SMID IS 'Код из справочника'
+/
+
+COMMENT ON COLUMN ASU.TQCSHUHARTFIX.FN_XM IS 'Значение Xср'
+/
+
+COMMENT ON COLUMN ASU.TQCSHUHARTFIX.FN_S IS 'Значение среднеквадратичного отклонения'
+/
+
+COMMENT ON COLUMN ASU.TQCSHUHARTFIX.FD_DATA1 IS 'Дата начала действия фиксированных значений'
+/
+
+COMMENT ON COLUMN ASU.TQCSHUHARTFIX.FD_DATA2 IS 'Дата конца действия фиксированных значений'
+/
+
+COMMENT ON COLUMN ASU.TQCSHUHARTFIX.FK_KONTRMATID IS 'Код контрольного материала'
+/
+
+
+--
+-- TQCSHUHARTFIX_SMID_DATAS  (Index) 
+--
+--  Dependencies: 
+--   TQCSHUHARTFIX (Table)
+--
+CREATE INDEX ASU.TQCSHUHARTFIX_SMID_DATAS ON ASU.TQCSHUHARTFIX
+(FK_SMID, FD_DATA1, FD_DATA2)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TQCSHUHARTFIX_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TQCSHUHARTFIX (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TQCSHUHARTFIX_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TQCSHUHARTFIX REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  SELECT SEQ_TQCSHUHARTFIX.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

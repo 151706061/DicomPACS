@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_NAZTABLE_SECID
+/
+
+--
+-- GET_NAZTABLE_SECID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_NAZTABLE_SECID" 
+return number
+is 
+begin
+  return 10;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_NAZTABLE_SECID TO PUBLIC
+/
+

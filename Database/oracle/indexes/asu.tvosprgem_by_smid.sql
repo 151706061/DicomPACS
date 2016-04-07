@@ -1,0 +1,25 @@
+DROP INDEX ASU.TVOSPRGEM_BY_SMID
+/
+
+--
+-- TVOSPRGEM_BY_SMID  (Index) 
+--
+CREATE INDEX ASU.TVOSPRGEM_BY_SMID ON ASU.TVOSPRGEM
+(FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

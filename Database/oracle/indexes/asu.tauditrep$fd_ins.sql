@@ -1,0 +1,25 @@
+DROP INDEX ASU.TAUDITREP$FD_INS
+/
+
+--
+-- TAUDITREP$FD_INS  (Index) 
+--
+CREATE INDEX ASU.TAUDITREP$FD_INS ON ASU.TAUDITREP
+(FD_INS)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          3120K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

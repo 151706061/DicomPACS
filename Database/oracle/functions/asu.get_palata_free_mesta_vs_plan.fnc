@@ -1,0 +1,37 @@
+DROP FUNCTION ASU.GET_PALATA_FREE_MESTA_VS_PLAN
+/
+
+--
+-- GET_PALATA_FREE_MESTA_VS_PLAN  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TPERESEL (Table)
+--   GET_PALATAMESTA (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PALATA_FREE_MESTA_VS_PLAN" 
+  ( pFK_PACID IN NUMBER, pFK_PALATAID IN NUMBER, pFD_DATA IN DATE)
+  RETURN  NUMBER IS
+  CURSOR cTemp IS SELECT /*+ rule*/COUNT(TPERESEL.FK_ID)
+                    FROM TPERESEL
+                   WHERE FK_PALATAID=pFK_PALATAID
+                     AND FK_PACID <> pFK_PACID
+                     AND pFD_DATA BETWEEN FD_DATA1
+                     AND FD_DATA2;
+  nTemp1 NUMBER;
+  nTemp2 NUMBER;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO nTemp1;
+  CLOSE cTemp;
+  SELECT GET_PALATAMESTA(pFK_PALATAID) INTO nTemp2 FROM DUAL;
+  nTemp1:=nTemp2-nTemp1;
+  RETURN nTemp1;
+END;
+/
+
+SHOW ERRORS;
+
+

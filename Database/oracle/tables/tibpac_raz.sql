@@ -1,0 +1,150 @@
+ALTER TABLE ASU.TIBPAC_RAZ
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TIBPAC_RAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TIBPAC_RAZ  (Table) 
+--
+CREATE TABLE ASU.TIBPAC_RAZ
+(
+  FK_ID     NUMBER,
+  FK_RAZID  NUMBER,
+  FK_SMID   NUMBER,
+  FK_PACID  NUMBER,
+  FN_COUNT  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          4560K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TIBPAC_RAZ IS 'Для хранения кол-ва элементов в разделах ИБ (by Xand)'
+/
+
+COMMENT ON COLUMN ASU.TIBPAC_RAZ.FK_ID IS 'SEQUENCE=[SEQ_TIBPAC_RAZ]'
+/
+
+COMMENT ON COLUMN ASU.TIBPAC_RAZ.FK_RAZID IS 'ид раздела из tibprint.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TIBPAC_RAZ.FK_SMID IS 'tsmid.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TIBPAC_RAZ.FK_PACID IS 'tkarta.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TIBPAC_RAZ.FN_COUNT IS 'кол-во смидов'
+/
+
+
+--
+-- TIBPAC_RAZ_PACID_RAZID_SMID  (Index) 
+--
+--  Dependencies: 
+--   TIBPAC_RAZ (Table)
+--
+CREATE INDEX ASU.TIBPAC_RAZ_PACID_RAZID_SMID ON ASU.TIBPAC_RAZ
+(FK_PACID, FK_RAZID, FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          3760K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TIBPAC_RAZ_PK  (Index) 
+--
+--  Dependencies: 
+--   TIBPAC_RAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.TIBPAC_RAZ_PK ON ASU.TIBPAC_RAZ
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TIBPAC_RAZ_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TIBPAC_RAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TIBPAC_RAZ_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.tibpac_raz
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT SEQ_tibpac_raz.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TIBPAC_RAZ 
+-- 
+ALTER TABLE ASU.TIBPAC_RAZ ADD (
+  CONSTRAINT TIBPAC_RAZ_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+GRANT DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TIBPAC_RAZ TO STAT
+/
+

@@ -1,0 +1,28 @@
+DROP FUNCTION ASU.GET_NAZMARK2
+/
+
+--
+-- GET_NAZMARK2  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TNAZMARK (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_NAZMARK2" (pFK_NAZID IN BINARY_INTEGER)
+  RETURN BINARY_INTEGER IS
+  -- by TimurLan
+  Result BINARY_INTEGER;
+  CURSOR c IS
+    SELECT COUNT(FK_NAZID) FROM TNAZMARK WHERE FK_NAZID = pFK_NAZID;
+BEGIN
+  open c;
+  fetch c into Result;
+  close c;
+  RETURN(Result);
+END;
+/
+
+SHOW ERRORS;
+
+

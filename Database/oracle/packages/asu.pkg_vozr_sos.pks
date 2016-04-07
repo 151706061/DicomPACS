@@ -1,0 +1,19 @@
+DROP PACKAGE ASU.PKG_VOZR_SOS
+/
+
+--
+-- PKG_VOZR_SOS  (Package) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE PACKAGE ASU."PKG_VOZR_SOS" 
+  IS
+FUNCTION GET_VOZR_SOS(DATA1 IN DATE,DATA2 IN DATE,vrach_id in number)
+RETURN NUMBER;
+END; -- Package Specification PKG_VOZR_SOS
+/
+
+SHOW ERRORS;
+
+

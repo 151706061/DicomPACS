@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{3c68b32b-d0da-49e6-9099-39a8fab2ffc7}</ProjectGuid>
+    <MainSource>repSpisOnPac.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>..\..\..\..\..\..\..\ASU\ASU_H\repSpisOnPac.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_UnitSearchPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ObjPath>
+    <DCC_IncludePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_IncludePath>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_UnitSearchPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ObjPath>
+    <DCC_IncludePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_IncludePath>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_ExeOutput>C:\Work\ASU\ASU_H</DCC_ExeOutput>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters><Parameters Name="RunParams">71405</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">2</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">29</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">2.0.0.29</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">repSpisOnPac.dpr</Source></Source><Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="c:\Program Files\Developer Express Inc_20090211_d11\Library\Delphi11\dclcxPivotGridOLAPD11.bpl">ExpressPivotGrid 2 OLAP by Developer Express Inc.</Excluded_Packages>
+      <Excluded_Packages Name="C:\Program Files\Steema Software\TeeChart Pro 8.04 Full Source Code\Sources\Compiled\Delphi11\Bin\DclTeePro811.bpl">TeeChart Pro 8 Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+    </Excluded_Packages></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="repSpisOnPac.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\..\..\..\..\uCommon\uGlobalConst.pas" />
+    <DCCReference Include="fgetperiod.pas">
+      <Form>frmGetPeriod</Form>
+    </DCCReference>
+    <DCCReference Include="fReportInputActSpis.pas">
+      <Form>fmReportInputActSpis</Form>
+    </DCCReference>
+    <DCCReference Include="HtmlHlp.pas" />
+  </ItemGroup>
+</Project>

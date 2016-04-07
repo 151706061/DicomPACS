@@ -1,0 +1,106 @@
+DROP TABLE ASU.TPROTIVDIAG CASCADE CONSTRAINTS
+/
+
+--
+-- TPROTIVDIAG  (Table) 
+--
+CREATE TABLE ASU.TPROTIVDIAG
+(
+  FK_ID    NUMBER(15),
+  FK_SMID  NUMBER(15),
+  FK_DIAG  NUMBER(15)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPROTIVDIAG IS 'Противопоказания диагнозов'
+/
+
+COMMENT ON COLUMN ASU.TPROTIVDIAG.FK_ID IS 'SEQUENCE=[SEQ_TPROTIVDAIG]'
+/
+
+
+--
+-- TPROTIVDIAG_ALL  (Index) 
+--
+--  Dependencies: 
+--   TPROTIVDIAG (Table)
+--
+CREATE INDEX ASU.TPROTIVDIAG_ALL ON ASU.TPROTIVDIAG
+(FK_SMID, FK_DIAG)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROTIVDIAG_ID  (Index) 
+--
+--  Dependencies: 
+--   TPROTIVDIAG (Table)
+--
+CREATE UNIQUE INDEX ASU.TPROTIVDIAG_ID ON ASU.TPROTIVDIAG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROTIVDIAG_BEFOR_INSER  (Trigger) 
+--
+--  Dependencies: 
+--   TPROTIVDIAG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROTIVDIAG_BEFOR_INSER" 
+BEFORE INSERT
+ON ASU.TPROTIVDIAG REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  select SEQ_TPROTIVDAIG.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

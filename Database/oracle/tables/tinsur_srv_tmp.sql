@@ -1,0 +1,56 @@
+DROP TABLE ASU.TINSUR_SRV_TMP CASCADE CONSTRAINTS
+/
+
+--
+-- TINSUR_SRV_TMP  (Table) 
+--
+CREATE TABLE ASU.TINSUR_SRV_TMP
+(
+  FK_PEPLID  NUMBER(15)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- TINSUR_SRV_TMP_IX1  (Index) 
+--
+--  Dependencies: 
+--   TINSUR_SRV_TMP (Table)
+--
+CREATE INDEX ASU.TINSUR_SRV_TMP_IX1 ON ASU.TINSUR_SRV_TMP
+(FK_PEPLID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

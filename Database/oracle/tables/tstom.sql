@@ -1,0 +1,78 @@
+DROP TABLE ASU.TSTOM CASCADE CONSTRAINTS
+/
+
+--
+-- TSTOM  (Table) 
+--
+CREATE TABLE ASU.TSTOM
+(
+  FK_ID       NUMBER(15)                        NOT NULL,
+  FC_NAMECOL  VARCHAR2(30 BYTE),
+  FN_COLOR    NUMBER(10)                        NOT NULL,
+  FC_ITEM     VARCHAR2(30 BYTE)                 NOT NULL,
+  FC_SIMB     VARCHAR2(4 BYTE)                  NOT NULL,
+  FL_TEETH    NUMBER(1)                         NOT NULL,
+  FL_PRESENT  NUMBER(1)                         DEFAULT 1                     NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSTOM IS 'Справочник стоматолога by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TSTOM.FK_ID IS 'SEQUENCE=[SEQ_TSTOM]'
+/
+
+COMMENT ON COLUMN ASU.TSTOM.FC_NAMECOL IS 'название'
+/
+
+COMMENT ON COLUMN ASU.TSTOM.FN_COLOR IS 'цвет'
+/
+
+COMMENT ON COLUMN ASU.TSTOM.FC_ITEM IS 'название'
+/
+
+COMMENT ON COLUMN ASU.TSTOM.FC_SIMB IS 'кратко'
+/
+
+COMMENT ON COLUMN ASU.TSTOM.FL_TEETH IS 'признак зуба'
+/
+
+COMMENT ON COLUMN ASU.TSTOM.FL_PRESENT IS '1-присудствует, 0 - нет'
+/
+
+
+--
+-- TSTOM_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TSTOM (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSTOM_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TSTOM REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+Begin
+  SELECT SEQ_TSTOM.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

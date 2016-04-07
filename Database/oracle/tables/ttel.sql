@@ -1,0 +1,35 @@
+DROP TABLE ASU.TTEL CASCADE CONSTRAINTS
+/
+
+--
+-- TTEL  (Table) 
+--
+CREATE TABLE ASU.TTEL
+(
+  FK_ID         NUMBER(15),
+  FK_COMPANYID  NUMBER(15),
+  FC_NAME       VARCHAR2(100 BYTE),
+  FC_TEL        VARCHAR2(20 BYTE),
+  OLDID         NUMBER(15)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          560K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+

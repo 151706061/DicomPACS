@@ -1,0 +1,30 @@
+DROP FUNCTION ASU.GET_KATEGORIAID
+/
+
+--
+-- GET_KATEGORIAID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TKATEGORIA (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_KATEGORIAID" 
+  ( pFC_KATEGORIA IN VARCHAR2)
+  RETURN  NUMBER IS
+  CURSOR cTemp IS SELECT FK_ID FROM TKATEGORIA WHERE FC_NAME=pFC_KATEGORIA;
+  nTemp NUMBER;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO nTemp;
+  CLOSE cTemp;
+  if nTemp IS NULL Then
+    nTemp:=-1;
+  end if;
+  RETURN nTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

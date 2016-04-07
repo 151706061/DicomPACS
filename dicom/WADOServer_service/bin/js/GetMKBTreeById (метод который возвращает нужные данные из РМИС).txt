@@ -1,0 +1,77 @@
+// =============== команда которая возвращает json строку с правильной последовательностью полей
+public virtual JsonResult GetMKBTreeById(string id)
+        {
+            if (id == "source")
+            {
+                id = "0";
+            }
+			
+            DataSet itemTree = SQLRegist.GetElemetTreeMKB(id);
+            List<TemplateEditorModel> list = new List<TemplateEditorModel>();
+            TemplateEditorModel row;
+
+            foreach (DataRow dr in itemTree.Tables[0].Rows)
+            {
+                row = new TemplateEditorModel
+                {//требуемые поля для jstree
+ 			        data = dr["FC_NAME"].ToString(),
+                    attr = new Attr 
+                    { 
+                        id = dr["P_ID"].ToString(), 
+                        rev = JsonString(dr["P_ID"].ToString(), "0"), 
+                        rel = dr["FN_PARENTID"].ToString() == "0" ? "directory" : "default", 
+                        code = dr["FC_NAME"].ToString(), 
+                        title = dr["FC_NAME"].ToString(), 
+                        IsValid = dr["amm_child"].ToString() 
+                    },
+                    state = dr["FN_PARENTID"].ToString() == "0" ? "closed" : " ",
+                    children = ""
+                };
+                list.Add(row);
+            }
+            return Json(list, JsonRequestBehavior.AllowGet);
+        }
+// =================== пример json ответа	
+var data =[
+					{	
+						"data":"РОССИЯ"
+						,"attr":{"id": "4","rev":"4","rel": "directory","code":"РОССИЯ","title":"РОССИЯ"}
+						,"state":"closed"
+						,"children"  
+					}
+			];
+                
+//================ кусок оригинальной команды		
+row = new TemplateEditorModel
+                {
+                    data = dr["name"].ToString(),
+                    attr = new Attr 
+                    { 
+                        id = dr["oid"].ToString(), 
+                        rev = JsonString(dr["oid"].ToString(), "0"), 
+                        rel = dr["is_sh"].ToString() == "1" ? "folder" : "default", 
+                        code = dr["code"].ToString(), 
+                        title = dr["code"].ToString(), 
+                        IsValid = dr["valid"].ToString() 
+                    },
+                    state = dr["is_sh"].ToString() == "1" ? "closed" : " ",
+                    children = ""
+                };
+                list.Add(row);
+//============ конец	
+
+// ===================== запрос			
+ string sql =
+                @"SELECT 
+                                DISTINCT(pt.oid),
+                                pt.name as name,
+                                pt.valid as valid,
+                                pt.mkb10_code as code,
+                                CASE WHEN p.oid is not null 
+                                THEN 1
+                                ELSE 0
+                                END  as is_sh
+                                ,mkb10.oid AS mkb10_oid
+                                from mir.diagnoz_template pt
+                                    LEFT JOIN mir.mkb_10 mkb10 ON mkb10.code=pt.mkb10_code
+                                left join mir.diagnoz_template p on p.parent = pt.oid";			

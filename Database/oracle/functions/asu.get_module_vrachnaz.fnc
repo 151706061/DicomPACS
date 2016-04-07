@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_MODULE_VRACHNAZ
+/
+
+--
+-- GET_MODULE_VRACHNAZ  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_MODULE_VRACHNAZ" 
+return number
+is 
+begin
+  return 20760;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_MODULE_VRACHNAZ TO PUBLIC
+/
+

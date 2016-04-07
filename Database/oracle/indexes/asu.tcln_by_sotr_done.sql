@@ -1,0 +1,25 @@
+DROP INDEX ASU.TCLN_BY_SOTR_DONE
+/
+
+--
+-- TCLN_BY_SOTR_DONE  (Index) 
+--
+CREATE INDEX ASU.TCLN_BY_SOTR_DONE ON ASU.TCLEAN
+(FK_SOTRID, FL_DONE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

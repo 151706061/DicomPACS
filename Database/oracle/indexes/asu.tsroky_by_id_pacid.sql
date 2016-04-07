@@ -1,0 +1,25 @@
+DROP INDEX ASU.TSROKY_BY_ID_PACID
+/
+
+--
+-- TSROKY_BY_ID_PACID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TSROKY_BY_ID_PACID ON ASU.TSROKY
+(FK_PACID, FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1408K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

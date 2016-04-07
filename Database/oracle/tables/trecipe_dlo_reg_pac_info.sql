@@ -1,0 +1,204 @@
+ALTER TABLE ASU.TRECIPE_DLO_REG_PAC_INFO
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_REG_PAC_INFO CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_REG_PAC_INFO  (Table) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_REG_PAC (Table)
+--
+CREATE TABLE ASU.TRECIPE_DLO_REG_PAC_INFO
+(
+  FK_ID        NUMBER,
+  FK_REGPACID  NUMBER,
+  DATE_B       DATE,
+  FAM          VARCHAR2(50 BYTE),
+  IMA          VARCHAR2(50 BYTE),
+  OTC          VARCHAR2(50 BYTE),
+  DR           DATE,
+  TIPDOC       NUMBER,
+  SERDOC       VARCHAR2(16 BYTE),
+  NOMDOC       VARCHAR2(16 BYTE),
+  SNILS        VARCHAR2(11 BYTE),
+  SEX          NUMBER,
+  ADRPREG      VARCHAR2(200 BYTE),
+  DADRPREG     VARCHAR2(200 BYTE),
+  C_PROG       NUMBER,
+  DATADOC      DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_REG_PAC_INFO IS 'ДЛО. Блок данных региональных льготников'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.FK_ID IS 'ключ'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.FK_REGPACID IS 'ссылка на льготника'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.DATE_B IS 'Дата начала действия'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.FAM IS 'Фамилия'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.IMA IS 'Имя'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.OTC IS 'Отчество'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.DR IS 'Дата рождения'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.TIPDOC IS 'Код типа документа, удостоверяющего личность'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.SERDOC IS 'Серия документа, удостоверяющего личность'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.NOMDOC IS 'Номер документа, удостоверяющего личность'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.SNILS IS 'СНИЛС'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.SEX IS 'Пол 1 - Жен, 2-Муж'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.ADRPREG IS 'Адрес постоянной регистрации (текстовый)'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.DADRPREG IS 'Адрес постоянной регистрации (составной)'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.C_PROG IS 'Код программы. ссылка на PROG_ONLS'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_REG_PAC_INFO.DATADOC IS 'Дата выдачи документа, удостоверяющего личность'
+/
+
+
+--
+-- TRECIPE_DLO_RPAC_INFO_FK_IDX  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_REG_PAC_INFO (Table)
+--
+CREATE INDEX ASU.TRECIPE_DLO_RPAC_INFO_FK_IDX ON ASU.TRECIPE_DLO_REG_PAC_INFO
+(FK_REGPACID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_RPAC_INFO_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_REG_PAC_INFO (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_RPAC_INFO_PK ON ASU.TRECIPE_DLO_REG_PAC_INFO
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_REG_PAC_INFO_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_REG_PAC_INFO (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECIPE_DLO_REG_PAC_INFO_INS"
+ BEFORE
+  INSERT
+ ON ASU.TRECIPE_DLO_REG_PAC_INFO REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  if (:new.fk_id is null) then
+    select ASU.SEQ_TRECIPE_DLO_REG_PAC_INFO.nextval into :new.fk_id from dual;
+  end if;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_REG_PAC_INFO 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_REG_PAC_INFO ADD (
+  CONSTRAINT TRECIPE_DLO_RPAC_INFO_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TRECIPE_DLO_REG_PAC_INFO 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_REG_PAC_INFO ADD (
+  CONSTRAINT TRECIPE_DLO_RPAC_INFO_FK 
+ FOREIGN KEY (FK_REGPACID) 
+ REFERENCES ASU.TRECIPE_DLO_REG_PAC (FK_ID))
+/
+

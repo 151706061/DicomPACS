@@ -1,0 +1,18 @@
+DROP FUNCTION ASU.GET_DAYID
+/
+
+--
+-- GET_DAYID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_DAYID" RETURN NUMBER is
+  Begin
+   RETURN   837820;
+  End;
+/
+
+SHOW ERRORS;
+
+

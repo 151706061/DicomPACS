@@ -1,0 +1,1 @@
+exec asu.PKG_SMINI.WRITESTRING('RepSpisOnPac.exe', 'FUNC_COUNT_SPIS_CHLEN_KOM', '3');

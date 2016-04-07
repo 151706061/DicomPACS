@@ -1,0 +1,169 @@
+DROP FUNCTION ASU.DO_REGIST_ZASELENIYE
+/
+
+--
+-- DO_REGIST_ZASELENIYE  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSROKY (Table)
+--   TSRTIPROOM (Table)
+--   TVRACH (Table)
+--   TROOM (Table)
+--   TADRESS (Table)
+--   TADRTYPE (Table)
+--   TPEOPLES (Table)
+--   DO_ADD_FAKTS (Procedure)
+--   DO_ADD_PLANS (Procedure)
+--   DO_CHECK_FREE_MESTA_FOR_REGIST (Function)
+--   DO_WRITE_PERESEL (Procedure)
+--   TKARTA (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."DO_REGIST_ZASELENIYE" -- Created by TimurLan _Valdai_
+ (pFD_DATE IN DATE,pFN_COL IN NUMBER,pFN_KDN IN NUMBER,pFK_TYPEPUT IN NUMBER,pFK_PUTTYPE IN NUMBER,
+  pFK_KOD IN NUMBER,pFK_KOD2 IN NUMBER,pFC_FAM IN VARCHAR,pFK_PALATAID IN NUMBER,
+  pFL_AUTOVRACH IN NUMBER,pFK_DALID IN NUMBER,pFK_SOC_POLID IN NUMBER,
+  pFK_PACVID IN NUMBER,pFK_GROUPID IN NUMBER,pFK_PRIZNID IN NUMBER,
+  pFK_COUNTRYID IN NUMBER,pFK_REGIONID IN NUMBER,pFK_TOWNID IN NUMBER)
+ RETURN NUMBER
+IS
+ CURSOR cMain IS
+  SELECT FK_PALATAID,FN_MESTA
+    FROM TSRTIPROOM,(select MAX(fk_id) as id from TSRTIPROOM where FK_VIDID=pFK_TYPEPUT group by fk_palataid)
+   WHERE FK_ID=ID
+     AND FL_REMONT = 0
+   ORDER BY FK_PALATAID;
+  nCount NUMBER;
+  nResult NUMBER;
+  nFree NUMBER;
+  dDate1 DATE;
+  dDate2 DATE;
+  pFK_PACID NUMBER;
+  pFK_PEPLID NUMBER;
+  nADRTYPE NUMBER;
+  nSROKID NUMBER;
+  nVRACHID NUMBER;
+  nIBID NUMBER;
+BEGIN
+  nResult:=pFN_COL;
+  nCount:=0;
+  dDate1:=/*TRUNC(*/pFD_DATE/*,'MI')*/;
+  dDate2:=TRUNC(TRUNC(dDate1,'MI')+pFN_KDN)-1/(24*60);
+  SELECT FK_ID INTO nADRTYPE FROM TADRTYPE WHERE FL_DEFAULT = 1;
+--      pFK_IB:=nIBID||'/'||TO_CHAR(TRUNC(SYSDATE),'YYYY');
+  if (pFK_TYPEPUT = 0 ) AND (pFK_PALATAID = -1) then /*если в резерв*/
+    WHILE nResult > 0 LOOP
+      SELECT MAX(FK_IBID)+1 INTO nIBID FROM TKARTA WHERE FK_IBY=TO_CHAR(TRUNC(SYSDATE),'YYYY');
+      IF nIBID is NULL then
+        nIBID:=1;
+      end IF;
+      INSERT INTO TKARTA (FK_IBID,FK_IBY,FC_FAM,FK_KOD2,FK_KOD,FP_TEK_COC,FK_PUTTYPE,FK_COC_POLID,FK_PACVID,FK_GROUPID,FK_PRIZN,FK_COUNTRYID,FK_REGIONID,FK_TOWNID)
+                  values (nIBID,TO_CHAR(TRUNC(SYSDATE),'YYYY'),pFC_FAM,pFK_KOD2,pFK_KOD,2,pFK_PUTTYPE,pFK_SOC_POLID,pFK_PACVID,pFK_GROUPID,pFK_PRIZNID,pFK_COUNTRYID,pFK_REGIONID,pFK_TOWNID)
+        RETURNING FK_ID INTO pFK_PACID;
+      INSERT INTO TPEOPLES (FC_FAM)
+                  values (pFC_FAM)
+        RETURNING FK_ID INTO pFK_PEPLID;
+      INSERT INTO TADRESS (FK_COUNTRYID,FK_REGIONID,FK_TOWNID,FK_PACID,FK_TYPE)
+                  values (pFK_COUNTRYID,pFK_REGIONID,pFK_TOWNID,pFK_PEPLID,nADRTYPE);
+      UPDATE TKarta SET FK_PEPLID = pFK_PEPLID,
+                        FL_DOR = 1
+                  WHERE FK_ID = pFK_PACID;
+      DO_ADD_PLANS(pFK_PACID,dDate1,dDate2,dDate2,pFN_KDN,0,0);
+      DO_ADD_FAKTS(pFK_PACID,dDate1,dDate2,dDate2,pFN_KDN,0,0,0);
+      SELECT MAX(FK_ID) INTO nSROKID FROM TSROKY WHERE FK_PACID=pFK_PACID;
+      DO_WRITE_PERESEL(-1,pFK_PACID,dDate1,dDate2,0,nSROKID);
+/*        DO_ADD_PLANS(pFK_PACID,dDate1,dDate2,dDate2,pFN_KDN,0,0);
+      DO_WRITE_PERESEL(-1,pFK_PACID,dDate1,dDate2,pFK_TYPEPUT,0);*/
+      COMMIT;
+      nResult:=nResult-1;
+    END LOOP;
+  else
+    if pFK_PALATAID = -1 then /*если авторасселение*/
+      FOR p IN cMain LOOP
+        nFree := DO_CHECK_FREE_MESTA_FOR_REGIST(-1,p.FK_PALATAID,dDate1,dDate2);
+        if nFree > 0 then
+          WHILE nFree > 0 LOOP
+            SELECT MAX(FK_IBID)+1 INTO nIBID FROM TKARTA WHERE FK_IBY=TO_CHAR(TRUNC(SYSDATE),'YYYY');
+            IF nIBID is NULL then
+              nIBID:=1;
+            end IF;
+            INSERT INTO TKARTA (FK_IBID,FK_IBY,FC_FAM,FK_KOD2,FK_KOD,FP_TEK_COC,FK_PACVID,FK_PUTTYPE,FK_COC_POLID,FK_GROUPID,FK_PRIZN,FK_COUNTRYID,FK_REGIONID,FK_TOWNID)
+                        values (nIBID,TO_CHAR(TRUNC(SYSDATE),'YYYY'),pFC_FAM,pFK_KOD2,pFK_KOD,2,pFK_PUTTYPE,pFK_SOC_POLID,pFK_PACVID,pFK_GROUPID,pFK_PRIZNID,pFK_COUNTRYID,pFK_REGIONID,pFK_TOWNID)
+              RETURNING FK_ID INTO pFK_PACID;
+            if pFL_AUTOVRACH = 1 then /*если автозаполнение*/
+              SELECT FK_VRACHID INTO nVRACHID FROM TROOM WHERE FK_ID = p.FK_PALATAID;
+              UPDATE TVRACH
+                 SET FK_VRACHID=nVRACHID,
+                     FK_DALID=pFK_DALID
+               WHERE FK_PACID=pFK_PACID AND FL_VID='M';
+            end if;
+            INSERT INTO TPEOPLES (FC_FAM)
+                        values (pFC_FAM)
+              RETURNING FK_ID INTO pFK_PEPLID;
+            INSERT INTO TADRESS (FK_COUNTRYID,FK_REGIONID,FK_TOWNID,FK_PACID,FK_TYPE)
+                        values (pFK_COUNTRYID,pFK_REGIONID,pFK_TOWNID,pFK_PEPLID,nADRTYPE);
+            UPDATE TKarta SET FK_PEPLID = pFK_PEPLID,
+                              FL_DOR = 1
+                        WHERE FK_ID = pFK_PACID;
+            DO_ADD_PLANS(pFK_PACID,dDate1,dDate2,dDate2,pFN_KDN,0,0);
+            DO_ADD_FAKTS(pFK_PACID,dDate1,dDate2,dDate2,pFN_KDN,0,0,0);
+            SELECT MAX(FK_ID) INTO nSROKID FROM TSROKY WHERE FK_PACID=pFK_PACID;
+            DO_WRITE_PERESEL(-1,pFK_PACID,dDate1,dDate2,p.FK_PALATAID,nSROKID);
+/*            DO_ADD_PLANS(pFK_PACID,dDate1,dDate2,dDate2,pFN_KDN,0,0);
+            DO_WRITE_PERESEL(-1,pFK_PACID,dDate1,dDate2,p.FK_PALATAID\*-1*\,0);*/
+            COMMIT;
+            nResult:=nResult-1;
+            nFree:=nFree-1;
+            nCount:=nCount+1;
+            EXIT WHEN nCount = pFN_COL;
+          END LOOP;
+        end if;
+        EXIT WHEN nCount = pFN_COL;
+      END LOOP;
+    else
+      nFree := DO_CHECK_FREE_MESTA_FOR_REGIST(-1,pFK_PALATAID,dDate1,dDate2);
+      if nFree > 0 then
+        WHILE nFree > 0 LOOP
+          SELECT MAX(FK_IBID)+1 INTO nIBID FROM TKARTA WHERE FK_IBY=TO_CHAR(TRUNC(SYSDATE),'YYYY');
+          IF nIBID is NULL then
+            nIBID:=1;
+          end IF;
+          INSERT INTO TKARTA (FK_IBID,FK_IBY,FC_FAM,FK_KOD2,FK_KOD,FP_TEK_COC,FK_PUTTYPE,FK_COC_POLID,FK_PACVID,FK_GROUPID,FK_PRIZN,FK_COUNTRYID,FK_REGIONID,FK_TOWNID)
+                      values (nIBID,TO_CHAR(TRUNC(SYSDATE),'YYYY'),pFC_FAM,pFK_KOD2,pFK_KOD,2,pFK_PUTTYPE,pFK_SOC_POLID,pFK_PACVID,pFK_GROUPID,pFK_PRIZNID,pFK_COUNTRYID,pFK_REGIONID,pFK_TOWNID)
+            RETURNING FK_ID INTO pFK_PACID;
+          if pFL_AUTOVRACH = 1 then /*если автозаполнение*/
+            SELECT FK_VRACHID INTO nVRACHID FROM TROOM WHERE FK_ID = pFK_PALATAID;
+            UPDATE TVRACH
+               SET FK_VRACHID=nVRACHID,
+                   FK_DALID=pFK_DALID
+             WHERE FK_PACID=pFK_PACID AND FL_VID='M';
+          end if;
+          INSERT INTO TPEOPLES (FC_FAM)
+                      values (pFC_FAM)
+            RETURNING FK_ID INTO pFK_PEPLID;
+          INSERT INTO TADRESS (FK_COUNTRYID,FK_REGIONID,FK_TOWNID,FK_PACID,FK_TYPE)
+                      values (pFK_COUNTRYID,pFK_REGIONID,pFK_TOWNID,pFK_PEPLID,nADRTYPE);
+          UPDATE TKarta SET FK_PEPLID = pFK_PEPLID,
+                            FL_DOR = 1
+                      WHERE FK_ID = pFK_PACID;
+          DO_ADD_PLANS(pFK_PACID,dDate1,dDate2,dDate2,pFN_KDN,0,0);
+          DO_ADD_FAKTS(pFK_PACID,dDate1,dDate2,dDate2,pFN_KDN,0,0,0);
+          SELECT MAX(FK_ID) INTO nSROKID FROM TSROKY WHERE FK_PACID=pFK_PACID;
+          DO_WRITE_PERESEL(-1,pFK_PACID,dDate1,dDate2,pFK_PALATAID,nSROKID);
+          COMMIT;
+          nResult:=nResult-1;
+          nFree:=nFree-1;
+          nCount:=nCount+1;
+          EXIT WHEN nCount = pFN_COL;
+        END LOOP;
+      end if;
+    end if;
+  end if;
+  RETURN nResult;
+END;
+/
+
+SHOW ERRORS;
+
+

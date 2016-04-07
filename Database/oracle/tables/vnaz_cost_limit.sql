@@ -1,0 +1,59 @@
+DROP TABLE ASU.VNAZ_COST_LIMIT CASCADE CONSTRAINTS
+/
+
+--
+-- VNAZ_COST_LIMIT  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.VNAZ_COST_LIMIT
+(
+  FK_TALONID  NUMBER(15),
+  FK_NAZID    NUMBER(15),
+  FD_CALC     DATE
+)
+ON COMMIT PRESERVE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.VNAZ_COST_LIMIT IS 'Таблица ограничений выборки для представления vnaz_cost Author:Efimov'
+/
+
+COMMENT ON COLUMN ASU.VNAZ_COST_LIMIT.FD_CALC IS 'Если поле заполнено, то цены рассчитываются на дате FD_CALC, а не на даты, связанные с назначением или талоном'
+/
+
+
+--
+-- I_NAZ_COST_LIMIT_KEY  (Index) 
+--
+--  Dependencies: 
+--   VNAZ_COST_LIMIT (Table)
+--
+CREATE INDEX ASU.I_NAZ_COST_LIMIT_KEY ON ASU.VNAZ_COST_LIMIT
+(FK_TALONID, FK_NAZID)
+/
+
+
+--
+-- I_NAZ_COST_LIMIT_NAZ  (Index) 
+--
+--  Dependencies: 
+--   VNAZ_COST_LIMIT (Table)
+--
+CREATE INDEX ASU.I_NAZ_COST_LIMIT_NAZ ON ASU.VNAZ_COST_LIMIT
+(FK_NAZID)
+/
+
+
+--
+-- I_NAZ_COST_LIMIT_TALON  (Index) 
+--
+--  Dependencies: 
+--   VNAZ_COST_LIMIT (Table)
+--
+CREATE INDEX ASU.I_NAZ_COST_LIMIT_TALON ON ASU.VNAZ_COST_LIMIT
+(FK_TALONID)
+/
+
+
+GRANT ALTER, DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.VNAZ_COST_LIMIT TO EXCH79
+/
+

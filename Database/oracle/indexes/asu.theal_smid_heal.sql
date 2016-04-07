@@ -1,0 +1,25 @@
+DROP INDEX ASU.THEAL_SMID_HEAL
+/
+
+--
+-- THEAL_SMID_HEAL  (Index) 
+--
+CREATE INDEX ASU.THEAL_SMID_HEAL ON ASU.THEAL_SMID
+(FK_HEAL)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

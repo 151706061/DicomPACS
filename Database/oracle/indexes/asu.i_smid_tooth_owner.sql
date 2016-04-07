@@ -1,0 +1,25 @@
+DROP INDEX ASU.I_SMID_TOOTH_OWNER
+/
+
+--
+-- I_SMID_TOOTH_OWNER  (Index) 
+--
+CREATE INDEX ASU.I_SMID_TOOTH_OWNER ON ASU.TSMID_TOOTH
+(FK_OWNER)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

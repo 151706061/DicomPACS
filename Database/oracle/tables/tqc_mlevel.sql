@@ -1,0 +1,115 @@
+ALTER TABLE ASU.TQC_MLEVEL
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TQC_MLEVEL CASCADE CONSTRAINTS
+/
+
+--
+-- TQC_MLEVEL  (Table) 
+--
+CREATE TABLE ASU.TQC_MLEVEL
+(
+  FK_ID          INTEGER                        NOT NULL,
+  FK_MATERIALID  INTEGER,
+  FN_SORT        NUMBER,
+  FC_NAME        VARCHAR2(255 BYTE),
+  FL_DEL         NUMBER                         DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TQC_MLEVEL.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TQC_MLEVEL.FK_MATERIALID IS 'TQCMATERIAL.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TQC_MLEVEL.FN_SORT IS 'Порядок сортировки'
+/
+
+COMMENT ON COLUMN ASU.TQC_MLEVEL.FC_NAME IS 'Название'
+/
+
+
+--
+-- PK_CONTROL_MATERIAL_LEVEL  (Index) 
+--
+--  Dependencies: 
+--   TQC_MLEVEL (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_CONTROL_MATERIAL_LEVEL ON ASU.TQC_MLEVEL
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TQC_MLEVEL_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TQC_MLEVEL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TQC_MLEVEL_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TQC_MLEVEL  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+    SELECT SEQ_QC_LAB.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TQC_MLEVEL 
+-- 
+ALTER TABLE ASU.TQC_MLEVEL ADD (
+  CONSTRAINT PK_CONTROL_MATERIAL_LEVEL
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

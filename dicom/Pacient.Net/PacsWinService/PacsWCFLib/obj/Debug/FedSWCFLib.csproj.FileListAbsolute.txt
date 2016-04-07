@@ -1,0 +1,9 @@
+d:\www\ExchangeWebService\FSWinService_2\FedSWCFLib\bin\Debug\FedSWCFLib.dll.config
+d:\www\ExchangeWebService\FSWinService_2\FedSWCFLib\bin\Debug\FedSWCFLib.dll
+d:\www\ExchangeWebService\FSWinService_2\FedSWCFLib\bin\Debug\FedSWCFLib.pdb
+d:\www\ExchangeWebService\FSWinService_2\FedSWCFLib\bin\Debug\DataAccess.dll
+d:\www\ExchangeWebService\FSWinService_2\FedSWCFLib\bin\Debug\log4net.dll
+d:\www\ExchangeWebService\FSWinService_2\FedSWCFLib\obj\Debug\ResolveAssemblyReference.cache
+d:\www\ExchangeWebService\FSWinService_2\FedSWCFLib\obj\Debug\FedSWCFLib.dll.licenses
+d:\www\ExchangeWebService\FSWinService_2\FedSWCFLib\obj\Debug\FedSWCFLib.dll
+d:\www\ExchangeWebService\FSWinService_2\FedSWCFLib\obj\Debug\FedSWCFLib.pdb

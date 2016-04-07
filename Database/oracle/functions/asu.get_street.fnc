@@ -1,0 +1,34 @@
+DROP FUNCTION ASU.GET_STREET
+/
+
+--
+-- GET_STREET  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSTREET (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_STREET" -- Created by TimurLan
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+  strTemp VARCHAR2(30);
+  CURSOR cTemp IS SELECT FC_NAME FROM TSTREET WHERE FK_ID=pFK_ID;
+BEGIN
+  if pFK_ID>0 then
+    OPEN cTemp;
+    FETCH cTemp INTO strTemp;
+    CLOSE cTemp;
+  else
+    RETURN NULL;
+  end if;
+  RETURN strTemp;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_STREET TO EXCH43
+/
+

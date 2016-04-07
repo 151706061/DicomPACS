@@ -1,0 +1,144 @@
+ALTER TABLE ASU.TPASSRAZDEL
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TPASSRAZDEL CASCADE CONSTRAINTS
+/
+
+--
+-- TPASSRAZDEL  (Table) 
+--
+CREATE TABLE ASU.TPASSRAZDEL
+(
+  FK_ID        NUMBER                           NOT NULL,
+  FK_SOTRID    NUMBER,
+  FC_HASH      VARCHAR2(32 BYTE),
+  FN_PRAVA     NUMBER,
+  FK_RAZDELID  NUMBER,
+  FK_PACID     NUMBER,
+  FD_INS       DATE                             DEFAULT sysdate
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TPASSRAZDEL.FK_SOTRID IS 'Сотрудник, создавший пароль'
+/
+
+COMMENT ON COLUMN ASU.TPASSRAZDEL.FC_HASH IS 'Хэш пароля'
+/
+
+COMMENT ON COLUMN ASU.TPASSRAZDEL.FN_PRAVA IS 'Права.0 -read, 1 - ReadWrite, 2 - ReadWrite, '
+/
+
+COMMENT ON COLUMN ASU.TPASSRAZDEL.FK_RAZDELID IS 'Код раздела'
+/
+
+COMMENT ON COLUMN ASU.TPASSRAZDEL.FK_PACID IS 'Код пациента'
+/
+
+
+--
+-- TPASSRAZDEL_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TPASSRAZDEL (Table)
+--
+CREATE UNIQUE INDEX ASU.TPASSRAZDEL_FK_ID ON ASU.TPASSRAZDEL
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPASSRAZDEL_PAC_RAZD  (Index) 
+--
+--  Dependencies: 
+--   TPASSRAZDEL (Table)
+--
+CREATE INDEX ASU.TPASSRAZDEL_PAC_RAZD ON ASU.TPASSRAZDEL
+(FK_PACID, FK_RAZDELID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPASSRAZDEL_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPASSRAZDEL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPASSRAZDEL_INSERT" 
+  BEFORE INSERT
+  ON ASU.TPASSRAZDEL   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  select SEQ_TPASSRAZDEL.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TPASSRAZDEL 
+-- 
+ALTER TABLE ASU.TPASSRAZDEL ADD (
+  CONSTRAINT TPASSRAZDEL_FK_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

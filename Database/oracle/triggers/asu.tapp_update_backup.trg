@@ -1,0 +1,44 @@
+DROP TRIGGER ASU.TAPP_UPDATE_BACKUP
+/
+
+--
+-- TAPP_UPDATE_BACKUP  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DBMS_STANDARD (Package)
+--   TAPP (Table)
+--   TAPP_BACKUP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TAPP_UPDATE_BACKUP" --Created by TimurLan
+  BEFORE UPDATE ON ASU.TAPP   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+BEGIN
+  IF UPDATING('FB_FILE') THEN
+    UPDATE TAPP_BACKUP
+       SET FK_ID   = :OLD.FK_ID,
+           FC_OPIS = :OLD.FC_OPIS,
+           FC_VER  = :OLD.FC_VER,
+           FB_FILE = :OLD.FB_FILE,
+           FC_NAME = :OLD.FC_NAME,
+           FK_TYPE = :OLD.FK_TYPE,
+           FC_TYPE = :OLD.FC_TYPE
+     WHERE FK_ID = :OLD.FK_ID;
+    IF SQL%ROWCOUNT = 0 THEN
+      INSERT INTO TAPP_BACKUP
+        (FK_ID, FC_OPIS, FC_VER, FB_FILE, FC_NAME, FK_TYPE, FC_TYPE)
+      VALUES
+        (:OLD.FK_ID,
+         :OLD.FC_OPIS,
+         :OLD.FC_VER,
+         :OLD.FB_FILE,
+         :OLD.FC_NAME,
+         :OLD.FK_TYPE,
+         :OLD.FC_TYPE);
+    END IF;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+

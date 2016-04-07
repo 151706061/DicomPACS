@@ -1,0 +1,62 @@
+package DicomVCLD7;
+
+{$R *.res}
+{$R 'DCM_Reg.dcr'}
+{$R '..\dx\dcm_dxreg.dcr'}
+{$ALIGN 8}
+{$ASSERTIONS ON}
+{$BOOLEVAL OFF}
+{$DEBUGINFO ON}
+{$EXTENDEDSYNTAX ON}
+{$IMPORTEDDATA ON}
+{$IOCHECKS ON}
+{$LOCALSYMBOLS ON}
+{$LONGSTRINGS ON}
+{$OPENSTRINGS ON}
+{$OPTIMIZATION ON}
+{$OVERFLOWCHECKS OFF}
+{$RANGECHECKS OFF}
+{$REFERENCEINFO ON}
+{$SAFEDIVIDE OFF}
+{$STACKFRAMES OFF}
+{$TYPEDADDRESS OFF}
+{$VARSTRINGCHECKS ON}
+{$WRITEABLECONST OFF}
+{$MINENUMSIZE 1}
+{$IMAGEBASE $400000}
+{$DESCRIPTION 'Dicom Communication And Viewer'}
+{$IMPLICITBUILD OFF}
+
+requires
+  rtl,
+  vcl,
+  dbrtl,
+  vclx,
+  visualclx,
+  vcldb,
+  designide,
+  vclactnband,
+  dclstd,
+  vcljpg;
+
+contains
+  Dcm_View in 'DCM_View.pas',
+  DCM_Client in 'DCM_Client.pas',
+  DCM_Connection in 'DCM_Connection.pas',
+  DCM_Server in 'DCM_Server.pas',
+  DCM_Attributes in 'Dcm_Attributes.pas',
+  DCM_Reg in 'DCM_Reg.pas',
+  V3DRenWindow in 'V3DRenWindow.pas',
+  DCM_Dict in 'DCM_Dict.pas',
+  Dcm_GLView in 'Dcm_GLView.pas',
+  DCM_MPR in 'DCM_MPR.pas',
+  DCM_UID in 'DCM_UID.pas',
+  DCM_WADO in 'DCM_Wado.pas',
+  DCM_ConferenceServer in 'DCM_ConferenceServer.pas',
+  DicomBurner in 'DicomBurner.pas',
+  H263Unit in 'H263Unit.pas',
+  dcm_dxreg in '..\dx\dcm_dxreg.pas',
+  CnsHotKeyManager in 'CnsHotKeyManager.pas',
+  KxDicomClient in 'KxDicomClient.pas';
+
+end.

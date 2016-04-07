@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_DNEV_STAC
+/
+
+--
+-- GET_DNEV_STAC  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU.GET_DNEV_STAC
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =-
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return -1;
+END;
+/
+
+SHOW ERRORS;
+
+

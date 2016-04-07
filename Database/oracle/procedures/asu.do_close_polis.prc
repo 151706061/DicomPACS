@@ -1,0 +1,54 @@
+DROP PROCEDURE ASU.DO_CLOSE_POLIS
+/
+
+--
+-- DO_CLOSE_POLIS  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TTYPEDOC (Table)
+--   TINSURDOCS (Table)
+--
+CREATE OR REPLACE PROCEDURE ASU.DO_CLOSE_POLIS(pFK_PEPLID IN NUMBER, pFK_POLISID IN NUMBER DEFAULT -1)
+  IS
+  vCount          NUMBER;
+  vMaxDate        DATE;
+BEGIN
+  SELECT MAX(FD_BEGIN) INTO vMaxDate FROM ASU.TINSURDOCS WHERE FK_ID = pFK_POLISID
+         and FK_TYPEDOCID IN (select FK_ID from asu.ttypedoc WHERe FC_SYNONIM = 'OMS');
+  SELECT COUNT(*) INTO vCount FROM ASU.TINSURDOCS WHERE FK_PEPLID = pFK_PEPLID AND FD_END IS NULL
+         and FK_TYPEDOCID IN (select FK_ID from asu.ttypedoc WHERe FC_SYNONIM = 'OMS');
+
+  IF vCount > 1
+  THEN
+    IF vMaxDate IS NULL
+    THEN
+      SELECT MAX(FD_BEGIN) INTO vMaxDate FROM ASU.TINSURDOCS WHERE FK_PEPLID = pFK_PEPLID AND FD_END IS NULL
+             and FK_TYPEDOCID IN (select FK_ID from asu.ttypedoc WHERe FC_SYNONIM = 'OMS');
+    END IF;
+
+    IF vMaxDate IS NULL
+    THEN
+       RETURN;
+    END IF;
+
+    IF NVL(pFK_POLISID, -1) <> -1
+    THEN
+       UPDATE ASU.TINSURDOCS
+       SET FD_END = vMaxDate - 1
+       WHERE FK_ID <> pFK_POLISID AND FD_END IS NULL AND FK_PEPLID = pFK_PEPLID
+             and FK_TYPEDOCID IN (select FK_ID from asu.ttypedoc WHERe FC_SYNONIM = 'OMS');
+    ELSE
+       UPDATE ASU.TINSURDOCS
+       SET FD_END = vMaxDate - 1
+       WHERE FD_BEGIN <> vMaxDate AND FD_END IS NULL AND FK_PEPLID = pFK_PEPLID
+             and FK_TYPEDOCID IN (select FK_ID from asu.ttypedoc WHERe FC_SYNONIM = 'OMS');
+    END IF;
+  END IF;
+END;
+/
+
+SHOW ERRORS;
+
+

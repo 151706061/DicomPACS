@@ -1,0 +1,206 @@
+ALTER TABLE ASU.TPERIODS
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TPERIODS CASCADE CONSTRAINTS
+/
+
+--
+-- TPERIODS  (Table) 
+--
+CREATE TABLE ASU.TPERIODS
+(
+  FK_ID        NUMBER                           NOT NULL,
+  FD_DATE1     DATE,
+  FD_DATE2     DATE,
+  FK_SMIDID    NUMBER,
+  FK_PEPLID    NUMBER,
+  FK_SOTRID    NUMBER,
+  FD_CREATED   DATE                             DEFAULT SYSDATE,
+  FC_COMMENTS  VARCHAR2(4000 CHAR)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          16K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPERIODS IS 'by TimurLan LABEL=_EXP DATE=20.09.2005 23:15:18'
+/
+
+
+--
+-- TPERIODS_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TPERIODS (Table)
+--
+CREATE UNIQUE INDEX ASU.TPERIODS_BY_ID ON ASU.TPERIODS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERIODS_PEPL_DATA1  (Index) 
+--
+--  Dependencies: 
+--   TPERIODS (Table)
+--
+CREATE INDEX ASU.TPERIODS_PEPL_DATA1 ON ASU.TPERIODS
+(FK_PEPLID, FD_DATE1)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERIODS_PEPL_SMID  (Index) 
+--
+--  Dependencies: 
+--   TPERIODS (Table)
+--
+CREATE INDEX ASU.TPERIODS_PEPL_SMID ON ASU.TPERIODS
+(FK_PEPLID, FK_SMIDID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPERIODS_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TPERIODS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPERIODS_DELETE" 
+  BEFORE DELETE ON ASU.TPERIODS   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW-- by TimurLan
+
+
+-- Код триггера модифицирован системой автоматической генерации триггеров репликации aTrigger.exe от:20.09.2005 23:15:17
+BEGIN
+  IF (USERENV('CLIENT_INFO') is null) or (USERENV('CLIENT_INFO') <> '%MAIL%') THEN
+    BEGIN
+    -- ORIGINAL TRIGGER BODY BEGIN FROM HERE:
+
+BEGIN
+  DELETE FROM TIB WHERE FK_BID = :OLD.FK_ID;
+  --DELETE FROM TIB WHERE FK_SMID = :OLD.FK_SMIDID;
+  --DELETE FROM TIB WHERE FK_SMEDITID = :OLD.FK_SMIDID;
+END;
+
+    -- ORIGINAL TRIGGER BODY ENDS HERE
+    END;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+
+--
+-- TPERIODS_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPERIODS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPERIODS_BEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TPERIODS   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW-- by TimurLan
+
+
+-- Код триггера модифицирован системой автоматической генерации триггеров репликации aTrigger.exe от:20.09.2005 23:15:17
+BEGIN
+  IF (USERENV('CLIENT_INFO') is null) or (USERENV('CLIENT_INFO') <> '%MAIL%') THEN
+    BEGIN
+    -- ORIGINAL TRIGGER BODY BEGIN FROM HERE:
+
+Begin
+  SELECT SEQ_TPEOPLES.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  /*begin
+    SELECT TRUNC(NVL(TPERIODS.FD_DATE2,TPERIODS.FD_DATE1))+1 INTO :NEW.FD_DATE1 FROM TPERIODS WHERE FK_ID = (SELECT MAX(FK_ID) FROM TPERIODS WHERE FK_PEPLID = :NEW.FK_PEPLID);
+  exception when others then
+    SELECT SYSDATE INTO :NEW.FD_DATE1 FROM DUAL;
+  end;*/
+End;
+
+    -- ORIGINAL TRIGGER BODY ENDS HERE
+    END;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TPERIODS 
+-- 
+ALTER TABLE ASU.TPERIODS ADD (
+  CONSTRAINT TPERIODS_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

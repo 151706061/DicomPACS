@@ -1,0 +1,138 @@
+ALTER TABLE ASU.TRECIPE_DLO_IMP_REQ
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_IMP_REQ CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_IMP_REQ  (Table) 
+--
+CREATE TABLE ASU.TRECIPE_DLO_IMP_REQ
+(
+  UNIQCODE     NUMBER,
+  TITLE        VARCHAR2(100 BYTE),
+  DATE_BEG     DATE,
+  DATE_END     DATE,
+  C_FINL       NUMBER,
+  PROG_LLO     NUMBER,
+  STATE        NUMBER,
+  MCOD         NUMBER,
+  ID_MAINCOMP  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_IMP_REQ IS 'ДЛО. Заявки на получение ЛП'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ.UNIQCODE IS 'Уникальный код заявочной кампании'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ.TITLE IS 'Наименование ЗК'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ.DATE_BEG IS 'дата начала ЗК'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ.DATE_END IS 'дата окончания ЗК'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ.C_FINL IS 'Источник финансирования'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ.PROG_LLO IS 'Программа ЛЛО'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ.STATE IS 'Состояние ЗК. 0 - открыта 1-закрыта 2-утверждена'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ.MCOD IS 'Код ЛПУ'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_IMP_REQ.ID_MAINCOMP IS 'Код основной ЗК(для дополнительных заявок)'
+/
+
+
+--
+-- TRECIPE_DLO_IMP_REQ_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_IMP_REQ (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_IMP_REQ_PK ON ASU.TRECIPE_DLO_IMP_REQ
+(UNIQCODE)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_IMP_REQ_DEL  (Trigger) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_IMP_REQ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECIPE_DLO_IMP_REQ_DEL"
+ BEFORE
+  DELETE
+ ON ASU.TRECIPE_DLO_IMP_REQ REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  delete from asu.TRECIPE_DLO_IMP_REQ_MEDIC t
+   where t.FK_UNIQCODE = :OLD.UNIQCODE;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_IMP_REQ 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_IMP_REQ ADD (
+  CONSTRAINT TRECIPE_DLO_IMP_REQ_PK
+ PRIMARY KEY
+ (UNIQCODE)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

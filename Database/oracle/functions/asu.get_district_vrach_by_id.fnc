@@ -1,0 +1,39 @@
+DROP FUNCTION ASU.GET_DISTRICT_VRACH_BY_ID
+/
+
+--
+-- GET_DISTRICT_VRACH_BY_ID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TDISTRICT (Table)
+--   TDISTRICT_NAME (Table)
+--   DO_VRACHFIO (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_DISTRICT_VRACH_BY_ID" (pDistrictID IN TDISTRICT.FK_ID%TYPE)
+RETURN VARCHAR2 is
+
+ sVrachFIO  VARCHAR2(100);
+
+ cursor cur is
+  SELECT DO_VRACHFIO(DN.FK_SOTR)
+    FROM TDISTRICT D, TDISTRICT_NAME DN
+   WHERE D.FK_DISTRICT = DN.FK_ID
+     AND D.FK_ID = pDistrictID;
+
+begin
+ sVrachFIO := '';
+
+ open  cur;
+ fetch cur into sVrachFIO;
+ close cur;
+
+ RETURN sVrachFIO;
+
+end GET_DISTRICT_VRACH_BY_ID;
+/
+
+SHOW ERRORS;
+
+

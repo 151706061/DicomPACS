@@ -1,0 +1,31 @@
+DROP FUNCTION ASU.GET_MINPAT
+/
+
+--
+-- GET_MINPAT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TPATNAME (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_MINPAT" 
+
+  RETURN NUMBER IS
+--
+-- Purpose: Получает минимальную IDшку паталогии (>0)
+--
+-- Wrote by Philip A. Milovanov
+CURSOR c IS SELECT FK_ID FROM TPATNAME,(SELECT MIN(FP_PRIOR) FP_VPAT FROM TPATNAME WHERE FP_PRIOR>0) WHERE FP_PRIOR=FP_VPAT;
+i NUMBER;
+BEGIN
+  OPEN c;
+  FETCH c INTO i;
+  CLOSE c;
+  RETURN i;
+END; -- Function GET_MINPAT
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_SAHAR_OF_BLOOD_ID
+/
+
+--
+-- GET_SAHAR_OF_BLOOD_ID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_SAHAR_OF_BLOOD_ID" 
+return number
+is
+begin
+  return 40399;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_SAHAR_OF_BLOOD_ID TO PUBLIC
+/
+

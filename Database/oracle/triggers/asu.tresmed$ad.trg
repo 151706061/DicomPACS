@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TRESMED$AD
+/
+
+--
+-- TRESMED$AD  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TRESMED (Table)
+--   TRESMEDCONT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRESMED$AD" 
+AFTER DELETE
+ON ASU.TRESMED REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+BEGIN
+  DELETE
+    FROM tresmedcont
+   WHERE fk_resmedid = :old.fk_id;
+END;
+/
+SHOW ERRORS;
+
+

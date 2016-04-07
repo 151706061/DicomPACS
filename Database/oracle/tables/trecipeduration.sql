@@ -1,0 +1,134 @@
+ALTER TABLE ASU.TRECIPEDURATION
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPEDURATION CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPEDURATION  (Table) 
+--
+CREATE TABLE ASU.TRECIPEDURATION
+(
+  FK_ID         NUMBER(10)                      NOT NULL,
+  FC_NAME       VARCHAR2(100 BYTE),
+  FN_RESERVED   NUMBER(10),
+  FL_PRIVELEGE  NUMBER(1),
+  FC_SYNONIM    VARCHAR2(30 BYTE),
+  FN_ORDER      NUMBER,
+  FN_KOL_DLIT   NUMBER,
+  FL_DEFAULT    NUMBER                          DEFAULT 0,
+  FL_DEL        NUMBER                          DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPEDURATION IS 'Sill - Срок действия рецепта'
+/
+
+COMMENT ON COLUMN ASU.TRECIPEDURATION.FK_ID IS 'SEQUENCE=[ASU]'
+/
+
+COMMENT ON COLUMN ASU.TRECIPEDURATION.FC_NAME IS 'Название'
+/
+
+COMMENT ON COLUMN ASU.TRECIPEDURATION.FN_RESERVED IS 'Зарезервировано'
+/
+
+COMMENT ON COLUMN ASU.TRECIPEDURATION.FL_PRIVELEGE IS 'Признак "льготный". 0 - обычный (107у); 1 - форма (148-1/У-06(л) (льготный-ФЕДЕРАЛЬНЫЙ); 2 - 148-1/У-88 (льготный-РЕГИОНАЛЬНЫЙ)'
+/
+
+COMMENT ON COLUMN ASU.TRECIPEDURATION.FC_SYNONIM IS 'синоним лат. буквами, желательно уникальное для всех записей'
+/
+
+COMMENT ON COLUMN ASU.TRECIPEDURATION.FN_ORDER IS 'порядок отображения'
+/
+
+COMMENT ON COLUMN ASU.TRECIPEDURATION.FL_DEFAULT IS '1 - значение по умолчанию'
+/
+
+COMMENT ON COLUMN ASU.TRECIPEDURATION.FL_DEL IS 'признак удаления (1 - удален)'
+/
+
+
+--
+-- TRECIPEDURATION  (Index) 
+--
+--  Dependencies: 
+--   TRECIPEDURATION (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPEDURATION ON ASU.TRECIPEDURATION
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPEDURATION_BEFORE_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TRECIPEDURATION (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECIPEDURATION_BEFORE_INS" 
+  BEFORE INSERT ON ASU.TRECIPEDURATION   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+DECLARE
+
+BEGIN
+  SELECT ASU.SEQ_TRECIPEDURATION.nextval into :new.FK_ID from dual;
+END TRECIPEDURATION_BEFORE_INS;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPEDURATION 
+-- 
+ALTER TABLE ASU.TRECIPEDURATION ADD (
+  CONSTRAINT TRECIPEDURATION
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

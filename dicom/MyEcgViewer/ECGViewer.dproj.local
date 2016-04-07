@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2014.02.12 15:18:40.131.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\Softmaster\Documents\RAD Studio\Projects\ECGViewer.dproj</Transaction>
+    <Transaction>2014.02.12 15:19:40.372.pas,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.pas=C:\Users\Softmaster\Documents\DICOM_ECG\MyEcgViewer\UnECGMain.pas</Transaction>
+    <Transaction>2014.02.12 15:19:40.372.dfm,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.dfm=C:\Users\Softmaster\Documents\DICOM_ECG\MyEcgViewer\UnECGMain.dfm</Transaction>
+    <Transaction>2014.02.12 15:19:52.643.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\ECGViewer.dproj=C:\Users\Softmaster\Documents\DICOM_ECG\MyEcgViewer\ECGViewer.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

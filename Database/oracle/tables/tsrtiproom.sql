@@ -1,0 +1,286 @@
+DROP TABLE ASU.TSRTIPROOM CASCADE CONSTRAINTS
+/
+
+--
+-- TSRTIPROOM  (Table) 
+--
+CREATE TABLE ASU.TSRTIPROOM
+(
+  FK_ID         NUMBER(15)                      NOT NULL,
+  FK_PALATAID   NUMBER(15)                      DEFAULT -1                    NOT NULL,
+  FD_DATA1      DATE,
+  FD_DATA2      DATE,
+  FN_MESTA      NUMBER(3)                       DEFAULT 0,
+  FK_VIDID      NUMBER(15)                      DEFAULT -1                    NOT NULL,
+  FC_TEL        VARCHAR2(15 BYTE),
+  FL_REMONT     NUMBER(1)                       DEFAULT 0,
+  FK_KOMFORTID  NUMBER,
+  FL_CLOSED     NUMBER(1)                       DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          576K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSRTIPROOM IS 'динамическое изменение параметров палат by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TSRTIPROOM.FK_ID IS 'SEQUENCE=[SEQ_TSRTIPROOM]'
+/
+
+COMMENT ON COLUMN ASU.TSRTIPROOM.FK_PALATAID IS 'TROOM.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TSRTIPROOM.FD_DATA1 IS 'начало срока'
+/
+
+COMMENT ON COLUMN ASU.TSRTIPROOM.FD_DATA2 IS 'окончание срока'
+/
+
+COMMENT ON COLUMN ASU.TSRTIPROOM.FN_MESTA IS 'к-во мест'
+/
+
+COMMENT ON COLUMN ASU.TSRTIPROOM.FK_VIDID IS 'вид палаты'
+/
+
+COMMENT ON COLUMN ASU.TSRTIPROOM.FC_TEL IS 'телефон'
+/
+
+COMMENT ON COLUMN ASU.TSRTIPROOM.FL_REMONT IS 'признак ремонта'
+/
+
+COMMENT ON COLUMN ASU.TSRTIPROOM.FL_CLOSED IS '1 - Ї « в  § Єалв , 0 - ¤Ґ©бвўгҐв.'
+/
+
+
+--
+-- TSRTIPROM_BY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TSRTIPROOM (Table)
+--
+CREATE UNIQUE INDEX ASU.TSRTIPROM_BY_FK_ID ON ASU.TSRTIPROOM
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSRTIPROOM_BY_FD_DATA1  (Index) 
+--
+--  Dependencies: 
+--   TSRTIPROOM (Table)
+--
+CREATE INDEX ASU.TSRTIPROOM_BY_FD_DATA1 ON ASU.TSRTIPROOM
+(FD_DATA1)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSRTIPROOM_BY_FD_DATA2  (Index) 
+--
+--  Dependencies: 
+--   TSRTIPROOM (Table)
+--
+CREATE INDEX ASU.TSRTIPROOM_BY_FD_DATA2 ON ASU.TSRTIPROOM
+(FD_DATA2)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSRTIPROOM_BY_FK_PALATAID  (Index) 
+--
+--  Dependencies: 
+--   TSRTIPROOM (Table)
+--
+CREATE INDEX ASU.TSRTIPROOM_BY_FK_PALATAID ON ASU.TSRTIPROOM
+(FK_PALATAID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSRTIPROOM_BY_FK_VIDID  (Index) 
+--
+--  Dependencies: 
+--   TSRTIPROOM (Table)
+--
+CREATE INDEX ASU.TSRTIPROOM_BY_FK_VIDID ON ASU.TSRTIPROOM
+(FK_VIDID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSRTIPROOM_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TSRTIPROOM (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSRTIPROOM_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TSRTIPROOM  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  nTemp NUMBER;
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TSRTIPROOM', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+  elsif DELETING then
+    PKG_LOG.Do_log('TSRTIPROOM', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_id), null, :old.fk_id);
+    PKG_LOG.Do_log('TSRTIPROOM', 'FK_PALATAID', 'DELETE', PKG_LOG.GET_VALUE(:old.FK_PALATAID), null, :old.fk_id);
+    PKG_LOG.Do_log('TSRTIPROOM', 'FD_DATA1', 'DELETE', PKG_LOG.GET_VALUE(:old.FD_DATA1), null, :old.fk_id);
+    PKG_LOG.Do_log('TSRTIPROOM', 'FD_DATA2', 'DELETE', PKG_LOG.GET_VALUE(:old.FD_DATA2), null, :old.fk_id);
+    PKG_LOG.Do_log('TSRTIPROOM', 'FN_MESTA', 'DELETE', PKG_LOG.GET_VALUE(:old.FN_MESTA), null, :old.fk_id);
+    PKG_LOG.Do_log('TSRTIPROOM', 'FK_VIDID', 'DELETE', PKG_LOG.GET_VALUE(:old.FK_VIDID), null, :old.fk_id);
+    PKG_LOG.Do_log('TSRTIPROOM', 'FL_REMONT', 'DELETE', PKG_LOG.GET_VALUE(:old.FL_REMONT), null, :old.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TSRTIPROOM', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FK_PALATAID') AND PKG_LOG.GET_VALUE(:old.FK_PALATAID) <> PKG_LOG.GET_VALUE(:new.FK_PALATAID) then
+      PKG_LOG.Do_log('TSRTIPROOM', 'FK_PALATAID', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_PALATAID), PKG_LOG.GET_VALUE(:new.FK_PALATAID), :old.fk_id);
+    end if;
+    if UPDATING ('FD_DATA1') AND PKG_LOG.GET_VALUE(:old.FD_DATA1) <> PKG_LOG.GET_VALUE(:new.FD_DATA1) then
+      PKG_LOG.Do_log('TSRTIPROOM', 'FD_DATA1', 'UPDATE', PKG_LOG.GET_VALUE(:old.FD_DATA1), PKG_LOG.GET_VALUE(:new.FD_DATA1), :old.fk_id);
+    end if;
+    if UPDATING ('FD_DATA2') AND PKG_LOG.GET_VALUE(:old.FD_DATA2) <> PKG_LOG.GET_VALUE(:new.FD_DATA2) then
+      PKG_LOG.Do_log('TSRTIPROOM', 'FD_DATA2', 'UPDATE', PKG_LOG.GET_VALUE(:old.FD_DATA2), PKG_LOG.GET_VALUE(:new.FD_DATA2), :old.fk_id);
+    end if;
+    if UPDATING ('FN_MESTA') AND PKG_LOG.GET_VALUE(:old.FN_MESTA) <> PKG_LOG.GET_VALUE(:new.FN_MESTA) then
+      PKG_LOG.Do_log('TSRTIPROOM', 'FN_MESTA', 'UPDATE', PKG_LOG.GET_VALUE(:old.FN_MESTA), PKG_LOG.GET_VALUE(:new.FN_MESTA), :old.fk_id);
+    end if;
+    if UPDATING ('FK_VIDID') AND PKG_LOG.GET_VALUE(:old.FK_VIDID) <> PKG_LOG.GET_VALUE(:new.FK_VIDID) then
+      PKG_LOG.Do_log('TSRTIPROOM', 'FK_VIDID', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_VIDID), PKG_LOG.GET_VALUE(:new.FK_VIDID), :old.fk_id);
+    end if;
+    if UPDATING ('FL_REMONT') AND PKG_LOG.GET_VALUE(:old.FL_REMONT) <> PKG_LOG.GET_VALUE(:new.FL_REMONT) then
+      PKG_LOG.Do_log('TSRTIPROOM', 'FL_REMONT', 'UPDATE', PKG_LOG.GET_VALUE(:old.FL_REMONT), PKG_LOG.GET_VALUE(:new.FL_REMONT), :old.fk_id);
+    end if;
+  end if;
+  null;
+END TSRTIPROOM_LOG;
+/
+SHOW ERRORS;
+
+
+--
+-- TSRTIPROOM_BEFORE_INS_UPD  (Trigger) 
+--
+--  Dependencies: 
+--   TSRTIPROOM (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSRTIPROOM_BEFORE_INS_UPD" 
+  BEFORE INSERT OR UPDATE ON ASU.TSRTIPROOM REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+Begin
+  :NEW.FD_DATA2 := :NEW.FD_DATA2+1-1/(24*60*60);
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TSRTIPROOM_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TSRTIPROOM (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSRTIPROOM_BEFORE_INSERT" 
+BEFORE  INSERT  ON ASU.TSRTIPROOM REFERENCING
+ NEW AS NEW
+ OLD AS OLD
+FOR EACH ROW
+Begin
+  SELECT SEQ_TSRTIPROOM.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+GRANT REFERENCES, SELECT ON ASU.TSRTIPROOM TO EXCHANGE
+/
+
+GRANT REFERENCES, SELECT ON ASU.TSRTIPROOM TO EXCH43
+/
+

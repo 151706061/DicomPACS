@@ -1,0 +1,25 @@
+DROP INDEX ASU.IX_TVAC_CANCEL_FK_TYPE
+/
+
+--
+-- IX_TVAC_CANCEL_FK_TYPE  (Index) 
+--
+CREATE INDEX ASU.IX_TVAC_CANCEL_FK_TYPE ON ASU.TVAC_CANCEL
+(FK_TYPE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

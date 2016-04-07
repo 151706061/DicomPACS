@@ -1,0 +1,30 @@
+DROP FUNCTION ASU.GET_MKB10_FOR_NAPRAV_REPORT
+/
+
+--
+-- GET_MKB10_FOR_NAPRAV_REPORT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TDIAG (Table)
+--   GET_MKB10_FROM_TSMID (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_MKB10_FOR_NAPRAV_REPORT" ( PFK_DIAGID IN NUMBER ) RETURN varchar2 IS
+ res varchar2(4000);
+ pFC_MKB10 varchar2(4000);
+BEGIN
+ SELECT GET_MKB10_FROM_TSMID(FK_SMDIAGID),FC_WRITE into pFC_MKB10, res  FROM TDIAG WHERE FK_ID = PFK_DIAGID;
+ if UPPER(SUBSTR(pFC_MKB10,1,1)) = 'C' then
+    res := pFC_MKB10;
+  else
+    res := res||'('||pFC_MKB10||')';
+ end if;
+-- SELECT count(1) into pCount FROM TDIAG WHERE FK_ID = :PFK_DIAGID and
+ return res;
+END;
+/
+
+SHOW ERRORS;
+
+

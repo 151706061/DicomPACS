@@ -1,0 +1,22 @@
+DROP PROCEDURE ASU.DO_DELETE_TOWN
+/
+
+--
+-- DO_DELETE_TOWN  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TTOWN (Table)
+--
+CREATE OR REPLACE PROCEDURE ASU."DO_DELETE_TOWN" 
+   ( pFK_ID IN NUMBER)
+   IS
+BEGIN
+  DELETE FROM TTOWN WHERE FK_ID=pFK_ID;
+END; -- Procedure
+/
+
+SHOW ERRORS;
+
+

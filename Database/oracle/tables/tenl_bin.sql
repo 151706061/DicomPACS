@@ -1,0 +1,53 @@
+DROP TABLE ASU.TENL_BIN CASCADE CONSTRAINTS
+/
+
+--
+-- TENL_BIN  (Table) 
+--
+CREATE TABLE ASU.TENL_BIN
+(
+  FK_ID      NUMBER,
+  FK_ENLLPU  NUMBER,
+  FD_DATE    DATE,
+  FB_BLOB    BLOB,
+  FN_TYPE    NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TENL_BIN.FB_BLOB IS 'файл обновления'
+/
+
+COMMENT ON COLUMN ASU.TENL_BIN.FN_TYPE IS '0 - install, 1 - update'
+/
+
+
+--
+-- TENL_BIN_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TENL_BIN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TENL_BIN_BI
+  before insert ON ASU.TENL_BIN   REFERENCING OLD AS OLD NEW AS NEW
+  for each ROW
+begin
+  SELECT asu.seq_tenl_bin.nextval INTO :new.fk_id FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

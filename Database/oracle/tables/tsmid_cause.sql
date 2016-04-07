@@ -1,0 +1,49 @@
+DROP TABLE ASU.TSMID_CAUSE CASCADE CONSTRAINTS
+/
+
+--
+-- TSMID_CAUSE  (Table) 
+--
+CREATE TABLE ASU.TSMID_CAUSE
+(
+  FK_SMID    NUMBER,
+  FK_CAUSE   NUMBER,
+  FK_SOTRID  NUMBER,
+  FD_BEGIN   DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSMID_CAUSE IS 'Таблица связки для указания причины отмены назначений Author:Kulbatsky D.'
+/
+
+COMMENT ON COLUMN ASU.TSMID_CAUSE.FK_SMID IS 'TSMID.FK_ID - ID назначения'
+/
+
+COMMENT ON COLUMN ASU.TSMID_CAUSE.FK_CAUSE IS 'TSMID.FK_ID = ID причины отмены'
+/
+
+COMMENT ON COLUMN ASU.TSMID_CAUSE.FK_SOTRID IS 'LOGIN.TSOTR.FK_ID - сотрудник, сделайший отметку об отмене'
+/
+
+COMMENT ON COLUMN ASU.TSMID_CAUSE.FD_BEGIN IS 'Дата простановки отметки'
+/
+
+

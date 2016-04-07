@@ -1,0 +1,118 @@
+ALTER TABLE ASU.TLINKNAZ
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TLINKNAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TLINKNAZ  (Table) 
+--
+CREATE TABLE ASU.TLINKNAZ
+(
+  FK_ID       NUMBER                            NOT NULL,
+  FK_SMID     NUMBER,
+  FK_OWNER    NUMBER,
+  FK_ISPOLID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TLINKNAZ IS 'Таблица связанных назначений by A.Nakorjakov 280708'
+/
+
+COMMENT ON COLUMN ASU.TLINKNAZ.FK_ID IS 'SEQUENCE=[SEQ_TKARTA]'
+/
+
+COMMENT ON COLUMN ASU.TLINKNAZ.FK_SMID IS 'TSMID.FK_ID - ИД смида назначения'
+/
+
+COMMENT ON COLUMN ASU.TLINKNAZ.FK_OWNER IS 'TLINKNAZ.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TLINKNAZ.FK_ISPOLID IS 'Исполнитель по умолчанию'
+/
+
+
+--
+-- PK_LINKNAZ  (Index) 
+--
+--  Dependencies: 
+--   TLINKNAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_LINKNAZ ON ASU.TLINKNAZ
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLINKNAZ_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TLINKNAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLINKNAZ_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tlinknaz
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TKARTA.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TLINKNAZ 
+-- 
+ALTER TABLE ASU.TLINKNAZ ADD (
+  CONSTRAINT PK_LINKNAZ
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

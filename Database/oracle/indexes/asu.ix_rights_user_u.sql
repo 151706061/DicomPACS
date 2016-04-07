@@ -1,0 +1,25 @@
+DROP INDEX ASU.IX_RIGHTS_USER_U
+/
+
+--
+-- IX_RIGHTS_USER_U  (Index) 
+--
+CREATE UNIQUE INDEX ASU.IX_RIGHTS_USER_U ON ASU.TRIGHTS_USER
+(FK_RIGHT, FK_SOTR)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

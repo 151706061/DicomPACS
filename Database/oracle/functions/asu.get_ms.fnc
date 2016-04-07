@@ -1,0 +1,37 @@
+DROP FUNCTION ASU.GET_MS
+/
+
+--
+-- GET_MS  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU.GET_MS
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =- 
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 1550;
+END;
+/
+
+SHOW ERRORS;
+
+
+DROP PUBLIC SYNONYM GET_MS
+/
+
+--
+-- GET_MS  (Synonym) 
+--
+--  Dependencies: 
+--   GET_MS (Function)
+--
+CREATE PUBLIC SYNONYM GET_MS FOR ASU.GET_MS
+/
+
+
+GRANT EXECUTE ON ASU.GET_MS TO PUBLIC
+/
+

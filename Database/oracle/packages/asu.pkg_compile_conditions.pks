@@ -1,0 +1,16 @@
+DROP PACKAGE ASU.PKG_COMPILE_CONDITIONS
+/
+
+--
+-- PKG_COMPILE_CONDITIONS  (Package) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE PACKAGE ASU."PKG_COMPILE_CONDITIONS" IS bUSE_DS CONSTANT BOOLEAN :=FALSE; bUSE_TRASFUS CONSTANT BOOLEAN :=FALSE;   bDBF_EXCH_FILL_FC_KOD_EO_NAME CONSTANT BOOLEAN := TRUE; -- true - Для заполнения TUSL_DBF_GRID.FC_KOD_EO_NAME используются join-ы, которые тормозят сбор данных на Хантах, false - поле остаётся пустым
+END PKG_COMPILE_CONDITIONS;
+/
+
+SHOW ERRORS;
+
+

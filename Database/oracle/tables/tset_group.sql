@@ -1,0 +1,116 @@
+DROP TABLE ASU.TSET_GROUP CASCADE CONSTRAINTS
+/
+
+--
+-- TSET_GROUP  (Table) 
+--
+CREATE TABLE ASU.TSET_GROUP
+(
+  FK_SETID    NUMBER,
+  FK_GROUPID  NUMBER,
+  FK_SMID     NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSET_GROUP IS 'Таблица-связка между группой, отчетом и папкой в дереве отчетов(tsmid) Created by Prihodko N. 10.10.2011'
+/
+
+COMMENT ON COLUMN ASU.TSET_GROUP.FK_SETID IS 'stat.t_n_settings.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TSET_GROUP.FK_GROUPID IS 'asu.tgroupright.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TSET_GROUP.FK_SMID IS 'asu.tsmid.fk_id'
+/
+
+
+--
+-- TSET_GROUP_GROUPID  (Index) 
+--
+--  Dependencies: 
+--   TSET_GROUP (Table)
+--
+CREATE INDEX ASU.TSET_GROUP_GROUPID ON ASU.TSET_GROUP
+(FK_GROUPID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSET_GROUP_SETID  (Index) 
+--
+--  Dependencies: 
+--   TSET_GROUP (Table)
+--
+CREATE INDEX ASU.TSET_GROUP_SETID ON ASU.TSET_GROUP
+(FK_SETID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSET_GROUP_SMID  (Index) 
+--
+--  Dependencies: 
+--   TSET_GROUP (Table)
+--
+CREATE INDEX ASU.TSET_GROUP_SMID ON ASU.TSET_GROUP
+(FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

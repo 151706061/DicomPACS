@@ -1,0 +1,62 @@
+DROP TABLE ASU.TEXCH_ARCH_TMP CASCADE CONSTRAINTS
+/
+
+--
+-- TEXCH_ARCH_TMP  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.TEXCH_ARCH_TMP
+(
+  FK_SMO_ID         NUMBER,
+  FK_OTDELID        NUMBER,
+  FK_EXSLUCHID      NUMBER(15),
+  TOTAL             NUMBER(10,2),
+  UDR_MEK           NUMBER(10,2),
+  UDR_MEE           NUMBER(10,2),
+  UDR_EKMP          NUMBER(10,2),
+  SHTR_MEK          NUMBER(10,2),
+  SHTR_MEE          NUMBER(10,2),
+  SHTR_EKMP         NUMBER(10,2),
+  FK_ID             NUMBER(15)                  NOT NULL,
+  ID_ILL            NUMBER(19),
+  FAM               VARCHAR2(25 BYTE),
+  IM                VARCHAR2(25 BYTE),
+  OTCH              VARCHAR2(25 BYTE),
+  DATE_B_DAY        DATE,
+  POLICYNUM         VARCHAR2(20 BYTE),
+  DIA_E             VARCHAR2(8 BYTE),
+  TYPE_V_MU         NUMBER(1),
+  N_MAP             VARCHAR2(19 BYTE),
+  N_MAP_AMB         VARCHAR2(19 BYTE),
+  DATE_S            DATE,
+  DATE_E            DATE,
+  FC_SOTRFAM        VARCHAR2(30 BYTE),
+  FC_SOTRNAME       VARCHAR2(30 BYTE),
+  FC_SOTROTCH       VARCHAR2(30 BYTE),
+  FC_DOLG_NAME      VARCHAR2(255 BYTE),
+  FC_OTDEL_NAME     VARCHAR2(255 BYTE),
+  SANK_KOD          NUMBER(5),
+  MSG_DEF           VARCHAR2(120 BYTE),
+  FC_MSG_ERR        VARCHAR2(4000 BYTE),
+  FK_OTDELID_VYP    NUMBER,
+  FC_OTDELNAME_VYP  VARCHAR2(255 BYTE),
+  POL               VARCHAR2(1 BYTE)
+)
+ON COMMIT PRESERVE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.TEXCH_ARCH_TMP IS 'Временная таблица для работы ExchDBFArch.exe Author:Efimov'
+/
+
+
+--
+-- I_EXCH_ARCH_TMP_KEY  (Index) 
+--
+--  Dependencies: 
+--   TEXCH_ARCH_TMP (Table)
+--
+CREATE INDEX ASU.I_EXCH_ARCH_TMP_KEY ON ASU.TEXCH_ARCH_TMP
+(FK_SMO_ID, FK_OTDELID)
+/
+
+

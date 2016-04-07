@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_NAZURGENT
+/
+
+--
+-- GET_NAZURGENT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_NAZURGENT" return number is
+begin
+ return 3;
+ end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_NAZURGENT TO PUBLIC
+/
+

@@ -1,0 +1,144 @@
+ALTER TABLE ASU.TMKB10
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TMKB10 CASCADE CONSTRAINTS
+/
+
+--
+-- TMKB10  (Table) 
+--
+CREATE TABLE ASU.TMKB10
+(
+  FK_ID       NUMBER(15)                        NOT NULL,
+  FK_OWNERID  NUMBER(15),
+  FC_MKB10    VARCHAR2(6 BYTE),
+  FC_NAME     VARCHAR2(150 BYTE),
+  FL_DEL      NUMBER(1)                         DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1600K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TMKB10 IS 'Таблица диагнозов по МКБ-10 by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TMKB10.FK_ID IS 'SEQUENCE=[SEQ_TMKB10]'
+/
+
+COMMENT ON COLUMN ASU.TMKB10.FK_OWNERID IS 'Код "родителя'
+/
+
+COMMENT ON COLUMN ASU.TMKB10.FC_MKB10 IS 'Код по МКБ-10'
+/
+
+COMMENT ON COLUMN ASU.TMKB10.FC_NAME IS 'Название диагноза'
+/
+
+COMMENT ON COLUMN ASU.TMKB10.FL_DEL IS '1 - удалено'
+/
+
+
+--
+-- TMKB10_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TMKB10 (Table)
+--
+CREATE UNIQUE INDEX ASU.TMKB10_BY_ID ON ASU.TMKB10
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TMKB10_BY_ID_OWNER  (Index) 
+--
+--  Dependencies: 
+--   TMKB10 (Table)
+--
+CREATE INDEX ASU.TMKB10_BY_ID_OWNER ON ASU.TMKB10
+(FK_OWNERID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TMKB10_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TMKB10 (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TMKB10_BEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TMKB10   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TMKB10.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TMKB10 
+-- 
+ALTER TABLE ASU.TMKB10 ADD (
+  CONSTRAINT TMKB10_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          256K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

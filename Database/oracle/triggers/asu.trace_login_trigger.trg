@@ -1,0 +1,22 @@
+DROP TRIGGER ASU.TRACE_LOGIN_TRIGGER
+/
+
+--
+-- TRACE_LOGIN_TRIGGER  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE TRIGGER ASU."TRACE_LOGIN_TRIGGER" 
+  AFTER logon ON DATABASE
+DISABLE
+BEGIN
+    IF (USER = 'SOFTMASTER') THEN
+      EXECUTE IMMEDIATE 'ALTER SESSION SET EVENTS ''10046 trace name
+      context forever, level ''';
+    END IF;
+  END;
+/
+SHOW ERRORS;
+
+

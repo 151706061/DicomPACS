@@ -1,0 +1,201 @@
+ALTER TABLE ASU.TEXCHANGE_ELSELOG_STOR
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TEXCHANGE_ELSELOG_STOR CASCADE CONSTRAINTS
+/
+
+--
+-- TEXCHANGE_ELSELOG_STOR  (Table) 
+--
+CREATE TABLE ASU.TEXCHANGE_ELSELOG_STOR
+(
+  FK_ID               NUMBER(15)                NOT NULL,
+  FC_TABLE            VARCHAR2(32 BYTE),
+  FK_OWNER            NUMBER(15),
+  FC_FIELD            VARCHAR2(32 BYTE),
+  FK_THEIR_COMPANYID  NUMBER(15),
+  FC_THEIR_TABLE      VARCHAR2(50 BYTE),
+  FC_OUR_TABLE        VARCHAR2(50 BYTE),
+  FK_OUR_CODE         NUMBER                    DEFAULT 0,
+  FK_PREGROUPOWNER    NUMBER(15)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          16K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TEXCHANGE_ELSELOG_STOR IS 'В таблицу сохраняются данные о несопоставленных полях, обнаруженных в процессе выгрузки в DBF Author:Efimov'
+/
+
+COMMENT ON COLUMN ASU.TEXCHANGE_ELSELOG_STOR.FK_ID IS 'SEQ_TEXCHANGE_ELSELOG'
+/
+
+COMMENT ON COLUMN ASU.TEXCHANGE_ELSELOG_STOR.FC_TABLE IS 'Таблица при заполении которой решалась задача поиска сопоставленного поля'
+/
+
+COMMENT ON COLUMN ASU.TEXCHANGE_ELSELOG_STOR.FK_OWNER IS 'FK_ID записи в таблице FC_TABLE'
+/
+
+COMMENT ON COLUMN ASU.TEXCHANGE_ELSELOG_STOR.FC_FIELD IS 'Поле таблицы FC_TABLE'
+/
+
+COMMENT ON COLUMN ASU.TEXCHANGE_ELSELOG_STOR.FK_THEIR_COMPANYID IS 'Их компания exch43.texchange_company.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TEXCHANGE_ELSELOG_STOR.FC_THEIR_TABLE IS 'Их таблица exch43.ttables.fc_name'
+/
+
+COMMENT ON COLUMN ASU.TEXCHANGE_ELSELOG_STOR.FC_OUR_TABLE IS 'Наша таблица exch43.ttables.fc_name'
+/
+
+COMMENT ON COLUMN ASU.TEXCHANGE_ELSELOG_STOR.FK_OUR_CODE IS 'Код в нашей таблице exch43.texchange_own.fn_code'
+/
+
+COMMENT ON COLUMN ASU.TEXCHANGE_ELSELOG_STOR.FK_PREGROUPOWNER IS 'Если случай, к которому относится запись был сгруппирован с другими в случай-группу, то FK_OWNER записи будет скопировано в FK_PREGROUPOWNER, а в FK_OWNER будет записан TSLUCH_DBF.FK_ID случая-группы'
+/
+
+
+--
+-- I_TEXCHANGE_ELSELOG_STOR_GROUP  (Index) 
+--
+--  Dependencies: 
+--   TEXCHANGE_ELSELOG_STOR (Table)
+--
+CREATE INDEX ASU.I_TEXCHANGE_ELSELOG_STOR_GROUP ON ASU.TEXCHANGE_ELSELOG_STOR
+(FK_PREGROUPOWNER)
+LOGGING
+TABLESPACE SYSTEM
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            FREELISTS        1
+            FREELIST GROUPS  1
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- I_TEXCHANGE_ELSELOG_STOR_OC  (Index) 
+--
+--  Dependencies: 
+--   TEXCHANGE_ELSELOG_STOR (Table)
+--
+CREATE INDEX ASU.I_TEXCHANGE_ELSELOG_STOR_OC ON ASU.TEXCHANGE_ELSELOG_STOR
+(FK_OUR_CODE)
+LOGGING
+TABLESPACE SYSTEM
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            FREELISTS        1
+            FREELIST GROUPS  1
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- I_TEXCHANGE_ELSELOG_STOR_OWNER  (Index) 
+--
+--  Dependencies: 
+--   TEXCHANGE_ELSELOG_STOR (Table)
+--
+CREATE INDEX ASU.I_TEXCHANGE_ELSELOG_STOR_OWNER ON ASU.TEXCHANGE_ELSELOG_STOR
+(FC_TABLE, FK_OWNER)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- K_TEXCHANGE_ELSELOG_STOR_ID  (Index) 
+--
+--  Dependencies: 
+--   TEXCHANGE_ELSELOG_STOR (Table)
+--
+CREATE UNIQUE INDEX ASU.K_TEXCHANGE_ELSELOG_STOR_ID ON ASU.TEXCHANGE_ELSELOG_STOR
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TEXCHANGE_ELSELOG_STOR 
+-- 
+ALTER TABLE ASU.TEXCHANGE_ELSELOG_STOR ADD (
+  CONSTRAINT K_TEXCHANGE_ELSELOG_STOR_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+GRANT ALTER, DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE, ON COMMIT REFRESH, QUERY REWRITE, DEBUG, FLASHBACK ON ASU.TEXCHANGE_ELSELOG_STOR TO EXCH43
+/
+

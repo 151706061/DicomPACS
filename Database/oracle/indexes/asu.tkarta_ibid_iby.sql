@@ -1,0 +1,25 @@
+DROP INDEX ASU.TKARTA_IBID_IBY
+/
+
+--
+-- TKARTA_IBID_IBY  (Index) 
+--
+CREATE INDEX ASU.TKARTA_IBID_IBY ON ASU.TKARTA
+(FK_IBID, FK_IBY)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          512K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

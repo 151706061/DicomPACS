@@ -1,0 +1,25 @@
+DROP INDEX ASU.TCOUNTRY_BY_FK_ID
+/
+
+--
+-- TCOUNTRY_BY_FK_ID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TCOUNTRY_BY_FK_ID ON ASU.TCOUNTRY
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

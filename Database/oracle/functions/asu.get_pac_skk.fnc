@@ -1,0 +1,30 @@
+DROP FUNCTION ASU.GET_PAC_SKK
+/
+
+--
+-- GET_PAC_SKK  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TKARTA (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PAC_SKK" 
+  ( pFK_ID IN NUMBER)
+  RETURN  NUMBER IS
+  CURSOR c(pID NUMBER) IS SELECT FL_SKK FROM TKARTA WHERE FK_ID=pID;
+  i NUMBER;
+BEGIN
+  OPEN c(pFK_ID);
+  FETCH c INTO i;
+  CLOSE c;
+  IF i IS NULL THEN
+    i:=0;
+  END IF;
+  RETURN i;
+END; -- Function GET_PAC_SKK
+/
+
+SHOW ERRORS;
+
+

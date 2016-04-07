@@ -1,0 +1,58 @@
+DROP TRIGGER ASU.TPACLST$WEB_REPLICATION2
+/
+
+--
+-- TPACLST$WEB_REPLICATION2  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   V$SESSION (Synonym)
+--   DBMS_STANDARD (Package)
+--   TGRAPH (Table)
+--   TPACLST (Table)
+--   TRASPIS_SCHEMA (Table)
+--   WEB_BUFFER_TRANSFER2 (Table)
+--   PKG_STATUTIL (Package)
+--
+CREATE OR REPLACE TRIGGER ASU.TPACLST$WEB_REPLICATION2
+ AFTER
+ INSERT OR DELETE
+ ON ASU.TPACLST  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  cnt NUMBER;
+BEGIN
+    IF DELETING THEN
+       SELECT COUNT(*) INTO cnt from asu.traspis_schema r INNER JOIN asu.Tgraph g 
+       on r.fk_graphid = g.fk_raspid
+       WHERE g.fk_id = :OLD.FK_GRAPHID AND r.fk_schemaid = stat.pkg_statutil.get_smidid('RASPIS_PORTAL') 
+             AND g.ft_end > SYSDATE;
+       IF cnt = 0
+       THEN
+          RETURN;
+       END IF;
+
+        --ASU.PKG_EXCH_SAMOZAPIS.DO_LOG('TGRAPH', :OLD.FK_GRAPHID, 'UPDATE', 'TGRAPH$WEB_REPLICATION');
+        INSERT INTO ASU.WEB_BUFFER_TRANSFER2(REGIST_DATE, TABLE_NAME, KEY_FIELD_VALUE, ACTION, FC_INFO, FC_USERNAME)
+        VALUES(SYSDATE, 'TPACLST', :OLD.FK_GRAPHID, 'DELETE', 'TGRAPH$WEB_REPLICATION',
+                        (SELECT MAX(USERNAME) FROM V$SESSION WHERE AUDSID=USERENV('SESSIONID')));
+    ELSE
+       SELECT COUNT(*) INTO cnt from asu.traspis_schema r INNER JOIN asu.Tgraph g
+       on r.fk_graphid = g.fk_raspid
+       WHERE g.fk_id = :NEW.FK_GRAPHID AND r.fk_schemaid = stat.pkg_statutil.get_smidid('RASPIS_PORTAL');
+
+       IF cnt = 0
+       THEN
+          RETURN;
+       END IF;
+
+        --ASU.PKG_EXCH_SAMOZAPIS.DO_LOG('TGRAPH', :NEW.FK_GRAPHID, 'UPDATE', 'TGRAPH$WEB_REPLICATION');
+        INSERT INTO ASU.WEB_BUFFER_TRANSFER2(REGIST_DATE, TABLE_NAME, KEY_FIELD_VALUE, ACTION, FC_INFO, FC_USERNAME)
+        VALUES(SYSDATE, 'TPACLST', :NEW.FK_GRAPHID, 'INSERT', 'TGRAPH$WEB_REPLICATION', (SELECT MAX(USERNAME) FROM V$SESSION WHERE AUDSID=USERENV('SESSIONID')));
+    END IF;
+
+END;
+/
+SHOW ERRORS;
+
+

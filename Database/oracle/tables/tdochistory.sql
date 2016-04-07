@@ -1,0 +1,278 @@
+ALTER TABLE ASU.TDOCHISTORY
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TDOCHISTORY CASCADE CONSTRAINTS
+/
+
+--
+-- TDOCHISTORY  (Table) 
+--
+CREATE TABLE ASU.TDOCHISTORY
+(
+  FK_ID             NUMBER                      NOT NULL,
+  FK_PACID          NUMBER,
+  FD_OUT            DATE,
+  FK_TOKABINETID    NUMBER,
+  FK_FROMKABINETID  NUMBER,
+  FK_TOOTDELID      NUMBER,
+  FK_FROMOTDELID    NUMBER,
+  FK_SOTRID         NUMBER,
+  FC_FROMCOMMENT    VARCHAR2(129 BYTE),
+  FC_TOCOMMENT      VARCHAR2(129 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          16K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TDOCHISTORY.FK_PACID IS 'TAMBULANCE.FK_ID || TKARTA.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TDOCHISTORY.FD_OUT IS 'Когда переместили карту'
+/
+
+COMMENT ON COLUMN ASU.TDOCHISTORY.FK_TOKABINETID IS 'Куда переместили карту (код кабинета)'
+/
+
+COMMENT ON COLUMN ASU.TDOCHISTORY.FK_FROMKABINETID IS 'Откуда переместили карту (код кабинета)'
+/
+
+COMMENT ON COLUMN ASU.TDOCHISTORY.FK_TOOTDELID IS 'Куда переместили карту (код отделения)'
+/
+
+COMMENT ON COLUMN ASU.TDOCHISTORY.FK_FROMOTDELID IS 'Откуда переместили карту(код отделения)'
+/
+
+COMMENT ON COLUMN ASU.TDOCHISTORY.FK_SOTRID IS 'Кто переместил (Код сотрудника TSotr)'
+/
+
+
+--
+-- TAMBHISTORY_BY_FD_OUT  (Index) 
+--
+--  Dependencies: 
+--   TDOCHISTORY (Table)
+--
+CREATE INDEX ASU.TAMBHISTORY_BY_FD_OUT ON ASU.TDOCHISTORY
+(FD_OUT)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAMBHISTORY_BY_FK_AMBID  (Index) 
+--
+--  Dependencies: 
+--   TDOCHISTORY (Table)
+--
+CREATE INDEX ASU.TAMBHISTORY_BY_FK_AMBID ON ASU.TDOCHISTORY
+(FK_PACID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAMBHISTORY_BY_FK_FROMKAB  (Index) 
+--
+--  Dependencies: 
+--   TDOCHISTORY (Table)
+--
+CREATE INDEX ASU.TAMBHISTORY_BY_FK_FROMKAB ON ASU.TDOCHISTORY
+(FK_FROMKABINETID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAMBHISTORY_BY_FK_FROMOTD  (Index) 
+--
+--  Dependencies: 
+--   TDOCHISTORY (Table)
+--
+CREATE INDEX ASU.TAMBHISTORY_BY_FK_FROMOTD ON ASU.TDOCHISTORY
+(FK_FROMOTDELID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAMBHISTORY_BY_FK_TOKAB  (Index) 
+--
+--  Dependencies: 
+--   TDOCHISTORY (Table)
+--
+CREATE INDEX ASU.TAMBHISTORY_BY_FK_TOKAB ON ASU.TDOCHISTORY
+(FK_TOKABINETID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAMBHISTORY_BY_FK_TOOTD  (Index) 
+--
+--  Dependencies: 
+--   TDOCHISTORY (Table)
+--
+CREATE INDEX ASU.TAMBHISTORY_BY_FK_TOOTD ON ASU.TDOCHISTORY
+(FK_TOOTDELID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAMBHISTORY_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TDOCHISTORY (Table)
+--
+CREATE UNIQUE INDEX ASU.TAMBHISTORY_BY_ID ON ASU.TDOCHISTORY
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDOCHISTORY_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDOCHISTORY (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDOCHISTORY_INSERT" 
+  BEFORE INSERT
+  ON ASU.TDOCHISTORY   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  select SEQ_TDOCHISTORY.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TDOCHISTORY 
+-- 
+ALTER TABLE ASU.TDOCHISTORY ADD (
+  CONSTRAINT TAMBHISTORY_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

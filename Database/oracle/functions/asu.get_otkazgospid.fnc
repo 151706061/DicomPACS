@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_OTKAZGOSPID
+/
+
+--
+-- GET_OTKAZGOSPID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_OTKAZGOSPID" 
+return number
+is 
+begin
+  return 342378;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_OTKAZGOSPID TO PUBLIC
+/
+

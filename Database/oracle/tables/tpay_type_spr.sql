@@ -1,0 +1,99 @@
+ALTER TABLE ASU.TPAY_TYPE_SPR
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TPAY_TYPE_SPR CASCADE CONSTRAINTS
+/
+
+--
+-- TPAY_TYPE_SPR  (Table) 
+--
+CREATE TABLE ASU.TPAY_TYPE_SPR
+(
+  FK_ID    NUMBER,
+  FK_TYPE  NUMBER,
+  FC_NAME  VARCHAR2(64 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPAY_TYPE_SPR IS 'Справочник "типов" аппаратов оплаты'
+/
+
+COMMENT ON COLUMN ASU.TPAY_TYPE_SPR.FK_ID IS 'ключ'
+/
+
+COMMENT ON COLUMN ASU.TPAY_TYPE_SPR.FK_TYPE IS 'Тип "аппарата" 0 - фиск. аппарат; 1 - терминал; 2 - кассовый аппарат'
+/
+
+COMMENT ON COLUMN ASU.TPAY_TYPE_SPR.FC_NAME IS 'Название аппарата'
+/
+
+
+--
+-- TPAY_TYPE_SPR_PK  (Index) 
+--
+--  Dependencies: 
+--   TPAY_TYPE_SPR (Table)
+--
+CREATE UNIQUE INDEX ASU.TPAY_TYPE_SPR_PK ON ASU.TPAY_TYPE_SPR
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPAY_TYPE_SPR_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TPAY_TYPE_SPR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPAY_TYPE_SPR_BI"
+ BEFORE
+  INSERT
+ ON ASU.TPAY_TYPE_SPR REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  if (:new.fk_id is null) then
+    select ASU.SEQ_TPAY_TYPE_SPR.nextval into :new.fk_id from dual;
+  end if;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TPAY_TYPE_SPR 
+-- 
+ALTER TABLE ASU.TPAY_TYPE_SPR ADD (
+  CONSTRAINT TPAY_TYPE_SPR_PK
+ PRIMARY KEY
+ (FK_ID))
+/
+

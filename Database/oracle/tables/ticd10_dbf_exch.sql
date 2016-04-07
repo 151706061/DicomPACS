@@ -1,0 +1,63 @@
+DROP TABLE ASU.TICD10_DBF_EXCH CASCADE CONSTRAINTS
+/
+
+--
+-- TICD10_DBF_EXCH  (Table) 
+--
+CREATE TABLE ASU.TICD10_DBF_EXCH
+(
+  FC_KEY  VARCHAR2(20 BYTE),
+  FC_KOD  VARCHAR2(10 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             8K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TICD10_DBF_EXCH IS 'Выгрузка в DBF Вы таблицу копируются все диагнозы, учавтсвующие в процессе расчёта ошибок  Author: Efimov 20121129'
+/
+
+
+--
+-- I_TICD10_DBF_EXCH_KEY  (Index) 
+--
+--  Dependencies: 
+--   TICD10_DBF_EXCH (Table)
+--
+CREATE INDEX ASU.I_TICD10_DBF_EXCH_KEY ON ASU.TICD10_DBF_EXCH
+(FC_KEY)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+GRANT ALTER, DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TICD10_DBF_EXCH TO EXCH79
+/
+

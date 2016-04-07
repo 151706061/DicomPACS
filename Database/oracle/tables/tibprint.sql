@@ -1,0 +1,173 @@
+DROP TABLE ASU.TIBPRINT CASCADE CONSTRAINTS
+/
+
+--
+-- TIBPRINT  (Table) 
+--
+CREATE TABLE ASU.TIBPRINT
+(
+  FK_ID     NUMBER(15),
+  FK_OWNER  NUMBER(15),
+  FC_NAME   VARCHAR2(255 BYTE),
+  FC_SYN    VARCHAR2(255 BYTE),
+  FK_SMID   NUMBER(15),
+  FN_TYPE   NUMBER(1)                           DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TIBPRINT.FK_ID IS 'SEQUENCE=[SEQ_TIBPRINT]'
+/
+
+COMMENT ON COLUMN ASU.TIBPRINT.FK_OWNER IS 'родитель'
+/
+
+COMMENT ON COLUMN ASU.TIBPRINT.FC_NAME IS 'название'
+/
+
+COMMENT ON COLUMN ASU.TIBPRINT.FC_SYN IS 'синоним'
+/
+
+COMMENT ON COLUMN ASU.TIBPRINT.FK_SMID IS 'tsmid.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TIBPRINT.FN_TYPE IS 'тип раздела (0- визуальный,1-логический)'
+/
+
+
+--
+-- TIBPRINT_BY_SMID  (Index) 
+--
+--  Dependencies: 
+--   TIBPRINT (Table)
+--
+CREATE INDEX ASU.TIBPRINT_BY_SMID ON ASU.TIBPRINT
+(FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TIBPRINT_BY_SYN  (Index) 
+--
+--  Dependencies: 
+--   TIBPRINT (Table)
+--
+CREATE INDEX ASU.TIBPRINT_BY_SYN ON ASU.TIBPRINT
+(FC_SYN)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TIBPRINT$FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TIBPRINT (Table)
+--
+CREATE UNIQUE INDEX ASU.TIBPRINT$FK_ID ON ASU.TIBPRINT
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TIBPRINT$FK_OWNER  (Index) 
+--
+--  Dependencies: 
+--   TIBPRINT (Table)
+--
+CREATE INDEX ASU.TIBPRINT$FK_OWNER ON ASU.TIBPRINT
+(FK_OWNER, FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TIBPRINT_WHEN_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TIBPRINT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TIBPRINT_WHEN_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.tibprint
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+ SELECT SEQ_tibprint.NEXTVAL INTO :new.fk_id FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+

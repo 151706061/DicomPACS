@@ -1,0 +1,25 @@
+DROP INDEX ASU.TLABSORT_BY_FK_SMID
+/
+
+--
+-- TLABSORT_BY_FK_SMID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TLABSORT_BY_FK_SMID ON ASU.TLABSORT
+(FK_SMID, FK_COLOR)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

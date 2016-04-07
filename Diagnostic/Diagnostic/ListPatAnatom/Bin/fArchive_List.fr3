@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TfrxReport Version="4.6.5" DotMatrixReport="False" EngineOptions.MaxMemSize="10000000" IniFile="\Software\Fast Reports" PreviewOptions.Buttons="2047" PreviewOptions.Zoom="1" PrintOptions.Printer="Default" PrintOptions.PrintOnSheet="0" ReportOptions.CreateDate="39022,4377439583" ReportOptions.Description.Text="" ReportOptions.LastChange="40040,5906649653" ScriptLanguage="PascalScript" ScriptText.Text="begin&#13;&#10;&#13;&#10;end." PropData="044C65667403300203546F7003D80008446174617365747301010C3400000020446174615365743D22667278444244617461736574312220446174615365744E616D653D2266727844424461746173657431220000095661726961626C65730100055374796C650100">
+  <TfrxDataPage Name="Data" Height="1000" Left="0" Top="0" Width="1000"/>
+  <TfrxReportPage Name="Page1" Orientation="poLandscape" PaperWidth="297" PaperHeight="210" PaperSize="9" LeftMargin="10" RightMargin="10" TopMargin="10" BottomMargin="10" ColumnWidth="0" ColumnPositions.Text="" HGuides.Text="" VGuides.Text="">
+    <TfrxReportTitle Name="ReportTitle1" Height="85,04731" Left="0" Top="18,89765" Width="1046,92981">
+      <TfrxMemoView Name="Memo14" Left="13,85827667" Top="7,55906" Width="95,74809333" Height="40,31498667" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="[Date]"/>
+      <TfrxMemoView Name="Memo15" Left="113,3859" Top="7,55906" Width="337,63801333" Height="40,31498667" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" ParentFont="False" Text="Результат отбора исследований."/>
+      <TfrxMemoView Name="Memo3" Left="117,16543" Top="58,47248" Width="249,44898" Height="26,35436" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="15" ParentFont="False" Text=" Фамилия Имя Отчество"/>
+      <TfrxMemoView Name="Memo4" Left="366,61441" Top="58,69295" Width="113,3859" Height="26,35436" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="15" ParentFont="False" Text=" Год рожд"/>
+      <TfrxMemoView Name="Memo5" Left="480,00031" Top="58,47248" Width="222,99227" Height="26,35436" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="15" ParentFont="False" Text=" Кем направлен"/>
+      <TfrxMemoView Name="Memo6" Left="703,21305" Top="58,69295" Width="207,87415" Height="26,35436" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="15" ParentFont="False" Text=" Исследование"/>
+      <TfrxMemoView Name="Memo2" Left="3" Top="58,47248" Width="114,3859" Height="26,35436" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="15" ParentFont="False" Text=" Дата"/>
+      <TfrxMemoView Name="Memo7" Left="910,86673" Top="58,47248" Width="128,50402" Height="26,35436" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-13" Font.Name="Arial" Font.Style="1" Frame.Typ="15" ParentFont="False" Text=" Врач"/>
+    </TfrxReportTitle>
+    <TfrxMasterData Name="MasterData1" Height="46,25201" Left="0" Top="166,29932" Width="1046,92981" ColumnWidth="0" ColumnGap="0" DataSet="frxDBDataset1" DataSetName="frxDBDataset1" RowCount="0">
+      <TfrxMemoView Name="Memo8" Left="2,77953" Top="0,677179999999993" Width="114,3859" Height="45,35436" ShowHint="False" Frame.Typ="15" Text=" [frxDBDataset1.&#34;FD_DATE&#34;]"/>
+      <TfrxMemoView Name="Memo9" Left="117,16543" Top="0,677179999999993" Width="249,44898" Height="45,35436" ShowHint="False" Frame.Typ="15" Text=" [frxDBDataset1.&#34;PACFIO&#34;]"/>
+      <TfrxMemoView Name="Memo10" Left="366,61441" Top="0,677179999999993" Width="113,3859" Height="45,35436" ShowHint="False" Frame.Typ="15" Text=" [frxDBDataset1.&#34;FD_ROJD&#34;]"/>
+      <TfrxMemoView Name="Memo11" Left="480,00031" Top="0,897649999999999" Width="222,99227" Height="45,35436" ShowHint="False" Frame.Typ="15" Text=" [frxDBDataset1.&#34;KEM&#34;]"/>
+      <TfrxMemoView Name="Memo12" Left="702,99258" Top="0,677179999999993" Width="207,87415" Height="45,35436" ShowHint="False" Frame.Typ="15" Text="[frxDBDataset1.&#34;FC_NAME&#34;]"/>
+      <TfrxMemoView Name="Memo13" Left="910,86673" Top="0,677179999999993" Width="128,50402" Height="45,35436" ShowHint="False" Frame.Typ="15" Text="[frxDBDataset1.&#34;VRACHFIO&#34;]"/>
+    </TfrxMasterData>
+    <TfrxPageFooter Name="PageFooter1" Height="26,45671" Left="0" Top="328,81911" Width="1046,92981">
+      <TfrxMemoView Name="Memo1" Left="933,60312264" Top="0" Width="75,5906" Height="18,89765" ShowHint="False" HAlign="haRight" Text="Стр. [Page#]"/>
+    </TfrxPageFooter>
+    <TfrxFooter Name="Footer1" Height="34,01577" Left="0" Top="234,33086" Width="1046,92981">
+      <TfrxMemoView Name="Memo16" Left="0" Top="0" Width="367,87425333" Height="21,41733667" ShowHint="False" Font.Charset="1" Font.Color="0" Font.Height="-16" Font.Name="Arial" Font.Style="1" ParentFont="False" WordBreak="True" Text="Всего исследований: [COUNT(MasterData1)]"/>
+    </TfrxFooter>
+  </TfrxReportPage>
+</TfrxReport>

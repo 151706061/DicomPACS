@@ -1,0 +1,174 @@
+ALTER TABLE ASU.TPODPISNAZ
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TPODPISNAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TPODPISNAZ  (Table) 
+--
+CREATE TABLE ASU.TPODPISNAZ
+(
+  FK_ID      NUMBER                             NOT NULL,
+  FK_NAZID   NUMBER(15),
+  FK_SOTRID  NUMBER(15),
+  FK_SOS     NUMBER,
+  FD_DATE    DATE,
+  FD_INS     DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1872K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPODPISNAZ IS 'Таблица множественной подписи'
+/
+
+COMMENT ON COLUMN ASU.TPODPISNAZ.FK_ID IS 'SEQUENCE=[SEQ_TPODPISNAZ]'
+/
+
+COMMENT ON COLUMN ASU.TPODPISNAZ.FK_NAZID IS 'ID назначения'
+/
+
+COMMENT ON COLUMN ASU.TPODPISNAZ.FK_SOTRID IS 'ID сотрудника'
+/
+
+COMMENT ON COLUMN ASU.TPODPISNAZ.FK_SOS IS 'Статус'
+/
+
+COMMENT ON COLUMN ASU.TPODPISNAZ.FD_DATE IS 'Дата(текущая)'
+/
+
+COMMENT ON COLUMN ASU.TPODPISNAZ.FD_INS IS 'Дата(выставленная врачом)'
+/
+
+
+--
+-- TPODPISNAZ_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TPODPISNAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.TPODPISNAZ_BY_ID ON ASU.TPODPISNAZ
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          896K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPODPISNAZ_BY_NAZID  (Index) 
+--
+--  Dependencies: 
+--   TPODPISNAZ (Table)
+--
+CREATE INDEX ASU.TPODPISNAZ_BY_NAZID ON ASU.TPODPISNAZ
+(FK_NAZID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPODPISNAZ_BY_SOS  (Index) 
+--
+--  Dependencies: 
+--   TPODPISNAZ (Table)
+--
+CREATE INDEX ASU.TPODPISNAZ_BY_SOS ON ASU.TPODPISNAZ
+(FK_SOS)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPODPISNAZ_BEFORE_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TPODPISNAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPODPISNAZ_BEFORE_INS" 
+ BEFORE 
+ INSERT
+ ON ASU.TPODPISNAZ  FOR EACH ROW
+BEGIN
+  SELECT SEQ_TPODPISNAZ.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TPODPISNAZ 
+-- 
+ALTER TABLE ASU.TPODPISNAZ ADD (
+  CONSTRAINT TPODPISNAZ_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          896K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

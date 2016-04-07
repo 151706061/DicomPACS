@@ -1,0 +1,144 @@
+DROP TABLE ASU.TGROUP CASCADE CONSTRAINTS
+/
+
+--
+-- TGROUP  (Table) 
+--
+CREATE TABLE ASU.TGROUP
+(
+  FK_ID           NUMBER(15),
+  FK_MAINGROUPID  NUMBER(15),
+  FC_NAME         VARCHAR2(100 BYTE),
+  FC_SHORT        VARCHAR2(100 BYTE),
+  FL_KONT         NUMBER(1)                     DEFAULT 1,
+  FL_DEFAULT      NUMBER(1)                     DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TGROUP IS 'Справочник "Группа отбора" by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TGROUP.FK_ID IS 'SEQUENCE=[SEQ_TGROUP]'
+/
+
+COMMENT ON COLUMN ASU.TGROUP.FK_MAINGROUPID IS 'код главной группы'
+/
+
+COMMENT ON COLUMN ASU.TGROUP.FC_NAME IS 'название'
+/
+
+COMMENT ON COLUMN ASU.TGROUP.FC_SHORT IS 'кратко'
+/
+
+COMMENT ON COLUMN ASU.TGROUP.FL_KONT IS 'признак контингента'
+/
+
+COMMENT ON COLUMN ASU.TGROUP.FL_DEFAULT IS 'значение по-умолчанию'
+/
+
+
+--
+-- TGROUP_BY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TGROUP (Table)
+--
+CREATE UNIQUE INDEX ASU.TGROUP_BY_FK_ID ON ASU.TGROUP
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TGROUP_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TGROUP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TGROUP_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TGROUP REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  SELECT SEQ_TGROUP.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TGROUP_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TGROUP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TGROUP_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TGROUP  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  nTemp NUMBER;
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TGROUP', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TGROUP', 'FC_NAME', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fc_name), :new.fk_id);
+  elsif DELETING then
+    PKG_LOG.Do_log('TGROUP', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_id), null, :old.fk_id);
+    PKG_LOG.Do_log('TGROUP', 'FC_NAME', 'DELETE', PKG_LOG.GET_VALUE(:old.FC_NAME), null, :old.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TGROUP', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FC_NAME') AND PKG_LOG.GET_VALUE(:old.FC_NAME) <> PKG_LOG.GET_VALUE(:new.FC_NAME) then
+      PKG_LOG.Do_log('TGROUP', 'FC_NAME', 'UPDATE', PKG_LOG.GET_VALUE(:old.FC_NAME), PKG_LOG.GET_VALUE(:new.FC_NAME), :old.fk_id);
+    end if;
+  end if;
+  null;
+END TGROUP_LOG;
+/
+SHOW ERRORS;
+
+
+DROP SYNONYM BUH.TGROUP
+/
+
+--
+-- TGROUP  (Synonym) 
+--
+--  Dependencies: 
+--   TGROUP (Table)
+--
+CREATE SYNONYM BUH.TGROUP FOR ASU.TGROUP
+/
+
+

@@ -1,0 +1,73 @@
+DROP TABLE ASU.TEXCHUPLOAD_MOVE CASCADE CONSTRAINTS
+/
+
+--
+-- TEXCHUPLOAD_MOVE  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.TEXCHUPLOAD_MOVE
+(
+  ID_ILL     NUMBER,
+  PID        NUMBER,
+  N_MAP      NUMBER,
+  PLACE_1    NUMBER,
+  DATE_1     DATE,
+  DOCTOR_1   VARCHAR2(100 BYTE),
+  PLACE_2    NUMBER,
+  DATE_2     DATE,
+  N_MOVE     NUMBER,
+  DOCSPEC1   NUMBER(5),
+  DOCTOR_2   VARCHAR2(100 BYTE),
+  DOCSPEC2   NUMBER(5),
+  PROFMP_ID  NUMBER(9),
+  DIA        VARCHAR2(10 BYTE)
+)
+ON COMMIT PRESERVE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.TEXCHUPLOAD_MOVE IS 'Временная таблица для выгрузки перемещений между отделениями в ЕИС ОМС'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.ID_ILL IS 'Идентификатор случая'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.PID IS 'Идентификатор пациента'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.N_MAP IS 'Номер истории болезни'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.PLACE_1 IS 'Код отделения откуда переведен пациент'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.DATE_1 IS 'Дата с какой пациент был в предыдущем отделении'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.DOCTOR_1 IS 'Врач, переведший пациента (ФИО) '
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.PLACE_2 IS 'Код отделения куда переведен пациент'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.DATE_2 IS 'Дата с какой идет перевод'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.N_MOVE IS 'Номер перевода по порядку'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.DOCSPEC1 IS 'Специальность врача DOCTOR_1'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.DOCTOR_2 IS 'Код ФИО лечашего врача, в отделении куда перевели пациента'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.DOCSPEC2 IS 'Специальность врача DOCTOR_2'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.PROFMP_ID IS 'Профиль медицинской помощи (Справочник EXT_PROFMP)'
+/
+
+COMMENT ON COLUMN ASU.TEXCHUPLOAD_MOVE.DIA IS 'Диагноз заболевания в отделении куда переведен пациент'
+/
+
+

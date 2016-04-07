@@ -1,0 +1,53 @@
+DROP TABLE ASU.TSPECSOTR CASCADE CONSTRAINTS
+/
+
+--
+-- TSPECSOTR  (Table) 
+--
+CREATE TABLE ASU.TSPECSOTR
+(
+  FK_ID      NUMBER,
+  FK_SMIDID  NUMBER,
+  FK_SPECID  NUMBER,
+  FK_SOTRID  NUMBER,
+  FL_DEL     NUMBER(1)                          DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSPECSOTR IS 'таблица определяющяя отношение сотрудника+специализация к отделу by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TSPECSOTR.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TSPECSOTR.FK_SMIDID IS 'Код отдела из ТСМИД'
+/
+
+COMMENT ON COLUMN ASU.TSPECSOTR.FK_SPECID IS 'Код специализации'
+/
+
+COMMENT ON COLUMN ASU.TSPECSOTR.FK_SOTRID IS 'Код сотрудника'
+/
+
+COMMENT ON COLUMN ASU.TSPECSOTR.FL_DEL IS 'признак "в корзине"'
+/
+
+

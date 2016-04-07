@@ -1,0 +1,49 @@
+DROP FUNCTION ASU.GET_ISSLEDID
+/
+
+--
+-- GET_ISSLEDID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_ISSLEDID" 
+return number
+is
+begin
+  return 1323;
+end;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM BUH.GET_ISSLEDID
+/
+
+--
+-- GET_ISSLEDID  (Synonym) 
+--
+--  Dependencies: 
+--   GET_ISSLEDID (Function)
+--
+CREATE SYNONYM BUH.GET_ISSLEDID FOR ASU.GET_ISSLEDID
+/
+
+
+DROP SYNONYM STAT.GET_ISSLEDID
+/
+
+--
+-- GET_ISSLEDID  (Synonym) 
+--
+--  Dependencies: 
+--   GET_ISSLEDID (Function)
+--
+CREATE SYNONYM STAT.GET_ISSLEDID FOR ASU.GET_ISSLEDID
+/
+
+
+GRANT EXECUTE ON ASU.GET_ISSLEDID TO PUBLIC
+/
+

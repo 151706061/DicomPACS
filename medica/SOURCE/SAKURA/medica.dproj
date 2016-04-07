@@ -1,0 +1,381 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{0c5893e0-aa45-430e-8ee1-62fd7f597afd}</ProjectGuid>
+    <MainSource>medica.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>C:\ASU\medica.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_Optimize>False</DCC_Optimize>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_MapFile>3</DCC_MapFile>
+    <DCC_ExeOutput>..\BIN</DCC_ExeOutput>
+    <DCC_DcuOutput>..\DCU</DCC_DcuOutput>
+    <DCC_ObjOutput>..\DCU</DCC_ObjOutput>
+    <DCC_HppOutput>..\DCU</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\..\uCommon_Tima\;..\..\..\JVCL</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\uCommon_Tima\;..\..\..\JVCL</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\uCommon_Tima\;..\..\..\JVCL</DCC_ObjPath>
+    <DCC_IncludePath>..\..\uCommon_Tima\;..\..\..\JVCL</DCC_IncludePath>
+    <DCC_Define>RELEASE</DCC_Define>
+    <DCC_SYMBOL_PLATFORM>False</DCC_SYMBOL_PLATFORM>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_Optimize>False</DCC_Optimize>
+    <DCC_SymbolReferenceInfo>2</DCC_SymbolReferenceInfo>
+    <DCC_MapFile>3</DCC_MapFile>
+    <DCC_ExeOutput>C:\ASU</DCC_ExeOutput>
+    <DCC_DcuOutput>..\..\DCU</DCC_DcuOutput>
+    <DCC_ObjOutput>..\..\DCU</DCC_ObjOutput>
+    <DCC_HppOutput>..\..\DCU</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\..\..\..\..\Trunk\JVCL;..\..\..\..\..\Trunk_AUTH\uCommon\;..\..\..\..\..\Autoriz_Ugorsk\uCommon;..\..\..\..\..\Autoriz_Ugorsk\LoginDll;..\..\..\..\..\Trunk\ASU2\uCommon_Tima\</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\..\..\..\Trunk\JVCL;..\..\..\..\..\Trunk_AUTH\uCommon\;..\..\..\..\..\Autoriz_Ugorsk\uCommon;..\..\..\..\..\Autoriz_Ugorsk\LoginDll;..\..\..\..\..\Trunk\ASU2\uCommon_Tima\</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\..\..\..\Trunk\JVCL;..\..\..\..\..\Trunk_AUTH\uCommon\;..\..\..\..\..\Autoriz_Ugorsk\uCommon;..\..\..\..\..\Autoriz_Ugorsk\LoginDll;..\..\..\..\..\Trunk\ASU2\uCommon_Tima\</DCC_ObjPath>
+    <DCC_IncludePath>..\..\..\..\..\Trunk\JVCL;..\..\..\..\..\Trunk_AUTH\uCommon\;..\..\..\..\..\Autoriz_Ugorsk\uCommon;..\..\..\..\..\Autoriz_Ugorsk\LoginDll;..\..\..\..\..\Trunk\ASU2\uCommon_Tima\</DCC_IncludePath>
+    <DCC_Define>DEBUG;OLD_AUTH;XE;SAKURA</DCC_Define>
+    <DCC_SYMBOL_PLATFORM>False</DCC_SYMBOL_PLATFORM>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="RunParams">281200</Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">4</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">18</VersionInfo><VersionInfo Name="Build">154</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName">Медотрейд</VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">4.0.18.154</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments">Для поликлиники</VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">medica.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="medica.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\..\..\..uCommon\uGlobalConst.pas" />
+    <DCCReference Include="..\..\..\..\uCommon\uGlobalConst.pas" />
+    <DCCReference Include="..\..\..\..\uCommon\uProcess.pas" />
+    <DCCReference Include="..\..\..\..\uCommon_Ura\uIROraUtils.pas" />
+    <DCCReference Include="..\..\..\.uCommon\uGlobalConst.pas" />
+    <DCCReference Include="..\..\..\uCommon\uGlobalConst.pas" />
+    <DCCReference Include="..\..\..\uCommon\uProcess.pas" />
+    <DCCReference Include="..\..\..\uCommon_Ura\uIROraUtils.pas" />
+    <DCCReference Include="..\Reports\CommonUnits\fCheckedListEdit.pas">
+      <Form>fmCheckedListEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\Reports\CommonUnits\fSelectCheckedList.pas">
+      <Form>fmSelectCheckedList</Form>
+    </DCCReference>
+    <DCCReference Include="..\source\Reports\CommonUnits\fCheckedListEdit.pas">
+      <Form>fmCheckedListEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\source\Reports\CommonUnits\fSelectCheckedList.pas">
+      <Form>fmSelectCheckedList</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\fdmMain.pas">
+      <Form>dmMain</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\src\fdmPrintReports.pas">
+      <Form>dmPrintReports</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\src\fdmPrintSelect.pas">
+      <Form>dmPrintSelect</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\src\fdmSkladSelect.pas">
+      <Form>dmSkladSelect</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\src\fGlobal.pas" />
+    <DCCReference Include="..\src\forms\DictAnc\fDictAncestor.pas">
+      <Form>frmDictAncestor</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fActOstEdit.pas">
+      <Form>frmActOstEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fBrakCheckProgress.pas">
+      <Form>fmBrakCheckProgress</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fBrakSelect.pas">
+      <Form>fmBrakSelect</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\FCHMO.PAS">
+      <Form>frmChmo</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fcross_table_check.pas">
+      <Form>frmCROSS_TABLE_CHECK</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fCROSS_TABLE_PARAMS.pas">
+      <Form>frmCROSS_TABLE_PARAMS</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fDateInput.pas">
+      <Form>frmDateInput</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fdmMoveEdit.pas">
+      <Form>dmMoveEdit</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fEditAll.pas">
+      <Form>frmEditAll</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fEditMoinGroup.pas">
+      <Form>frmEditMoinGroup</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fEdIzm.pas">
+      <Form>frmEdIzm</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fEdizmEdit.pas">
+      <Form>frmEdIzmEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fFarmGr.pas">
+      <Form>frmFarmGr</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fFarmGrEdit.pas">
+      <Form>frmFarmGrEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fFinSource.pas">
+      <Form>fmFinSource</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fFIONakl.pas">
+      <Form>frmFIONakl</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fFIOTreb.pas">
+      <Form>frmFIOTreb</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fFioZav.pas">
+      <Form>frmFioZav</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fgetperiod.pas">
+      <Form>frmGetPeriod</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fGroup_LF.pas">
+      <Form>frmGroup_LF</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fImportNakl.pas">
+      <Form>fmImportNakl</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fInputEdit.pas">
+      <Form>fmInputEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fInputMemo.pas">
+      <Form>frmInputMemo</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fInputNameValue.pas">
+      <Form>fmInputNameValue</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fInterface.pas">
+      <Form>fmInterface</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fInvEdit.pas">
+      <Form>frmInvEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fInvList.pas">
+      <Form>frmInvList</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fKartsLst.pas">
+      <Form>frmKartsLst</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fLinkedDocs.pas">
+      <Form>frmLinkedDocs</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMainForm.pas">
+      <Form>frmMain</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMassUnits.pas">
+      <Form>frmMassUnits</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMedic.pas">
+      <Form>frmMedic</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMedicEdit.pas">
+      <Form>frmMedicEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMedicSelect.pas">
+      <Form>frmMedicSelect</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMedicWithoutLink.pas">
+      <Form>frmMedicWithoutLink</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMedKardEdit.pas">
+      <Form>frmMedKardEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMedKardListFilter.pas">
+      <Form>frmMedKardListFilter</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMedKardLst.pas">
+      <Form>frmMedKardLst</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMedProduceEdit.pas">
+      <Form>frmMedProduceEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMedProduceList.pas">
+      <Form>frmMedProduceList</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMinSpare.pas">
+      <Form>frmMinSpare</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMO.pas">
+      <Form>frmMO</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMOEdit.pas">
+      <Form>frmMOEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMOGroup.pas">
+      <Form>frmMOGroup</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMOinGroup.pas">
+      <Form>frmMOinGroup</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMoveEdit.pas">
+      <Form>frmMoveEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fMoveList.pas">
+      <Form>frmMoveList</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fm_Select_MO.pas">
+      <Form>fmSelect_MO</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fNeotl.pas">
+      <Form>frmNeotlozh</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fPayCond.pas">
+      <Form>fmPayCond</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fPostavEdit.pas">
+      <Form>frmPostavEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fPostavLst.pas">
+      <Form>frmPostavLst</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fPostGiven.pas">
+      <Form>frmPostGiven</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fPrihEdit.pas">
+      <Form>frmPrihEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fPrihList.pas">
+      <Form>frmPrihList</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fPrintPreview_Base.pas">
+      <Form>fmPrintPreview_Base</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fPrintPreview_FR2.pas">
+      <Form>fmPrintPreview_FR2</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fRecipe.pas">
+      <Form>frmRecipe</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fReportInputActSpis.pas">
+      <Form>fmReportInputActSpis</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fRlsChosePrep.pas">
+      <Form>frmRlsChosePrep</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fRlsDragForms.pas">
+      <Form>frmRlsDragForms</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fRlsFarmGroup.pas">
+      <Form>frmRlsFarmGroup</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\frmRlsChosePrep1.pas">
+      <Form>frameRlsChosePrep1</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\frmRlsChosePrep2.pas">
+      <Form>frameRlsChosePrep2</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\frmRlsChosePrep_B.pas">
+      <Form>frameRlsChosePrep_B</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fSelectPeriod.pas">
+      <Form>frmSelectPeriod</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fSelectSotr.pas">
+      <Form>frmSelectSotr</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fSetup.pas">
+      <Form>frmSetup</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fSklad.pas">
+      <Form>frmSklad</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fSpecialMedic.pas">
+      <Form>frmSpecialMedic</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fSpisanieVid.pas">
+      <Form>fmSpisanieVid</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fTemplates.pas">
+      <Form>fmTemplates</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fTrebByNaz.pas">
+      <Form>frmTrebByNaz</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fTrebLst.pas">
+      <Form>frmTrebLst</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fTrebManual.pas">
+      <Form>frmTrebManual</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fTreb_Quota.pas">
+      <Form>fmTreb_Quota</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fTreb_Quota_Edit.pas">
+      <Form>fmTreb_Quota_Edit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fUchGr.pas">
+      <Form>frmUchGr</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fUchGrEdit.pas">
+      <Form>frmUchGrEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fVid_post.pas">
+      <Form>frmVid_post</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fViewPeriodChange.pas">
+      <Form>fmViewPeriodChange</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fZayavEdit.pas">
+      <Form>frmZayavEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\fZayavList.pas">
+      <Form>frmZayavList</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\HtmlHlp.pas" />
+    <DCCReference Include="..\src\forms\uParams.pas" />
+    <DCCReference Include="..\src\forms\uProdCertDlg.pas">
+      <Form>ProdCertDlg</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\forms\uProdCertEditDlg.pas">
+      <Form>ProdCertEditDlg</Form>
+    </DCCReference>
+    <DCCReference Include="..\src\GLOBALS.pas" />
+    <DCCReference Include="..\src\pkgs\PkgInvopis.pas" />
+    <DCCReference Include="..\src\pkgs\PKGMEDKART.pas" />
+    <DCCReference Include="..\src\pkgs\PKGMEDSES.pas" />
+    <DCCReference Include="..\src\pkgs\PkgPrihrash.pas" />
+    <DCCReference Include="..\src\pkgs\PkgSmini.pas" />
+    <DCCReference Include="..\src\pkgs\PKGTDOCS.pas" />
+    <DCCReference Include="..\src\pkgs\PKGTEDIZM.pas" />
+    <DCCReference Include="..\src\pkgs\PKGTFARMGR.pas" />
+    <DCCReference Include="..\src\pkgs\PKGTKARTCOITEM.pas" />
+    <DCCReference Include="..\src\pkgs\PKGTKARTCOMPOS.pas" />
+    <DCCReference Include="..\src\pkgs\PKGTMEDIC.pas" />
+    <DCCReference Include="..\src\pkgs\PKGTMO.PAS" />
+    <DCCReference Include="..\src\pkgs\PKGTPOSTAV.pas" />
+    <DCCReference Include="..\src\pkgs\PKGTREB.pas" />
+    <DCCReference Include="..\src\pkgs\PKGTUCHGR.pas" />
+    <DCCReference Include="..\src\pkgs\PKGTUCHGRTYPE.pas" />
+    <DCCReference Include="..\src\pkgs\uPkgProdCert.pas" />
+    <DCCReference Include="..\src\uTLINK_IMPNAKL.pas" />
+    <DCCReference Include="..\uCommon\uProcess.pas" />
+    <DCCReference Include="..\uCommon_Ura\uIROraUtils.pas" />
+  </ItemGroup>
+</Project>

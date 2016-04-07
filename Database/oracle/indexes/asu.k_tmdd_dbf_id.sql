@@ -1,0 +1,25 @@
+DROP INDEX ASU.K_TMDD_DBF_ID
+/
+
+--
+-- K_TMDD_DBF_ID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.K_TMDD_DBF_ID ON ASU.TMDD_DBF
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

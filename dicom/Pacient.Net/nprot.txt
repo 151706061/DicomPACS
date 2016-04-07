@@ -1,0 +1,33 @@
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Xray\Views\XrayLaborant\Referral.cshtml
+
+вьюха для ввода номера протокола
+
+--------------------------
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Xray\Models\Xray\BaseGridModel.cs
+line 34
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Xray\Controllers\XrayLaborantController.cs
+line 452
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Xray\Controllers\XrayDoctorController.cs
+line 290
+line 199
+
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Domain\Concrete\DictionaryN\PrescRepository.cs
+line 2106
+
+---------------------------
+
+C:\tmp\Pacient.Net\WWW\PacientNet_Tula\PacientNet.Xray\Views\XrayLaborant\Referral.cshtml
+line 257
+
+
+
+
+
+
+
+
+

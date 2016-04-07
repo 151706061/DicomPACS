@@ -1,0 +1,18 @@
+DROP FUNCTION ASU.ADD_ONE
+/
+
+--
+-- ADD_ONE  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."ADD_ONE" ( an_x IN NUMBER ) RETURN NUMBER IS
+BEGIN
+  RETURN( an_x + 1 );
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,30 @@
+DROP TRIGGER ASU.TPROFACTOR_SMID_BEFORE_INSERT
+/
+
+--
+-- TPROFACTOR_SMID_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   TPROFACTOR_SMID (Table)
+--   SEQ_PROFACTOR_SMID (Sequence)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFACTOR_SMID_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tprofactor_smid
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT seq_profactor_smid.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+end;
+/
+SHOW ERRORS;
+
+

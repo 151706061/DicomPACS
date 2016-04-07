@@ -1,0 +1,50 @@
+<div class="myheadt mhh" style="background-color: #65B1D5;top:0">
+        <div class="container mhh" style="background-color: #65B1D5;top:0">
+                <div class="row-fluid">
+                    <div class="span12 ">
+                        <div class="span8 align-left">
+                            <div class="image-wrapper myhead" style="width: 35px; padding-top: 21x; ">
+                                <img src="css/img/medlogo.png">
+                            </div>
+                            <div class="myhdtext1" style="margin-left:100px;margin-top:-30px;">
+                                <h3 style="color:white;">ЦЕНТР МЕДИЦИНСКИХ ИЗОБРАЖЕНИЙ</h3>
+                            </div>	
+                        </div>
+                    
+                        <div style="height:40px;padding-left:10px" class="span4">	<!--	блок авторизации 	-->
+                            <div class="span3 align-left mhh" style="width:300px;">
+                                <div style="width:255px" class="row ">
+                                    <div style="padding:5px;width:255px;background-color:white;opacity:0.7" class="span12 mhh myflft">
+                                        <div style="width:40px;" class="mhh myflft">
+                                            <div class="image-wrapper">
+                                                <img src="css/img/face.png">
+                                            </div>
+                                        </div>
+                                        <div id="myauth" style="padding-left:10px;height:30px" class="mhh myflft">
+                                            <div id="myusername" class="myflft" style="padding-top:10px;max-width:130px;width:130px;">
+                                            	<h5 style="font-weight:bold;color:#599DC0">ADMIN</h5>
+                                            </div>
+                                            <div id="mybtnflogs" class="myflft" style="width:50px">
+                                                <button id="logoutbutton" title="Выход" class="win-command mybox1btn mhh" style="color:#65B1D5;padding-top:10px;margin-top:-10px;">
+												<span class="win-commandimage win-commandring" style="">&#xe040;</span> 
+                                                </button>
+                                            </div>    
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+        </div>
+    </div>
+
+<script type="text/javascript">		
+   $(function() {
+	   $("#logoutbutton").click(function(){
+			var v_url_tmp = v_url+ 'login';
+			document.location.href =(v_url_tmp);
+		});
+	});
+</script>	

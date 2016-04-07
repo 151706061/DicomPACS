@@ -1,0 +1,9 @@
+record
+r_group
+r_channel
+r_name
+r_amm
+r_freq
+r_edizm_shrt
+r_edizm_lrg
+r_data [ 1..nmb_grps, 1..r_amm ]

@@ -1,0 +1,25 @@
+DROP INDEX ASU.I_TICD10_DBF_EXCH_KEY
+/
+
+--
+-- I_TICD10_DBF_EXCH_KEY  (Index) 
+--
+CREATE INDEX ASU.I_TICD10_DBF_EXCH_KEY ON ASU.TICD10_DBF_EXCH
+(FC_KEY)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

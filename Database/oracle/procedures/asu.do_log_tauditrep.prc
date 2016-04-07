@@ -1,0 +1,33 @@
+DROP PROCEDURE ASU.DO_LOG_TAUDITREP
+/
+
+--
+-- DO_LOG_TAUDITREP  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TAUDITREP (Table)
+--
+CREATE OR REPLACE PROCEDURE ASU."DO_LOG_TAUDITREP" (PFD_INS DATE DEFAULT SYSDATE,
+                           PFK_VRACHID NUMBER,
+                           PFK_PACID NUMBER,
+                           PFK_RAZDELID NUMBER DEFAULT -1,
+                           PFC_COMMENT VARCHAR2 DEFAULT NULL,
+                           --PFC_TERMINAL VARCHAR2 DEFAULT NULL,
+                           PFK_OBJID NUMBER DEFAULT -1)
+IS
+
+BEGIN
+  INSERT INTO TAUDITREP(FD_INS, FK_VRACHID, FK_PACID, FK_RAZDELID, FC_COMMENT, FC_TERMINAL, FK_OBJID)
+       VALUES(PFD_INS, PFK_VRACHID, PFK_PACID, PFK_RAZDELID, PFC_COMMENT, USERENV('TERMINAL'), PFK_OBJID);
+  COMMIT;
+END; -- Procedure
+--Created: X-Side
+--Date: 13.11.2006
+--Last modified: 13.11.2006
+/
+
+SHOW ERRORS;
+
+

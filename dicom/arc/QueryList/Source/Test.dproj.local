@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015.03.26 11:10:35.108.pas,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\UnTestMain.pas</Transaction>
+    <Transaction>2015.03.26 11:10:35.108.dfm,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\UnTestMain.dfm</Transaction>
+    <Transaction>2015.03.26 11:10:42.715.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\Project1.dproj=C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\Test.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

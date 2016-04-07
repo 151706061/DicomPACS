@@ -1,0 +1,137 @@
+DROP TABLE ASU.TSECTIONS CASCADE CONSTRAINTS
+/
+
+--
+-- TSECTIONS  (Table) 
+--
+CREATE TABLE ASU.TSECTIONS
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FC_NAME       VARCHAR2(100 BYTE),
+  FC_TYPE       VARCHAR2(3 BYTE),
+  FK_IB_PRINT   NUMBER,
+  FK_SMIDID     NUMBER,
+  FK_MODULEID   NUMBER,
+  FC_FUNCMASK   VARCHAR2(10 BYTE)               DEFAULT '0000000000',
+  FN_ORDER      NUMBER(3)                       DEFAULT 0,
+  FN_STARTPOS   NUMBER(1)                       DEFAULT 1,
+  FL_DEFAULT    NUMBER(1)                       DEFAULT 0,
+  FN_HELPINDEX  NUMBER(3)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FK_ID IS 'SEQUENCE=[SEQ_TSECTIONS]'
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FC_NAME IS 'название раздела'
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FC_TYPE IS 'тип раздела'
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FK_IB_PRINT IS 'ссылка на структурный раздел  наглядной ИБ'
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FK_SMIDID IS 'ссылка на смид'
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FK_MODULEID IS 'ссылка на tapp'
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FC_FUNCMASK IS 'маска на функции'
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FN_ORDER IS 'порядок'
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FN_STARTPOS IS 'Стартовая позиция (0-начало/1-конец) для HTM'
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FL_DEFAULT IS 'Раздел по умолчанию'
+/
+
+COMMENT ON COLUMN ASU.TSECTIONS.FN_HELPINDEX IS 'индекс к help файлу'
+/
+
+
+--
+-- TSECTION$FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TSECTIONS (Table)
+--
+CREATE UNIQUE INDEX ASU.TSECTION$FK_ID ON ASU.TSECTIONS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSECTIONS_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TSECTIONS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSECTIONS_BEFORE_INSERT" 
+ BEFORE 
+ INSERT
+ ON ASU.TSECTIONS  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+begin
+  SELECT seq_tsections.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TSECTIONS_BEFORE_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TSECTIONS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSECTIONS_BEFORE_DELETE" 
+ BEFORE 
+ DELETE
+ ON ASU.TSECTIONS  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+begin
+  delete from tsection_smid where fk_secid=:old.fk_id;
+  delete from tsection_butline where fk_secid=:old.fk_id;
+  delete from tsection_rights where fk_secid=:old.fk_id;
+end;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,37 @@
+DROP FUNCTION ASU.DOC_IB
+/
+
+--
+-- DOC_IB  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU.DOC_IB
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =- 
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 301;
+END;
+/
+
+SHOW ERRORS;
+
+
+DROP PUBLIC SYNONYM DOC_IB
+/
+
+--
+-- DOC_IB  (Synonym) 
+--
+--  Dependencies: 
+--   DOC_IB (Function)
+--
+CREATE PUBLIC SYNONYM DOC_IB FOR ASU.DOC_IB
+/
+
+
+GRANT EXECUTE ON ASU.DOC_IB TO PUBLIC
+/
+

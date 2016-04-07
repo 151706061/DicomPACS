@@ -1,0 +1,85 @@
+DROP PROCEDURE ASU.GET_BUH_PACINFO
+/
+
+--
+-- GET_BUH_PACINFO  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DBMS_STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSROKY (Table)
+--   TPEOPLES (Table)
+--   DO_ADD_PLANS (Procedure)
+--   GET_PACPALATAID (Function)
+--   DO_WRITE_PERESEL (Procedure)
+--   TKARTA (Table)
+--
+CREATE OR REPLACE PROCEDURE ASU."GET_BUH_PACINFO" -- Modified by TimurLan
+  ( pFK_ID IN OUT NUMBER,
+  pFK_PEPLID IN OUT NUMBER,
+  pFK_KOD2 IN OUT NUMBER,
+  pFK_KOD IN OUT NUMBER,
+  pFK_PALATAID OUT  NUMBER,
+  pFC_FAM OUT VARCHAR2,
+  pFC_OTCH OUT VARCHAR2,
+  pFC_IM OUT VARCHAR2,
+  pFP_SEX OUT NUMBER,
+  pFC_PUT OUT VARCHAR2,
+  pFN_SUM OUT NUMBER,
+  pFK_PUTTYPE OUT NUMBER,
+  pFD_DATA1 OUT DATE,
+  pFD_DATA2 OUT DATE,
+  pFN_KOL OUT NUMBER,
+  pFK_OPLID OUT NUMBER,
+  pFP_TEK_COC OUT NUMBER,
+--  pFK_GROUPID OUT  NUMBER,
+  pFL_BUH OUT  NUMBER,
+  pFC_RABOTA OUT VARCHAR2--,
+--  pFK_PRIZN OUT NUMBER
+  )
+AS
+CURSOR cExists IS SELECT /*+ first_row*/COUNT(FK_ID) FROM TKARTA WHERE FK_ID=pFK_ID;
+CURSOR cMain IS SELECT /*+ rule*/TPEOPLES.FC_FAM,TPEOPLES.FC_OTCH,TPEOPLES.FC_IM,TPEOPLES.FP_SEX,FC_PUT,
+                       FN_SUM,FK_PUTTYPE,FP_TEK_COC,FK_KOD2,FK_KOD,
+--                       FK_GROUPID,
+                       FL_BUH,TPEOPLES.fc_rabota
+--                       , FK_PRIZN
+             FROM TKARTA, TPEOPLES
+             WHERE TKARTA.FK_ID=pFK_ID AND TPEOPLES.FK_ID=pFK_PEPLID;
+CURSOR cSroky IS SELECT /*+ rule*/FD_DATA1,FD_DATA2,FN_KOL,FK_OPLID FROM TSROKY WHERE FK_PACID=pFK_ID AND FK_PRYB=1;
+nTemp NUMBER;
+BEGIN
+--Is this patient exists?
+  OPEN cExists;
+  FETCH cExists INTO nTemp;
+  CLOSE cExists;
+  if nTemp>1 then
+    raise_application_error(-2004,'+°øñúð! =ðùôõýþ ñþûõõ þôýþóþ ÿð¡øõýªð ¸ þôøýðúþòvü øôõýªø¯øúð¡øþýývü ýþüõ¨þü!');
+  end if;
+  if nTemp=0 then
+    INSERT INTO TKARTA (FK_ID,FK_IBID,FK_KOD2,FK_KOD,FP_TEK_COC,FL_PLANNED) values (pFK_ID,0,pFK_KOD2,pFK_KOD,1,1) RETURNING FK_ID INTO pFK_ID;
+    Insert into TPeoples (Fc_Fam)
+                values (NULL)
+                RETURNING FK_ID INTO pFK_PeplID;
+    Update TKarta set Fk_PEPLID = nTemp WHERE FK_ID = pFK_ID;
+    DO_ADD_PLANS(pFK_ID,SYSDATE,TRUNC(SYSDATE+1)-1/(24*60)/*-0.00001*/,TRUNC(SYSDATE+1)-1/(24*60)/*-0.00001*/,0,0,0);
+    DO_WRITE_PERESEL(-1,pFK_ID,SYSDATE,SYSDATE,-1,0);
+  end if;
+--Get other info
+  OPEN cMain;
+  FETCH cMain INTO pFC_FAM,pFC_OTCH,pFC_IM,pFP_SEX,pFC_PUT,pFN_SUM,pFK_PUTTYPE,pFP_TEK_COC,pFK_KOD2,pFK_KOD,
+--  pFK_GROUPID,
+  pFL_BUH, pFC_RABOTA;
+--  ,pFK_PRIZN;
+  CLOSE cMain;
+  pFK_PALATAID:=GET_PACPALATAID(pFK_ID);
+  OPEN cSroky;
+  FETCH cSroky INTO pFD_DATA1,pFD_DATA2,pFN_KOL,pFK_OPLID;
+  CLOSE cSroky;
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,25 @@
+DROP INDEX ASU.TVRACHKAB_NAZ_BY_ID_
+/
+
+--
+-- TVRACHKAB_NAZ_BY_ID_  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TVRACHKAB_NAZ_BY_ID_ ON ASU.TVRACHKAB_NAZ
+(FK_ID_)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          440K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

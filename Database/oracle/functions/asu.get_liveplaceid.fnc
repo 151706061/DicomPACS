@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.GET_LIVEPLACEID
+/
+
+--
+-- GET_LIVEPLACEID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_LIVEPLACEID" 
+      RETURN NUMBER DETERMINISTIC
+      IS -- Created by -= aAdmin.exe =-
+         -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+   BEGIN
+     Return 62;
+   END;
+/
+
+SHOW ERRORS;
+
+

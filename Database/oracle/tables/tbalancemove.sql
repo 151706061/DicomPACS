@@ -1,0 +1,205 @@
+ALTER TABLE ASU.TBALANCEMOVE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TBALANCEMOVE CASCADE CONSTRAINTS
+/
+
+--
+-- TBALANCEMOVE  (Table) 
+--
+CREATE TABLE ASU.TBALANCEMOVE
+(
+  FK_ID     NUMBER                              NOT NULL,
+  FK_FROM   NUMBER,
+  FK_TO     NUMBER,
+  FK_BILL   NUMBER,
+  FN_SUM    NUMBER,
+  FD_DATE   DATE,
+  FD_CLAIM  DATE,
+  FK_SOTR   NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TBALANCEMOVE IS 'Таблица перемещения денег плательщиков by A.Nakorjakov 080508'
+/
+
+COMMENT ON COLUMN ASU.TBALANCEMOVE.FK_FROM IS 'Движение денег: откуда'
+/
+
+COMMENT ON COLUMN ASU.TBALANCEMOVE.FK_TO IS 'Движение денег: куда'
+/
+
+COMMENT ON COLUMN ASU.TBALANCEMOVE.FK_BILL IS 'TBILL.FK_ID Счет, в рамках которого происходит движение денег'
+/
+
+COMMENT ON COLUMN ASU.TBALANCEMOVE.FN_SUM IS 'Сумма'
+/
+
+COMMENT ON COLUMN ASU.TBALANCEMOVE.FD_DATE IS 'Дата движения'
+/
+
+COMMENT ON COLUMN ASU.TBALANCEMOVE.FD_CLAIM IS 'Дата заявки на возврат денег'
+/
+
+COMMENT ON COLUMN ASU.TBALANCEMOVE.FK_SOTR IS 'Сотрудник, выполнивший действие'
+/
+
+
+--
+-- PK_BALANCEMOVE  (Index) 
+--
+--  Dependencies: 
+--   TBALANCEMOVE (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_BALANCEMOVE ON ASU.TBALANCEMOVE
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TBALANCEMOVE_BY_FK_BILL  (Index) 
+--
+--  Dependencies: 
+--   TBALANCEMOVE (Table)
+--
+CREATE INDEX ASU.TBALANCEMOVE_BY_FK_BILL ON ASU.TBALANCEMOVE
+(FK_BILL)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TBALANCEMOVE_BY_FK_FROM  (Index) 
+--
+--  Dependencies: 
+--   TBALANCEMOVE (Table)
+--
+CREATE INDEX ASU.TBALANCEMOVE_BY_FK_FROM ON ASU.TBALANCEMOVE
+(FK_FROM)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TBALANCEMOVE_BY_FK_TO  (Index) 
+--
+--  Dependencies: 
+--   TBALANCEMOVE (Table)
+--
+CREATE INDEX ASU.TBALANCEMOVE_BY_FK_TO ON ASU.TBALANCEMOVE
+(FK_TO)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TBALANCEMOVE_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TBALANCEMOVE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TBALANCEMOVE_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TBALANCEMOVE  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TBALANCEMOVE.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TBALANCEMOVE 
+-- 
+ALTER TABLE ASU.TBALANCEMOVE ADD (
+  CONSTRAINT PK_BALANCEMOVE
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

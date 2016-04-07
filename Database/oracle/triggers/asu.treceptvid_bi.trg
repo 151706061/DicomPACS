@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TRECEPTVID_BI
+/
+
+--
+-- TRECEPTVID_BI  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TRECEPTVID (Sequence)
+--   TRECEPTVID (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECEPTVID_BI" 
+BEFORE INSERT
+ON ASU.TRECEPTVID REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+BEGIN
+  SELECT seq_treceptvid.nextval
+    INTO :new.fk_id
+    FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

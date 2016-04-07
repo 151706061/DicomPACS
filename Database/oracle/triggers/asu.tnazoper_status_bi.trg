@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TNAZOPER_STATUS_BI
+/
+
+--
+-- TNAZOPER_STATUS_BI  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TNAZOPER_STATUS (Sequence)
+--   TNAZOPER_STATUS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZOPER_STATUS_BI" 
+BEFORE INSERT
+ON ASU.TNAZOPER_STATUS REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+    if :new.FK_ID is null then
+      select asu.SEQ_TNAZOPER_STATUS.NEXTVAL INTO :new.FK_ID from dual;
+    end if;
+END;
+/
+SHOW ERRORS;
+
+

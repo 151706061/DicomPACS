@@ -1,0 +1,23 @@
+DROP TRIGGER ASU.TTIPROOM_AFTER_UPDATE
+/
+
+--
+-- TTIPROOM_AFTER_UPDATE  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TSRTIPROOM (Table)
+--   TTIPROOM (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TTIPROOM_AFTER_UPDATE" 
+AFTER UPDATE
+ON ASU.TTIPROOM REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+--This is trigger for manual using only. It must be disabled!!!!
+  UPDATE TSRTIPROOM SET FK_VIDID = :NEW.FK_ID where FK_VIDID = :OLD.FK_ID;
+End;
+/
+SHOW ERRORS;
+
+

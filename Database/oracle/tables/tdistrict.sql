@@ -1,0 +1,128 @@
+ALTER TABLE ASU.TDISTRICT
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TDISTRICT CASCADE CONSTRAINTS
+/
+
+--
+-- TDISTRICT  (Table) 
+--
+CREATE TABLE ASU.TDISTRICT
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FK_DISTRICT   NUMBER,
+  FK_KLADR      NUMBER,
+  FC_RANGE      VARCHAR2(1000 BYTE),
+  FC_ANTIRANGE  VARCHAR2(1000 BYTE),
+  FN_FROM       NUMBER,
+  FN_TO         NUMBER,
+  FL_ROOMS      NUMBER(1),
+  FC_ROOMS      VARCHAR2(1000 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TDISTRICT IS 'Терапевтические участки -- Created 20081007 by Linnikov'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT.FK_DISTRICT IS 'Наименование участка (TDISTRICT_NAME.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT.FK_KLADR IS 'Код КЛАДР для улицы (TKLADR.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT.FC_RANGE IS 'Номера домов через запятую'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT.FC_ANTIRANGE IS 'Номера домов через запятую (кроме)'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT.FN_FROM IS 'Начало диапазона'
+/
+
+COMMENT ON COLUMN ASU.TDISTRICT.FN_TO IS 'Окончание диапазона'
+/
+
+
+--
+-- TDISTRICT_PK  (Index) 
+--
+--  Dependencies: 
+--   TDISTRICT (Table)
+--
+CREATE UNIQUE INDEX ASU.TDISTRICT_PK ON ASU.TDISTRICT
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDISTRICT_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDISTRICT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDISTRICT_BEFORE_INSERT" 
+ BEFORE INSERT ON ASU.TDISTRICT  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+ IF :NEW.FK_ID IS NULL THEN
+  SELECT SEQ_TDISTRICT.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+ END IF;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TDISTRICT 
+-- 
+ALTER TABLE ASU.TDISTRICT ADD (
+  CONSTRAINT TDISTRICT_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

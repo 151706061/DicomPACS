@@ -1,0 +1,110 @@
+ALTER TABLE ASU.THEALPAYTYPE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.THEALPAYTYPE CASCADE CONSTRAINTS
+/
+
+--
+-- THEALPAYTYPE  (Table) 
+--
+CREATE TABLE ASU.THEALPAYTYPE
+(
+  FK_ID       NUMBER                            NOT NULL,
+  FC_NAME     VARCHAR2(250 BYTE),
+  FC_SYNONYM  VARCHAR2(250 BYTE),
+  FP_DEL      NUMBER                            DEFAULT 0,
+  FN_PERCENT  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.THEALPAYTYPE IS 'Виды оплат услуг (полностью оплачиваемые, частично и т.д.)
+Author: A.Nakorjakov 120508'
+/
+
+COMMENT ON COLUMN ASU.THEALPAYTYPE.FN_PERCENT IS 'Процент оплачиваемости'
+/
+
+
+--
+-- PK_HEALPAYTYPE  (Index) 
+--
+--  Dependencies: 
+--   THEALPAYTYPE (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_HEALPAYTYPE ON ASU.THEALPAYTYPE
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- THEALPAYTYPE_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   THEALPAYTYPE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."THEALPAYTYPE_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.THEALPAYTYPE  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_THEALPAYTYPE.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table THEALPAYTYPE 
+-- 
+ALTER TABLE ASU.THEALPAYTYPE ADD (
+  CONSTRAINT PK_HEALPAYTYPE
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

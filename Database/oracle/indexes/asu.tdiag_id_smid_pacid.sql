@@ -1,0 +1,25 @@
+DROP INDEX ASU.TDIAG_ID_SMID_PACID
+/
+
+--
+-- TDIAG_ID_SMID_PACID  (Index) 
+--
+CREATE INDEX ASU.TDIAG_ID_SMID_PACID ON ASU.TDIAG
+(FK_PACID, FK_SMDIAGID, FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          768K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

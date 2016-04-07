@@ -1,0 +1,736 @@
+unit fMain;
+
+interface
+
+uses
+  Windows, Messages, SysUtils, Variants, Classes, Graphics, Controls, Forms,
+  Dialogs, cxMemo, cxContainer, cxEdit, cxTextEdit, cxPC, cxControls, dxBar,
+  cxClasses, ActnList, ImgList, cxLabel, Menus, Oracle, OracleData, SMMainAPI,
+  JclFileUtils, uGlobalConst, cxConstantsRus, dxBarCustomize_Rus;
+
+type
+  TfrmMain = class(TForm)
+    cxPageControl1: TcxPageControl;
+    cxTS_5110: TcxTabSheet;
+    e00_5110_1_3: TcxTextEdit;
+    cxMemo1: TcxMemo;
+    cxMemo2: TcxMemo;
+    cxMemo3: TcxMemo;
+    cxMemo4: TcxMemo;
+    cxMemo5: TcxMemo;
+    cxMemo6: TcxMemo;
+    cxMemo7: TcxMemo;
+    cxMemo8: TcxMemo;
+    cxMemo9: TcxMemo;
+    cxMemo10: TcxMemo;
+    cxMemo11: TcxMemo;
+    cxMemo12: TcxMemo;
+    cxMemo13: TcxMemo;
+    cxMemo14: TcxMemo;
+    cxMemo15: TcxMemo;
+    cxMemo19: TcxMemo;
+    cxMemo21: TcxMemo;
+    cxMemo22: TcxMemo;
+    cxMemo23: TcxMemo;
+    cxMemo24: TcxMemo;
+    cxMemo25: TcxMemo;
+    cxMemo26: TcxMemo;
+    cxMemo27: TcxMemo;
+    cxMemo28: TcxMemo;
+    cxMemo29: TcxMemo;
+    cxMemo30: TcxMemo;
+    e10_5110_2_3: TcxTextEdit;
+    e20_5110_3_3: TcxTextEdit;
+    e30_5110_4_3: TcxTextEdit;
+    e40_5110_5_3: TcxTextEdit;
+    e60_5110_7_3: TcxTextEdit;
+    e70_5110_8_3: TcxTextEdit;
+    e80_5110_9_3: TcxTextEdit;
+    e90_5110_10_3: TcxTextEdit;
+    cxMemo31: TcxMemo;
+    cxMemo32: TcxMemo;
+    cxMemo33: TcxMemo;
+    cxMemo34: TcxMemo;
+    cxMemo35: TcxMemo;
+    cxMemo36: TcxMemo;
+    cxMemo37: TcxMemo;
+    cxMemo38: TcxMemo;
+    cxMemo39: TcxMemo;
+    cxMemo40: TcxMemo;
+    e01_5110_1_4: TcxTextEdit;
+    e02_5110_1_5: TcxTextEdit;
+    e03_5110_1_6: TcxTextEdit;
+    e04_5110_1_7: TcxTextEdit;
+    e05_5110_1_8: TcxTextEdit;
+    e06_5110_1_9: TcxTextEdit;
+    e11_5110_2_4: TcxTextEdit;
+    e21_5110_3_4: TcxTextEdit;
+    e31_5110_4_4: TcxTextEdit;
+    e61_5110_7_4: TcxTextEdit;
+    e71_5110_8_4: TcxTextEdit;
+    e81_5110_9_4: TcxTextEdit;
+    e41_5110_5_4: TcxTextEdit;
+    e91_5110_10_4: TcxTextEdit;
+    e12_5110_2_5: TcxTextEdit;
+    e22_5110_3_5: TcxTextEdit;
+    e32_5110_4_5: TcxTextEdit;
+    e62_5110_7_5: TcxTextEdit;
+    e72_5110_8_5: TcxTextEdit;
+    e82_5110_9_5: TcxTextEdit;
+    e92_5110_10_5: TcxTextEdit;
+    e42_5110_5_5: TcxTextEdit;
+    e13_5110_2_6: TcxTextEdit;
+    e23_5110_3_6: TcxTextEdit;
+    e33_5110_4_6: TcxTextEdit;
+    e43_5110_5_6: TcxTextEdit;
+    e13_5110_2_7: TcxTextEdit;
+    e24_5110_3_7: TcxTextEdit;
+    e34_5110_4_7: TcxTextEdit;
+    e44_5110_5_7: TcxTextEdit;
+    e63_5110_7_6: TcxTextEdit;
+    e73_5110_8_6: TcxTextEdit;
+    e83_5110_9_6: TcxTextEdit;
+    e93_5110_10_6: TcxTextEdit;
+    e64_5110_7_7: TcxTextEdit;
+    e74_5110_8_7: TcxTextEdit;
+    e84_5110_9_7: TcxTextEdit;
+    e94_5110_10_7: TcxTextEdit;
+    e15_5110_2_8: TcxTextEdit;
+    e25_5110_3_8: TcxTextEdit;
+    e35_5110_4_8: TcxTextEdit;
+    e45_5110_5_8: TcxTextEdit;
+    e16_5110_2_9: TcxTextEdit;
+    e26_5110_3_9: TcxTextEdit;
+    e36_5110_4_9: TcxTextEdit;
+    e46_5110_5_9: TcxTextEdit;
+    e65_5110_7_8: TcxTextEdit;
+    e75_5110_8_8: TcxTextEdit;
+    e85_5110_9_8: TcxTextEdit;
+    e95_5110_10_8: TcxTextEdit;
+    e66_5110_7_9: TcxTextEdit;
+    e76_5110_8_9: TcxTextEdit;
+    e86_5110_9_9: TcxTextEdit;
+    e96_5110_10_9: TcxTextEdit;
+    e50_5110_6_3: TcxTextEdit;
+    e51_5110_6_4: TcxTextEdit;
+    e53_5110_6_6: TcxTextEdit;
+    e54_5110_6_7: TcxTextEdit;
+    e52_5110_6_5: TcxTextEdit;
+    e55_5110_6_8: TcxTextEdit;
+    e56_5110_6_9: TcxTextEdit;
+    cxMemo135: TcxMemo;
+    cxMemo136: TcxMemo;
+    cxMemo137: TcxMemo;
+    cxMemo138: TcxMemo;
+    cxTextEdit1: TcxTextEdit;
+    e101_5110_11_4: TcxTextEdit;
+    e102_5110_11_5: TcxTextEdit;
+    e103_5110_11_6: TcxTextEdit;
+    e104_5110_11_7: TcxTextEdit;
+    e105_5110_11_8: TcxTextEdit;
+    e106_5110_11_9: TcxTextEdit;
+    cxTextEdit8: TcxTextEdit;
+    e111_5110_12_4: TcxTextEdit;
+    e112_5110_12_5: TcxTextEdit;
+    e113_5110_12_6: TcxTextEdit;
+    e114_5110_12_7: TcxTextEdit;
+    e115_5110_12_8: TcxTextEdit;
+    e116_5110_12_9: TcxTextEdit;
+    cxMemo139: TcxMemo;
+    cxMemo140: TcxMemo;
+    e07_5110_1_10: TcxTextEdit;
+    e17_5110_2_10: TcxTextEdit;
+    e27_5110_3_10: TcxTextEdit;
+    e37_5110_4_10: TcxTextEdit;
+    e47_5110_5_10: TcxTextEdit;
+    e67_5110_7_10: TcxTextEdit;
+    e77_5110_8_10: TcxTextEdit;
+    e87_5110_9_10: TcxTextEdit;
+    e97_5110_10_10: TcxTextEdit;
+    e107_5110_11_10: TcxTextEdit;
+    e117_5110_12_10: TcxTextEdit;
+    e57_5110_6_10: TcxTextEdit;
+    cxMemo161: TcxMemo;
+    cxMemo141: TcxMemo;
+    cxMemo148: TcxMemo;
+    cxTextEdit3: TcxTextEdit;
+    e131_5110_14_4: TcxTextEdit;
+    e132_5110_14_5: TcxTextEdit;
+    e133_5110_14_6: TcxTextEdit;
+    e134_5110_14_7: TcxTextEdit;
+    e135_5110_14_8: TcxTextEdit;
+    e136_5110_14_9: TcxTextEdit;
+    e137_5110_14_10: TcxTextEdit;
+    cxTabSheet2: TcxTabSheet;
+    cxMemo41: TcxMemo;
+    cxMemo42: TcxMemo;
+    cxMemo43: TcxMemo;
+    cxMemo46: TcxMemo;
+    cxMemo47: TcxMemo;
+    cxMemo48: TcxMemo;
+    e00_5111_1: TcxTextEdit;
+    e10_5111_2: TcxTextEdit;
+    cxTabSheet3: TcxTabSheet;
+    cxMemo51: TcxMemo;
+    cxMemo52: TcxMemo;
+    cxMemo54: TcxMemo;
+    cxMemo55: TcxMemo;
+    cxMemo56: TcxMemo;
+    cxMemo57: TcxMemo;
+    cxMemo58: TcxMemo;
+    cxMemo59: TcxMemo;
+    cxMemo61: TcxMemo;
+    cxMemo62: TcxMemo;
+    cxMemo63: TcxMemo;
+    cxMemo64: TcxMemo;
+    e00_5112_1: TcxTextEdit;
+    e10_5112_2: TcxTextEdit;
+    e30_5112_4: TcxTextEdit;
+    e40_5112_5: TcxTextEdit;
+    e50_5112_6: TcxTextEdit;
+    e60_5112_7: TcxTextEdit;
+    cxMemo164: TcxMemo;
+    cxMemo169: TcxMemo;
+    e70_5112_8: TcxTextEdit;
+    cxTabSheet4: TcxTabSheet;
+    cxMemo65: TcxMemo;
+    cxMemo71: TcxMemo;
+    cxMemo72: TcxMemo;
+    cxMemo73: TcxMemo;
+    cxMemo74: TcxMemo;
+    cxMemo75: TcxMemo;
+    cxMemo76: TcxMemo;
+    e00_5113_1_3: TcxTextEdit;
+    e10_5113_2_3: TcxTextEdit;
+    e20_5113_3_3: TcxTextEdit;
+    e30_5113_4_3: TcxTextEdit;
+    e40_5113_5_3: TcxTextEdit;
+    cxMemo142: TcxMemo;
+    cxMemo143: TcxMemo;
+    cxMemo144: TcxMemo;
+    cxMemo145: TcxMemo;
+    cxMemo146: TcxMemo;
+    cxMemo147: TcxMemo;
+    e50_5113_6_3: TcxTextEdit;
+    cxMemo178: TcxMemo;
+    cxMemo179: TcxMemo;
+    e01_5113_1_4: TcxTextEdit;
+    e11_5113_2_4: TcxTextEdit;
+    e21_5113_3_4: TcxTextEdit;
+    e31_5113_4_4: TcxTextEdit;
+    e41_5113_5_4: TcxTextEdit;
+    e51_5113_6_4: TcxTextEdit;
+    cxMemo66: TcxMemo;
+    cxMemo67: TcxMemo;
+    cxMemo68: TcxMemo;
+    cxMemo69: TcxMemo;
+    cxMemo70: TcxMemo;
+    cxTabSheet5: TcxTabSheet;
+    cxMemo77: TcxMemo;
+    cxMemo78: TcxMemo;
+    cxMemo79: TcxMemo;
+    cxMemo80: TcxMemo;
+    cxMemo81: TcxMemo;
+    cxMemo82: TcxMemo;
+    cxMemo83: TcxMemo;
+    cxMemo85: TcxMemo;
+    cxMemo86: TcxMemo;
+    cxMemo87: TcxMemo;
+    cxMemo88: TcxMemo;
+    cxMemo89: TcxMemo;
+    cxMemo90: TcxMemo;
+    e00_5114_1_3: TcxTextEdit;
+    e01_5114_1_4: TcxTextEdit;
+    e11_5114_2_4: TcxTextEdit;
+    e10_5114_2_3: TcxTextEdit;
+    e20_5114_3_3: TcxTextEdit;
+    e21_5114_3_4: TcxTextEdit;
+    e30_5114_4_3: TcxTextEdit;
+    e31_5114_4_4: TcxTextEdit;
+    e40_5114_5_3: TcxTextEdit;
+    e41_5114_5_4: TcxTextEdit;
+    e50_5114_6_3: TcxTextEdit;
+    e51_5114_6_4: TcxTextEdit;
+    cxMemo129: TcxMemo;
+    cxMemo130: TcxMemo;
+    cxMemo131: TcxMemo;
+    cxMemo132: TcxMemo;
+    cxMemo133: TcxMemo;
+    cxMemo134: TcxMemo;
+    cxMemo174: TcxMemo;
+    cxMemo175: TcxMemo;
+    cxMemo176: TcxMemo;
+    e60_5114_7_3: TcxTextEdit;
+    e61_5114_7_4: TcxTextEdit;
+    cxTabSheet6: TcxTabSheet;
+    cxMemo91: TcxMemo;
+    cxMemo92: TcxMemo;
+    cxMemo93: TcxMemo;
+    cxMemo94: TcxMemo;
+    cxMemo95: TcxMemo;
+    cxMemo97: TcxMemo;
+    cxMemo98: TcxMemo;
+    cxMemo99: TcxMemo;
+    cxMemo100: TcxMemo;
+    cxMemo101: TcxMemo;
+    cxMemo102: TcxMemo;
+    cxMemo103: TcxMemo;
+    cxMemo104: TcxMemo;
+    cxMemo105: TcxMemo;
+    cxMemo106: TcxMemo;
+    cxMemo107: TcxMemo;
+    cxMemo108: TcxMemo;
+    cxMemo109: TcxMemo;
+    cxMemo110: TcxMemo;
+    cxMemo111: TcxMemo;
+    cxMemo112: TcxMemo;
+    cxMemo113: TcxMemo;
+    cxMemo114: TcxMemo;
+    cxMemo115: TcxMemo;
+    cxMemo116: TcxMemo;
+    cxMemo117: TcxMemo;
+    cxMemo118: TcxMemo;
+    cxMemo119: TcxMemo;
+    cxMemo120: TcxMemo;
+    cxMemo121: TcxMemo;
+    cxMemo122: TcxMemo;
+    cxMemo123: TcxMemo;
+    cxMemo124: TcxMemo;
+    cxMemo125: TcxMemo;
+    cxMemo126: TcxMemo;
+    cxMemo127: TcxMemo;
+    cxMemo128: TcxMemo;
+    e00_5119_1_3: TcxTextEdit;
+    e10_5119_2_3: TcxTextEdit;
+    e20_5119_3_3: TcxTextEdit;
+    e30_5119_4_3: TcxTextEdit;
+    e40_5119_5_3: TcxTextEdit;
+    e50_5119_6_3: TcxTextEdit;
+    e60_5119_7_3: TcxTextEdit;
+    e70_5119_8_3: TcxTextEdit;
+    e80_5119_9_3: TcxTextEdit;
+    e90_5119_10_3: TcxTextEdit;
+    e100_5119_11_3: TcxTextEdit;
+    e110_5119_12_3: TcxTextEdit;
+    e01_5119_1_4: TcxTextEdit;
+    e11_5119_2_4: TcxTextEdit;
+    e21_5119_3_4: TcxTextEdit;
+    e31_5119_4_4: TcxTextEdit;
+    e41_5119_5_4: TcxTextEdit;
+    e51_5119_6_4: TcxTextEdit;
+    e61_5119_7_4: TcxTextEdit;
+    e71_5119_8_4: TcxTextEdit;
+    e81_5119_9_4: TcxTextEdit;
+    e91_5119_10_4: TcxTextEdit;
+    e101_5119_11_4: TcxTextEdit;
+    e111_5119_12_4: TcxTextEdit;
+    e02_5119_1_5: TcxTextEdit;
+    e12_5119_2_5: TcxTextEdit;
+    e22_5119_3_5: TcxTextEdit;
+    e32_5119_4_5: TcxTextEdit;
+    e42_5119_5_5: TcxTextEdit;
+    e52_5119_6_5: TcxTextEdit;
+    e62_5119_7_5: TcxTextEdit;
+    e72_5119_8_5: TcxTextEdit;
+    e82_5119_9_5: TcxTextEdit;
+    e92_5119_10_5: TcxTextEdit;
+    e102_5119_11_5: TcxTextEdit;
+    e112_5119_12_5: TcxTextEdit;
+    e03_5119_1_6: TcxTextEdit;
+    e13_5119_2_6: TcxTextEdit;
+    e23_5119_3_6: TcxTextEdit;
+    e33_5119_4_6: TcxTextEdit;
+    e43_5119_5_6: TcxTextEdit;
+    e53_5119_6_6: TcxTextEdit;
+    e63_5119_7_6: TcxTextEdit;
+    e73_5119_8_6: TcxTextEdit;
+    e83_5119_9_6: TcxTextEdit;
+    e93_5119_10_6: TcxTextEdit;
+    e103_5119_11_6: TcxTextEdit;
+    e116_5119_12_6: TcxTextEdit;
+    dxBarDockControl1: TdxBarDockControl;
+    BM: TdxBarManager;
+    BMBar1: TdxBar;
+    bbClose: TdxBarButton;
+    IL: TImageList;
+    AL: TActionList;
+    aClose: TAction;
+    cxLabel1: TcxLabel;
+    cxMemo149: TcxMemo;
+    cxMemo162: TcxMemo;
+    cxMemo163: TcxMemo;
+    cxMemo180: TcxMemo;
+    cxMemo181: TcxMemo;
+    cxMemo182: TcxMemo;
+    cxMemo183: TcxMemo;
+    cxMemo16: TcxMemo;
+    cxTextEdit2: TcxTextEdit;
+    cxTextEdit4: TcxTextEdit;
+    cxTextEdit5: TcxTextEdit;
+    cxTextEdit6: TcxTextEdit;
+    cxTextEdit7: TcxTextEdit;
+    cxTextEdit9: TcxTextEdit;
+    cxTextEdit10: TcxTextEdit;
+    cxTextEdit11: TcxTextEdit;
+    cxTextEdit15: TcxTextEdit;
+    cxTextEdit16: TcxTextEdit;
+    cxTextEdit17: TcxTextEdit;
+    cxTextEdit18: TcxTextEdit;
+    cxTextEdit19: TcxTextEdit;
+    cxMemo17: TcxMemo;
+    cxTextEdit20: TcxTextEdit;
+    cxTextEdit21: TcxTextEdit;
+    cxTextEdit22: TcxTextEdit;
+    cxTextEdit23: TcxTextEdit;
+    cxTextEdit24: TcxTextEdit;
+    cxTextEdit25: TcxTextEdit;
+    cxTextEdit26: TcxTextEdit;
+    cxTextEdit27: TcxTextEdit;
+    cxTextEdit28: TcxTextEdit;
+    cxTextEdit29: TcxTextEdit;
+    cxTextEdit30: TcxTextEdit;
+    cxTextEdit31: TcxTextEdit;
+    cxTextEdit32: TcxTextEdit;
+    aMetodics: TAction;
+    pmMain: TPopupMenu;
+    N1: TMenuItem;
+    os: TOracleSession;
+    cxMemo18: TcxMemo;
+    cxMemo20: TcxMemo;
+    cxMemo184: TcxMemo;
+    cxMemo185: TcxMemo;
+    cxMemo186: TcxMemo;
+    cxMemo187: TcxMemo;
+    cxTextEdit33: TcxTextEdit;
+    cxTextEdit34: TcxTextEdit;
+    cxTextEdit35: TcxTextEdit;
+    cxTextEdit36: TcxTextEdit;
+    cxTextEdit37: TcxTextEdit;
+    cxTextEdit38: TcxTextEdit;
+    cxMemo44: TcxMemo;
+    cxMemo45: TcxMemo;
+    cxTextEdit39: TcxTextEdit;
+    cxTextEdit40: TcxTextEdit;
+    cxTextEdit41: TcxTextEdit;
+    cxTextEdit42: TcxTextEdit;
+    cxMemo49: TcxMemo;
+    cxMemo50: TcxMemo;
+    cxTextEdit43: TcxTextEdit;
+    cxTextEdit44: TcxTextEdit;
+    cxTextEdit45: TcxTextEdit;
+    cxTextEdit46: TcxTextEdit;
+    cxMemo153: TcxMemo;
+    cxMemo154: TcxMemo;
+    cxTextEdit47: TcxTextEdit;
+    cxTextEdit48: TcxTextEdit;
+    cxTextEdit49: TcxTextEdit;
+    cxTextEdit50: TcxTextEdit;
+    cxMemo155: TcxMemo;
+    cxMemo156: TcxMemo;
+    cxTextEdit51: TcxTextEdit;
+    cxTextEdit52: TcxTextEdit;
+    cxTextEdit53: TcxTextEdit;
+    cxTextEdit54: TcxTextEdit;
+    cxMemo157: TcxMemo;
+    cxMemo158: TcxMemo;
+    cxTextEdit55: TcxTextEdit;
+    cxTextEdit56: TcxTextEdit;
+    cxTextEdit57: TcxTextEdit;
+    cxTextEdit58: TcxTextEdit;
+    cxMemo159: TcxMemo;
+    cxMemo160: TcxMemo;
+    cxTextEdit59: TcxTextEdit;
+    cxTextEdit60: TcxTextEdit;
+    cxTextEdit61: TcxTextEdit;
+    cxTextEdit62: TcxTextEdit;
+    cxMemo188: TcxMemo;
+    cxMemo189: TcxMemo;
+    cxTextEdit63: TcxTextEdit;
+    cxTextEdit64: TcxTextEdit;
+    cxTextEdit65: TcxTextEdit;
+    cxTextEdit66: TcxTextEdit;
+    cxMemo190: TcxMemo;
+    cxMemo191: TcxMemo;
+    cxTextEdit67: TcxTextEdit;
+    cxTextEdit68: TcxTextEdit;
+    cxTextEdit69: TcxTextEdit;
+    cxTextEdit70: TcxTextEdit;
+    cxMemo192: TcxMemo;
+    cxMemo193: TcxMemo;
+    cxTextEdit71: TcxTextEdit;
+    cxTextEdit72: TcxTextEdit;
+    cxTextEdit73: TcxTextEdit;
+    cxTextEdit74: TcxTextEdit;
+    cxMemo194: TcxMemo;
+    cxMemo195: TcxMemo;
+    cxTextEdit75: TcxTextEdit;
+    cxTextEdit76: TcxTextEdit;
+    cxTextEdit77: TcxTextEdit;
+    cxTextEdit78: TcxTextEdit;
+    cxMemo196: TcxMemo;
+    cxMemo197: TcxMemo;
+    cxTextEdit79: TcxTextEdit;
+    cxTextEdit80: TcxTextEdit;
+    cxTextEdit81: TcxTextEdit;
+    cxTextEdit82: TcxTextEdit;
+    cxMemo198: TcxMemo;
+    cxMemo199: TcxMemo;
+    cxTextEdit83: TcxTextEdit;
+    cxTextEdit84: TcxTextEdit;
+    cxTextEdit85: TcxTextEdit;
+    cxTextEdit86: TcxTextEdit;
+    cxMemo200: TcxMemo;
+    cxMemo201: TcxMemo;
+    cxTextEdit87: TcxTextEdit;
+    cxTextEdit88: TcxTextEdit;
+    cxTextEdit89: TcxTextEdit;
+    cxTextEdit90: TcxTextEdit;
+    cxMemo202: TcxMemo;
+    cxMemo203: TcxMemo;
+    cxTextEdit91: TcxTextEdit;
+    cxTextEdit92: TcxTextEdit;
+    cxTextEdit93: TcxTextEdit;
+    cxTextEdit94: TcxTextEdit;
+    cxMemo204: TcxMemo;
+    cxMemo205: TcxMemo;
+    cxTextEdit95: TcxTextEdit;
+    cxTextEdit96: TcxTextEdit;
+    cxTextEdit97: TcxTextEdit;
+    cxTextEdit98: TcxTextEdit;
+    cxMemo206: TcxMemo;
+    cxMemo207: TcxMemo;
+    cxTextEdit99: TcxTextEdit;
+    cxTextEdit100: TcxTextEdit;
+    cxTextEdit101: TcxTextEdit;
+    cxTextEdit102: TcxTextEdit;
+    cxMemo208: TcxMemo;
+    cxMemo209: TcxMemo;
+    cxTextEdit103: TcxTextEdit;
+    cxTextEdit104: TcxTextEdit;
+    cxTextEdit105: TcxTextEdit;
+    cxTextEdit106: TcxTextEdit;
+    cxMemo210: TcxMemo;
+    cxMemo211: TcxMemo;
+    cxTextEdit107: TcxTextEdit;
+    cxTextEdit108: TcxTextEdit;
+    cxTextEdit109: TcxTextEdit;
+    cxTextEdit110: TcxTextEdit;
+    cxMemo212: TcxMemo;
+    cxMemo213: TcxMemo;
+    cxTextEdit111: TcxTextEdit;
+    cxTextEdit112: TcxTextEdit;
+    cxTextEdit113: TcxTextEdit;
+    cxTextEdit114: TcxTextEdit;
+    cxLabel2: TcxLabel;
+    cxMemo214: TcxMemo;
+    cxMemo215: TcxMemo;
+    cxMemo216: TcxMemo;
+    cxMemo217: TcxMemo;
+    cxMemo218: TcxMemo;
+    cxMemo219: TcxMemo;
+    cxMemo53: TcxMemo;
+    cxMemo60: TcxMemo;
+    cxMemo165: TcxMemo;
+    cxMemo166: TcxMemo;
+    cxMemo167: TcxMemo;
+    cxMemo168: TcxMemo;
+    cxMemo170: TcxMemo;
+    cxMemo171: TcxMemo;
+    cxMemo172: TcxMemo;
+    cxMemo173: TcxMemo;
+    cxMemo220: TcxMemo;
+    cxMemo221: TcxMemo;
+    cxMemo222: TcxMemo;
+    cxTextEdit115: TcxTextEdit;
+    cxTextEdit116: TcxTextEdit;
+    cxTextEdit117: TcxTextEdit;
+    cxTextEdit118: TcxTextEdit;
+    cxTextEdit119: TcxTextEdit;
+    cxTextEdit120: TcxTextEdit;
+    cxTextEdit121: TcxTextEdit;
+    cxTextEdit122: TcxTextEdit;
+    cxTextEdit123: TcxTextEdit;
+    cxTextEdit124: TcxTextEdit;
+    cxTextEdit125: TcxTextEdit;
+    cxTextEdit126: TcxTextEdit;
+    cxTextEdit12: TcxTextEdit;
+    cxTextEdit13: TcxTextEdit;
+    cxTextEdit14: TcxTextEdit;
+    cxTextEdit127: TcxTextEdit;
+    cxTextEdit128: TcxTextEdit;
+    cxTextEdit129: TcxTextEdit;
+    cxTextEdit130: TcxTextEdit;
+    cxTextEdit131: TcxTextEdit;
+    cxTextEdit132: TcxTextEdit;
+    cxTextEdit133: TcxTextEdit;
+    cxTextEdit134: TcxTextEdit;
+    cxTextEdit135: TcxTextEdit;
+    cxTextEdit136: TcxTextEdit;
+    cxTextEdit137: TcxTextEdit;
+    cxTextEdit138: TcxTextEdit;
+    cxTextEdit139: TcxTextEdit;
+    cxTextEdit140: TcxTextEdit;
+    cxTextEdit141: TcxTextEdit;
+    cxTextEdit142: TcxTextEdit;
+    cxTextEdit143: TcxTextEdit;
+    cxTextEdit144: TcxTextEdit;
+    cxTextEdit145: TcxTextEdit;
+    cxTextEdit146: TcxTextEdit;
+    cxTextEdit147: TcxTextEdit;
+    cxTextEdit148: TcxTextEdit;
+    cxTextEdit149: TcxTextEdit;
+    cxTextEdit150: TcxTextEdit;
+    cxTextEdit151: TcxTextEdit;
+    cxMemo84: TcxMemo;
+    cxMemo177: TcxMemo;
+    cxMemo226: TcxMemo;
+    cxTextEdit152: TcxTextEdit;
+    cxTextEdit153: TcxTextEdit;
+    cxTextEdit154: TcxTextEdit;
+    cxTextEdit155: TcxTextEdit;
+    cxTextEdit156: TcxTextEdit;
+    cxTextEdit157: TcxTextEdit;
+    cxTextEdit158: TcxTextEdit;
+    cxMemo96: TcxMemo;
+    cxMemo223: TcxMemo;
+    cxMemo224: TcxMemo;
+    cxMemo150: TcxMemo;
+    cxMemo151: TcxMemo;
+    cxMemo152: TcxMemo;
+    procedure aCloseExecute(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+    procedure aMetodicsExecute(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+
+    procedure DoMarkCells;
+
+  public
+    pSotrID, pAppSotrID : Integer;
+    sVrachFIO, sCompanyName, sOtdelName : string;
+    arrID : array of integer;
+    MedotradeSign : string;
+    procedure DoShowForm;
+    { Public declarations }
+  end;
+
+var
+  frmMain: TfrmMain;
+
+implementation
+
+uses fMetodics;
+
+{$R *.dfm}
+
+procedure TfrmMain.aCloseExecute(Sender: TObject);
+begin
+  close;
+end;
+
+procedure TfrmMain.aMetodicsExecute(Sender: TObject);
+begin
+  Application.CreateForm(TfrmMetodics, frmMetodics);
+  try
+    frmMetodics.DoShowForm(TcxTextEdit(pmMain.PopupComponent).Hint, cxPageControl1.ActivePage.Caption);
+    frmMetodics.ShowModal;
+  finally
+    frmMetodics.Free;
+    
+    Self.DoMarkCells;
+  end;
+end;
+
+procedure TfrmMain.DoShowForm;
+var ods : TOracleDataSet;
+    Ver : TJclFileVersionInfo;
+begin
+  cxPageControl1.ActivePageIndex := 0;
+  pAPPSOTRID := StrToInt(paramstr(1));
+  ods := TOracleDataSet.Create(nil);
+  try
+    ods.Session := os;
+    ods.Cursor := crSQLWait;
+    ods.SQL.Text := ' SELECT FK_SOTRID, ASU.DO_VRACHFIO(FK_SOTRID) AS VRACHFIO, SYSDATE, '+#13+
+                    '        ASU.PKG_SMINI.READSTRING (''CONFIG'', ''S_FULLNAME'', '''') AS COMPANYNAME, '+#13+
+                    '        (SELECT FC_NAME '+#13+
+                    '           FROM ASU.TOTDEL '+#13+
+                    '          WHERE FK_ID = (SELECT FK_OTDID FROM ASU.TSOTR WHERE FK_ID = TAPPSOTR.FK_SOTRID)) AS OTDELNAME '+#13+
+                    '   FROM LOGIN.TAPPSOTR WHERE FL_DEL <> 1 AND FK_ID = :PFK_ID ';
+    ods.DeclareAndSet('PFK_ID', otInteger, pAPPSOTRID);
+    ods.Open;
+    pSOTRID := ods.FieldByName('FK_SOTRID').AsInteger;
+    sVrachFIO := ods.FieldByName('VRACHFIO').AsString;
+    sCompanyName := ods.FieldByName('COMPANYNAME').AsString;
+    sOtdelName := ods.FieldByName('OTDELNAME').AsString;
+  finally
+    ods.Free;
+  end;
+  Ver := TJclFileVersionInfo.Create(ExtractFileName(ParamStr(0)));
+  frmMain.Caption := 'Форма 30. Глава 5 - Настройка('+Ver.FileVersion+'). Пользователь: '+sVrachFIO;
+  Ver.Free;
+
+  MedotradeSign := ReadMedotradeSign;
+end;
+
+procedure TfrmMain.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  if Application.MessageBox('Вы хотите выйти из приложения ?', 'Вопрос', MB_YESNO + MB_ICONQUESTION) = MrYes then
+    action := caFree
+  else
+    action := caNone;
+end;
+
+procedure TfrmMain.FormCreate(Sender: TObject);
+begin
+  GetSession(os, 'ASU');
+  Self.WindowState := wsMaximized;
+
+  Self.DoMarkCells;
+end;
+
+
+procedure TfrmMain.DoMarkCells;
+var
+  ods: TOracleDataSet;
+  i: Integer;
+
+begin
+  ods := TOracleDataSet.Create(nil);
+  try
+     ods.Session := frmMain.os;
+     ods.SQL.Text := 'select count(1) AS cnt ' +
+                     '  from asu.ts_columnnaz n ' +
+                     ' where n.fk_owner in (select fk_id from asu.ts_columnnaz n where fc_synonim = :pfc_synonim and fc_tablename = :pfc_tablename and fk_owner = asu.get_form30id) ' +
+                     '   and n.fk_smid <> -1 ';
+     ods.DeclareVariable('pfc_synonim', otString);
+     ods.DeclareVariable('pfc_tablename', otString);
+
+     for i := 0 to ComponentCount - 1 do begin
+        if (Components[i].ClassName = 'TcxTextEdit') then begin
+           if ( ((Components[i] as TcxTextEdit).Text = '') or ((Components[i] as TcxTextEdit).Text = CHR(149)) ) and
+              ((Components[i] as TcxTextEdit).Hint <> '') and
+              ((Components[i] as TcxTextEdit).Parent.ClassName = 'TcxTabSheet')
+           then begin
+              ods.Close;
+              ods.SetVariable('pfc_synonim', (Components[i] as TcxTextEdit).Hint);
+              ods.SetVariable('pfc_tablename', ((Components[i] as TcxTextEdit).Parent as TcxTabSheet).Caption);
+              ods.Open;
+
+              if (ods.FieldByName('cnt').AsInteger > 0) then begin
+                 (Components[i] as TcxTextEdit).Text := CHR(149);
+              end else begin
+                 (Components[i] as TcxTextEdit).Text := '';
+              end;              
+           end;
+        end;
+     end;
+
+  finally
+     ods.Free;
+  end;
+
+end;
+
+end.

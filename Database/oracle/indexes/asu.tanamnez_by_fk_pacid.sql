@@ -1,0 +1,25 @@
+DROP INDEX ASU.TANAMNEZ_BY_FK_PACID
+/
+
+--
+-- TANAMNEZ_BY_FK_PACID  (Index) 
+--
+CREATE INDEX ASU.TANAMNEZ_BY_FK_PACID ON ASU.TANAMNEZ
+(FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          4736K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

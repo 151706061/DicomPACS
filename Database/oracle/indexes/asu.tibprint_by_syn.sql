@@ -1,0 +1,25 @@
+DROP INDEX ASU.TIBPRINT_BY_SYN
+/
+
+--
+-- TIBPRINT_BY_SYN  (Index) 
+--
+CREATE INDEX ASU.TIBPRINT_BY_SYN ON ASU.TIBPRINT
+(FC_SYN)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

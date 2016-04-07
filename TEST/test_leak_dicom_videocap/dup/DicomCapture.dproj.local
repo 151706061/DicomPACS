@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015.03.25 16:32:39.431.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\Project1.dproj=C:\Users\Softmaster\Documents\RAD Studio\Projects\DicomCapture.dproj</Transaction>
+    <Transaction>2015.03.25 16:33:03.332.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\DicomCapture.dproj=C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\DicomCapture.dproj</Transaction>
+    <Transaction>2015.03.25 16:33:14.229.dproj,C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\DicomCapture.dproj=C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source\DicomCapture.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

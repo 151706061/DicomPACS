@@ -1,0 +1,25 @@
+DROP INDEX ASU.TAMBTALON_BY_AMBID
+/
+
+--
+-- TAMBTALON_BY_AMBID  (Index) 
+--
+CREATE INDEX ASU.TAMBTALON_BY_AMBID ON ASU.TAMBTALON
+(FK_AMBID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    5
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

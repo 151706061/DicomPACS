@@ -1,0 +1,126 @@
+DROP TABLE ASU.TMISEXCH_BUF CASCADE CONSTRAINTS
+/
+
+--
+-- TMISEXCH_BUF  (Table) 
+--
+CREATE TABLE ASU.TMISEXCH_BUF
+(
+  FK_ID             NUMBER(10),
+  FC_TEXT           VARCHAR2(4000 BYTE),
+  FK_OWNERUSER      NUMBER(15),
+  FK_RECIPIENTUSER  NUMBER(15),
+  FK_CLOBID         NUMBER(15),
+  FD_DATECREATE     DATE,
+  FL_NEED_READ      NUMBER(1),
+  FP_TYPE           NUMBER(1)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TMISEXCH_BUF IS 'буфер сообщений для системы обмена сообщениями
+Нетребенко Е.А. 17.05.2007'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_BUF.FK_ID IS 'SEQUENCE=[SEQ_TMISEXCH_BUF]'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_BUF.FC_TEXT IS 'сообщение'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_BUF.FK_OWNERUSER IS 'пользователь создавший tsotr.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_BUF.FK_RECIPIENTUSER IS 'пользователь получатель tsotr.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_BUF.FK_CLOBID IS 'вложения tclob.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_BUF.FD_DATECREATE IS 'дата формирования сообщения'
+/
+
+COMMENT ON COLUMN ASU.TMISEXCH_BUF.FL_NEED_READ IS 'Заказать если не прочтет'
+/
+
+
+--
+-- IDX_TMISEXCH_BUF_OWN  (Index) 
+--
+--  Dependencies: 
+--   TMISEXCH_BUF (Table)
+--
+CREATE INDEX ASU.IDX_TMISEXCH_BUF_OWN ON ASU.TMISEXCH_BUF
+(FK_OWNERUSER)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TMISEXCH_BUF_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TMISEXCH_BUF (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TMISEXCH_BUF_BEFORE_INSERT" 
+BEFORE
+ INSERT
+ON tmisexch_buf
+REFERENCING NEW AS NEW OLD AS OLD
+FOR EACH ROW
+begin
+ select seq_tmisexch_buf.NEXTVAL into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TMISEXCH_BUF_BEFORE_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TMISEXCH_BUF (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TMISEXCH_BUF_BEFORE_DELETE" 
+ BEFORE
+  DELETE
+ ON tmisexch_buf
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  delete from tmisexch_buf_objread where fk_bufid=:old.fk_id;
+end;
+/
+SHOW ERRORS;
+
+

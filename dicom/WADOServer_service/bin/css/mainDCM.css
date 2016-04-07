@@ -1,0 +1,290 @@
+body {
+margin: 0px;
+padding: 0px;
+background-color: #ccc;
+}
+
+#btnleft {
+right: auto;	
+}
+
+#btnright {
+right: auto;
+right:100px;	
+}
+
+.leftstr {
+	color:#FFF;
+	background:#000;
+	list-style: none;
+}
+
+.main {
+	color:#FFF;
+	background:#000;
+}
+
+.leftcolimg {
+  background: #aaaaaa;	
+}
+
+body {
+margin: 0px;
+padding: 0px;
+background-color: #ccc;
+}
+
+.f1div
+{
+  position:relative;
+  float:left;
+  padding:3px;
+}
+
+.leftdiv {
+	width:110px;
+	display:none;
+}
+
+.finfo {
+	float:left;
+}
+
+.buttonNAV
+{
+float: right;
+}
+
+#draw {
+	border:1px solid;
+/*	height: 100%; */
+/*	height: 512px;  */
+/*    max-width: 512px; */
+}
+
+.d2 {
+	padding:0px;
+}
+
+.scroll {
+	width:600px;
+    height:150px;
+	overflow-x:scroll;
+    overflow-y:hidden;
+}
+
+.imgup {
+	float:left;	
+	margin-right: 1px;
+}
+
+.knopka {
+	width:16px;
+	height:16px;
+}
+
+.MainUpperDiv {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	height: 30px;
+	padding-left: 5px;
+	padding-top: 2px;
+}
+
+/* МОДАЛЬНОЕ ОКНО ПОИСКА */
+.search_divs {
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
+	font-size: 14px;
+}
+
+/* параметры поиска */
+.cmnbrd {
+	border:none;  /*1px solid black; /* Параметры границы */
+}
+
+#search_2 {
+	height: 180px;
+	background: #F7F7F7;  /* Цвет фона */
+	border-color: #333;	
+	margin: 0;
+	padding: 2;  /* Поля вокруг текста */
+}
+
+#concl_frm {
+	height: 180px;
+	background: #F7F7F7;  /* Цвет фона */
+	border-color: #333;	
+	margin: 0;
+	padding: 2;  /* Поля вокруг текста */
+}
+
+#search_3 {
+	height:380px;
+}
+
+#search_4 {
+	border-width: 1px;
+}
+
+#AddTerminalModal {
+	width: 600px; 
+	height:600px;
+	background: #F7F7F7; 
+	background-color: #CCC;
+}
+
+#AddTerminalModal1 {
+	width: 600px; 
+	height:600px;
+	background: #F7F7F7; 
+	background-color: #CCC;
+}
+
+#sdl1 {
+	position:relative;
+	float: left;
+	width:500px;
+	height:130px;
+	padding-top:5px;
+}
+
+#sdr1 {
+	float: right;
+	width:92px;
+	height:130px;
+	padding:1px;
+	padding-top: 10px;
+}
+
+.fldL {
+	position:relative;
+	float: left;
+	width:130px;
+}
+
+.fldL1 {
+	position:relative;
+	float: left;
+	width:40px;
+	padding-left:100px;
+}
+
+.fldR1 {
+	position:relative;
+	float: left;
+	width: 23px;
+}
+
+.fldR {
+	position:relative;
+	float: left;
+	width:300px;
+}
+
+.fldR2 {
+	position:relative;
+	float: left;
+	width: 130px;
+}
+
+.fldR3 {
+	position:relative;
+	float: left;
+	width: 125px;
+}
+
+.TextL {
+	float: left;
+	padding-left:10px;
+	height:22px;
+}
+
+.fscroll{
+/*	width:512px;*/
+	height:118px;
+	overflow-x:scroll;
+	overflow-y:hidden;
+}
+.fscroll_child{
+	width:99999px;
+}
+.fscroll_child > div{
+	float:left;
+	text-align:center;
+}
+
+.btn {
+	 padding: 4px 3px 3px 4px;
+}
+
+.btngrp {
+	float: left; 
+	padding-left:2px;
+}
+
+.btngrp1 {
+	padding: 1px;
+    width: 10px; 
+/*	float:left; 
+	padding-left:2px; 
+	height: 27px; 
+	border: 1px double black; 
+	border-radius: 5px 5px 5px 5px;
+	*/
+}
+
+.btn3 {
+	float:left; 
+	padding-left:2px; 
+}
+
+#cncl_cmn {
+	float:left; 
+	padding:2px;
+}
+
+#cncl_lt {
+	float:top;
+/*	border:1px solid black;*/
+	height:30px;
+	padding: 1px 1px 1px 10px;
+	min-width: 90px;
+	float:left; 
+}
+
+#cncl_l {
+	width:30px;	
+/*	border:1px solid black;	*/
+	float:left; 
+	padding:1px;
+}
+
+#cncl_r {
+	width:70px;	
+/*	border:1px solid black;*/
+	float:left; 
+	padding: 2px;
+}
+
+
+#cncl_rcmn {
+	float:top;
+/*	border:1px solid black;	*/
+	height:30px;
+}
+
+#tabs {
+	background: none repeat scroll 0 0 #CCCCCC;
+}
+
+#concltextarea {
+	resize:none;
+	outline:none;
+}
+
+#concltextarea1 {
+	resize:none;
+	outline:none;
+}
+

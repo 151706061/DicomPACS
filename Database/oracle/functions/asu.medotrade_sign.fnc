@@ -1,0 +1,18 @@
+DROP FUNCTION ASU.MEDOTRADE_SIGN
+/
+
+--
+-- MEDOTRADE_SIGN  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."MEDOTRADE_SIGN" RETURN VARCHAR2 IS
+BEGIN
+  RETURN 'МИС "Пациент"';
+END;
+/
+
+SHOW ERRORS;
+
+

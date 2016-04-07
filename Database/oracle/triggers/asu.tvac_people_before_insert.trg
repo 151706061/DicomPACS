@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TVAC_PEOPLE_BEFORE_INSERT
+/
+
+--
+-- TVAC_PEOPLE_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_VAC_PEOPLE (Sequence)
+--   TVAC_PEOPLE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVAC_PEOPLE_BEFORE_INSERT" BEFORE INSERT
+ON ASU.TVAC_PEOPLE FOR EACH ROW
+begin
+    --  Column "FK_ID" uses sequence SEQ_VAC_PEOPLE
+      IF :NEW.FK_ID IS NULL
+      THEN
+         SELECT SEQ_VAC_PEOPLE.NEXTVAL INTO :NEW.FK_ID from dual;
+      END IF;
+end;
+/
+SHOW ERRORS;
+
+

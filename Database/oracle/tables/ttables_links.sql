@@ -1,0 +1,112 @@
+DROP TABLE ASU.TTABLES_LINKS CASCADE CONSTRAINTS
+/
+
+--
+-- TTABLES_LINKS  (Table) 
+--
+CREATE TABLE ASU.TTABLES_LINKS
+(
+  FK_ID1          NUMBER,
+  FC_TABLE1_NAME  VARCHAR2(50 BYTE),
+  FK_ID2          NUMBER,
+  FC_TABLE2_NAME  VARCHAR2(50 BYTE),
+  FN_LINK_TYPE    NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TTABLES_LINKS IS 'Таблица для хранения связей между таблицами'
+/
+
+COMMENT ON COLUMN ASU.TTABLES_LINKS.FK_ID1 IS 'id из первой таблицы'
+/
+
+COMMENT ON COLUMN ASU.TTABLES_LINKS.FC_TABLE1_NAME IS 'полное название 1 таблицы с префиксом схемы заглавными буквами'
+/
+
+COMMENT ON COLUMN ASU.TTABLES_LINKS.FK_ID2 IS 'id из второй таблицы'
+/
+
+COMMENT ON COLUMN ASU.TTABLES_LINKS.FC_TABLE2_NAME IS 'полное название 2 таблицы с префиксом схемы заглавными буквами'
+/
+
+COMMENT ON COLUMN ASU.TTABLES_LINKS.FN_LINK_TYPE IS 'тип привязки (определяется пользователем), для возможности по разному связывать одну и туже пару таблиц'
+/
+
+
+--
+-- TTABLES_LINKS_FN_LINK_TYPE  (Index) 
+--
+--  Dependencies: 
+--   TTABLES_LINKS (Table)
+--
+CREATE INDEX ASU.TTABLES_LINKS_FN_LINK_TYPE ON ASU.TTABLES_LINKS
+(FN_LINK_TYPE)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TTABLES_LINKS_TABLE1  (Index) 
+--
+--  Dependencies: 
+--   TTABLES_LINKS (Table)
+--
+CREATE INDEX ASU.TTABLES_LINKS_TABLE1 ON ASU.TTABLES_LINKS
+(FC_TABLE1_NAME, FK_ID1)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TTABLES_LINKS_TABLE2  (Index) 
+--
+--  Dependencies: 
+--   TTABLES_LINKS (Table)
+--
+CREATE INDEX ASU.TTABLES_LINKS_TABLE2 ON ASU.TTABLES_LINKS
+(FC_TABLE2_NAME, FK_ID2)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

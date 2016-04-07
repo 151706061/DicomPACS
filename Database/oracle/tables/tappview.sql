@@ -1,0 +1,99 @@
+DROP TABLE ASU.TAPPVIEW CASCADE CONSTRAINTS
+/
+
+--
+-- TAPPVIEW  (Table) 
+--
+CREATE TABLE ASU.TAPPVIEW
+(
+  FK_ID    NUMBER(15),
+  FC_OPIS  VARCHAR2(25 BYTE),
+  FC_VER   VARCHAR2(10 BYTE),
+  FC_NAME  VARCHAR2(45 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TAPPVIEW IS 'ѕредставление таблицы TAPP by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TAPPVIEW.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TAPPVIEW.FC_OPIS IS 'описание'
+/
+
+COMMENT ON COLUMN ASU.TAPPVIEW.FC_VER IS 'верси€'
+/
+
+COMMENT ON COLUMN ASU.TAPPVIEW.FC_NAME IS 'название'
+/
+
+
+--
+-- TAPPVIEW_ON_ID  (Index) 
+--
+--  Dependencies: 
+--   TAPPVIEW (Table)
+--
+CREATE UNIQUE INDEX ASU.TAPPVIEW_ON_ID ON ASU.TAPPVIEW
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAPPVIEW_OPIS_NAME  (Index) 
+--
+--  Dependencies: 
+--   TAPPVIEW (Table)
+--
+CREATE INDEX ASU.TAPPVIEW_OPIS_NAME ON ASU.TAPPVIEW
+(FC_OPIS, FC_NAME)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

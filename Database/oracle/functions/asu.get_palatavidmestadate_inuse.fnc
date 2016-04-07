@@ -1,0 +1,50 @@
+DROP FUNCTION ASU.GET_PALATAVIDMESTADATE_INUSE
+/
+
+--
+-- GET_PALATAVIDMESTADATE_INUSE  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   GET_PALATAVIDMESTADATE_BY_KORP (Function)
+--   TPLANMAIN (Table)
+--   TPLANSLAVE (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PALATAVIDMESTADATE_INUSE" -- Created by TimurLan
+ (pFK_PLANID IN NUMBER,pFK_VIDID IN NUMBER,pFD_DATA IN DATE,pFK_KORPID IN NUMBER,pFN_COUNT IN NUMBER)
+ RETURN  NUMBER IS
+  nTemp1 NUMBER;
+  nTemp2 NUMBER;
+  nMainID NUMBER;
+  nKDN NUMBER;
+  CURSOR cAll IS SELECT GET_PALATAVIDMESTADATE_BY_KORP(pFK_VIDID,TRUNC(pFD_DATA),pFK_KORPID) FROM DUAL;
+  CURSOR cMain IS SELECT FK_ID,FN_KDN FROM TPLANMAIN WHERE FK_PLANID = pFK_PLANID AND FK_KORPID = pFK_KORPID;
+  CURSOR cUse(MAINID IN NUMBER) IS select SUM(FN_KOL) as FN_KOL
+                   from tplanslave
+                  where fk_mainid = MAINID
+                    and fk_vidid = pFK_VIDID
+                    and TRUNC(FD_DATE) between TRUNC(pFD_DATA) and TRUNC(pFD_DATA) + pFN_COUNT;
+BEGIN
+  OPEN cAll;
+  FETCH cAll INTO nTemp1;
+  CLOSE cAll;
+  OPEN cMain;
+  FETCH cMain INTO nMainID,nKDN;
+  CLOSE cMain;
+  OPEN cUse(nMainID);
+  FETCH cUse INTO nTemp2;
+  CLOSE cUse;
+/*  FOR i in cMain LOOP
+    FOR j in cUse(i.FK_ID) LOOP
+      nTemp2:=nTemp2+j.FN_KOL;
+    END LOOP;
+  END LOOP;*/
+  RETURN (nTemp1-NVL(nTemp2,0));
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_STOTDEL
+/
+
+--
+-- GET_STOTDEL  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_STOTDEL" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 21466;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_STOTDEL TO PUBLIC
+/
+

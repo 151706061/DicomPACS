@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_KARDPROF
+/
+
+--
+-- GET_KARDPROF  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_KARDPROF" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 29704;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_KARDPROF TO PUBLIC
+/
+

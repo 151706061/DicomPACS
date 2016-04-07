@@ -1,0 +1,25 @@
+DROP INDEX ASU.K_TREPLYTABLE_ID
+/
+
+--
+-- K_TREPLYTABLE_ID  (Index) 
+--
+CREATE INDEX ASU.K_TREPLYTABLE_ID ON ASU.TREPLYTABLE
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

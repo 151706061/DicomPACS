@@ -1,0 +1,4 @@
+ALTER TABLE MED.TDPC ADD (FK_NAZMARK_ID NUMBER)
+/
+COMMENT ON COLUMN MED.TDPC.FK_NAZMARK_ID IS 'ASU.TNAZMARK.FK_ID - ид отметки о выдаче пациенту - один на одну выдачу'
+/

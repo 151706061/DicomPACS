@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TNAZRECEPTVID_BI
+/
+
+--
+-- TNAZRECEPTVID_BI  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TNAZRECEPTVID (Sequence)
+--   TNAZRECEPTVID (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZRECEPTVID_BI" 
+BEFORE INSERT
+ON ASU.TNAZRECEPTVID REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+BEGIN
+  SELECT seq_tnazreceptvid.nextval
+    INTO :new.fk_id
+    FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

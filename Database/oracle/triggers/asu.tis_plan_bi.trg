@@ -1,0 +1,28 @@
+DROP TRIGGER ASU.TIS_PLAN_BI
+/
+
+--
+-- TIS_PLAN_BI  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TIS_PLAN (Sequence)
+--   TIS_PLAN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TIS_PLAN_BI
+  BEFORE INSERT
+  ON ASU.TIS_PLAN   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+BEGIN
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT asu.seq_TIS_PLAN.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+

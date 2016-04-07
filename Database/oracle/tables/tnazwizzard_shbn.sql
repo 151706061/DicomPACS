@@ -1,0 +1,117 @@
+DROP TABLE ASU.TNAZWIZZARD_SHBN CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZWIZZARD_SHBN  (Table) 
+--
+CREATE TABLE ASU.TNAZWIZZARD_SHBN
+(
+  FK_ID        NUMBER(10)                       NOT NULL,
+  FC_NAME      VARCHAR2(40 BYTE),
+  FK_SOTRID    NUMBER(15),
+  FD_DATE      DATE,
+  FK_SMIDRAZD  NUMBER(15)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNAZWIZZARD_SHBN IS 'Таблица шаблонов используемых в nazwizzard.dll
+'
+/
+
+COMMENT ON COLUMN ASU.TNAZWIZZARD_SHBN.FK_ID IS 'SEQUENCE=[SEQ_TNAZWIZZARD_SHBN]'
+/
+
+COMMENT ON COLUMN ASU.TNAZWIZZARD_SHBN.FC_NAME IS 'Имя шаблона'
+/
+
+COMMENT ON COLUMN ASU.TNAZWIZZARD_SHBN.FK_SOTRID IS 'Код сотрудника (владельца)'
+/
+
+COMMENT ON COLUMN ASU.TNAZWIZZARD_SHBN.FD_DATE IS 'Дата создания'
+/
+
+COMMENT ON COLUMN ASU.TNAZWIZZARD_SHBN.FK_SMIDRAZD IS 'Раздел смида'
+/
+
+
+--
+-- TNAZWIZZARD_SHBN_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TNAZWIZZARD_SHBN (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZWIZZARD_SHBN_BY_ID ON ASU.TNAZWIZZARD_SHBN
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZWIZZARD_SHBN_BEFOR_DEL  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZWIZZARD_SHBN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZWIZZARD_SHBN_BEFOR_DEL" 
+ BEFORE
+  DELETE
+ ON tnazwizzard_shbn
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  delete from tnazwizzard_naz where fk_shablonid=:old.fk_id;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TNAZWIZZARD_SHBN_BEFORE_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZWIZZARD_SHBN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZWIZZARD_SHBN_BEFORE_INS" 
+ BEFORE
+  INSERT
+ ON tnazwizzard_shbn
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  select seq_tnazwizzard_shbn.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

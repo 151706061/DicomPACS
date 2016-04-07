@@ -1,0 +1,25 @@
+DROP INDEX ASU.TNAZAN_DATE
+/
+
+--
+-- TNAZAN_DATE  (Index) 
+--
+CREATE INDEX ASU.TNAZAN_DATE ON ASU.TNAZAN
+(FD_RUN)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          4608K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,1528 @@
+object frmComment: TfrmComment
+  Left = 0
+  Top = 0
+  Caption = #1044#1086#1087#1086#1083#1085#1080#1090#1077#1083#1100#1085#1086' '#1087#1086' '#1080#1089#1089#1083#1077#1076#1086#1074#1072#1085#1080#1102
+  ClientHeight = 431
+  ClientWidth = 668
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma,204'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  PixelsPerInch = 96
+  TextHeight = 14
+  object cxPageControl1: TcxPageControl
+    Left = 0
+    Top = 48
+    Width = 668
+    Height = 361
+    ActivePage = tsInfoFromFile
+    Align = alClient
+    TabOrder = 0
+    ExplicitHeight = 362
+    ClientRectBottom = 361
+    ClientRectRight = 668
+    ClientRectTop = 25
+    object tsFields: TcxTabSheet
+      Caption = #1044#1072#1085#1085#1099#1077' '#1080#1089#1089#1083#1077#1076#1086#1074#1072#1085#1080#1103
+      ImageIndex = 2
+      ExplicitHeight = 337
+      object cxLabel1: TcxLabel
+        Left = 15
+        Top = 9
+        Caption = 'PatientID :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object tePatientID: TcxTextEdit
+        Left = 155
+        Top = 8
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 1
+        Width = 250
+      end
+      object cxLabel5: TcxLabel
+        Left = 15
+        Top = 34
+        Caption = #1060#1048#1054' '#1087#1072#1094#1080#1077#1085#1090#1072' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object teFIOpac: TcxTextEdit
+        Left = 155
+        Top = 33
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 3
+        Width = 496
+      end
+      object cxLabel8: TcxLabel
+        Left = 15
+        Top = 59
+        Caption = #1055#1086#1083' '#1087#1072#1094#1080#1077#1085#1090#1072' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object cxPolMan: TcxRadioButton
+        Left = 155
+        Top = 58
+        Width = 76
+        Height = 17
+        Caption = #1084#1091#1078#1089#1082#1086#1081
+        Checked = True
+        TabOrder = 5
+        TabStop = True
+      end
+      object cxPolWoMan: TcxRadioButton
+        Left = 242
+        Top = 58
+        Width = 76
+        Height = 17
+        Caption = #1078#1077#1085#1089#1082#1080#1081
+        TabOrder = 6
+      end
+      object cxLabel7: TcxLabel
+        Left = 15
+        Top = 84
+        Caption = #1044#1072#1090#1072' '#1088#1086#1078#1076#1077#1085#1080#1103' '#1087#1072#1094#1080#1077#1085#1090#1072' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object deDateBorn: TcxDateEdit
+        Left = 155
+        Top = 83
+        ParentShowHint = False
+        Properties.DateButtons = [btnToday]
+        Properties.DateOnError = deToday
+        Properties.ImmediatePost = True
+        Properties.PostPopupValueOnTab = True
+        Properties.ShowTime = False
+        ShowHint = True
+        Style.BorderStyle = ebsOffice11
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.ButtonStyle = btsOffice11
+        Style.ButtonTransparency = ebtNone
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 8
+        Width = 125
+      end
+      object cxLabel2: TcxLabel
+        Left = 15
+        Top = 109
+        Caption = #1044#1072#1090#1072' '#1080#1089#1089#1083#1077#1076#1086#1074#1072#1085#1080#1103' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object deStudyDate: TcxDateEdit
+        Left = 155
+        Top = 108
+        ParentShowHint = False
+        Properties.DateButtons = [btnToday]
+        Properties.DateOnError = deToday
+        Properties.ImmediatePost = True
+        Properties.PostPopupValueOnTab = True
+        Properties.ShowTime = False
+        ShowHint = True
+        Style.BorderStyle = ebsOffice11
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.ButtonStyle = btsOffice11
+        Style.ButtonTransparency = ebtNone
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 10
+        Width = 125
+      end
+      object cxLabel3: TcxLabel
+        Left = 15
+        Top = 134
+        Caption = #1054#1087#1080#1089#1072#1085#1080#1077' '#1080#1089#1089#1083#1077#1076#1086#1074#1072#1085#1080#1103' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object teOpisStudy: TcxTextEdit
+        Left = 155
+        Top = 133
+        ParentFont = False
+        Properties.CharCase = ecUpperCase
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 12
+        Width = 496
+      end
+      object cxLabel4: TcxLabel
+        Left = 15
+        Top = 159
+        Caption = #1060#1048#1054' '#1074#1088#1072#1095#1072' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object teDoctor: TcxTextEdit
+        Left = 155
+        Top = 158
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 14
+        Width = 496
+      end
+      object cxRadioButton3: TcxRadioButton
+        Left = 329
+        Top = 58
+        Width = 76
+        Height = 17
+        Caption = #1080#1085#1086#1077
+        TabOrder = 15
+        Visible = False
+      end
+      object cxLabel6: TcxLabel
+        Left = 15
+        Top = 311
+        Caption = 'StudyUID :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object teStudyUID: TcxTextEdit
+        Left = 155
+        Top = 310
+        Enabled = False
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 27
+        Width = 359
+      end
+      object cxLabel9: TcxLabel
+        Left = 15
+        Top = 180
+        Caption = 'AccessionNumber :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object teAccessionNumber: TcxTextEdit
+        Left = 155
+        Top = 179
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 17
+        Width = 250
+      end
+      object cxLabel10: TcxLabel
+        Left = 15
+        Top = 206
+        Caption = #1052#1086#1076#1072#1083#1100#1085#1086#1089#1090#1100' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+        Visible = False
+      end
+      object cbType: TcxComboBox
+        Left = 155
+        Top = 204
+        ParentShowHint = False
+        Properties.DropDownListStyle = lsFixedList
+        Properties.DropDownSizeable = True
+        Properties.ImmediatePost = True
+        Properties.ImmediateUpdateText = True
+        Properties.Items.Strings = (
+          'CR'
+          'CT'
+          'MR'
+          'NM'
+          'US'
+          'OT'
+          'BI'
+          'DG'
+          'ES'
+          'LS'
+          'PT'
+          'RG'
+          'TG'
+          'XA'
+          'RF'
+          'RTIMAGE'
+          'RTDOSE'
+          'RTSTRUCT'
+          'RTPLAN'
+          'RTRECORD'
+          'HC'
+          'DX'
+          'MG'
+          'IO'
+          'PX'
+          'GM'
+          'SM'
+          'XC'
+          'PR'
+          'AU'
+          'ECG'
+          'EPS'
+          'HD'
+          'SR'
+          'IVUS'
+          'OP'
+          'SMR'
+          'AR'
+          'KER'
+          'VA'
+          'SRF'
+          'OCT'
+          'LEN'
+          'OPV'
+          'OPM'
+          'OAM'
+          'RESP'
+          'KO'
+          'SEG'
+          'REG'
+          'OPT'
+          'BDUS'
+          'BMD'
+          'DOC'
+          'FID'
+          'PLAN'
+          'IOL'
+          'IVOCT')
+        Properties.PostPopupValueOnTab = True
+        ShowHint = True
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 18
+        Visible = False
+        Width = 58
+      end
+      object cxLabel11: TcxLabel
+        Left = 15
+        Top = 236
+        Caption = #1054#1089#1085#1086#1074#1085#1086#1081' '#1076#1080#1072#1075#1085#1086#1079':'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object cxLabel12: TcxLabel
+        Left = 15
+        Top = 264
+        Caption = #1057#1086#1087#1091#1090#1089#1090#1074#1091#1102#1097#1080#1081' '#1076#1080#1072#1075#1085#1086#1079':'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object dxTreeViewEdit1: TdxTreeViewEdit
+        Left = 155
+        Top = 230
+        Width = 496
+        Height = 22
+        CanSelectParents = True
+        ParentColor = False
+        TabOrder = 19
+        TabStop = True
+        TreeViewColor = clWindow
+        TreeViewCursor = crDefault
+        TreeViewFont.Charset = DEFAULT_CHARSET
+        TreeViewFont.Color = clWindowText
+        TreeViewFont.Height = -11
+        TreeViewFont.Name = 'Tahoma,204'
+        TreeViewFont.Style = []
+        TreeViewIndent = 19
+        TreeViewReadOnly = False
+        TreeViewShowButtons = True
+        TreeViewShowHint = False
+        TreeViewShowLines = True
+        TreeViewShowRoot = True
+        TreeViewSortType = stNone
+        DividedChar = '.'
+        TextStyle = tvtsShort
+        Alignment = taLeftJustify
+      end
+      object dxTreeViewEdit2: TdxTreeViewEdit
+        Left = 155
+        Top = 258
+        Width = 496
+        Height = 22
+        CanSelectParents = True
+        ParentColor = False
+        TabOrder = 20
+        TabStop = True
+        TreeViewColor = clWindow
+        TreeViewCursor = crDefault
+        TreeViewFont.Charset = DEFAULT_CHARSET
+        TreeViewFont.Color = clWindowText
+        TreeViewFont.Height = -11
+        TreeViewFont.Name = 'Tahoma,204'
+        TreeViewFont.Style = []
+        TreeViewIndent = 19
+        TreeViewReadOnly = False
+        TreeViewShowButtons = True
+        TreeViewShowHint = False
+        TreeViewShowLines = True
+        TreeViewShowRoot = True
+        TreeViewSortType = stNone
+        DividedChar = '.'
+        TextStyle = tvtsShort
+        Alignment = taLeftJustify
+      end
+      object cxLabel13: TcxLabel
+        Left = 15
+        Top = 287
+        Caption = 'AETitle '#1072#1087#1087#1072#1088#1072#1090#1072':'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object teAE: TcxTextEdit
+        Left = 155
+        Top = 286
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 21
+        Width = 359
+      end
+      object CheckBox1: TCheckBox
+        Left = 520
+        Top = 312
+        Width = 131
+        Height = 17
+        Caption = #1080#1079#1084#1077#1085#1080#1090#1100' '#1074' '#1089#1085#1080#1084#1082#1072#1093
+        TabOrder = 28
+        Visible = False
+      end
+    end
+    object tsFiles: TcxTabSheet
+      Caption = #1060#1072#1081#1083#1099
+      ImageIndex = 2
+      ExplicitTop = 0
+      ExplicitWidth = 0
+      ExplicitHeight = 0
+      object Panel1: TPanel
+        Left = 0
+        Top = 0
+        Width = 668
+        Height = 32
+        Align = alTop
+        TabOrder = 0
+        object cxButton2: TcxButton
+          Left = 65
+          Top = 1
+          Width = 32
+          Height = 30
+          Hint = #1059#1076#1072#1083#1080#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090
+          Align = alLeft
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 0
+          OnClick = cxButton2Click
+          Glyph.Data = {
+            F6060000424DF606000000000000360000002800000018000000180000000100
+            180000000000C0060000130B0000130B00000000000000000000FF00FFFF00FF
+            FF00FF000085000085FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FF0000850209A8040AA43D43ACFF00FFFF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FF000085000CB0000BAF0009AB000085FF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FF000085000085FF00FF0000850F22C8000FB6000DB3000B
+            AF010AAA000085FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FF00008508089B07079A0000853D43AC2B4DFC
+            081CC6000FB7000DB3000BAF040CA73D43ACFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FF3D43AC00008501019700009804059900
+            00852C40D42D50FF2242F00012BC000FB7000DB3000BAF000085FF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF0000850A0B9C0000980000
+            980303982332C8FF00FF3D43AC2848F32D50FE1730DB0011BB000FB7000DB301
+            0CAF000085FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3D43AC000085010197
+            0000980000980202982332C8FF00FFFF00FFFF00FF4956C93353FB3D5CFB0B20
+            C80011BB000FB7000EB4010BAD000085FF00FFFF00FFFF00FFFF00FF0000850B
+            0C9B0000980000980000980202992332C8FF00FFFF00FFFF00FFFF00FFFF00FF
+            3140CC4C68FE4059EE0115C00012BB0010B8000EB4030DAB000085FF00FF3D43
+            AC00008501039C00009A0000980000980101972332C8FF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FF3747D2627AFD2B41DA0014BF0012BC0010B8000EB4
+            0A12AA0000850E13A60006A50004A100029D00009A0101972332C8FF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF3B48CC6C80F70F25CA00
+            14C00012BC0010B8000EB4010CAE000AAD0008A90006A50004A101039D2332C8
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FF3843C25063E50117C40014C00012BC0010B8000EB5000CB1000AAD0008A901
+            07A42332C8FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FF3842BD0B21C90016C40014C00012BC0010B8000E
+            B5000CB1010BAC2332C8FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF404ABD0018C90018C80016C4
+            0014C00012BD0010B9000EB5191EABFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF2332C8011CCE00
+            1BD0001ACC0018C80016C40014C00012BD0010B9010DB02332C8FF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF2332
+            C8011ED1001FD8001ED4001CD0001ACC0018C80016C50014C10012BD0010B903
+            0FB02332C8FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            FF00FF2332C8021FD30024E00022DC0020D8001ED4001CD01D37DD293ED70E28
+            D50015C20013BD0011BA0711AF2332C8FF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FF2332C80421D50028E70026E40024E00022DC0323DA314EED
+            4B5EE62332C82332C81733DF0218C50013BE0011BA0A14AF2332C8FF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FF2332C80927D5002CEF002AEC0028E80026E40E
+            31E64360F84A5EE62332C8FF00FFFF00FF2332C81A34DD0820CC0013BE0011BA
+            0812AF2332C8FF00FFFF00FFFF00FFFF00FF2332C8112BD2002FF7002EF4002C
+            F0002AEC1E42F24C69FD4B5EE72332C8FF00FFFF00FFFF00FFFF00FF2235D223
+            32C81730D70013BE0011BA030FB02332C8FF00FFFF00FFFF00FF2332C80127E3
+            0030F8002FF70532F52F52FA4F6BFE4B5FE72332C8FF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FF2332C82B40D9091CC40011BA020FB22332C8FF00FFFF
+            00FFFF00FF2332C8002BEE103CF93B5CFE4F6CFE4B61E82332C8FF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF2235D22332C82235CE0012
+            BB010FB32332C8FF00FFFF00FFFF00FF2332C83046E04965FB4A5FE82332C8FF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            FF00FF2332C83240CB0D1FC1010DAF2332C8FF00FFFF00FFFF00FF2332C82332
+            C82332C8FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FF2332C82332C82332C8FF00FF}
+        end
+        object cxButton3: TcxButton
+          Left = 1
+          Top = 1
+          Width = 32
+          Height = 30
+          Hint = #1054#1073#1085#1086#1074#1080#1090#1100
+          Align = alLeft
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 1
+          OnClick = cxButton3Click
+          Glyph.Data = {
+            F6060000424DF606000000000000360000002800000018000000180000000100
+            180000000000C0060000920B0000920B00000000000000000000FF00FFFF00FF
+            FF00FFC8B3A46947316947316947316947316947316947316947316947316947
+            31694731694731694731694731694731694731694731694731694731FF00FFFF
+            00FFFF00FFFF00FFFF00FFC8B3A4EDE5E0B7A293B7A293B7A293B7A293B7A293
+            B7A293B7A293B7A293B7A293B7A293B7A293B7A293B7A293B7A293B7A293B7A2
+            93694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4EFE8E3EDE5E0ECE2DEEB
+            E0DBE9DDD7E7DAD4E5D7D1E4D6CFE2D3CCE0D1C8DECEC5DCCBC2DBC9BFDBC9BF
+            DBC9BFDBC9BFB7A293694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4F2EC
+            E8F0E9E5EEE6E2EDE4DFEBE1DCEADED9E8DBD6E6D9D2E4D6CFE2D3CCE0D1C8DE
+            CEC5DCCBC2DBC9BFDBC9BFDBC9BFB7A293694731FF00FFFF00FFFF00FFFF00FF
+            FF00FFC8B3A4F4EEECF2ECE8F0E9E5EEE6E2019901EBE1DC8FCC8341B13D41B1
+            3E71C46E8FCC83E0D1C8DECEC5DCCBC2DBC9BFDBC9BFB7A293694731FF00FFFF
+            00FFFF00FFFF00FFFF00FFC8B3A4F6F1EFF4EEECF2ECE8F0E9E501990121A41D
+            0199010199010199010199010199018FCC83E0D1C8DECEC5DCCBC2DBC9BFB7A2
+            93694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4F8F4F2F6F1EFF4EEECF2
+            ECE801990142BD5242BD5242BD5242BD5242BD5242BD520199018FCC83E0D1C8
+            DECEC5DCCBC2B7A293694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4FAF6
+            F6F8F4F2F6F1EFF4EEEC01990142BD5242BD5231A92BEBE1DCEADED981C77601
+            990141B23FE2D3CCE0D1C8DECEC5B7A293694731FF00FFFF00FFFF00FFFF00FF
+            FF00FFC8B3A4FCF9F9FAF6F6F8F4F2F6F1EF01990142BD5242BD5231A92BEDE4
+            DFEBE1DCEADED9CFE5C0119F108FCC83E2D3CCE0D1C8B7A293694731FF00FFFF
+            00FFFF00FFFF00FFFF00FFC8B3A4FDFCFCFCF9F9FAF6F6F8F4F2019901019901
+            019901019901019901EDE4DFEBE1DCEADED971C46E71C46EE5D7D1E3D5CDB7A2
+            93694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4FFFFFFFDFCFC81C878FA
+            F6F6F9F5F4F7F2F1F5F0EDF3EDEAF1EAE7EFE8E3EDE5E0ECE2DEEBE0DB81C878
+            E7DAD4E5D7D1B7A293694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4FFFF
+            FFFFFFFF71C46EBFDFB1FBF8F7F9F5F4F7F2F101990101990101990101990101
+            9901ECE2DEEBE0DBE9DDD7E7DAD4B7A293694731FF00FFFF00FFFF00FFFF00FF
+            FF00FFC8B3A4FFFFFFFFFFFFCFE8C9119F10CFE5C0FBF8F7F9F5F4F7F2F131A9
+            2B42BD5242BD52019901EDE5E0ECE2DEEBE0DBE9DDD7B7A293694731FF00FFFF
+            00FFFF00FFFF00FFFF00FFC8B3A4FFFFFFFFFFFFFFFFFF41B23F01990181C776
+            FBF8F7F9F5F431A92B42BD5242BD52019901EFE8E3EDE5E0ECE2DEEBE0DBB7A2
+            93694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4FFFFFFFFFFFFFFFFFFCF
+            E9CA01990101990101990101990101990142BD5242BD52019901F1EAE7EFE8E3
+            EDE5E0ECE2DEB7A293694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4FFFF
+            FFFFFFFFFFFFFFFFFFFF9FD79B42BD5242BD5242BD5242BD5242BD5221A41D01
+            9901F3EDEAF1EAE7EFE8E3EDE5E0B7A293694731FF00FFFF00FFFF00FFFF00FF
+            FF00FFC8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFEFD971C46E41B13E41B1
+            3D8FCC83F9F5F4019901F5F0EDD5BFB1CAB5A6B7A293B7A293694731FF00FFFF
+            00FFFF00FFFF00FFFF00FFC8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFEFDFEFDFBFBFBF8F7FAF6F6C8B3A46947316947316947316947
+            31694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4FFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFCFCFCF9F9C8B3A4F3EBE6
+            EFE6E0E8DCD4DBC9BF694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4FFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD
+            FCFCC8B3A4EFE6E0E8DCD4DBC9BF694731FF00FFFF00FFFF00FFFF00FFFF00FF
+            FF00FFC8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFC8B3A4E8DCD4DBC9BF694731FF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFC8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC8B3A4DBC9BF694731FF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4C8B3A4C8B3A4C8B3A4C8
+            B3A4C8B3A4C8B3A4C8B3A4C8B3A4C8B3A4C8B3A4C8B3A4C8B3A4C8B3A4694731
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+        end
+        object cxButton4: TcxButton
+          Left = 129
+          Top = 1
+          Width = 32
+          Height = 30
+          Hint = #1048#1079#1084#1077#1085#1080#1090#1100' '#1086#1087#1080#1089#1072#1085#1080#1077
+          Align = alLeft
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 2
+          OnClick = cxButton4Click
+          Glyph.Data = {
+            F6060000424DF606000000000000360000002800000018000000180000000100
+            180000000000C0060000F00A0000F00A00000000000000000000FFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFAF8F7907161917262A18678BEABA2D7CCC7F1EDEC
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFD3C3BCC3AFA3FFFFFFF8F6F2DA
+            D0C9BDA99FA38678957564AA8F81C3AEA6DBD0C9F3EFEDFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA78879FAF7
+            F3CFA590C79E89E3D0C4FFFFFFFEFFFFDCDFE2D9D7D5D7CBC6BAA79D9D827495
+            7564AA8F84CDBCB3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            F3EFECA28472FFFBF48017007818006D13006310004E1500685247EDEFEFFFFF
+            FFFFFFFFFFFFFFFFFFFFCEC1BAAE9387FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFD3C1BAC9B6ABFAF2EADABAA8C39A84AA765E8E4F3234403F
+            8E888FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF947567F1EDEAFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB49789EEE5DDFEFBF4FFFFFEFFFFFFFF
+            FFFFFFFFFFF6FFFF5E68B6141597ECEBF5FFFFFFFFFFFFE2DBD7B1988CFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFE967F6EFFFFFDE2C4
+            B0E3C6B4E7CDBDEAD4C8EEDCD1F0E2D9000CCF0F3CF4000093E5E4F1FFFFFFAE
+            978AE2DBD5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEEEAE7
+            AE9282FCF4E9E2C4B1E3C7B5E4C7B7E4C8B8E4C9B9F1D2B93B45C81947F70D39
+            F4020291F7F7FD997B67FEFDFDFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFDACDC7C7B0A3F3E3D4E2C4B1E3C6B4E3C7B5E4C7B7E4C8B8E9CCB9
+            C5B2BE001BDB255AFF0531ED0F0B8ABAA399FFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFC9B4AADBCCBFEBD4C3E2C4AFE2C4B2E2C5B3E3
+            C6B4E3C6B6E3C6B6FBE7D15466DE1843EF1F53FF0327DF4444A9FCFCFEFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFBB9F93ECE1D6E5C9B6E2C3
+            AEE2C3B0E2C4B1E2C4B2E3C5B4E5C8B9FFFFFFFDFEFC0021E02D5DFF144BFF15
+            23998383A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFAD8D7E
+            FAF5EAE1C0AAE1C1ADE1C2AEE1C2AFE2C3B0E2C3B1E3C6B5E6CBB9EFD1BA9FAE
+            F5042DE88189A36662504B483AB5B5C6FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFA68371FFFCF1DFBCA5E0C0AAE0C0ACE1C1ADE1C2AEE1C2AFE3C5B3
+            E4C7B4EDD9CCFFFFFA818BC1CBC8B84F68BE0B3EFF0D0D9FD7D7EEFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFA57F6DFFFBEFDEBAA3DFBEA8E0BFAAE0BFAAE0
+            C0ACDFC0ACF6EBE0FFFDF8FEFCF5FFFFF7DDCEC25766AD375DD51D51FF0933F2
+            2C2C9FF5F5FAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8826EFEF8E9DEB9A2DFBD
+            A6DFBEA7DFBEA9DFBFA9DFBEA9F0DED1F4E8DDF3E4D8F7EBDFC7B0A49188859E
+            998A4D609C194FFF0523D46363BAFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFA8816D
+            FFF5E5DDB89EDEBBA4DFBCA4DFBCA5DFBCA6DFBCA6DEBBA3DDBAA2DEB8A2E7CC
+            BABAA194E2D7D08191CEB6B09C284CC1164DFF020FB1ABABDDFFFFFFFFFFFFFF
+            FFFFFFFFFFAA856FFCF3E0DEB89EE3C3ADE6CAB5EAD0BEEDD8C6F2DFCFF5E7D9
+            FAEEE2FCF5EAFFFFFAB39789ECE4DEECEDFFA1A7BC81889B1D4DEE1144FF1515
+            9DEAEAF6FFFFFFFFFFFFFFFFFFAB8570FFFCE9FFFBEAFEF7E8F4EBDEEADDD0DE
+            CFC0D3BEB1C7AF9FBBA090AF8F7FA38271A07A6AF3EDEBFFFFFFE0E2EBDDD9CE
+            3852A11F51FF0B2CDF6565BDFFFFFFFFFFFFFFFFFF9F7762AC8673AF8673B38D
+            7CBB998AC5A79ACCB4A9D6C2B8DED0C8E7DED8F1EAE8FAF8F7FFFFFFFFFFFFFF
+            FFFFFFFFFFDBDBDAC6C5C32B4AB0194FFF060CADE5E5F5FFFFFFFFFFFFF9F6F5
+            FDFCFBFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFDFDFDCFCFCFAEAB9F5A699829399AACACD1FF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFB3BDE8757D
+            A5BEBCB27F7F79FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFF6F6F9A3A3A1B3B3B3FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+        end
+        object cxButton5: TcxButton
+          Left = 33
+          Top = 1
+          Width = 32
+          Height = 30
+          Hint = #1044#1086#1073#1072#1074#1080#1090#1100' '#1076#1086#1082#1091#1084#1077#1085#1090
+          Align = alLeft
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 3
+          OnClick = cxButton5Click
+          Glyph.Data = {
+            F6060000424DF606000000000000360000002800000018000000180000000100
+            180000000000C0060000630B0000630B00000000000000000000FF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FF009000006000006000006000006000006000006000FF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FF0090002CC4460EA6160EA6160EA6160EA616006000FF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00900060F8982CC44628C04025BD
+            3A0EA616006000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00900060F898
+            30C84C2CC44628C0400EA616006000FF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FF00900060F89834CC5230C84C2CC4460EA616006000FF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FF00900060F89837CF5734CC5230C84C0EA616006000FF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00900060F8983BD35D37CF5734CC
+            520EA616006000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FF00900000600000600000600000600000600000600000600060F898
+            3ED6633BD35D37CF570EA6160060000060000060000060000060000060000060
+            00006000FF00FFFF00FFFF00FF00900060F8980EA6160EA6160EA6160EA6160E
+            A6160EA61648E07244DC6C40D8663CD4600EA6160EA6160EA6160EA6160EA616
+            0EA6160EA6160EA616006000FF00FFFF00FFFF00FF00900060F89860F8985EF6
+            965BF39057EF8A53EB844FE77E4BE37848E07244DC6C40D8663CD46039D15A36
+            CE5532CA4F2EC6492AC24326BE3D0EA616006000FF00FFFF00FFFF00FF009000
+            60F89860F89860F8985EF6965BF39057EF8A53EB844FE77E4BE37848E07244DC
+            6C40D8663CD46039D15A36CE5532CA4F2EC6492AC2430EA616006000FF00FFFF
+            00FFFF00FF00900060F89860F89860F89860F8985EF6965BF39057EF8A53EB84
+            4FE77E4BE37848E07244DC6C40D8663CD46039D15A36CE5532CA4F2EC6490EA6
+            16006000FF00FFFF00FFFF00FF00900060F89860F89860F89860F89860F89860
+            F89860F89860F89853EB844FE77E4BE37848E07260F89860F89860F89860F898
+            60F89860F8980EA616006000FF00FFFF00FFFF00FF0090000090000090000090
+            0000900000900000900000900060F89857EF8A53EB844FE77E0EA61600600000
+            9000009000009000009000009000009000009000FF00FFFF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00900060F8985BF39057EF8A53EB
+            840EA616006000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00900060F898
+            60F8985CF49359F18D0EA616006000FF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FF00900060F89860F89860F8985CF4930EA616006000FF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FF00900060F89860F89860F89860F8980EA616006000FF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00900060F89860F89860F89860F8
+            980EA616006000FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF00900060F898
+            60F89860F89860F8980EA616006000FF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FF009000009000009000009000009000009000009000FF00FFFF00FFFF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+        end
+        object cxButton1: TcxButton
+          Left = 97
+          Top = 1
+          Width = 32
+          Height = 30
+          Hint = #1055#1088#1086#1089#1084#1086#1090#1088' '#1076#1086#1082#1091#1084#1077#1085#1090#1072
+          Align = alLeft
+          ParentShowHint = False
+          ShowHint = True
+          TabOrder = 4
+          OnClick = cxButton1Click
+          Glyph.Data = {
+            F6060000424DF606000000000000360000002800000018000000180000000100
+            180000000000C0060000820B0000820B00000000000000000000FF00FFFF00FF
+            C8B3A46947316947316947316947316947316947316947316947316947316947
+            31694731694731694731694731694731694731694731694731FF00FFFF00FFFF
+            00FFFF00FFFF00FFC8B3A4EDE5E0B7A293B7A293B7A293B7A293B7A293B7A293
+            B7A293B7A293B7A293B7A293B7A293B7A293B7A293B7A293B7A293B7A2936947
+            31FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4EFE8E3EDE5E0ECE2DEEBE0DBE9
+            DDD7E7DAD429188C000098000098000098000098000098000098000098000098
+            000098000098000098000098000098FF00FFFF00FFFF00FFC8B3A4F2ECE8F0E9
+            E5EEE6E2EDE4DFEBE1DCEADED90030F8B9B9B9C5C5C5D1D1D1D4D4D4DCDCDCDC
+            DCDCDCDCDCDCDCDCDCDCDCD4D4D4D1D1D1C5C5C5000098FF00FFFF00FFFF00FF
+            C8B3A4F4EEECF2ECE8F0E9E5EEE6E2EDE4DFEBE1DC0030F8C5C5C5D1D1D1D8D8
+            D8E0E0E0E3E3E3E7E7E7E7E7E7E7E7E7E3E3E3E0E0E0D8D8D8D1D1D1000098FF
+            00FFFF00FFFF00FFC8B3A4F6F1EFF4EEECF2ECE8F0E9E5EEE6E2EDE4DF0030F8
+            D1D1D1D8D8D8E3E3E3E7E7E7EFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE7E7E7E3E3
+            E3D8D8D8000098FF00FFFF00FFFF00FFC8B3A4F8F4F2F6F1EFF4EEECF2ECE8F0
+            E9E5EEE6E20030F8D4D4D40030F84242DEADADCEEFEFEFEFEFEFEFEFEFEFEFEF
+            EFEFEFEFEFEFE7E7E7E0E0E0000098FF00FFFF00FFFF00FFC8B3A4FAF6F6F8F4
+            F2F6F1EFF4EEECF2ECE8F0E9E50030F8DCDCDCE3E3E30030F84242DEADADCEEF
+            EFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFEFE3E3E3000098FF00FFFF00FFFF00FF
+            C8B3A4FCF9F9FAF6F6F8F4F2F6F1EFF4EEECF2ECE80030F8DCDCDCE7E7E7EFEF
+            EF0030F84242DEADADCEEFEFEFEFEFEFEFEFEFEFEFEFD6CEF70030F80030F8FF
+            00FFFF00FFFF00FFC8B3A4FDFCFCFCF9F9FAF6F6F8F4F2F6F1EFF4EEEC0030F8
+            DCDCDCE7E7E7EFEFEFEFEFEF0030F80030F80030F80030F80030F80030F80030
+            F8E7E7E70000980030F8FF00FFFF00FFC8B3A4FFFFFFFDFCFCFCF9F9FAF6F6F9
+            F5F4F7F2F10030F8DCDCDCE7E7E7EFEFEFEFEFEFEFEFEF0030F8EFEFEFE7E7FF
+            0030F84242F7D6CEF70030F80030F8FF00FFFF00FFFF00FFC8B3A4FFFFFFFFFF
+            FFFEFDFEFDFBFBFBF8F7F9F5F40030F8DCDCDCE3E3E3EFEFEFEFEFEFEFEFEF00
+            30F8ADADE7D6D6FF0030F8F7F7FFEFEFEFE3E3E3000098FF00FFFF00FFFF00FF
+            C8B3A4FFFFFFFFFFFFFFFFFFFEFDFEFDFBFBFBF8F70030F8D4D4D4E0E0E0E7E7
+            E7EFEFEFEFEFEFEFEFEF0030F87B7BF7F7F7FFEFEFEFE7E7E7E0E0E0000098FF
+            00FFFF00FFFF00FFC8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFEFDFEFDFBFB0030F8
+            D1D1D1D8D8D8E3E3E3E7E7E7EFEFEFEFEFEF0030F89494E7EFEFEFE7E7E7E3E3
+            E3D8D8D8000098FF00FFFF00FFFF00FFC8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFEFDFE0030F8C5C5C5D1D1D1D8D8D8E0E0E0E3E3E3ADADCE0030F89494E7
+            E3E3E3E0E0E0D8D8D8D1D1D1000098FF00FFFF00FFFF00FFC8B3A4FFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFF0030F80030F80030F80030F80030F80030F89C
+            8CFF0030F80030F80030F80030F80030F80030F80030F8FF00FFFF00FFFF00FF
+            C8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEFDFEFDFBFBFBF8
+            F7F9F5F4F7F2F10030F89C9CFF0030F8B7A293B7A293694731FF00FFFF00FFFF
+            00FFFF00FFFF00FFC8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFEFDFEFDFBFBFBF8F7FAF6F6C8B3A40030F80030F86947316947316947
+            31FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFCFCFCF9F9C8B3A4F3EBE6EFE6E0
+            E8DCD4DBC9BF694731FF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4FFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFDFCFCC8
+            B3A4EFE6E0E8DCD4DBC9BF694731FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+            C8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFC8B3A4E8DCD4DBC9BF694731FF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFC8B3A4FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+            FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFC8B3A4DBC9BF694731FF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFC8B3A4C8B3A4C8B3A4C8B3A4C8B3A4C8
+            B3A4C8B3A4C8B3A4C8B3A4C8B3A4C8B3A4C8B3A4C8B3A4C8B3A4694731FF00FF
+            FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00
+            FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+            00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF}
+        end
+      end
+      object cxGrid1: TcxGrid
+        Left = 0
+        Top = 32
+        Width = 668
+        Height = 304
+        Align = alClient
+        TabOrder = 1
+        LookAndFeel.Kind = lfFlat
+        ExplicitTop = 26
+        object cxGrid1DBTableView1: TcxGridDBTableView
+          NavigatorButtons.ConfirmDelete = False
+          DataController.DataSource = sFileList
+          DataController.Summary.DefaultGroupSummaryItems = <>
+          DataController.Summary.FooterSummaryItems = <>
+          DataController.Summary.SummaryGroups = <>
+          OptionsBehavior.CellHints = True
+          OptionsBehavior.IncSearch = True
+          OptionsCustomize.ColumnsQuickCustomization = True
+          OptionsData.CancelOnExit = False
+          OptionsData.Deleting = False
+          OptionsData.DeletingConfirmation = False
+          OptionsData.Editing = False
+          OptionsData.Inserting = False
+          OptionsSelection.CellSelect = False
+          OptionsView.ColumnAutoWidth = True
+          OptionsView.Footer = True
+          OptionsView.GroupByBox = False
+          OptionsView.Indicator = True
+          object colFDATE: TcxGridDBColumn
+            Caption = #1044#1072#1090#1072
+            DataBinding.FieldName = 'FDATE'
+            Width = 84
+          end
+          object colFCOMMENT: TcxGridDBColumn
+            Caption = #1054#1087#1080#1089#1072#1085#1080#1077
+            DataBinding.FieldName = 'FCOMMENT'
+            Width = 359
+          end
+          object colF_ID: TcxGridDBColumn
+            Caption = 'ID'
+            DataBinding.FieldName = 'F_ID'
+            Visible = False
+          end
+        end
+        object cxGrid1Level1: TcxGridLevel
+          GridView = cxGrid1DBTableView1
+        end
+      end
+    end
+    object tsDiagnos: TcxTabSheet
+      Caption = #1044#1080#1072#1075#1085#1086#1079
+      ImageIndex = 0
+      ExplicitHeight = 337
+      object GroupBox1: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 668
+        Height = 281
+        Align = alTop
+        Caption = #1054#1089#1085#1086#1074#1085#1086#1081' '#1076#1080#1072#1075#1085#1086#1079
+        TabOrder = 0
+        object MemOsnDz: TcxMemo
+          Left = 2
+          Top = 16
+          Align = alClient
+          Properties.ScrollBars = ssBoth
+          TabOrder = 0
+          Height = 263
+          Width = 664
+        end
+      end
+      object GroupBox2: TGroupBox
+        Left = 0
+        Top = 289
+        Width = 668
+        Height = 47
+        Align = alClient
+        Caption = #1057#1086#1087#1091#1090#1089#1090#1074#1091#1102#1097#1080#1081' '#1076#1080#1072#1075#1085#1086#1079
+        TabOrder = 1
+        ExplicitHeight = 48
+        object MemDopDz: TcxMemo
+          Left = 2
+          Top = 16
+          Align = alClient
+          Properties.ScrollBars = ssBoth
+          TabOrder = 0
+          Height = 29
+          Width = 664
+        end
+      end
+      object cxSplitter1: TcxSplitter
+        Left = 0
+        Top = 281
+        Width = 668
+        Height = 8
+        AlignSplitter = salTop
+        Control = GroupBox1
+      end
+    end
+    object tsInfoFromFile: TcxTabSheet
+      Caption = #1044#1072#1085#1085#1099#1077' '#1080#1089#1089#1083#1077#1076#1086#1074#1072#1085#1080#1103
+      ImageIndex = 2
+      object cxLabel14: TcxLabel
+        Left = 15
+        Top = 9
+        Caption = 'PatientID :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object cxLabel15: TcxLabel
+        Left = 15
+        Top = 34
+        Caption = #1060#1048#1054' '#1087#1072#1094#1080#1077#1085#1090#1072' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object cxPatientID: TcxTextEdit
+        Left = 155
+        Top = 8
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 2
+        Width = 250
+      end
+      object cxFIOPac: TcxTextEdit
+        Left = 155
+        Top = 33
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 3
+        Width = 496
+      end
+      object cxLabel16: TcxLabel
+        Left = 15
+        Top = 59
+        Caption = #1055#1086#1083' '#1087#1072#1094#1080#1077#1085#1090#1072' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object cxPolMan1: TcxRadioButton
+        Left = 155
+        Top = 58
+        Width = 76
+        Height = 17
+        Caption = #1084#1091#1078#1089#1082#1086#1081
+        Checked = True
+        TabOrder = 5
+        TabStop = True
+      end
+      object cxPolWoMan1: TcxRadioButton
+        Left = 242
+        Top = 58
+        Width = 76
+        Height = 17
+        Caption = #1078#1077#1085#1089#1082#1080#1081
+        TabOrder = 6
+      end
+      object cxLabel17: TcxLabel
+        Left = 15
+        Top = 84
+        Caption = #1044#1072#1090#1072' '#1088#1086#1078#1076#1077#1085#1080#1103' '#1087#1072#1094#1080#1077#1085#1090#1072' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object cxDateBrn1: TcxDateEdit
+        Left = 155
+        Top = 83
+        ParentShowHint = False
+        Properties.DateButtons = [btnToday]
+        Properties.DateOnError = deToday
+        Properties.ImmediatePost = True
+        Properties.PostPopupValueOnTab = True
+        Properties.ShowTime = False
+        ShowHint = True
+        Style.BorderStyle = ebsOffice11
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.ButtonStyle = btsOffice11
+        Style.ButtonTransparency = ebtNone
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 8
+        Width = 125
+      end
+      object cxLabel18: TcxLabel
+        Left = 15
+        Top = 109
+        Caption = #1044#1072#1090#1072' '#1080#1089#1089#1083#1077#1076#1086#1074#1072#1085#1080#1103' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object cxStudyDate1: TcxDateEdit
+        Left = 155
+        Top = 107
+        ParentShowHint = False
+        Properties.DateButtons = [btnToday]
+        Properties.DateOnError = deToday
+        Properties.ImmediatePost = True
+        Properties.PostPopupValueOnTab = True
+        Properties.ShowTime = False
+        ShowHint = True
+        Style.BorderStyle = ebsOffice11
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.ButtonStyle = btsOffice11
+        Style.ButtonTransparency = ebtNone
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 10
+        Width = 125
+      end
+      object cxLabel20: TcxLabel
+        Left = 15
+        Top = 133
+        Caption = 'AccessionNumber :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object cxAccessionNumber1: TcxTextEdit
+        Left = 155
+        Top = 132
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 12
+        Width = 250
+      end
+      object cxLabel21: TcxLabel
+        Left = 15
+        Top = 159
+        Caption = #1052#1086#1076#1072#1083#1100#1085#1086#1089#1090#1100' :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object cxMod1: TcxComboBox
+        Left = 155
+        Top = 157
+        ParentShowHint = False
+        Properties.DropDownListStyle = lsFixedList
+        Properties.DropDownSizeable = True
+        Properties.ImmediatePost = True
+        Properties.ImmediateUpdateText = True
+        Properties.Items.Strings = (
+          'CR'
+          'CT'
+          'MR'
+          'NM'
+          'US'
+          'OT'
+          'BI'
+          'DG'
+          'ES'
+          'LS'
+          'PT'
+          'RG'
+          'TG'
+          'XA'
+          'RF'
+          'RTIMAGE'
+          'RTDOSE'
+          'RTSTRUCT'
+          'RTPLAN'
+          'RTRECORD'
+          'HC'
+          'DX'
+          'MG'
+          'IO'
+          'PX'
+          'GM'
+          'SM'
+          'XC'
+          'PR'
+          'AU'
+          'ECG'
+          'EPS'
+          'HD'
+          'SR'
+          'IVUS'
+          'OP'
+          'SMR'
+          'AR'
+          'KER'
+          'VA'
+          'SRF'
+          'OCT'
+          'LEN'
+          'OPV'
+          'OPM'
+          'OAM'
+          'RESP'
+          'KO'
+          'SEG'
+          'REG'
+          'OPT'
+          'BDUS'
+          'BMD'
+          'DOC'
+          'FID'
+          'PLAN'
+          'IOL'
+          'IVOCT')
+        Properties.PostPopupValueOnTab = True
+        ShowHint = True
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 14
+        Width = 58
+      end
+      object cxLabel22: TcxLabel
+        Left = 15
+        Top = 184
+        Caption = 'StudyUID :'
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        Transparent = True
+      end
+      object cxStudyUID1: TcxTextEdit
+        Left = 155
+        Top = 183
+        ParentFont = False
+        Style.Font.Charset = DEFAULT_CHARSET
+        Style.Font.Color = clBlack
+        Style.Font.Height = -11
+        Style.Font.Name = 'Tahoma'
+        Style.Font.Style = [fsBold]
+        Style.LookAndFeel.Kind = lfOffice11
+        Style.LookAndFeel.SkinName = 'Office2007Green'
+        Style.TextColor = clBlack
+        Style.TextStyle = []
+        Style.IsFontAssigned = True
+        StyleDisabled.LookAndFeel.Kind = lfOffice11
+        StyleDisabled.LookAndFeel.SkinName = 'Office2007Green'
+        StyleFocused.LookAndFeel.Kind = lfOffice11
+        StyleFocused.LookAndFeel.SkinName = 'Office2007Green'
+        StyleHot.LookAndFeel.Kind = lfOffice11
+        StyleHot.LookAndFeel.SkinName = 'Office2007Green'
+        TabOrder = 16
+        Width = 359
+      end
+    end
+  end
+  object ProgressBar1: TcxProgressBar
+    Left = 0
+    Top = 409
+    Align = alBottom
+    Properties.PeakValue = 55.000000000000000000
+    TabOrder = 5
+    Visible = False
+    Width = 668
+  end
+  object sFileList: TDataSource
+    DataSet = dsFileList
+    Left = 344
+    Top = 136
+  end
+  object dsFileList: TpFIBDataSet
+    RefreshSQL.Strings = (
+      'select F_ID, FDATE, FCOMMENT from STUDYDOCS t')
+    SelectSQL.Strings = (
+      'select F_ID, FDATE, FCOMMENT from STUDYDOCS t')
+    AutoCommit = True
+    SQLScreenCursor = crSQLWait
+    CSMonitorSupport.Enabled = csmeTransactionDriven
+    Left = 296
+    Top = 128
+  end
+  object dxBarManager1: TdxBarManager
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    Categories.Strings = (
+      #1055#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102)
+    Categories.ItemsVisibles = (
+      2)
+    Categories.Visibles = (
+      True)
+    PopupMenuLinks = <>
+    UseSystemFont = True
+    Left = 576
+    Top = 128
+    DockControlHeights = (
+      0
+      0
+      48
+      0)
+    object dxBarManager1Bar1: TdxBar
+      Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' 1'
+      CaptionButtons = <>
+      DockedDockingStyle = dsTop
+      DockedLeft = 0
+      DockedTop = 0
+      DockingStyle = dsTop
+      FloatLeft = 694
+      FloatTop = 8
+      FloatClientWidth = 0
+      FloatClientHeight = 0
+      IsMainMenu = True
+      ItemLinks = <
+        item
+          Visible = True
+          ItemName = 'dxBarLargeButton1'
+        end
+        item
+          BeginGroup = True
+          Visible = True
+          ItemName = 'dxBarLargeButton2'
+        end>
+      MultiLine = True
+      OneOnRow = True
+      Row = 0
+      UseOwnFont = False
+      Visible = True
+      WholeRow = True
+    end
+    object dxBarLargeButton1: TdxBarLargeButton
+      Caption = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      Category = 0
+      Hint = #1057#1086#1093#1088#1072#1085#1080#1090#1100
+      Visible = ivAlways
+      OnClick = dxBarLargeButton1Click
+      AutoGrayScale = False
+      HotGlyph.Data = {
+        F6060000424DF606000000000000360000002800000018000000180000000100
+        180000000000C006000000000000000000000000000000000000FFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFDEAC8CB05828AA4C248658409A9FA2A1A4A9A9ADB2
+        B2B6BAB9BCBCB3B3B3A4A4A4999999909090676E739F4723A54A24A44A24A54B
+        26BC795BF7EFEBFFFFFFFFFFFFFFFFFFE6A577B04C01BE691FC1691D966942B1
+        B6B9D19555D6A063DDA765F2E4D3FFFFFFF6F6F6E5E5E5D6D6D6939AA0BF6D21
+        C87728C97C31D39355AA4B0DB76D4CFFFFFFFFFFFFE2A36EBC5701C27024C576
+        28C975269E754B9DA1A5C56B17C67625CD7B20DBC7B0EDEFF2FDFDFDF2F2F2E5
+        E5E59CA3AAC9802AD58C33D89440E4B171D288309A350AFFFFFFFFFFFFC86308
+        C06D20C17026C16F24C47022A0774FA7ABB2B85A0FBC6820C4701DCDB9A4DCDF
+        E1EDEDEDFCFCFCF8F8F8ABB1B7C67A27D08632D58F3EE1AC6DD1862E973308FF
+        FFFFFFFFFFCF6908C06B20BE6D22BF6C22C26D1FA47851BBC1C5AB4602B35A18
+        BE6518BFAB96CBCDCFDBDBDBECECECFFFFFFB9BFC6C47725D08430D38D3DE0AB
+        6CCE832D973308FFFFFFFFFFFFD06B08BE691DBC6820BD6920BF691DA67A54CD
+        D2D59B2A00AC4906BD5C0CB29A85BABBBDCBCBCBDCDCDCF0F0F0BEC4CBC27623
+        D0832FD48B3BDEAA6CCD802C973308FFFFFFFFFFFFD06B08BC651DBA651EBB66
+        1EBD661BA57B57E6F0F7C9C1BEBCB5B4ACA6A19D9FA1A9ACB1BBC0C3CDD1D5E3
+        E8ECB5BEC8B06921BA742ABF7C34DB9F5CCC7F2B973308FFFFFFFFFFFFD06B08
+        B9621AB8621CB8631DBA641BAE6B33A67A55A97D58AB7F59A77C55A377509E72
+        49996D4595694192663D8B633BAA6723AB6B26B06E29D08430CC802D973308FF
+        FFFFFFFFFFD06B08B95F18B65F1AB65F1BB7601BB9621BBB6319BC6519BD651B
+        BF681CC06A1EC26C1FC36E21C67122C97326CA7728CA7B2ACC7D2BCE7F2DCE82
+        30CB7E2C983308FFFFFFFFFFFFD06C08B65D18B45C18B45C18B55A13B65C13B7
+        5D14B85F15B96116BA6217BD6418BE671BC1691CC16D1EC46F1FC67321C97622
+        CB7925CC7C2BCE802ECA7D2B983308FFFFFFFFFFFFD06C08B45A15B25815B165
+        2BAE8B70AE886BAF886CAF8A6BAF896BAE896BAE8B6BAE8A6CAF8A6AAD8A6BAE
+        8A69AC8968AC8969AC8C6CBF8141CC7D2DC97B2C983308FFFFFFFFFFFFD16C08
+        B25712AF5311AF6C3CC8D2D8DEE2E4DDE1E3DEE2E5DFE3E6DDE1E4DDE0E3DADE
+        E1D8DBDED6D9DCD3D6D9CFD3D6CDD0D3B6BDC5B7834FCB7C2AC77A2A983308FF
+        FFFFFFFFFFD16D08B05310AD500FAD6837D1D7DBEAEAEAECECECE3E3E3E0E0E0
+        E1E1E1E0E0E0DDDDDDDDDDDDDADADAD9D9D9DEDEDEDADADABFC3C8B7824CCA7A
+        28C67929983308FFFFFFFFFFFFD16D08AD5010AB4C0EAD6737D3D9DEEDEDEDEF
+        EFEFD2D2D2C8C8C8C9C9C9C9C9C9C9C9C9CACACACACACAC9C9C9DFDFDFDBDBDB
+        C1C4CAB6824CC97927C57628983408FFFFFFFFFFFFD16E08AD4F0DA9490CAD66
+        38D8DFE2F2F2F2F2F2F2EDEDEDECECECEBEBEBEAEAEAE7E7E7E5E5E5E2E2E2DF
+        DFDFE0E0E0DDDDDDC3C7CCB6804DCA7826C67528983408FFFFFFFFFFFFD16E08
+        AA4B0AA7460AAB6436DBE1E5F6F6F6F7F7F7E1E1E1DADADAD9D9D9D9D9D9D8D8
+        D8D7D7D7D5D5D5D5D5D5E3E3E3E0E0E0C4C8CDB6804DC87725C47627983408FF
+        FFFFFFFFFFD16E08A8470AA54307AC6236DEE5E8F9F9F9FCFCFCD5D5D5C6C6C6
+        C7C7C7C8C8C8C8C8C8C9C9C9C9C9C9C9C9C9E6E6E6E0E0E0C5C9CEB6804DC776
+        25C47427983408FFFFFFFFFFFFD16E08A64407A34005AA6135E2E8ECFCFCFCFE
+        FEFEFFFFFFFFFFFFFFFFFFFFFFFFFBFBFBF6F6F6F2F2F2EBEBEBE5E5E5E1E1E1
+        C6CACFB7814DC97624C57526993508FFFFFFFFFFFFD16F08A34205A03D03A960
+        35E3E9EDFDFDFDFFFFFFDEDEDED3D3D3D4D4D4D2D2D2D2D2D2D1D1D1D0D0D0CF
+        CFCFE6E6E6E3E3E3C7CCD0B47E4CA7611EC171269F3A08FFFFFFFFFFFFD26D09
+        A13F059D3903A95F34E4EBEFFDFDFDFFFFFFDEDEDED2D2D2D3D3D3D2D2D2D3D3
+        D3D2D2D2D1D1D1D1D1D1E7E7E7E3E3E3C7CCD0AE7C4C6F4113B66B24A74209FF
+        FFFFFFFFFFDA8F44BD5801A53E01AD6233E4ECF0FEFEFEFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFDFEFEF7F8F8F3F4F4EEEFEFE8E9E9E5E6E6C9CFD4B77E49C971
+        1EBA5A0DC27745FFFFFFFFFFFFFAEFE5DB944CD37314CF863BCECFD1D0CDC9D2
+        CECAD2CDC8CFCAC6CDC9C4CAC6BFC6C0BDC2BFBAC0BAB6BCB8B2B9B3AFB4B1AD
+        B0B0AFBC7A3FC16014CA834CF7ECE5FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF}
+    end
+    object dxBarLargeButton2: TdxBarLargeButton
+      Caption = #1042#1099#1093#1086#1076
+      Category = 0
+      Hint = #1042#1099#1093#1086#1076
+      Visible = ivAlways
+      OnClick = dxBarLargeButton2Click
+      AutoGrayScale = False
+      HotGlyph.Data = {
+        76060000424D7606000000000000360400002800000018000000180000000100
+        08000000000040020000120B0000120B0000000100000000000000000000FFFF
+        FF00FF00FF004E1E1F00BF4C4D00BD4B4C00C04D4E00C14E4F00C4505100C24F
+        5000C5515200B64B4C00C9545500C7535400C6525300CA555600CB565700CE58
+        5900CC575800C5545500D05A5B00CF595A00D35C5D00D15B5C00D55E5F00D45D
+        5E00D8606200D75F6000AF4E4F00D9626300DD656600DC646500DA636400E067
+        6800DE666700E2696A00E1686900E56B6C00E36A6B00E96E6F00E76D6E00E66C
+        6D009F4B4C00EA6F7000A04C4D00EB707200A34E4F00EE737400ED7273009C4B
+        4C00F2767700F0757600EF747500E06D6E00A6515200F6797A00F4787900F377
+        7800A9535400F87B7D00F77A7B00FB7E7F00FA7D7E00AF585900AC5657009A4D
+        4E00FF818200FE808100FC7F8000F77E7F00B25B5C00EE7A7B00D56F7000B860
+        6200B6626300AF5E5F00FE8B8C0091515200FC929300EF909100FB9A9C00E690
+        9100EB959600FAA3A400F8AAAB00F2A9AA00EEA6A700F7B5B600A5505000994B
+        4B00AB555500B15A5A00B55D5D00B75F5F00914B4B00BB636300BF666600BD65
+        65008C4B4B00894B4B009F58580098555500824B4B00EB9C9C00F7B1B100EECE
+        AF00FFFFD300D9F6BD00B7EBAA0058A55B003F9E4C005ED3770045CA67001EBC
+        4C00000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000000000000000
+        0000000000000000000000000000000000000000000000000000020202020202
+        02020202026603020202020202020202020202020202020202026666625E0302
+        020202020202020202020202020202666663310B052A03020202020202020202
+        02020202026666411C070604042A03596666666666666666020202020266130C
+        0D0E0A08092C034C4E505354685757660202020202661112100F0C0D0E2E036E
+        71717171717157660202020202661714151112100F58036E7171717171715766
+        0202020202661818191617141536036E7171717171715766020202020266201D
+        1A1B1819163A036E7171717171715766020202020266221E1F201D1A1B5A036E
+        71717171717157660202020202662324212235511F40036D7171717171715766
+        020202020266282925265601673F03696C6F6F70707057660202020202662D2B
+        27285501525B03696A6A6A6A6B6B5766020202020266342F302D2B4F28460369
+        6A6A6A6A6A6A576602020202026639393233342F305C03696A6A6A6A6A6A5766
+        0202020202663B3C37383932335D03696A6A6A6A6A6A5766020202020266443D
+        3E3B3C37384903696A6A6A6A6A6A576602020202026642424344443D3E5F0369
+        6A6A6A6A6A6A5766020202020266424242424243436103696A6A6A6A6A6A5766
+        020202020266454242424242426003696A6A6A6A6A6A5766020202020266664B
+        48424242426003696A6A6A6A6A6A57660202020202020266664D4A474260035E
+        6666666666666666020202020202020202026666656403020202020202020202
+        0202020202020202020202020266030202020202020202020202}
+    end
+  end
+  object UniQuery1: TUniQuery
+    Left = 296
+    Top = 184
+  end
+end

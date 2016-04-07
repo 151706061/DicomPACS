@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_ANAMGIZNID
+/
+
+--
+-- GET_ANAMGIZNID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_ANAMGIZNID" 
+return number
+is
+begin
+  return 2384;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_ANAMGIZNID TO PUBLIC
+/
+

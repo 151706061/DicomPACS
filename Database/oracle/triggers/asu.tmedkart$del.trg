@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TMEDKART$DEL
+/
+
+--
+-- TMEDKART$DEL  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TAPRIHCONT (Table)
+--   TMEDKART (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TMEDKART$DEL" 
+AFTER  DELETE  ON ASU.TMEDKART REFERENCING
+ NEW AS NEW
+ OLD AS OLD
+FOR EACH ROW
+BEGIN
+  DELETE
+    FROM taprihcont
+   WHERE fk_medkartid = :old.fk_id;
+END;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,4 @@
+ALTER TABLE MED.TTREB ADD (FL_RPO NUMBER (1) default 0)
+/
+COMMENT ON COLUMN MED.TTREB.FL_RPO IS 'требование для РПО'
+/

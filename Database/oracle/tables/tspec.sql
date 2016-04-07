@@ -1,0 +1,180 @@
+DROP TABLE ASU.TSPEC CASCADE CONSTRAINTS
+/
+
+--
+-- TSPEC  (Table) 
+--
+CREATE TABLE ASU.TSPEC
+(
+  FK_ID        NUMBER(15),
+  FK_PRIORID   NUMBER(15),
+  FC_NAME      VARCHAR2(30 BYTE),
+  FK_APPID     NUMBER(15),
+  FK_LEVELID   NUMBER(15),
+  FL_PODP      NUMBER(1),
+  FL_SPR       NUMBER(1),
+  FL_MESTA     NUMBER(1),
+  FL_SHOWREP   NUMBER(1)                        DEFAULT 0,
+  FL_EDITDICT  NUMBER(1),
+  FL_PROC      NUMBER(1),
+  FL_TIME      NUMBER(1),
+  FC_URL       VARCHAR2(100 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSPEC IS 'Справочник специализаций by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FK_ID IS 'SEQUENCE=[SEQ_TSPEC]'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FK_PRIORID IS 'Код приоритета'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FC_NAME IS 'Название'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FK_APPID IS 'Код приложения'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FK_LEVELID IS 'Код доступа'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FL_PODP IS 'Имеет право подписи'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FL_SPR IS 'Имеет право менять справочник'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FL_MESTA IS 'Имеет право менять параметры мест'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FL_SHOWREP IS 'служебное поле'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FL_EDITDICT IS 'служебное поле'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FL_PROC IS 'служебное поле'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FL_TIME IS 'служебное поле'
+/
+
+COMMENT ON COLUMN ASU.TSPEC.FC_URL IS 'служебное поле'
+/
+
+
+--
+-- TSPEC$ID  (Index) 
+--
+--  Dependencies: 
+--   TSPEC (Table)
+--
+CREATE UNIQUE INDEX ASU.TSPEC$ID ON ASU.TSPEC
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSPEC_PRIOR  (Index) 
+--
+--  Dependencies: 
+--   TSPEC (Table)
+--
+CREATE INDEX ASU.TSPEC_PRIOR ON ASU.TSPEC
+(FK_PRIORID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSPEC_AFTER_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TSPEC (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSPEC_AFTER_DELETE" 
+  AFTER DELETE ON ASU.TSPEC   FOR EACH ROW
+Begin
+  DELETE FROM TSPECLAB WHERE FK_SPECID = :OLD.FK_ID;
+  DELETE FROM TVRACHRAZ WHERE FK_SPECID = :OLD.FK_ID; -- by TimurLan 18/08/04
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TSPEC_BEFOR_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TSPEC (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSPEC_BEFOR_INSERT" 
+  BEFORE INSERT ON ASU.TSPEC   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TSPEC.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+DROP SYNONYM STAT.TSPEC
+/
+
+--
+-- TSPEC  (Synonym) 
+--
+--  Dependencies: 
+--   TSPEC (Table)
+--
+CREATE SYNONYM STAT.TSPEC FOR ASU.TSPEC
+/
+
+

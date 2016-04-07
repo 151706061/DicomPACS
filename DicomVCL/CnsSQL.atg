@@ -1,0 +1,794 @@
+$C
+COMPILER CnsSQL
+USES CnsSQLData,db;
+DELPHI
+GLOBAL
+  
+TARGETDIRECTORY
+  C:\Program Files\Borland\Delphi7\dicomvcl\Source
+COMPILERFRAME
+  C:\parserbuilder\Frames\pbCompiler.frm
+PARSERFRAME
+  C:\parserbuilder\Frames\pbParser.frm
+SCANNERFRAME
+  C:\parserbuilder\Frames\pbScanner.frm
+PRIVATE
+fOutputStream : TStringStream;
+ fCollectStart : Integer;
+ fCollectLength : Integer;
+ procedure Init;
+ procedure Final;
+ Function CalcLength : Integer;
+ procedure SetStart;
+ function CopySourceToCurrent : String;
+ procedure WriteStr(S : string);
+ Function GetLexString : String;
+ procedure GetNumber (VAR Int : INTEGER);
+ procedure ReportError(nr, line, col, pos: integer);
+ procedure AddUserGroup(AName:string);
+ function GetCnsString: string;
+PROTECTED
+
+PUBLIC
+GroupName:string;
+SQLData:TCnsSQLData;
+procedure SetSQLData(AValue:TCnsSQLData);
+CREATE
+fOutputStream := TStringStream.Create('' );
+ Error := ReportError;
+ SQLData := nil;
+DESTROY
+fOutputStream.Free;
+ERRORS
+
+PUBLISHED
+
+END_DELPHI
+
+Procedure T-->GrammarParser.SetStart;
+Begin
+ fCollectStart := nextPos+1;
+End;
+
+procedure T-->GrammarParser.Init;
+begin
+ fOutputStream.Size := 0;
+ fCollectStart := 0;
+ fCollectLength := 0;
+ lst.Size := 0;
+ if not assigned(SQLData) then
+   Raise Exception.Create('SQLDData is Not assigned!' );
+end;
+
+procedure T-->GrammarParser.SetSQLData(AValue:TCnsSQLData);
+begin
+  SQLData := AValue;
+end;
+
+Function T-->GrammarParser.CopySourceToCurrent : String;
+Begin
+ CalcLength;
+ Result := Copy(src.DataString, FCollectStart, fCollectLength);
+End;
+
+Function T-->GrammarParser.CalcLength : Integer;
+Begin
+ Result := nextPos - fCollectStart+1;
+ fCollectLength := Result;
+End;
+
+procedure T-->GrammarParser.Final;
+begin
+ if Errors>0 then
+  lst.WriteString('*** Errors ***' );
+ lst.WriteString(fOutputStream.DataString);
+ fOutputStream.Size := 0;
+end;
+
+procedure T-->GrammarParser.WriteStr(S : string);
+begin
+ fOutputStream.WriteBuffer(S[1],length(S));
+end;
+
+Function T-->GrammarParser.GetLexString : String;
+Begin
+ LexString(Result);
+end;
+
+Function T-->GrammarParser.GetCnsString : String;
+Begin
+ LexString(Result);
+ Result := Copy(Result,2,Length(Result)-2);
+end;
+
+procedure T-->GrammarParser.ReportError(nr, line, col, pos: integer);
+Var
+ S, S1 : String;
+ SL : TStringList;
+begin
+ Case nr of
+ {$I  -->Grammar.err}
+ End; // Case
+ S := CRLF +S+CRLF + 'Line ' +IntToStr(line)+CRLF+'Column ' +
+   IntToStr(col)+CRLF+'................................' +CRLF;
+ SL := TStringList.Create;
+ SL.Text := src.DataString;
+ if Line<SL.Count then
+   S1 := SL[Line-1]
+  else S1 := '[End Of Source File]' ;
+ SL.Free;
+ Insert(' ERROR->' ,S1,Col-1);
+ Inc(fErrors);
+ WriteStr(S+S1+CRLF);
+end;
+
+PROCEDURE T-->GrammarParser.GetNumber (VAR Int : INTEGER);
+VAR
+  Error : INTEGER;
+  S : STRING;
+BEGIN
+  GetString(pos, len, S);
+  Int := 0;
+  Val(S, Int, Error);
+END;
+
+procedure T-->GrammarParser.AddUserGroup(AName:string);
+var
+  i:Integer;
+begin
+  for i:=0 to SQLData.UserGroups.Count-1 do
+  begin
+    if AName=SQLData.UserGroups[i] then
+      exit;
+  end;
+  SQLData.UserGroups.Add(AName);
+end;
+
+
+IGNORE CASE
+
+CHARACTERS
+letter="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_".
+digit="0123456789".
+special = ";.{}/:()%@*-,".
+ctrl=CHR(1)..CHR(31).
+tab=CHR(9).
+eol=CHR(13).
+lf=CHR(10).
+noquote1=ANY-'"' -ctrl.
+noquote2=ANY-"'" -ctrl.
+chinese=CHR(129)..CHR(255).
+
+TOKENS
+ident = (letter|chinese){letter|digit|chinese|"." }.
+number = digit{digit}.
+string = '"' {noquote1| "'" } '"' | "'" {noquote2|'"' }"'".
+Special = special.
+
+NAMES
+
+IGNORE CHR(1)..CHR(31)
+PRAGMAS
+
+COMMENTS FROM "(*" TO "*)" NESTED
+
+PRODUCTIONS
+CnsSQL =
+        (. Init ;
+                                                    SetStart ; .)
+        
+         { TableGroup | TaskGroup | ViewGroup  } 
+        EOF                                         (. Final ; .)
+        .
+TableGroup
+               (. var t1:TCnsTable ; .)
+ =
+        "TABLEGROUP" ident                                         (. GroupName := getLexString ; .)
+        
+        "{"  { TableItem < SQLData.TableGroup, t1 >  } 
+        "}"
+        .
+TaskGroup =
+        "TASKGROUP" ident                                         (. GroupName := getLexString ; .)
+        
+        "{"  { TaskItem  } 
+        "}"
+        .
+ViewGroup =
+        "VIEWGROUP" ident                                         (. GroupName := getLexString ; .)
+        
+        "{"  { ViewItem  } 
+        "}"
+        .
+ViewItem
+               (. var v1:TCnsView ;
+                   str1:string ; .)
+ =
+        "VIEW" ident                                         (. v1 := SQLData.ViewGroup.ItemByName[GetLexString] ;
+                                                    if assigned(v1) then 
+                                                    begin
+                                                   v1.Clear ;
+                                                      end else
+                                                      begin
+                                                     v1 := TCnsView.Create(SQLData.ViewGroup,GetLexString) ;
+                                                        SQLData.ViewGroup.Add(v1) ;
+                                                        v1.GroupName := GroupName ;
+                                                        end;    
+                                                     v1.StartPos := Line ; .)
+        
+        "{" "PLUGIN" "IS" ident                                         (. v1.PluginName := GetLexString ; .)
+        
+        "DATABASE" "IS" ident                                         (. v1.DatabaseName := GetLexString ; .)
+        
+         [ "FETCH" "=" number                                         (. v1.FetchCount := StrToIntDef(GetLexString,0) ; .)
+         ] 
+        
+         { ident                                         (. v1.FieldList.Add(GetLexString) ; .)
+        
+        "(" ident                                         (. v1.PromptList.Add(getLexString) ; .)
+        
+        ")"  } 
+        "FROM" string                                         (. v1.FromSQL := getCnsString ; .)
+        
+        "WHERE" string                                         (. v1.WhereSQL := GetCnsString ; .)
+        
+        "}"
+        .
+TaskItem
+               (. var task1:TCnsTask ;
+                   detail1:TCnsDetailTable ;
+                   str1:string ; .)
+ =
+        "TASK" ident                                         (. task1 := SQLData.TaskGroup.ItemByName[GetLexString] ;
+                                                    if assigned(task1) then 
+                                                    task1.Clear 
+                                                    else
+                                                   begin
+                                                   task1 := TCnsTask.Create(SQLData.TaskGroup,GetLexString) ;
+                                                      SQLData.taskGroup.Add(task1) ;
+                                                      task1.GroupName := GroupName ;
+                                                      end;  
+                                                   task1.StartPos := Line ; .)
+        
+        "{" "PLUGIN" "IS" ident                                         (. task1.PluginName := GetLexString ; .)
+        
+        "Dataset" "Is" ident                                         (. task1.DatasetName := getLexString ; .)
+        
+         { "Master" "(" ident                                         (. detail1 := task1.AddDetailTable(GetLexString) ; .)
+        
+        "BY" ident                                         (. str1:=GetLexString ; .)
+        
+        "=" ident                                         (. detail1.DetailLink.Add(str1+ '=' +GetLexString) ; .)
+        
+         { "," ident                                         (. str1:=GetLexString ; .)
+        
+        "=" ident                                         (. detail1.DetailLink.Add(str1+ '=' +GetLexString) ; .)
+         } 
+        
+        ")"  } 
+        "}"
+        .
+TableItem <AParent:TCnsCollect;var t1:TCnsTable >
+               (. var f1:TCnsFieldGroup ;
+                   cs1:TCnsState ;
+                   cp1:TCnsProgram ;
+                   temp1,temp2:string ; .)
+ =
+        "TABLE" ident                                         (. t1 := SQLData.TableGroup.ItemByName[GetLexString] ;
+                                                    if assigned(t1) then 
+                                                    begin
+                                                   t1.Clear ;
+                                                      t1.Parent := AParent ;
+                                                      end 
+                                                      else
+                                                     begin
+                                                     t1 := TCnsTable.Create(AParent,GetLexString) ;
+                                                        SQLData.TableGroup.Add(t1) ;
+                                                        t1.GroupName := GroupName ;
+                                                        end; 
+                                                     t1.StartPos := Line ; .)
+        
+        "(" ident                                         (. t1.TableName := UpperCase(GetLexString) ; .)
+        
+        ")" "{" "PLUGIN" "IS" ident                                         (. t1.PluginName := GetLexString ; .)
+        
+         [ "AUTOCREATE"                                         (. t1.AutoCreate := true ; .)
+         ] 
+        
+         [ "LOGEXEC"                                         (. t1.LogExec := true ; .)
+         ] 
+        
+         [ "LOGTIME"                                         (. t1.LogTime := true ; .)
+         ] 
+        
+         [ "COUNTFIRST"                                         (. t1.CountFirst := true ; .)
+         ] 
+        
+         [ "NEEDLOCK"                                         (. t1.NeedLock := true ; .)
+         ] 
+        
+         [ "MULTIDATABASE"                                         (. t1.MultiDatabase:= true ; .)
+         ] 
+        
+         [ "OWNER" "IS" ident                                         (. t1.TableOwner := GetLexString ; .)
+         ] 
+        
+        "DATABASE" "IS" ident                                         (. t1.DatabaseName := GetLexString ; .)
+        
+         [ "FETCH" "=" number                                         (. t1.FetchCount := StrToIntDef(GetLexString,0) ; .)
+         ] 
+        
+         [ "USERFIELD" ident                                         (. t1.UserField := GetLexString ; .)
+         ] 
+        
+         [ "STATE" "FIELD" ident                                         (. t1.States := TCnsStateGroup.Create(t1,UpperCase(getLexString)) ; .)
+        
+        "{" TableStateItem < t1.States >  { TableStateItem < t1.States >  } 
+        "}"  ] 
+         [ "PROFILE" "FIELD" ident                                         (. t1.ProfileFieldName := UpperCase(GetLexString) ; .)
+        
+        "(" TableProfileItem < t1.Profiles >  { "," TableProfileItem < t1.Profiles >  } 
+        ")"  ] 
+        
+        "USERGROUP" "{"  { UserGroup < t1 >  } 
+        "}" "REPORT" "{"  { ReportItem < t1 >  } 
+        "}" FieldCollection < t1, f1 > 
+                                                (. t1.Add(f1) ; .)
+         { FieldCollection < t1, f1 >                                         (. t1.Add(f1) ; .)
+         } 
+        
+        "PRIMARY" "KEY" "(" ident                                         (. t1.AddPrimaryKey(UpperCase(GetLexString)) ; .)
+        
+         { "," ident                                         (. t1.AddPrimaryKey(UpperCase(GetLexString)) ; .)
+         } 
+        
+        ")"  { QueryItem < t1 >  } 
+         [ "ANALYZEFIELD" "{" ident                                         (. temp1 := GetLexString ;
+                                                    temp2 := 'NONE' ; .)
+        
+        "("  [ ident                                         (. temp2 := GetLexString ; .)
+         ] 
+        
+        ")"                                         (. t1.AnalyzeFields.Values[temp1] := Temp2 ; .)
+        
+         { "," ident                                         (. temp1 := GetLexString ;
+                                                    temp2 := 'NONE' ; .)
+        
+        "("  [ ident                                         (. temp2 := GetLexString ; .)
+         ] 
+        
+        ")"                                         (. t1.AnalyzeFields.Values[temp1] := Temp2 ; .)
+         } 
+        
+        "}"  ] 
+         { AnalyzeItem < t1 >  } 
+         [ "TRIGGER" "{"                                         (. SetStart ; .)
+        
+         { ANY  } 
+                                                (. t1.Trigger := CopySourceToCurrent ; .)
+        
+        "}"  ] 
+         { "PROGRAM" ident                                         (. cp1 := TCnsProgram.Create(t1.Scripts,getLexString) ;
+                                                    t1.Scripts.Add(cp1) ; .)
+        
+         [ "TO"  ( "ALL" | "(" ident                                         (. cp1.AddProfile(GetLexString) ; .)
+        
+         { "," ident                                         (. cp1.AddProfile(GetLexString) ; .)
+         } 
+        
+        ")"  ) ] 
+        "{" "KEY" "IS" string                                         (. cp1.ShortCut := GetCnsString ; .)
+        
+        "HINT" "IS" string                                         (. cp1.Hint := GetCnsString ; .)
+        
+         [ "IMAGEINDEX" "=" number                                         (. GetNumber(cp1.ImageIndex) ; .)
+         ] 
+        
+        "}"  } 
+        "}"
+        .
+QueryItem <t1:TCnsTable>
+               (. var 
+                   cq1:TCnsQuery ; .)
+ =
+        "QUERY" "COMBIN" ident                                         (. cq1 := TCnsQuery.Create(t1.Querys,getLexString) ;
+                                                    t1.Querys.Add(cq1) ; .)
+        
+         [ "TO"  ( "ALL" | "(" ident                                         (. cq1.AddProfile(GetLexString) ; .)
+        
+         { "," ident                                         (. cq1.AddProfile(GetLexString) ; .)
+         } 
+        
+        ")"  ) ] 
+        "(" ident                                         (. cq1.FieldNames.Add(getLexString) ; .)
+        
+         { "," ident                                         (. cq1.FieldNames.Add(getLexString) ; .)
+         } 
+        
+        ")"
+        .
+AnalyzeItem <t1:TCnsTable >
+               (. var ca1:TCnsAnalyze ; .)
+ =
+        "ANALYZE" ident                                         (. ca1 := TCnsAnalyze.Create(t1.Analyzes,getLexString) ;
+                                                    t1.Analyzes.Add(ca1) ; .)
+        
+         [ "TO"  ( "ALL" | "(" ident                                         (. ca1.AddProfile(GetLexString) ; .)
+        
+         { "," ident                                         (. ca1.AddProfile(GetLexString) ; .)
+         } 
+        
+        ")"  ) ] 
+         [ "ROW" ColumnDefine < ca1.RowMode,ca1.RowField >  ] 
+        
+         [ "COL" ColumnDefine < ca1.ColMode,ca1.ColField >  ] 
+        
+         [ "SUM" "(" ident                                         (. ca1.SumMode:=0 ;
+                                                    ca1.SumField:=GetLexString ; .)
+        
+        ")" | "COUNT" "(" ident                                         (. ca1.SumMode:=1 ;
+                                                    ca1.SumField:=GetLexString ; .)
+        
+        ")" | "CAL" "(" ident                                         (. ca1.SumMode:=2 ;
+                                                    ca1.SumField:=GetLexString ; .)
+        
+        ")"  ] 
+         [ "RANGE" "BY" "(" ident                                         (. ca1.RangeFields.Add(GetLexString) ; .)
+        
+         { "," ident                                         (. ca1.RangeFields.Add(GetLexString) ; .)
+         } 
+        
+        ")"  ]
+        .
+ReportItem <t1:TCnsTable >
+               (. var cr1:TCnsReport ; .)
+ =
+        ident                                         (. cr1:=TCnsReport.Create(t1.Reports,GetLexString) ;
+                                                    t1.Reports.Add(cr1) ; .)
+        
+         [ "TO"  ( "ALL" | "(" ident                                         (. cr1.AddProfile(GetLexString) ; .)
+        
+         { "," ident                                         (. cr1.AddProfile(GetLexString) ; .)
+         } 
+        
+        ")"  ) ]
+        .
+UserGroup <t1:TCnsTable >
+               (. var tu1:TCnsTableUser ; .)
+ =
+        ident                                         (. tu1 := TCnsTableUser.Create(t1.UserPermits,GetLexString) ;
+                                                    t1.UserPermits.Add(tu1) ;
+                                                    AddUserGroup(GetLexString) ; .)
+        
+        "TO" UserItem < tu1 >  { "," UserItem < tu1 >  } 
+        ";"
+        .
+UserItem <tu1: TCnsTableUser >
+               (. var tup1:TCnsTableUserProfileState ; .)
+ =
+        ( "ALL" | ident  ) 
+                                                (. tup1 := TCnsTableUserProfileState.Create(tu1,GetLexString) ;
+                                                    tu1.Add(tup1) ; .)
+        
+         [ "(" ident                                         (. tup1.AddState(GetLexString) ; .)
+        
+         { "," ident                                         (. tup1.AddState(GetLexString) ; .)
+         } 
+        
+        ")"  ]
+        .
+TableProfileItem <ts1 : TCnsProfileGroup >
+               (. var sg1:TCnsProfile ; .)
+ =
+        ident                                         (. sg1:=TCnsprofile.Create(ts1,GetLexString) ;
+                                                    ts1.Add(sg1) ; .)
+        
+         [ "<" "VALUE" "=" number                                         (. sg1.Value := StrToIntDef(GetLexString,1) ; .)
+        
+        ">"  ]
+        .
+TableStateItem <ts1 : TCnsStateGroup >
+               (. var sg1:TCnsState ; .)
+ =
+        ident                                         (. sg1:=TCnsState.Create(ts1,GetLexString) ;
+                                                    ts1.Add(sg1) ; .)
+        
+        "=" number                                         (. sg1.Value := StrToIntDef(GetLexString,1) ; .)
+        
+         [  ( "READONLY" | "WRITEONLY"                                         (. sg1.IsReadOnly := false ; .)
+         ) 
+        
+         ( "ALL"                                         (. sg1.ReadOnlyFields.Add(Uppercase(GetLexString)) ; .)
+        
+        |  ( "(" ident                                         (. sg1.ReadOnlyFields.Add(Uppercase(GetLexString)) ; .)
+        
+         { "," ident                                         (. sg1.ReadOnlyFields.Add(UpperCase(GetLexString)) ; .)
+         } 
+        
+        ")"  ) ) ] 
+         [ "DEFAULT" "(" ident "=" string  { "," ident "=" string  } 
+        ")"  ] 
+         [  ( "DISABLE" | "ENABLE"                                         (. sg1.IsDisableFunction := false ; .)
+         ) 
+        
+         ( "ALL"                                         (. sg1.DisableFunctions.Add(Uppercase(GetLexString)) ; .)
+        
+        |  ( "(" ident                                         (. sg1.DisableFunctions.Add(GetLexString) ; .)
+        
+         { "," ident                                         (. sg1.DisableFunctions.Add(GetLexString) ; .)
+         } 
+        
+        ")"  ) ) ] 
+        "COLOR" ident                                         (. sg1.ColorString := GetLexString ; .)
+        
+         [ "FOR"  (  ( "OWNER"                                         (. sg1.UserMode := 0 ; .)
+        
+        "(" ident                                         (. sg1.UserField := GetLexString ; .)
+        
+        ")"  ) 
+        |  ( "SELF"                                         (. sg1.UserMode := 1 ; .)
+        
+        "(" ident                                         (. sg1.UserField := GetLexString ; .)
+        
+        ")"  ) 
+        | "ALL"                                         (. sg1.UserMode := 2 ; .)
+         ) ] 
+        
+         [ "ORDER" "BY" ident                                         (. sg1.OrderField := GetLexString ; .)
+         ] 
+        
+         [ "CLASS" "BY" string                                         (. sg1.ClassByField := getCnsString ; .)
+         ]
+        .
+ColumnDefine <var mode1:Integer;var FieldName1:String > =
+        "GROUP" "BY" ident                                         (. mode1 := 0 ;
+                                                    FieldName1 := getLexString  .)        | 
+        "SPERATE" "ON" ident                                         (. mode1 := 1 ;
+                                                    FieldName1 := getLexString  .)
+        .
+FieldCollection <AParent:TCnsCollect;var AFG:TCnsFieldGroup >
+               (. var f1:TCnsFieldGroup ;
+                   t2:TCnsTable ;
+                   td1:TCnsDetailTable ;
+                   tx1:TCnsCollect ; .)
+ =
+        "GROUP" ident                                         (. AFG := TCnsFieldGroup.Create(AParent,GetLexString) ;
+                                                    afg.StartPos := line ; .)
+        
+        "{"  ( FieldItem < afg, f1 >                                         (. AFG.Add(f1) ; .)
+        
+        | FieldCollection < afg, f1 >                                         (. AFG.Add(f1) ; .)
+         ) 
+        
+         { ","  ( FieldItem < afg,f1 >                                         (. AFG.Add(f1) ; .)
+        
+        | FieldCollection < afg,f1 >                                         (. AFG.Add(f1) ; .)
+         ) } 
+        
+        "}"  [ "DETAIL" "<" ident                                         (. afg.IsDetail := true ;
+                                                    afg.DetailTable := GetLexString ;
+                                                    afg.LookupTableDefine := SQLData.TableGroup.ItemByName[GetLexString] ;
+                                                    if assigned(afg.LookupTableDefine) then 
+                                                    begin
+                                                   afg.LookupTableDefine.Clear ;
+                                                      afg.LookupTableDefine.Parent :=  afg ;
+                                                      end 
+                                                      else
+                                                     begin
+                                                     afg.LookupTableDefine := TCnsTable.Create(afg,GetLexString) ;
+                                                        SQLData.TableGroup.Add(afg.LookupTableDefine) ;
+                                                        end;
+                                                     afg.LookupTableDefine.StartPos := afg.StartPos ;
+                                                      afg.LookupTableDefine.TableMode := cnsIsDetailTable ;
+                                                      tx1 := AParent ;
+                                                      while not(tx1 is TCnsTable) do tx1 := tx1.Parent ;
+                                                      td1 := TCnsDetailTable.Create(afg.LookupTableDefine,GetLexString) ;
+                                                      (tx1 as TCnsTable).Details.Add(td1) ;
+                                                      afg.LookupTableDefine.DatabaseName := (tx1 as TCnsTable).DatabaseName ;
+                                                      afg.LookupTableDefine.PluginName := (tx1 as TCnsTable).PluginName ;
+                                                      afg.LookupTableDefine.AutoCreate:= (tx1 as TCnsTable).AutoCreate ;
+                                                      afg.LookupTableDefine.GroupName := (tx1 as TCnsTable).GroupName ;
+                                                      afg.LookupTableDefine.FetchCount := 300 ;
+                                                      afg.MasterDetailLink := td1 ; .)
+        
+        "(" ident                                         (. afg.LookupTableDefine.TableName := GetLexString ; .)
+        
+        ")"  [ "TO"  ( "ALL" | "(" ident                                         (. td1.AddProfile(GetLexString) ; .)
+        
+         { "," ident                                         (. td1.AddProfile(GetLexString) ; .)
+         } 
+        
+        ")"  ) ] 
+        "KEY" "IS" "(" ident                                         (. afg.LookupTableDefine.PrimaryKey.Add(UpperCase(GetLexString)) ; .)
+        
+         { "," ident                                         (. afg.LookupTableDefine.PrimaryKey.Add(UpperCase(GetLexString)) ; .)
+         } 
+        
+        ")"  [ "READONLY" "AFTER" number                                         (. GetNumber(afg.LookupTableDefine.ReadOnlyState) ; .)
+         ] 
+        
+        ">"  ] 
+         [ "LOOKUP" ident                                         (. afg.LookupFieldName := UpperCase(GetLexString) ; .)
+        
+        "=" ident                                         (. afg.LookupFieldName := afg.LookupFieldName+ '=' +UpperCase(GetLexString) ; .)
+        
+         { "," ident                                         (. afg.LookupFieldName := afg.LookupFieldName + ',' + UpperCase( GetLexString ) ; .)
+        
+        "=" ident                                         (. afg.LookupFieldName := afg.LookupFieldName+ '=' +UpperCase(GetLexString) ; .)
+         } 
+        
+        "OF"  ( ident                                         (. afg.LookupTable := GetLexString ; .)
+        
+        | TableItem < afg,t2 >                                         (. afg.LookupTable := t2.Name ;
+                                                    afg.LookupTableDefine := t2 ;
+                                                    t2.TableMode := cnsIsLookupTable ; .)
+         ) 
+        
+         [ "WHERE"  ( "SAME_PROFILE"                                         (. afg.LookupWhere := 'PROFILE' ; .)
+        
+        | string                                         (. afg.LookupWhere := GetLexString ; .)
+         ) ] ]
+        .
+FieldItem <AParent:TCnsCollect;VAR f1: TCnsFieldGroup >
+               (. var t2:TCnsTable ; .)
+ =
+        ident                                         (. f1 := TCnsFieldGroup.Create(AParent,Uppercase(GetLexString)) ;
+                                                    f1.IsField := true ; .)
+        
+        FieldType < f1.FieldType,f1.FieldLength >  { "DEFAULT" string                                         (. f1.DefaultValue := GetCnsString ; .)
+        
+         [ "ON" "PROFILE" ident                                         (. f1.SetProfileRelate( 'DEFAULT' ,getCnsString,f1.DefaultValue)  .)
+         ] 
+        
+        | "PROMPT1" string                                         (. f1.Prompt1 := getCnsString ; .)
+        
+        | "PROMPT2" string                                         (. f1.Prompt2 := getCnsString ; .)
+        
+        | "PROMPT3" string                                         (. f1.Prompt3 := getCnsString ; .)
+        
+        | "PROMPT4" string                                         (. f1.Prompt4 := getCnsString ; .)
+        
+        | "PROMPT5" string                                         (. f1.Prompt5 := getCnsString ; .)
+        
+        | "PROMPT" string                                         (. f1.Prompt := getCnsString ; .)
+        
+         [ "ON" "PROFILE" ident                                         (. f1.SetProfileRelate( 'PROMPT' ,getLexString,f1.Prompt)  .)
+         ] 
+        
+        | "VALUES" "(" string                                         (. f1.SelectList.Add(GetCnsString) ; .)
+        
+         { "," string                                         (. f1.SelectList.Add(GetCnsString) ; .)
+         } 
+        
+        ")" | "HINT" string                                         (. f1.Hint := getCnsString ; .)
+        
+         [ "ON" "PROFILE" ident                                         (. f1.SetProfileRelate( 'HINT' ,getLexString,f1.Hint)  .)
+         ] 
+        
+        | "NOT" "NULL"                                         (. f1.IsNull := false ; .)
+        
+        |  ( "MIN" | "MINIMUM"  ) 
+        number                                         (. f1.MinString := GetLexString ; .)
+        
+        |  ( "MAX" | "MAXIMUM"  ) 
+        number                                         (. f1.MaxString := GetLexString ; .)
+        
+        |  ( "ASC" | "ASCENDING" | "DESC" | "DESCENDING"  ) 
+        
+                                                (. f1.OrderString := GetLexString ; .)
+        | "READONLY"                                         (. f1.ReadOnly := true ; .)
+        
+        | "CONTROL" ident                                         (. f1.ControlType := getLexString ; .)
+        
+        | "PICTUREMASK" string                                         (. f1.PictureMask := getCnsString ; .)
+        
+        | "CAN" "QUERY"                                         (. f1.CanQuery := True ; .)
+        
+        | "AUTO" "REMMBER"                                         (. f1.AutoRemmber := True ; .)
+        
+        | "TREEFIELD"                                         (. f1.IsTreeField := True ; .)
+        
+        | "COLOR" "TABLE" "(" string                                         (. f1.ColorValues.Add(GetCnsString) ; .)
+        
+        "=" ident                                         (. f1.ColorStrings.Add(GetLexString) ; .)
+        
+         { "," string                                         (. f1.ColorValues.Add(GetCnsString) ; .)
+        
+        "=" ident                                         (. f1.ColorStrings.Add(GetLexString) ; .)
+         } 
+        
+        ")" | "WIDTHINGRID" number                                         (. GetNumber(f1.WidthInGrid) ; .)
+        
+        | "WIDTHINDIALOG" number                                         (. GetNumber(f1.WidthInDialog) ; .)
+        
+        |  ( "LOOKUP" ident                                         (. f1.LookupFieldName := UpperCase(GetLexString) ; .)
+        
+        "OF"  ( ident                                         (. f1.LookupTable := GetLexString ; .)
+        
+        | TableItem < f1, t2 >                                         (. f1.LookupTable := t2.Name ;
+                                                    f1.LookupTableDefine := t2 ;
+                                                    t2.TableMode := cnsIsLookupTable ; .)
+         ) 
+        
+         [ "WHERE"  ( "SAME_PROFILE"                                         (. f1.LookupWhere := 'PROFILE' ; .)
+        
+        | string                                         (. f1.LookupWhere := GetCnsString ; .)
+         ) ] 
+        
+        "BY" string                                         (. f1.LookupBy := GetCnsString ; .)
+         ) 
+        
+         [ "DISPLAY" string                                         (. f1.LookupDisplay := GetCnsString ; .)
+         ] }
+        .
+FieldType <var k1:Integer;VAR s1: string > =
+        "SMALLINT"                                         (. k1 := ord(ftSmallint) ; .)        | 
+        "INTEGER"                                         (. k1 := ord(ftInteger) ; .)        | 
+        "INT"                                         (. k1 := ord(ftInteger) ; .)        | 
+        "LARGEINT"                                         (. k1 := ord(ftInteger) ; .)        | 
+        "DATE"                                         (. k1 := ord(ftDate) ; .)        | 
+        "BOOLEAN"                                         (. k1 := ord(ftBoolean) ; .)        | 
+        "TIME"                                         (. k1 := ord(ftTime) ; .)        | 
+        "TIMESTAMP"                                         (. k1 := ord(ftDateTime) ; .)        | 
+        "MONEY"                                         (. k1 := ord(ftCurrency) ; .)        | 
+        "AUTOINC"                                         (. k1 := ord(ftAutoInc) ; .)        | 
+        "BLOB"                                         (. k1 := ord(ftBlob) ; .)
+        
+         [ "(" number                                         (. s1 := GetLexString ; .)
+        
+         [ "," number                                         (. s1 := s1+ ',' +GetLexString ; .)
+         ] 
+        
+        ")"  ]        | 
+        "MEMO"                                         (. k1 := ord(ftMemo) ; .)
+        
+         [ "(" number                                         (. s1 := GetLexString ; .)
+        
+         [ "," number                                         (. s1 := s1+ ',' +GetLexString ; .)
+         ] 
+        
+        ")"  ]        | 
+        "CHAR" "(" number                                         (. k1 := ord(ftString) ;
+                                                    s1 := GetLexString ; .)
+        
+        ")"        | 
+        "CHARACTER" "(" number                                         (. k1 := ord(ftString) ;
+                                                    s1 := GetLexString ; .)
+        
+        ")"        | 
+        "VARCHAR" "(" number                                         (. k1 := ord(ftString) ;
+                                                    s1 := GetLexString ; .)
+        
+        ")"        | 
+        "DECIMAL"                                         (. k1:=ord(ftFloat) ; .)
+        
+         [ "(" number                                         (. s1 := GetLexString ; .)
+        
+         [ "," number                                         (. s1 := s1+ ',' +GetLexString ; .)
+         ] 
+        
+        ")"  ]        | 
+        "NUMERIC"                                         (. k1:=ord(ftFloat) ; .)
+        
+         [ "(" number                                         (. s1 := GetLexString ; .)
+        
+         [ "," number                                         (. s1 := s1+ ',' +GetLexString ; .)
+         ] 
+        
+        ")"  ]        | 
+        "FLOAT"                                         (. k1:=ord(ftFloat) ; .)
+        
+         [ "(" number                                         (. s1 := GetLexString ; .)
+        
+         [ "," number                                         (. s1 := s1+ ',' +GetLexString ; .)
+         ] 
+        
+        ")"  ]        | 
+        "BYTES"                                         (. k1 := ord(ftBytes) ; .)
+        
+         [ "(" number                                         (. s1 := GetLexString ; .)
+        
+        ")"  ]
+        .
+
+END CnsSQL.

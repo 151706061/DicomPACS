@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_REANIMID
+/
+
+--
+-- GET_REANIMID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_REANIMID" 
+return number
+is 
+begin
+  return 335080;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_REANIMID TO PUBLIC
+/
+

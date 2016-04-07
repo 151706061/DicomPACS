@@ -1,0 +1,48 @@
+DROP TABLE ASU.TN581U CASCADE CONSTRAINTS
+/
+
+--
+-- TN581U  (Table) 
+--
+CREATE TABLE ASU.TN581U
+(
+  FK_PACID     NUMBER,
+  FD_CREATE    DATE,
+  N5           NUMBER,
+  N6           VARCHAR2(100 BYTE),
+  N9           NUMBER,
+  N10          NUMBER,
+  N11          NUMBER,
+  N11_1        VARCHAR2(100 BYTE),
+  N11_2        NUMBER,
+  N12          NUMBER,
+  N12_1        NUMBER,
+  N12_2        NUMBER,
+  N12_3        NUMBER,
+  S12_3        VARCHAR2(100 BYTE),
+  N13          NUMBER,
+  S13          VARCHAR2(100 BYTE),
+  S5           VARCHAR2(100 BYTE),
+  FC_FIOVRACH  VARCHAR2(100 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+

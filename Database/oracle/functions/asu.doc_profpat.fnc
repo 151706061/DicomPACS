@@ -1,0 +1,21 @@
+DROP FUNCTION ASU.DOC_PROFPAT
+/
+
+--
+-- DOC_PROFPAT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU.doc_profpat
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =-
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 1181;
+END;
+/
+
+SHOW ERRORS;
+
+

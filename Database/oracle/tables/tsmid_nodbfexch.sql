@@ -1,0 +1,65 @@
+DROP TABLE ASU.TSMID_NODBFEXCH CASCADE CONSTRAINTS
+/
+
+--
+-- TSMID_NODBFEXCH  (Table) 
+--
+CREATE TABLE ASU.TSMID_NODBFEXCH
+(
+  FK_ID  NUMBER(15)                             NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             8K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSMID_NODBFEXCH IS 'Перед выгрузкой в DBF, в таблицу копируются ID всех назначений, которые не должны попадать в выгрузку Author:Efimov'
+/
+
+
+--
+-- I_SMID_NODBFEXCH_ID  (Index) 
+--
+--  Dependencies: 
+--   TSMID_NODBFEXCH (Table)
+--
+CREATE INDEX ASU.I_SMID_NODBFEXCH_ID ON ASU.TSMID_NODBFEXCH
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+GRANT ALTER, DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TSMID_NODBFEXCH TO EXCH79
+/
+
+GRANT ALTER, DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TSMID_NODBFEXCH TO PILE
+/
+

@@ -1,0 +1,161 @@
+.tufld0 {
+	min-width:29px !important;
+	width:29px;
+	max-width:29px;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.tufld1 {
+	min-width:195px !important;
+	width:195px;
+	max-width:195px;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.tufld2 {
+	min-width:200px !important;
+	max-width:200px;
+	width:200px;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.tufld3 {
+	max-width:220px ;
+	width:220px ;
+	min-width:220px !important;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+
+
+.myborder {
+	border:1px solid; 
+}
+
+.clear-float {
+    clear: both;
+}
+
+.myhdtext {
+	border:none;
+	white-space: normal;
+	height:50px;
+}
+
+.myfloatleft {
+	float:left;
+	left:auto;
+}
+
+.myrows {
+	width:842px;
+	padding-top: 5px;
+}
+
+.mymodbtn {
+	height: 19px;
+    width: 19px;
+	padding:0px !important;
+}
+
+.nopad {
+	padding:0px !important;
+}
+
+.ui-button-text-only .ui-button-text {
+	padding: 0 !important;
+	font-family: Courier New,monospace;
+    font-size: 14px;
+    padding: 0 !important;
+}
+
+.mybottomcolor {
+	background-color: #0D2937;
+/*	color: #000000;*/
+}
+
+.myfbtn {
+	color: white;
+}
+
+.myfbtn1 {
+/*	font-size: 7pt !important;
+	padding: 1px 0 !important;*/
+/*	font-size: 10pt !important;
+	height: 30px !important;
+	line-height: 30px !important;
+	width: 30px !important;*/
+}
+
+.mydcmtags {
+	color:white;
+	position:fixed;
+}
+
+.user_edtbtn {
+	background-color:#65B1D5;
+	border:none;
+	width:180px;
+	color:white !important;
+}
+
+.user_sav_btn {
+	background-color:#65B1D5;
+	border:none;
+	width:180px;
+	color:white !important;
+}
+
+.edtflduser {
+	height: 35px;
+    padding-left: 50px;
+    /*padding-top: 10px;*/
+    width: 400px;
+}
+
+.txtedtfld {
+	width:110px;
+	padding-top:3px;
+}
+
+.txtedtflddiv {
+	width:500px;
+}
+
+.usredtfld {
+	width:500px;
+	background-color:#D0E6F1 !important;
+	border:none !important;
+	text-transform:uppercase;
+}
+
+.usredtfldcb {
+	height:22px !important;
+}
+
+.chk_btn {
+	background-color:#FF8D4C;
+	width:100px; 
+	height: 26px;
+	border:none;
+	color:white;
+}
+
+.chk_btn1 {
+	
+}
+
+.chk_btn2 {
+	margin-top: -10px;
+}
+
+ 
+

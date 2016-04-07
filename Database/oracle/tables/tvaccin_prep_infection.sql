@@ -1,0 +1,182 @@
+ALTER TABLE ASU.TVACCIN_PREP_INFECTION
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TVACCIN_PREP_INFECTION CASCADE CONSTRAINTS
+/
+
+--
+-- TVACCIN_PREP_INFECTION  (Table) 
+--
+--  Dependencies: 
+--   TINFECTION (Table)
+--   TVACCIN_PREP (Table)
+--
+CREATE TABLE ASU.TVACCIN_PREP_INFECTION
+(
+  FK_ID                INTEGER                  NOT NULL,
+  FK_VACCIN_PREP       INTEGER,
+  FK_VACCIN_INFECTION  INTEGER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVACCIN_PREP_INFECTION IS 'Связь между назваинем вакцины и болезнями от кторых она создает иммунитет
+Вакцина может быть комбинированая, т.е. прививать иммунитет сразу от нескольких инфекций
+Author: Ura'
+/
+
+COMMENT ON COLUMN ASU.TVACCIN_PREP_INFECTION.FK_ID IS 'SEQUENCE=[SEQ_VACCIN_PREP_INF]'
+/
+
+
+--
+-- PK_TVACCIN_PREP_INFECTION  (Index) 
+--
+--  Dependencies: 
+--   TVACCIN_PREP_INFECTION (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TVACCIN_PREP_INFECTION ON ASU.TVACCIN_PREP_INFECTION
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVACCIN_PREP_INFECTION_FK_VI  (Index) 
+--
+--  Dependencies: 
+--   TVACCIN_PREP_INFECTION (Table)
+--
+CREATE INDEX ASU.TVACCIN_PREP_INFECTION_FK_VI ON ASU.TVACCIN_PREP_INFECTION
+(FK_VACCIN_INFECTION)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVACCIN_PREP_INFE_FK_PREP  (Index) 
+--
+--  Dependencies: 
+--   TVACCIN_PREP_INFECTION (Table)
+--
+CREATE INDEX ASU.TVACCIN_PREP_INFE_FK_PREP ON ASU.TVACCIN_PREP_INFECTION
+(FK_VACCIN_PREP)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVACCIN_PREP_INFECTION$BI  (Trigger) 
+--
+--  Dependencies: 
+--   TVACCIN_PREP_INFECTION (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVACCIN_PREP_INFECTION$BI" 
+ BEFORE
+  INSERT
+ ON tvaccin_prep_infection
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT seq_vaccin_prep_inf.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TVACCIN_PREP_INFECTION 
+-- 
+ALTER TABLE ASU.TVACCIN_PREP_INFECTION ADD (
+  CONSTRAINT PK_TVACCIN_PREP_INFECTION
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TVACCIN_PREP_INFECTION 
+-- 
+ALTER TABLE ASU.TVACCIN_PREP_INFECTION ADD (
+  CONSTRAINT FK_TVACCIN_PREP$TVACCIN_PREP 
+ FOREIGN KEY (FK_VACCIN_PREP) 
+ REFERENCES ASU.TVACCIN_PREP (FK_ID) DISABLE,
+  CONSTRAINT TVACCIN_PRE_INFECTION$FK_INFEC 
+ FOREIGN KEY (FK_VACCIN_INFECTION) 
+ REFERENCES ASU.TINFECTION (FK_ID)
+    ON DELETE CASCADE)
+/
+

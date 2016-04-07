@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013.12.10 14:53:42.555.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\unSnimkiAtris.pas</Transaction>
+    <Transaction>2013.12.10 14:53:42.555.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\unSnimkiAtris.dfm</Transaction>
+    <Transaction>2013.12.12 17:11:49.377.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\UndmMain.pas</Transaction>
+    <Transaction>2013.12.12 17:11:49.377.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\UndmMain.dfm</Transaction>
+    <Transaction>2014.01.15 15:23:09.441.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\Unit2.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\UnWaitMsg.pas</Transaction>
+    <Transaction>2014.01.15 15:23:09.441.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\Unit2.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\UnWaitMsg.dfm</Transaction>
+    <Transaction>2014.01.15 15:37:09.755.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\UnWaitMsg.pas=</Transaction>
+    <Transaction>2014.01.15 15:37:09.755.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\UnWaitMsg.dfm=</Transaction>
+  </Transactions>
+</BorlandProject>

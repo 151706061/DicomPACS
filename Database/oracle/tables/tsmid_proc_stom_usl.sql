@@ -1,0 +1,63 @@
+DROP TABLE ASU.TSMID_PROC_STOM_USL CASCADE CONSTRAINTS
+/
+
+--
+-- TSMID_PROC_STOM_USL  (Table) 
+--
+CREATE TABLE ASU.TSMID_PROC_STOM_USL
+(
+  FK_ID  NUMBER(15)                             NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSMID_PROC_STOM_USL IS 'ID записей OCC из ветки с синонимом PROC_STOM_USL, которые в дальнейшем будут использованы в выгрузке Author:Efimov'
+/
+
+COMMENT ON COLUMN ASU.TSMID_PROC_STOM_USL.FK_ID IS 'tsmid.fk_id'
+/
+
+
+--
+-- IDX_SMID_PROC_STOM_USL_ID  (Index) 
+--
+--  Dependencies: 
+--   TSMID_PROC_STOM_USL (Table)
+--
+CREATE INDEX ASU.IDX_SMID_PROC_STOM_USL_ID ON ASU.TSMID_PROC_STOM_USL
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+GRANT ALTER, DELETE, INDEX, INSERT, REFERENCES, SELECT, UPDATE ON ASU.TSMID_PROC_STOM_USL TO EXCH79
+/
+

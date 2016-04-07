@@ -1,0 +1,64 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{df5b2892-3fcc-49c3-bcee-065d3692df63}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="..\..\Client\Source\DicomClient.dproj" />
+    <Projects Include="DicomCapture.dproj" />
+    <Projects Include="QueryList.dproj" />
+    <Projects Include="Test.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="QueryList">
+    <MSBuild Projects="QueryList.dproj" Targets="" />
+  </Target>
+  <Target Name="QueryList:Clean">
+    <MSBuild Projects="QueryList.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="QueryList:Make">
+    <MSBuild Projects="QueryList.dproj" Targets="Make" />
+  </Target>
+  <Target Name="DicomCapture">
+    <MSBuild Projects="DicomCapture.dproj" Targets="" />
+  </Target>
+  <Target Name="DicomCapture:Clean">
+    <MSBuild Projects="DicomCapture.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DicomCapture:Make">
+    <MSBuild Projects="DicomCapture.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Test">
+    <MSBuild Projects="Test.dproj" Targets="" />
+  </Target>
+  <Target Name="Test:Clean">
+    <MSBuild Projects="Test.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="Test:Make">
+    <MSBuild Projects="Test.dproj" Targets="Make" />
+  </Target>
+  <Target Name="DicomClient">
+    <MSBuild Projects="..\..\Client\Source\DicomClient.dproj" Targets="" />
+  </Target>
+  <Target Name="DicomClient:Clean">
+    <MSBuild Projects="..\..\Client\Source\DicomClient.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DicomClient:Make">
+    <MSBuild Projects="..\..\Client\Source\DicomClient.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="QueryList;DicomCapture;Test;DicomClient" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="QueryList:Clean;DicomCapture:Clean;Test:Clean;DicomClient:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="QueryList:Make;DicomCapture:Make;Test:Make;DicomClient:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

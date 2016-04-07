@@ -1,0 +1,109 @@
+ALTER TABLE ASU.TNAZMED_TRECIPE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TNAZMED_TRECIPE CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZMED_TRECIPE  (Table) 
+--
+--  Dependencies: 
+--   TNAZMED (Table)
+--   TRECIPE (Table)
+--
+CREATE TABLE ASU.TNAZMED_TRECIPE
+(
+  FK_NAZID   NUMBER(10)                         NOT NULL,
+  FK_RECIPE  NUMBER(10)                         NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNAZMED_TRECIPE IS 'Sill - таблица связей Мед назначений с рецептами'
+/
+
+COMMENT ON COLUMN ASU.TNAZMED_TRECIPE.FK_NAZID IS 'Код назначения (см. т. TNazMed)'
+/
+
+COMMENT ON COLUMN ASU.TNAZMED_TRECIPE.FK_RECIPE IS 'Код рецепт (см. т. TRecipe)'
+/
+
+
+--
+-- TNAZMED_TRECIPE_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TNAZMED_TRECIPE (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZMED_TRECIPE_BY_ID ON ASU.TNAZMED_TRECIPE
+(FK_NAZID, FK_RECIPE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TNAZMED_TRECIPE 
+-- 
+ALTER TABLE ASU.TNAZMED_TRECIPE ADD (
+  CONSTRAINT TNAZMED_TRECIPE_BY_ID
+ PRIMARY KEY
+ (FK_NAZID, FK_RECIPE)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TNAZMED_TRECIPE 
+-- 
+ALTER TABLE ASU.TNAZMED_TRECIPE ADD (
+  CONSTRAINT FK_TNAZMED 
+ FOREIGN KEY (FK_NAZID) 
+ REFERENCES ASU.TNAZMED (FK_ID)
+    ON DELETE CASCADE,
+  CONSTRAINT FK_TRECIPE 
+ FOREIGN KEY (FK_RECIPE) 
+ REFERENCES ASU.TRECIPE (FK_ID)
+    ON DELETE CASCADE)
+/
+

@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_BIOHIMID
+/
+
+--
+-- GET_BIOHIMID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_BIOHIMID" 
+return number
+is
+begin
+  return 41964;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_BIOHIMID TO PUBLIC
+/
+

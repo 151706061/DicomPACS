@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{5b292594-de0c-4975-b6e9-6a49aee7a63f}</ProjectGuid>
+    <MainSource>List_diagnost.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>..\bin_old\List_diagnost.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_ExeOutput>..\bin_old</DCC_ExeOutput>
+    <DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>..\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\..\..\..\uCommon;..\..\..\uCommon_Utils;..\..\..\..\..\Trunk\ASU2\uCommon_Tima\;..\..\..\..\DigitalSignature\parts;..\..\..\..\DigitalSignature\parts\DigKey;..\..\..\..\DigitalSignature\parts\XMLKeysInfo;..\..\..\uCommon_Kolya</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\..\..\uCommon;..\..\..\uCommon_Utils;..\..\..\..\..\Trunk\ASU2\uCommon_Tima\;..\..\..\..\DigitalSignature\parts;..\..\..\..\DigitalSignature\parts\DigKey;..\..\..\..\DigitalSignature\parts\XMLKeysInfo;..\..\..\uCommon_Kolya</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\..\..\uCommon;..\..\..\uCommon_Utils;..\..\..\..\..\Trunk\ASU2\uCommon_Tima\;..\..\..\..\DigitalSignature\parts;..\..\..\..\DigitalSignature\parts\DigKey;..\..\..\..\DigitalSignature\parts\XMLKeysInfo;..\..\..\uCommon_Kolya</DCC_ObjPath>
+    <DCC_IncludePath>..\..\..\..\uCommon;..\..\..\uCommon_Utils;..\..\..\..\..\Trunk\ASU2\uCommon_Tima\;..\..\..\..\DigitalSignature\parts;..\..\..\..\DigitalSignature\parts\DigKey;..\..\..\..\DigitalSignature\parts\XMLKeysInfo;..\..\..\uCommon_Kolya</DCC_IncludePath>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters><Parameters Name="RunParams">47789</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">True</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">198</VersionInfo><VersionInfo Name="Debug">True</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">True</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.198</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">List_diagnost.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="List_diagnost.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\..\..\..\..\Trunk\ASU2\uCommon_Tima\SMMainAPI.pas" />
+    <DCCReference Include="..\..\..\..\DigitalSignature\parts\DigKey\uDigitalSignature.pas" />
+    <DCCReference Include="..\..\..\uCommon_Kolya\fOtmena.pas">
+      <Form>frmOtmena</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Kolya\fPacInfoDiagnost.pas">
+      <Form>frmPacInfoDiagnost</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Kolya\fPreview.pas">
+      <Form>frmPreview</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Kolya\fSetNaz.pas">
+      <Form>frmSetNaz</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Kolya\fSysInfo.pas">
+      <Form>frmSysInfo</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Kolya\fWait.pas">
+      <Form>FrmWait</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fArchive.pas">
+      <Form>frmArchive</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fDolg.pas">
+      <Form>frmDolg</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fDolgTalon.pas">
+      <Form>frmDolgTalon</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fEditNaz.pas">
+      <Form>frmEditNaz</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fEditType.pas">
+      <Form>frmEditType</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fImages.pas">
+      <Form>frmImages</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fMain.pas">
+      <Form>frmMain</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fMS.pas">
+      <Form>frmMS</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fNaz.pas">
+      <Form>frmNaz</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fPac.pas">
+      <Form>frmPac</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSearch.pas">
+      <Form>frmSearch</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSetMS.pas">
+      <Form>frmSetMS</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fTextIssl.pas">
+      <Form>frmTextIssl</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\uPeriod.pas">
+      <Form>frmPeriod</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>

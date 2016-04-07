@@ -1,0 +1,15 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ConsoleApplication1.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnectionSOAPFederalAddress" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://adapter-fer.rosminzdrav.ru/misAdapterService/ws/MisAdapterService?wsdl</Value>
+    </Setting>
+    <Setting Name="Disable_Expect100Continue" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ThreadCount" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">16</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

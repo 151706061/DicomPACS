@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TAPOSTAVSHIK
+/
+
+--
+-- TAPOSTAVSHIK  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TAPOSTAVSHIK (Sequence)
+--
+CREATE OR REPLACE TRIGGER ASU."TAPOSTAVSHIK" 
+BEFORE  INSERT  ON ASU.TAPOSTAVSHIK REFERENCING
+ NEW AS NEW
+ OLD AS OLD
+FOR EACH ROW
+BEGIN
+  SELECT seq_tapostavshik.nextval
+    INTO :new.fk_id
+    FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

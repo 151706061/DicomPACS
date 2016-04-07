@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TGRAPH_BEFOR_INSERT
+/
+
+--
+-- TGRAPH_BEFOR_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TGRAPHID (Sequence)
+--   TGRAPH (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TGRAPH_BEFOR_INSERT" 
+  BEFORE INSERT
+  ON ASU.TGRAPH   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+DISABLE
+Begin
+  select SEQ_TGRAPHID.NEXTVAL into :new.FK_ID from dual;
+End;
+/
+SHOW ERRORS;
+
+

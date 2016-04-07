@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_OPERLECH
+/
+
+--
+-- GET_OPERLECH  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_OPERLECH" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 324148;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_OPERLECH TO PUBLIC
+/
+

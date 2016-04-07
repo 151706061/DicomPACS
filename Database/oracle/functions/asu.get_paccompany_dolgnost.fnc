@@ -1,0 +1,31 @@
+DROP FUNCTION ASU.GET_PACCOMPANY_DOLGNOST
+/
+
+--
+-- GET_PACCOMPANY_DOLGNOST  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TCOMPANY_DOLGNOST (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PACCOMPANY_DOLGNOST" -- Created by TimurLan
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+  strTemp VARCHAR2(30);
+  CURSOR cTemp IS SELECT FC_NAME FROM TCOMPANY_DOLGNOST WHERE FK_ID=pFK_ID;
+BEGIN
+  if pFK_ID>0 then
+    OPEN cTemp;
+    FETCH cTemp INTO strTemp;
+    CLOSE cTemp;
+  else
+    RETURN NULL;
+  end if;
+  RETURN strTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

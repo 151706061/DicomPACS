@@ -1,0 +1,71 @@
+DROP TABLE ASU.TEPIK_DSPEREVOD CASCADE CONSTRAINTS
+/
+
+--
+-- TEPIK_DSPEREVOD  (Table) 
+--
+CREATE TABLE ASU.TEPIK_DSPEREVOD
+(
+  FK_EPIKID  NUMBER,
+  FK_DIAGID  NUMBER,
+  FC_KOD     VARCHAR2(10 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TEPIK_DSPEREVOD IS 'Таблица содержит в себе диагноз для обоснования перевода, который выставляется в эпикризе и затем используется в выгрузке.
+Created by Prihodko N. 28.02.2013'
+/
+
+COMMENT ON COLUMN ASU.TEPIK_DSPEREVOD.FK_EPIKID IS 'TEPIKRIZ.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TEPIK_DSPEREVOD.FK_DIAGID IS 'TDIAG.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TEPIK_DSPEREVOD.FC_KOD IS 'Код МКБ-10'
+/
+
+
+--
+-- TEPIK_DSPEREVOD_EPIKID  (Index) 
+--
+--  Dependencies: 
+--   TEPIK_DSPEREVOD (Table)
+--
+CREATE UNIQUE INDEX ASU.TEPIK_DSPEREVOD_EPIKID ON ASU.TEPIK_DSPEREVOD
+(FK_EPIKID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

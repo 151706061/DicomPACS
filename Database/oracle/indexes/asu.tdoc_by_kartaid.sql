@@ -1,0 +1,25 @@
+DROP INDEX ASU.TDOC_BY_KARTAID
+/
+
+--
+-- TDOC_BY_KARTAID  (Index) 
+--
+CREATE INDEX ASU.TDOC_BY_KARTAID ON ASU.TDOC
+(FK_KARTAID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

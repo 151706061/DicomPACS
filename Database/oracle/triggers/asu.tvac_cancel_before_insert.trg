@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TVAC_CANCEL_BEFORE_INSERT
+/
+
+--
+-- TVAC_CANCEL_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_VAC_CANCEL (Sequence)
+--   TVAC_CANCEL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVAC_CANCEL_BEFORE_INSERT" BEFORE INSERT
+ON ASU.TVAC_CANCEL FOR EACH ROW
+begin
+    --  Column "FK_ID" uses sequence SEQ_VAC_CANCEL
+      IF :NEW.FK_ID IS NULL
+      THEN
+         SELECT SEQ_VAC_CANCEL.NEXTVAL INTO :NEW.FK_ID from dual;
+      END IF;
+end;
+/
+SHOW ERRORS;
+
+

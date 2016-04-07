@@ -1,0 +1,23 @@
+<head>	
+	<script type="text/javascript" src="js/jquery/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery/jquery-migrate-1.1.0.min.js"></script>
+</head>
+<body>
+
+	<div id='mynmbframe'>FRAME</div>
+
+	<script type="text/javascript">
+	    var a = 1;
+	    function FNext() {
+	        $("#mynmbframe").html('FRAME '+a);
+	        a++;
+	    }
+	    
+		$(document).ready(function() {
+		
+    	    setInterval("FNext();", 150);
+		
+		});
+	</script>
+
+</body>

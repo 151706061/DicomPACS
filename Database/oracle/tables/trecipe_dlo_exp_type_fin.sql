@@ -1,0 +1,99 @@
+ALTER TABLE ASU.TRECIPE_DLO_EXP_TYPE_FIN
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_EXP_TYPE_FIN CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_EXP_TYPE_FIN  (Table) 
+--
+CREATE TABLE ASU.TRECIPE_DLO_EXP_TYPE_FIN
+(
+  C_FINL    NUMBER,
+  NAME_FIN  VARCHAR2(50 BYTE),
+  DATE_BEG  DATE,
+  MSG_TEXT  VARCHAR2(100 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_EXP_TYPE_FIN IS 'ДЛО. Справочник источников финансирования'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TYPE_FIN.C_FINL IS 'Код источника финансирования'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TYPE_FIN.NAME_FIN IS 'Наименование источника финансирования'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TYPE_FIN.DATE_BEG IS 'Дата начала действия'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TYPE_FIN.MSG_TEXT IS 'Комментарий'
+/
+
+
+--
+-- TRECIPE_DLO_EXP_TYPE_FIN_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_TYPE_FIN (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_EXP_TYPE_FIN_PK ON ASU.TRECIPE_DLO_EXP_TYPE_FIN
+(C_FINL)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_EXP_TYPE_FIN 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_EXP_TYPE_FIN ADD (
+  CONSTRAINT TRECIPE_DLO_EXP_TYPE_FIN_PK
+ PRIMARY KEY
+ (C_FINL)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

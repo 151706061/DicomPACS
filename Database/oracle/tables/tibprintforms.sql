@@ -1,0 +1,100 @@
+ALTER TABLE ASU.TIBPRINTFORMS
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TIBPRINTFORMS CASCADE CONSTRAINTS
+/
+
+--
+-- TIBPRINTFORMS  (Table) 
+--
+CREATE TABLE ASU.TIBPRINTFORMS
+(
+  FK_OTDELID    NUMBER(10)                      NOT NULL,
+  FK_BLANKTYPE  NUMBER(15)                      NOT NULL,
+  FK_FORMTYPE   NUMBER(15),
+  FK_DOCTYPEID  NUMBER(10)                      NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TIBPRINTFORMS IS 'формат печати документов из RasdelIB
+Нетребенко Е.А.'
+/
+
+COMMENT ON COLUMN ASU.TIBPRINTFORMS.FK_OTDELID IS 'totdel.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TIBPRINTFORMS.FK_BLANKTYPE IS 'tsmid.fk_id -код элемента печати документа'
+/
+
+COMMENT ON COLUMN ASU.TIBPRINTFORMS.FK_FORMTYPE IS 'tsmid.fk_id -код формата печати'
+/
+
+COMMENT ON COLUMN ASU.TIBPRINTFORMS.FK_DOCTYPEID IS 'tuslvid.fk_id - код типа документа'
+/
+
+
+--
+-- TIBPRINTFORMS_PK  (Index) 
+--
+--  Dependencies: 
+--   TIBPRINTFORMS (Table)
+--
+CREATE UNIQUE INDEX ASU.TIBPRINTFORMS_PK ON ASU.TIBPRINTFORMS
+(FK_OTDELID, FK_BLANKTYPE, FK_DOCTYPEID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TIBPRINTFORMS 
+-- 
+ALTER TABLE ASU.TIBPRINTFORMS ADD (
+  CONSTRAINT TIBPRINTFORMS_PK
+ PRIMARY KEY
+ (FK_OTDELID, FK_BLANKTYPE, FK_DOCTYPEID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

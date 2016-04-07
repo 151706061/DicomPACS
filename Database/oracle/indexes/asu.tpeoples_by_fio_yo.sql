@@ -1,0 +1,25 @@
+DROP INDEX ASU.TPEOPLES_BY_FIO_YO
+/
+
+--
+-- TPEOPLES_BY_FIO_YO  (Index) 
+--
+CREATE INDEX ASU.TPEOPLES_BY_FIO_YO ON ASU.TPEOPLES
+(REPLACE("FC_FAM",'¨','Å'), REPLACE("FC_IM",'¨','Å'), REPLACE("FC_OTCH",'¨','Å'))
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

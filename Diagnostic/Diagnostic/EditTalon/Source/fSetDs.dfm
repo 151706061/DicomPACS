@@ -1,0 +1,477 @@
+object frmSetDs: TfrmSetDs
+  Left = 245
+  Top = 52
+  BorderStyle = bsDialog
+  Caption = #1044#1086#1073#1072#1074#1083#1077#1085#1080#1077' '#1076#1080#1072#1075#1085#1086#1079#1072
+  ClientHeight = 569
+  ClientWidth = 886
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  OldCreateOrder = False
+  Position = poScreenCenter
+  OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
+  PixelsPerInch = 96
+  TextHeight = 13
+  object vGrFilters: TcxVerticalGrid
+    AlignWithMargins = True
+    Left = 3
+    Top = 3
+    Width = 880
+    Height = 112
+    BorderStyle = cxcbsNone
+    Align = alTop
+    LookAndFeel.Kind = lfUltraFlat
+    OptionsView.RowHeaderWidth = 256
+    TabOrder = 0
+    object catProp: TcxCategoryRow
+      Properties.Caption = #1061#1072#1088#1072#1082#1090#1077#1088#1080#1089#1090#1080#1082#1080' '#1076#1080#1072#1075#1085#1086#1079#1072
+    end
+    object rowShowIB: TcxEditorRow
+      Properties.Caption = #1055#1086#1082#1072#1079#1099#1074#1072#1090#1100' '#1074' '#1052#1050
+      Properties.EditPropertiesClassName = 'TcxCheckBoxProperties'
+      Properties.EditProperties.ImmediatePost = True
+      Properties.EditProperties.NullStyle = nssUnchecked
+      Properties.DataBinding.ValueType = 'String'
+      Properties.Value = Null
+    end
+    object rowVyavlen: TcxEditorRow
+      Properties.Caption = #1042#1099#1103#1074#1083#1077#1085
+      Properties.EditPropertiesClassName = 'TcxLookupComboBoxProperties'
+      Properties.EditProperties.DropDownListStyle = lsFixedList
+      Properties.EditProperties.DropDownSizeable = True
+      Properties.EditProperties.GridMode = True
+      Properties.EditProperties.ImmediatePost = True
+      Properties.EditProperties.KeyFieldNames = 'FK_ID'
+      Properties.EditProperties.ListColumns = <
+        item
+          FieldName = 'FC_NAME'
+        end>
+      Properties.EditProperties.ListOptions.ShowHeader = False
+      Properties.EditProperties.ListSource = dsVyavlen
+      Properties.EditProperties.PostPopupValueOnTab = True
+      Properties.DataBinding.ValueType = 'String'
+      Properties.Options.ShowEditButtons = eisbAlways
+      Properties.Value = Null
+    end
+    object catFilter: TcxCategoryRow
+      Properties.Caption = #1060#1080#1083#1100#1090#1088#1099
+    end
+    object rowGroup: TcxEditorRow
+      Properties.Caption = #1043#1088#1091#1087#1087#1099' '#1076#1080#1072#1075#1085#1086#1079#1086#1074
+      Properties.EditPropertiesClassName = 'TcxLookupComboBoxProperties'
+      Properties.EditProperties.DropDownListStyle = lsFixedList
+      Properties.EditProperties.DropDownSizeable = True
+      Properties.EditProperties.GridMode = True
+      Properties.EditProperties.ImmediatePost = True
+      Properties.EditProperties.KeyFieldNames = 'FK_ID'
+      Properties.EditProperties.ListColumns = <
+        item
+          FieldName = 'NAME'
+        end>
+      Properties.EditProperties.ListOptions.ShowHeader = False
+      Properties.EditProperties.ListSource = dsGroupDiag
+      Properties.EditProperties.OnEditValueChanged = rowGroupEditPropertiesEditValueChanged
+      Properties.DataBinding.ValueType = 'String'
+      Properties.Options.ShowEditButtons = eisbAlways
+      Properties.Value = Null
+    end
+    object merSearch: TcxMultiEditorRow
+      Properties.Editors = <
+        item
+          Caption = #1055#1086#1080#1089#1082' '#1087#1086' '#1052#1050#1041
+          EditPropertiesClassName = 'TcxButtonEditProperties'
+          EditProperties.Buttons = <
+            item
+              Default = True
+              Glyph.Data = {
+                36040000424D3604000000000000360000002800000010000000100000000100
+                2000000000000004000000000000000000000000000000000000FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF0000000000FFFFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF0000000000FFFFFF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF0084848400000000000000000000000000848484000000
+                0000FFFFFF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF000000000000000000FF00FF00FF00FF0084848400000000000000
+                000000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF000000000084848400FF00FF00FF00FF00FF00FF00FFFFFF00FFFFFF000000
+                0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF008484
+                840000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FFFFFF000000
+                000084848400FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                000084848400FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF008484
+                840000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                0000FF00FF00FFFFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF0000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                0000FF00FF00FFFFFF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF008484
+                840000000000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF008484
+                840000000000FFFFFF00FFFFFF00FF00FF00FF00FF00FF00FF00FF00FF000000
+                000084848400FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF000000000084848400FFFFFF00FFFFFF00FF00FF00FF00FF00FF00FF000000
+                0000FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF000000000000000000FF00FF00FF00FF00FF00FF0000000000FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00
+                FF00FF00FF00FF00FF008484840000000000000000000000000084848400FF00
+                FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00FF00}
+              Kind = bkGlyph
+            end
+            item
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                18000000000000030000120B0000120B00000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                000000000000000000000000000000000206B0030AAE0000A600000000000000
+                00000000000000000000A700009A0000A70000000000000000000000000000A9
+                1844F6194DF81031D20102AB0000000000000000000000B10928D7092ED70313
+                B30000AC0000000000000000000103B32451F91F52FF1D4FFF1744E8040BB000
+                00000000AC0D2EDD1142F90D3DF50B3BF0041ABC0000A50000000000000000AE
+                1832DB285BFF2456FF2253FF1B4BF1050DB10F30DD164AFE1344F91041F60E3E
+                F60A3CF000009F0000000000000000BE1F37DD3A6FFF2C5EFF295AFF2657FF20
+                52FC1C4FFF194AFD1646FA1445FA0F3DF2020AB10000A8000000000000000000
+                0000C8121DC83D6AFB3567FF2C5DFF2859FF2253FF1D4EFF1A4DFF123DED0002
+                AC0000BA0000000000000000000000000000000000CC0000B62E4EE73668FF2E
+                5EFF2859FF2254FF163DEA0000A80000AB000000000000000000000000000000
+                0000000000000000BF253FDF3B6DFF3464FF2E5EFF2759FF1B46EA0001AC0000
+                A90000000000000000000000000000000000000000000203C84B7CFF4170FF3B
+                6BFF396CFF2D5EFF2558FF1336D70000B6000000000000000000000000000000
+                0000000000D9263CDB5080FF4575FF3662FA0D14C33C6DFF2A5BFF2053FD0B1D
+                C40000C00000000000000000000000000000000000CB527CFA5081FF4B7DFF0B
+                13C90000BB0E15C7386AFF2456FF1A4AF20207B30000B5000000000000000000
+                000000131CDD6A9CFF5788FF2B46E70000CD0000000000CD0F1BCB3065FF1F51
+                FF1439DD0000B10000000000000000000000000000DE3A52E45782FB0101D000
+                00000000000000000000CC1426D6265AFF0F2EE30103B8000000000000000000
+                0000000000000000CF0000C00000CE0000000000000000000000000000C40001
+                B80000B500000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000}
+              Kind = bkGlyph
+            end>
+          EditProperties.CharCase = ecUpperCase
+          EditProperties.ClickKey = 13
+          EditProperties.MaskKind = emkRegExpr
+          EditProperties.OnButtonClick = merSearchEditors0EditPropertiesButtonClick
+          Width = 25
+          DataBinding.ValueType = 'String'
+          Options.ShowEditButtons = eisbAlways
+          Value = Null
+        end
+        item
+          Caption = #1060#1080#1083#1100#1090#1088' '#1087#1086' '#1085#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1102
+          EditPropertiesClassName = 'TcxButtonEditProperties'
+          EditProperties.Buttons = <
+            item
+              Default = True
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                18000000000000030000120B0000120B00000000000000000000FF00FFFF00FF
+                FF00FFFF00FFFF00FFFF00FFFF00FF117011117011FF00FFFF00FFFF00FFFF00
+                FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF117011B1
+                E2BF62BC380A6E00FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+                FF00FFFF00FFFF00FFFF00FF257A23B1E2BF62BC38147600FF00FFFF00FFFF00
+                FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF227921A7
+                D9B35CB634137500FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+                FF00FFFF00FFFF00FFFF00FF1F751D9AD7AA56B736127300FF00FFFF00FFFF00
+                FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF239C393C
+                CC6B26B9400C8D11FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+                FF00FFFF00FFFF00FF24A13B43DC792DC85D1CB53A0BA718008200FF00FFFF00
+                FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FF2BA84354ED893ED7742B
+                C35619B23208A10F009A00008300FF00FFFF00FFFF00FFFF00FFFF00FFFF00FF
+                FF00FF30AE4868FF9F53EE8B3CD77329C55417B22E05A10A009B00009E000084
+                00FF00FFFF00FFFF00FFFF00FFFF00FF29A44050E38144D3702FB5521FA43E12
+                97230B8C0B018400008300008800008D00007E00FF00FFFF00FFFF00FF006D00
+                0B800F278001268204058F1342AF5454D8D700D1D90E999736AB4E37BA512DAB
+                450F931D0C7813FF00FF0067000079008DA00CF0B338EDAB2295A51717BC3E70
+                DE9950F0FF00E1FF1BAFB75AE08F44E16C91D4B2239933006700FF00FF006700
+                E0B87BF6EAB2EDD87CDBA117006E0A026C0661A36852F1FF007A6A005F005E8A
+                5FF97AF7562553FF00FFFF00FFFF00FFE0C4A3FFFFF2F4E5A5DCA823FF00FFFF
+                00FFFF00FFFF00FFFF00FFFF00FFFFB2FFFF09FFBD00BD920492FF00FFFF00FF
+                FF00FFD0B48BD1AA5BFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFCDD
+                FCFB48FBA202A2FF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF00FFFF
+                00FFFF00FFFF00FFFF00FFFF00FFFF00FFFBADFBFF00FFFF00FF}
+              Kind = bkGlyph
+            end
+            item
+              Glyph.Data = {
+                36030000424D3603000000000000360000002800000010000000100000000100
+                18000000000000030000120B0000120B00000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000000000000000
+                000000000000000000000000000000000206B0030AAE0000A600000000000000
+                00000000000000000000A700009A0000A70000000000000000000000000000A9
+                1844F6194DF81031D20102AB0000000000000000000000B10928D7092ED70313
+                B30000AC0000000000000000000103B32451F91F52FF1D4FFF1744E8040BB000
+                00000000AC0D2EDD1142F90D3DF50B3BF0041ABC0000A50000000000000000AE
+                1832DB285BFF2456FF2253FF1B4BF1050DB10F30DD164AFE1344F91041F60E3E
+                F60A3CF000009F0000000000000000BE1F37DD3A6FFF2C5EFF295AFF2657FF20
+                52FC1C4FFF194AFD1646FA1445FA0F3DF2020AB10000A8000000000000000000
+                0000C8121DC83D6AFB3567FF2C5DFF2859FF2253FF1D4EFF1A4DFF123DED0002
+                AC0000BA0000000000000000000000000000000000CC0000B62E4EE73668FF2E
+                5EFF2859FF2254FF163DEA0000A80000AB000000000000000000000000000000
+                0000000000000000BF253FDF3B6DFF3464FF2E5EFF2759FF1B46EA0001AC0000
+                A90000000000000000000000000000000000000000000203C84B7CFF4170FF3B
+                6BFF396CFF2D5EFF2558FF1336D70000B6000000000000000000000000000000
+                0000000000D9263CDB5080FF4575FF3662FA0D14C33C6DFF2A5BFF2053FD0B1D
+                C40000C00000000000000000000000000000000000CB527CFA5081FF4B7DFF0B
+                13C90000BB0E15C7386AFF2456FF1A4AF20207B30000B5000000000000000000
+                000000131CDD6A9CFF5788FF2B46E70000CD0000000000CD0F1BCB3065FF1F51
+                FF1439DD0000B10000000000000000000000000000DE3A52E45782FB0101D000
+                00000000000000000000CC1426D6265AFF0F2EE30103B8000000000000000000
+                0000000000000000CF0000C00000CE0000000000000000000000000000C40001
+                B80000B500000000000000000000000000000000000000000000000000000000
+                0000000000000000000000000000000000000000000000000000}
+              Kind = bkGlyph
+            end>
+          EditProperties.ClickKey = 13
+          EditProperties.OnButtonClick = merSearchEditors1EditPropertiesButtonClick
+          DataBinding.ValueType = 'String'
+          Options.ShowEditButtons = eisbAlways
+          Value = Null
+        end>
+    end
+  end
+  object tvNameDiag: TcxDBTreeList
+    AlignWithMargins = True
+    Left = 3
+    Top = 121
+    Width = 880
+    Height = 400
+    Align = alTop
+    Bands = <
+      item
+      end>
+    BufferedPaint = False
+    DataController.DataSource = dsNameDiag
+    DataController.ParentField = 'FK_OWNER'
+    DataController.KeyField = 'FK_ID'
+    LookAndFeel.Kind = lfFlat
+    OptionsBehavior.CellHints = True
+    OptionsBehavior.IncSearch = True
+    OptionsData.Editing = False
+    OptionsData.Deleting = False
+    OptionsView.CellAutoHeight = True
+    OptionsView.ColumnAutoWidth = True
+    RootValue = -1
+    TabOrder = 1
+    OnDblClick = tvNameDiagDblClick
+    OnFocusedNodeChanged = tvNameDiagFocusedNodeChanged
+    OnKeyDown = tvNameDiagKeyDown
+    ExplicitLeft = -2
+    object cxDBTreeList1cxDBTreeListColumn1: TcxDBTreeListColumn
+      Caption.Text = #1053#1072#1080#1084#1077#1085#1086#1074#1072#1085#1080#1077
+      DataBinding.FieldName = 'FC_NAME'
+      Width = 381
+      Position.ColIndex = 0
+      Position.RowIndex = 0
+      Position.BandIndex = 0
+    end
+    object cxDBTreeList1cxDBTreeListColumn2: TcxDBTreeListColumn
+      Caption.Text = #1052#1050#1041'-10'
+      DataBinding.FieldName = 'FK_MKB10'
+      Width = 90
+      Position.ColIndex = 1
+      Position.RowIndex = 0
+      Position.BandIndex = 0
+    end
+  end
+  object Panel1: TPanel
+    AlignWithMargins = True
+    Left = 3
+    Top = 524
+    Width = 880
+    Height = 42
+    Margins.Top = 0
+    Align = alClient
+    BevelInner = bvRaised
+    BevelOuter = bvLowered
+    TabOrder = 2
+    ExplicitLeft = 464
+    ExplicitTop = 528
+    ExplicitWidth = 185
+    ExplicitHeight = 41
+    object bSave: TcxButton
+      Left = 719
+      Top = 9
+      Width = 75
+      Height = 25
+      Action = aSave
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 0
+      LookAndFeel.Kind = lfUltraFlat
+      LookAndFeel.SkinName = 'Office2007Green'
+    end
+    object bCancel: TcxButton
+      Left = 797
+      Top = 9
+      Width = 75
+      Height = 25
+      Action = aCancel
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 1
+      LookAndFeel.Kind = lfUltraFlat
+      LookAndFeel.SkinName = 'Office2007Green'
+    end
+  end
+  object odsGroup: TOracleDataSet
+    SQL.Strings = (
+      'SELECT -4 AS FK_ID,'
+      '       '#39#1044#1048#1040#1043#1053#1054#1047#1067' '#1055#1040#1062#1048#1045#1053#1058#1040#39' AS NAME,'
+      '       '#39' '#39' AS FK_MKB10,'
+      '       0  AS FK_OWNER,'
+      '       0 as FN_ORDER'
+      '  FROM DUAL'
+      ''
+      'UNION ALL'
+      ''
+      'SELECT -3 AS FK_ID,'
+      '       '#39#1055#1054#1057#1051#1045#1044#1053#1048#1045' 20'#39' AS NAME,'
+      '       '#39' '#39' AS FK_MKB10,'
+      '       0 AS FK_OWNER,'
+      '       0 as FN_ORDER'
+      '  FROM DUAL '
+      ''
+      'UNION ALL'
+      ''
+      'SELECT FK_ID,'
+      '       '#39#1042#1057#1045' '#1044#1048#1040#1043#1053#1054#1047#1067#39' AS NAME,'
+      '       '#39' '#39' AS FK_MKB10,'
+      '       FK_OWNER,'
+      '       0 as FN_ORDER'
+      '  FROM ASU.TSMID'
+      ' WHERE FK_ID = ASU.GET_DIAGSSTAT '
+      ''
+      'UNION ALL'
+      ''
+      'SELECT FK_ID, '
+      '       FC_NAME||'#39' '#39'||'#39'('#39'||FK_MKB10||'#39')'#39' AS FC_NAME, '
+      '       FK_MKB10, '
+      '       FK_OWNER,'
+      '       FN_ORDER'
+      'FROM ASU.TSMID'
+      'WHERE FK_ID <> ASU.GET_DIAGSSTAT'
+      '  AND FK_OWNER = ASU.GET_DIAGSSTAT'
+      '  '
+      '  ORDER BY FK_MKB10 '
+      ''
+      '')
+    Optimize = False
+    QBEDefinition.QBEFieldDefs = {
+      040000000800000005000000464B5F49440100000000000700000046435F4E41
+      4D450100000000000A00000046435F4E414D454D4B4201000000000007000000
+      464B5F4D4B423901000000000008000000464B5F4D4B42313001000000000008
+      000000464B5F4F574E45520100000000000A00000046435F53594E4F4E494D01
+      000000000008000000464C5F434845434B010000000000}
+    Session = frmMain.os
+    Left = 312
+    Top = 304
+  end
+  object dsGroupDiag: TDataSource
+    DataSet = odsGroup
+    Left = 240
+    Top = 304
+  end
+  object odsDiag: TOracleDataSet
+    SQL.Strings = (
+      'SELECT ROWID,'
+      '       FK_ID, '
+      '       FC_NAME, UPPER(FC_NAME) AS FC_NAME_UP,'
+      '       FK_MKB10, '
+      '       FK_OWNER,'
+      '       FC_SYNONIM'
+      '  FROM ASU.TSMID'
+      ' WHERE FK_MKB10 IS NOT NULL'
+      '   AND FK_ID <> :pFK_OWNER '
+      'START WITH FK_ID=:pFK_OWNER '
+      'CONNECT BY PRIOR FK_ID=FK_OWNER '
+      ''
+      ''
+      '')
+    Optimize = False
+    Variables.Data = {
+      03000000010000000A0000003A50464B5F4F574E455203000000000000000000
+      0000}
+    QBEDefinition.QBEFieldDefs = {
+      040000000800000005000000464B5F49440100000000000700000046435F4E41
+      4D4501000000000007000000464B5F4D4B423901000000000008000000464B5F
+      4D4B42313001000000000008000000464B5F4F574E45520100000000000A0000
+      0046435F53594E4F4E494D01000000000008000000464C5F434845434B010000
+      000000030000004C4556010000000000}
+    Cursor = crSQLWait
+    LockingMode = lmNone
+    Session = frmMain.os
+    AfterOpen = odsDiagAfterOpen
+    Left = 241
+    Top = 244
+    object odsDiagFK_ID: TFloatField
+      FieldName = 'FK_ID'
+      Required = True
+    end
+    object odsDiagFC_NAME: TStringField
+      FieldName = 'FC_NAME'
+      Size = 255
+    end
+    object odsDiagFK_MKB10: TStringField
+      FieldName = 'FK_MKB10'
+    end
+    object odsDiagFK_OWNER: TFloatField
+      FieldName = 'FK_OWNER'
+    end
+    object odsDiagFC_SYNONIM: TStringField
+      FieldName = 'FC_SYNONIM'
+      Size = 254
+    end
+    object odsDiagFC_NAME_UP: TStringField
+      FieldName = 'FC_NAME_UP'
+      Size = 1000
+    end
+  end
+  object dsNameDiag: TDataSource
+    DataSet = odsDiag
+    Left = 305
+    Top = 242
+  end
+  object al: TActionList
+    Left = 416
+    Top = 248
+    object aSave: TAction
+      Caption = #1042#1099#1073#1088#1072#1090#1100
+      Hint = #1042#1099#1073#1088#1072#1090#1100' '#1076#1080#1072#1075#1085#1086#1079
+      ShortCut = 113
+      OnExecute = aSaveExecute
+    end
+    object aCancel: TAction
+      Caption = #1054#1090#1084#1077#1085#1072
+      Hint = #1054#1090#1084#1077#1085#1072
+      ShortCut = 27
+      OnExecute = aCancelExecute
+    end
+  end
+  object dsVyavlen: TDataSource
+    DataSet = odsVyavlen
+    Left = 240
+    Top = 368
+  end
+  object odsVyavlen: TOracleDataSet
+    SQL.Strings = (
+      'SELECT FK_ID, FC_NAME'
+      '  FROM ASU.TSMID'
+      
+        'WHERE FK_OWNER = (SELECT FK_ID FROM ASU.TSMID WHERE FC_SYNONIM =' +
+        ' '#39'PRIZNAK_DIAGS'#39')'
+      '  AND FL_DEL = 0'
+      'ORDER BY FN_ORDER')
+    Optimize = False
+    Session = frmMain.os
+    Left = 312
+    Top = 368
+  end
+end

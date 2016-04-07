@@ -1,0 +1,41 @@
+DROP TABLE ASU.TSCHET_STAC_REP CASCADE CONSTRAINTS
+/
+
+--
+-- TSCHET_STAC_REP  (Table) 
+--
+CREATE GLOBAL TEMPORARY TABLE ASU.TSCHET_STAC_REP
+(
+  FK_PACID      NUMBER,
+  FC_SCHETTYPE  VARCHAR2(1 BYTE),
+  FC_TOMPTYPE   VARCHAR2(1 BYTE),
+  FN_DUSL_CNT   NUMBER,
+  FN_SUSL_CNT   NUMBER,
+  FN_TOMP_SUM   NUMBER
+)
+ON COMMIT DELETE ROWS
+NOCACHE
+/
+
+COMMENT ON TABLE ASU.TSCHET_STAC_REP IS 'Временная таблица для отчетов "Счет" и "Счет-фактура", отвечает за стационарную часть'
+/
+
+COMMENT ON COLUMN ASU.TSCHET_STAC_REP.FK_PACID IS 'Пациент '
+/
+
+COMMENT ON COLUMN ASU.TSCHET_STAC_REP.FC_SCHETTYPE IS 'Тип счета (1 - ркботающие, 2 - дети до 18, 3,4 - неработающие)'
+/
+
+COMMENT ON COLUMN ASU.TSCHET_STAC_REP.FC_TOMPTYPE IS 'Тип ТОМПа (1 - ТОМП, 2 - ТОМП по КДН, 0 - НЕТ ТОМП)'
+/
+
+COMMENT ON COLUMN ASU.TSCHET_STAC_REP.FN_DUSL_CNT IS 'Кол-во диагностических услуг'
+/
+
+COMMENT ON COLUMN ASU.TSCHET_STAC_REP.FN_SUSL_CNT IS 'Кол-во стоматологических услуг'
+/
+
+COMMENT ON COLUMN ASU.TSCHET_STAC_REP.FN_TOMP_SUM IS 'Сумма за ТОМП'
+/
+
+

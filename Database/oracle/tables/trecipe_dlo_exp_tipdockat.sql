@@ -1,0 +1,99 @@
+ALTER TABLE ASU.TRECIPE_DLO_EXP_TIPDOCKAT
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_EXP_TIPDOCKAT CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_EXP_TIPDOCKAT  (Table) 
+--
+CREATE TABLE ASU.TRECIPE_DLO_EXP_TIPDOCKAT
+(
+  TIPDOCKAT   NUMBER,
+  NAME_SHORT  VARCHAR2(100 BYTE),
+  NAME_FULL   VARCHAR2(200 BYTE),
+  SHABLON     VARCHAR2(100 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_EXP_TIPDOCKAT IS 'ДЛО. Справочник типов документов, подтверждающих право на льготу'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TIPDOCKAT.TIPDOCKAT IS 'Код типа документа льготы'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TIPDOCKAT.NAME_SHORT IS 'Наименование краткое'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TIPDOCKAT.NAME_FULL IS '>Наименование полное'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_TIPDOCKAT.SHABLON IS 'Список шаблонов документа, разделенных ",". Где "N" - число, "C" - символ, "введите данные" -  обязательное заполнение любым значением (поле не должно быть пусто)'
+/
+
+
+--
+-- TRECIPE_DLO_EXP_TIPDOCKAT_PK  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_TIPDOCKAT (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_EXP_TIPDOCKAT_PK ON ASU.TRECIPE_DLO_EXP_TIPDOCKAT
+(TIPDOCKAT)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_EXP_TIPDOCKAT 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_EXP_TIPDOCKAT ADD (
+  CONSTRAINT TRECIPE_DLO_EXP_TIPDOCKAT_PK
+ PRIMARY KEY
+ (TIPDOCKAT)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

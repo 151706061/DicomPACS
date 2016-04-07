@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_OSMOTRLV
+/
+
+--
+-- GET_OSMOTRLV  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_OSMOTRLV" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 5979;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_OSMOTRLV TO PUBLIC
+/
+

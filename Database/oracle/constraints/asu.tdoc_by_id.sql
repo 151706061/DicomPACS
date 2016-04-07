@@ -1,0 +1,13 @@
+ALTER TABLE ASU.TDOC
+  DROP CONSTRAINT TDOC_BY_ID
+/
+
+-- 
+-- Non Foreign Key Constraints for Table TDOC 
+-- 
+ALTER TABLE ASU.TDOC ADD (
+  CONSTRAINT TDOC_BY_ID
+ PRIMARY KEY
+ (FK_ID))
+/
+

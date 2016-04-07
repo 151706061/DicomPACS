@@ -1,0 +1,36 @@
+DROP FUNCTION ASU.GET_VIPNAZ
+/
+
+--
+-- GET_VIPNAZ  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_VIPNAZ"
+return number DETERMINISTIC
+is
+begin
+  return 1;
+end;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM BUH.GET_VIPNAZ
+/
+
+--
+-- GET_VIPNAZ  (Synonym) 
+--
+--  Dependencies: 
+--   GET_VIPNAZ (Function)
+--
+CREATE SYNONYM BUH.GET_VIPNAZ FOR ASU.GET_VIPNAZ
+/
+
+
+GRANT EXECUTE ON ASU.GET_VIPNAZ TO PUBLIC
+/
+

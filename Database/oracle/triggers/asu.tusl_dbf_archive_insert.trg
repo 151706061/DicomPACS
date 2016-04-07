@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TUSL_DBF_ARCHIVE_INSERT
+/
+
+--
+-- TUSL_DBF_ARCHIVE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TUSL_DBF_ARCHIVE (Sequence)
+--   TUSL_DBF_ARCHIVE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TUSL_DBF_ARCHIVE_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.tusl_dbf_archive
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT asu.SEQ_tusl_dbf_archive.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

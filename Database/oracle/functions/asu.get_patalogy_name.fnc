@@ -1,0 +1,56 @@
+DROP FUNCTION ASU.GET_PATALOGY_NAME
+/
+
+--
+-- GET_PATALOGY_NAME  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TRESAN (Table)
+--   GET_PATNAME (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PATALOGY_NAME" (pFK_NAZID IN NUMBER, pFK_SMID IN NUMBER, pFK_COLID IN NUMBER := NULL)
+  RETURN VARCHAR2 IS
+  CURSOR cGetPat (pSMID NUMBER, pNAZID NUMBER) IS
+    SELECT GET_PATNAME(FK_PATID) FC_PAT
+      FROM TRESAN
+     WHERE FK_SMID = pSMID
+       AND FK_NAZID = pNAZID
+       AND FL_ZAKL <> 1
+       AND FK_PATID IS NOT NULL;
+
+  CURSOR cGetMPat (pSMID NUMBER, pNAZID NUMBER) IS
+    SELECT GET_PATNAME(FK_PATID) FC_PAT
+      FROM TRESAN
+     WHERE FK_SMID = pSMID
+       AND FK_NAZID = pNAZID
+       AND FL_ZAKL <> 1
+       AND FK_COLID = pFK_COLID;
+
+  strPat VARCHAR2 (20);
+  curPat VARCHAR2 (20);
+BEGIN
+    IF pFK_COLID IS NULL THEN
+    FOR curPat IN cGetPat (pFK_SMID, pFK_NAZID) LOOP
+        strPat := curPat.FC_PAT;
+        IF (curPat.FC_PAT  IS NOT NULL) THEN
+            RETURN strPat;
+        END IF;
+    END LOOP;
+      OPEN cGetPat (pFK_SMID, pFK_NAZID);
+      FETCH cGetPat INTO strPat;
+      CLOSE cGetPat;
+    ELSE
+      OPEN cGetMPat (pFK_SMID, pFK_NAZID);
+      FETCH cGetMPat INTO strPat;
+      CLOSE cGetMPat;
+    END IF;
+
+    RETURN strPat;
+END;
+/
+
+SHOW ERRORS;
+
+

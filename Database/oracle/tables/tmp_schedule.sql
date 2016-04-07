@@ -1,0 +1,31 @@
+DROP TABLE ASU.TMP_SCHEDULE CASCADE CONSTRAINTS
+/
+
+--
+-- TMP_SCHEDULE  (Table) 
+--
+CREATE TABLE ASU.TMP_SCHEDULE
+(
+  OID  CHAR(36 BYTE)                            NOT NULL
+)
+TABLESPACE USERS
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          320K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+

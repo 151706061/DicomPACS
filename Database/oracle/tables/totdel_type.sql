@@ -1,0 +1,35 @@
+DROP TABLE ASU.TOTDEL_TYPE CASCADE CONSTRAINTS
+/
+
+--
+-- TOTDEL_TYPE  (Table) 
+--
+CREATE TABLE ASU.TOTDEL_TYPE
+(
+  FK_TYPEID   NUMBER,
+  FK_OTDELID  NUMBER                            NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TOTDEL_TYPE IS 'Таблица соответствий типов отделений'
+/
+
+

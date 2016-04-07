@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015.03.06 11:47:53.486.pas,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\DICOM_Viewer_DLL\source\MnUnit1.pas</Transaction>
+    <Transaction>2015.03.06 11:47:53.486.dfm,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\DICOM_Viewer_DLL\source\MnUnit1.dfm</Transaction>
+    <Transaction>2015.03.06 11:48:20.010.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\Project1.dproj=C:\Delphi\Trunk_AUTH\ASU2\Dicom\DICOM_Viewer_DLL\source\DicomVw.dproj</Transaction>
+    <Transaction>2015.03.06 11:48:37.947.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\DICOM_Viewer_DLL\source\MnUnit1.pas=</Transaction>
+    <Transaction>2015.03.06 11:48:37.947.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\DICOM_Viewer_DLL\source\MnUnit1.dfm=</Transaction>
+  </Transactions>
+</BorlandProject>

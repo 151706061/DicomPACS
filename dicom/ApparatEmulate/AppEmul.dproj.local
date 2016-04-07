@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+  <Transactions>
+    <Transaction>2014.10.15 08:38:01.864.pas,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\ApparatEmulate\UnMain.pas</Transaction>
+    <Transaction>2014.10.15 08:38:01.864.dfm,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\ApparatEmulate\UnMain.dfm</Transaction>
+    <Transaction>2014.10.15 08:38:21.076.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\Project1.dproj=C:\Delphi\Trunk_AUTH\ASU2\Dicom\ApparatEmulate\AppEmul.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

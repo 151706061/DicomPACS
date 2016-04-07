@@ -1,0 +1,161 @@
+ALTER TABLE ASU.TVVODPATH
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TVVODPATH CASCADE CONSTRAINTS
+/
+
+--
+-- TVVODPATH  (Table) 
+--
+CREATE TABLE ASU.TVVODPATH
+(
+  FK_ID       NUMBER(10)                        NOT NULL,
+  FC_NAME     VARCHAR2(50 BYTE),
+  FK_SMIDID   NUMBER(9),
+  FN_PRICE    NUMBER(18,6),
+  FL_PROCCAB  NUMBER(1)                         DEFAULT 0,
+  FC_SYNONIM  VARCHAR2(100 BYTE),
+  FL_VISIBLE  NUMBER(1)                         DEFAULT 1,
+  FN_ORDER    NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVVODPATH IS 'Форма введения медикамента (27.01.06 Sill)'
+/
+
+COMMENT ON COLUMN ASU.TVVODPATH.FK_ID IS 'SEQUENCE=[SEQ_TVVODPATH]'
+/
+
+COMMENT ON COLUMN ASU.TVVODPATH.FC_NAME IS 'Название'
+/
+
+COMMENT ON COLUMN ASU.TVVODPATH.FK_SMIDID IS 'Код смида (для выполнения связанных назначений)'
+/
+
+COMMENT ON COLUMN ASU.TVVODPATH.FN_PRICE IS 'Порог стоимости дорогостоящего препарата'
+/
+
+COMMENT ON COLUMN ASU.TVVODPATH.FL_PROCCAB IS 'Признак назначений в процедурный кабинет'
+/
+
+COMMENT ON COLUMN ASU.TVVODPATH.FC_SYNONIM IS 'Синоним (добавил Неронов А.С. 021210)'
+/
+
+COMMENT ON COLUMN ASU.TVVODPATH.FL_VISIBLE IS 'признак видимости'
+/
+
+COMMENT ON COLUMN ASU.TVVODPATH.FN_ORDER IS 'Для сортировки'
+/
+
+
+--
+-- TVVODPATH_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TVVODPATH (Table)
+--
+CREATE UNIQUE INDEX ASU.TVVODPATH_BY_ID ON ASU.TVVODPATH
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          40K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVVODPATH_BY_SYNONIM  (Index) 
+--
+--  Dependencies: 
+--   TVVODPATH (Table)
+--
+CREATE INDEX ASU.TVVODPATH_BY_SYNONIM ON ASU.TVVODPATH
+(FC_SYNONIM)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVVODPATH_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TVVODPATH (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVVODPATH_BEFORE_INSERT" 
+  BEFORE INSERT ON tvvodpath  
+  FOR EACH ROW
+BEGIN
+  IF :NEW.FK_ID IS NULL THEN
+    SELECT SEQ_tvvodpath.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  END IF;  
+END tvvodpath_BEFORE_INSERT;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TVVODPATH 
+-- 
+ALTER TABLE ASU.TVVODPATH ADD (
+  CONSTRAINT TVVODPATH_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          40K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+GRANT SELECT ON ASU.TVVODPATH TO MED
+/
+

@@ -1,0 +1,280 @@
+DROP TABLE ASU.TNAZGROUP CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZGROUP  (Table) 
+--
+CREATE TABLE ASU.TNAZGROUP
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FK_NAZID      NUMBER,
+  FK_GROUPID    NUMBER,
+  FD_RUN        DATE,
+  FK_SMID       NUMBER,
+  FD_REGIST     DATE,
+  FK_LABREG     NUMBER,
+  FN_PROBE      NUMBER,
+  FK_PACID      NUMBER,
+  FK_NAZTYPEID  NUMBER,
+  FK_VRACHID    NUMBER,
+  FD_DATE       DATE,
+  FL_PRINT      NUMBER                          DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNAZGROUP IS 'For LibAnal.dpr // By Kulechek'
+/
+
+COMMENT ON COLUMN ASU.TNAZGROUP.FK_NAZID IS 'ссылка на TNAZAN.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TNAZGROUP.FK_GROUPID IS 'ID группы'
+/
+
+COMMENT ON COLUMN ASU.TNAZGROUP.FD_RUN IS 'дата когда необходимо выполнить'
+/
+
+COMMENT ON COLUMN ASU.TNAZGROUP.FK_SMID IS 'ссылка на TNAZAN.FK_SMID'
+/
+
+COMMENT ON COLUMN ASU.TNAZGROUP.FD_REGIST IS 'Дата регистрации'
+/
+
+
+--
+-- TNAZGROUP_BY_ALL  (Index) 
+--
+--  Dependencies: 
+--   TNAZGROUP (Table)
+--
+CREATE INDEX ASU.TNAZGROUP_BY_ALL ON ASU.TNAZGROUP
+(FK_GROUPID, FK_PACID, FN_PROBE, FK_VRACHID, FK_SMID, 
+FD_REGIST, FD_RUN)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZGROUP_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TNAZGROUP (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZGROUP_BY_ID ON ASU.TNAZGROUP
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZGROUP_BY_NAZID  (Index) 
+--
+--  Dependencies: 
+--   TNAZGROUP (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZGROUP_BY_NAZID ON ASU.TNAZGROUP
+(FK_NAZID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZGROUP_BY_NAZID_SMID_REG  (Index) 
+--
+--  Dependencies: 
+--   TNAZGROUP (Table)
+--
+CREATE INDEX ASU.TNAZGROUP_BY_NAZID_SMID_REG ON ASU.TNAZGROUP
+(FK_NAZID, FK_SMID, FD_REGIST)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZGROUP_BY_PAC  (Index) 
+--
+--  Dependencies: 
+--   TNAZGROUP (Table)
+--
+CREATE INDEX ASU.TNAZGROUP_BY_PAC ON ASU.TNAZGROUP
+(FK_PACID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZGROUP_BY_SMID_DATA_PRO  (Index) 
+--
+--  Dependencies: 
+--   TNAZGROUP (Table)
+--
+CREATE INDEX ASU.TNAZGROUP_BY_SMID_DATA_PRO ON ASU.TNAZGROUP
+(FK_SMID, FD_DATE, FN_PROBE)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZGROUP_BY_SMID_DATE_NAZ  (Index) 
+--
+--  Dependencies: 
+--   TNAZGROUP (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZGROUP_BY_SMID_DATE_NAZ ON ASU.TNAZGROUP
+(FK_SMID, FD_REGIST, FK_NAZID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZGROUP_BY_SMID_DATE_NAZ_PRO  (Index) 
+--
+--  Dependencies: 
+--   TNAZGROUP (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZGROUP_BY_SMID_DATE_NAZ_PRO ON ASU.TNAZGROUP
+(FK_SMID, FD_REGIST, FK_NAZID, FN_PROBE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZGROUP_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZGROUP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZGROUP_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TNAZGROUP  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+    SELECT SEQ_TNAZGROUP.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+

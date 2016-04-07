@@ -1,0 +1,27 @@
+DROP FUNCTION ASU.GET_MAXSROKID
+/
+
+--
+-- GET_MAXSROKID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSROKY (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_MAXSROKID" 
+  ( pFK_ID IN NUMBER)
+  RETURN  NUMBER IS
+  CURSOR cTemp IS SELECT /*+first_row*/ MAX(FK_ID) FROM TSROKY WHERE FK_PACID=pFK_ID;
+  nTemp NUMBER;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO nTemp;
+  CLOSE cTemp;
+  RETURN nTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

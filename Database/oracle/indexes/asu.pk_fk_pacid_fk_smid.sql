@@ -1,0 +1,25 @@
+DROP INDEX ASU.PK_FK_PACID_FK_SMID
+/
+
+--
+-- PK_FK_PACID_FK_SMID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.PK_FK_PACID_FK_SMID ON ASU.TNEXTYAVKA
+(FK_PACID, FK_SMID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

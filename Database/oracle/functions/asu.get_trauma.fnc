@@ -1,0 +1,44 @@
+DROP FUNCTION ASU.GET_TRAUMA
+/
+
+--
+-- GET_TRAUMA  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TIB (Table)
+--   TAMBTALON (Table)
+--   TSMID (Table)
+--   GET_SMIDNAME (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_TRAUMA" (pfk_pacid IN NUMBER) RETURN VARCHAR2 IS
+
+ -- created by Serg
+
+ CURSOR c IS
+  SELECT MAX(SM.FC_NAME)
+    FROM TIB,
+         (SELECT FK_ID, FC_NAME
+            FROM TSMID
+          CONNECT BY PRIOR FK_ID = FK_OWNER
+           START WITH FC_SYNONIM = 'PD_TRAVM') SM
+   WHERE SM.FK_ID = TIB.FK_SMID
+     AND TIB.FK_PACID = pfk_pacid;
+ D VARCHAR2(32767);
+
+BEGIN
+ OPEN C;
+ FETCH C
+ INTO D;
+ CLOSE C;
+ IF D IS NULL THEN
+  SELECT ASU.GET_SMIDNAME(T.FK_TRAVMA) INTO D FROM TAMBTALON T WHERE T.FK_ID = pfk_pacid;
+ END IF;
+ RETURN D;
+END;
+/
+
+SHOW ERRORS;
+
+

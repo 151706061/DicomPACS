@@ -1,0 +1,154 @@
+DROP TABLE ASU.TPATALOGY CASCADE CONSTRAINTS
+/
+
+--
+-- TPATALOGY  (Table) 
+--
+CREATE TABLE ASU.TPATALOGY
+(
+  FK_ID       NUMBER(16)                        DEFAULT -1                    NOT NULL,
+  FK_PACID    NUMBER(16)                        DEFAULT -1                    NOT NULL,
+  FK_SMID     NUMBER(16)                        DEFAULT -1                    NOT NULL,
+  FK_PATID    NUMBER(16)                        DEFAULT -1                    NOT NULL,
+  FK_VRACHID  NUMBER(16)                        DEFAULT -1,
+  FD_DATA     DATE,
+  FL_SHOWN    NUMBER(1)                         DEFAULT 0                     NOT NULL,
+  FK_RESID    NUMBER(15)                        DEFAULT -1                    NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          936K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TPATALOGY.FK_ID IS 'SEQUENCE=[SEQ_TPATALOGY]'
+/
+
+COMMENT ON COLUMN ASU.TPATALOGY.FK_PACID IS 'Patient code (TKARTA.FK_ID OR TAMBULANCE.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TPATALOGY.FK_SMID IS 'Code of patalogy (TSMID.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TPATALOGY.FK_PATID IS 'Code of level of patalogy (TPATNAME.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TPATALOGY.FK_VRACHID IS 'Code of vrach (TSOTR.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TPATALOGY.FD_DATA IS 'Date of setting patalogy'
+/
+
+COMMENT ON COLUMN ASU.TPATALOGY.FL_SHOWN IS 'IS SHOWN??'
+/
+
+COMMENT ON COLUMN ASU.TPATALOGY.FK_RESID IS 'Result ID'
+/
+
+
+--
+-- TPATALOGY_BY_PACID  (Index) 
+--
+--  Dependencies: 
+--   TPATALOGY (Table)
+--
+CREATE INDEX ASU.TPATALOGY_BY_PACID ON ASU.TPATALOGY
+(FK_VRACHID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          512K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPATALOGY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TPATALOGY (Table)
+--
+CREATE UNIQUE INDEX ASU.TPATALOGY_FK_ID ON ASU.TPATALOGY
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          384K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPATALOGY_VRACHID_SHOWN  (Index) 
+--
+--  Dependencies: 
+--   TPATALOGY (Table)
+--
+CREATE INDEX ASU.TPATALOGY_VRACHID_SHOWN ON ASU.TPATALOGY
+(FK_VRACHID, FL_SHOWN)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          512K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPATALOGY_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPATALOGY (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPATALOGY_BEFORE_INSERT" 
+  BEFORE INSERT
+  ON ASU.TPATALOGY   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TPATALOGY.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,25 @@
+DROP INDEX ASU.TBALANCEMOVE_BY_FK_TO
+/
+
+--
+-- TBALANCEMOVE_BY_FK_TO  (Index) 
+--
+CREATE INDEX ASU.TBALANCEMOVE_BY_FK_TO ON ASU.TBALANCEMOVE
+(FK_TO)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,177 @@
+.myborder {
+	border:1px solid; 
+}
+
+.clear-float {
+    clear: both;
+}
+
+.myhdtext {
+	border:none;
+	white-space: normal;
+	height:50px;
+}
+
+.tfld0 {
+	min-width:20px !important;
+	width:20px;
+	max-width:20px;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.tfld1 {
+	min-width:10px !important;
+	width:80px;
+	max-width:93px;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.tfld2 {
+	min-width:10px !important;
+	max-width:160px;
+	width:160px;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.tfld3 {
+	max-width:94px ;
+	width:80px ;
+	min-width:10px !important;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.tfld4 {
+	max-width:106px ;
+	width:64px ;
+	min-width:10px !important;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.tfld5 {
+	max-width:60px ;
+	width:36px ;
+	min-width:10px !important;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.tfld6 {
+	max-width:130px ;
+	width:130px ;
+	min-width:130px !important;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.tfld7 {
+	max-width:90px ;
+	width:80px ;
+	min-width:10px !important;
+	white-space: normal;
+	overflow:hidden; 
+	word-wrap:break-word;
+}
+
+.myfloatleft {
+	float:left;
+	left:auto;
+}
+
+.myrows {
+	width:670px;
+	padding-top: 5px;
+}
+
+.mymodbtn {
+	height: 19px;
+    width: 19px;
+	padding:0px !important;
+}
+
+.nopad {
+	padding:0px !important;
+}
+
+.ui-button-text-only .ui-button-text {
+	padding: 0 !important;
+	font-family: Courier New,monospace;
+    font-size: 12px;
+    padding: 0 !important;
+}
+
+.mybottomcolor {
+	background-color: #0D2937;
+/*	color: #000000;*/
+}
+
+.myfbtn {
+	color: white;
+}
+
+.myfbtn1 {
+/*	font-size: 7pt !important;
+	padding: 1px 0 !important;*/
+/*	font-size: 10pt !important;
+	height: 30px !important;
+	line-height: 30px !important;
+	width: 30px !important;*/
+}
+
+.mydcmtags {
+	color:white;
+	position:fixed;
+}
+
+.myleft_hdiv {
+	float:left;
+	left:auto;
+	height:35px;
+	width:290px;
+}
+
+.myleft_w1div {
+	float:left;
+	left:auto;
+	width:98px;
+	padding-top:3px;
+}
+
+.myleft_w2div {
+	float:left;
+	left:auto;
+	width:100px;
+}
+
+.myurgmenu {
+	width:130px;
+}
+
+.chk_btn {
+	background-color:#FF8D4C;
+	width:90px; 
+	height: 24px;
+	border:none;
+	color:white;
+	padding-top: 2px;
+}
+
+.chk_btn1 {
+	
+}
+
+.chk_btn2 {
+	margin-top: 3px;
+}
+

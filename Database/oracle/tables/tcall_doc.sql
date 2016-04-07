@@ -1,0 +1,120 @@
+ALTER TABLE ASU.TCALL_DOC
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TCALL_DOC CASCADE CONSTRAINTS
+/
+
+--
+-- TCALL_DOC  (Table) 
+--
+CREATE TABLE ASU.TCALL_DOC
+(
+  FK_ID           NUMBER                        NOT NULL,
+  FK_AMBULANCE    NUMBER,
+  FD_DATE         DATE,
+  FC_REMARK       VARCHAR2(1000 BYTE),
+  FK_DISTR_NAME   NUMBER,
+  FK_DISTR_VRACH  NUMBER,
+  FL_PODPIS       NUMBER(1)                     DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TCALL_DOC IS '-- Вызовы врача на дом -- Created 20081014 by Linnikov'
+/
+
+COMMENT ON COLUMN ASU.TCALL_DOC.FK_AMBULANCE IS 'Кто заболел (TAMBULANCE.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TCALL_DOC.FD_DATE IS 'Когда записался'
+/
+
+COMMENT ON COLUMN ASU.TCALL_DOC.FC_REMARK IS 'Жалобы (кратко)'
+/
+
+COMMENT ON COLUMN ASU.TCALL_DOC.FK_DISTR_NAME IS 'ссылка на участок (tdistrict_name)'
+/
+
+
+--
+-- TCALL_DOC_PK  (Index) 
+--
+--  Dependencies: 
+--   TCALL_DOC (Table)
+--
+CREATE UNIQUE INDEX ASU.TCALL_DOC_PK ON ASU.TCALL_DOC
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TCALL_DOC_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TCALL_DOC (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TCALL_DOC_INSERT" 
+ BEFORE
+  INSERT
+ ON ASU.TCALL_DOC REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TCALL_DOC.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TCALL_DOC 
+-- 
+ALTER TABLE ASU.TCALL_DOC ADD (
+  CONSTRAINT TCALL_DOC_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

@@ -1,0 +1,31 @@
+DROP FUNCTION ASU.GET_APPNAME
+/
+
+--
+-- GET_APPNAME  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TAPPVIEW (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_APPNAME" 
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+-- Purpose: Возвращает имя ехешника
+  CURSOR c IS SELECT /*+rule*/FC_OPIS FROM TAPPVIEW WHERE FK_ID=pFK_ID;
+  str VARCHAR2(60);
+BEGIN
+  IF C%ISOPEN THEN
+    CLOSE C;
+  END IF;
+  OPEN C;
+  FETCH C INTO str;
+  CLOSE C;
+  RETURN str;
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TAUCHEDASU_INS
+/
+
+--
+-- TAUCHEDASU_INS  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TAUCHED (Sequence)
+--   TAUCHED (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TAUCHEDASU_INS" 
+BEFORE INSERT
+ON ASU.TAUCHED REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+bEGIN
+  SELECT seq_tauched.nextval
+    INTO :new.fk_id
+    FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

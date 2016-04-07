@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012.11.22 09:05:08.552.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Viewer\Source\fSnimok.pas=</Transaction>
+    <Transaction>2012.11.22 09:05:08.552.dfm,C:\Delphi\Trunk_AUTH\ASU2\Dicom\Viewer\Source\fSnimok.dfm=</Transaction>
+    <Transaction>2012.11.22 11:02:10.463.pas,C:\Delphi\Trunk_AUTH\ASU2\uCommon_Dicom\fSnimok.pas=</Transaction>
+    <Transaction>2012.11.22 11:02:10.463.dfm,C:\Delphi\Trunk_AUTH\ASU2\uCommon_Dicom\fSnimok.dfm=</Transaction>
+  </Transactions>
+</BorlandProject>

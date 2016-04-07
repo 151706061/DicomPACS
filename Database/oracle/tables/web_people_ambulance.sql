@@ -1,0 +1,82 @@
+DROP TABLE ASU.WEB_PEOPLE_AMBULANCE CASCADE CONSTRAINTS
+/
+
+--
+-- WEB_PEOPLE_AMBULANCE  (Table) 
+--
+CREATE TABLE ASU.WEB_PEOPLE_AMBULANCE
+(
+  WEB_PEOPLE_ID  CHAR(36 BYTE),
+  AMBULANCE_ID   NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- WPA_BY_AMBULANCE_ID  (Index) 
+--
+--  Dependencies: 
+--   WEB_PEOPLE_AMBULANCE (Table)
+--
+CREATE INDEX ASU.WPA_BY_AMBULANCE_ID ON ASU.WEB_PEOPLE_AMBULANCE
+(AMBULANCE_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- WPA_BY_WEB_PEOPLE  (Index) 
+--
+--  Dependencies: 
+--   WEB_PEOPLE_AMBULANCE (Table)
+--
+CREATE INDEX ASU.WPA_BY_WEB_PEOPLE ON ASU.WEB_PEOPLE_AMBULANCE
+(WEB_PEOPLE_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

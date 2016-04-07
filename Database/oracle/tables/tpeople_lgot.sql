@@ -1,0 +1,186 @@
+ALTER TABLE ASU.TPEOPLE_LGOT
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TPEOPLE_LGOT CASCADE CONSTRAINTS
+/
+
+--
+-- TPEOPLE_LGOT  (Table) 
+--
+CREATE TABLE ASU.TPEOPLE_LGOT
+(
+  FK_ID        INTEGER                          NOT NULL,
+  FK_PEOPLEID  INTEGER,
+  FK_SMID      INTEGER,
+  FC_DOCNAME   VARCHAR2(255 BYTE),
+  FC_SERNUM    VARCHAR2(25 BYTE),
+  FD_BEGIN     DATE,
+  FD_END       DATE,
+  FC_ICD10     VARCHAR2(5 BYTE),
+  FD_DOC_END   DATE,
+  FK_DOCKAT    NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPEOPLE_LGOT IS 'Льготы Author:Linnikov '
+/
+
+COMMENT ON COLUMN ASU.TPEOPLE_LGOT.FK_PEOPLEID IS 'ASU.TPEOPLES.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TPEOPLE_LGOT.FK_SMID IS 'ASU.TSMID.FK_ID (тип льготы)'
+/
+
+COMMENT ON COLUMN ASU.TPEOPLE_LGOT.FC_DOCNAME IS 'Наименование документа, подтверждающего право на получение ГСП'
+/
+
+COMMENT ON COLUMN ASU.TPEOPLE_LGOT.FC_SERNUM IS 'Серия и номер документа'
+/
+
+COMMENT ON COLUMN ASU.TPEOPLE_LGOT.FD_BEGIN IS 'Дата выдачи документа'
+/
+
+COMMENT ON COLUMN ASU.TPEOPLE_LGOT.FD_END IS 'Дата окончания действия льготы'
+/
+
+COMMENT ON COLUMN ASU.TPEOPLE_LGOT.FC_ICD10 IS 'Код МКБ10'
+/
+
+COMMENT ON COLUMN ASU.TPEOPLE_LGOT.FD_DOC_END IS 'Дата окончания действия льготы'
+/
+
+COMMENT ON COLUMN ASU.TPEOPLE_LGOT.FK_DOCKAT IS 'Тип документа на категорию льготности ASU.TSMID.FK_ID (тип льготы)'
+/
+
+
+--
+-- TPEOPLE_LGOT_DATES  (Index) 
+--
+--  Dependencies: 
+--   TPEOPLE_LGOT (Table)
+--
+CREATE INDEX ASU.TPEOPLE_LGOT_DATES ON ASU.TPEOPLE_LGOT
+(FD_BEGIN, FD_END)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPEOPLE_LGOT_PEOPLE_ID  (Index) 
+--
+--  Dependencies: 
+--   TPEOPLE_LGOT (Table)
+--
+CREATE INDEX ASU.TPEOPLE_LGOT_PEOPLE_ID ON ASU.TPEOPLE_LGOT
+(FK_PEOPLEID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPEOPLE_LGOT_PK  (Index) 
+--
+--  Dependencies: 
+--   TPEOPLE_LGOT (Table)
+--
+CREATE UNIQUE INDEX ASU.TPEOPLE_LGOT_PK ON ASU.TPEOPLE_LGOT
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPEOPLE_LGOT_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPEOPLE_LGOT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPEOPLE_LGOT_BEFORE_INSERT" 
+ BEFORE INSERT ON ASU.TPEOPLE_LGOT  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+ SELECT ASU.SEQ_TPEOPLE_LGOT.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TPEOPLE_LGOT 
+-- 
+ALTER TABLE ASU.TPEOPLE_LGOT ADD (
+  CONSTRAINT TPEOPLE_LGOT_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

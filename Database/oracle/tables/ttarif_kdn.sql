@@ -1,0 +1,70 @@
+DROP TABLE ASU.TTARIF_KDN CASCADE CONSTRAINTS
+/
+
+--
+-- TTARIF_KDN  (Table) 
+--
+CREATE TABLE ASU.TTARIF_KDN
+(
+  FK_ID       NUMBER                            NOT NULL,
+  FK_TIPROOM  NUMBER                            NOT NULL,
+  FD_DATE     DATE                              NOT NULL,
+  FN_COST     NUMBER                            DEFAULT 0                     NOT NULL,
+  FL_DEL      NUMBER(1)                         DEFAULT 0                     NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TTARIF_KDN IS 'Таблица тарифов на проживание. Author: Neronov A.S.'
+/
+
+COMMENT ON COLUMN ASU.TTARIF_KDN.FK_ID IS 'SEQUENCE=[SEQ_TTARIF_KDN]'
+/
+
+COMMENT ON COLUMN ASU.TTARIF_KDN.FK_TIPROOM IS 'TTIPROOM.FK_ID - Профиль койки'
+/
+
+COMMENT ON COLUMN ASU.TTARIF_KDN.FD_DATE IS 'Дата начала действия тарифа'
+/
+
+COMMENT ON COLUMN ASU.TTARIF_KDN.FN_COST IS 'Стоимость койко-дня'
+/
+
+COMMENT ON COLUMN ASU.TTARIF_KDN.FL_DEL IS '1 - удален'
+/
+
+
+--
+-- TTARIF_KDN_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TTARIF_KDN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TTARIF_KDN_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TTARIF_KDN REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  SELECT SEQ_TTARIF_KDN.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

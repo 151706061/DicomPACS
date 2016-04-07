@@ -1,0 +1,71 @@
+DROP TABLE ASU.TNAZOPER_DIAG CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZOPER_DIAG  (Table) 
+--
+CREATE TABLE ASU.TNAZOPER_DIAG
+(
+  FK_NAZOPERID  NUMBER(15)                      NOT NULL,
+  FK_DIAGID     NUMBER(15)                      NOT NULL,
+  FK_SOTRID     NUMBER(10),
+  FD_DATE       DATE                            DEFAULT sysdate
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TNAZOPER_DIAG.FK_NAZOPERID IS '->tnazoper.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TNAZOPER_DIAG.FK_DIAGID IS '->tdiag.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TNAZOPER_DIAG.FK_SOTRID IS 'кто добавил диагноз->tsotr.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TNAZOPER_DIAG.FD_DATE IS 'когда добавил'
+/
+
+
+--
+-- TNAZOPER_DIAG_BY_NAZDIAGID  (Index) 
+--
+--  Dependencies: 
+--   TNAZOPER_DIAG (Table)
+--
+CREATE INDEX ASU.TNAZOPER_DIAG_BY_NAZDIAGID ON ASU.TNAZOPER_DIAG
+(FK_NAZOPERID, FK_DIAGID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

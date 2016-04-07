@@ -1,0 +1,153 @@
+ALTER TABLE ASU.TGUARDIAN
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TGUARDIAN CASCADE CONSTRAINTS
+/
+
+--
+-- TGUARDIAN  (Table) 
+--
+CREATE TABLE ASU.TGUARDIAN
+(
+  FK_ID            NUMBER(15)                   NOT NULL,
+  FK_PACID         NUMBER(15),
+  FK_PAC_PEPLID    NUMBER(15),
+  FK_GUARD_PEPLID  NUMBER(15)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- IDX_TGUARDIAN_FK_PACID  (Index) 
+--
+--  Dependencies: 
+--   TGUARDIAN (Table)
+--
+CREATE INDEX ASU.IDX_TGUARDIAN_FK_PACID ON ASU.TGUARDIAN
+(FK_PACID)
+LOGGING
+TABLESPACE SYSTEM
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- IDX_TGUARDIAN_GUARDPID  (Index) 
+--
+--  Dependencies: 
+--   TGUARDIAN (Table)
+--
+CREATE INDEX ASU.IDX_TGUARDIAN_GUARDPID ON ASU.TGUARDIAN
+(FK_GUARD_PEPLID)
+LOGGING
+TABLESPACE SYSTEM
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- PK_TGUARDIAN  (Index) 
+--
+--  Dependencies: 
+--   TGUARDIAN (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TGUARDIAN ON ASU.TGUARDIAN
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TGUARDIAN_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TGUARDIAN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TGUARDIAN_BI
+ BEFORE INSERT
+ ON ASU.TGUARDIAN REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+ IF :NEW.FK_ID IS NULL THEN
+    SELECT ASU.SEQ_TGUARDIAN.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+ END IF;
+END TGUARDIAN_BI;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TGUARDIAN 
+-- 
+ALTER TABLE ASU.TGUARDIAN ADD (
+  CONSTRAINT PK_TGUARDIAN
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

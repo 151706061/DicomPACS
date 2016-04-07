@@ -1,0 +1,35 @@
+DROP TABLE ASU.TALGPARTYPE CASCADE CONSTRAINTS
+/
+
+--
+-- TALGPARTYPE  (Table) 
+--
+CREATE TABLE ASU.TALGPARTYPE
+(
+  FK_ID    NUMBER(3),
+  FC_NAME  VARCHAR2(25 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TALGPARTYPE IS 'список типов параметров для алгоритмов'
+/
+
+

@@ -1,0 +1,162 @@
+ALTER TABLE ASU.TINSUR_DOGOVOR
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TINSUR_DOGOVOR CASCADE CONSTRAINTS
+/
+
+--
+-- TINSUR_DOGOVOR  (Table) 
+--
+CREATE TABLE ASU.TINSUR_DOGOVOR
+(
+  FK_ID             NUMBER                      NOT NULL,
+  FK_COMPANYID      NUMBER                      NOT NULL,
+  FD_DATE           DATE                        NOT NULL,
+  FD_BEGIN          DATE                        NOT NULL,
+  FD_END            DATE,
+  FC_NUMBER         VARCHAR2(255 BYTE),
+  FN_LIMIT_PAC      NUMBER,
+  FN_LIMIT_DOGOVOR  NUMBER,
+  FC_COMMENT        VARCHAR2(4000 BYTE),
+  FK_TYPEDOC        NUMBER                      DEFAULT 2,
+  FN_STATE          NUMBER(1)                   DEFAULT 0,
+  FL_DEL            NUMBER(1)                   DEFAULT 0,
+  FN_DISCOUNT       NUMBER,
+  FN_CREATE_FROM    NUMBER,
+  FK_OTDELID        NUMBER,
+  FN_LIMIT          NUMBER,
+  FD_EXTENSION      DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TINSUR_DOGOVOR IS 'Таблаци договоров на оказание платных услуг(Author: Spasskiy S.N.)'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FD_EXTENSION IS 'Продлен до...'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FK_ID IS 'SEQUENCE=[SEQ_TINSUR_PROGRAMM]'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FK_COMPANYID IS 'Код организации(TCOMPANY.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FD_DATE IS 'Дата создания договора'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FD_BEGIN IS 'Дата начала действия договора'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FD_END IS 'Дата окончания действия договора'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FC_NUMBER IS 'Номер договора'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FN_LIMIT_PAC IS 'Максимальная сумма оплаты на пациента'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FN_LIMIT_DOGOVOR IS 'Максимальная сумма оплаты на договор'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FC_COMMENT IS 'Описание договора'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FK_TYPEDOC IS 'Тип документа, TTYPEDOC.FK_ID (by Spasskiy S.N. 18022008)'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FN_STATE IS 'Статус договора(0- активный, 1 - приостановлено действие) (by Spasskiy S.N. 18022008)'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FL_DEL IS 'Признак удаления(by Spasskiy S.N. 18022008)'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FN_DISCOUNT IS 'Скидка на услуги по договору(by Kulikovskiy E.V. 16092011)'
+/
+
+COMMENT ON COLUMN ASU.TINSUR_DOGOVOR.FN_CREATE_FROM IS '0-из INSURPROGRAM, 1 -не из INSURPROGRAM'
+/
+
+
+--
+-- TINSUR_DOGOVOR_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TINSUR_DOGOVOR (Table)
+--
+CREATE UNIQUE INDEX ASU.TINSUR_DOGOVOR_BY_ID ON ASU.TINSUR_DOGOVOR
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TINSUR_DOGOVOR_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TINSUR_DOGOVOR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TINSUR_DOGOVOR_INSERT
+  BEFORE INSERT ON ASU.TINSUR_DOGOVOR   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+BEGIN
+  --SELECT SEQ_TINSUR_PROGRAMM.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  SELECT ASU.SEQ_TDOGOVOR.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END TINSUR_DOGOVOR_INSERT;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TINSUR_DOGOVOR 
+-- 
+ALTER TABLE ASU.TINSUR_DOGOVOR ADD (
+  CONSTRAINT TINSUR_DOGOVOR_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

@@ -1,0 +1,229 @@
+DROP TABLE ASU.TROOM CASCADE CONSTRAINTS
+/
+
+--
+-- TROOM  (Table) 
+--
+CREATE TABLE ASU.TROOM
+(
+  FK_ID         NUMBER(15)                      NOT NULL,
+  FK_KORPID     NUMBER(15)                      DEFAULT -1                    NOT NULL,
+  FC_PALATA     VARCHAR2(10 BYTE),
+  FN_FLOOR      NUMBER(3)                       DEFAULT 0                     NOT NULL,
+  FC_OPIS       VARCHAR2(160 BYTE),
+  FK_VRACHID    NUMBER(15)                      DEFAULT -1,
+  OLDID         NUMBER,
+  FK_OTDELID    INTEGER,
+  FK_KOMFORTID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          576K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TROOM IS '—правочник палат by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TROOM.FK_ID IS 'SEQUENCE=[SEQ_TROOM]'
+/
+
+COMMENT ON COLUMN ASU.TROOM.FK_KORPID IS 'код корпуса'
+/
+
+COMMENT ON COLUMN ASU.TROOM.FC_PALATA IS 'название (номер)'
+/
+
+COMMENT ON COLUMN ASU.TROOM.FN_FLOOR IS 'этаж'
+/
+
+COMMENT ON COLUMN ASU.TROOM.FC_OPIS IS 'описание'
+/
+
+COMMENT ON COLUMN ASU.TROOM.FK_VRACHID IS 'закрепленный врач'
+/
+
+COMMENT ON COLUMN ASU.TROOM.OLDID IS 'служебное поле'
+/
+
+COMMENT ON COLUMN ASU.TROOM.FK_OTDELID IS 'код отделени€'
+/
+
+COMMENT ON COLUMN ASU.TROOM.FK_KOMFORTID IS 'TFOMFORT.FK_ID - последн€€ из TSrTipRoom'
+/
+
+
+--
+-- TROOM_BY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TROOM (Table)
+--
+CREATE UNIQUE INDEX ASU.TROOM_BY_FK_ID ON ASU.TROOM
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TROOM_BY_FK_KORPID  (Index) 
+--
+--  Dependencies: 
+--   TROOM (Table)
+--
+CREATE INDEX ASU.TROOM_BY_FK_KORPID ON ASU.TROOM
+(FK_KORPID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TROOM_BY_FK_OTDELID  (Index) 
+--
+--  Dependencies: 
+--   TROOM (Table)
+--
+CREATE INDEX ASU.TROOM_BY_FK_OTDELID ON ASU.TROOM
+(FK_OTDELID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TROOM_BY_FK_VRACHID  (Index) 
+--
+--  Dependencies: 
+--   TROOM (Table)
+--
+CREATE INDEX ASU.TROOM_BY_FK_VRACHID ON ASU.TROOM
+(FK_VRACHID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TROOM_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TROOM (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TROOM_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TROOM REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  SELECT SEQ_TROOM.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TROOM_AFTER_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TROOM (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TROOM_AFTER_DELETE" 
+AFTER INSERT OR DELETE
+ON ASU.TROOM REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  DELETE FROM TSRTIPROOM WHERE FK_PALATAID=:OLD.FK_ID;
+End;
+/
+SHOW ERRORS;
+
+
+DROP SYNONYM FOOD.TS_PEOPLE_ROOM
+/
+
+--
+-- TS_PEOPLE_ROOM  (Synonym) 
+--
+--  Dependencies: 
+--   TROOM (Table)
+--
+CREATE SYNONYM FOOD.TS_PEOPLE_ROOM FOR ASU.TROOM
+/
+
+
+DROP SYNONYM FOOD.TS_ROOM
+/
+
+--
+-- TS_ROOM  (Synonym) 
+--
+--  Dependencies: 
+--   TROOM (Table)
+--
+CREATE SYNONYM FOOD.TS_ROOM FOR ASU.TROOM
+/
+
+

@@ -1,0 +1,36 @@
+#------------------------------------------------------------------------------
+VERSION = BWS.01
+#------------------------------------------------------------------------------
+# 1. Заменить aOborotkaSMSRazv На название проекта
+# 2.  Подправить переменную LIB  - пути поиска для библиотек  находящихся в SVN
+# Для консольных приложений убрать ключ -CG
+#------------------------------------------------------------------------------
+!ifndef ROOT
+ROOT = $(MAKEDIR)\..
+!endif
+
+#------------------------------------------------------------------------------
+MAKE = $(ROOT)\bin\make.exe -$(MAKEFLAGS) -f$**
+BRCC = $(ROOT)\bin\brcc32.exe $**
+BRCC1 = $(ROOT)\bin\brcc32.exe 
+DCU = ..\..\..\DCU
+BIN = ..\..\..\BIN
+LIB = ..\..\..\uCommon_URA;..\..\..\JVCL;..\..\uCommon_Tima;..\..\..\DOA_OCU;..\..\..\FR\FR_DOA4;..\..\..\lTimurlan\DCU
+# -B = Build all units
+# -E = EXE output directory
+# -I = Include directories
+# -N = DCU output directory
+# -W = Output warning messages
+# -Q = Quiet compile
+# -CG = GUI target
+# -GD = Detailed map file  
+# -H = Output hint messages
+#DCC = $(ROOT)\bin\dcc32.exe $** -B -e$(BIN) -n$(DCU) -u$(LIB) -w -h -q -CG
+DCC = $(ROOT)\bin\dcc32.exe $** -B -e$(BIN) -n$(DCU) -u$(LIB) -w -q -CG -GD -H 
+
+#------------------------------------------------------------------------------
+PROJECTS = VedomItogRash.exe
+#------------------------------------------------------------------------------
+
+VedomItogRash.exe: VedomItogRash.dpr
+   $(DCC)

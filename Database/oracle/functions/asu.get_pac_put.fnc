@@ -1,0 +1,26 @@
+DROP FUNCTION ASU.GET_PAC_PUT
+/
+
+--
+-- GET_PAC_PUT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TKARTA (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PAC_PUT" -- Created by TimurLan
+  ( pFK_PACID IN NUMBER) RETURN VARCHAR2 IS
+  CURSOR c IS SELECT FC_PUT FROM TKARTA WHERE FK_ID=pFK_PACID ;
+  cTemp VARCHAR(15);
+BEGIN
+  OPEN c;
+  FETCH c INTO cTemp;
+  CLOSE c;
+  RETURN cTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

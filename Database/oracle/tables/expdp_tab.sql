@@ -1,0 +1,33 @@
+DROP TABLE ASU.EXPDP_TAB CASCADE CONSTRAINTS
+/
+
+--
+-- EXPDP_TAB  (Table) 
+--
+CREATE TABLE ASU.EXPDP_TAB
+(
+  OWNER        VARCHAR2(30 BYTE)                NOT NULL,
+  OBJECT_NAME  VARCHAR2(30 BYTE)                NOT NULL,
+  OBJECT_TYPE  CHAR(5 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+

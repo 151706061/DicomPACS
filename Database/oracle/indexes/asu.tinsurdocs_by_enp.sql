@@ -1,0 +1,25 @@
+DROP INDEX ASU.TINSURDOCS_BY_ENP
+/
+
+--
+-- TINSURDOCS_BY_ENP  (Index) 
+--
+CREATE INDEX ASU.TINSURDOCS_BY_ENP ON ASU.TINSURDOCS
+(FC_ENP)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

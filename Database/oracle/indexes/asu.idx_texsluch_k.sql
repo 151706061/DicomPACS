@@ -1,0 +1,26 @@
+DROP INDEX ASU.IDX_TEXSLUCH_K
+/
+
+--
+-- IDX_TEXSLUCH_K  (Index) 
+--
+CREATE UNIQUE INDEX ASU.IDX_TEXSLUCH_K ON ASU.TEXSLUCH
+(LPU_ID, PERSON_IDL, ID_ILL, P_ID_ILL, YEAR, 
+MONTH)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

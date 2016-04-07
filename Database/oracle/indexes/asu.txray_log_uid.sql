@@ -1,0 +1,25 @@
+DROP INDEX ASU.TXRAY_LOG_UID
+/
+
+--
+-- TXRAY_LOG_UID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TXRAY_LOG_UID ON ASU.TXRAY_LOG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

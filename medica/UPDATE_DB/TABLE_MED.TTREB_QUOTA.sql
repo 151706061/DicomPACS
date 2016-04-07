@@ -1,0 +1,78 @@
+CREATE TABLE MED.TTREB_QUOTA
+  (
+  FK_ID NUMBER,
+  FK_MEDIC_ID NUMBER,
+  FN_KOL NUMBER,
+  FD_DATE1 DATE,
+  FD_DATE2 DATE,
+  FK_MO_GROUP_ID NUMBER,
+  FK_CREATE_MO_ID NUMBER,
+  FD_CREATE DATE,
+  FK_EDIT_MO_ID NUMBER,
+  FD_EDIT DATE
+ )
+/
+COMMENT ON TABLE MED.TTREB_QUOTA IS 'Квотирование требований Author:Voronov'
+/
+COMMENT ON COLUMN MED.TTREB_QUOTA.FK_ID IS 'MED.SEQ_TTREB_QUOTA'
+/
+COMMENT ON COLUMN MED.TTREB_QUOTA.FK_MEDIC_ID IS 'квотируемый медикамент - MED.TMEDIC.MEDICID'
+/
+COMMENT ON COLUMN MED.TTREB_QUOTA.FN_KOL IS 'кол-во'
+/
+COMMENT ON COLUMN MED.TTREB_QUOTA.FD_DATE1 IS 'дата начала квоты'
+/
+COMMENT ON COLUMN MED.TTREB_QUOTA.FD_DATE2 IS 'дата завершения срока квоты'
+/
+COMMENT ON COLUMN MED.TTREB_QUOTA.FK_MO_GROUP_ID IS 'для какой группы квота (MED.TMO_GROUP.GROUPID)'
+/
+COMMENT ON COLUMN MED.TTREB_QUOTA.FK_CREATE_MO_ID IS 'кто создал (MED.TMO.MOID)'
+/
+COMMENT ON COLUMN MED.TTREB_QUOTA.FD_CREATE IS 'дата/время создания'
+/
+COMMENT ON COLUMN MED.TTREB_QUOTA.FK_EDIT_MO_ID IS 'кто реактировал (MED.TMO.MOID)'
+/
+COMMENT ON COLUMN MED.TTREB_QUOTA.FD_EDIT IS 'дата/время редактирования'
+/
+
+CREATE SEQUENCE MED.SEQ_TTREB_QUOTA
+/
+
+CREATE OR REPLACE TRIGGER med.ttreb_quota_ins
+ BEFORE
+  INSERT
+ ON med.ttreb_quota
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  if NVL(:new.fk_id,0) < 1 then
+    select MED.SEQ_TTREB_QUOTA.nextval into :new.fk_id from dual;
+  end if;
+  :new.FD_CREATE        := sysdate;
+  :new.FK_CREATE_MO_ID  := med.pkg_medses.get_curmo;
+  
+  :new.FD_DATE1 := TRUNC(:new.FD_DATE1);
+  :new.FD_DATE2 := TRUNC(:new.FD_DATE2);
+end;
+/
+
+
+CREATE OR REPLACE TRIGGER med.ttreb_quota_upd
+ BEFORE
+  UPDATE
+ ON med.ttreb_quota
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  :new.FD_EDIT        := sysdate;
+  :new.FK_EDIT_MO_ID  := med.pkg_medses.get_curmo;
+
+  :new.FD_DATE1 := TRUNC(:new.FD_DATE1);
+  :new.FD_DATE2 := TRUNC(:new.FD_DATE2);
+end;
+/
+
+CREATE INDEX MED.TTREB_QUOTA_MOGR_MEDIC ON MED.TTREB_QUOTA
+   (  FK_MO_GROUP_ID ASC ,  FK_MEDIC_ID ASC  ) 
+ COMPUTE STATISTICS 
+/

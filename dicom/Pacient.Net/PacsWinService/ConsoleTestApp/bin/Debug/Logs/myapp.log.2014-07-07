@@ -1,0 +1,221 @@
+2014-07-07 14:43:47,851 [INFO] [9] - DownloadPosts - Begin.
+2014-07-07 14:45:46,871 [INFO] [9] - DownloadPosts - Begin.
+2014-07-07 14:47:24,385 [INFO] [8] - DownloadPosts - Begin.
+2014-07-07 14:48:08,405 [INFO] [10] - DownloadPosts - Begin.
+2014-07-07 14:49:49,450 [ERROR] [10] - System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.Close(TimeSpan timeout)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at System.ServiceModel.ICommunicationObject.Close(TimeSpan timeout)
+   at System.ServiceModel.ClientBase`1.System.ServiceModel.ICommunicationObject.Close(TimeSpan timeout)
+   at System.ServiceModel.ClientBase`1.Close()
+   at System.ServiceModel.ClientBase`1.System.IDisposable.Dispose()
+   at SzRer2WCFLib.MainActivityRer.DownloadPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\MainActivityRer.cs:line 250
+2014-07-07 14:49:49,451 [INFO] [10] - DownloadPosts - ok. Duration: 1.68397965166667 minutes
+2014-07-07 14:52:36,369 [INFO] [9] - DownloadPosts - Begin.
+2014-07-07 14:58:00,138 [INFO] [9] - DownloadPosts - Begin.
+2014-07-07 14:58:32,203 [ERROR] [9] - System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.Close(TimeSpan timeout)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at System.ServiceModel.ICommunicationObject.Close(TimeSpan timeout)
+   at System.ServiceModel.ClientBase`1.System.ServiceModel.ICommunicationObject.Close(TimeSpan timeout)
+   at System.ServiceModel.ClientBase`1.Close()
+   at System.ServiceModel.ClientBase`1.System.IDisposable.Dispose()
+   at SzRer2WCFLib.MainActivityRer.DownloadPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\MainActivityRer.cs:line 252
+2014-07-07 14:58:32,204 [INFO] [9] - DownloadPosts - ok. Duration: 0.525046698333333 minutes
+2014-07-07 14:59:04,278 [INFO] [9] - DownloadPosts - Begin.
+2014-07-07 14:59:23,521 [ERROR] [9] - System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.Close(TimeSpan timeout)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at System.ServiceModel.ICommunicationObject.Close(TimeSpan timeout)
+   at System.ServiceModel.ClientBase`1.System.ServiceModel.ICommunicationObject.Close(TimeSpan timeout)
+   at System.ServiceModel.ClientBase`1.Close()
+   at System.ServiceModel.ClientBase`1.System.IDisposable.Dispose()
+   at SzRer2WCFLib.MainActivityRer.DownloadPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\MainActivityRer.cs:line 252
+2014-07-07 14:59:23,525 [INFO] [9] - DownloadPosts - ok. Duration: 0.320635005 minutes
+2014-07-07 14:59:39,051 [INFO] [10] - DownloadPosts - Begin.
+2014-07-07 15:00:15,422 [ERROR] [10] - System.InvalidOperationException: Could not find default endpoint element that references contract 'RerReference.Rer' in the ServiceModel client configuration section. This might be because no configuration file was found for your application, or because no endpoint element matching this contract could be found in the client element.
+   at System.ServiceModel.Description.ConfigLoader.LoadChannelBehaviors(ServiceEndpoint serviceEndpoint, String configurationName)
+   at System.ServiceModel.ChannelFactory.ApplyConfiguration(String configurationName, Configuration configuration)
+   at System.ServiceModel.ChannelFactory.ApplyConfiguration(String configurationName)
+   at System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+   at System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+   at System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName)
+   at System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+   at System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+   at System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+   at System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+   at System.ServiceModel.ClientBase`1..ctor()
+   at SzRer2WCFLib.RerReference.RerClient..ctor() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\Service References\RerReference\Reference.cs:line 7838
+   at SzRer2WCFLib.MainActivityRer.DownloadPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\MainActivityRer.cs:line 241
+2014-07-07 15:00:15,423 [INFO] [10] - DownloadPosts - ok. Duration: 0.606067998333333 minutes
+2014-07-07 15:01:39,673 [INFO] [9] - DownloadPosts - Begin.
+2014-07-07 15:01:40,078 [ERROR] [9] - System.Configuration.ConfigurationErrorsException: The binding at system.serviceModel/bindings/basicHttpBinding does not have a configured binding named 'RerSoapBinding'. This is an invalid value for bindingConfiguration. (d:\www\ExchangeWebService\SzRer2WinService\ConsoleTestApp\bin\Debug\ConsoleApplication1.vshost.exe.Config line 44)
+   at System.Configuration.BaseConfigurationRecord.EvaluateOne(String[] keys, SectionInput input, Boolean isTrusted, FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult)
+   at System.Configuration.BaseConfigurationRecord.Evaluate(FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult, Boolean getLkg, Boolean getRuntimeObject, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   at System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   at System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   at System.ServiceModel.Activation.AspNetEnvironment.UnsafeGetSectionFromConfigurationManager(String sectionPath)
+   at System.ServiceModel.Activation.AspNetEnvironment.UnsafeGetConfigurationSection(String sectionPath)
+   at System.ServiceModel.Configuration.ConfigurationHelpers.UnsafeGetAssociatedSection(ContextInformation evalContext, String sectionPath)
+   at System.ServiceModel.Configuration.ConfigurationHelpers.UnsafeGetSection(String sectionPath)
+   at System.ServiceModel.Configuration.ClientSection.UnsafeGetSection()
+   at System.ServiceModel.Description.ConfigLoader.LookupChannel(ContextInformation configurationContext, String configurationName, ContractDescription contract, EndpointAddress address, Boolean wildcard, Boolean useChannelElementKind, ServiceEndpoint& serviceEndpoint)
+   at System.ServiceModel.Description.ConfigLoader.LookupEndpoint(String configurationName, EndpointAddress address, ContractDescription contract, ContextInformation configurationContext)
+   at System.ServiceModel.Description.ConfigLoader.LookupEndpoint(String configurationName, EndpointAddress address, ContractDescription contract)
+   at System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+   at System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+   at System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName)
+   at System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+   at System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+   at System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+   at System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+   at System.ServiceModel.ClientBase`1..ctor()
+   at SzRer2WCFLib.RerReference.RerClient..ctor() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\Service References\RerReference\Reference.cs:line 7838
+   at SzRer2WCFLib.MainActivityRer.DownloadPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\MainActivityRer.cs:line 241
+2014-07-07 15:01:40,080 [INFO] [9] - DownloadPosts - ok. Duration: 0.00665038166666667 minutes
+2014-07-07 15:02:09,332 [INFO] [9] - DownloadPosts - Begin.
+2014-07-07 15:02:38,441 [ERROR] [9] - System.Configuration.ConfigurationErrorsException: The binding at system.serviceModel/bindings/basicHttpBinding does not have a configured binding named 'RerSoapBinding'. This is an invalid value for bindingConfiguration. (d:\www\ExchangeWebService\SzRer2WinService\ConsoleTestApp\bin\Debug\ConsoleApplication1.vshost.exe.Config line 44)
+   at System.Configuration.BaseConfigurationRecord.EvaluateOne(String[] keys, SectionInput input, Boolean isTrusted, FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult)
+   at System.Configuration.BaseConfigurationRecord.Evaluate(FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult, Boolean getLkg, Boolean getRuntimeObject, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   at System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   at System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   at System.ServiceModel.Activation.AspNetEnvironment.UnsafeGetSectionFromConfigurationManager(String sectionPath)
+   at System.ServiceModel.Activation.AspNetEnvironment.UnsafeGetConfigurationSection(String sectionPath)
+   at System.ServiceModel.Configuration.ConfigurationHelpers.UnsafeGetAssociatedSection(ContextInformation evalContext, String sectionPath)
+   at System.ServiceModel.Configuration.ConfigurationHelpers.UnsafeGetSection(String sectionPath)
+   at System.ServiceModel.Configuration.ClientSection.UnsafeGetSection()
+   at System.ServiceModel.Description.ConfigLoader.LookupChannel(ContextInformation configurationContext, String configurationName, ContractDescription contract, EndpointAddress address, Boolean wildcard, Boolean useChannelElementKind, ServiceEndpoint& serviceEndpoint)
+   at System.ServiceModel.Description.ConfigLoader.LookupEndpoint(String configurationName, EndpointAddress address, ContractDescription contract, ContextInformation configurationContext)
+   at System.ServiceModel.Description.ConfigLoader.LookupEndpoint(String configurationName, EndpointAddress address, ContractDescription contract)
+   at System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+   at System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+   at System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName)
+   at System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+   at System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+   at System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+   at System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+   at System.ServiceModel.ClientBase`1..ctor()
+   at SzRer2WCFLib.RerReference.RerClient..ctor() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\Service References\RerReference\Reference.cs:line 7838
+   at SzRer2WCFLib.MainActivityRer.DownloadPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\MainActivityRer.cs:line 241
+2014-07-07 15:02:38,442 [INFO] [9] - DownloadPosts - ok. Duration: 0.485011073333333 minutes
+2014-07-07 15:03:30,174 [INFO] [9] - DownloadPosts - Begin.
+2014-07-07 15:03:41,657 [ERROR] [9] - System.Configuration.ConfigurationErrorsException: The binding at system.serviceModel/bindings/basicHttpBinding does not have a configured binding named 'RerSoapBinding'. This is an invalid value for bindingConfiguration. (d:\www\ExchangeWebService\SzRer2WinService\ConsoleTestApp\bin\Debug\ConsoleApplication1.vshost.exe.Config line 58)
+   at System.Configuration.BaseConfigurationRecord.EvaluateOne(String[] keys, SectionInput input, Boolean isTrusted, FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult)
+   at System.Configuration.BaseConfigurationRecord.Evaluate(FactoryRecord factoryRecord, SectionRecord sectionRecord, Object parentResult, Boolean getLkg, Boolean getRuntimeObject, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSectionRecursive(String configKey, Boolean getLkg, Boolean checkPermission, Boolean getRuntimeObject, Boolean requestIsHere, Object& result, Object& resultRuntimeObject)
+   at System.Configuration.BaseConfigurationRecord.GetSection(String configKey)
+   at System.Configuration.ClientConfigurationSystem.System.Configuration.Internal.IInternalConfigSystem.GetSection(String sectionName)
+   at System.Configuration.ConfigurationManager.GetSection(String sectionName)
+   at System.ServiceModel.Activation.AspNetEnvironment.UnsafeGetSectionFromConfigurationManager(String sectionPath)
+   at System.ServiceModel.Activation.AspNetEnvironment.UnsafeGetConfigurationSection(String sectionPath)
+   at System.ServiceModel.Configuration.ConfigurationHelpers.UnsafeGetAssociatedSection(ContextInformation evalContext, String sectionPath)
+   at System.ServiceModel.Configuration.ConfigurationHelpers.UnsafeGetSection(String sectionPath)
+   at System.ServiceModel.Configuration.ClientSection.UnsafeGetSection()
+   at System.ServiceModel.Description.ConfigLoader.LookupChannel(ContextInformation configurationContext, String configurationName, ContractDescription contract, EndpointAddress address, Boolean wildcard, Boolean useChannelElementKind, ServiceEndpoint& serviceEndpoint)
+   at System.ServiceModel.Description.ConfigLoader.LookupEndpoint(String configurationName, EndpointAddress address, ContractDescription contract, ContextInformation configurationContext)
+   at System.ServiceModel.Description.ConfigLoader.LookupEndpoint(String configurationName, EndpointAddress address, ContractDescription contract)
+   at System.ServiceModel.ChannelFactory.InitializeEndpoint(String configurationName, EndpointAddress address)
+   at System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName, EndpointAddress remoteAddress)
+   at System.ServiceModel.ChannelFactory`1..ctor(String endpointConfigurationName)
+   at System.ServiceModel.EndpointTrait`1.CreateSimplexFactory()
+   at System.ServiceModel.EndpointTrait`1.CreateChannelFactory()
+   at System.ServiceModel.ClientBase`1.CreateChannelFactoryRef(EndpointTrait`1 endpointTrait)
+   at System.ServiceModel.ClientBase`1.InitializeChannelFactoryRef()
+   at System.ServiceModel.ClientBase`1..ctor()
+   at SzRer2WCFLib.RerReference.RerClient..ctor() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\Service References\RerReference\Reference.cs:line 7838
+   at SzRer2WCFLib.MainActivityRer.DownloadPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\MainActivityRer.cs:line 241
+2014-07-07 15:03:41,660 [INFO] [9] - DownloadPosts - ok. Duration: 0.191277606666667 minutes
+2014-07-07 15:04:30,642 [INFO] [10] - DownloadPosts - Begin.
+2014-07-07 15:05:01,164 [ERROR] [10] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-07-07 15:05:01,164 [INFO] [10] - DownloadPosts - ok. Duration: 0.508562421666667 minutes
+2014-07-07 15:08:35,486 [INFO] [10] - DownloadPosts - Begin.
+2014-07-07 15:08:58,248 [ERROR] [10] - System.ServiceModel.CommunicationObjectFaultedException: The communication object, System.ServiceModel.Channels.ServiceChannel, cannot be used for communication because it is in the Faulted state.
+
+Server stack trace: 
+   at System.ServiceModel.Channels.CommunicationObject.Close(TimeSpan timeout)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at System.ServiceModel.ICommunicationObject.Close(TimeSpan timeout)
+   at System.ServiceModel.ClientBase`1.System.ServiceModel.ICommunicationObject.Close(TimeSpan timeout)
+   at System.ServiceModel.ClientBase`1.Close()
+   at System.ServiceModel.ClientBase`1.System.IDisposable.Dispose()
+   at SzRer2WCFLib.MainActivityRer.DownloadPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\MainActivityRer.cs:line 252
+2014-07-07 15:08:58,249 [INFO] [10] - DownloadPosts - ok. Duration: 0.379238356666667 minutes
+2014-07-07 15:13:21,761 [INFO] [9] - DownloadPosts - Begin.
+2014-07-07 15:14:24,476 [ERROR] [9] - System.ServiceModel.ProtocolException: The content type text/xml;charset=UTF-8 of the response message does not match the content type of the binding (application/soap+xml; charset=utf-8). If using a custom encoder, be sure that the IsContentTypeSupported method is implemented properly. The first 351 bytes of the response were: '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"/><soap:Body><soap:Fault><faultcode>soap:VersionMismatch</faultcode><faultstring>A SOAP 1.2 message is not valid when sent to a SOAP 1.1 only endpoint.</faultstring></soap:Fault></soap:Body></soap:Envelope>'. ---> System.Net.WebException: The remote server returned an error: (500) Internal Server Error.
+   at System.Net.HttpWebRequest.GetResponse()
+   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpChannelUtilities.ValidateRequestReplyResponse(HttpWebRequest request, HttpWebResponse response, HttpChannelFactory factory, WebException responseException, ChannelBinding channelBinding)
+   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at SzRer2WCFLib.RerReference.Rer.getPosts(getPosts request)
+   at SzRer2WCFLib.RerReference.RerClient.SzRer2WCFLib.RerReference.Rer.getPosts(getPosts request) in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\Service References\RerReference\Reference.cs:line 8352
+   at SzRer2WCFLib.RerReference.RerClient.getPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\Service References\RerReference\Reference.cs:line 8357
+   at SzRer2WCFLib.MainActivityRer.DownloadPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\MainActivityRer.cs:line 245
+2014-07-07 15:14:24,477 [INFO] [9] - DownloadPosts - ok. Duration: 1.04514311333333 minutes
+2014-07-07 15:15:57,540 [INFO] [9] - DownloadPosts - Begin.
+2014-07-07 15:16:09,994 [ERROR] [9] - System.ServiceModel.FaultException`1[SzRer2WCFLib.RerReference.RerException]: Ошибка аутентификации (Fault Detail is equal to SzRer2WCFLib.RerReference.RerException).
+2014-07-07 15:16:10,006 [INFO] [9] - DownloadPosts - ok. Duration: 0.207628543333333 minutes
+2014-07-07 15:21:04,022 [INFO] [10] - DownloadPosts - Begin.
+2014-07-07 15:21:30,004 [ERROR] [10] - System.ServiceModel.ProtocolException: The content type text/xml;charset=UTF-8 of the response message does not match the content type of the binding (application/soap+xml; charset=utf-8). If using a custom encoder, be sure that the IsContentTypeSupported method is implemented properly. The first 351 bytes of the response were: '<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"><SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"/><soap:Body><soap:Fault><faultcode>soap:VersionMismatch</faultcode><faultstring>A SOAP 1.2 message is not valid when sent to a SOAP 1.1 only endpoint.</faultstring></soap:Fault></soap:Body></soap:Envelope>'. ---> System.Net.WebException: The remote server returned an error: (500) Internal Server Error.
+   at System.Net.HttpWebRequest.GetResponse()
+   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   --- End of inner exception stack trace ---
+
+Server stack trace: 
+   at System.ServiceModel.Channels.HttpChannelUtilities.ValidateRequestReplyResponse(HttpWebRequest request, HttpWebResponse response, HttpChannelFactory factory, WebException responseException, ChannelBinding channelBinding)
+   at System.ServiceModel.Channels.HttpChannelFactory.HttpRequestChannel.HttpChannelRequest.WaitForReply(TimeSpan timeout)
+   at System.ServiceModel.Channels.RequestChannel.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Dispatcher.RequestChannelBinder.Request(Message message, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs, TimeSpan timeout)
+   at System.ServiceModel.Channels.ServiceChannel.Call(String action, Boolean oneway, ProxyOperationRuntime operation, Object[] ins, Object[] outs)
+   at System.ServiceModel.Channels.ServiceChannelProxy.InvokeService(IMethodCallMessage methodCall, ProxyOperationRuntime operation)
+   at System.ServiceModel.Channels.ServiceChannelProxy.Invoke(IMessage message)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData& msgData, Int32 type)
+   at SzRer2WCFLib.RerReference.Rer.getPosts(getPosts request)
+   at SzRer2WCFLib.RerReference.RerClient.SzRer2WCFLib.RerReference.Rer.getPosts(getPosts request) in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\Service References\RerReference\Reference.cs:line 8352
+   at SzRer2WCFLib.RerReference.RerClient.getPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\Service References\RerReference\Reference.cs:line 8357
+   at SzRer2WCFLib.MainActivityRer.DownloadPosts() in D:\www\ExchangeWebService\SzRer2WinService\FedSWCFLib\MainActivityRer.cs:line 246
+2014-07-07 15:21:30,006 [INFO] [10] - DownloadPosts - ok. Duration: 0.432924761666667 minutes

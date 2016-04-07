@@ -1,0 +1,142 @@
+				<div style=" border-bottom:1px solid;margin-bottom:10px;">
+                    <strong>ПАРАМЕТРЫ ПОИСКА</strong> 
+                </div>
+                <div style="padding:5px">
+
+                    <div style="" class="myleft_hdiv" id="patientname">
+                        <div class="myleft_w1div">
+                            <label for="patientname"><h5>ФИО пациента:</h5></label>
+                        </div>
+                        <div class="myleft_w2div">
+                            <input type="text" class="mysrchfields" style="width:180px;background-color:#D0E6F1;border:none;text-transform:uppercase" placeholder="" id="patientname1" name="patientname">
+                        </div>
+                    </div>
+
+
+                    <div style="" class="myleft_hdiv" id="patientid">
+                        <div  class="myleft_w1div">
+                            <label for="patientid"><h5>№ медкарты:</h5></label>
+                        </div>
+                        <div class="myleft_w2div">
+                            <input type="text" class="mysrchfields" style="width:180px;background-color:#D0E6F1;border:none;text-transform:uppercase" placeholder="" id="patientid1" name="patientid">
+                        </div>
+                    </div>
+
+
+                    <div style="" class="myleft_hdiv" id="accessionnumber">
+                        <div  class="myleft_w1div">
+                            <label for="accessionnumber"><h5>№ протокола:</h5></label>
+                        </div>
+                        <div class="myleft_w2div">
+                            <input type="text" class="mysrchfields" style="width:180px;background-color:#D0E6F1;border:none;text-transform:uppercase" placeholder="" id="accessionnumber1" name="accessionnumber">
+                        </div>
+                    </div>
+
+                    <div style="" class="myleft_hdiv" id="fdata1">
+                        <div  class="myleft_w1div">
+                            <label for="fdata1"><h5>Дата с:</h5></label>
+                        </div>
+                        <div class="myleft_w2div">
+                            <div data-date-format="dd.mm.yyyy" data-date="12.02.2012" id="dp3" class="input-append datepicker">
+                                <input id="dp1" class="mysrchfields" class="span2" type="text" data-date-format="mm.dd.yyyy"  style="width:150px;background-color:#D0E6F1;border:none">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="" class="myleft_hdiv" id="fdata2">
+                        <div  class="myleft_w1div">
+                            <label for="fdata2"><h5>по:</h5></label>
+                        </div>
+                        <div class="myleft_w2div">
+                            <div data-date-format="dd.mm.yyyy" data-date="12.02.2012" id="dp4" class="input-append datepicker">
+                                <input id="dp2" class="mysrchfields" class="span2" type="text" data-date-format="mm.dd.yyyy"  style="width:150px;background-color:#D0E6F1;border:none">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div style="" class="myleft_hdiv" id="fstudyuid">
+                        <div class="myleft_w1div">
+                            <label for="fstudyuid"><h5>UID:</h5></label>
+                        </div>
+                        <div class="myleft_w2div">
+                            <input type="text" class="mysrchfields" style="width:180px;background-color:#D0E6F1;border:none;text-transform:uppercase" placeholder="" id="fstudyuid1" name="fstudyuid">
+                        </div>
+                    </div>
+
+
+                    <div style="" class="myleft_hdiv" id="fdescription">
+                        <div class="myleft_w1div">
+                            <label for="fdescription"><h5>Описание:</h5></label>
+                        </div>
+                        <div class="myleft_w2div">
+                            <input type="text" class="mysrchfields" style="width:180px;background-color:#D0E6F1;border:none;text-transform:uppercase" placeholder="" id="fdescription1" name="fdescription">
+                        </div>
+                    </div>
+
+                    <div style="" class="myleft_hdiv" id="fdescription11">
+                        <div class="myleft_w1div">
+                            <label for="fdescription"><h5>Заключение:</h5></label>
+                        </div>
+                        <div class="myfloatleft" >
+                          <div class="myfloatleft" style="padding-left:10px;padding-top:5px;height:25px;background-color:rgb(101,177,213);color:white !important;width:170px;">
+		                      <ul class="nav" role="navigation">       
+		                       <li class="dropdown">
+		                         <a style="color: white ! important; font-size: 11pt; width: 170px; height: 20px;" 
+		                         	data-toggle="dropdown" class="dropdown-toggle" role="button" data-target="#" id="myzaklhead">
+		                         	Весь список <b style="float:right" class="caret">&nbsp;</b>
+		                         </a>
+		                         <ul aria-labelledby="drop2" role="menu" class="dropdown-menu" style="margin-left: -11px; width: 181px;">
+		                           <li><a id="myzklall" tabindex="-1" href="#">Весь список</a></li>
+		                           <li><a id="myzklwth" tabindex="-1" href="#">С заключением</a></li>
+		                           <li><a id="myzklnot" tabindex="-1" href="#">Без заключения</a></li>
+		                         </ul>
+		                       </li>
+		                     </ul>  
+                          </div> 
+                        </div>
+                    </div>
+					
+					<div style="" class="myleft_hdiv" id="fdescription12">
+                        <div class="myleft_w1div">
+                            <label for="fdescription"><h5>Актуальность:</h5></label>
+                        </div>
+                        <div class="myfloatleft" >
+                          <div class="myfloatleft" style="padding-left:10px;padding-top:5px;height:25px;background-color:rgb(101,177,213);color:white !important;width:170px;">
+		                      <ul class="nav" role="navigation">       
+		                       <li class="dropdown">
+		                         <a style="color: white ! important; font-size: 11pt; width: 170px; height: 20px;" 
+		                         	data-toggle="dropdown" class="dropdown-toggle" role="button" data-target="#" id="myzaklchain">
+		                         	Весь список <b style="float:right" class="caret">&nbsp;</b>
+		                         </a>
+		                         <ul aria-labelledby="drop2" role="menu" class="dropdown-menu" style="margin-left: -11px; width: 181px;">
+		                           <li><a id="mytopall"          tabindex="-1" href="#">Весь список</a></li>
+								   <li><a id="mytopQueue"        tabindex="-1" href="#">Очередь</a></li>
+								   <li><a id="mytopRoutine"      tabindex="-1" href="#">Плановые</a></li>
+		                           <li><a id="mytopUrgent"       tabindex="-1" href="#">Срочные</a></li>
+		                           <li><a id="mytopEmergency"    tabindex="-1" href="#">Экстренные</a></li>
+								   <li><a id="mytopFinished"     tabindex="-1" href="#">Завершенные</a></li>
+								   <li><a id="mytopInstalled"    tabindex="-1" href="#">Установленные</a></li>
+								   <li><a id="mytopNotinstalled" tabindex="-1" href="#">Не установленные</a></li>
+		                         </ul>
+		                       </li>
+		                     </ul>  
+                          </div> 
+                        </div>
+                    </div>
+					<!--@degree_of_importance-->
+                    @chk_mod
+						
+                    <div style="" class="myleft_hdiv" id="myAsk1">
+                        <div id="myAsk" style="padding-left:98px" class="myleft_w1div">
+                            <button style="background-color:#65B1D5;border:none;width:180px;color:white !important" onclick="">ПОИСК</button>
+                        </div>
+                    </div>
+                    
+                    <div style="" class="myleft_hdiv" id="myclr1">
+                        <div id="myclr" style="padding-left:98px" class="myleft_w1div">
+                            <button style="background-color:#FF8D4C;border:none;width:180px;color:white !important">СБРОС</button>
+                        </div>
+                    </div>
+                    
+                </div>

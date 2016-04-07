@@ -1,0 +1,127 @@
+DROP TABLE ASU.TPROFP_DOG CASCADE CONSTRAINTS
+/
+
+--
+-- TPROFP_DOG  (Table) 
+--
+CREATE TABLE ASU.TPROFP_DOG
+(
+  FK_ID         NUMBER(10),
+  FK_COMPANYID  NUMBER(15),
+  FD_OPENED     DATE,
+  FD_CLOSED     DATE,
+  FC_DOGNUM     VARCHAR2(15 BYTE),
+  FK_SOTRID     NUMBER(15),
+  FD_DATE       DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TPROFP_DOG.FK_ID IS 'SEQUENCE=[SEQ_PROFP_DOG]'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_DOG.FK_COMPANYID IS 'ID предпри€ти€ из TCOMPANY'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_DOG.FD_OPENED IS 'дата начала действи€ договора'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_DOG.FD_CLOSED IS 'дата окончани€ действи€ договора'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_DOG.FC_DOGNUM IS 'Ќомер договора'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_DOG.FK_SOTRID IS 'сотрудник создавший'
+/
+
+COMMENT ON COLUMN ASU.TPROFP_DOG.FD_DATE IS 'ƒата формировани€ записи'
+/
+
+
+--
+-- TPROFP_DOG_BY_COMPANYID  (Index) 
+--
+--  Dependencies: 
+--   TPROFP_DOG (Table)
+--
+CREATE INDEX ASU.TPROFP_DOG_BY_COMPANYID ON ASU.TPROFP_DOG
+(FK_COMPANYID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFP_DOG_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TPROFP_DOG (Table)
+--
+CREATE UNIQUE INDEX ASU.TPROFP_DOG_BY_ID ON ASU.TPROFP_DOG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFP_DOG_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPROFP_DOG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFP_DOG_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tprofp_dog
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  select seq_profp_dog.NEXTVAL into :new.fk_id from dual;
+end;
+/
+SHOW ERRORS;
+
+

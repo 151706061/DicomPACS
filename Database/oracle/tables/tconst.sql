@@ -1,0 +1,120 @@
+DROP TABLE ASU.TCONST CASCADE CONSTRAINTS
+/
+
+--
+-- TCONST  (Table) 
+--
+CREATE TABLE ASU.TCONST
+(
+  FK_ID       NUMBER                            NOT NULL,
+  FC_NAME     VARCHAR2(60 BYTE),
+  FC_FUNC     VARCHAR2(60 BYTE),
+  FN_CONST    NUMBER,
+  FC_COMMENT  VARCHAR2(2000 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TCONST IS 'Системные константы by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TCONST.FK_ID IS 'SEQUENCE=[SEQ_TCONST]'
+/
+
+COMMENT ON COLUMN ASU.TCONST.FC_NAME IS 'название'
+/
+
+COMMENT ON COLUMN ASU.TCONST.FC_FUNC IS 'имя функции'
+/
+
+COMMENT ON COLUMN ASU.TCONST.FN_CONST IS 'значение'
+/
+
+COMMENT ON COLUMN ASU.TCONST.FC_COMMENT IS 'описание к константе'
+/
+
+
+--
+-- TCONST_BY_FC_FUNC  (Index) 
+--
+--  Dependencies: 
+--   TCONST (Table)
+--
+CREATE UNIQUE INDEX ASU.TCONST_BY_FC_FUNC ON ASU.TCONST
+(FC_FUNC)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TCONST_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TCONST (Table)
+--
+CREATE UNIQUE INDEX ASU.TCONST_BY_ID ON ASU.TCONST
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TCONST_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TCONST (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TCONST_BEFORE_INSERT" 
+  BEFORE INSERT
+  ON ASU.TCONST   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  select seq_tconst.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

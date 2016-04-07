@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TVAC_SICNESS_AFTER_INSERT
+/
+
+--
+-- TVAC_SICNESS_AFTER_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TVAC_SICNESS (Table)
+--   PKG_VACCIN (Package)
+--
+CREATE OR REPLACE TRIGGER ASU."TVAC_SICNESS_AFTER_INSERT" 
+ AFTER
+  INSERT
+ ON asu.tvac_sicness
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  PKG_VACCIN.DELETE_VAC_PLAN(:new.fk_people, :new.fk_infection, :new.fd_end);
+END;
+/
+SHOW ERRORS;
+
+

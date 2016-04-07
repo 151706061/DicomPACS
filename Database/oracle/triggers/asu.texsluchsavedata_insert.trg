@@ -1,0 +1,27 @@
+DROP TRIGGER ASU."TExSluchSaveData_INSERT"
+/
+
+--
+-- "TExSluchSaveData_INSERT"  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TEXSLUCHSAVEDATA (Sequence)
+--   TEXSLUCHSAVEDATA (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TExSluchSaveData_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.TEXSLUCHSAVEDATA
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  IF :new.fk_id IS NULL THEN
+    SELECT asu.SEQ_TExSluchSaveData.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  end if;
+End;
+/
+SHOW ERRORS;
+
+

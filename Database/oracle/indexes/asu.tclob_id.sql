@@ -1,0 +1,25 @@
+DROP INDEX ASU.TCLOB_ID
+/
+
+--
+-- TCLOB_ID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TCLOB_ID ON ASU.TCLOBS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          287680K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

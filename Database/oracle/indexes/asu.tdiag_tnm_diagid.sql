@@ -1,0 +1,25 @@
+DROP INDEX ASU.TDIAG_TNM_DIAGID
+/
+
+--
+-- TDIAG_TNM_DIAGID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TDIAG_TNM_DIAGID ON ASU.TDIAG_TNM
+(FK_DIAGID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

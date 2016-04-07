@@ -1,0 +1,13 @@
+﻿Installing assembly 'd:\www\ExchangeWebService\SzRer2WinService\SzRer2Service\bin\Debug\SzRer2Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = d:\www\ExchangeWebService\SzRer2WinService\SzRer2Service\bin\Debug\SzRer2Service.InstallLog
+   assemblypath = d:\www\ExchangeWebService\SzRer2WinService\SzRer2Service\bin\Debug\SzRer2Service.exe
+Installing service SzRer2Service...
+Service SzRer2Service has been successfully installed.
+Creating EventLog source SzRer2Service in log Application...
+Committing assembly 'd:\www\ExchangeWebService\SzRer2WinService\SzRer2Service\bin\Debug\SzRer2Service.exe'.
+Affected parameters are:
+   logtoconsole = 
+   logfile = d:\www\ExchangeWebService\SzRer2WinService\SzRer2Service\bin\Debug\SzRer2Service.InstallLog
+   assemblypath = d:\www\ExchangeWebService\SzRer2WinService\SzRer2Service\bin\Debug\SzRer2Service.exe

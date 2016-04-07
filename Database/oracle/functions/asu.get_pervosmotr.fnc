@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_PERVOSMOTR
+/
+
+--
+-- GET_PERVOSMOTR  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PERVOSMOTR" 
+return number
+is 
+begin
+  return 256931;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_PERVOSMOTR TO PUBLIC
+/
+

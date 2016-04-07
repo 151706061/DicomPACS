@@ -1,0 +1,99 @@
+DROP TABLE ASU.TTYPEOBSL CASCADE CONSTRAINTS
+/
+
+--
+-- TTYPEOBSL  (Table) 
+--
+CREATE TABLE ASU.TTYPEOBSL
+(
+  FK_ID          NUMBER                         DEFAULT -1,
+  FC_NAME        VARCHAR2(32 CHAR),
+  FL_IB          NUMBER(1)                      DEFAULT 1,
+  FL_PUT         NUMBER(1)                      DEFAULT 1,
+  FL_PUTTYPE     NUMBER(1)                      DEFAULT 1,
+  FL_RASS        NUMBER(1)                      DEFAULT 1,
+  FL_DEFAULT     NUMBER(1)                      DEFAULT 0,
+  FL_STOL        NUMBER(1)                      DEFAULT 1,
+  FC_SHORT       VARCHAR2(10 CHAR),
+  FK_DOCID       NUMBER,
+  FK_BUHTYPEPUT  NUMBER,
+  FK_OWNERID     INTEGER,
+  OLDID          NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TTYPEOBSL IS 'Для типа обслуживания'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FC_NAME IS 'Наименование'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FL_IB IS 'Указывать №Истории болезни'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FL_PUT IS 'Указывать №Путевки'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FL_PUTTYPE IS 'Указывать тип путевки'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FL_RASS IS 'Оформлять расселение'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FL_DEFAULT IS 'Значение по умолчанию??'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FL_STOL IS 'С питанием (закрепление столовых)'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FC_SHORT IS 'Краткое наименование'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FK_DOCID IS 'Код документа из TSMID (синоним = VID_DOC) также соответствует tkarta.fk_docid'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FK_BUHTYPEPUT IS 'Код FK_ID из справочника BUH.TS_TYPEPUT'
+/
+
+COMMENT ON COLUMN ASU.TTYPEOBSL.FK_OWNERID IS 'Ссылка на родителя FK_ID'
+/
+
+
+--
+-- TTYPEOBSL_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TTYPEOBSL (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TTYPEOBSL_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TTYPEOBSL REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  SELECT SEQ_TTYPEOBSL.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

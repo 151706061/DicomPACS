@@ -1,0 +1,13 @@
+ALTER TABLE ASU.TSMID
+  DROP CONSTRAINT TSMID_BY_ID
+/
+
+-- 
+-- Non Foreign Key Constraints for Table TSMID 
+-- 
+ALTER TABLE ASU.TSMID ADD (
+  CONSTRAINT TSMID_BY_ID
+ PRIMARY KEY
+ (FK_ID))
+/
+

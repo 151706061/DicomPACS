@@ -1,0 +1,94 @@
+ALTER TABLE ASU.TAMBTALON_INFO
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TAMBTALON_INFO CASCADE CONSTRAINTS
+/
+
+--
+-- TAMBTALON_INFO  (Table) 
+--
+CREATE TABLE ASU.TAMBTALON_INFO
+(
+  FK_TALONID       NUMBER,
+  FL_MODERNIZACIA  NUMBER                       DEFAULT 0,
+  FC_PACCODE       VARCHAR2(128 BYTE),
+  FK_VISITVID      NUMBER,
+  FC_KOM_CODE      VARCHAR2(128 BYTE),
+  FK_CITIZEN_KAT   NUMBER,
+  FK_SECOND_DISP   NUMBER,
+  FL_FIRST_DISP    NUMBER(1)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TAMBTALON_INFO.FL_MODERNIZACIA IS 'По модернизации'
+/
+
+COMMENT ON COLUMN ASU.TAMBTALON_INFO.FK_VISITVID IS 'Вид посещения, TSMID'
+/
+
+
+--
+-- PK_TAMBTALON_INFO  (Index) 
+--
+--  Dependencies: 
+--   TAMBTALON_INFO (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TAMBTALON_INFO ON ASU.TAMBTALON_INFO
+(FK_TALONID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TAMBTALON_INFO 
+-- 
+ALTER TABLE ASU.TAMBTALON_INFO ADD (
+  CONSTRAINT PK_TAMBTALON_INFO
+ PRIMARY KEY
+ (FK_TALONID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

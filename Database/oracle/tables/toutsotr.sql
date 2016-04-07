@@ -1,0 +1,96 @@
+ALTER TABLE ASU.TOUTSOTR
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TOUTSOTR CASCADE CONSTRAINTS
+/
+
+--
+-- TOUTSOTR  (Table) 
+--
+CREATE TABLE ASU.TOUTSOTR
+(
+  FK_ID       NUMBER                            NOT NULL,
+  LPU_ID      VARCHAR2(30 BYTE),
+  DOK_INN     VARCHAR2(12 BYTE),
+  FAM         VARCHAR2(30 BYTE),
+  IM          VARCHAR2(30 BYTE),
+  OTCH        VARCHAR2(30 BYTE),
+  DATE_B_DAY  DATE,
+  STAT        NUMBER,
+  SPEC_VUZ    NUMBER,
+  DATE_BEG    DATE,
+  DATE_END    DATE,
+  FILENAME    VARCHAR2(255 BYTE),
+  FILEDATE    DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          192K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- PK_TOUTSOTR  (Index) 
+--
+--  Dependencies: 
+--   TOUTSOTR (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TOUTSOTR ON ASU.TOUTSOTR
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TOUTSOTR_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TOUTSOTR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.toutsotr_before_insert
+   BEFORE INSERT
+   ON ASU.TOUTSOTR    REFERENCING OLD AS OLD NEW AS NEW
+   FOR EACH ROW
+BEGIN
+   SELECT asu.seq_toutsotr.NEXTVAL
+     INTO :NEW.fk_id
+     FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TOUTSOTR 
+-- 
+ALTER TABLE ASU.TOUTSOTR ADD (
+  CONSTRAINT PK_TOUTSOTR
+ PRIMARY KEY
+ (FK_ID))
+/
+

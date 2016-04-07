@@ -1,0 +1,26 @@
+DROP TRIGGER ASU.TRECIPE_DLO_EXP_DOCTOR_INS_TRG
+/
+
+--
+-- TRECIPE_DLO_EXP_DOCTOR_INS_TRG  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TRECIPE_DLO_EXP_DOCTOR (Sequence)
+--   TRECIPE_DLO_EXP_DOCTOR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TRECIPE_DLO_EXP_DOCTOR_INS_TRG
+ BEFORE
+  INSERT
+ ON ASU.TRECIPE_DLO_EXP_DOCTOR REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  if (:new.fk_id is null) then
+    select ASU.SEQ_TRECIPE_DLO_EXP_DOCTOR.nextval into :new.fk_id from dual;
+  end if;
+end;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,160 @@
+DROP TABLE ASU.TSMIDNORMS CASCADE CONSTRAINTS
+/
+
+--
+-- TSMIDNORMS  (Table) 
+--
+CREATE TABLE ASU.TSMIDNORMS
+(
+  FK_ID             NUMBER(9),
+  FN_YEAR1          NUMBER(4),
+  FN_YEAR2          NUMBER(4),
+  FN_LOW_M          NUMBER(7,3),
+  FN_HI_M           NUMBER(7,3),
+  FN_LOW_W          NUMBER(7,3),
+  FN_HI_W           NUMBER(7,3),
+  FK_SMID           NUMBER(9),
+  FL_PAT            NUMBER(1)                   DEFAULT 0,
+  FL_LOW_M_EQ       NUMBER(1),
+  FN_HI_M_EQ        NUMBER(1),
+  FN_LOW_EQ         NUMBER(1),
+  FN_HI_EQ          NUMBER(1),
+  FN_ONE_RES_M      NUMBER(7,3),
+  FN_ONE_RES_W      NUMBER(7,3),
+  FN_MOUNTH_1       NUMBER(7),
+  FN_MOUNTH_2       NUMBER(7),
+  FN_DAY_1          NUMBER(7),
+  FN_DAY_2          NUMBER(7),
+  FC_ED_IZM         VARCHAR2(20 BYTE),
+  PHASE_ENTIRE      NUMBER(1),
+  PHASE_FOLLICULAR  NUMBER(1),
+  PHASE_MIDLCYCLE   NUMBER(1),
+  PHASE_LUTEAL      NUMBER(1),
+  TRIMESRT1         NUMBER(1),
+  TRIMESRT2         NUMBER(1),
+  TRIMESRT3         NUMBER(1)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSMIDNORMS IS 'Нормы для лабораторных исследований по возрасту'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FK_ID IS 'SEQUENCE=[SEQ_TSMIDNORMS]'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_YEAR1 IS 'Возраст (лет)'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_YEAR2 IS 'Возраст (лет)'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_LOW_M IS 'Нижняя норма для мужчин'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_HI_M IS 'Верхняя норма для мужчин'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_LOW_W IS 'Нижняя норма для женщин'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_HI_W IS 'Верхняя норма для женщин'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FK_SMID IS 'Код из TSMID (TSMID->FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FL_PAT IS 'Служебное поле'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FL_LOW_M_EQ IS 'Признак вхождения значения в диапазон'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_HI_M_EQ IS 'Признак вхождения значения в диапазон'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_LOW_EQ IS 'Признак вхождения значения в диапазон'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_HI_EQ IS 'Признак вхождения значения в диапазон'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_ONE_RES_M IS 'Если все, кроме 1 результата паталогия'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_ONE_RES_W IS 'Если все, кроме 1 результата паталогия'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_MOUNTH_1 IS 'Возраст ( месяцев)'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_MOUNTH_2 IS 'Возраст ( месяцев)'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_DAY_1 IS 'Возраст (дней)'
+/
+
+COMMENT ON COLUMN ASU.TSMIDNORMS.FN_DAY_2 IS 'Возраст (дней)'
+/
+
+
+--
+-- TSMIDNORMS_SMID_YEAR2  (Index) 
+--
+--  Dependencies: 
+--   TSMIDNORMS (Table)
+--
+CREATE INDEX ASU.TSMIDNORMS_SMID_YEAR2 ON ASU.TSMIDNORMS
+(FK_SMID, FN_YEAR2)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TSMIDNORMS_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TSMIDNORMS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSMIDNORMS_INSERT" 
+ BEFORE 
+ INSERT
+ ON ASU.TSMIDNORMS  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+    SELECT SEQ_TSMIDNORMS.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+

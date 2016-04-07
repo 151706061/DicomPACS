@@ -1,0 +1,287 @@
+ALTER TABLE ASU.TRECIPE_DLO_EXP_MEDICS
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRECIPE_DLO_EXP_MEDICS CASCADE CONSTRAINTS
+/
+
+--
+-- TRECIPE_DLO_EXP_MEDICS  (Table) 
+--
+CREATE TABLE ASU.TRECIPE_DLO_EXP_MEDICS
+(
+  NOMK_LS    NUMBER,
+  NAME_MED   VARCHAR2(254 BYTE),
+  C_TRN      NUMBER,
+  C_MNN      NUMBER,
+  C_LF       NUMBER,
+  DATE_B     DATE,
+  DATE_E     DATE,
+  D_LS       VARCHAR2(30 BYTE),
+  C_DLS      NUMBER,
+  N_FV       NUMBER,
+  C_FARG     NUMBER,
+  V_LF       NUMBER(22,8),
+  C_VLF      NUMBER,
+  M_LF       NUMBER(22,8),
+  C_MLF      NUMBER,
+  NAME_FCT   VARCHAR2(150 BYTE),
+  NAME_CNF   VARCHAR2(25 BYTE),
+  NAME_PCK   VARCHAR2(150 BYTE),
+  NAME_CNP   VARCHAR2(25 BYTE),
+  COMPL      VARCHAR2(170 BYTE),
+  FLAG_KEK   NUMBER,
+  FLAG1      NUMBER,
+  FLAG2      NUMBER,
+  MSG_TEXT   VARCHAR2(100 BYTE),
+  C_RLP      NUMBER,
+  IMN        NUMBER,
+  LP         NUMBER,
+  PM         NUMBER,
+  OPTIKA     NUMBER,
+  PRIZ_DUBL  NUMBER                             DEFAULT 0,
+  PACKAGE    VARCHAR2(100 BYTE),
+  C_FINL     NUMBER                             DEFAULT 0,
+  N_DOZA     NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRECIPE_DLO_EXP_MEDICS IS 'ДЛО.Справочник товаров'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.PRIZ_DUBL IS 'Признак дублированной или ошибочной записи'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.PACKAGE IS 'Уточняющая характеристика упаковки'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.C_FINL IS 'Источник финансирования'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.NOMK_LS IS 'Номенклатурный код лекарственного средства'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.NAME_MED IS 'Наименование ЛП'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.C_TRN IS 'Код торгового наименования'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.C_MNN IS 'Код МНН'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.C_LF IS 'Код лек. формы'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.DATE_B IS 'начало действия'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.DATE_E IS 'конец действия'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.D_LS IS 'Значение дозировки дейст. вещества'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.C_DLS IS 'Код дозировки'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.N_FV IS 'фасовка'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.C_FARG IS 'фармгруппа (TRECIPE_DLO_EXP_FARMGR)'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.V_LF IS 'Значение объема'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.C_VLF IS 'код ед. измерения объема'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.M_LF IS 'значение веса'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.C_MLF IS 'код ед. измерения веса '
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.NAME_FCT IS 'Производитель'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.NAME_CNF IS 'Страна производства'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.NAME_PCK IS 'Упаковщик'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.NAME_CNP IS 'Страна упаковки'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.COMPL IS 'Комплектность'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.FLAG_KEK IS 'Признак необходимости протокола врачебной комиссии'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.FLAG1 IS 'Признак жизненно необходимых лекарственных средств'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.FLAG2 IS 'Признак лекарственных средств, запрещенных к отпуску'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.MSG_TEXT IS 'Комментарий'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.C_RLP IS 'код раздела перечня'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.IMN IS 'Признак изделий медицинского назначения'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.LP IS 'признак лечебного питания'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.PM IS 'признак перевязочных материалов'
+/
+
+COMMENT ON COLUMN ASU.TRECIPE_DLO_EXP_MEDICS.OPTIKA IS 'Признак оптических медикаментов'
+/
+
+
+--
+-- TRECIPE_DLO_EXP_MEDICS_C_FARG  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_MEDICS (Table)
+--
+CREATE INDEX ASU.TRECIPE_DLO_EXP_MEDICS_C_FARG ON ASU.TRECIPE_DLO_EXP_MEDICS
+(C_FARG)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_EXP_MEDICS_DATES  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_MEDICS (Table)
+--
+CREATE INDEX ASU.TRECIPE_DLO_EXP_MEDICS_DATES ON ASU.TRECIPE_DLO_EXP_MEDICS
+(DATE_B, DATE_E)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_EXP_MEDICS_KEY  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_MEDICS (Table)
+--
+CREATE UNIQUE INDEX ASU.TRECIPE_DLO_EXP_MEDICS_KEY ON ASU.TRECIPE_DLO_EXP_MEDICS
+(NOMK_LS, C_FINL)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRECIPE_DLO_EXP_MEDICS_PARAMS  (Index) 
+--
+--  Dependencies: 
+--   TRECIPE_DLO_EXP_MEDICS (Table)
+--
+CREATE INDEX ASU.TRECIPE_DLO_EXP_MEDICS_PARAMS ON ASU.TRECIPE_DLO_EXP_MEDICS
+(C_TRN, C_MNN, C_LF)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRECIPE_DLO_EXP_MEDICS 
+-- 
+ALTER TABLE ASU.TRECIPE_DLO_EXP_MEDICS ADD (
+  CONSTRAINT TRECIPE_DLO_EXP_MEDICS_KEY
+ PRIMARY KEY
+ (NOMK_LS, C_FINL)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

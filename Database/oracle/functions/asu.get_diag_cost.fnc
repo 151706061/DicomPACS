@@ -1,0 +1,43 @@
+DROP FUNCTION ASU.GET_DIAG_COST
+/
+
+--
+-- GET_DIAG_COST  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSTANDART (Table)
+--   TSTANDART_COST (Table)
+--   TSTANDART_ICD10 (Table)
+--   TICD10 (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_DIAG_COST" (pDiagCode IN VARCHAR2) RETURN FLOAT IS
+
+   -- created by Serg
+
+ CURSOR C
+ IS
+SELECT MAX(SC.FN_COST)
+       FROM
+       TSTANDART_COST SC,
+       TSTANDART S,
+       TSTANDART_ICD10 SI,
+       TICD10 I
+       WHERE I.FK_ID = SI.FK_ICD10
+       AND S.FK_ID = SI.FK_STANDART
+       AND SC.FK_STANDARTID = S.FK_ID
+       AND UPPER(I.FC_KOD) LIKE SUBSTR(UPPER(pDiagCode), 1, 3);
+ D FLOAT;
+
+ BEGIN
+  OPEN C;
+  FETCH C INTO D;
+  CLOSE C;
+  RETURN nvl(D, 0);
+ END;
+/
+
+SHOW ERRORS;
+
+

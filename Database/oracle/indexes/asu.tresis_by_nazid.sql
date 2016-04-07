@@ -1,0 +1,25 @@
+DROP INDEX ASU.TRESIS_BY_NAZID
+/
+
+--
+-- TRESIS_BY_NAZID  (Index) 
+--
+CREATE INDEX ASU.TRESIS_BY_NAZID ON ASU.TRESIS
+(FK_NAZID, FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          896K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,294 @@
+DROP TABLE ASU.TLABREG CASCADE CONSTRAINTS
+/
+
+--
+-- TLABREG  (Table) 
+--
+CREATE TABLE ASU.TLABREG
+(
+  FK_ID       NUMBER(9)                         DEFAULT 0                     NOT NULL,
+  FK_PACID    NUMBER(9)                         DEFAULT 0                     NOT NULL,
+  FK_NAZID    NUMBER(9)                         DEFAULT 0                     NOT NULL,
+  FD_REGIST   DATE,
+  FN_PROBE    NUMBER(10)                        DEFAULT 0                     NOT NULL,
+  FK_NAPRID   NUMBER(9)                         DEFAULT 0                     NOT NULL,
+  FK_DEFAULT  NUMBER(9),
+  FK_PLACE    NUMBER(9),
+  FK_SOTRID   NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          2720K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TLABREG IS 'Таблица зарегистрированных на анализы'
+/
+
+COMMENT ON COLUMN ASU.TLABREG.FK_ID IS 'SEQUENCE=[SEQ_TLABREG]'
+/
+
+COMMENT ON COLUMN ASU.TLABREG.FK_PACID IS 'код пациента (TKARTA->FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TLABREG.FK_NAZID IS 'Код назначения'
+/
+
+COMMENT ON COLUMN ASU.TLABREG.FD_REGIST IS 'Дата регистрации'
+/
+
+COMMENT ON COLUMN ASU.TLABREG.FN_PROBE IS '№ пробы'
+/
+
+COMMENT ON COLUMN ASU.TLABREG.FK_NAPRID IS 'Направление'
+/
+
+COMMENT ON COLUMN ASU.TLABREG.FK_DEFAULT IS 'номер лота в аппарате'
+/
+
+COMMENT ON COLUMN ASU.TLABREG.FK_PLACE IS 'номер ряда/ячейки в аппарате'
+/
+
+
+--
+-- TLABREG_BY_FD_REGIST  (Index) 
+--
+--  Dependencies: 
+--   TLABREG (Table)
+--
+CREATE INDEX ASU.TLABREG_BY_FD_REGIST ON ASU.TLABREG
+(FD_REGIST)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1536K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLABREG_BY_ID_REGIST  (Index) 
+--
+--  Dependencies: 
+--   TLABREG (Table)
+--
+CREATE UNIQUE INDEX ASU.TLABREG_BY_ID_REGIST ON ASU.TLABREG
+(FK_ID, FD_REGIST)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1664K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLABREG_BY_NAZID  (Index) 
+--
+--  Dependencies: 
+--   TLABREG (Table)
+--
+CREATE INDEX ASU.TLABREG_BY_NAZID ON ASU.TLABREG
+(FK_NAZID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1664K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLABREG_BY_PACID_REGIST  (Index) 
+--
+--  Dependencies: 
+--   TLABREG (Table)
+--
+CREATE UNIQUE INDEX ASU.TLABREG_BY_PACID_REGIST ON ASU.TLABREG
+(FK_PACID, FD_REGIST, FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          2176K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLABREG$FN_PROBE  (Index) 
+--
+--  Dependencies: 
+--   TLABREG (Table)
+--
+CREATE INDEX ASU.TLABREG$FN_PROBE ON ASU.TLABREG
+(FN_PROBE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLABREG$TRUNC_FD_DATE  (Index) 
+--
+--  Dependencies: 
+--   TLABREG (Table)
+--
+CREATE INDEX ASU.TLABREG$TRUNC_FD_DATE ON ASU.TLABREG
+(TRUNC("FD_REGIST"))
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLABREG_SET_DEFAULT  (Trigger) 
+--
+--  Dependencies: 
+--   TLABREG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLABREG_SET_DEFAULT" 
+  BEFORE INSERT ON ASU.TLABREG   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+Begin
+  /*by TimurLan SELECT GET_DEFAULT_FROM_SMID(GET_LAB_RAZD(GET_SMIDFROMNAZ(:NEW.FK_NAZID)))
+    INTO :NEW.FK_DEFAULT
+    FROM DUAL;*/
+  NULL;
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TLABREG_BEFORE_UPDATE  (Trigger) 
+--
+--  Dependencies: 
+--   TLABREG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLABREG_BEFORE_UPDATE" 
+ BEFORE
+ UPDATE
+ ON ASU.TLABREG  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+begin
+  UPDATE TNAZGROUP SET FD_REGIST = :NEW.FD_REGIST, FK_LABREG = :NEW.FK_ID, FN_PROBE = :NEW.FN_PROBE WHERE FK_NAZID = :NEW.FK_NAZID;
+end;
+/
+SHOW ERRORS;
+
+
+--
+-- TLABREG_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TLABREG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLABREG_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TLABREG  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TLABREG.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  UPDATE TNAZGROUP SET FD_REGIST = :NEW.FD_REGIST, FK_LABREG = :NEW.FK_ID, FN_PROBE = :NEW.FN_PROBE WHERE FK_NAZID = :NEW.FK_NAZID;
+END;
+/
+SHOW ERRORS;
+
+
+--
+-- TLABREG_BEFORE_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   TLABREG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLABREG_BEFORE_DELETE" 
+ BEFORE
+ DELETE
+ ON ASU.TLABREG  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+Begin
+  UPDATE TNAZAN SET FK_NAZSOSID = GET_NEVIP WHERE FK_ID = :OLD.FK_NAZID;
+  UPDATE TNAZGROUP SET FD_REGIST = NULL, FN_PROBE = NULL, FK_LABREG = NULL WHERE FK_NAZID = :OLD.FK_NAZID;
+EXCEPTION
+  WHEN OTHERS THEN
+    NULL;
+End;
+/
+SHOW ERRORS;
+
+

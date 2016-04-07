@@ -1,0 +1,36 @@
+DROP TRIGGER ASU.TPERIODS_DELETE
+/
+
+--
+-- TPERIODS_DELETE  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TIB (Table)
+--   TPERIODS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPERIODS_DELETE" 
+  BEFORE DELETE ON ASU.TPERIODS   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW-- by TimurLan
+
+
+-- Код триггера модифицирован системой автоматической генерации триггеров репликации aTrigger.exe от:20.09.2005 23:15:17
+BEGIN
+  IF (USERENV('CLIENT_INFO') is null) or (USERENV('CLIENT_INFO') <> '%MAIL%') THEN
+    BEGIN
+    -- ORIGINAL TRIGGER BODY BEGIN FROM HERE:
+
+BEGIN
+  DELETE FROM TIB WHERE FK_BID = :OLD.FK_ID;
+  --DELETE FROM TIB WHERE FK_SMID = :OLD.FK_SMIDID;
+  --DELETE FROM TIB WHERE FK_SMEDITID = :OLD.FK_SMIDID;
+END;
+
+    -- ORIGINAL TRIGGER BODY ENDS HERE
+    END;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+

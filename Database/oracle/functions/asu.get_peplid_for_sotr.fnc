@@ -1,0 +1,42 @@
+DROP FUNCTION ASU.GET_PEPLID_FOR_SOTR
+/
+
+--
+-- GET_PEPLID_FOR_SOTR  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TPEOPLES (Table)
+--   TSOTR (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PEPLID_FOR_SOTR" (psotrid IN NUMBER) RETURN NUMBER IS
+-- Created 20061227 by Serg
+-- Функция возвращает код пипла для врача
+CURSOR C
+IS
+SELECT P.FK_ID
+       FROM LOGIN.TSOTR S,
+            ASU.TPEOPLES P
+       WHERE S.FK_PEPLID = P.FK_ID
+       AND S.FK_ID = NVL(psotrid, 0);
+
+  nRes NUMBER;
+
+BEGIN
+ OPEN C;
+  FETCH C INTO nRes;
+ CLOSE C;
+ RETURN nRes;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_PEPLID_FOR_SOTR TO EXCHANGE
+/
+
+GRANT EXECUTE ON ASU.GET_PEPLID_FOR_SOTR TO EXCH43
+/
+

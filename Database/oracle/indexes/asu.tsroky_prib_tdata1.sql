@@ -1,0 +1,25 @@
+DROP INDEX ASU.TSROKY_PRIB_TDATA1
+/
+
+--
+-- TSROKY_PRIB_TDATA1  (Index) 
+--
+CREATE INDEX ASU.TSROKY_PRIB_TDATA1 ON ASU.TSROKY
+(FK_PRYB, TRUNC("FD_DATA1"))
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

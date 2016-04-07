@@ -1,0 +1,25 @@
+DROP INDEX ASU.TADRESS_BY_KLADRID
+/
+
+--
+-- TADRESS_BY_KLADRID  (Index) 
+--
+CREATE INDEX ASU.TADRESS_BY_KLADRID ON ASU.TADRESS
+(FK_KLADR)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

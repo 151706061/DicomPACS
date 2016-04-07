@@ -1,0 +1,25 @@
+DROP INDEX ASU.TLIN_MEDIC_BY_DATE
+/
+
+--
+-- TLIN_MEDIC_BY_DATE  (Index) 
+--
+CREATE INDEX ASU.TLIN_MEDIC_BY_DATE ON ASU.TLIN_MEDIC
+(FD_DATE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

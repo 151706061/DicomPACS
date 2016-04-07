@@ -1,0 +1,34 @@
+DROP TABLE ASU.TEMP_PEPLID CASCADE CONSTRAINTS
+/
+
+--
+-- TEMP_PEPLID  (Table) 
+--
+CREATE TABLE ASU.TEMP_PEPLID
+(
+  FK_PEPLID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TEMP_PEPLID IS 'выгруженные peplid, Melnikov 20141114'
+/
+
+

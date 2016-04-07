@@ -1,0 +1,125 @@
+ALTER TABLE ASU.TVRACHNAZMARK
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TVRACHNAZMARK CASCADE CONSTRAINTS
+/
+
+--
+-- TVRACHNAZMARK  (Table) 
+--
+CREATE TABLE ASU.TVRACHNAZMARK
+(
+  FK_ID     NUMBER                              NOT NULL,
+  FK_NAZID  NUMBER,
+  FK_SOTR   NUMBER,
+  FK_SOS    NUMBER,
+  FD_NAZ    DATE,
+  FD_RUN    DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVRACHNAZMARK IS 'Таблица выполнения процедур в рамках назначения. Отметка проставляется сотрудником, проводившем процедуру. A.Nakorjakov 080508'
+/
+
+COMMENT ON COLUMN ASU.TVRACHNAZMARK.FK_ID IS 'SEQUENCE=[SEQ_TVRACHNAZMARK]'
+/
+
+COMMENT ON COLUMN ASU.TVRACHNAZMARK.FK_NAZID IS 'VNAZ.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TVRACHNAZMARK.FK_SOTR IS 'Врач, поставивший отметку об исполнении'
+/
+
+COMMENT ON COLUMN ASU.TVRACHNAZMARK.FK_SOS IS 'TNAZSOS.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TVRACHNAZMARK.FD_NAZ IS 'Когда назначено'
+/
+
+COMMENT ON COLUMN ASU.TVRACHNAZMARK.FD_RUN IS 'Дата, когда поставили отметку об исполнении'
+/
+
+
+--
+-- PK_VRACHNAZMARK  (Index) 
+--
+--  Dependencies: 
+--   TVRACHNAZMARK (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_VRACHNAZMARK ON ASU.TVRACHNAZMARK
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVRACHNAZMARK_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TVRACHNAZMARK (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVRACHNAZMARK_BEFORE_INSERT" 
+ BEFORE
+ INSERT
+ ON ASU.TVRACHNAZMARK  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TVRACHNAZMARK.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TVRACHNAZMARK 
+-- 
+ALTER TABLE ASU.TVRACHNAZMARK ADD (
+  CONSTRAINT PK_VRACHNAZMARK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

@@ -1,0 +1,169 @@
+DROP TABLE ASU.TPRIZN CASCADE CONSTRAINTS
+/
+
+--
+-- TPRIZN  (Table) 
+--
+CREATE TABLE ASU.TPRIZN
+(
+  FK_ID       NUMBER(15)                        NOT NULL,
+  FC_NAME     VARCHAR2(100 BYTE),
+  FC_SHORT    VARCHAR2(100 BYTE),
+  FN_ORDER    NUMBER(9),
+  FL_DEFAULT  NUMBER(1)                         DEFAULT 0,
+  FL_SHOWREP  NUMBER(1)                         DEFAULT 1
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          560K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPRIZN IS 'Справочник контингентов by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TPRIZN.FK_ID IS 'SEQUENCE=[SEQ_TPRIZN]'
+/
+
+COMMENT ON COLUMN ASU.TPRIZN.FC_NAME IS 'название'
+/
+
+COMMENT ON COLUMN ASU.TPRIZN.FC_SHORT IS 'кратко'
+/
+
+COMMENT ON COLUMN ASU.TPRIZN.FN_ORDER IS 'сортировка'
+/
+
+COMMENT ON COLUMN ASU.TPRIZN.FL_DEFAULT IS 'знач. по-умолчанию'
+/
+
+COMMENT ON COLUMN ASU.TPRIZN.FL_SHOWREP IS 'показ в отчетах'
+/
+
+
+--
+-- TPRIZN_BY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TPRIZN (Table)
+--
+CREATE UNIQUE INDEX ASU.TPRIZN_BY_FK_ID ON ASU.TPRIZN
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPRIZM_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPRIZN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPRIZM_BEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TPRIZN   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TPRIZN.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TPRIZN_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TPRIZN (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPRIZN_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TPRIZN  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  nTemp NUMBER;
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TPRIZN', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TPRIZN', 'FC_NAME', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fc_name), :new.fk_id);
+  elsif DELETING then
+    PKG_LOG.Do_log('TPRIZN', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_id), null, :old.fk_id);
+    PKG_LOG.Do_log('TPRIZN', 'FC_NAME', 'DELETE', PKG_LOG.GET_VALUE(:old.FC_NAME), null, :old.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TPRIZN', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FC_NAME') AND PKG_LOG.GET_VALUE(:old.FC_NAME) <> PKG_LOG.GET_VALUE(:new.FC_NAME) then
+      PKG_LOG.Do_log('TPRIZN', 'FC_NAME', 'UPDATE', PKG_LOG.GET_VALUE(:old.FC_NAME), PKG_LOG.GET_VALUE(:new.FC_NAME), :old.fk_id);
+    end if;
+  end if;
+  null;
+END TPRIZN_LOG;
+/
+SHOW ERRORS;
+
+
+DROP SYNONYM BUH.TPRIZN
+/
+
+--
+-- TPRIZN  (Synonym) 
+--
+--  Dependencies: 
+--   TPRIZN (Table)
+--
+CREATE SYNONYM BUH.TPRIZN FOR ASU.TPRIZN
+/
+
+
+DROP SYNONYM FOOD.TS_PRIZN
+/
+
+--
+-- TS_PRIZN  (Synonym) 
+--
+--  Dependencies: 
+--   TPRIZN (Table)
+--
+CREATE SYNONYM FOOD.TS_PRIZN FOR ASU.TPRIZN
+/
+
+
+DROP SYNONYM STAT.TPRIZN
+/
+
+--
+-- TPRIZN  (Synonym) 
+--
+--  Dependencies: 
+--   TPRIZN (Table)
+--
+CREATE SYNONYM STAT.TPRIZN FOR ASU.TPRIZN
+/
+
+

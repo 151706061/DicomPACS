@@ -1,0 +1,193 @@
+ALTER TABLE ASU.TMDA_DBF_ARCHIVE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TMDA_DBF_ARCHIVE CASCADE CONSTRAINTS
+/
+
+--
+-- TMDA_DBF_ARCHIVE  (Table) 
+--
+CREATE TABLE ASU.TMDA_DBF_ARCHIVE
+(
+  FK_ID       NUMBER(15)                        NOT NULL,
+  YEAR        NUMBER(4),
+  MONTH       NUMBER(2),
+  OWN         NUMBER(1),
+  LPU_ID      NUMBER(10),
+  PERSON_IDL  NUMBER(19),
+  P_ID_ILL    NUMBER(2),
+  ID_ILL      NUMBER(19),
+  ID_ILL_U    NUMBER(19),
+  POLICYSER   VARCHAR2(10 BYTE),
+  POLICYNUM   VARCHAR2(20 BYTE),
+  FAM         VARCHAR2(25 BYTE),
+  IM          VARCHAR2(25 BYTE),
+  OTCH        VARCHAR2(25 BYTE),
+  DATE_B_DAY  DATE,
+  DIA_E       VARCHAR2(8 BYTE),
+  DATE_S      DATE,
+  DATE_E      DATE,
+  DATE_B_U    DATE,
+  DATE_E_U    DATE,
+  TYPE_USL    NUMBER(1),
+  KOD_EO      VARCHAR2(20 BYTE),
+  KOL_EO      NUMBER(5),
+  TYPE_EO     NUMBER(2),
+  IST_FIN     NUMBER(2),
+  SBJ_MODERN  NUMBER(10,2),
+  FED_MODERN  NUMBER(10,2),
+  TRF_MODERN  NUMBER(10,2),
+  SUM_MODERN  NUMBER(10,2),
+  PRVSM_U     NUMBER(4),
+  DOC_CD_U    VARCHAR2(20 BYTE),
+  FK_SLUCHID  NUMBER(15),
+  FK_USLID    NUMBER(15)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          16K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TMDA_DBF_ARCHIVE IS 'Архив. Данные об оказанных медицинских услугах по программе модернизации (выгрузка в DBF, таблица MDA) Author:Neronov'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.FK_ID IS 'ASU.SEQ_TMDA_DBF'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.YEAR IS 'Год подачи реестра'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.MONTH IS 'Месяц подачи реестра'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.LPU_ID IS 'Код ЛПУ (Справочник LPU)'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.PERSON_IDL IS 'Локальный номер застрахованного в ЛПУ'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.ID_ILL IS 'Идентификационный номер случая'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.POLICYSER IS 'Серия полиса пациента'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.POLICYNUM IS 'Номер полиса'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.FAM IS 'Фамилия пациента'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.IM IS 'Имя пациента'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.OTCH IS 'Отчество пациента'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.DATE_B_DAY IS 'Дата рождения пациента'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.DIA_E IS 'Диагноз окончательный'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.DATE_S IS 'Дата начала заболевания'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.DATE_E IS 'Дата окончания заболевания'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.TYPE_USL IS '1-стационар (плановая госпитализация)
+  2-поликлиника
+  3-дневной стационар
+  4 – стационар (экстренная госпитализация)
+'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.KOD_EO IS 'Код единицы оплаты'
+/
+
+COMMENT ON COLUMN ASU.TMDA_DBF_ARCHIVE.KOL_EO IS 'Количество по полю (KOD_ EO)'
+/
+
+
+--
+-- K_TMDA_DBF_ARCHIVE_ID  (Index) 
+--
+--  Dependencies: 
+--   TMDA_DBF_ARCHIVE (Table)
+--
+CREATE UNIQUE INDEX ASU.K_TMDA_DBF_ARCHIVE_ID ON ASU.TMDA_DBF_ARCHIVE
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TMDA_DBF_ARCHIVE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TMDA_DBF_ARCHIVE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TMDA_DBF_ARCHIVE_INSERT" 
+ BEFORE
+  INSERT
+ ON asu.tmda_dbf_archive
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT asu.SEQ_tmda_dbf_archive.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TMDA_DBF_ARCHIVE 
+-- 
+ALTER TABLE ASU.TMDA_DBF_ARCHIVE ADD (
+  CONSTRAINT K_TMDA_DBF_ARCHIVE_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

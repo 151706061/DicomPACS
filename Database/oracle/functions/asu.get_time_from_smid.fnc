@@ -1,0 +1,41 @@
+DROP FUNCTION ASU.GET_TIME_FROM_SMID
+/
+
+--
+-- GET_TIME_FROM_SMID  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSMID (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_TIME_FROM_SMID" 
+  ( pFK_ID IN NUMBER)
+  RETURN  NUMBER IS
+CURSOR c(pID NUMBER) IS SELECT REPLACE(FC_TIME,',','.') FROM TSMID WHERE FK_ID=pID;
+str VARCHAR2(100);
+i NUMBER;
+BEGIN
+  OPEN c(pFK_ID);
+  FETCH c INTO str;
+  CLOSE c;
+  str:=REPLACE(str,'.',',');
+  BEGIN
+    i:=TO_NUMBER(str);
+  EXCEPTION
+    WHEN OTHERS THEN
+      str:=REPLACE(str,',','.');
+      BEGIN
+        i:=TO_NUMBER(str);
+      EXCEPTION
+        WHEN OTHERS THEN
+          i:=-1;
+      END;
+  END;
+  RETURN i;
+END; -- Function GET_TIME_FROM_SMID
+/
+
+SHOW ERRORS;
+
+

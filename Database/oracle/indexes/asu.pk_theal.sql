@@ -1,0 +1,25 @@
+DROP INDEX ASU.PK_THEAL
+/
+
+--
+-- PK_THEAL  (Index) 
+--
+CREATE UNIQUE INDEX ASU.PK_THEAL ON ASU.THEAL
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

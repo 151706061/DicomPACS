@@ -1,0 +1,970 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2A0A3FA5-80E3-4B1C-AEC0-E7F3C3CCDDB2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PacientNet.Domain</RootNamespace>
+    <AssemblyName>PacientNet.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.0.0\lib\net40-client\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="DataAccess">
+      <HintPath>..\3rdPartyComponents\DataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Devart.Data, Version=5.0.327.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdPartyComponents\Devart.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Devart.Data.PostgreSql, Version=5.50.228.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdPartyComponents\Devart.Data.PostgreSql.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Devart.Data.PostgreSql.Entity, Version=6.8.333.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Devart.Data.PostgreSql.Web, Version=5.50.228.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdPartyComponents\Devart.Data.PostgreSql.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Devart.Data.Universal, Version=3.40.310.0, Culture=neutral, PublicKeyToken=09af7300eec23701, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\3rdPartyComponents\Devart.Data.Universal.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Utils.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v10.2, Version=10.2.8.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.4.3.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="FirebirdSql.Data.FirebirdClient">
+      <HintPath>..\3rdPartyComponents\FirebirdSql.Data.FirebirdClient.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\packages\DotNetZip.1.9.1.8\lib\net20\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.1.2.10\lib\2.0\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="MVC Foolproof Validation">
+      <HintPath>..\packages\foolproof.0.9.4048\lib\MVC Foolproof Validation.dll</HintPath>
+    </Reference>
+    <Reference Include="MVC.Controls">
+      <HintPath>..\3rdPartyComponents\MVC.Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="PatientExchangeServiceLib">
+      <HintPath>..\3rdPartyComponents\PatientExchangeServiceLib.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.configuration">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.OracleClient">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Transactions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Extensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Windows.Forms">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\ADM\IAccessGroupRepository.cs" />
+    <Compile Include="Abstract\ADM\IFormFilterSettingRepository.cs" />
+    <Compile Include="Abstract\CDA\ICDARepository.cs" />
+    <Compile Include="Abstract\IRefundReasonRepository.cs" />
+    <Compile Include="Abstract\IVeterinarianRepository.cs" />
+    <Compile Include="Abstract\CounterpartProgram\ICounterpartProgramRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IMedicalOrganizationRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IPresctypeRepository.cs" />
+    <Compile Include="Abstract\Direction\IDirectionRepository.cs" />
+    <Compile Include="Abstract\Discount\IDiscountConditionRepository.cs" />
+    <Compile Include="Abstract\Discount\IDiscountRepository.cs" />
+    <Compile Include="Abstract\Dispensary\IDispensaryAnketsRepository.cs" />
+    <Compile Include="Abstract\Dispensary\IDispConclusionRepository.cs" />
+    <Compile Include="Abstract\Emk\IEmkRepository.cs" />
+    <Compile Include="Abstract\Exchange\IRegisterFomsRepository.cs" />
+    <Compile Include="Abstract\ExecuteProcedure\IExecuteProcedureRepository.cs" />
+    <Compile Include="Abstract\ADM\IDictionaryMngRepository.cs" />
+    <Compile Include="Abstract\ADM\ISotrAccessRepository.cs" />
+    <Compile Include="Abstract\ADM\IDocumentNumerationRepository.cs" />
+    <Compile Include="Abstract\Exchange\IExportRepository.cs" />
+    <Compile Include="Abstract\ADM\IAuditRepository.cs" />
+    <Compile Include="Abstract\ADM\IPersonRepository.cs" />
+    <Compile Include="Abstract\ADM\IRightRepository.cs" />
+    <Compile Include="Abstract\ADM\IRoleRepository.cs" />
+    <Compile Include="Abstract\ADM\ISystemSettingsRepository.cs" />
+    <Compile Include="Abstract\ADM\ISysuserAuditRepository.cs" />
+    <Compile Include="Abstract\ADM\ISysuserRepository.cs" />
+    <Compile Include="Abstract\Base\IContextRepository.cs" />
+    <Compile Include="Abstract\Base\IGenericHistoricRepository.cs" />
+    <Compile Include="Abstract\Base\IGenericRepository.cs" />
+    <Compile Include="Abstract\Base\IBaseRepository.cs" />
+    <Compile Include="Abstract\Base\IStoredFunctions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\IBAttachment\IIBAttachmentRepository.cs" />
+    <Compile Include="Abstract\IMdocGroupRepository.cs" />
+    <Compile Include="Abstract\Counterpart\IСontractRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IStatCardReportRepository.cs" />
+    <Compile Include="Abstract\IDiarysRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IMapTeethRepository.cs" />
+    <Compile Include="Abstract\Import\IImportPeopleRepository.cs" />
+    <Compile Include="Abstract\INewsRepository.cs" />
+    <Compile Include="Abstract\InformingService\IInformingMessageServiceRepository.cs" />
+    <Compile Include="Abstract\Insurances\IInsuranceFinanceRepository.cs" />
+    <Compile Include="Abstract\IOperationRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IMkb10Repository.cs" />
+    <Compile Include="Abstract\DictionaryN\IPeopleDictionaryRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IPrescRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IPresctypeFolderRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IRegistWindowLinetypeRepository.cs" />
+    <Compile Include="Abstract\RecommendTemplate\IRecommendTemplateRepository.cs" />
+    <Compile Include="Abstract\Settings\IFormEditSettingsRepository.cs" />
+    <Compile Include="Abstract\Standart\IStandartRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\ITemplateRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\ITravmRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IComfortTypeRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IDictionaryEntity.cs" />
+    <Compile Include="Abstract\DictionaryN\IDictionaryGenericRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IDictionaryRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IPeoplepostRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IRoomTypeRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IAgeGroupTypeRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IArealTypeRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IBuildingFloorTypeRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IBuildingPurposeRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IBuildingSupportingStructureRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IBuildProjectTypeRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IBuildTypeRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IInfoTypeRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IInfoValueRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\ILevelTypeRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\ILpuTypeRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IOrganizationalFormRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IOtdelTypeRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IOwnershipRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IPostRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IProfileCareRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\IQuipmentOwnershipListRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\ISubordinationTypeRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\DictionaryN\ISupremeDepartmentRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\ITKladrSprRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Abstract\IEpicrisRepository.cs" />
+    <Compile Include="Abstract\IIbSectionsRepository.cs" />
+    <Compile Include="Abstract\IProtocolTemplateRepository.cs" />
+    <Compile Include="Abstract\ITemplateQueryRepository.cs" />
+    <Compile Include="Abstract\Laboratory\ILaboratoryAnalizatorRepository.cs" />
+    <Compile Include="Abstract\Laboratory\ILaboratoryBarcodeRepository.cs" />
+    <Compile Include="Abstract\Laboratory\ILaboratoryPerformRepository.cs" />
+    <Compile Include="Abstract\Laboratory\ILaboratoryRegistrationRepository.cs" />
+    <Compile Include="Abstract\Laboratory\ILaboratorySettingsRepository.cs" />
+    <Compile Include="Abstract\Laboratory\ILaboratorySortRepository.cs" />
+    <Compile Include="Abstract\Laboratory\IPrescparamValuesRepository.cs" />
+    <Compile Include="Abstract\Laboratory\IPrescCardsRepository.cs" />
+    <Compile Include="Abstract\NSI\IUpdateNsiRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\IArealPeopleRepository.cs" />
+    <Compile Include="Abstract\DictionaryN\IPeopleDocTypeRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\IArealTypesRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\ICureTypesRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\IGroupRiskRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\IHardLifeRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\INursingBabyRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\IPInfoRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\IPremilitaryRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\IPrenatalRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\IRecipeLgotTypeRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\IReferallsRepository.cs" />
+    <Compile Include="Abstract\PacientDistricts\ITuberculezRepository.cs" />
+    <Compile Include="Abstract\Pacient\IPeopleInfoRepository.cs" />
+    <Compile Include="Abstract\Pacient\IVipPersonRepository.cs" />
+    <Compile Include="Abstract\Pacient\IListSpecifyDiagRepository.cs" />
+    <Compile Include="Abstract\Pacient\INacionalityRepository.cs" />
+    <Compile Include="Abstract\Pacient\IRecipeMedicTemplateRepository.cs" />
+    <Compile Include="Abstract\Pacient\IStandartControlRepository.cs" />
+    <Compile Include="Abstract\PasportMU\ICabinetScheduleRepository.cs" />
+    <Compile Include="Abstract\Pacient\IExportCodRepository.cs" />
+    <Compile Include="Abstract\Pacient\IOtdelMdoctypeRepository.cs" />
+    <Compile Include="Abstract\Pacient\IBillRepository.cs" />
+    <Compile Include="Abstract\Pacient\IBillUslugRepository.cs" />
+    <Compile Include="Abstract\Pacient\IPayAgreements.cs" />
+    <Compile Include="Abstract\Pacient\IPayAppendixes.cs" />
+    <Compile Include="Abstract\Pacient\IPayTypeAppendixes.cs" />
+    <Compile Include="Abstract\Pacient\IReceptiontypeRepository.cs" />
+    <Compile Include="Abstract\Pacient\IScheduleRepository.cs" />
+    <Compile Include="Abstract\Pacient\ISicklistRepository.cs" />
+    <Compile Include="Abstract\Pacient\ISotrMdoctypeRepository.cs" />
+    <Compile Include="Abstract\Pacient\ISotrPresctypeRepository.cs" />
+    <Compile Include="Abstract\Pacient\IRiskFactorsRepository.cs" />
+    <Compile Include="Abstract\Pacient\IDispansaryCardRepository.cs" />
+    <Compile Include="Abstract\Pacient\IPregnanciesRepository.cs" />
+    <Compile Include="Abstract\Pacient\IRecipeMedicRepository.cs" />
+    <Compile Include="Abstract\Pacient\IRecipeRepository.cs" />
+    <Compile Include="Abstract\Pacient\IScheduleTemplateRepository.cs" />
+    <Compile Include="Abstract\Pacient\ISotrScheduleRepository.cs" />
+    <Compile Include="Abstract\Insurances\IInsuranceRepository.cs" />
+    <Compile Include="Abstract\Pacient\IAmbTickDiagRepository.cs" />
+    <Compile Include="Abstract\Pacient\IDiagRepository.cs" />
+    <Compile Include="Abstract\Pacient\IMdocTypeRepository.cs" />
+    <Compile Include="Abstract\Pacient\IVisitRepository.cs" />
+    <Compile Include="Abstract\Pacient\IAmbulatoryTicketRepository.cs" />
+    <Compile Include="Abstract\Pacient\IMdocRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IBedRepository.cs" />
+    <Compile Include="Abstract\PasportMU\ICabinetRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IAgeGroupRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IArealRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IBuildingStateRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IBuildingPriceRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IBuildingRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IBankAccountRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IDrugStoreRepository.cs" />
+    <Compile Include="Abstract\ICredentialsValidator.cs" />
+    <Compile Include="Abstract\IPersistentPermissionsRepository.cs" />
+    <Compile Include="Abstract\PasportMU\ICompanyRepository.cs" />
+    <Compile Include="Abstract\PasportMU\ILicenceRepository.cs" />
+    <Compile Include="Abstract\PasportMU\ILPURepository.cs" />
+    <Compile Include="Abstract\PasportMU\IOtdelRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IPlotRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IRoomRepository.cs" />
+    <Compile Include="Abstract\PasportMU\ISanatoriumRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IRegistryWindowsRepository.cs" />
+    <Compile Include="Abstract\PasportMU\ISotrRepository.cs" />
+    <Compile Include="Abstract\PayServiceShort\IPayServiceShortRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmOperation\IAppointmentProcedureRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmOperation\IKartCoItemRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmOperation\IMinZapasRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmOperation\IRequestRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmOperation\IAppointmentDrugRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmOperation\ITrebDpcRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmOperation\ITrebRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmOperation\IZayavkaDPCRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IAccountGroupRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IDocsRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IFarmGroupRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IGroupMORepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IGroupLFRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IKartRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IMassUnitsRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IMedicComplexRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IMORepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IPositionDocRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IProducerRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IOutputFormRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\ISourcesFinanceRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IObjectUchetRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\ISpecialMedicRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\ISpisanievidRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\IStoreRepository.cs" />
+    <Compile Include="Abstract\Pharm\PharmSetting\ISupplierRepository.cs" />
+    <Compile Include="Abstract\Portal\ICallCenterRepository.cs" />
+    <Compile Include="Abstract\Portal\IPortalRepository.cs" />
+    <Compile Include="Abstract\Portal\IQuestionnaireRepository.cs" />
+    <Compile Include="Abstract\Portal\IRiskgroupRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProfexActionRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProfexFinalActRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProfexRecommendationRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProfexDiseaseRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProfexListRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProfexListNazRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProfexNoticeRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProfexProffactorRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProfexActionTypeRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProphCompanyRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProphContractRepository.cs" />
+    <Compile Include="Abstract\Pacient\ISDCardRepository.cs" />
+    <Compile Include="Abstract\ProphRegistry\IProphExportUserRepository.cs" />
+    <Compile Include="Abstract\ReceptionWard\IStacPrescRepository.cs" />
+    <Compile Include="Abstract\ReceptionWard\ITemperatureRepository.cs" />
+    <Compile Include="Abstract\ReceptionWard\IDutyPlanRepository.cs" />
+    <Compile Include="Abstract\ReceptionWard\IHospitalDurationRepository.cs" />
+    <Compile Include="Abstract\ReceptionWard\IHospitalMoveRepository.cs" />
+    <Compile Include="Abstract\ReceptionWard\IPacListRepository.cs" />
+    <Compile Include="Abstract\ReceptionWard\IReceptionWardRepository.cs" />
+    <Compile Include="Abstract\ReceptionWard\IHospitalPlanRepository.cs" />
+    <Compile Include="Abstract\ReceptionWard\IMtlRepository.cs" />
+    <Compile Include="Abstract\Report\IReportRepository.cs" />
+    <Compile Include="Abstract\RSF\IRsfColumnsRepository.cs" />
+    <Compile Include="Abstract\RSF\IRsfRepository.cs" />
+    <Compile Include="Abstract\RSF\IRsfSavedReestr.cs" />
+    <Compile Include="Abstract\RSF\IRsfTemplateAllColumnsRepository.cs" />
+    <Compile Include="Abstract\RSF\IRsfTemplateColumnsrepository.cs" />
+    <Compile Include="Abstract\ServiceUtil\IServiceUtilRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IInfectionRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacCancelRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacCancelTypeRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacCompanyRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacCompanyTypeRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacInputTypeRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacKratnNameRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacKratnRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacMapRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacPeopleStatusRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacPeopleTestRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacPlanRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacPlanStatusRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacPrepInfectionRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacPrepRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacPrepStoreLogRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacSicnessRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacStatusSeryRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacTestRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacTestResultRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacPeopleRepository.cs" />
+    <Compile Include="Abstract\Vaccin\IVacUnitRepository.cs" />
+    <Compile Include="Abstract\WorkList\IWorkListLOGSRepository.cs" />
+    <Compile Include="Concrete\ADM\AccessGroupRepository.cs" />
+    <Compile Include="Concrete\ADM\DictionaryMngRepository.cs" />
+    <Compile Include="Concrete\ADM\SotrAccessRepository.cs" />
+    <Compile Include="Concrete\ADM\AuditRepository.cs" />
+    <Compile Include="Concrete\ADM\DocumentNumerationRepository.cs" />
+    <Compile Include="Concrete\ADM\FormFilterSettingRepository.cs" />
+    <Compile Include="Concrete\Base\BaseRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Concrete\Base\ContextRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Concrete\Base\GenericHistoricRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Concrete\Base\GenericRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Concrete\Base\ClassesRepository.cs" />
+    <Compile Include="Concrete\Base\StoredFunctions.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Concrete\CDA\CDARepository.cs" />
+    <Compile Include="Concrete\RefundReasonRepository.cs" />
+    <Compile Include="Concrete\VeterinarianRepository.cs" />
+    <Compile Include="Concrete\CounterpartProgram\CounterpartProgramRepository.cs" />
+    <Compile Include="Concrete\Direction\DirectionRepository.cs" />
+    <Compile Include="Concrete\Emk\EmkRepository.cs" />
+    <Compile Include="Concrete\Exchange\RegisterFomsRepository.cs" />
+    <Compile Include="Concrete\Exchange\ExportRepository.cs" />
+    <Compile Include="Concrete\ADM\PersonRepository.cs" />
+    <Compile Include="Concrete\ADM\RightRepository.cs" />
+    <Compile Include="Concrete\ADM\RoleRepository.cs" />
+    <Compile Include="Concrete\ADM\SystemSettingsRepository.cs" />
+    <Compile Include="Concrete\ADM\SysuserAuditRepository.cs" />
+    <Compile Include="Concrete\ADM\SysuserRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\MedicalOrganizationRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\PresctypeRepository.cs" />
+    <Compile Include="Concrete\Discount\DiscountConditionRepository.cs" />
+    <Compile Include="Concrete\Discount\DiscountRepository.cs" />
+    <Compile Include="Concrete\Dispensary\DispensaryAnketsRepository.cs" />
+    <Compile Include="Concrete\Dispensary\DispConclusionRepository.cs" />
+    <Compile Include="Concrete\ExecuteProcedure\ExecuteProcedureRepository.cs" />
+    <Compile Include="Concrete\IBAttachment\IBAttachmentRepository.cs" />
+    <Compile Include="Concrete\Import\ImportPeopleRepository.cs" />
+    <Compile Include="Concrete\InformingService\InformingMessageServiceRepository.cs" />
+    <Compile Include="Concrete\Insurances\InsuranceFinanceRepository.cs" />
+    <Compile Include="Concrete\Laboratory\LaboratoryBarcodeRepository.cs" />
+    <Compile Include="Concrete\Laboratory\LaboratoryPerformRepository.cs" />
+    <Compile Include="Concrete\Laboratory\LaboratoryRegistrationRepository.cs" />
+    <Compile Include="Concrete\Laboratory\LaboratorySettingsRepository.cs" />
+    <Compile Include="Concrete\Laboratory\LaboratorySortRepository.cs" />
+    <Compile Include="Concrete\Laboratory\LaboratoryAnalizatorRepository.cs" />
+    <Compile Include="Concrete\MdocGroupRepository.cs" />
+    <Compile Include="Concrete\Counterpart\СontractRepository.cs" />
+    <Compile Include="Concrete\DiarysRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\MapTeethRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\StatCardReportRepository.cs" />
+    <Compile Include="Concrete\Laboratory\PrescparamValuesRepository.cs" />
+    <Compile Include="Concrete\Laboratory\PrescCardsRepository.cs" />
+    <Compile Include="Concrete\NewsRepository.cs" />
+    <Compile Include="Concrete\NSI\UpdateNsiRepository.cs" />
+    <Compile Include="Concrete\OperationRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\AgeGroupTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\ArealTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\BuildTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\BuildingPurposeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\BuildProjectTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\BuildingSupportingStructureRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\BuildingFloorTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\ComfortTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\DictionaryGenericRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\DictionaryRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\Mkb10Repository.cs" />
+    <Compile Include="Concrete\DictionaryN\PeopleDictionaryRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\PeopleDocTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\PeoplepostRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\PrescRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\PresctypeFolderRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\RoomTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\QuipmentOwnershipListRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\LevelTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\ProfileCareRepository.cs" />
+    <Compile Include="Concrete\RecommendTemplate\RecommendTemplateRepository.cs" />
+    <Compile Include="Concrete\Settings\FormEditSettingsRepository.cs" />
+    <Compile Include="Concrete\Standart\StandartRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\SubordinationTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\SupremeDepartmentRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\TemplateRepository.cs" />
+    <Compile Include="Concrete\EpicrisRepository.cs" />
+    <Compile Include="Concrete\IbSectionsRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\ArealPeopleRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\ArealTypesRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\CureTypesRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\GroupRiskRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\HardLifeRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\NursingBabyRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\PInfoRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\PremilitaryRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\PrenatalRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\RecipeLgotTypeRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\ReferallsRepository.cs" />
+    <Compile Include="Concrete\PacientDistricts\TuberculezRepository.cs" />
+    <Compile Include="Concrete\Pacient\AmbulatoryTicketRepository.cs" />
+    <Compile Include="Concrete\Pacient\AmbTickDiagRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\RegistWindowLinetypeRepository.cs" />
+    <Compile Include="Concrete\Pacient\BillRepository.cs" />
+    <Compile Include="Concrete\Pacient\BillUslugRepository.cs" />
+    <Compile Include="Concrete\Pacient\PeopleInfoRepository.cs" />
+    <Compile Include="Concrete\Pacient\VipPersonRepository.cs" />
+    <Compile Include="Concrete\Pacient\ListSpecifyDiagRepository.cs" />
+    <Compile Include="Concrete\Pacient\NacionalityRepository.cs" />
+    <Compile Include="Concrete\Pacient\RecipeMedicTemplateRepository.cs" />
+    <Compile Include="Concrete\Pacient\SDCardRepository.cs" />
+    <Compile Include="Concrete\Pacient\StandartControlRepository.cs" />
+    <Compile Include="Concrete\PasportMU\CabinetScheduleRepository.cs" />
+    <Compile Include="Concrete\Pacient\ExportCodRepository.cs" />
+    <Compile Include="Concrete\Pacient\OtdelMdoctypeRepository.cs" />
+    <Compile Include="Concrete\Pacient\PayAgreements.cs" />
+    <Compile Include="Concrete\Pacient\PayAppendixes.cs" />
+    <Compile Include="Concrete\Pacient\PayTypeAppendixes.cs" />
+    <Compile Include="Concrete\Pacient\ReceptiontypeRepository.cs" />
+    <Compile Include="Concrete\Pacient\SicklistRepository.cs" />
+    <Compile Include="Concrete\Pacient\SotrMdoctypeRepository.cs" />
+    <Compile Include="Concrete\Pacient\SotrPresctypeRepository.cs" />
+    <Compile Include="Concrete\Pacient\RiskFactorsRepository.cs" />
+    <Compile Include="Concrete\Pacient\DispansaryCardRepository.cs" />
+    <Compile Include="Concrete\Pacient\PregnanciesRepository.cs" />
+    <Compile Include="Concrete\Pacient\RecipeMedicRepository.cs" />
+    <Compile Include="Concrete\Pacient\RecipeRepository.cs" />
+    <Compile Include="Concrete\Pacient\ScheduleRepository.cs" />
+    <Compile Include="Concrete\Pacient\ScheduleTemplateRepository.cs" />
+    <Compile Include="Concrete\Pacient\SotrScheduleRepository.cs" />
+    <Compile Include="Concrete\Insurances\InsuranceRepository.cs" />
+    <Compile Include="Concrete\Pacient\DiagRepository.cs" />
+    <Compile Include="Concrete\Pacient\MdocTypeRepository.cs" />
+    <Compile Include="Concrete\Pacient\VisitRepository.cs" />
+    <Compile Include="Concrete\Pacient\MdocRepository.cs" />
+    <Compile Include="Concrete\PasportMU\AgeGroupRepository.cs" />
+    <Compile Include="Concrete\PasportMU\ArealRepository.cs" />
+    <Compile Include="Concrete\PasportMU\BedRepository.cs" />
+    <Compile Include="Concrete\PasportMU\BuildingRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\OtdelTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\InfoTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\InfoValueRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\LpuTypeRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\OrganizationalFormRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\OwnershipRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\PostRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\TKladrSprRepository.cs" />
+    <Compile Include="Concrete\PasportMU\BankAccountRepository.cs" />
+    <Compile Include="Concrete\PasportMU\BuildingPriceRepository.cs" />
+    <Compile Include="Concrete\PasportMU\BuildingStateRepository.cs" />
+    <Compile Include="Concrete\DictionaryN\TravmRepository.cs" />
+    <Compile Include="Abstract\PasportMU\IStaffListRepository.cs" />
+    <Compile Include="Concrete\PasportMU\CabinetRepository.cs" />
+    <Compile Include="Concrete\PasportMU\DrugStoreRepository.cs" />
+    <Compile Include="Concrete\PasportMU\RoomRepository.cs" />
+    <Compile Include="Concrete\CredentialsValidator.cs" />
+    <Compile Include="Concrete\PasportMU\CompanyRepository.cs" />
+    <Compile Include="Concrete\PasportMU\LicenceRepository.cs" />
+    <Compile Include="Concrete\PasportMU\LPURepository.cs" />
+    <Compile Include="Concrete\PasportMU\OtdelRepository.cs" />
+    <Compile Include="Concrete\PasportMU\PlotRepository.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Concrete\PasportMU\SanatoriumRepository.cs" />
+    <Compile Include="Concrete\PasportMU\RegistryWindowsRepository.cs" />
+    <Compile Include="Concrete\PasportMU\SotrRepository.cs" />
+    <Compile Include="Concrete\PasportMU\StaffListRepository.cs" />
+    <Compile Include="Concrete\PayServiceShort\PayServiceShortRepository.cs" />
+    <Compile Include="Concrete\PersistentPermissionsRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmOperation\AppointmentProcedureRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmOperation\KartCoItemRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmOperation\MinZapasRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmOperation\RequestRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmOperation\AppointmentDrugRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmOperation\TrebDpcRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmOperation\TrebRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmOperation\ZayavkaDPCRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\AccountGroupRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\DocsRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\FarmGroupRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\GroupMORepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\GroupLFRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\KartRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\MassUnitsRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\MedicComplexRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\MORepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\ObjectUchetRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\PositionDocRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\ProducerRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\OutputFormRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\SpecialMedicRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\SourcesFinanceRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\SpisanievidRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\StoreRepository.cs" />
+    <Compile Include="Concrete\Pharm\PharmSetting\SupplierRepository.cs" />
+    <Compile Include="Concrete\Portal\CallCenterRepository.cs" />
+    <Compile Include="Concrete\Portal\PortalRepository.cs" />
+    <Compile Include="Concrete\Portal\QuestionnaireRepository.cs" />
+    <Compile Include="Concrete\Portal\RiskgroupRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProfexActionRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProfexFinalActRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProfexRecommendationRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProfexDiseaseRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProfexListRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProfexListNazRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProfexNoticeRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProfexProffactorRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProfexActionTypeRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProphCompanyRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProphContractRepository.cs" />
+    <Compile Include="Concrete\ProphRegistry\ProphExportUserRepository.cs" />
+    <Compile Include="Concrete\ProtocolTemplateRepository.cs" />
+    <Compile Include="Concrete\ReceptionWard\StacPrescRepository.cs" />
+    <Compile Include="Concrete\ReceptionWard\PacListRepository.cs" />
+    <Compile Include="Concrete\ReceptionWard\TemperatureRepository.cs" />
+    <Compile Include="Concrete\ReceptionWard\DutyPlanRepository.cs" />
+    <Compile Include="Concrete\ReceptionWard\HospitalDurationRepository.cs" />
+    <Compile Include="Concrete\ReceptionWard\HospitalMoveRepository.cs" />
+    <Compile Include="Concrete\ReceptionWard\ReceptionWardRepository.cs" />
+    <Compile Include="Concrete\ReceptionWard\HospitalPlanRepository.cs" />
+    <Compile Include="Concrete\ReceptionWard\MtlRepository.cs" />
+    <Compile Include="Concrete\Report\ReportRepository.cs" />
+    <Compile Include="Concrete\RSF\RsfColumnsRepository.cs" />
+    <Compile Include="Concrete\RSF\RsfRepository.cs" />
+    <Compile Include="Concrete\RSF\RsfSavedReestr.cs" />
+    <Compile Include="Concrete\RSF\RsfTemplateAllColumnsRepository.cs" />
+    <Compile Include="Concrete\RSF\RsfTemplateColumnsRepository.cs" />
+    <Compile Include="Concrete\ServiceUtil\ServiceUtilRepository.cs" />
+    <Compile Include="Concrete\TemplateQueryRepository.cs" />
+    <Compile Include="Concrete\UserProtocolTemplateExt.cs" />
+    <Compile Include="Concrete\Vaccin\InfectionRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacCancelRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacCancelTypeRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacCompanyRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacCompanyTypeRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacInputTypeRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacKratnNameRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacKratnRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacMapRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacPeopleRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacPeopleStatusRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacPeopleTestRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacPlanRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacPlanStatusRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacPrepInfectionRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacPrepRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacPrepStoreLogRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacSicnessRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacStatusSeryRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacTestRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacTestResultRepository.cs" />
+    <Compile Include="Concrete\Vaccin\VacUnitRepository.cs" />
+    <Compile Include="Concrete\WorkList\WorkListLOGSRepository.cs" />
+    <Compile Include="Entities\AnketsReestrResultBall.cs" />
+    <Compile Include="Entities\AuditActionType.cs" />
+    <Compile Include="Entities\BuildsList.cs" />
+    <Compile Include="Entities\BuildsStateList.cs" />
+    <Compile Include="Entities\PrintSettings.cs" />
+    <Compile Include="Entities\MdocCase.cs" />
+    <Compile Include="Entities\FormFieldValidate.cs" />
+    <Compile Include="Entities\DictionaryTables.cs" />
+    <Compile Include="Entities\MdocContent.cs" />
+    <Compile Include="Entities\MdocHtml.cs" />
+    <Compile Include="Entities\Direction.cs" />
+    <Compile Include="Entities\DirectionRefuse.cs" />
+    <Compile Include="Entities\MdocInfo.cs" />
+    <Compile Include="Entities\LaboratorySettingsTreeItem.cs" />
+    <Compile Include="Entities\LaboratoryValue.cs" />
+    <Compile Include="Entities\MdocItem.cs" />
+    <Compile Include="Entities\NormEntity.cs" />
+    <Compile Include="Entities\Specialty.cs" />
+    <Compile Include="Entities\Person.cs" />
+    <Compile Include="Entities\DocumentDigit.cs" />
+    <Compile Include="Entities\Diag.cs" />
+    <Compile Include="Entities\Mdoc.cs" />
+    <Compile Include="Entities\Presc.cs" />
+    <Compile Include="Entities\Dictionaries.cs" />
+    <Compile Include="Entities\DictionaryMetaData.cs" />
+    <Compile Include="Entities\MkbRespondingClass.cs" />
+    <Compile Include="Entities\People.cs" />
+    <Compile Include="Entities\Lpu.cs" />
+    <Compile Include="Entities\LpuWithOtdel.cs" />
+    <Compile Include="Entities\Receptiontype.cs" />
+    <Compile Include="Entities\ScheduleLogAction.cs" />
+    <Compile Include="Entities\SpisanievidExt.cs" />
+    <Compile Include="Entities\TrsfEx.cs" />
+    <Compile Include="Extensions\DomainExtentions.cs" />
+    <Compile Include="Infrastructure\CONSTBOX.cs" />
+    <Compile Include="Infrastructure\CustomAttribute\CustomAttributes.cs" />
+    <Compile Include="Infrastructure\HtmlHelpers\LogHelper.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Infrastructure\ModelCompleter.cs" />
+    <Compile Include="Infrastructure\SQL\SqlCDA.cs" />
+    <Compile Include="Infrastructure\SQL\DataAccessExt.cs" />
+    <Compile Include="Infrastructure\SQL\ProphSQL.cs" />
+    <Compile Include="Infrastructure\SQL\SqlCounterpart.cs" />
+    <Compile Include="Infrastructure\SQL\SqlDirection.cs" />
+    <Compile Include="Infrastructure\SQL\SqlLab.cs" />
+    <Compile Include="Infrastructure\SQL\SqlMdoc.cs" />
+    <Compile Include="Infrastructure\SQL\SqlPortal.cs" />
+    <Compile Include="Infrastructure\SQL\DynFormSQL.cs" />
+    <Compile Include="Infrastructure\SQL\SqlRecommendTemplate.cs" />
+    <Compile Include="Infrastructure\SQL\SQLRegist.cs" />
+    <Compile Include="Infrastructure\SQL\SqlRole.cs" />
+    <Compile Include="Infrastructure\SQL\SqlSchedule.cs" />
+    <Compile Include="Infrastructure\SQL\SQLUni.cs" />
+    <Compile Include="Infrastructure\SQL\UsersSQL.cs" />
+    <Compile Include="Infrastructure\SQL\WorkListSQL.cs" />
+    <Compile Include="Infrastructure\Utils\CacheUtils.cs" />
+    <Compile Include="Infrastructure\Utils\DataSetExtensions.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupInfo.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupPresctypeListGrid.cs" />
+    <Compile Include="Models\AccessGroup\CheckResult.cs" />
+    <Compile Include="Models\ADM\RoleRightModel.cs" />
+    <Compile Include="Models\Ambtalon\AmbulatoryNaznList.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupDictionaryListGrid.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupListGrid.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupLpuListGrid.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupOtdelListGrid.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupOtdelListGridWhithAccess.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupReceptiontypeListGrid.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupRightListGrid.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupRoleListGrid.cs" />
+    <Compile Include="Models\AccessGroup\AccessGroupSectionIBListGrid.cs" />
+    <Compile Include="Models\AmbulatoryTicket\VisitTicketModels.cs" />
+    <Compile Include="Models\AmbulatoryTicket\RequiredFieldList.cs" />
+    <Compile Include="Models\AmbulatoryTicket\AmbulatoryTicketDiag.cs" />
+    <Compile Include="Models\CDA\CDAListGrid.cs" />
+    <Compile Include="Models\CDA\CDALogListGrid.cs" />
+    <Compile Include="Models\CDA\CDAMessageErrorGrid.cs" />
+    <Compile Include="Models\CDA\ConstInfo.cs" />
+    <Compile Include="Models\CDA\WebBufferTransferInfo.cs" />
+    <Compile Include="Models\CDA\PIXLogListGrid.cs" />
+    <Compile Include="Models\CDA\PIXListGrid.cs" />
+    <Compile Include="Models\Company\InsuranceCompanyModel.cs" />
+    <Compile Include="Models\CounterpartProgram\CounterpartProgramPresctypeListGrid.cs" />
+    <Compile Include="Models\CounterpartProgram\InsuranceProgramInfo.cs" />
+    <Compile Include="Models\CounterpartProgram\InsuranceProgramListGrid.cs" />
+    <Compile Include="Models\Counterpart\CheckPrectypeByContract.cs" />
+    <Compile Include="Models\Counterpart\SummContractByPeopleInsurance.cs" />
+    <Compile Include="Models\Counterpart\SummContractByPeopleInsuranceDetail.cs" />
+    <Compile Include="Models\Diarys\DiarysList.cs" />
+    <Compile Include="Models\DictionaryMng\DictionaryFieldList.cs" />
+    <Compile Include="Models\DictionaryMng\DictionaryInfo.cs" />
+    <Compile Include="Models\DictionaryMng\DictionaryListGrid.cs" />
+    <Compile Include="Models\Direction\BufferPackageListGrid.cs" />
+    <Compile Include="Models\Direction\BufferPackageAutoListGrid.cs" />
+    <Compile Include="Models\Direction\DirectionDischargeInfo.cs" />
+    <Compile Include="Models\Direction\DirectionHospMoveInfo.cs" />
+    <Compile Include="Models\Direction\DirectionHospInfo.cs" />
+    <Compile Include="Models\Direction\DirectionBedCountInfo.cs" />
+    <Compile Include="Models\Direction\DirectionBedCountSelectListGrid.cs" />
+    <Compile Include="Models\Direction\PackageLogListGrid.cs" />
+    <Compile Include="Models\Discount\DiscountPeopleInfo.cs" />
+    <Compile Include="Models\Discount\DiscountPeopleListGrid.cs" />
+    <Compile Include="Models\Discount\DiscountServiceListGrid.cs" />
+    <Compile Include="Models\Discount\DiscountConditionInfo.cs" />
+    <Compile Include="Models\Discount\DiscountConditionListGrid.cs" />
+    <Compile Include="Models\Discount\DiscountInfo.cs" />
+    <Compile Include="Models\Discount\DiscountListGrid.cs" />
+    <Compile Include="Models\Discount\DiscountLpuListGrid.cs" />
+    <Compile Include="Models\Dispensary\DispConclusionResultGrid.cs" />
+    <Compile Include="Models\Dispensary\DispConclusionInfo.cs" />
+    <Compile Include="Models\Dispensary\DataDispAnketsModel.cs" />
+    <Compile Include="Models\DynamicGrig\DynamicGrigModel.cs" />
+    <Compile Include="Models\Epicris\EpicrisList.cs" />
+    <Compile Include="Models\ADM\FormFilterSettingList.cs" />
+    <Compile Include="Models\Exchange\RegisterFomsModel.cs" />
+    <Compile Include="Models\HospitalMove\HospitalMoveInterimModel.cs" />
+    <Compile Include="Models\HospitalMove\HospitalMoveModel.cs" />
+    <Compile Include="Models\HospitalPlan\HospitalPlanHist.cs" />
+    <Compile Include="Models\HospitalPlan\HospitalPlanHistGrid.cs" />
+    <Compile Include="Models\IBAttachment\IBAttachmentListGrid.cs" />
+    <Compile Include="Models\Insurances\InsuranceModel.cs" />
+    <Compile Include="Models\Mkb\Mkb10Model.cs" />
+    <Compile Include="Models\Operation\OperationGridModel.cs" />
+    <Compile Include="Models\Operation\OperationList.cs" />
+    <Compile Include="Models\PassportMU\Bed\BedListGrid.cs" />
+    <Compile Include="Models\PassportMU\Lpu\LpuListTreeNode.cs" />
+    <Compile Include="Models\PassportMU\Room\RoomModel.cs" />
+    <Compile Include="Models\PayServicesShort\PayServicePeopleDebtGrid.cs" />
+    <Compile Include="Models\Person\PeopleFind.cs" />
+    <Compile Include="Models\Person\PacientDublicate.cs" />
+    <Compile Include="Models\Presctype\DtPeriodSelectorModel.cs" />
+    <Compile Include="Models\Presctype\PrescTypeTreeModel.cs" />
+    <Compile Include="Models\Presc\PrescForMdoc.cs" />
+    <Compile Include="Models\Presc\PrescForList.cs" />
+    <Compile Include="Models\Presc\PrescForXray.cs" />
+    <Compile Include="Models\Presc\PrescSignSotrList.cs" />
+    <Compile Include="Models\Presc\PrescForIB.cs" />
+    <Compile Include="Models\Profex\ContractListGridModel.cs" />
+    <Compile Include="Models\Profex\ScheduleForProfexListModel.cs" />
+    <Compile Include="Models\Profex\WorkerInfoModel.cs" />
+    <Compile Include="Models\Profex\PrintFinalActModel.cs" />
+    <Compile Include="Models\Profex\ProfexIbProtocolModel.cs" />
+    <Compile Include="Models\Profex\ProfexRecommendationGridModel.cs" />
+    <Compile Include="Models\Profex\RecipeListGrid.cs" />
+    <Compile Include="Models\ReceptionType\ReceptionTypeGridModel.cs" />
+    <Compile Include="Models\ReceptionWard\StacPrescListGrid.cs" />
+    <Compile Include="Models\ReceptionWard\StatCardDiag.cs" />
+    <Compile Include="Models\ReceptionWard\DutyPlanGridModel.cs" />
+    <Compile Include="Models\ReceptionWard\MtlStatCardField.cs" />
+    <Compile Include="Models\Recipe\CheckModel.cs" />
+    <Compile Include="Models\Recipe\RecipeMedicListGrid.cs" />
+    <Compile Include="Models\Recipe\RecipeMedicTemplateGrid.cs" />
+    <Compile Include="Models\Recipe\RecipeListGridColumn.cs" />
+    <Compile Include="Models\Recipe\RecipeMedicActionModel.cs" />
+    <Compile Include="Models\Recipe\RecipeRecipeListGrid.cs" />
+    <Compile Include="Models\Recipe\RecipeListProlongGrid.cs" />
+    <Compile Include="Models\Recipe\RecipeListDoneGrid.cs" />
+    <Compile Include="Models\Recipe\RecipeListPrescGrid.cs" />
+    <Compile Include="Models\Recipe\RecipeListGrid.cs" />
+    <Compile Include="Models\RecommendTemplate\RecommendTemplateListForSaveModel.cs" />
+    <Compile Include="Models\RecommendTemplate\RecommendTemplateModel.cs" />
+    <Compile Include="Models\Report\ReportTemplatePartition.cs" />
+    <Compile Include="Models\Schedule\LockedSchedule.cs" />
+    <Compile Include="Models\SDCard\FindPeopleResult.cs" />
+    <Compile Include="Models\SDCard\SDCardInfo.cs" />
+    <Compile Include="Models\ServiceUtil\ServiceUtilModel.cs" />
+    <Compile Include="Models\Sicklist\SicklistList.cs" />
+    <Compile Include="Models\PayServicesShort\PayAgreementInfoModel.cs" />
+    <Compile Include="Models\Common\MvcGridParam.cs" />
+    <Compile Include="Models\PacientDistricts\ArealPeopleHist.cs" />
+    <Compile Include="Models\PacientDistricts\ArealPeopleHistGrid.cs" />
+    <Compile Include="Models\PayServicesShort\PayServiceContractInfo.cs" />
+    <Compile Include="Models\PayServicesShort\PayServiceContractInfoGrid.cs" />
+    <Compile Include="Models\PayServicesShort\PayServiceContractListGridModel.cs" />
+    <Compile Include="Models\PayServicesShort\PayServiceGridModel.cs" />
+    <Compile Include="Models\PayServicesShort\PayServicePrescForAgreementGridModel.cs" />
+    <Compile Include="Models\PayServicesShort\PayServicePrescToPayModel.cs" />
+    <Compile Include="Models\ReceptionWard\DiagInfoModel.cs" />
+    <Compile Include="Models\ReceptionWard\MtlDictionaryList.cs" />
+    <Compile Include="Models\ReceptionWard\MtlInfo.cs" />
+    <Compile Include="Models\ReceptionWard\MtlTabList.cs" />
+    <Compile Include="Models\ReceptionWard\StatCardModel.cs" />
+    <Compile Include="Models\Rights\AmbulatoryCardAccessTabModel.cs" />
+    <Compile Include="Models\SotrAccess\SotrTopMenu.cs" />
+    <Compile Include="Models\SotrAccess\SotrBookmarkMenu.cs" />
+    <Compile Include="Models\SotrAccess\SotrAccessGroupListGrid.cs" />
+    <Compile Include="Models\SotrAccess\SotrOtdelListGridWhithAccess.cs" />
+    <Compile Include="Models\SotrAccess\SotrDictionaryListGrid.cs" />
+    <Compile Include="Models\SotrAccess\SotrSectionIBListGrid.cs" />
+    <Compile Include="Models\SotrAccess\PresctypeListGrid.cs" />
+    <Compile Include="Models\SotrAccess\SotrReceptiontypeListGrid.cs" />
+    <Compile Include="Models\SotrAccess\SotrOtdelListGrid.cs" />
+    <Compile Include="Models\SotrAccess\SotrLpuListGrid.cs" />
+    <Compile Include="Models\SotrAccess\SotrRightListGrid.cs" />
+    <Compile Include="Models\SotrAccess\SotrRoleListGrid.cs" />
+    <Compile Include="Models\SotrAccess\SotrListGrid.cs" />
+    <Compile Include="Models\StatCardReport\StatCardValuesModel.cs" />
+    <Compile Include="Models\StatCardReport\VariableValueModel.cs" />
+    <Compile Include="Models\Sysuser\SotrSertificateSpecialityGridModel.cs" />
+    <Compile Include="Models\Template\TemplateType.cs" />
+    <Compile Include="Models\TreeViewGrid\TreeViewGridModel.cs" />
+    <Compile Include="Models\Veterinarian\VeterinarianModel.cs" />
+    <Compile Include="Models\WorkList\AccessWorklist.cs" />
+    <Compile Include="Models\WorkList\WorkListLOGSListGrid.cs" />
+    <Compile Include="PgDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PgDataModel.edml</DependentUpon>
+    </Compile>
+    <Compile Include="PgDataModel.PregeneratedViews.cs">
+      <DependentUpon>PgDataModel.edml</DependentUpon>
+    </Compile>
+    <Compile Include="PgFunctionModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PgFunctionModel.edml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="PgDataModel.Diagram1.view">
+      <DependentUpon>PgDataModel.edml</DependentUpon>
+    </None>
+    <DevartEntityDeploy Include="PgDataModel.edml">
+      <Generator>DevartEfGenerator</Generator>
+      <LastGenOutput>PgDataModel.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </DevartEntityDeploy>
+    <None Include="PgDataModel.edps">
+      <DependentUpon>PgDataModel.edml</DependentUpon>
+    </None>
+    <None Include="PgFunctionModel.Diagram1.view">
+      <DependentUpon>PgFunctionModel.edml</DependentUpon>
+    </None>
+    <DevartEntityDeploy Include="PgFunctionModel.edml">
+      <Generator>DevartEfGenerator</Generator>
+      <LastGenOutput>PgFunctionModel.Designer.cs</LastGenOutput>
+    </DevartEntityDeploy>
+    <None Include="PgFunctionModel.edps">
+      <DependentUpon>PgFunctionModel.edml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="PgFunctionModel.PostgresFunctionModelDiagram.view">
+      <DependentUpon>PgFunctionModel.edml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Cache\CacheProviders.Interfaces\CacheProviders.Interfaces.csproj">
+      <Project>{4A551824-1EEC-445C-8F16-75A24A4778D9}</Project>
+      <Name>CacheProviders.Interfaces</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cache\CacheProviders.Manager\CacheProviders.Manager.csproj">
+      <Project>{2607EE28-A1C6-4774-9B6D-0FA759B63E68}</Project>
+      <Name>CacheProviders.Manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Cache\CacheProviders.WebCache\CacheProviders.WebCache.csproj">
+      <Project>{712FE375-549C-4AA5-98F7-956D4DA40800}</Project>
+      <Name>CacheProviders.WebCache</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,43 @@
+DROP PACKAGE BODY ASU.PKG_AMEDSES_EXE
+/
+
+--
+-- PKG_AMEDSES_EXE  (Package Body) 
+--
+CREATE OR REPLACE PACKAGE BODY ASU.pkg_amedses_exe
+IS
+   FD_CUR_SPIS DATE DEFAULT SYSDATE; -- текущая дата списания - перенесено в PKG_SPIS_ON_PAC
+   FL_SHOW_VIPIS_PAC NUMBER DEFAULT 0; -- флаг отображения выписанных пацов
+
+-- текущая дата списания
+   FUNCTION GET_CUR_SPIS_DATE RETURN  DATE DETERMINISTIC
+   IS
+   BEGIN
+     RETURN NVL(FD_CUR_SPIS, SYSDATE);
+   END;
+
+   PROCEDURE SET_CUR_SPIS_DATE ( aSpisDate DATE DEFAULT SYSDATE )
+    IS
+   BEGIN
+     FD_CUR_SPIS := aSpisDate;
+   END;
+
+-- флаг отображения выписанных пацов
+   FUNCTION GET_FL_SHOW_VIPIS_PAC RETURN  NUMBER DETERMINISTIC
+   IS
+   BEGIN
+     RETURN NVL(FL_SHOW_VIPIS_PAC, 0);
+   END;
+
+   PROCEDURE SET_FL_SHOW_VIPIS_PAC ( aFL_SHOW_VIPIS_PAC NUMBER DEFAULT 0 )
+    IS
+   BEGIN
+     FL_SHOW_VIPIS_PAC := aFL_SHOW_VIPIS_PAC;
+   END;
+END;
+-- End of DDL Script for Package ASU.PKG_AMEDSES_EXE
+/
+
+SHOW ERRORS;
+
+

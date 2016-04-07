@@ -1,0 +1,25 @@
+DROP INDEX ASU.TRECIPE_M_I_FK_LAT_NAME
+/
+
+--
+-- TRECIPE_M_I_FK_LAT_NAME  (Index) 
+--
+CREATE INDEX ASU.TRECIPE_M_I_FK_LAT_NAME ON ASU.TRECIPE_MEDIC
+(FK_LAT_NAME_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

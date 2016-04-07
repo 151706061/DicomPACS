@@ -1,0 +1,79 @@
+set define off
+ALTER TABLE MED.TTREB_DPC 
+ ADD (
+  FK_CREATE_MO_ID NUMBER,
+  FD_CREATE DATE,
+  FK_EDIT_MO_ID NUMBER,
+  FD_EDIT DATE
+ )
+/
+COMMENT ON COLUMN MED.TTREB_DPC.FK_CREATE_MO_ID IS 'кто создал строку (ссылка на MED.TMO)'
+/
+COMMENT ON COLUMN MED.TTREB_DPC.FD_CREATE IS 'дата создания'
+/
+COMMENT ON COLUMN MED.TTREB_DPC.FK_EDIT_MO_ID IS 'кто изменил строку (ссылка на MED.TMO)'
+/
+COMMENT ON COLUMN MED.TTREB_DPC.FD_EDIT IS 'дата редактирования'
+/
+
+CREATE OR REPLACE TRIGGER MED.TTREB_DPC_BEFORE_INSERT
+ BEFORE 
+ INSERT
+ ON MED.TTREB_DPC
+ REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW 
+BEGIN 
+  IF :NEW.FK_ID IS NULL THEN
+    SELECT SEQ_TTREB_DPC.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+  END IF;
+ :NEW.FK_CREATE_MO_ID := med.pkg_medses.get_curmo;
+ :NEW.FD_CREATE := sysdate;
+ 
+
+  update asu.tnazmedlech nml set nml.FK_TREB_DPC = :NEW.FK_ID where nml.FK_ID = :NEW.FK_NAZMEDLECH_ID;
+  update asu.tnazmed nm
+     set nm.FK_TREB = :NEW.FK_TREBID
+  where nm.FK_ID in(select nml.fk_nazmedid  from asu.tnazmedlech nml where nml.FK_ID = :NEW.FK_NAZMEDLECH_ID);
+END TTREB_DPC_BEFORE_INSERT;
+/
+
+CREATE OR REPLACE TRIGGER MED.TTREB_DPC_UPD
+ BEFORE 
+ UPDATE
+ ON MED.TTREB_DPC
+ REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW 
+begin
+  :NEW.FK_EDIT_MO_ID := med.pkg_medses.get_curmo;
+  :NEW.FD_EDIT       := sysdate;
+end;
+/
+
+CREATE OR REPLACE TRIGGER MED.TTREB_DPC_BEFORE_DELETE
+ BEFORE 
+ DELETE
+ ON MED.TTREB_DPC
+ REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW 
+BEGIN 
+  UPDATE tnazmedlech l
+  SET l.fk_treb_dpc = NULL
+  WHERE fk_treb_dpc = :OLD.FK_ID;
+  
+  update med.tdpc  set FK_TREBDPC = null
+  where FK_TREBDPC = :OLD.FK_ID;
+END TTREB_DPC_BEFORE_DELETE;
+/
+
+CREATE INDEX ASU.TMEDICGIVEN_FK_DPCID ON ASU.TMEDICGIVEN(  FK_DPCID ASC  ) 
+/
+
+exec dbms_stats.gather_table_stats('ASU','TMEDICGIVEN');
+/
+
+exec asu.PKG_SMINI.WRITESTRING( 'medica.exe', 'FUNC_EDIT_TREB_IN_RASH', '1');
+/
+
+commit
+/
+

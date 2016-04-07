@@ -1,0 +1,22 @@
+DROP TRIGGER ASU.TNAZRECEPT_DEL
+/
+
+--
+-- TNAZRECEPT_DEL  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   TNAZRECEPT (Table)
+--   TNAZRECEPTCON (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZRECEPT_DEL" 
+BEFORE DELETE
+ON ASU.TNAZRECEPT REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+BEGIN
+  delete from tnazreceptcon where fk_receptid=:old.fk_id;
+END;
+/
+SHOW ERRORS;
+
+

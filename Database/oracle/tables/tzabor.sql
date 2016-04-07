@@ -1,0 +1,49 @@
+DROP TABLE ASU.TZABOR CASCADE CONSTRAINTS
+/
+
+--
+-- TZABOR  (Table) 
+--
+CREATE TABLE ASU.TZABOR
+(
+  FK_ID     NUMBER(9),
+  FN_VENA   NUMBER,
+  FN_PALEC  NUMBER(9),
+  FD_DATE   DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          200K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TZABOR IS 'Таблица заборовиз вены/пальца'
+/
+
+COMMENT ON COLUMN ASU.TZABOR.FK_ID IS 'ID'
+/
+
+COMMENT ON COLUMN ASU.TZABOR.FN_VENA IS 'Количество заборов из вены'
+/
+
+COMMENT ON COLUMN ASU.TZABOR.FN_PALEC IS 'Количество заборов из пальца'
+/
+
+COMMENT ON COLUMN ASU.TZABOR.FD_DATE IS 'Дата вставки'
+/
+
+

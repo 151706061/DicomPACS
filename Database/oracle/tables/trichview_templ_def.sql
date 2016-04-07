@@ -1,0 +1,198 @@
+ALTER TABLE ASU.TRICHVIEW_TEMPL_DEF
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TRICHVIEW_TEMPL_DEF CASCADE CONSTRAINTS
+/
+
+--
+-- TRICHVIEW_TEMPL_DEF  (Table) 
+--
+CREATE TABLE ASU.TRICHVIEW_TEMPL_DEF
+(
+  FK_ID             INTEGER                     NOT NULL,
+  FK_SOTR           INTEGER                     NOT NULL,
+  FK_RICHVIEW_TEML  INTEGER                     NOT NULL,
+  FK_SMID           INTEGER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          120K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRICHVIEW_TEMPL_DEF IS 'ќписывает какой шаблон дл€ сотрудника загружать по умолчанию
+Author: Ura'
+/
+
+COMMENT ON COLUMN ASU.TRICHVIEW_TEMPL_DEF.FK_ID IS 'SEQUENCE=[SEQ_TRICH_VIEW_TEMPL_DEF]'
+/
+
+COMMENT ON COLUMN ASU.TRICHVIEW_TEMPL_DEF.FK_SOTR IS 'ссылка на сотрудника'
+/
+
+COMMENT ON COLUMN ASU.TRICHVIEW_TEMPL_DEF.FK_RICHVIEW_TEML IS '—сылка на шаблон'
+/
+
+COMMENT ON COLUMN ASU.TRICHVIEW_TEMPL_DEF.FK_SMID IS '—сылка на SMID'
+/
+
+
+--
+-- IX_TRICHVIEW_TEMP_DEF_FK_SOTR  (Index) 
+--
+--  Dependencies: 
+--   TRICHVIEW_TEMPL_DEF (Table)
+--
+CREATE INDEX ASU.IX_TRICHVIEW_TEMP_DEF_FK_SOTR ON ASU.TRICHVIEW_TEMPL_DEF
+(FK_SOTR)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- IX_TRICHVIEW_TEMPL_DEF_FK_SMID  (Index) 
+--
+--  Dependencies: 
+--   TRICHVIEW_TEMPL_DEF (Table)
+--
+CREATE INDEX ASU.IX_TRICHVIEW_TEMPL_DEF_FK_SMID ON ASU.TRICHVIEW_TEMPL_DEF
+(FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- IX_TRICHVIEW_TEMPL_DEF_FK_TEMP  (Index) 
+--
+--  Dependencies: 
+--   TRICHVIEW_TEMPL_DEF (Table)
+--
+CREATE INDEX ASU.IX_TRICHVIEW_TEMPL_DEF_FK_TEMP ON ASU.TRICHVIEW_TEMPL_DEF
+(FK_RICHVIEW_TEML)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- PK_TRICHVIEW_TEML_DEF  (Index) 
+--
+--  Dependencies: 
+--   TRICHVIEW_TEMPL_DEF (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TRICHVIEW_TEML_DEF ON ASU.TRICHVIEW_TEMPL_DEF
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TRICHVIEW_TEMPL_DEF_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TRICHVIEW_TEMPL_DEF (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRICHVIEW_TEMPL_DEF_BI" 
+ BEFORE 
+ INSERT
+ ON ASU.TRICHVIEW_TEMPL_DEF  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT seq_trich_view_templ_def.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TRICHVIEW_TEMPL_DEF 
+-- 
+ALTER TABLE ASU.TRICHVIEW_TEMPL_DEF ADD (
+  CONSTRAINT PK_TRICHVIEW_TEML_DEF
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          80K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

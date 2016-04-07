@@ -1,0 +1,204 @@
+ALTER TABLE ASU.TVACCIN_PREP
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TVACCIN_PREP CASCADE CONSTRAINTS
+/
+
+--
+-- TVACCIN_PREP  (Table) 
+--
+--  Dependencies: 
+--   TVACCIN_UNIT (Table)
+--   TVAC_INPUT_TYPE (Table)
+--
+CREATE TABLE ASU.TVACCIN_PREP
+(
+  FK_ID          INTEGER                        NOT NULL,
+  FC_NAME        VARCHAR2(150 BYTE)             NOT NULL,
+  FK_UNIT        INTEGER                        NOT NULL,
+  RC_REM         VARCHAR2(4000 BYTE),
+  FL_DEL         NUMBER(1)                      DEFAULT 0,
+  FN_DOSE        NUMBER                         DEFAULT 1                     NOT NULL,
+  FK_INPUT_TYPE  INTEGER                        DEFAULT 1
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          40K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVACCIN_PREP IS 'Учет имунобилогических препаратов
+Author: Ura'
+/
+
+COMMENT ON COLUMN ASU.TVACCIN_PREP.FK_ID IS 'SEQUENCE=[SEQ_VACCIN]'
+/
+
+COMMENT ON COLUMN ASU.TVACCIN_PREP.FC_NAME IS 'Название препарата'
+/
+
+COMMENT ON COLUMN ASU.TVACCIN_PREP.FK_UNIT IS 'Единица измерения'
+/
+
+COMMENT ON COLUMN ASU.TVACCIN_PREP.RC_REM IS 'Примечание описание'
+/
+
+COMMENT ON COLUMN ASU.TVACCIN_PREP.FL_DEL IS 'Удален'
+/
+
+COMMENT ON COLUMN ASU.TVACCIN_PREP.FN_DOSE IS 'Доза по умолчанию'
+/
+
+COMMENT ON COLUMN ASU.TVACCIN_PREP.FK_INPUT_TYPE IS 'Способ ввдения по умолчанию'
+/
+
+
+--
+-- PK_TVACCIN_PREP  (Index) 
+--
+--  Dependencies: 
+--   TVACCIN_PREP (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TVACCIN_PREP ON ASU.TVACCIN_PREP
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVACCIN_PREP_BY_NAME_UNIT  (Index) 
+--
+--  Dependencies: 
+--   TVACCIN_PREP (Table)
+--
+CREATE UNIQUE INDEX ASU.TVACCIN_PREP_BY_NAME_UNIT ON ASU.TVACCIN_PREP
+(FC_NAME, FK_UNIT)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVACCIN_PREP$FK_INPUT_TYPE  (Index) 
+--
+--  Dependencies: 
+--   TVACCIN_PREP (Table)
+--
+CREATE INDEX ASU.TVACCIN_PREP$FK_INPUT_TYPE ON ASU.TVACCIN_PREP
+(FK_INPUT_TYPE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVACCIN_PREP_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TVACCIN_PREP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVACCIN_PREP_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tvaccin_prep
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+    --  Column "FK_ID" uses sequence SEQ_VACCIN
+
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT SEQ_VACCIN.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TVACCIN_PREP 
+-- 
+ALTER TABLE ASU.TVACCIN_PREP ADD (
+  CONSTRAINT PK_TVACCIN_PREP
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TVACCIN_PREP 
+-- 
+ALTER TABLE ASU.TVACCIN_PREP ADD (
+  CONSTRAINT FK_TVACCIN_PREP$TVACCIN_UNIT 
+ FOREIGN KEY (FK_UNIT) 
+ REFERENCES ASU.TVACCIN_UNIT (FK_ID),
+  CONSTRAINT FK_TVACCIN_PREP$TVAC_INPUT_TYP 
+ FOREIGN KEY (FK_INPUT_TYPE) 
+ REFERENCES ASU.TVAC_INPUT_TYPE (FK_ID))
+/
+

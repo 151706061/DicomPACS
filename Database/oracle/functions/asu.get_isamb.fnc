@@ -1,0 +1,27 @@
+DROP FUNCTION ASU.GET_ISAMB
+/
+
+--
+-- GET_ISAMB  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TAMBULANCE (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_ISAMB" ( pFK_ID IN NUMBER)
+  RETURN  NUMBER IS
+  nc NUMBER :=0;
+  CURSOR cTemp IS SELECT FK_ID FROM TAMBULANCE WHERE FK_ID=pFK_ID;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO nc;
+  IF nc<>0 THEN nc:=1; END IF;
+  CLOSE cTemp;
+  RETURN nc;
+END;
+/
+
+SHOW ERRORS;
+
+

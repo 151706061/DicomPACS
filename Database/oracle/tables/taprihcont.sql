@@ -1,0 +1,147 @@
+DROP TABLE ASU.TAPRIHCONT CASCADE CONSTRAINTS
+/
+
+--
+-- TAPRIHCONT  (Table) 
+--
+CREATE TABLE ASU.TAPRIHCONT
+(
+  FK_ID         NUMBER(9)                       NOT NULL,
+  FN_UCHKOL     NUMBER(9,3),
+  FN_FASKOL     NUMBER(9,3),
+  FK_APRIHID    NUMBER(9)                       NOT NULL,
+  FK_MEDKARTID  NUMBER(9)                       NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TAPRIHCONT IS 'содержимое того что пришло в аптеку'
+/
+
+COMMENT ON COLUMN ASU.TAPRIHCONT.FK_ID IS 'SEQUENCE=[SEQ_TAPRIHCONT]'
+/
+
+COMMENT ON COLUMN ASU.TAPRIHCONT.FN_UCHKOL IS 'учетное кол-во'
+/
+
+COMMENT ON COLUMN ASU.TAPRIHCONT.FN_FASKOL IS 'фасовочное кол-во'
+/
+
+COMMENT ON COLUMN ASU.TAPRIHCONT.FK_APRIHID IS 'код прихода к которому это содержимое'
+/
+
+COMMENT ON COLUMN ASU.TAPRIHCONT.FK_MEDKARTID IS 'код карточки на которую пришел(с которой списали) медикамент'
+/
+
+
+--
+-- TAPRIHCONT$APRIHID  (Index) 
+--
+--  Dependencies: 
+--   TAPRIHCONT (Table)
+--
+CREATE INDEX ASU.TAPRIHCONT$APRIHID ON ASU.TAPRIHCONT
+(FK_APRIHID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAPRIHCONT$ID$APRIHID  (Index) 
+--
+--  Dependencies: 
+--   TAPRIHCONT (Table)
+--
+CREATE UNIQUE INDEX ASU.TAPRIHCONT$ID$APRIHID ON ASU.TAPRIHCONT
+(FK_ID, FK_APRIHID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAPRIHCONT$MEDKARTID  (Index) 
+--
+--  Dependencies: 
+--   TAPRIHCONT (Table)
+--
+CREATE INDEX ASU.TAPRIHCONT$MEDKARTID ON ASU.TAPRIHCONT
+(FK_MEDKARTID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TAPRIHCONT$INS  (Trigger) 
+--
+--  Dependencies: 
+--   TAPRIHCONT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TAPRIHCONT$INS" 
+BEFORE INSERT
+ON ASU.TAPRIHCONT REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+BEGIN
+  SELECT seq_taprihcont.nextval
+    INTO :new.fk_id
+    FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

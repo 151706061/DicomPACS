@@ -1,0 +1,382 @@
+<?xml version='1.0' encoding='utf-8' ?>
+<!-- C++Builder XML Project -->
+<PROJECT>
+  <MACROS>
+    <VERSION value="BCB.06.00"/>
+    <PROJECT value="DicomVCLCB6.bpl"/>
+    <OBJFILES value="&quot;f:\program files\borland\cbuilder6\dicom\DicomVCLCB6.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_Reg.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\Dcm_View.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM32.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_Client.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_Connection.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_Dict.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_Server.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\Dcm_Attributes.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DicomVFWView.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_MemTable.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsMsg.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\SelectPacsHost.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsScan.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\cnssqldata.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsSQLParser.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsSQLScanner.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsTwain.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_Def.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_Hash.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_Jpegio.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_MpegWrite.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_UID.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM32_Blend.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM32_LowLevel.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM32_System.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM32_Transforms.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\ImageAttributesList.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KXSecurity.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KXServerCore.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KXSessionTracker.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KXSock.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxSockClient.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\Kxsocket.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KXString.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxThread.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\Save2MpegStatus.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsDirScan.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsTransf.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsCRtl.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsDcxGr.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsDiGrph.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsGbm.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsJpgGr.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsMisc.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsPcxGr.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsPngGr.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsPpmGr.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsQuantz.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsTgaGr.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsTifGr.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsCLib.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DicomHistogramBox.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DicomBurner.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxGraph3D.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_WADO.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_MPR.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\OpenGlPanel.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM32_Resamplers.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DefineCal.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\SetupLayout.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\Dicom2AVIStatus.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\ImportAVIProcessing.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\CnsVfw.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_Jpegls8081.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\Dcmjpeg2000Ex.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\Dcmjpeg16.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\Dcmjpeg12.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\dcmjpeg8.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\cnsmsg_eng.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\SelectNewHost.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxDeviceCaps.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxDriverInfo.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxASPI.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxSPTI.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxConst.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxDrvLib.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DicomMimeUtils.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DicomMD5.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DicomInputQuery.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\Dcm_GLView.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\GL.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\GLext.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\GLU.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\GLUT.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DotMath.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_3D.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_MarchingCubes.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\SurfaceInProcessing.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\Dcmjpeg2000.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\H263Unit.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_Templates.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DcmImageConvert.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\VideoConferenceBaseForm.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\V3DMemoryModule.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\V3DRenWindow.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM_ConferenceServer.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM32_Lines.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM32_Misc.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\DCM32_Polygons.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxCache.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxStreamEx.obj&quot; 
+      &quot;f:\program files\borland\cbuilder6\dicom\KxISOLib.obj&quot; &quot;f:\program files\borland\cbuilder6\dicom\VolumeSelectRange.obj&quot;"/>
+    <RESFILES value="DicomVCLCB6.res DCM_Reg.dcr"/>
+    <IDLFILES value=""/>
+    <IDLGENFILES value=""/>
+    <DEFFILE value=""/>
+    <RESDEPEN value="$(RESFILES) SelectPacsHost.dfm ImageAttributesList.dfm Save2MpegStatus.dfm 
+      DefineCal.dfm SetupLayout.dfm Dicom2AVIStatus.dfm ImportAVIProcessing.dfm 
+      SelectNewHost.dfm KxDeviceCaps.dfm KxDriverInfo.dfm DicomInputQuery.dfm 
+      SurfaceInProcessing.dfm VideoConferenceBaseForm.dfm VolumeSelectRange.dfm"/>
+    <LIBFILES value=""/>
+    <LIBRARIES value="bcb2kaxserver.lib indy.lib dbxcds.lib dclocx.lib soaprtl.lib nmfast.lib 
+      dbexpress.lib inetdbxpress.lib inetdbbde.lib dsnapcon.lib dsnapcrba.lib 
+      visualdbclx.lib teeqr.lib dss.lib tee.lib teedb.lib teeui.lib qrpt.lib 
+      bdecds.lib cds.lib ibxpress.lib vcldbx.lib bdertl.lib adortl.lib vcldb.lib"/>
+    <SPARELIBS value="rtl.lib vcldb.lib adortl.lib bdertl.lib vcldbx.lib ibxpress.lib cds.lib 
+      bdecds.lib qrpt.lib teeui.lib teedb.lib tee.lib dss.lib teeqr.lib 
+      visualdbclx.lib dsnapcrba.lib dsnapcon.lib bcbsmp.lib inetdbbde.lib 
+      inetdbxpress.lib dbexpress.lib nmfast.lib bcbie.lib soaprtl.lib dclocx.lib 
+      dbxcds.lib indy.lib bcb2kaxserver.lib dclusr.lib"/>
+    <PACKAGES value="rtl.bpi dclstd.bpi dcldb.bpi vcl.bpi dbrtl.bpi vclx.bpi visualclx.bpi 
+      bcbsmp.bpi bcbie.bpi dclusr.bpi"/>
+    <PATHCPP value=".;"/>
+    <PATHPAS value=".;"/>
+    <PATHRC value=".;"/>
+    <PATHASM value=".;"/>
+    <DEBUGLIBPATH value="$(BCB)\lib\debug"/>
+    <RELEASELIBPATH value="$(BCB)\lib\release"/>
+    <LINKER value="ilink32"/>
+    <USERDEFINES value="_DEBUG"/>
+    <SYSDEFINES value="_RTLDLL;NO_STRICT;USEPACKAGES"/>
+    <MAINSOURCE value="DicomVCLCB6.cpp"/>
+    <INCLUDEPATH value="$(BCB)\include;$(BCB)\include\vcl"/>
+    <LIBPATH value="$(BCB)\Projects\Lib;$(BCB)\lib\obj;$(BCB)\lib"/>
+    <WARNINGS value="-w-par"/>
+    <OTHERFILES value=""/>
+  </MACROS>
+  <OPTIONS>
+    <IDLCFLAGS value="-I$(BCB)\include -I$(BCB)\include\vcl -src_suffix cpp -D_DEBUG -boa"/>
+    <CFLAG1 value="-Od -H=$(BCB)\lib\vcl60.csm -Hc -Vx -Ve -X- -r- -a8 -b- -k -y -v -vi- -c 
+      -tWM"/>
+    <PFLAGS value="-N2$(BCB)\dicom -N0$(BCB)\dicom -$YD -$W -$O- -$A8 -v -JPHNE -M"/>
+    <RFLAGS value=""/>
+    <AFLAGS value="/mx /w2 /zd"/>
+    <LFLAGS value="-I$(BCB)\dicom -D&quot;&quot; -aa -Tpp -x -Gn -Gl -Gi -v"/>
+    <OTHERFILES value=""/>
+  </OPTIONS>
+  <LINKER>
+    <ALLOBJ value="c0pkg32.obj $(PACKAGES) Memmgr.Lib sysinit.obj $(OBJFILES)"/>
+    <ALLRES value="$(RESFILES)"/>
+    <ALLLIB value="$(LIBFILES) $(LIBRARIES) import32.lib cp32mti.lib"/>
+    <OTHERFILES value=""/>
+  </LINKER>
+  <FILELIST>
+      <FILE FILENAME="DicomVCLCB6.res" FORMNAME="" UNITNAME="DicomVCLCB6.res" CONTAINERID="ResTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DicomVCLCB6.cpp" FORMNAME="" UNITNAME="DicomVCLCB6" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Lib\rtl.bpi" FORMNAME="" UNITNAME="rtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Reg.pas" FORMNAME="" UNITNAME="DCM_Reg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Reg.dcr" FORMNAME="" UNITNAME="" CONTAINERID="DcrTool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Lib\dclstd.bpi" FORMNAME="" UNITNAME="dclstd" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Lib\dcldb.bpi" FORMNAME="" UNITNAME="dcldb" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Dcm_View.pas" FORMNAME="" UNITNAME="Dcm_View" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="compress\vcl.bpi" FORMNAME="" UNITNAME="vcl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="compress\dbrtl.bpi" FORMNAME="" UNITNAME="dbrtl" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM32.pas" FORMNAME="" UNITNAME="DCM32" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Client.pas" FORMNAME="" UNITNAME="DCM_Client" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Connection.pas" FORMNAME="" UNITNAME="DCM_Connection" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Dict.pas" FORMNAME="" UNITNAME="DCM_Dict" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Server.pas" FORMNAME="" UNITNAME="DCM_Server" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Dcm_Attributes.pas" FORMNAME="" UNITNAME="DCM_Attributes" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="compress\vclx.bpi" FORMNAME="" UNITNAME="vclx" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="compress\visualclx.bpi" FORMNAME="" UNITNAME="visualclx" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="compress\bcbsmp.bpi" FORMNAME="" UNITNAME="bcbsmp" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DicomVFWView.pas" FORMNAME="" UNITNAME="DicomVFWView" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_MemTable.pas" FORMNAME="" UNITNAME="DCM_MemTable" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsMsg.pas" FORMNAME="" UNITNAME="CnsMsg" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SelectPacsHost.pas" FORMNAME="SelectPacsHostForm" UNITNAME="SelectPacsHost" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsScan.pas" FORMNAME="" UNITNAME="CnsScan" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="cnssqldata.pas" FORMNAME="" UNITNAME="CnsSQLData" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsSQLParser.pas" FORMNAME="" UNITNAME="CnsSQLParser" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsSQLScanner.pas" FORMNAME="" UNITNAME="CnsSQLScanner" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsTwain.pas" FORMNAME="" UNITNAME="CnsTwain" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Def.pas" FORMNAME="" UNITNAME="DCM_Def" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Hash.pas" FORMNAME="" UNITNAME="DCM_Hash" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Jpegio.pas" FORMNAME="" UNITNAME="DCM_jpegio" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_MpegWrite.pas" FORMNAME="" UNITNAME="DCM_MpegWrite" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_UID.pas" FORMNAME="" UNITNAME="DCM_UID" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM32_Blend.pas" FORMNAME="" UNITNAME="DCM32_Blend" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM32_LowLevel.pas" FORMNAME="" UNITNAME="DCM32_LowLevel" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM32_System.pas" FORMNAME="" UNITNAME="DCM32_System" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM32_Transforms.pas" FORMNAME="" UNITNAME="DCM32_Transforms" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ImageAttributesList.pas" FORMNAME="ImageAttributesForm" UNITNAME="ImageAttributesList" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KXSecurity.pas" FORMNAME="" UNITNAME="KXSecurity" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KXServerCore.pas" FORMNAME="" UNITNAME="KXServerCore" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KXSessionTracker.pas" FORMNAME="" UNITNAME="KXSessionTracker" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KXSock.pas" FORMNAME="" UNITNAME="KXSock" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxSockClient.pas" FORMNAME="" UNITNAME="KXSockClient" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Kxsocket.pas" FORMNAME="" UNITNAME="KXSocket" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KXString.pas" FORMNAME="" UNITNAME="KXString" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxThread.pas" FORMNAME="" UNITNAME="KxThread" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Save2MpegStatus.pas" FORMNAME="Convert2MpegStatusForm" UNITNAME="Save2MpegStatus" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsDirScan.pas" FORMNAME="" UNITNAME="CnsDirScan" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsTransf.pas" FORMNAME="" UNITNAME="CnsTransf" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsCRtl.pas" FORMNAME="" UNITNAME="CnsCRtl" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsDcxGr.pas" FORMNAME="" UNITNAME="CnsDcxGr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsDiGrph.pas" FORMNAME="" UNITNAME="CnsDiGrph" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsGbm.pas" FORMNAME="" UNITNAME="CnsGbm" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsJpgGr.pas" FORMNAME="" UNITNAME="CnsJpgGr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsMisc.pas" FORMNAME="" UNITNAME="CnsMisc" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsPcxGr.pas" FORMNAME="" UNITNAME="CnsPcxGr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsPngGr.pas" FORMNAME="" UNITNAME="CnsPngGr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsPpmGr.pas" FORMNAME="" UNITNAME="CnsPpmGr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsQuantz.PAS" FORMNAME="" UNITNAME="CnsQuantz" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsTgaGr.pas" FORMNAME="" UNITNAME="CnsTgaGr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsTifGr.pas" FORMNAME="" UNITNAME="CnsTifGr" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsCLib.pas" FORMNAME="" UNITNAME="CnsCLib" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="bcbie.bpi" FORMNAME="" UNITNAME="bcbie" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DicomHistogramBox.pas" FORMNAME="" UNITNAME="DicomHistogramBox" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DicomBurner.pas" FORMNAME="" UNITNAME="DicomBurner" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxGraph3D.pas" FORMNAME="" UNITNAME="KxGraph3D" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_WADO.pas" FORMNAME="" UNITNAME="DCM_WADO" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_MPR.pas" FORMNAME="" UNITNAME="DCM_MPR" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="OpenGlPanel.pas" FORMNAME="" UNITNAME="OpenGlPanel" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM32_Resamplers.pas" FORMNAME="" UNITNAME="DCM32_Resamplers" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DefineCal.pas" FORMNAME="CalibrateForm" UNITNAME="DefineCal" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SetupLayout.pas" FORMNAME="LayoutSetupForm" UNITNAME="SetupLayout" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Dicom2AVIStatus.pas" FORMNAME="Dicom2AVIStatusForm" UNITNAME="Dicom2AVIStatus" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="ImportAVIProcessing.pas" FORMNAME="ImportAVIProcessBarForm" UNITNAME="ImportAVIProcessing" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="CnsVfw.pas" FORMNAME="" UNITNAME="CnsVfw" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Jpegls8081.pas" FORMNAME="" UNITNAME="DCM_Jpegls8081" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Dcmjpeg2000Ex.pas" FORMNAME="" UNITNAME="Dcmjpeg2000Ex" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Dcmjpeg16.pas" FORMNAME="" UNITNAME="Dcmjpeg16" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Dcmjpeg12.pas" FORMNAME="" UNITNAME="Dcmjpeg12" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="dcmjpeg8.pas" FORMNAME="" UNITNAME="Dcmjpeg8" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="cnsmsg_eng.pas" FORMNAME="" UNITNAME="cnsmsg_eng" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SelectNewHost.pas" FORMNAME="NewHostForm" UNITNAME="SelectNewHost" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxDeviceCaps.pas" FORMNAME="DeviceCapsForm" UNITNAME="KxDeviceCaps" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxDriverInfo.pas" FORMNAME="frmSettings" UNITNAME="KxDriverInfo" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxASPI.pas" FORMNAME="" UNITNAME="KxASPI" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxSPTI.pas" FORMNAME="" UNITNAME="KxSPTI" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxConst.pas" FORMNAME="" UNITNAME="KxConst" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxDrvLib.pas" FORMNAME="" UNITNAME="KxDrvLib" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DicomMimeUtils.pas" FORMNAME="" UNITNAME="DicomMimeUtils" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DicomMD5.pas" FORMNAME="" UNITNAME="DicomMD5" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DicomInputQuery.pas" FORMNAME="DicomInputQueryForm" UNITNAME="DicomInputQuery" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Dcm_GLView.pas" FORMNAME="" UNITNAME="Dcm_GLView" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="GL.pas" FORMNAME="" UNITNAME="GL" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="GLext.pas" FORMNAME="" UNITNAME="GLext" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="GLU.pas" FORMNAME="" UNITNAME="GLu" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="GLUT.pas" FORMNAME="" UNITNAME="Glut" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DotMath.pas" FORMNAME="" UNITNAME="DotMath" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_3D.pas" FORMNAME="" UNITNAME="DCM_3D" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_MarchingCubes.pas" FORMNAME="" UNITNAME="DCM_MarchingCubes" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="SurfaceInProcessing.pas" FORMNAME="RenderingProcessBarForm" UNITNAME="SurfaceInProcessing" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="Dcmjpeg2000.pas" FORMNAME="" UNITNAME="Dcmjpeg2000" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="dclusr.bpi" FORMNAME="" UNITNAME="dclusr" CONTAINERID="BPITool" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="H263Unit.pas" FORMNAME="" UNITNAME="H263Unit" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_Templates.pas" FORMNAME="" UNITNAME="DCM_Templates" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DcmImageConvert.pas" FORMNAME="" UNITNAME="DcmImageConvert" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="VideoConferenceBaseForm.pas" FORMNAME="VideoConferenceForm" UNITNAME="VideoConferenceBaseForm" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="V3DMemoryModule.pas" FORMNAME="" UNITNAME="V3DMemoryModule" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="V3DRenWindow.pas" FORMNAME="" UNITNAME="V3DRenWindow" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM_ConferenceServer.pas" FORMNAME="" UNITNAME="DCM_ConferenceServer" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM32_Lines.pas" FORMNAME="" UNITNAME="DCM32_Lines" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM32_Misc.pas" FORMNAME="" UNITNAME="DCM32_Misc" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DCM32_Polygons.pas" FORMNAME="" UNITNAME="DCM32_Polygons" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxCache.pas" FORMNAME="" UNITNAME="KxCache" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxStreamEx.pas" FORMNAME="" UNITNAME="KxStreamEx" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="KxISOLib.pas" FORMNAME="" UNITNAME="KxISOLib" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="VolumeSelectRange.pas" FORMNAME="SelectRangeForm" UNITNAME="VolumeSelectRange" CONTAINERID="PascalCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+  </FILELIST>
+  <BUILDTOOLS>
+  </BUILDTOOLS>
+
+  <IDEOPTIONS>
+[Version Info]
+IncludeVerInfo=1
+AutoIncBuild=0
+MajorVer=1
+MinorVer=0
+Release=0
+Build=0
+Debug=0
+PreRelease=0
+Special=0
+Private=0
+DLL=0
+Locale=2052
+CodePage=936
+
+[Version Info Keys]
+CompanyName=
+FileDescription=
+FileVersion=1.0.0.0
+InternalName=
+LegalCopyright=
+LegalTrademarks=
+OriginalFilename=
+ProductName=
+ProductVersion=1.0.0.0
+Comments=
+
+[HistoryLists\hlIncludePath]
+Count=7
+Item0=$(BCB)\include;$(BCB)\include\vcl
+Item1=$(BCB)\include;$(BCB)\include\vcl;compress
+Item2=compress;$(BCB)\include;$(BCB)\include\vcl;..\Projects
+Item3=$(BCB)\include;$(BCB)\include\vcl;..\Projects
+Item4=compress;..\Projects;$(BCB)\include;$(BCB)\include\vcl;LIB
+Item5=..\Projects;$(BCB)\include;$(BCB)\include\vcl;LIB
+Item6=..\Projects;$(BCB)\include;$(BCB)\include\vcl
+
+[HistoryLists\hlLibraryPath]
+Count=6
+Item0=$(BCB)\lib\obj;$(BCB)\lib
+Item1=$(BCB)\lib\obj;$(BCB)\lib;compress
+Item2=compress;$(BCB)\lib\obj;$(BCB)\lib;..\Projects
+Item3=$(BCB)\lib\obj;$(BCB)\lib;..\Projects
+Item4=..\Projects;$(BCB)\lib\obj;$(BCB)\lib;compress
+Item5=..\Projects;$(BCB)\lib\obj;$(BCB)\lib
+
+[HistoryLists\hlDebugSourcePath]
+Count=1
+Item0=$(BCB)\source\vcl
+
+[HistoryLists\hlConditionals]
+Count=1
+Item0=_DEBUG
+
+[HistoryLists\hlIntOutputDir]
+Count=2
+Item0=$(BCB)\dicom
+Item1=LIB
+
+[HistoryLists\hlFinalOutputDir]
+Count=2
+Item0=$(BCB)\dicom\
+Item1=$(BCB)\dicom
+
+[Debugging]
+DebugSourceDirs=$(BCB)\source\vcl
+
+[Parameters]
+RunParams=
+Launcher=
+UseLauncher=0
+DebugCWD=
+HostApplication=
+RemoteHost=
+RemotePath=
+RemoteLauncher=
+RemoteCWD=
+RemoteDebug=0
+
+[Compiler]
+ShowInfoMsgs=0
+LinkDebugVcl=0
+LinkCGLIB=0
+
+[CORBA]
+AddServerUnit=1
+AddClientUnit=1
+PrecompiledHeaders=1
+
+[Language]
+ActiveLang=
+ProjectLang=
+RootDir=
+
+[Linker]
+LibPrefix=
+LibSuffix=
+LibVersion=
+  </IDEOPTIONS>
+</PROJECT>

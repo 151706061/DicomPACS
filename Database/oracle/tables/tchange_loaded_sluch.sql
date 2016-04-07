@@ -1,0 +1,116 @@
+ALTER TABLE ASU.TCHANGE_LOADED_SLUCH
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TCHANGE_LOADED_SLUCH CASCADE CONSTRAINTS
+/
+
+--
+-- TCHANGE_LOADED_SLUCH  (Table) 
+--
+CREATE TABLE ASU.TCHANGE_LOADED_SLUCH
+(
+  FK_ID      NUMBER                             NOT NULL,
+  FK_SLUCH   NUMBER,
+  FD_DATE    DATE                               DEFAULT SYSDATE,
+  FK_SOTR    NUMBER,
+  FD_TODATE  DATE                               DEFAULT sysdate + 10000
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          16K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TCHANGE_LOADED_SLUCH IS 'Случаи, которые можно изменить после выгрузки [Author: Linnikov]'
+/
+
+COMMENT ON COLUMN ASU.TCHANGE_LOADED_SLUCH.FK_SLUCH IS 'Случай (TKARTA.FK_ID)'
+/
+
+COMMENT ON COLUMN ASU.TCHANGE_LOADED_SLUCH.FD_DATE IS 'Дата, с которой можно изменять случай'
+/
+
+COMMENT ON COLUMN ASU.TCHANGE_LOADED_SLUCH.FK_SOTR IS 'Сотрудник резрешивший изменениие'
+/
+
+COMMENT ON COLUMN ASU.TCHANGE_LOADED_SLUCH.FD_TODATE IS 'Дата, по которую можно изменять случай'
+/
+
+
+--
+-- TCHANGE_LOADED_SLUCH_PK  (Index) 
+--
+--  Dependencies: 
+--   TCHANGE_LOADED_SLUCH (Table)
+--
+CREATE UNIQUE INDEX ASU.TCHANGE_LOADED_SLUCH_PK ON ASU.TCHANGE_LOADED_SLUCH
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TCHANGE_LOADED_SLUCH_BEF_INS  (Trigger) 
+--
+--  Dependencies: 
+--   TCHANGE_LOADED_SLUCH (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TCHANGE_LOADED_SLUCH_BEF_INS" 
+BEFORE  INSERT  ON asu.TCHANGE_LOADED_SLUCH
+FOR EACH ROW
+Begin
+  SELECT asu.SEQ_TCHANGE_LOADED_SLUCH.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TCHANGE_LOADED_SLUCH 
+-- 
+ALTER TABLE ASU.TCHANGE_LOADED_SLUCH ADD (
+  CONSTRAINT TCHANGE_LOADED_SLUCH_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

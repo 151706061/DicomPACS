@@ -1,0 +1,40 @@
+DROP TRIGGER ASU.TFILES_LOG
+/
+
+--
+-- TFILES_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DBMS_STANDARD (Package)
+--   TFILES (Table)
+--   PKG_LOG (Package)
+--
+CREATE OR REPLACE TRIGGER ASU."TFILES_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TFILES  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TFILES', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TFILES', 'FK_BLOBID', 'INSERT', PKG_LOG.GET_VALUE(:old.FK_BLOBID), PKG_LOG.GET_VALUE(:new.FK_BLOBID), :new.fk_id);
+    PKG_LOG.Do_log('TFILES', 'FL_SHOWIB', 'INSERT', PKG_LOG.GET_VALUE(:old.FL_SHOWIB), PKG_LOG.GET_VALUE(:new.FL_SHOWIB), :new.fk_id);
+    PKG_LOG.Do_log('TFILES', 'FK_NAZID', 'INSERT', PKG_LOG.GET_VALUE(:old.FK_NAZID), PKG_LOG.GET_VALUE(:new.FK_NAZID), :new.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TFILES', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FK_BLOBID') AND PKG_LOG.GET_VALUE(:old.FK_BLOBID) <> PKG_LOG.GET_VALUE(:new.FK_BLOBID) then
+      PKG_LOG.Do_log('TFILES', 'FK_BLOBID', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_BLOBID), PKG_LOG.GET_VALUE(:new.FK_BLOBID), :old.fk_id);
+    end if;
+    if UPDATING ('FL_SHOWIB') AND PKG_LOG.GET_VALUE(:old.FL_SHOWIB) <> PKG_LOG.GET_VALUE(:new.FL_SHOWIB) then
+      PKG_LOG.Do_log('TFILES', 'FL_SHOWIB', 'UPDATE', PKG_LOG.GET_VALUE(:old.FL_SHOWIB), PKG_LOG.GET_VALUE(:new.FL_SHOWIB), :old.fk_id);
+    end if;
+    if UPDATING ('FK_NAZID') AND PKG_LOG.GET_VALUE(:old.FK_NAZID) <> PKG_LOG.GET_VALUE(:new.FK_NAZID) then
+      PKG_LOG.Do_log('TFILES', 'FK_NAZID', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_NAZID), PKG_LOG.GET_VALUE(:new.FK_NAZID), :old.fk_id);
+    end if;
+  end if;
+END;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,25 @@
+DROP INDEX ASU.TSTATKARTA_LOG_PK
+/
+
+--
+-- TSTATKARTA_LOG_PK  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TSTATKARTA_LOG_PK ON ASU.TSTATKARTA_LOG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          416K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

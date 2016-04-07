@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TAUCHGRASU_INS
+/
+
+--
+-- TAUCHGRASU_INS  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TAUCHGR (Sequence)
+--   TAUCHGR (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TAUCHGRASU_INS" 
+BEFORE INSERT
+ON ASU.TAUCHGR REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+BEGIN
+  SELECT seq_TAUCHGR.nextval
+    into :new.fk_id
+    FROM dual;
+END;
+/
+SHOW ERRORS;
+
+

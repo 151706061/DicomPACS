@@ -1,0 +1,25 @@
+DROP INDEX ASU.TUSL_KART_FK_ID_COPIED
+/
+
+--
+-- TUSL_KART_FK_ID_COPIED  (Index) 
+--
+CREATE INDEX ASU.TUSL_KART_FK_ID_COPIED ON ASU.TUSL_KART
+(FK_ID_COPIED)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

@@ -1,0 +1,25 @@
+DROP INDEX ASU.IQ_THEAL$FC_NAME
+/
+
+--
+-- IQ_THEAL$FC_NAME  (Index) 
+--
+CREATE INDEX ASU.IQ_THEAL$FC_NAME ON ASU.THEAL
+(FC_NAME)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          320K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

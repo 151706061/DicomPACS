@@ -1,0 +1,200 @@
+ALTER TABLE ASU.PASPORT_MIC_BU
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.PASPORT_MIC_BU CASCADE CONSTRAINTS
+/
+
+--
+-- PASPORT_MIC_BU  (Table) 
+--
+CREATE TABLE ASU.PASPORT_MIC_BU
+(
+  FK_ID           NUMBER                        NOT NULL,
+  SNAME           VARCHAR2(25 BYTE),
+  FNAME           VARCHAR2(25 BYTE),
+  MNAME           VARCHAR2(25 BYTE),
+  DATE_B          DATE,
+  POL             VARCHAR2(1 BYTE),
+  SOCIAL          VARCHAR2(2 BYTE),
+  DOCSER          VARCHAR2(10 BYTE),
+  DOCNUM          VARCHAR2(10 BYTE),
+  DATE_V          DATE,
+  DOC_TYPE        VARCHAR2(2 BYTE),
+  KEM             VARCHAR2(150 BYTE),
+  MR              VARCHAR2(100 BYTE),
+  COUNTRYPAS      VARCHAR2(30 BYTE),
+  STATEPAS        VARCHAR2(40 BYTE),
+  RONPAS          VARCHAR2(25 BYTE),
+  CITYPAS         VARCHAR2(25 BYTE),
+  STREETPAS       VARCHAR2(25 BYTE),
+  DOMPAS          VARCHAR2(4 BYTE),
+  KORPAS          VARCHAR2(5 BYTE),
+  FLATPAS         NUMBER(5),
+  COUNTRYM        VARCHAR2(30 BYTE),
+  STATEM          VARCHAR2(40 BYTE),
+  RONM            VARCHAR2(25 BYTE),
+  CITYM           VARCHAR2(25 BYTE),
+  STREETM         VARCHAR2(25 BYTE),
+  DOMM            VARCHAR2(4 BYTE),
+  KORM            VARCHAR2(5 BYTE),
+  FLATM           NUMBER(5),
+  POLICYSER       VARCHAR2(20 BYTE),
+  POLICYNUM       VARCHAR2(30 BYTE),
+  SMK             VARCHAR2(20 BYTE),
+  NAME_SMK        VARCHAR2(150 BYTE),
+  OFOMS           VARCHAR2(150 BYTE),
+  DATE_S          DATE,
+  DATE_E          DATE,
+  TYPEDOG         VARCHAR2(1 BYTE),
+  DATE_GIVE       DATE,
+  DATE_ANUL       DATE,
+  ANUL_KOD        VARCHAR2(2 BYTE),
+  POLICY_TYPEN    VARCHAR2(1 BYTE),
+  COUNTRY         VARCHAR2(50 BYTE),
+  TERRITOR        VARCHAR2(150 BYTE),
+  FK_PEPL         NUMBER,
+  FL_ADD          NUMBER(1)                     DEFAULT 0,
+  FK_WORK         NUMBER,
+  FK_INSHCOMP     NUMBER,
+  FK_KLADR_STATE  NUMBER,
+  FN_KLADR_LEVEL  NUMBER                        DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.PASPORT_MIC_BU IS 'Таблица создана автоматически в результате загрузки DBF'
+/
+
+COMMENT ON COLUMN ASU.PASPORT_MIC_BU.FK_PEPL IS 'asu.tpeoples.fk_id'
+/
+
+COMMENT ON COLUMN ASU.PASPORT_MIC_BU.FK_WORK IS 'asu.tcompany.fk_id'
+/
+
+COMMENT ON COLUMN ASU.PASPORT_MIC_BU.FK_INSHCOMP IS 'asu.tcompany.fk_id'
+/
+
+COMMENT ON COLUMN ASU.PASPORT_MIC_BU.FK_KLADR_STATE IS 'asu.tkladr.fk_id'
+/
+
+COMMENT ON COLUMN ASU.PASPORT_MIC_BU.FN_KLADR_LEVEL IS '1-country,2-state,3-city'
+/
+
+COMMENT ON COLUMN ASU.PASPORT_MIC_BU.FK_ID IS 'ASU.SEQ_pasport_mic'
+/
+
+
+--
+-- I_PARPORT_MIC_BU_FK_PEPL  (Index) 
+--
+--  Dependencies: 
+--   PASPORT_MIC_BU (Table)
+--
+CREATE INDEX ASU.I_PARPORT_MIC_BU_FK_PEPL ON ASU.PASPORT_MIC_BU
+(FK_PEPL)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- I_PARPORT_MIC_BU_FL_ADD  (Index) 
+--
+--  Dependencies: 
+--   PASPORT_MIC_BU (Table)
+--
+CREATE INDEX ASU.I_PARPORT_MIC_BU_FL_ADD ON ASU.PASPORT_MIC_BU
+(FL_ADD)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- K_PASPORT_BU_MIC_ID  (Index) 
+--
+--  Dependencies: 
+--   PASPORT_MIC_BU (Table)
+--
+CREATE UNIQUE INDEX ASU.K_PASPORT_BU_MIC_ID ON ASU.PASPORT_MIC_BU
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+-- 
+-- Non Foreign Key Constraints for Table PASPORT_MIC_BU 
+-- 
+ALTER TABLE ASU.PASPORT_MIC_BU ADD (
+  CONSTRAINT K_PASPORT_BU_MIC_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

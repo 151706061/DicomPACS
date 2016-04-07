@@ -1,0 +1,28 @@
+<div class="container " style="height:35px">
+    <ul class="nav nav-pills">
+        <li id='li_hd_mnu_1'><a id="mygofrmstudies" href="#">ИССЛЕДОВАНИЯ</a></li>
+        <li id='li_hd_mnu_2'><a id="mygofrmsnimki" href="#">СНИМКИ</a></li>
+        <li id='li_hd_mnu_3'><a id="mygofrmconcl" href="#">ПРОТОКОЛЫ</a></li>
+        <li id='li_worklist' style='display:none'><a id="myworklist" href="#">WORKLIST</a></li>
+        @main_admin_menu
+    </ul>
+</div>
+    
+<script type="text/javascript">
+  $(function() {	
+	$("#myworklist").click(function()   {
+		var v_ask_url = v_url+'WORKLISTLIST?';		
+		v_ask_url = v_ask_url+'fld1='+v_un+'&';
+		v_ask_url = v_ask_url+'fld2='+v_up;
+		window.open(v_ask_url).focus();		
+   });
+   
+   $("#mygofrmstudies").click(function()   {
+		var v_ask_url = v_url+'STUDYLIST?';		
+		v_ask_url = v_ask_url+'fld1='+v_un+'&';
+		v_ask_url = v_ask_url+'fld2='+v_up;
+		window.open(v_ask_url).focus();		
+   });
+   
+  });
+</script>    

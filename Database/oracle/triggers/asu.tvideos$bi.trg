@@ -1,0 +1,25 @@
+DROP TRIGGER ASU.TVIDEOS$BI
+/
+
+--
+-- TVIDEOS$BI  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TVIDEOS (Sequence)
+--   TVIDEOS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVIDEOS$BI" 
+ BEFORE 
+ INSERT
+ ON ASU.TVIDEOS  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  --  Column "FK_ID" uses sequence SEQ_asu.tvideos
+ SELECT ASU.SEQ_tvideos.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+

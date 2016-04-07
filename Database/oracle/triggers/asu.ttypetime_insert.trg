@@ -1,0 +1,24 @@
+DROP TRIGGER ASU."TTypeTime_INSERT"
+/
+
+--
+-- "TTypeTime_INSERT"  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TTYPETIME (Sequence)
+--   TTYPETIME (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TTypeTime_INSERT" 
+  BEFORE INSERT
+  ON ASU.TTypeTime
+  REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  select SEQ_TTYPETIME.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

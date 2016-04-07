@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.DOC_ROD
+/
+
+--
+-- DOC_ROD  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."DOC_ROD" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 321;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.DOC_ROD TO PUBLIC
+/
+

@@ -1,0 +1,115 @@
+ALTER TABLE ASU.TVAC_COMPANY_TYPE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TVAC_COMPANY_TYPE CASCADE CONSTRAINTS
+/
+
+--
+-- TVAC_COMPANY_TYPE  (Table) 
+--
+CREATE TABLE ASU.TVAC_COMPANY_TYPE
+(
+  FK_ID    INTEGER                              NOT NULL,
+  FC_NAME  VARCHAR2(100 BYTE)                   NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          40K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVAC_COMPANY_TYPE IS 'Вакцинация типы контроллируемых организаций
+Author: Ura'
+/
+
+COMMENT ON COLUMN ASU.TVAC_COMPANY_TYPE.FC_NAME IS 'Название'
+/
+
+
+--
+-- PK_TVAC_COMPANY_TYPE  (Index) 
+--
+--  Dependencies: 
+--   TVAC_COMPANY_TYPE (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TVAC_COMPANY_TYPE ON ASU.TVAC_COMPANY_TYPE
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVAC_COMPANY_TYPE_TRIGGER  (Trigger) 
+--
+--  Dependencies: 
+--   TVAC_COMPANY_TYPE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVAC_COMPANY_TYPE_TRIGGER" 
+ BEFORE
+  INSERT
+ ON asu.tvac_company_type
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+    --  Column "FK_ID" uses sequence SEQ_TVAC_COMPANY_TYPE
+
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT SEQ_TVAC_COMPANY_TYPE.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TVAC_COMPANY_TYPE 
+-- 
+ALTER TABLE ASU.TVAC_COMPANY_TYPE ADD (
+  CONSTRAINT PK_TVAC_COMPANY_TYPE
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

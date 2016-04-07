@@ -1,0 +1,10 @@
+DROP SYNONYM ASU.TS_ORG
+/
+
+--
+-- TS_ORG  (Synonym) 
+--
+CREATE SYNONYM ASU.TS_ORG FOR BUH.TS_ORG
+/
+
+

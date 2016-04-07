@@ -1,0 +1,46 @@
+DROP FUNCTION ASU.GET_PACDAYSPLANING
+/
+
+--
+-- GET_PACDAYSPLANING  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSROKY (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PACDAYSPLANING" -- Created by TimurLan
+  ( pFK_ID IN NUMBER)
+ RETURN NUMBER IS
+  nTemp NUMBER;
+  CURSOR cTemp
+   IS
+  SELECT SUM(FN_KOL)
+    FROM (SELECT FN_KOL
+            FROM TSROKY
+           WHERE FK_PACID=pFK_ID
+             and FK_PRYB=1);
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO nTemp;
+  CLOSE cTemp;
+  RETURN nTemp;
+END;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM BUH.GET_PACDAYSPLANING
+/
+
+--
+-- GET_PACDAYSPLANING  (Synonym) 
+--
+--  Dependencies: 
+--   GET_PACDAYSPLANING (Function)
+--
+CREATE SYNONYM BUH.GET_PACDAYSPLANING FOR ASU.GET_PACDAYSPLANING
+/
+
+

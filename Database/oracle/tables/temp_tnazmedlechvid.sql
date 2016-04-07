@@ -1,0 +1,39 @@
+DROP TABLE ASU.TEMP_TNAZMEDLECHVID CASCADE CONSTRAINTS
+/
+
+--
+-- TEMP_TNAZMEDLECHVID  (Table) 
+--
+CREATE TABLE ASU.TEMP_TNAZMEDLECHVID
+(
+  FK_ID           NUMBER(10)                    NOT NULL,
+  FK_NAZMEDID     NUMBER(10),
+  FK_STATE        NUMBER(10),
+  FK_ISPOLSOTRID  NUMBER(10),
+  FD_DATE         DATE,
+  FD_DONE         DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TEMP_TNAZMEDLECHVID IS 'sill - старая структура TNazmedLechVid'
+/
+
+

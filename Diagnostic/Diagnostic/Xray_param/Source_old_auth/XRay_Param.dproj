@@ -1,0 +1,89 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{6b65d554-4181-4938-95b6-b919920b0ab9}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>..\bin_old\XRay_Param.exe</DCC_DependencyCheckOutputName>
+    <MainSource>XRay_Param.dpr</MainSource>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_ExeOutput>..\bin_old</DCC_ExeOutput>
+    <DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>..\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\..\..\uCommon_Tima</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\..\uCommon_Tima</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\..\uCommon_Tima</DCC_ObjPath>
+    <DCC_IncludePath>..\..\..\uCommon_Tima</DCC_IncludePath>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters><Parameters Name="RunParams">46766</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">True</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">1</VersionInfo><VersionInfo Name="Build">40</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.1.40</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">XRay_Param.dpr</Source></Source><Excluded_Packages>
+      
+      
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+    </Excluded_Packages></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="XRay_Param.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\..\..\..\..\Trunk\ASU2\uCommon_Tima\SMMainAPI.pas">
+      <Form>$ENDIF</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fAddEditApparat.pas">
+      <Form>frmAddEditApparat</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fAddEditModal.pas">
+      <Form>frmAddEditModal</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fAddEditPeriod.pas">
+      <Form>frmAddEditPeriod</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fMain.pas">
+      <Form>frmMain</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSetDoobsl.pas">
+      <Form>frmSetDoobsl</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSetGlavVrach.pas">
+      <Form>frmSetGlavVrach</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSetKab.pas">
+      <Form>frmSetKab</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSetKabinet.pas">
+      <Form>frmSetKabinet</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSetLiter.pas">
+      <Form>frmSetLiter</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSetMetod.pas">
+      <Form>frmSetMetod</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSetOtdel.pas">
+      <Form>frmSetOtdel</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSetSotr.pas">
+      <Form>frmSetSotr</Form>
+    </DCCReference>
+    <DCCReference Include="..\Source\fSetZavOtdel.pas">
+      <Form>frmSetZavOtdel</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>

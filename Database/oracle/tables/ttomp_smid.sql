@@ -1,0 +1,39 @@
+DROP TABLE ASU.TTOMP_SMID CASCADE CONSTRAINTS
+/
+
+--
+-- TTOMP_SMID  (Table) 
+--
+CREATE TABLE ASU.TTOMP_SMID
+(
+  FK_ID          NUMBER(15)                     NOT NULL,
+  FK_OWNER       NUMBER(15),
+  FC_OWNER_NAME  VARCHAR2(255 BYTE),
+  FC_NAME        VARCHAR2(255 BYTE),
+  SFOUND         VARCHAR2(255 BYTE),
+  FL_DEL         NUMBER(1),
+  NVID           NUMBER,
+  SVID           VARCHAR2(19 BYTE),
+  FC_OTDEL       VARCHAR2(255 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+

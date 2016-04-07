@@ -1,0 +1,25 @@
+DROP INDEX ASU.PK_TKARTA_INFO
+/
+
+--
+-- PK_TKARTA_INFO  (Index) 
+--
+CREATE UNIQUE INDEX ASU.PK_TKARTA_INFO ON ASU.TKARTA_INFO
+(FK_PACID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

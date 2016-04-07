@@ -1,0 +1,29 @@
+DROP FUNCTION ASU.GET_ID_FROM_PROBE
+/
+
+--
+-- GET_ID_FROM_PROBE  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TLABREG (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_ID_FROM_PROBE" 
+  ( pFK_ID IN NUMBER,pFD_DATE IN DATE)
+  RETURN  NUMBER IS
+--
+-- Purpose: ¬озвращает код пациента по коду пробы
+--
+i NUMBER;
+CURSOR c IS SELECT FK_PACID FROM TLABREG WHERE FN_PROBE=pFK_ID AND FD_REGIST=pFD_DATE;
+BEGIN
+  if c%ISOPEN THEN
+    Close C;
+  END if;
+END;
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2015.08.24 11:39:38.172.pas,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.pas=C:\tmp\test_threads\3_Синхронизация потоков с помощью семафоров\Unit1.pas</Transaction>
+    <Transaction>2015.08.24 11:39:38.172.dfm,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.dfm=C:\tmp\test_threads\3_Синхронизация потоков с помощью семафоров\Unit1.dfm</Transaction>
+    <Transaction>2015.08.24 11:39:41.055.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\Project1.dproj=C:\tmp\test_threads\3_Синхронизация потоков с помощью семафоров\Project1.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

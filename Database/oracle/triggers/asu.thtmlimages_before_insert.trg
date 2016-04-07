@@ -1,0 +1,27 @@
+DROP TRIGGER ASU.THTMLIMAGES_BEFORE_INSERT
+/
+
+--
+-- THTMLIMAGES_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TRICHVIEWDATA (Sequence)
+--   THTMLIMAGES (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."THTMLIMAGES_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON thtmlimages
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+    if :new.FK_ID is null then
+      select SEQ_TRICHVIEWDATA.NEXTVAL INTO :new.FK_ID from dual;
+    end if;
+END;
+/
+SHOW ERRORS;
+
+

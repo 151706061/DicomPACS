@@ -1,0 +1,60 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{8bdd1ecf-6eaa-4669-8fd2-aeb3c4ecd31b}</ProjectGuid>
+    <MainSource>repInv_MIS2.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>d:\RES_FOR_SOKB\repInv_MIS2.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_ExeOutput>..\bin</DCC_ExeOutput>
+    <DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>..\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\..\..\..\..\..\uCommon_Tima;..\..\CommonUnits</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\..\..\..\..\uCommon_Tima;..\..\CommonUnits</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\..\..\..\..\uCommon_Tima;..\..\CommonUnits</DCC_ObjPath>
+    <DCC_IncludePath>..\..\..\..\..\..\uCommon_Tima;..\..\CommonUnits</DCC_IncludePath>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>..\dcu</DCC_HppOutput>
+    <DCC_UnitSearchPath>..\..\..\..\..\uCommon_Tima;..\..\CommonUnits;..\..\..\..\..\..\uCommon</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\..\..\..\uCommon_Tima;..\..\CommonUnits;..\..\..\..\..\..\uCommon</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\..\..\..\uCommon_Tima;..\..\CommonUnits;..\..\..\..\..\..\uCommon</DCC_ObjPath>
+    <DCC_IncludePath>..\..\..\..\..\uCommon_Tima;..\..\CommonUnits;..\..\..\..\..\..\uCommon</DCC_IncludePath>
+    <DCC_Define>DEBUG;MIS2</DCC_Define>
+    <DCC_ExeOutput>d:\RES_FOR_SOKB\</DCC_ExeOutput>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="RunParams">29502</Parameters><Parameters Name="DebugSourceDirs">C:\Program Files\FastReports\FastReport 4\FastScript\;C:\Program Files\FastReports\FastReport 4\Source\</Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><Language><Language Name="RootDir">C:\Program Files\Borland\Delphi7\Bin\</Language></Language><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">3</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">25</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">3.0.0.25</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">repInv_MIS2.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="repInv_MIS2.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\..\..\..\..\..\uCommon\uGlobalConst.pas" />
+    <DCCReference Include="..\..\CommonUnits\fCheckedListEdit.pas">
+      <Form>fmCheckedListEdit</Form>
+    </DCCReference>
+    <DCCReference Include="fMain.pas">
+      <Form>frmMain</Form>
+    </DCCReference>
+    <DCCReference Include="udm.pas">
+      <Form>dm</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_DIAGSCLINIK
+/
+
+--
+-- GET_DIAGSCLINIK  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_DIAGSCLINIK" 
+return number
+is 
+begin
+  return 347246;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_DIAGSCLINIK TO PUBLIC
+/
+

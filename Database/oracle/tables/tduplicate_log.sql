@@ -1,0 +1,127 @@
+ALTER TABLE ASU.TDUPLICATE_LOG
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TDUPLICATE_LOG CASCADE CONSTRAINTS
+/
+
+--
+-- TDUPLICATE_LOG  (Table) 
+--
+CREATE TABLE ASU.TDUPLICATE_LOG
+(
+  FK_ID             NUMBER                      NOT NULL,
+  FC_PRIMARY_TABLE  VARCHAR2(100 BYTE),
+  FC_FOREIGN_TABLE  VARCHAR2(100 BYTE),
+  FK_OLD            NUMBER,
+  FK_NEW            NUMBER,
+  FD_DATE           DATE                        DEFAULT SYSDATE,
+  FK_UPDATED_ID     NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TDUPLICATE_LOG IS 'Лог замены дубликатов'
+/
+
+COMMENT ON COLUMN ASU.TDUPLICATE_LOG.FK_ID IS 'SEQUENCE=[SEQ_TDUPLICATE_LOG]'
+/
+
+COMMENT ON COLUMN ASU.TDUPLICATE_LOG.FC_PRIMARY_TABLE IS 'Таблица - родитель (содержащая дубликаты)'
+/
+
+COMMENT ON COLUMN ASU.TDUPLICATE_LOG.FC_FOREIGN_TABLE IS 'Таблица - потомок (содержащая ссылки на дубликаты)'
+/
+
+COMMENT ON COLUMN ASU.TDUPLICATE_LOG.FK_OLD IS 'Старое значение в таблице-потомке'
+/
+
+COMMENT ON COLUMN ASU.TDUPLICATE_LOG.FK_NEW IS 'Новое значение в таблице-потомке'
+/
+
+COMMENT ON COLUMN ASU.TDUPLICATE_LOG.FD_DATE IS 'Дата изменения'
+/
+
+COMMENT ON COLUMN ASU.TDUPLICATE_LOG.FK_UPDATED_ID IS 'FK_ID заапдеченной строки в FC_FOREIGN_TABLE'
+/
+
+
+--
+-- TDUPLICATE_LOG_PK  (Index) 
+--
+--  Dependencies: 
+--   TDUPLICATE_LOG (Table)
+--
+CREATE UNIQUE INDEX ASU.TDUPLICATE_LOG_PK ON ASU.TDUPLICATE_LOG
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TDUPLICATE_LOG_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TDUPLICATE_LOG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TDUPLICATE_LOG_INSERT" 
+  before insert on tduplicate_log
+  for each row
+begin
+  SELECT SEQ_TDUPLICATE_LOG.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+end TDUPLICATE_LOG_INSERT;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TDUPLICATE_LOG 
+-- 
+ALTER TABLE ASU.TDUPLICATE_LOG ADD (
+  CONSTRAINT TDUPLICATE_LOG_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

@@ -1,0 +1,123 @@
+ALTER TABLE ASU.T_SDF_TEMPLATE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.T_SDF_TEMPLATE CASCADE CONSTRAINTS
+/
+
+--
+-- T_SDF_TEMPLATE  (Table) 
+--
+CREATE TABLE ASU.T_SDF_TEMPLATE
+(
+  FK_ID           NUMBER                        NOT NULL,
+  FK_SDF_ELEMENT  NUMBER,
+  FK_CLOBID       NUMBER,
+  FC_NAME         VARCHAR2(250 BYTE),
+  FL_DEL          NUMBER                        DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.T_SDF_TEMPLATE IS 'Created by A.Nakorjakov 250308
+Таблица шаблонов динамической формы'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_TEMPLATE.FK_ID IS 'SEQUENCE=[SEQ_T_SDF_TEMPLATE]'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_TEMPLATE.FK_SDF_ELEMENT IS 'T_SDF_ELEMENT.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_TEMPLATE.FK_CLOBID IS 'TCLOBS.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_TEMPLATE.FC_NAME IS 'Название шаблона'
+/
+
+COMMENT ON COLUMN ASU.T_SDF_TEMPLATE.FL_DEL IS 'Удален?'
+/
+
+
+--
+-- PK_T_SDF_TEMPLATE  (Index) 
+--
+--  Dependencies: 
+--   T_SDF_TEMPLATE (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_T_SDF_TEMPLATE ON ASU.T_SDF_TEMPLATE
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- T_SDF_TEMPLATE_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   T_SDF_TEMPLATE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."T_SDF_TEMPLATE_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON t_sdf_template
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_T_SDF_TEMPLATE.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table T_SDF_TEMPLATE 
+-- 
+ALTER TABLE ASU.T_SDF_TEMPLATE ADD (
+  CONSTRAINT PK_T_SDF_TEMPLATE
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

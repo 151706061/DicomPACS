@@ -1,0 +1,25 @@
+DROP INDEX ASU.PK_TPROFFACTOR
+/
+
+--
+-- PK_TPROFFACTOR  (Index) 
+--
+CREATE UNIQUE INDEX ASU.PK_TPROFFACTOR ON ASU.TPROFFACTOR
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

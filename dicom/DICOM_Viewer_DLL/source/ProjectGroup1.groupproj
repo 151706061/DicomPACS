@@ -1,0 +1,54 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{bd4fd984-e3d8-4b74-b7ff-9799d23c658d}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="DicomCD.dproj" />
+    <Projects Include="DICOM_Viewer.dproj" />
+    <Projects Include="DICOM_Viewer_Test.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject xmlns=""><Default.Personality></Default.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="DICOM_Viewer">
+    <MSBuild Projects="DICOM_Viewer.dproj" Targets="" />
+  </Target>
+  <Target Name="DICOM_Viewer:Clean">
+    <MSBuild Projects="DICOM_Viewer.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DICOM_Viewer:Make">
+    <MSBuild Projects="DICOM_Viewer.dproj" Targets="Make" />
+  </Target>
+  <Target Name="DICOM_Viewer_Test">
+    <MSBuild Projects="DICOM_Viewer_Test.dproj" Targets="" />
+  </Target>
+  <Target Name="DICOM_Viewer_Test:Clean">
+    <MSBuild Projects="DICOM_Viewer_Test.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DICOM_Viewer_Test:Make">
+    <MSBuild Projects="DICOM_Viewer_Test.dproj" Targets="Make" />
+  </Target>
+  <Target Name="DicomCD">
+    <MSBuild Projects="DicomCD.dproj" Targets="" />
+  </Target>
+  <Target Name="DicomCD:Clean">
+    <MSBuild Projects="DicomCD.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="DicomCD:Make">
+    <MSBuild Projects="DicomCD.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="DICOM_Viewer;DICOM_Viewer_Test;DicomCD" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="DICOM_Viewer:Clean;DICOM_Viewer_Test:Clean;DicomCD:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="DICOM_Viewer:Make;DICOM_Viewer_Test:Make;DicomCD:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>

@@ -1,0 +1,24 @@
+DROP FUNCTION ASU.IS_ZERO
+/
+
+--
+-- IS_ZERO  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."IS_ZERO" (n IN NUMBER)
+  RETURN NUMBER
+IS
+BEGIN
+  IF N > 0 THEN
+    RETURN 1;
+  ELSE
+    RETURN 0;
+  END IF;
+END;
+/
+
+SHOW ERRORS;
+
+

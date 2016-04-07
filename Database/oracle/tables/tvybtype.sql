@@ -1,0 +1,119 @@
+DROP TABLE ASU.TVYBTYPE CASCADE CONSTRAINTS
+/
+
+--
+-- TVYBTYPE  (Table) 
+--
+CREATE TABLE ASU.TVYBTYPE
+(
+  FK_ID       NUMBER(15),
+  FC_NAME     VARCHAR2(100 BYTE),
+  FL_DEFAULT  NUMBER(1)                         DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TVYBTYPE IS 'причина выбытия пациента by TimurLan'
+/
+
+COMMENT ON COLUMN ASU.TVYBTYPE.FK_ID IS 'SEQUENCE=[SEQ_TVYBTYPE]'
+/
+
+COMMENT ON COLUMN ASU.TVYBTYPE.FC_NAME IS 'название'
+/
+
+COMMENT ON COLUMN ASU.TVYBTYPE.FL_DEFAULT IS 'по-умолчанию'
+/
+
+
+--
+-- TVYBTYPE_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TVYBTYPE (Table)
+--
+CREATE UNIQUE INDEX ASU.TVYBTYPE_BY_ID ON ASU.TVYBTYPE
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TVYBTYPE_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TVYBTYPE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVYBTYPE_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TVYBTYPE  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  nTemp NUMBER;
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TVYBTYPE', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TVYBTYPE', 'FC_NAME', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fc_name), :new.fk_id);
+  elsif DELETING then
+    PKG_LOG.Do_log('TVYBTYPE', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_id), null, :old.fk_id);
+    PKG_LOG.Do_log('TVYBTYPE', 'FC_NAME', 'DELETE', PKG_LOG.GET_VALUE(:old.FC_NAME), null, :old.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TVYBTYPE', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FC_NAME') AND PKG_LOG.GET_VALUE(:old.FC_NAME) <> PKG_LOG.GET_VALUE(:new.FC_NAME) then
+      PKG_LOG.Do_log('TVYBTYPE', 'FC_NAME', 'UPDATE', PKG_LOG.GET_VALUE(:old.FC_NAME), PKG_LOG.GET_VALUE(:new.FC_NAME), :old.fk_id);
+    end if;
+  end if;
+  null;
+END TVYBTYPE_LOG;
+/
+SHOW ERRORS;
+
+
+--
+-- TVYBTYPE_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TVYBTYPE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TVYBTYPE_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TVYBTYPE REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  SELECT SEQ_TVybType.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

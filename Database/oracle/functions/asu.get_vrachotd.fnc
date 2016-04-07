@@ -1,0 +1,46 @@
+DROP FUNCTION ASU.GET_VRACHOTD
+/
+
+--
+-- GET_VRACHOTD  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSOTR (Synonym)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_VRACHOTD" (pFK_ID IN NUMBER)
+  RETURN NUMBER
+  deterministic
+IS
+  nTemp   NUMBER;
+
+  CURSOR cTemp
+  IS
+    SELECT FK_OTDID
+      FROM TSOTR
+     WHERE FK_ID = pFK_ID;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO nTemp;
+  CLOSE cTemp;
+  RETURN nTemp;
+END;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM STAT.GET_VRACHOTD
+/
+
+--
+-- GET_VRACHOTD  (Synonym) 
+--
+--  Dependencies: 
+--   GET_VRACHOTD (Function)
+--
+CREATE SYNONYM STAT.GET_VRACHOTD FOR ASU.GET_VRACHOTD
+/
+
+

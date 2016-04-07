@@ -1,0 +1,45 @@
+DROP TABLE ASU.DS CASCADE CONSTRAINTS
+/
+
+--
+-- DS  (Table) 
+--
+CREATE TABLE ASU.DS
+(
+  FK_ID         NUMBER                          NOT NULL,
+  FC_NAME       VARCHAR2(300 BYTE),
+  FP_PAT        VARCHAR2(1 BYTE),
+  FK_MKB10      VARCHAR2(20 BYTE),
+  FK_OWNER      NUMBER(15),
+  FN_ORDER      NUMBER(15),
+  FK_DEFAULT    NUMBER(15),
+  FL_SHOWANAL   NUMBER(1),
+  FL_STAT       NUMBER(1),
+  FL_SHOWPRINT  NUMBER(1),
+  FL_USLUGA     NUMBER(1),
+  FL_DEL        NUMBER(1)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          400K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.DS IS 'Таблица ветки диагнозов DS из TSMID '
+/
+
+

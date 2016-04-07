@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_NAZ_PROCESS
+/
+
+--
+-- GET_NAZ_PROCESS  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_NAZ_PROCESS"
+return number DETERMINISTIC
+is
+begin
+  return 4;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_NAZ_PROCESS TO PUBLIC
+/
+

@@ -1,0 +1,25 @@
+DROP INDEX ASU.TRESAN_BY_NAZID_ZAKL
+/
+
+--
+-- TRESAN_BY_NAZID_ZAKL  (Index) 
+--
+CREATE INDEX ASU.TRESAN_BY_NAZID_ZAKL ON ASU.TRESAN
+(FK_NAZID, FL_ZAKL)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          17024K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

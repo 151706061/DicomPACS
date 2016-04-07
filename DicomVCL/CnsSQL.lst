@@ -1,0 +1,36 @@
+{+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-}
+ParserBuilder for Delphi 0.9.0.213b
+Parsing C:\Program Files\Borland\Delphi7\dicomvcl\Source\CnsSQL.atg
+
+Syntax OK, now testing grammar ......
+
+
+Deletable symbols:	-- none --
+
+Undefined nonterminals:   -- none --
+Unreachable nonterminals:	 -- none --
+Circular derivations:	-- none --
+Underivable nonterminals: -- none --
+
+Grammar tests OK.
+
+LL(1) conditions:	 --  ok  --
+
+Generating Parser
+Generating Scanner
+
+Generating Compiler
+
+Statistics:
+
+  nr of terminals:    125 (limit 1024)
+  nr of non-terminals:18 (limit 965)
+  nr of pragmas:      0 (limit 965)
+  nr of symbolnodes:  143 (limit 1024)
+  nr of graphnodes:   839 (limit 6000)
+  nr of conditionsets:3 (limit 400)
+  nr of charactersets:15 (limit 1000)
+
+
+Compilation completed. No errors detected.
+{+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-}

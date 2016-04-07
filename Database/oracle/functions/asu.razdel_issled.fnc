@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.RAZDEL_ISSLED
+/
+
+--
+-- RAZDEL_ISSLED  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."RAZDEL_ISSLED" 
+return number
+is 
+begin
+  return 1323;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.RAZDEL_ISSLED TO PUBLIC
+/
+

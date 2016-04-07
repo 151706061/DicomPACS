@@ -1,0 +1,119 @@
+ALTER TABLE ASU.TIS_PLAN_DEPTPOWER
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TIS_PLAN_DEPTPOWER CASCADE CONSTRAINTS
+/
+
+--
+-- TIS_PLAN_DEPTPOWER  (Table) 
+--
+--  Dependencies: 
+--   TIS_PLAN (Table)
+--
+CREATE TABLE ASU.TIS_PLAN_DEPTPOWER
+(
+  FK_ID          NUMBER                         NOT NULL,
+  FK_DEPTID      NUMBER,
+  FN_VISITCOUNT  NUMBER,
+  FN_HOSPCOUNT   NUMBER,
+  FK_IS_PLAN_ID  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- PK_TIS_PLAN_DEPTPOWER  (Index) 
+--
+--  Dependencies: 
+--   TIS_PLAN_DEPTPOWER (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TIS_PLAN_DEPTPOWER ON ASU.TIS_PLAN_DEPTPOWER
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TIS_PLAN_DEPTPOWER_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TIS_PLAN_DEPTPOWER (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TIS_PLAN_DEPTPOWER_BI
+  BEFORE INSERT
+  ON ASU.TIS_PLAN_DEPTPOWER   REFERENCING OLD AS OLD NEW AS NEW
+  FOR EACH ROW
+BEGIN
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT asu.seq_TIS_PLAN_DEPTPOWER.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TIS_PLAN_DEPTPOWER 
+-- 
+ALTER TABLE ASU.TIS_PLAN_DEPTPOWER ADD (
+  CONSTRAINT PK_TIS_PLAN_DEPTPOWER
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+
+-- 
+-- Foreign Key Constraints for Table TIS_PLAN_DEPTPOWER 
+-- 
+ALTER TABLE ASU.TIS_PLAN_DEPTPOWER ADD (
+  CONSTRAINT FK_TIS_PLAN_REFERENCE_TIS_PLA3 
+ FOREIGN KEY (FK_IS_PLAN_ID) 
+ REFERENCES ASU.TIS_PLAN (FK_ID))
+/
+

@@ -1,0 +1,39 @@
+DROP FUNCTION ASU.GET_BIOPROBEPAC
+/
+
+--
+-- GET_BIOPROBEPAC  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TNAZAN (Table)
+--   TLABREG (Table)
+--   TSMID (Table)
+--   GET_BIOHIMID (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_BIOPROBEPAC" 
+  ( pFK_ID IN NUMBER,pFD_DATE IN DATE)
+  RETURN NUMBER IS
+--
+-- Purpose: ¬озвращает номер пробы пациента по биохимии
+-- By Philip A. Milovanov
+CURSOR c IS SELECT FN_PROBE
+FROM TLABREG,tnazan,tsmid,(select GET_BIOHIMID FK_BIO from dual)
+WHERE TLABREG.FK_PACID=pFK_ID/*21101*/ AND
+      TLABREG.FD_REGIST=pFD_DATE/*to_date('22-jul-2000')*/ AND tnazan.fk_id=TLABREG.FK_NAZID and
+      tsmid.fk_id=TNAZAN.FK_SMID and TSMID.FK_OWNER=FK_BIO;
+--CURSOR c IS SELECT /*+rule*/DISTINCT FN_PROBE FROM TLABREG WHERE FK_PACID=pFK_ID AND FD_REGIST=pFD_DATE AND GET_OWNER_FROM_SMID(GET_SMIDFROMNAZ(FK_NAZID))=GET_BIOHIMID;
+i NUMBER;
+BEGIN
+  OPEN c;
+  FETCH c INTO i;
+  CLOSE c;
+  RETURN i;
+END; -- Function GET_PROBEPAC
+/
+
+SHOW ERRORS;
+
+

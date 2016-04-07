@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{f4bcd79f-d78b-4666-a5b6-43ff70e30511}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>..\bin\DicomCapture.dll</DCC_DependencyCheckOutputName>
+    <MainSource>DicomCapture.dpr</MainSource>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_Define>DEBUG</DCC_Define>
+    <DCC_UnitSearchPath>C:\Delphi\Trunk_AUTH\ASU2\Dicom\Client\Source;C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source;C:\Delphi\Trunk_AUTH\ASU2\Dicom\Client\Dcu;C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Dcu</DCC_UnitSearchPath>
+    <DCC_ResourcePath>C:\Delphi\Trunk_AUTH\ASU2\Dicom\Client\Source;C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source;C:\Delphi\Trunk_AUTH\ASU2\Dicom\Client\Dcu;C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Dcu</DCC_ResourcePath>
+    <DCC_ObjPath>C:\Delphi\Trunk_AUTH\ASU2\Dicom\Client\Source;C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source;C:\Delphi\Trunk_AUTH\ASU2\Dicom\Client\Dcu;C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Dcu</DCC_ObjPath>
+    <DCC_IncludePath>C:\Delphi\Trunk_AUTH\ASU2\Dicom\Client\Source;C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Source;C:\Delphi\Trunk_AUTH\ASU2\Dicom\Client\Dcu;C:\Delphi\Trunk_AUTH\ASU2\Dicom\QueryList\Dcu</DCC_IncludePath>
+    <DCC_ExeOutput>..\bin</DCC_ExeOutput>
+    <DCC_DcuOutput>..\dcu</DCC_DcuOutput>
+    <DCC_ObjOutput>..\dcu</DCC_ObjOutput>
+    <DCC_HppOutput>..\dcu</DCC_HppOutput>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">False</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">1</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">0</VersionInfo><VersionInfo Name="Build">0</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="$(BDS)\bin\bcboffice2k100.bpl">CodeGear C++Builder Office 2000 Servers Package</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\bcbofficexp100.bpl">CodeGear C++Builder Office XP Servers Package</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+    </Excluded_Packages><Source><Source Name="MainSource">DicomCapture.dpr</Source></Source></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="DicomCapture.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\..\..\uCommon_Dicom\CmnUnit.pas" />
+    <DCCReference Include="..\..\..\uCommon_Dicom\DB_CMN.pas" />
+    <DCCReference Include="..\..\..\uCommon_Dicom\db_cmn1.pas" />
+    <DCCReference Include="..\..\..\uCommon_Dicom\DICOM_CMN.pas" />
+    <DCCReference Include="..\..\..\uCommon_Dicom\fCine.pas">
+      <Form>frmCine</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\fHeader.pas">
+      <Form>frmHeader</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\fSendParam.pas">
+      <Form>frmSendParam</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\fSnimki.pas">
+      <Form>frmSnimki</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\MprUnit.pas">
+      <Form>MprForm</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\SurfaceRenderEx.pas">
+      <Form>SurfaceRenderForm</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnAbout.pas">
+      <Form>FrmAbout</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnATRIS.pas" />
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnComment.pas">
+      <Form>frmComment</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnDiagEdt.pas">
+      <Form>frmDiagEdt</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnFrmAddDocument.pas">
+      <Form>FrmAddDocument</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnFrmDiagTree.pas">
+      <Form>frmDiag</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnFrmEcgFrag.pas">
+      <Form>FrmEcgFrag</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnFrmFileBrowse.pas">
+      <Form>frmFileBrowse</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnFrmGetDevices.pas">
+      <Form>FrmGetDevices</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnFrmProgressBar.pas">
+      <Form>FrmProgressBar</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnFrmSize.pas">
+      <Form>FrmSize</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\unImportPDF.pas">
+      <Form>frmImportPDF</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnKalibr.pas">
+      <Form>frmKalibr</Form>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\UnMultiFormsFrame.pas">
+      <Form>MultiForms</Form>
+      <DesignClass>TFrame</DesignClass>
+    </DCCReference>
+    <DCCReference Include="..\..\..\uCommon_Dicom\VolumeRenderingEx.pas">
+      <Form>VolumeRenderingForm</Form>
+    </DCCReference>
+    <DCCReference Include="fCapture.pas">
+      <Form>frmCapture</Form>
+    </DCCReference>
+    <DCCReference Include="fMain.pas">
+      <Form>frmMain</Form>
+    </DCCReference>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,32 @@
+DROP FUNCTION ASU.GET_SKK
+/
+
+--
+-- GET_SKK  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TKARTA (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_SKK" 
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+CURSOR c(pID NUMBER) IS SELECT FL_SKK FROM TKARTA WHERE FK_ID=pID;
+i NUMBER;
+BEGIN
+  OPEN c(pFK_ID);
+  FETCH c INTO i;
+  IF i=1 THEN
+    CLOSE c;
+    RETURN 'Есть';
+  ELSE
+    CLOSE c;
+    RETURN '';
+  END IF;
+END; -- Function GET_SKK
+/
+
+SHOW ERRORS;
+
+

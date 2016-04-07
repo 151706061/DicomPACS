@@ -1,0 +1,22 @@
+DROP PACKAGE ASU.QUEST_SL_USER_MANAGER
+/
+
+--
+-- QUEST_SL_USER_MANAGER  (Package) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE PACKAGE ASU."QUEST_SL_USER_MANAGER" IS
+    PROCEDURE grant_user (user_p VARCHAR2);
+    PROCEDURE revoke_user(user_p VARCHAR2);
+    FUNCTION validate_user_access (user_p VARCHAR2, authorization_level VARCHAR2) RETURN INTEGER;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.QUEST_SL_USER_MANAGER TO PUBLIC
+/
+

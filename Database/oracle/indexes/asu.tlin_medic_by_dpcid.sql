@@ -1,0 +1,25 @@
+DROP INDEX ASU.TLIN_MEDIC_BY_DPCID
+/
+
+--
+-- TLIN_MEDIC_BY_DPCID  (Index) 
+--
+CREATE INDEX ASU.TLIN_MEDIC_BY_DPCID ON ASU.TLIN_MEDIC
+(FK_DPCID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

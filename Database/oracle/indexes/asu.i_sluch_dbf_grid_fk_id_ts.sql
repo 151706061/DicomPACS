@@ -1,0 +1,25 @@
+DROP INDEX ASU.I_SLUCH_DBF_GRID_FK_ID_TS
+/
+
+--
+-- I_SLUCH_DBF_GRID_FK_ID_TS  (Index) 
+--
+CREATE INDEX ASU.I_SLUCH_DBF_GRID_FK_ID_TS ON ASU.TSLUCH_DBF_GRID
+(FK_ID_TS)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

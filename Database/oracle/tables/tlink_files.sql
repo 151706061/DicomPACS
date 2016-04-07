@@ -1,0 +1,115 @@
+ALTER TABLE ASU.TLINK_FILES
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TLINK_FILES CASCADE CONSTRAINTS
+/
+
+--
+-- TLINK_FILES  (Table) 
+--
+CREATE TABLE ASU.TLINK_FILES
+(
+  FK_ID      NUMBER                             NOT NULL,
+  FD_CREATE  DATE                               DEFAULT SYSDATE,
+  FC_NAME    VARCHAR2(260 BYTE),
+  FD_DATE    DATE,
+  FN_SIZE    NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TLINK_FILES.FK_ID IS 'SEQUENCE=[SEQ_TLINK_FILES]'
+/
+
+COMMENT ON COLUMN ASU.TLINK_FILES.FD_CREATE IS 'Время создания записи'
+/
+
+COMMENT ON COLUMN ASU.TLINK_FILES.FC_NAME IS 'Название файла'
+/
+
+COMMENT ON COLUMN ASU.TLINK_FILES.FD_DATE IS 'Дата дайла'
+/
+
+COMMENT ON COLUMN ASU.TLINK_FILES.FN_SIZE IS 'Размер файла'
+/
+
+
+--
+-- TLINK_FILES_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TLINK_FILES (Table)
+--
+CREATE UNIQUE INDEX ASU.TLINK_FILES_BY_ID ON ASU.TLINK_FILES
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLINK_FILES_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TLINK_FILES (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TLINK_FILES_BEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TLINK_FILES   FOR EACH ROW
+Begin
+  SELECT SEQ_TLINK_FILES.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TLINK_FILES 
+-- 
+ALTER TABLE ASU.TLINK_FILES ADD (
+  CONSTRAINT TLINK_FILES_BY_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

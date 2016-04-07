@@ -1,0 +1,57 @@
+DROP TABLE ASU.TRESPONSE CASCADE CONSTRAINTS
+/
+
+--
+-- TRESPONSE  (Table) 
+--
+CREATE TABLE ASU.TRESPONSE
+(
+  FK_PACID    NUMBER,
+  FK_OBJID    NUMBER,
+  FL_OTDEL    NUMBER,
+  FK_PARAMID  NUMBER,
+  FK_MARKID   NUMBER,
+  FD_DATE     DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TRESPONSE IS 'Таблица записи отзывов с терминала'
+/
+
+COMMENT ON COLUMN ASU.TRESPONSE.FK_PACID IS 'id пациента из tambulance'
+/
+
+COMMENT ON COLUMN ASU.TRESPONSE.FK_OBJID IS 'id сотрудника или отдела'
+/
+
+COMMENT ON COLUMN ASU.TRESPONSE.FL_OTDEL IS 'Сотрудник или отдел?'
+/
+
+COMMENT ON COLUMN ASU.TRESPONSE.FK_PARAMID IS 'id параметра оценки из tsmid'
+/
+
+COMMENT ON COLUMN ASU.TRESPONSE.FK_MARKID IS 'id оценки из tsmid'
+/
+
+COMMENT ON COLUMN ASU.TRESPONSE.FD_DATE IS 'Дата оценки'
+/
+
+

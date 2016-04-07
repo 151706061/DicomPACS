@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013.12.10 15:13:10.291.pas,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\unTestWorklist.pas</Transaction>
+    <Transaction>2013.12.10 15:13:10.291.dfm,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\unTestWorklist.dfm</Transaction>
+    <Transaction>2013.12.10 15:13:24.450.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\Project1.dproj=C:\Delphi\Trunk_AUTH\ASU2\Dicom\dll_worklist_nazn\source\TestWorklist.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

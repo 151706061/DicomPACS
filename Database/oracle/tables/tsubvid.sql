@@ -1,0 +1,102 @@
+DROP TABLE ASU.TSUBVID CASCADE CONSTRAINTS
+/
+
+--
+-- TSUBVID  (Table) 
+--
+CREATE TABLE ASU.TSUBVID
+(
+  FK_ID     NUMBER(15),
+  FK_VIDID  NUMBER(15),
+  FC_NAME   VARCHAR2(30 BYTE),
+  FC_SHORT  VARCHAR2(10 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSUBVID IS '—правочник подтипов прибыти€ by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TSUBVID.FK_ID IS 'SEQUENCE=[SEQ_TSUBVID]'
+/
+
+COMMENT ON COLUMN ASU.TSUBVID.FK_VIDID IS 'TVID.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TSUBVID.FC_NAME IS 'название'
+/
+
+COMMENT ON COLUMN ASU.TSUBVID.FC_SHORT IS 'кратко'
+/
+
+
+--
+-- TSUBVID_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   TSUBVID (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSUBVID_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TSUBVID  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  nTemp NUMBER;
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TSUBVID', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TSUBVID', 'FC_NAME', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fc_name), :new.fk_id);
+    PKG_LOG.Do_log('TSUBVID', 'FK_VIDID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.FK_VIDID), :new.fk_id);
+  elsif DELETING then
+    PKG_LOG.Do_log('TSUBVID', 'FK_ID', 'DELETE', PKG_LOG.GET_VALUE(:old.fk_id), null, :old.fk_id);
+    PKG_LOG.Do_log('TSUBVID', 'FC_NAME', 'DELETE', PKG_LOG.GET_VALUE(:old.FC_NAME), null, :old.fk_id);
+    PKG_LOG.Do_log('TSUBVID', 'FK_VIDID', 'DELETE', PKG_LOG.GET_VALUE(:old.FK_VIDID), null, :old.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TSUBVID', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FC_NAME') AND PKG_LOG.GET_VALUE(:old.FC_NAME) <> PKG_LOG.GET_VALUE(:new.FC_NAME) then
+      PKG_LOG.Do_log('TSUBVID', 'FC_NAME', 'UPDATE', PKG_LOG.GET_VALUE(:old.FC_NAME), PKG_LOG.GET_VALUE(:new.FC_NAME), :old.fk_id);
+    end if;
+    if UPDATING ('FK_VIDID') AND PKG_LOG.GET_VALUE(:old.FK_VIDID) <> PKG_LOG.GET_VALUE(:new.FK_VIDID) then
+      PKG_LOG.Do_log('TSUBVID', 'FK_VIDID', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_VIDID), PKG_LOG.GET_VALUE(:new.FK_VIDID), :old.fk_id);
+    end if;
+  end if;
+  null;
+END TSUBVID_LOG;
+/
+SHOW ERRORS;
+
+
+--
+-- TSUBVID_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TSUBVID (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSUBVID_BEFORE_INSERT" 
+  BEFORE INSERT ON ASU.TSUBVID   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TSUBVID.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

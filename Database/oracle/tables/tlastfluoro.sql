@@ -1,0 +1,83 @@
+DROP TABLE ASU.TLASTFLUORO CASCADE CONSTRAINTS
+/
+
+--
+-- TLASTFLUORO  (Table) 
+--
+CREATE TABLE ASU.TLASTFLUORO
+(
+  FK_PEPLID  NUMBER(15),
+  FD_DATE    DATE,
+  FC_NUM     VARCHAR2(20 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- TLASTFLUORO_DATE  (Index) 
+--
+--  Dependencies: 
+--   TLASTFLUORO (Table)
+--
+CREATE INDEX ASU.TLASTFLUORO_DATE ON ASU.TLASTFLUORO
+(FD_DATE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TLASTFLUORO_PEPLID  (Index) 
+--
+--  Dependencies: 
+--   TLASTFLUORO (Table)
+--
+CREATE UNIQUE INDEX ASU.TLASTFLUORO_PEPLID ON ASU.TLASTFLUORO
+(FK_PEPLID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

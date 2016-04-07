@@ -1,0 +1,22 @@
+DROP TRIGGER ASU.TRECEPTION_AFTER_INSERT
+/
+
+--
+-- TRECEPTION_AFTER_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TRECEPTION (Table)
+--   PKG_NAZN (Package)
+--
+CREATE OR REPLACE TRIGGER ASU."TRECEPTION_AFTER_INSERT" 
+ AFTER
+  INSERT
+ ON asu.treception
+REFERENCING NEW AS NEW OLD AS OLD
+BEGIN
+  pkg_nazn.calc_status_on_nazn;
+END;
+/
+SHOW ERRORS;
+
+

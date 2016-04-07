@@ -1,0 +1,120 @@
+ALTER TABLE ASU.TPROFACTOR_SMID
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TPROFACTOR_SMID CASCADE CONSTRAINTS
+/
+
+--
+-- TPROFACTOR_SMID  (Table) 
+--
+CREATE TABLE ASU.TPROFACTOR_SMID
+(
+  FK_ID         INTEGER                         NOT NULL,
+  FK_PROFACTOR  INTEGER,
+  FK_SMID       INTEGER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          160K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TPROFACTOR_SMID IS 'Соответсвия проффакторов из приказа 90 с ужесуществующими профакторами
+Author: Ura'
+/
+
+COMMENT ON COLUMN ASU.TPROFACTOR_SMID.FK_ID IS 'SEQUENCE=[SEQ_PROFACTOR_SMID]'
+/
+
+COMMENT ON COLUMN ASU.TPROFACTOR_SMID.FK_PROFACTOR IS 'ссылка на профактор'
+/
+
+COMMENT ON COLUMN ASU.TPROFACTOR_SMID.FK_SMID IS 'сылка на TSMID'
+/
+
+
+--
+-- PK_TPROFACTOR_SMID  (Index) 
+--
+--  Dependencies: 
+--   TPROFACTOR_SMID (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TPROFACTOR_SMID ON ASU.TPROFACTOR_SMID
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TPROFACTOR_SMID_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TPROFACTOR_SMID (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROFACTOR_SMID_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tprofactor_smid
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+begin
+  IF :NEW.fk_id IS NULL
+  THEN
+    SELECT seq_profactor_smid.NEXTVAL
+      INTO :NEW.fk_id
+      FROM DUAL;
+  END IF;
+end;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TPROFACTOR_SMID 
+-- 
+ALTER TABLE ASU.TPROFACTOR_SMID ADD (
+  CONSTRAINT PK_TPROFACTOR_SMID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          256K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

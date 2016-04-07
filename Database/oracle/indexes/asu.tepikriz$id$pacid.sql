@@ -1,0 +1,25 @@
+DROP INDEX ASU.TEPIKRIZ$ID$PACID
+/
+
+--
+-- TEPIKRIZ$ID$PACID  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TEPIKRIZ$ID$PACID ON ASU.TEPIKRIZ
+(FK_ID, FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          384K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

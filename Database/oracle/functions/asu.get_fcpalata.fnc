@@ -1,0 +1,43 @@
+DROP FUNCTION ASU.GET_FCPALATA
+/
+
+--
+-- GET_FCPALATA  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TROOM (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_FCPALATA" 
+  ( pFK_ID IN NUMBER)
+  RETURN  VARCHAR2 IS
+  dTemp VARCHAR2(20);
+  CURSOR cTemp IS SELECT /*+ rule*/FC_PALATA FROM TROOM WHERE FK_ID=pFK_ID;
+BEGIN
+  OPEN cTemp;
+  FETCH cTemp INTO dTemp;
+  CLOSE cTemp;
+  IF dTemp IS NULL THEN
+    dTemp:='не выбрана';
+  end if;
+  RETURN dTemp;
+END;
+/
+
+SHOW ERRORS;
+
+
+DROP SYNONYM FOOD.GET_NUMPALATA
+/
+
+--
+-- GET_NUMPALATA  (Synonym) 
+--
+--  Dependencies: 
+--   GET_FCPALATA (Function)
+--
+CREATE SYNONYM FOOD.GET_NUMPALATA FOR ASU.GET_FCPALATA
+/
+
+

@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2012.06.08 10:24:25.335.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLServer\Source\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLServer\Source\CmnUnit.pas</Transaction>
+    <Transaction>2013.05.22 16:28:50.391.pas,C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLServer\Source\CmnUnit.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\WLServer\Source\CmnUnit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

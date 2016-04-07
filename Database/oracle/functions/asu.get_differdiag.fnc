@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_DIFFERDIAG
+/
+
+--
+-- GET_DIFFERDIAG  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_DIFFERDIAG" 
+return number
+is 
+begin
+  return 319036;
+end;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_DIFFERDIAG TO PUBLIC
+/
+

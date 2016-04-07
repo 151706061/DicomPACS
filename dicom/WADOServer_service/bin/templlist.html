@@ -1,0 +1,95 @@
+@head_first
+
+<title>Шаблоны медицинских заключений</title>
+
+	@incl_main_cmn
+	
+	<link href="css/studylist/studylistn.css" rel="stylesheet" type="text/css">
+    <link href="css/mainDCMn.css" rel="stylesheet" type="text/css">
+
+	<link href="css/templ_concl/templ_concl.css" rel="stylesheet" type="text/css">
+	<script src="js/templ_concl/templ_concl.js"></script>
+    
+    <script src="ckeditor/ckeditor.js"></script>
+	<script>
+		var v_emp1='<p>';
+		var v_emp2='</p>';
+		var v_emp_editor_str = v_emp1+'&nbsp; &nbsp;'+v_emp2 ;
+		var v_height_tmp=0;
+		var v_width_tmp=0;
+		var v_cur_grid_id=0;
+		var v_arr_list = [[],[],[],[],[],[],[]];
+		var v_sel_nmb = 0;
+		var v_sel_date = '';
+		var v_sel_doctor = '';
+		var v_sel_val = '';
+		var v_is_edt = false;
+		var v_nn = 0;
+		var v_amm_err = 0;
+		// BEGIN_DEBUG
+		var v_url = '';
+		var v_ui = 0;
+		var v_up = '';
+		var v_un = '';
+		var v_username = 'sysdba';
+		var v_fam = '';
+		var v_nam = '';
+		var v_surn = '';
+		var v_main_studyuid = '';
+		// END_DEBUG
+		
+	</script>
+
+</head>
+
+<body id="mybodyconcl" style="background-color: white;padding-top:0px;">
+
+	@main_header
+    
+    @main_menu
+        <p>    
+			<div class="myhdtext1" style="margin-left:40%;margin-top:-20px;">
+					<h3 style="color:black;">Шаблоны медицинских заключений</h3>
+			</div>	
+		</p>
+    <!--	Список протоколов	-->
+    <div id="mymaincntrprt" class="myheadt mhh" style="top:0">
+    	<div id="myconclforummn" class="container mhh t_hgh_gr" style="background-color: #F4F4F4;top:0;">
+			<div style="background-color: #D0E7F2;height:28px;padding:0px" >
+            	<p>
+                    <button id="myaddconcl" class="concl_edtbtn" 
+                                     title="Добавить новый шаблон">ДОБАВИТЬ</button>
+                    <button id="myedtconcl" class="concl_edtbtn" title="Редактировать шаблон">РЕДАКТИРОВАТЬ</button>
+                    <button id="mydlttempl" class="concl_edtbtn" title="Удалить шаблон">УДАЛИТЬ</button>
+                </p>
+            </div>
+            <div style="height:10px;" class="">
+            </div>
+            
+            <!-- HEAD -->
+            @head_templ_list            
+            
+            <div id="mymainscrollconcl" style="padding:5px;overflow:auto;" class="t_hgh_gr1">
+            	<div id="1" class="myconclchk">
+                    <div style="border:2px solid #D0E7F2;" class="myselval mydelf">
+                        <div class="mysel myfloatleft tufld0 " style="height:20px" >&nbsp;</div>
+					    <div class=" myfloatleft tufld1 " style="height:20px">&nbsp;</div>
+					    <div id="myfldcomm" class=" myfloatleft tufld2 " style="height:20px;width:10px">&nbsp;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    @templ_edt_frm
+    
+    @main_footer
+    
+    @mylibCmn
+	<script src="js/MyLibCmn.js"></script>
+            
+</body>
+</html>
+
+
+    

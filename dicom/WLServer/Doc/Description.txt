@@ -1,0 +1,71 @@
+Dicom WorkList by Fomin A.
+
+
+Fields considered Type 1 by the Worklist Server include:
+(0010,0010), Patient Name
+(0010,0020), Patient ID
+(0020,000D), Study Instance UID
+(0040,0001), Scheduled Station AE Title
+(0040,0002), Scheduled Procedure Step Start Date
+(0040,0003), Scheduled Procedure Step Start Time
+(0040,0009), Scheduled Procedure Step ID
+(0040,1001), Requested Procedure ID
+
+Fields considered Type 2 by Worklist Server include:
+(0008,0050), Accession Number
+(0008,0060), Modality
+(0008,0090), Referring Physician Name
+(0010,0030), Patient Date of Birth
+(0010,0040), Patient Sex
+(0010,1030), Patient Weight in kg
+(0010,2000), Medical Alerts
+(0010,2110), Contrast Allergies
+(0010,21C0), Pregnancy Status
+(0032,1032), Requesting Physician
+(0032,1070), Requested Contrast Agent
+(0038,0010), Admission ID
+(0038,0050), Special Needs
+(0038,0300), Current Patient Location
+(0038,0500), Patient State
+(0040,0006), Performing Physician
+(0040,0010), Scheduled Station Name
+(0040,0011), Scheduled Procedure Step Location
+(0040,0012), Pre-order Medication
+(0040,1003), Requested Procedure Priority
+(0040,1004), Patient Transport Arrangements
+(0040,3001), Confidentiality Constraint
+
+
+
+
+(0010,0010) PN (no value available) # 0, 0 PatientName
+(0010,0020) LO (no value available) # 0, 0 PatientID
+(0010,0030) DA (no value available) # 0, 0 PatientBirthDate
+(0010,0040) CS (no value available) # 0, 0 PatientSex
+(0010,1020) DS (no value available) # 0, 0 PatientSize
+(0010,1030) DS (no value available) # 0, 0 PatientWeight
+PatientAddres
+
+Studyiud
+AccessionNumber
+aetitle
+date
+time
+
+
+CREATE TABLE WORKLIST (
+    P_ENAME      CHAR(255),
+    P_SEX        CHAR(4),
+    P_PID        CHAR(20) NOT NULL,
+    P_DATEBORN   TIMESTAMP,
+    P_FAM        CHAR(255),
+    P_IM         CHAR(255),
+    P_OTCH       CHAR(255),
+    P_ENAME_RUS  CHAR(255),
+    P_PatientSex CHAR(3),
+    ACCESSIONNUMBER CHAR(100),
+    Modality     CHAR(5),
+    P_AETITLE    CHAR(15),
+    STUDYUID     CHAR(80),
+    P_ST_DT      TIMESTAMP
+);

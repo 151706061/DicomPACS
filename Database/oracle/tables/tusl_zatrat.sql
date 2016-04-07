@@ -1,0 +1,120 @@
+DROP TABLE ASU.TUSL_ZATRAT CASCADE CONSTRAINTS
+/
+
+--
+-- TUSL_ZATRAT  (Table) 
+--
+CREATE TABLE ASU.TUSL_ZATRAT
+(
+  FK_ID       INTEGER                           DEFAULT -1                    NOT NULL,
+  FK_HEALID   INTEGER,
+  FK_GROUPID  INTEGER,
+  FN_PROC     NUMBER(22,4),
+  FC_NAME     VARCHAR2(50 BYTE),
+  FC_FORMULA  VARCHAR2(4000 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TUSL_ZATRAT IS 'Список затрат с наценкой на карточки услуг'
+/
+
+COMMENT ON COLUMN ASU.TUSL_ZATRAT.FK_HEALID IS 'Ссылка на услугу в THAEL'
+/
+
+COMMENT ON COLUMN ASU.TUSL_ZATRAT.FK_GROUPID IS 'Ссылка на группу затрат в BUH.TS_GROUP'
+/
+
+COMMENT ON COLUMN ASU.TUSL_ZATRAT.FN_PROC IS 'Процент наценки'
+/
+
+COMMENT ON COLUMN ASU.TUSL_ZATRAT.FC_NAME IS 'Наименование затраты'
+/
+
+
+--
+-- TUSL_ZATRAT_BY_FK_ID  (Index) 
+--
+--  Dependencies: 
+--   TUSL_ZATRAT (Table)
+--
+CREATE UNIQUE INDEX ASU.TUSL_ZATRAT_BY_FK_ID ON ASU.TUSL_ZATRAT
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TUSL_ZATRAT_FK_HEALID_GROUP  (Index) 
+--
+--  Dependencies: 
+--   TUSL_ZATRAT (Table)
+--
+CREATE INDEX ASU.TUSL_ZATRAT_FK_HEALID_GROUP ON ASU.TUSL_ZATRAT
+(FK_HEALID, FK_GROUPID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TUSL_ZATRAT_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TUSL_ZATRAT (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TUSL_ZATRAT_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tusl_zatrat
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+Begin
+  SELECT SEQ_tusl_zatrat.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

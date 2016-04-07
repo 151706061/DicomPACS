@@ -1,0 +1,66 @@
+DROP TRIGGER ASU.TRESAN_SETNAZ_STATUS
+/
+
+--
+-- TRESAN_SETNAZ_STATUS  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   V$SESSION (Synonym)
+--   DBMS_STANDARD (Package)
+--   TNAZAN (Table)
+--   TRESAN (Table)
+--   GET_NAZ_PROCESS (Function)
+--   INSNAZ (Package)
+--   VNAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TRESAN_SETNAZ_STATUS" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON asu.TRESAN
+ REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+DECLARE
+  sMODULENAME VARCHAR2(64);
+BEGIN
+  --SELECT PROGRAM commented by A.Nakorjakov 22.06.09
+  SELECT MAX(PROGRAM) --added by A.Nakorjakov 22.06.09
+    INTO sMODULENAME
+    FROM V$SESSION
+   WHERE AUDSID = USERENV('SESSIONID');
+   
+  -- deemaric add 18.02.2009   sMODULENAME = 'modImpData.exe'
+  -- при экспорте/импорте "портился" статус анализов 
+  IF insnaz.bins OR (sMODULENAME = 'CorrectKarta.exe') OR (sMODULENAME = 'CopyPeople.exe') OR (sMODULENAME = 'modImpData.exe')
+  THEN
+    RETURN;
+  END IF;
+  insnaz.bins := TRUE;
+
+  IF DELETING
+  THEN
+    UPDATE ASU.TNAZAN
+       SET FK_NAZSOSID = GET_NAZ_PROCESS
+     WHERE FK_ID = :OLD.FK_NAZID;
+    UPDATE ASU.VNAZ
+       SET FK_NAZSOSID = GET_NAZ_PROCESS
+     WHERE FK_ID = :NEW.FK_NAZID;
+  ELSE
+    UPDATE ASU.TNAZAN
+       SET FK_NAZSOSID = GET_NAZ_PROCESS
+     WHERE FK_ID = :NEW.FK_NAZID;
+    UPDATE ASU.VNAZ
+       SET FK_NAZSOSID = GET_NAZ_PROCESS
+     WHERE FK_ID = :NEW.FK_NAZID;
+  END IF;
+
+  insnaz.bins := FALSE;
+EXCEPTION
+  WHEN OTHERS THEN
+    insnaz.bins := FALSE;
+    RAISE;
+END;
+/
+SHOW ERRORS;
+
+

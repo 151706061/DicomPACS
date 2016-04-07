@@ -1,0 +1,23 @@
+DROP TRIGGER ASU.TPROTIV_BEFOR_INSERT
+/
+
+--
+-- TPROTIV_BEFOR_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TPROTIV (Sequence)
+--   TPROTIV (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TPROTIV_BEFOR_INSERT" 
+BEFORE INSERT
+ON ASU.TPROTIV REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+  Select SEQ_TPROTIV.NextVal into :new.FK_ID from dual;
+End;
+/
+SHOW ERRORS;
+
+

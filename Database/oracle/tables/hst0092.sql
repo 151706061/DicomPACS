@@ -1,0 +1,107 @@
+ALTER TABLE ASU.HST0092
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.HST0092 CASCADE CONSTRAINTS
+/
+
+--
+-- HST0092  (Table) 
+--
+CREATE TABLE ASU.HST0092
+(
+  FK_ID     NUMBER,
+  CODE      VARCHAR2(255 BYTE),
+  NAME      VARCHAR2(255 BYTE),
+  ID_MAKER  VARCHAR2(255 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.HST0092 IS 'Таблица создана автоматически в результате загрузки DBF'
+/
+
+COMMENT ON COLUMN ASU.HST0092.FK_ID IS 'ASU.SEQ_HST0092'
+/
+
+
+--
+-- K_HST0092_ID  (Index) 
+--
+--  Dependencies: 
+--   HST0092 (Table)
+--
+CREATE UNIQUE INDEX ASU.K_HST0092_ID ON ASU.HST0092
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- HST0092_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   HST0092 (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.HST0092_BEFORE_INSERT
+  BEFORE INSERT
+  ON ASU.HST0092   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+BEGIN
+  SELECT ASU.SEQ_HST0092.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table HST0092 
+-- 
+ALTER TABLE ASU.HST0092 ADD (
+  CONSTRAINT K_HST0092_ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

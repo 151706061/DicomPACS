@@ -1,0 +1,53 @@
+DROP FUNCTION ASU.GET_LAB_TYPE
+/
+
+--
+-- GET_LAB_TYPE  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TLABLOT (Table)
+--   TLABREG (Table)
+--   TLABSORT (Table)
+--   GET_LAB_CUR_DAY (Function)
+--   TYPE_AVTOMAT (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_LAB_TYPE" (pFK_LABREGID IN NUMBER, pFK_SMID IN NUMBER) RETURN NUMBER IS
+    CURSOR C IS SELECT TLABLOT.FK_LABSMID
+                FROM TLABREG,
+                     TLABLOT
+                WHERE TLABREG.FK_ID = pFK_LABREGID
+                      AND TLABLOT.FN_NUMBER  = TLABREG.FK_DEFAULT
+                      AND TLABLOT.FD_DATE >= GET_LAB_CUR_DAY
+                          AND TLABLOT.FK_SOST = 0;
+    CURSOR C1 IS SELECT FK_TYPE FROM TLABSORT WHERE FK_SMID = pFK_SMID;
+    CURSOR C2 IS SELECT FK_ID FROM TLABREG WHERE FK_ID = pFK_LABREGID AND FK_DEFAULT = 0 AND FK_PLACE = 0;
+    nLAB_SMID NUMBER;
+    nLAB_TYPE NUMBER;
+BEGIN
+    OPEN C;
+    FETCH C INTO nLAB_SMID;
+    CLOSE C;
+    IF nLAB_SMID IS NULL THEN
+        OPEN C2;
+        FETCH C2 INTO nLAB_TYPE;
+        CLOSE C2;
+        IF nLAB_TYPE IS NULL THEN
+            OPEN C1;
+            FETCH C1 INTO nLAB_TYPE;
+            CLOSE C1;
+            RETURN nLAB_TYPE;
+         ELSE
+            RETURN TYPE_AVTOMAT;
+        END IF;
+        RETURN nLAB_TYPE;
+     ELSE
+      RETURN nLAB_SMID;
+    END IF;
+END;
+/
+
+SHOW ERRORS;
+
+

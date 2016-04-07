@@ -1,0 +1,30 @@
+DROP FUNCTION ASU.GET_PACVOZR
+/
+
+--
+-- GET_PACVOZR  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TKARTA (Table)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PACVOZR" 
+  ( pFK_ID IN NUMBER)
+  RETURN  NUMBER IS
+  nTemp NUMBER;
+  CURSOR cTemp(pID NUMBER) IS SELECT /*+rule*/ROUND((SYSDATE-FD_ROJD)/365) FROM TKARTA WHERE FK_ID=pID;
+BEGIN
+  OPEN cTemp(pFK_ID);
+  FETCH cTemp INTO nTemp;
+  CLOSE cTemp;
+  IF nTemp IS NULL THEN
+    nTemp:=0;
+  END IF;
+  RETURN nTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

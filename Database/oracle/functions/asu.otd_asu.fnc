@@ -1,0 +1,24 @@
+DROP FUNCTION ASU.OTD_ASU
+/
+
+--
+-- OTD_ASU  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."OTD_ASU" 
+  RETURN NUMBER DETERMINISTIC
+  IS -- Created by -= aAdmin.exe =- 
+     -- ATTENTION! DO NOT MODIFY THIS FUNCTION MANUALLY!!!
+BEGIN
+  Return 20876;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.OTD_ASU TO PUBLIC
+/
+

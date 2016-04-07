@@ -1,0 +1,79 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{bea22ccb-da45-40c7-a58b-62388feff014}</ProjectGuid>
+    <MainSource>repPrihRashDocs_MIS2.dpr</MainSource>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <DCC_DCCCompiler>DCC32</DCC_DCCCompiler>
+    <DCC_DependencyCheckOutputName>repPrihRashDocs_MIS2.exe</DCC_DependencyCheckOutputName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_DebugInformation>False</DCC_DebugInformation>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_LocalDebugSymbols>False</DCC_LocalDebugSymbols>
+    <DCC_Optimize>False</DCC_Optimize>
+    <DCC_SymbolReferenceInfo>0</DCC_SymbolReferenceInfo>
+    <DCC_UnitSearchPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_ObjPath>
+    <DCC_IncludePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima</DCC_IncludePath>
+    <DCC_Define>RELEASE</DCC_Define>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <Version>7.0</Version>
+    <DCC_WriteableConstants>True</DCC_WriteableConstants>
+    <DCC_Optimize>False</DCC_Optimize>
+    <DCC_UnitSearchPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima;..\..\..\..\..\uCommon</DCC_UnitSearchPath>
+    <DCC_ResourcePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima;..\..\..\..\..\uCommon</DCC_ResourcePath>
+    <DCC_ObjPath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima;..\..\..\..\..\uCommon</DCC_ObjPath>
+    <DCC_IncludePath>..\..\src;..\..\src\forms;..\..\..\..\uCommon_Tima;..\..\..\..\..\uCommon</DCC_IncludePath>
+    <DCC_Define>DEBUG;MIS2</DCC_Define>
+  </PropertyGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Delphi.Personality</Borland.Personality>
+    <Borland.ProjectType>VCLApplication</Borland.ProjectType>
+    <BorlandProject>
+<BorlandProject><Delphi.Personality><Parameters><Parameters Name="UseLauncher">False</Parameters><Parameters Name="LoadAllSymbols">True</Parameters><Parameters Name="LoadUnspecifiedSymbols">False</Parameters></Parameters><VersionInfo><VersionInfo Name="IncludeVerInfo">True</VersionInfo><VersionInfo Name="AutoIncBuild">False</VersionInfo><VersionInfo Name="MajorVer">3</VersionInfo><VersionInfo Name="MinorVer">0</VersionInfo><VersionInfo Name="Release">2</VersionInfo><VersionInfo Name="Build">20</VersionInfo><VersionInfo Name="Debug">False</VersionInfo><VersionInfo Name="PreRelease">False</VersionInfo><VersionInfo Name="Special">False</VersionInfo><VersionInfo Name="Private">False</VersionInfo><VersionInfo Name="DLL">False</VersionInfo><VersionInfo Name="Locale">1049</VersionInfo><VersionInfo Name="CodePage">1251</VersionInfo></VersionInfo><VersionInfoKeys><VersionInfoKeys Name="CompanyName"></VersionInfoKeys><VersionInfoKeys Name="FileDescription"></VersionInfoKeys><VersionInfoKeys Name="FileVersion">3.0.2.20</VersionInfoKeys><VersionInfoKeys Name="InternalName"></VersionInfoKeys><VersionInfoKeys Name="LegalCopyright"></VersionInfoKeys><VersionInfoKeys Name="LegalTrademarks"></VersionInfoKeys><VersionInfoKeys Name="OriginalFilename"></VersionInfoKeys><VersionInfoKeys Name="ProductName"></VersionInfoKeys><VersionInfoKeys Name="ProductVersion">1.0.0.0</VersionInfoKeys><VersionInfoKeys Name="Comments"></VersionInfoKeys></VersionInfoKeys><Source><Source Name="MainSource">repPrihRashDocs_MIS2.dpr</Source></Source><Excluded_Packages>
+      
+      
+      
+      
+      
+      
+      
+      
+      <Excluded_Packages Name="$(BDS)\bin\dcloffice2k100.bpl">Microsoft Office 2000 Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="$(BDS)\bin\dclofficexp100.bpl">Microsoft Office XP Sample Automation Server Wrapper Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Program Files\Steema Software\TeeChart Pro 8.04 Full Source Code\Sources\..\TeeTree\Compiled\Delphi11\Bin\DclTree2D11Tee8.bpl">TeeTree 2 Components</Excluded_Packages>
+      <Excluded_Packages Name="C:\Program Files\Steema Software\TeeChart Pro 8.04 Full Source Code\Sources\Compiled\Delphi11\Bin\DclTeePro811.bpl">TeeChart Pro 8 Components</Excluded_Packages>
+    </Excluded_Packages></Delphi.Personality></BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Import Project="$(MSBuildBinPath)\Borland.Delphi.Targets" />
+  <ItemGroup>
+    <DelphiCompile Include="repPrihRashDocs_MIS2.dpr">
+      <MainSource>MainSource</MainSource>
+    </DelphiCompile>
+    <DCCReference Include="..\..\..\..\..\uCommon\uGlobalConst.pas" />
+    <DCCReference Include="..\CommonUnits\fCheckedListEdit.pas">
+      <Form>fmCheckedListEdit</Form>
+    </DCCReference>
+    <DCCReference Include="..\CommonUnits\fSelectCheckedList.pas">
+      <Form>fmSelectCheckedList</Form>
+    </DCCReference>
+    <DCCReference Include="cxPivotGrid_Rusification.pas" />
+    <DCCReference Include="dm_Main.pas">
+      <Form>dmMain</Form>
+      <DesignClass>TDataModule</DesignClass>
+    </DCCReference>
+    <DCCReference Include="fHeaderSetup.pas">
+      <Form>fmHeaderAndFooter</Form>
+    </DCCReference>
+    <DCCReference Include="fm_Main.pas">
+      <Form>fmMain</Form>
+    </DCCReference>
+    <DCCReference Include="HtmlHlp.pas" />
+    <DCCReference Include="uCommon\uGlobalConst.pas" />
+  </ItemGroup>
+</Project>

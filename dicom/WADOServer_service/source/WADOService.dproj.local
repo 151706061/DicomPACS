@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013.02.21 08:11:04.125.pas,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.pas=C:\Delphi\Trunk_AUTH\ASU2\Dicom\WADOServer_service\source\Unit1.pas</Transaction>
+    <Transaction>2013.02.21 08:11:04.125.dfm,C:\Users\Softmaster\Documents\RAD Studio\Projects\Unit1.dfm=C:\Delphi\Trunk_AUTH\ASU2\Dicom\WADOServer_service\source\Unit1.dfm</Transaction>
+    <Transaction>2013.02.21 08:11:22.403.dproj,C:\Users\Softmaster\Documents\RAD Studio\Projects\Project1.dproj=C:\Delphi\Trunk_AUTH\ASU2\Dicom\WADOServer_service\source\WADOService.dproj</Transaction>
+  </Transactions>
+</BorlandProject>

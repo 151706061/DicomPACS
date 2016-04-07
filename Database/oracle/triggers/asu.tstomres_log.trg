@@ -1,0 +1,40 @@
+DROP TRIGGER ASU.TSTOMRES_LOG
+/
+
+--
+-- TSTOMRES_LOG  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DBMS_STANDARD (Package)
+--   PKG_LOG (Package)
+--   TSTOMRES (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TSTOMRES_LOG" 
+ AFTER
+ INSERT OR DELETE OR UPDATE
+ ON ASU.TSTOMRES  REFERENCING OLD AS OLD NEW AS NEW
+ FOR EACH ROW
+BEGIN
+  if INSERTING then
+    PKG_LOG.Do_log('TSTOMRES', 'FK_ID', 'INSERT', null, PKG_LOG.GET_VALUE(:new.fk_id), :new.fk_id);
+    PKG_LOG.Do_log('TSTOMRES', 'FK_PAC', 'INSERT', null, PKG_LOG.GET_VALUE(:new.FK_PAC), :new.fk_id);
+    PKG_LOG.Do_log('TSTOMRES', 'FK_STOMNAZ', 'INSERT', PKG_LOG.GET_VALUE(:old.FK_STOMNAZ), PKG_LOG.GET_VALUE(:new.FK_STOMNAZ), :new.fk_id);
+    PKG_LOG.Do_log('TSTOMRES', 'FN_TEETH', 'INSERT', PKG_LOG.GET_VALUE(:old.FN_TEETH), PKG_LOG.GET_VALUE(:new.FN_TEETH), :new.fk_id);
+  elsif UPDATING then
+    PKG_LOG.Do_log('TSTOMRES', 'FK_ID', 'UPDATE', PKG_LOG.GET_VALUE(:old.fk_id), PKG_LOG.GET_VALUE(:new.fk_id), :old.fk_id);
+    if UPDATING ('FK_PAC') AND PKG_LOG.GET_VALUE(:old.FK_PAC) <> PKG_LOG.GET_VALUE(:new.FK_PAC) then
+      PKG_LOG.Do_log('TSTOMRES', 'FK_PAC', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_PAC), PKG_LOG.GET_VALUE(:new.FK_PAC), :old.fk_id);
+    end if;
+    if UPDATING ('FK_STOMNAZ') AND PKG_LOG.GET_VALUE(:old.FK_STOMNAZ) <> PKG_LOG.GET_VALUE(:new.FK_STOMNAZ) then
+      PKG_LOG.Do_log('TSTOMRES', 'FK_STOMNAZ', 'UPDATE', PKG_LOG.GET_VALUE(:old.FK_STOMNAZ), PKG_LOG.GET_VALUE(:new.FK_STOMNAZ), :old.fk_id);
+    end if;
+    if UPDATING ('FN_TEETH') AND PKG_LOG.GET_VALUE(:old.FN_TEETH) <> PKG_LOG.GET_VALUE(:new.FN_TEETH) then
+      PKG_LOG.Do_log('TSTOMRES', 'FN_TEETH', 'UPDATE', PKG_LOG.GET_VALUE(:old.FN_TEETH), PKG_LOG.GET_VALUE(:new.FN_TEETH), :old.fk_id);
+    end if;
+  end if;
+END;
+/
+SHOW ERRORS;
+
+

@@ -1,0 +1,108 @@
+ALTER TABLE ASU.TEXP_TEMP
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TEXP_TEMP CASCADE CONSTRAINTS
+/
+
+--
+-- TEXP_TEMP  (Table) 
+--
+CREATE TABLE ASU.TEXP_TEMP
+(
+  FK_ID        NUMBER(15)                       NOT NULL,
+  FK_THREADID  NUMBER(15),
+  FK_TALONID   NUMBER(15),
+  FK_KARTID    NUMBER(15),
+  FK_NAZID     NUMBER(15),
+  FK_PEPLID    NUMBER(15),
+  FK_ADDRID    NUMBER(15),
+  FK_SOTRID    NUMBER(15),
+  BAD_REQUEST  NUMBER                           DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+
+--
+-- PK_TEXP_TEMP  (Index) 
+--
+--  Dependencies: 
+--   TEXP_TEMP (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_TEXP_TEMP ON ASU.TEXP_TEMP
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TEXP_TEMP_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TEXP_TEMP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU.TEXP_TEMP_BI
+ BEFORE INSERT
+ ON ASU.TEXP_TEMP REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+ IF :NEW.FK_ID IS NULL THEN
+    SELECT ASU.SEQ_TEXP_TEMP.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+ END IF;
+END TEXP_TEMP_BI;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TEXP_TEMP 
+-- 
+ALTER TABLE ASU.TEXP_TEMP ADD (
+  CONSTRAINT PK_TEXP_TEMP
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

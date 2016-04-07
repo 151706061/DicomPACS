@@ -1,0 +1,77 @@
+DROP PROCEDURE ASU.DO_MKB_ASCII
+/
+
+--
+-- DO_MKB_ASCII  (Procedure) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TSMID (Table)
+--   GET_DIAGSCLINIK (Function)
+--
+CREATE OR REPLACE PROCEDURE ASU."DO_MKB_ASCII" IS
+CURSOR cMKB IS SELECT FK_ID,
+                      FK_MKB10,
+                      SUBSTR(FK_MKB10, 1, 1) AS SUBMKB
+                 FROM TSMID ts
+                WHERE FK_ID <> GET_DIAGSCLINIK
+                  AND ASCII(substr(FK_MKB10, 1, 1)) > 127
+           START WITH FK_ID=GET_DIAGSCLINIK
+     CONNECT BY PRIOR FK_ID=FK_OWNER
+     ORDER BY SUBMKB;
+CURSOR cASCII(MKB IN VARCHAR2) IS SELECT ASCII(MKB) AS ASCII_MKB FROM DUAL;
+
+MKB10 VARCHAR2(32000);
+SUBMKB10 VARCHAR2(32000);
+STR VARCHAR2(32000);
+BEGIN
+  FOR c IN cMKB LOOP
+     FOR i IN cASCII(c.SUBMKB) LOOP
+       IF i.ASCII_MKB > 127 THEN
+         IF c.SUBMKB = 'À' THEN
+           UPDATE TSMID SET FK_MKB10 = (SELECT REPLACE(FK_MKB10, substr(FK_MKB10, 1, 1), 'A') FROM TSMID WHERE FK_ID = c.FK_ID)
+           WHERE FK_ID = c.FK_ID;
+         END IF;
+         IF c.SUBMKB = 'Â' THEN
+           UPDATE TSMID SET FK_MKB10 = (SELECT REPLACE(FK_MKB10, substr(FK_MKB10, 1, 1), 'B') FROM TSMID WHERE FK_ID = c.FK_ID)
+           WHERE FK_ID = c.FK_ID;
+         END IF;
+         IF c.SUBMKB = 'Ñ' THEN
+           UPDATE TSMID SET FK_MKB10 = (SELECT REPLACE(FK_MKB10, substr(FK_MKB10, 1, 1), 'C') FROM TSMID WHERE FK_ID = c.FK_ID)
+           WHERE FK_ID = c.FK_ID;
+         END IF;
+         IF c.SUBMKB = 'Å' THEN
+           UPDATE TSMID SET FK_MKB10 = (SELECT REPLACE(FK_MKB10, substr(FK_MKB10, 1, 1), 'E') FROM TSMID WHERE FK_ID = c.FK_ID)
+           WHERE FK_ID = c.FK_ID;
+         END IF;
+         IF c.SUBMKB = 'Ê' THEN
+           UPDATE TSMID SET FK_MKB10 = (SELECT REPLACE(FK_MKB10, substr(FK_MKB10, 1, 1), 'K') FROM TSMID WHERE FK_ID = c.FK_ID)
+           WHERE FK_ID = c.FK_ID;
+         END IF;
+         IF c.SUBMKB = 'Ì' THEN
+           UPDATE TSMID SET FK_MKB10 = (SELECT REPLACE(FK_MKB10, substr(FK_MKB10, 1, 1), 'M') FROM TSMID WHERE FK_ID = c.FK_ID)
+           WHERE FK_ID = c.FK_ID;
+         END IF;
+         IF c.SUBMKB = 'Í' THEN
+           UPDATE TSMID SET FK_MKB10 = (SELECT REPLACE(FK_MKB10, substr(FK_MKB10, 1, 1), 'H') FROM TSMID WHERE FK_ID = c.FK_ID)
+           WHERE FK_ID = c.FK_ID;
+         END IF;
+         IF c.SUBMKB = 'Î' THEN
+           UPDATE TSMID SET FK_MKB10 = (SELECT REPLACE(FK_MKB10, substr(FK_MKB10, 1, 1), 'O') FROM TSMID WHERE FK_ID = c.FK_ID)
+           WHERE FK_ID = c.FK_ID;
+         END IF;
+         IF c.SUBMKB = 'Ò' THEN
+           UPDATE TSMID SET FK_MKB10 = (SELECT REPLACE(FK_MKB10, substr(FK_MKB10, 1, 1), 'T') FROM TSMID WHERE FK_ID = c.FK_ID)
+           WHERE FK_ID = c.FK_ID;
+         END IF;
+       END IF;
+     END LOOP;
+  END LOOP;
+END; -- Procedure
+/
+
+SHOW ERRORS;
+
+

@@ -1,0 +1,123 @@
+ALTER TABLE ASU.TBILL_USLUG
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TBILL_USLUG CASCADE CONSTRAINTS
+/
+
+--
+-- TBILL_USLUG  (Table) 
+--
+CREATE TABLE ASU.TBILL_USLUG
+(
+  FK_ID          NUMBER                         NOT NULL,
+  FK_BILL        NUMBER,
+  FK_PLAT_USLUG  NUMBER,
+  FN_SUM         NUMBER,
+  FN_USLUGCOUNT  NUMBER
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TBILL_USLUG IS 'Таблица связок счета с услугами
+Author:  A.Nakorjakov 120508'
+/
+
+COMMENT ON COLUMN ASU.TBILL_USLUG.FK_ID IS 'SEQUENCE=[SEQ_TBILL_USLUG]'
+/
+
+COMMENT ON COLUMN ASU.TBILL_USLUG.FK_BILL IS 'TBILL.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TBILL_USLUG.FK_PLAT_USLUG IS 'TPLAT_USLUG.FK_ID'
+/
+
+COMMENT ON COLUMN ASU.TBILL_USLUG.FN_SUM IS 'Сумма оплаты по каждой услуге * FN_USLUGCOUNT'
+/
+
+COMMENT ON COLUMN ASU.TBILL_USLUG.FN_USLUGCOUNT IS 'Кол-во оплачиваемых посещений по одной услуге'
+/
+
+
+--
+-- PK_BILL_USLUG  (Index) 
+--
+--  Dependencies: 
+--   TBILL_USLUG (Table)
+--
+CREATE UNIQUE INDEX ASU.PK_BILL_USLUG ON ASU.TBILL_USLUG
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TBILL_USLUG_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TBILL_USLUG (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TBILL_USLUG_BEFORE_INSERT" 
+ BEFORE
+  INSERT
+ ON tbill_uslug
+REFERENCING NEW AS NEW OLD AS OLD
+ FOR EACH ROW
+BEGIN
+  SELECT SEQ_TBILL_USLUG.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TBILL_USLUG 
+-- 
+ALTER TABLE ASU.TBILL_USLUG ADD (
+  CONSTRAINT PK_BILL_USLUG
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

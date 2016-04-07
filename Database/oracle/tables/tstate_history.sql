@@ -1,0 +1,42 @@
+DROP TABLE ASU.TSTATE_HISTORY CASCADE CONSTRAINTS
+/
+
+--
+-- TSTATE_HISTORY  (Table) 
+--
+CREATE TABLE ASU.TSTATE_HISTORY
+(
+  FK_ID       NUMBER                            NOT NULL,
+  FK_USERID   NUMBER,
+  FK_CARID    NUMBER,
+  FD_DATE     DATE,
+  FN_STATE    NUMBER,
+  FC_COMMENT  VARCHAR2(100 BYTE),
+  FC_USER     VARCHAR2(100 BYTE),
+  FC_CAR      VARCHAR2(100 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOLOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TSTATE_HISTORY IS 'Истрория сосотояний аськи
+Author: Linnikov'
+/
+
+

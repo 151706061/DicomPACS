@@ -1,0 +1,111 @@
+ALTER TABLE ASU.TNAZOPER_STATUS
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TNAZOPER_STATUS CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZOPER_STATUS  (Table) 
+--
+CREATE TABLE ASU.TNAZOPER_STATUS
+(
+  FK_ID    NUMBER,
+  FC_NAME  VARCHAR2(250 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNAZOPER_STATUS IS 'Текущее состояние (для графика операций).
+AUTHOR:Kudzoev 2010.05.11'
+/
+
+COMMENT ON COLUMN ASU.TNAZOPER_STATUS.FK_ID IS 'seq_tnazoper_status'
+/
+
+COMMENT ON COLUMN ASU.TNAZOPER_STATUS.FC_NAME IS 'Название статуса'
+/
+
+
+--
+-- TNAZOPER_STATUS_PK  (Index) 
+--
+--  Dependencies: 
+--   TNAZOPER_STATUS (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZOPER_STATUS_PK ON ASU.TNAZOPER_STATUS
+(FK_ID)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZOPER_STATUS_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZOPER_STATUS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZOPER_STATUS_BI" 
+BEFORE INSERT
+ON ASU.TNAZOPER_STATUS REFERENCING NEW AS New OLD AS Old
+FOR EACH ROW
+BEGIN
+    if :new.FK_ID is null then
+      select asu.SEQ_TNAZOPER_STATUS.NEXTVAL INTO :new.FK_ID from dual;
+    end if;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TNAZOPER_STATUS 
+-- 
+ALTER TABLE ASU.TNAZOPER_STATUS ADD (
+  CONSTRAINT TNAZOPER_STATUS_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE USR
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          64K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

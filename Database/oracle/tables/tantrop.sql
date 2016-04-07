@@ -1,0 +1,181 @@
+DROP TABLE ASU.TANTROP CASCADE CONSTRAINTS
+/
+
+--
+-- TANTROP  (Table) 
+--
+CREATE TABLE ASU.TANTROP
+(
+  FK_ID      NUMBER(16)                         NOT NULL,
+  FK_PACID   NUMBER(16)                         DEFAULT -1                    NOT NULL,
+  FN_ROST    NUMBER(3),
+  FN_VES     NUMBER(5,2),
+  FN_IDEAL   NUMBER(5,2),
+  FN_PROC    NUMBER(10,2),
+  FN_KLET    NUMBER(3),
+  FN_DLEFT   NUMBER(3),
+  FN_DRIGHT  NUMBER(3),
+  FN_SPIRO   NUMBER(6,2),
+  FN_PULS    NUMBER(3),
+  FN_SISTO   NUMBER(3),
+  FN_DIASTO  NUMBER(3),
+  FK_VID     NUMBER(1)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TANTROP IS 'Антропометрические данные пациента by TimurLan '
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FK_ID IS 'SEQUENCE=[SEQ_TANTROP]'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FK_PACID IS 'код пациента'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_ROST IS 'рост'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_VES IS 'вес'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_IDEAL IS 'рассчитанные идеальный вес'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_PROC IS '% от идеального'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_KLET IS 'окружность грудной клетки'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_DLEFT IS 'динамометрия левой руки'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_DRIGHT IS 'динамометрия правой руки'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_SPIRO IS 'спириометрия'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_PULS IS 'пульс'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_SISTO IS 'систолическое давление'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FN_DIASTO IS 'диастолическое давление'
+/
+
+COMMENT ON COLUMN ASU.TANTROP.FK_VID IS '0 - при прступлении 1 - при выписке'
+/
+
+
+--
+-- TANTROP_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TANTROP (Table)
+--
+CREATE UNIQUE INDEX ASU.TANTROP_BY_ID ON ASU.TANTROP
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TANTROP_BY_PAC_ID  (Index) 
+--
+--  Dependencies: 
+--   TANTROP (Table)
+--
+CREATE INDEX ASU.TANTROP_BY_PAC_ID ON ASU.TANTROP
+(FK_ID, FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          256K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TANTROP_BY_PACID_VID  (Index) 
+--
+--  Dependencies: 
+--   TANTROP (Table)
+--
+CREATE INDEX ASU.TANTROP_BY_PACID_VID ON ASU.TANTROP
+(FK_PACID, FK_VID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TANTROP_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TANTROP (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TANTROP_BEFORE_INSERT" 
+  BEFORE INSERT
+  ON ASU.TANTROP   REFERENCING NEW AS NEW OLD AS OLD
+  FOR EACH ROW
+Begin
+  SELECT SEQ_TANTROP.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+

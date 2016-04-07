@@ -1,0 +1,152 @@
+31.03.2015 9:59:05 C_MOVE: Host = 192.168.1.47Port = 11114CalledTitle = PACSSERVERCallingTitle = TEST1
+31.03.2015 9:59:05 AddMOVEPresentationContext
+31.03.2015 9:59:05 SendDicomRequest C_MOVE_REQUEST 
+31.03.2015 9:59:05 before PrepareRequestCommand
+31.03.2015 9:59:05 PrepareRequestCommand
+31.03.2015 9:59:05 SendCommandBySop ASOPClass=4136
+31.03.2015 9:59:05 Try to connect ...
+31.03.2015 9:59:05 connected=1
+31.03.2015 9:59:05 FAssociation.Init ...
+31.03.2015 9:59:05 connected=1 before SendRequest
+31.03.2015 9:59:05 FAssociation.Init
+31.03.2015 9:59:05 FAssociation.sendAssociateRequest(FRequest)
+31.03.2015 9:59:05 FAssociation.ReadPduType
+31.03.2015 9:59:05 FAssociation.ReadPduType = 2
+31.03.2015 9:59:05 FAssociation.receiveAssociateResponse(k) k=2
+31.03.2015 9:59:05 FAssociation.receiveAssociateResponse(k) *** acknowledge ***
+max pdu size: 1048576
+max operation invoked: 1
+max operation performed: 1
+implementation class UID: 1.2.826.0.1.3680043.1.1.4.1.26.0
+implementation version name: CNS_Soft_1_000
+ApplicationContextUid: 1.2.840.10008.3.1.1.1
+CalledTitle: PACSSERVER
+CallingTitle: TEST1
+                 abstract syntax scu scp
+   nr  pcid                          result     transfer syntax
+    0     1                        accepted   1.2.840.10008.1.2
+    1     1                        accepted 1.2.840.10008.1.2.1
+    2     1                        accepted 1.2.840.10008.1.2.2
+    3     1                        accepted 1.2.840.10008.1.2.5
+******************* 0
+31.03.2015 9:59:05 connected=1 before sendDataPduBySOP
+31.03.2015 9:59:05 FAssociation.ReadPduType
+31.03.2015 9:59:05 FAssociation.ReadPduType=4
+31.03.2015 9:59:05 FAssociation.ReceiveDataPdu
+31.03.2015 9:59:05 FAssociation.ReceiveDataPdu=4
+31.03.2015 9:59:05 SendCommandBySop ASOPClass=4136 RESULT=1
+31.03.2015 9:59:05 C_MOVE_REQUEST Result=1
+31.03.2015 15:24:22 C_MOVE: Host = 192.168.1.47Port = 11114CalledTitle = PACSSERVERCallingTitle = TEST1
+31.03.2015 15:24:22 AddMOVEPresentationContext
+31.03.2015 15:24:22 SendDicomRequest C_MOVE_REQUEST 
+31.03.2015 15:24:22 before PrepareRequestCommand
+31.03.2015 15:24:22 PrepareRequestCommand
+31.03.2015 15:24:22 SendCommandBySop ASOPClass=4133
+31.03.2015 15:24:22 Try to connect ...
+31.03.2015 15:24:22 connected=1
+31.03.2015 15:24:22 FAssociation.Init ...
+31.03.2015 15:24:22 connected=1 before SendRequest
+31.03.2015 15:24:22 FAssociation.Init
+31.03.2015 15:24:22 FAssociation.sendAssociateRequest(FRequest)
+31.03.2015 15:24:22 FAssociation.ReadPduType
+31.03.2015 15:24:22 FAssociation.ReadPduType = 2
+31.03.2015 15:24:22 FAssociation.receiveAssociateResponse(k) k=2
+31.03.2015 15:24:22 FAssociation.receiveAssociateResponse(k) *** acknowledge ***
+max pdu size: 1048576
+max operation invoked: 1
+max operation performed: 1
+implementation class UID: 1.2.826.0.1.3680043.1.1.4.1.26.0
+implementation version name: CNS_Soft_1_000
+ApplicationContextUid: 1.2.840.10008.3.1.1.1
+CalledTitle: PACSSERVER
+CallingTitle: TEST1
+                 abstract syntax scu scp
+   nr  pcid                          result     transfer syntax
+    0     1                        accepted   1.2.840.10008.1.2
+    1     1                        accepted 1.2.840.10008.1.2.1
+    2     1                        accepted 1.2.840.10008.1.2.2
+    3     1                        accepted 1.2.840.10008.1.2.5
+******************* 0
+31.03.2015 15:24:22 connected=1 before sendDataPduBySOP
+31.03.2015 15:24:22 FAssociation.ReadPduType
+31.03.2015 15:24:22 FAssociation.ReadPduType=4
+31.03.2015 15:24:22 FAssociation.ReceiveDataPdu
+31.03.2015 15:24:22 FAssociation.ReceiveDataPdu=4
+31.03.2015 15:24:22 SendCommandBySop ASOPClass=4133 RESULT=1
+31.03.2015 15:24:22 C_MOVE_REQUEST Result=1
+31.03.2015 15:25:42 C_MOVE: Host = 192.168.1.47Port = 11114CalledTitle = PACSSERVERCallingTitle = TEST1
+31.03.2015 15:25:42 AddMOVEPresentationContext
+31.03.2015 15:25:42 SendDicomRequest C_MOVE_REQUEST 
+31.03.2015 15:25:42 before PrepareRequestCommand
+31.03.2015 15:25:42 PrepareRequestCommand
+31.03.2015 15:25:42 SendCommandBySop ASOPClass=4136
+31.03.2015 15:25:42 Try to connect ...
+31.03.2015 15:25:42 connected=1
+31.03.2015 15:25:42 FAssociation.Init ...
+31.03.2015 15:25:42 connected=1 before SendRequest
+31.03.2015 15:25:42 FAssociation.Init
+31.03.2015 15:25:42 FAssociation.sendAssociateRequest(FRequest)
+31.03.2015 15:25:42 FAssociation.ReadPduType
+31.03.2015 15:25:42 FAssociation.ReadPduType = 2
+31.03.2015 15:25:42 FAssociation.receiveAssociateResponse(k) k=2
+31.03.2015 15:25:42 FAssociation.receiveAssociateResponse(k) *** acknowledge ***
+max pdu size: 1048576
+max operation invoked: 1
+max operation performed: 1
+implementation class UID: 1.2.826.0.1.3680043.1.1.4.1.26.0
+implementation version name: CNS_Soft_1_000
+ApplicationContextUid: 1.2.840.10008.3.1.1.1
+CalledTitle: PACSSERVER
+CallingTitle: TEST1
+                 abstract syntax scu scp
+   nr  pcid                          result     transfer syntax
+    0     1                        accepted   1.2.840.10008.1.2
+    1     1                        accepted 1.2.840.10008.1.2.1
+    2     1                        accepted 1.2.840.10008.1.2.2
+    3     1                        accepted 1.2.840.10008.1.2.5
+******************* 0
+31.03.2015 15:25:42 connected=1 before sendDataPduBySOP
+31.03.2015 15:25:42 FAssociation.ReadPduType
+31.03.2015 15:25:42 FAssociation.ReadPduType=4
+31.03.2015 15:25:42 FAssociation.ReceiveDataPdu
+31.03.2015 15:25:42 FAssociation.ReceiveDataPdu=4
+31.03.2015 15:25:42 SendCommandBySop ASOPClass=4136 RESULT=1
+31.03.2015 15:25:42 C_MOVE_REQUEST Result=1
+31.03.2015 15:38:31 C_MOVE: Host = 192.168.1.47Port = 11114CalledTitle = PACSSERVERCallingTitle = TEST1
+31.03.2015 15:38:31 AddMOVEPresentationContext
+31.03.2015 15:38:31 SendDicomRequest C_MOVE_REQUEST 
+31.03.2015 15:38:31 before PrepareRequestCommand
+31.03.2015 15:38:31 PrepareRequestCommand
+31.03.2015 15:38:31 SendCommandBySop ASOPClass=4136
+31.03.2015 15:38:31 Try to connect ...
+31.03.2015 15:38:31 connected=1
+31.03.2015 15:38:31 FAssociation.Init ...
+31.03.2015 15:38:31 connected=1 before SendRequest
+31.03.2015 15:38:31 FAssociation.Init
+31.03.2015 15:38:31 FAssociation.sendAssociateRequest(FRequest)
+31.03.2015 15:38:31 FAssociation.ReadPduType
+31.03.2015 15:38:31 FAssociation.ReadPduType = 2
+31.03.2015 15:38:31 FAssociation.receiveAssociateResponse(k) k=2
+31.03.2015 15:38:31 FAssociation.receiveAssociateResponse(k) *** acknowledge ***
+max pdu size: 1048576
+max operation invoked: 1
+max operation performed: 1
+implementation class UID: 1.2.826.0.1.3680043.1.1.4.1.26.0
+implementation version name: CNS_Soft_1_000
+ApplicationContextUid: 1.2.840.10008.3.1.1.1
+CalledTitle: PACSSERVER
+CallingTitle: TEST1
+                 abstract syntax scu scp
+   nr  pcid                          result     transfer syntax
+    0     1                        accepted   1.2.840.10008.1.2
+    1     1                        accepted 1.2.840.10008.1.2.1
+    2     1                        accepted 1.2.840.10008.1.2.2
+    3     1                        accepted 1.2.840.10008.1.2.5
+******************* 0
+31.03.2015 15:38:31 connected=1 before sendDataPduBySOP
+31.03.2015 15:38:31 FAssociation.ReadPduType
+31.03.2015 15:38:33 FAssociation.ReadPduType=4
+31.03.2015 15:38:33 FAssociation.ReceiveDataPdu
+31.03.2015 15:38:33 FAssociation.ReceiveDataPdu=4
+31.03.2015 15:38:33 SendCommandBySop ASOPClass=4136 RESULT=1
+31.03.2015 15:38:33 C_MOVE_REQUEST Result=1

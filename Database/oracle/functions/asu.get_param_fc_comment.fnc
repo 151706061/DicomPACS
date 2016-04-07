@@ -1,0 +1,66 @@
+DROP FUNCTION ASU.GET_PARAM_FC_COMMENT
+/
+
+--
+-- GET_PARAM_FC_COMMENT  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   SYS_STUB_FOR_PURITY_ANALYSIS (Package)
+--   TRESAN (Table)
+--   TSMID (Table)
+--   GET_NAZ_CANCEL (Function)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_PARAM_FC_COMMENT" (pFK_NAZID IN NUMBER, pFK_SMID IN NUMBER, pFK_COLID IN NUMBER := NULL) RETURN VARCHAR IS
+  CURSOR cGetVal (pSMID NUMBER, pNAZID NUMBER) IS
+    SELECT FC_COMENT, FK_SOS
+      FROM TRESAN
+     WHERE FK_SMID = pSMID
+       AND FK_NAZID = pNAZID
+       AND FL_ZAKL <> 1;
+
+  CURSOR cGetMVal (pSMID NUMBER, pNAZID NUMBER) IS
+    SELECT DISTINCT FC_COMENT, FK_SOS
+      FROM TRESAN
+     WHERE FK_SMID = pSMID
+       AND FK_NAZID = pNAZID
+       AND FL_ZAKL <> 1
+       AND FK_COLID = pFK_COLID;
+
+  CURSOR cGetNAZCause (pCauseID NUMBER) IS
+    SELECT FC_NAME
+      FROM TSMID
+     WHERE FK_ID = pCauseID;
+  cTemp VARCHAR(100);
+  nTemp NUMBER;
+BEGIN
+  IF pFK_COLID IS NULL THEN
+      OPEN cGetVal (pFK_SMID, pFK_NAZID);
+      FETCH cGetVal INTO cTemp, nTemp;
+      CLOSE cGetVal;
+      IF nTemp = GET_NAZ_CANCEL THEN
+        OPEN cGetNAZCause (TO_NUMBER(cTemp));
+        FETCH cGetNAZCause INTO cTemp;
+        CLOSE cGetNAZCause;
+      END IF;
+    ELSE
+      OPEN cGetMVal (pFK_SMID, pFK_NAZID);
+      FETCH cGetMVal INTO cTemp, nTemp;
+      CLOSE cGetMVal;
+      IF nTemp = GET_NAZ_CANCEL THEN
+        OPEN cGetNAZCause (TO_NUMBER(cTemp));
+        FETCH cGetNAZCause INTO cTemp;
+        CLOSE cGetNAZCause;
+      END IF;
+  END IF;
+  IF cTemp IS NULL THEN
+    RETURN ' ';
+  END IF;
+
+  RETURN cTemp;
+END;
+/
+
+SHOW ERRORS;
+
+

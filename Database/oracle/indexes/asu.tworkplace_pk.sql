@@ -1,0 +1,25 @@
+DROP INDEX ASU.TWORKPLACE_PK
+/
+
+--
+-- TWORKPLACE_PK  (Index) 
+--
+CREATE UNIQUE INDEX ASU.TWORKPLACE_PK ON ASU.TWORKPLACE
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          2384K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

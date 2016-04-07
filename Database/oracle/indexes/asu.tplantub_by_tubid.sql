@@ -1,0 +1,25 @@
+DROP INDEX ASU.TPLANTUB_BY_TUBID
+/
+
+--
+-- TPLANTUB_BY_TUBID  (Index) 
+--
+CREATE INDEX ASU.TPLANTUB_BY_TUBID ON ASU.TPLANTUB
+(FK_TUBID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

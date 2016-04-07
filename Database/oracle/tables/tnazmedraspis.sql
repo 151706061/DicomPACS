@@ -1,0 +1,131 @@
+DROP TABLE ASU.TNAZMEDRASPIS CASCADE CONSTRAINTS
+/
+
+--
+-- TNAZMEDRASPIS  (Table) 
+--
+CREATE TABLE ASU.TNAZMEDRASPIS
+(
+  FK_ID        NUMBER(9)                        NOT NULL,
+  FK_NAZMEDID  NUMBER(9)                        NOT NULL,
+  FC_TIME      VARCHAR2(5 BYTE)                 DEFAULT '00:00'               NOT NULL
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1360K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TNAZMEDRASPIS IS 'Расписание приема медикаментов'
+/
+
+COMMENT ON COLUMN ASU.TNAZMEDRASPIS.FK_ID IS 'SEQUENCE=[SEQ_TNAZMEDRASPIS]'
+/
+
+COMMENT ON COLUMN ASU.TNAZMEDRASPIS.FK_NAZMEDID IS 'Название медикамента tnazmed.fk_id'
+/
+
+COMMENT ON COLUMN ASU.TNAZMEDRASPIS.FC_TIME IS 'Время приема медикамента в формате ЧЧ:ММ'
+/
+
+
+--
+-- TNAZMEDRASPIS_ID  (Index) 
+--
+--  Dependencies: 
+--   TNAZMEDRASPIS (Table)
+--
+CREATE UNIQUE INDEX ASU.TNAZMEDRASPIS_ID ON ASU.TNAZMEDRASPIS
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1M
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZMEDRASPIS_NAZMEDID  (Index) 
+--
+--  Dependencies: 
+--   TNAZMEDRASPIS (Table)
+--
+CREATE INDEX ASU.TNAZMEDRASPIS_NAZMEDID ON ASU.TNAZMEDRASPIS
+(FK_NAZMEDID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          1152K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TNAZMEDRASPIS_BI  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZMEDRASPIS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZMEDRASPIS_BI" 
+BEFORE INSERT
+ON ASU.TNAZMEDRASPIS REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+BEGIN
+  SELECT seq_tnazmedraspis.nextval
+    INTO :new.fk_id
+    FROM dual;
+END;
+/
+SHOW ERRORS;
+
+
+--
+-- TNAZMEDRAPIS$AIU$TIME  (Trigger) 
+--
+--  Dependencies: 
+--   TNAZMEDRASPIS (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZMEDRAPIS$AIU$TIME" 
+BEFORE INSERT OR UPDATE OF FC_TIME
+ON ASU.TNAZMEDRASPIS REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+Begin
+   :new.fc_time:=replace(:new.fc_time, ' ','0');
+End;
+/
+SHOW ERRORS;
+
+

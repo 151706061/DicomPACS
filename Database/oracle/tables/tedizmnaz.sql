@@ -1,0 +1,112 @@
+ALTER TABLE ASU.TEDIZMNAZ
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TEDIZMNAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TEDIZMNAZ  (Table) 
+--
+CREATE TABLE ASU.TEDIZMNAZ
+(
+  FK_ID       NUMBER(9)                         NOT NULL,
+  FC_NAME     VARCHAR2(10 BYTE)                 NOT NULL,
+  FC_COMMENT  VARCHAR2(100 BYTE)
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          80K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TEDIZMNAZ IS '—правочник едениц измерений'
+/
+
+COMMENT ON COLUMN ASU.TEDIZMNAZ.FK_ID IS 'SEQUENCE=[SEQ_TEDIZMNAZ]'
+/
+
+COMMENT ON COLUMN ASU.TEDIZMNAZ.FC_NAME IS 'название'
+/
+
+COMMENT ON COLUMN ASU.TEDIZMNAZ.FC_COMMENT IS 'описание'
+/
+
+
+--
+-- TEDIZMNAZ#ID  (Index) 
+--
+--  Dependencies: 
+--   TEDIZMNAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.TEDIZMNAZ#ID ON ASU.TEDIZMNAZ
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TEDIZMNAZ_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TEDIZMNAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TEDIZMNAZ_BEFORE_INSERT" 
+BEFORE INSERT
+ON ASU.TEDIZMNAZ REFERENCING OLD AS OLD NEW AS NEW
+FOR EACH ROW
+begin
+ SELECT SEQ_TEDIZMNAZ.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+END;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TEDIZMNAZ 
+-- 
+ALTER TABLE ASU.TEDIZMNAZ ADD (
+  CONSTRAINT TEDIZMNAZ#ID
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          128K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

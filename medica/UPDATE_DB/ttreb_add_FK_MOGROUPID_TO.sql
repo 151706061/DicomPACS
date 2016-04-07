@@ -1,0 +1,8 @@
+alter table med.ttreb add FK_MOGROUPID_TO NUMBER(10) default 0;
+-- Foreign Key
+ALTER TABLE med.ttreb
+ADD CONSTRAINT FK_MOGROUPID_TO FOREIGN KEY (FK_MOGROUPID_TO)
+REFERENCES MED.TMO_GROUP (GROUPID) ON DELETE SET NULL
+DISABLE NOVALIDATE;
+COMMENT ON COLUMN med.ttreb.FK_MOGROUPID_TO is 'Группа мат. отв., для которой поступило требование (TMO_GROUP)';
+

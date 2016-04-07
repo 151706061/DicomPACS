@@ -1,0 +1,1 @@
+create index asu.TNAZIS_ROOM_DATE on ASU.TNAZIS (fk_roomid, fd_run);

@@ -1,0 +1,23 @@
+DROP FUNCTION ASU.GET_XRAY_SCOP
+/
+
+--
+-- GET_XRAY_SCOP  (Function) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE FUNCTION ASU."GET_XRAY_SCOP" 
+  RETURN NUMBER
+  IS --by aAdmin.exe
+BEGIN
+  Return 303074;
+END;
+/
+
+SHOW ERRORS;
+
+
+GRANT EXECUTE ON ASU.GET_XRAY_SCOP TO PUBLIC
+/
+

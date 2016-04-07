@@ -1,0 +1,1 @@
+COMMENT ON COLUMN MED.TDOCS.FN_PRICE IS 'Сумма по документу';

@@ -1,0 +1,25 @@
+DROP INDEX ASU.TKARTA$FKROOM$TEK_SOS
+/
+
+--
+-- TKARTA$FKROOM$TEK_SOS  (Index) 
+--
+CREATE INDEX ASU.TKARTA$FKROOM$TEK_SOS ON ASU.TKARTA
+(FK_ROOM, FP_TEK_COC)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

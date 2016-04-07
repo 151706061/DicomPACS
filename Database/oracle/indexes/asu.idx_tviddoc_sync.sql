@@ -1,0 +1,25 @@
+DROP INDEX ASU.IDX_TVIDDOC_SYNC
+/
+
+--
+-- IDX_TVIDDOC_SYNC  (Index) 
+--
+CREATE INDEX ASU.IDX_TVIDDOC_SYNC ON ASU.TVIDDOC
+(FC_NAME)
+NOLOGGING
+TABLESPACE USR
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+

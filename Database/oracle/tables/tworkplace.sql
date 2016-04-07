@@ -1,0 +1,151 @@
+ALTER TABLE ASU.TWORKPLACE
+ DROP PRIMARY KEY CASCADE
+/
+
+DROP TABLE ASU.TWORKPLACE CASCADE CONSTRAINTS
+/
+
+--
+-- TWORKPLACE  (Table) 
+--
+CREATE TABLE ASU.TWORKPLACE
+(
+  FK_ID        NUMBER                           NOT NULL,
+  FK_COMPANY   NUMBER,
+  FK_OTDEL     NUMBER,
+  FK_DOLGNOST  NUMBER,
+  FC_RABOTA    VARCHAR2(200 BYTE),
+  FK_PACID     NUMBER,
+  FP_MAIN      NUMBER                           DEFAULT 0
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          10064K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON COLUMN ASU.TWORKPLACE.FK_ID IS 'SEQUENCE=[SEQ_TWORKPLACE]'
+/
+
+COMMENT ON COLUMN ASU.TWORKPLACE.FK_COMPANY IS 'Код компании'
+/
+
+COMMENT ON COLUMN ASU.TWORKPLACE.FK_OTDEL IS 'Код отдела'
+/
+
+COMMENT ON COLUMN ASU.TWORKPLACE.FK_DOLGNOST IS 'Код должности'
+/
+
+COMMENT ON COLUMN ASU.TWORKPLACE.FC_RABOTA IS 'Строка (работа)'
+/
+
+COMMENT ON COLUMN ASU.TWORKPLACE.FK_PACID IS 'FK_PEPLID или FK_PACID'
+/
+
+COMMENT ON COLUMN ASU.TWORKPLACE.FP_MAIN IS 'Вид работы 1 - основная, 0 - по совместительству'
+/
+
+
+--
+-- TWORKPLACE$FK_PACID  (Index) 
+--
+--  Dependencies: 
+--   TWORKPLACE (Table)
+--
+CREATE INDEX ASU.TWORKPLACE$FK_PACID ON ASU.TWORKPLACE
+(FK_PACID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          64K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TWORKPLACE_PK  (Index) 
+--
+--  Dependencies: 
+--   TWORKPLACE (Table)
+--
+CREATE UNIQUE INDEX ASU.TWORKPLACE_PK ON ASU.TWORKPLACE
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          2384K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TWORKPLACE_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TWORKPLACE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TWORKPLACE_BEFORE_INSERT" 
+  before insert on tworkplace
+  for each row
+declare
+  -- local variables here
+begin
+  SELECT SEQ_TWORKPLACE.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+end TWORKPLACE_BEFORE_INSERT;
+/
+SHOW ERRORS;
+
+
+-- 
+-- Non Foreign Key Constraints for Table TWORKPLACE 
+-- 
+ALTER TABLE ASU.TWORKPLACE ADD (
+  CONSTRAINT TWORKPLACE_PK
+ PRIMARY KEY
+ (FK_ID)
+    USING INDEX 
+    TABLESPACE INDX
+    PCTFREE    10
+    INITRANS   2
+    MAXTRANS   255
+    STORAGE    (
+                INITIAL          2384K
+                NEXT             1M
+                MINEXTENTS       1
+                MAXEXTENTS       UNLIMITED
+                PCTINCREASE      0
+               ))
+/
+

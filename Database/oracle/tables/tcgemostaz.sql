@@ -1,0 +1,154 @@
+DROP TABLE ASU.TCGEMOSTAZ CASCADE CONSTRAINTS
+/
+
+--
+-- TCGEMOSTAZ  (Table) 
+--
+CREATE TABLE ASU.TCGEMOSTAZ
+(
+  FK_ID     NUMBER(9)                           DEFAULT -1                    NOT NULL,
+  FN_VALUE  NUMBER(5,2)                         DEFAULT 0,
+  FK_SMID   NUMBER(9)                           DEFAULT -1,
+  FD_DATE   DATE
+)
+TABLESPACE USR
+PCTUSED    0
+PCTFREE    10
+INITRANS   1
+MAXTRANS   255
+STORAGE    (
+            INITIAL          520K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+LOGGING 
+NOCOMPRESS 
+NOCACHE
+NOPARALLEL
+MONITORING
+/
+
+COMMENT ON TABLE ASU.TCGEMOSTAZ IS 'Таблица для хранения данных по гемостазу'
+/
+
+COMMENT ON COLUMN ASU.TCGEMOSTAZ.FK_ID IS 'SEQUENCE=[SEQ_TCGEMOSTAZ]'
+/
+
+COMMENT ON COLUMN ASU.TCGEMOSTAZ.FN_VALUE IS 'Значение контроля'
+/
+
+COMMENT ON COLUMN ASU.TCGEMOSTAZ.FK_SMID IS 'Код из смид'
+/
+
+COMMENT ON COLUMN ASU.TCGEMOSTAZ.FD_DATE IS 'Дата проведения контроля'
+/
+
+
+--
+-- TCGEMOSTAZ_BY_DATE  (Index) 
+--
+--  Dependencies: 
+--   TCGEMOSTAZ (Table)
+--
+CREATE INDEX ASU.TCGEMOSTAZ_BY_DATE ON ASU.TCGEMOSTAZ
+(FD_DATE)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TCGEMOSTAZ_BY_DATE_SMID  (Index) 
+--
+--  Dependencies: 
+--   TCGEMOSTAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.TCGEMOSTAZ_BY_DATE_SMID ON ASU.TCGEMOSTAZ
+(FD_DATE, FK_SMID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TCGEMOSTAZ_BY_ID  (Index) 
+--
+--  Dependencies: 
+--   TCGEMOSTAZ (Table)
+--
+CREATE UNIQUE INDEX ASU.TCGEMOSTAZ_BY_ID ON ASU.TCGEMOSTAZ
+(FK_ID)
+NOLOGGING
+TABLESPACE INDX
+PCTFREE    10
+INITRANS   2
+MAXTRANS   255
+STORAGE    (
+            INITIAL          128K
+            NEXT             1M
+            MINEXTENTS       1
+            MAXEXTENTS       UNLIMITED
+            PCTINCREASE      0
+            BUFFER_POOL      DEFAULT
+           )
+NOPARALLEL
+/
+
+
+--
+-- TCGEMOSTAZ_BEFORE_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TCGEMOSTAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TCGEMOSTAZ_BEFORE_INSERT" 
+BEFORE  INSERT  ON ASU.TCGEMOSTAZ FOR EACH ROW
+Begin
+  SELECT SEQ_TCGEMOSTAZ.NEXTVAL INTO :NEW.FK_ID FROM DUAL;
+End;
+/
+SHOW ERRORS;
+
+
+--
+-- TCGEMOSTAZ_AFTER_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   TCGEMOSTAZ (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TCGEMOSTAZ_AFTER_INSERT" 
+AFTER  INSERT  ON ASU.TCGEMOSTAZ 
+Begin
+  DELETE FROM TCGEMOSTAZ WHERE FK_SMID=-1;
+End;
+/
+SHOW ERRORS;
+
+

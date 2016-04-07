@@ -1,0 +1,24 @@
+DROP TRIGGER ASU.TNAZAUTODONE_BEFOR_INSERT
+/
+
+--
+-- TNAZAUTODONE_BEFOR_INSERT  (Trigger) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--   DUAL (Synonym)
+--   SEQ_TNAZAUTODONE (Sequence)
+--   TNAZAUTODONE (Table)
+--
+CREATE OR REPLACE TRIGGER ASU."TNAZAUTODONE_BEFOR_INSERT" 
+BEFORE  INSERT  ON ASU.TNAZAUTODONE REFERENCING
+ NEW AS NEW
+ OLD AS OLD
+FOR EACH ROW
+Begin
+  select seq_tnazautodone.nextval into :new.fk_id from dual;
+End;
+/
+SHOW ERRORS;
+
+

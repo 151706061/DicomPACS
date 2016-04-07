@@ -1,0 +1,20 @@
+DROP PACKAGE ASU.PKG_R_ISSL_REPORTS
+/
+
+--
+-- PKG_R_ISSL_REPORTS  (Package) 
+--
+--  Dependencies: 
+--   STANDARD (Package)
+--
+CREATE OR REPLACE PACKAGE ASU."PKG_R_ISSL_REPORTS" IS
+
+  FUNCTION GetRepBySOTR2 (pFK_SOTRID IN BINARY_INTEGER,
+                         pFD_DATE1  IN DATE DEFAULT NULL,
+                         pFD_DATE2  IN DATE DEFAULT NULL) RETURN CLOB;
+END;
+/
+
+SHOW ERRORS;
+
+
